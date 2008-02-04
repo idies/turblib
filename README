@@ -1,0 +1,53 @@
+JHU Turbulence Database Cluster
+Fortran & C Interface Library
+http://turbulence.pha.jhu.edu/
+
+**** About this package ****
+
+This library provides a very simple wrapper around gSOAP for
+calling the JHU Turbulence Database Cluster.
+
+More information can be found at:
+  http://turbulence.pha.jhu.edu/help/c-fortran/
+
+'make' will build both the Fortran and C sample code.
+Use 'make turbc' if you do not have a Frotran compiler
+installed.
+
+**** Identification Token (optional, for now) ****
+
+While our service is open to anyone, we would like to keep
+track of who is using the service, and how.  To this end,
+we would like each user or site to obtain an authorization
+token from us:
+  http://turbulence.pha.jhu.edu/help/authtoken.html
+
+If you are just experimenting, the default token included
+in these test files should be valid.
+
+**** Mac OS X Notes ****
+
+This code has been run under Mac OS X 10.4 and 10.5.
+
+You will need the Apple Developer Tools (Xcode), which
+can be found on your OS X install disk, or downloaded
+for free (with registration) from
+   http://developer.apple.com/
+
+If you wish to use fortran, you will need to install
+gfortran.  We have been using the precompiled versions
+available from
+  http://hpc.sourceforge.net/
+
+
+**** Linux Notes ****
+
+Most versions of gcc should work.  If you wish to use fortran
+you will need to install gfortran, available as an optional
+package with most Linux distributions.
+
+**** Other Platforms ****
+
+Not tested.  Pleae let us know if any changes are needed.
+We are aware that the code will not work with other Fotran
+compilers which do different styles of name mangling.
