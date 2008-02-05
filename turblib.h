@@ -7,7 +7,7 @@
 extern "C" {
 #endif
 
-#define TURBLIB_VERSION "0.0.1"
+#define TURBLIB_VERSION "0.0.2"
 
 /* Global gSOAP handle
  * TODO: Figure out how to pass this to/from Fortran
@@ -18,6 +18,7 @@ extern struct soap __jhuturbsoap;
 enum SpatialInterpolation
 {
   NoSpatialInterpolation = 0,
+  Lagrangian4thOrder = 4,
   Lagrangian6thOrder = 6,
   Lagrangian8thOrder = 8
 };

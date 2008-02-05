@@ -17,6 +17,8 @@ enum turb1__SpatialInterpolation SpatialIntToEnum(enum SpatialInterpolation spat
   {
     case 0:
       return turb1__SpatialInterpolation__None;
+    case 4:
+      return turb1__SpatialInterpolation__Fd4Lag4;
     case 6:
       return turb1__SpatialInterpolation__Lag6;
     case 8:

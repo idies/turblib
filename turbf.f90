@@ -3,7 +3,9 @@ program TurbTest
 
   ! ---- Spatial Interpolation Flags ----
   integer, parameter :: NoSpatialInterpolation = 0
-  integer, parameter :: Lagrangian6thOrder = 6, Lagrangian8thOrder = 8
+  integer, parameter :: Lagrangian4thOrder = 4
+  integer, parameter :: Lagrangian6thOrder = 6
+  integer, parameter :: Lagrangian8thOrder = 8
 
   ! ---- Temporal Interpolation Options ----
   integer, parameter :: NoTemporalInterpolation = 0
