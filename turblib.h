@@ -20,7 +20,11 @@ enum SpatialInterpolation
   NoSpatialInterpolation = 0,
   Lagrangian4thOrder = 4,
   Lagrangian6thOrder = 6,
-  Lagrangian8thOrder = 8
+  Lagrangian8thOrder = 8,
+  NoSpatialWith4thOrderForGrid = 40,
+  NoSpatialWith6thOrderForGrid = 60,
+  NoSpatialWith8thOrderForGrid = 80
+  
 };
 
 /* Temporal Interpolation Options */

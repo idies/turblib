@@ -23,6 +23,12 @@ enum turb1__SpatialInterpolation SpatialIntToEnum(enum SpatialInterpolation spat
       return turb1__SpatialInterpolation__Lag6;
     case 8:
       return turb1__SpatialInterpolation__Lag8;
+    case 40:
+      return turb1__SpatialInterpolation__None_USCOREFd4;
+    case 60:
+      return turb1__SpatialInterpolation__None_USCOREFd6;
+    case 80:
+      return turb1__SpatialInterpolation__None_USCOREFd8;
   }
   return -1;
 }
