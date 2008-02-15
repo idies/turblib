@@ -17,19 +17,34 @@ extern struct soap __jhuturbsoap;
 /* Spatial Interpolation Options */
 enum SpatialInterpolation
 {
+  /* Spatial Interpolation Flags for GetVelocity & GetVelocityAndPressure */
+  NoSInt = 0, /* No spatial interpolatio */
+  Lag4 = 4,   /* 4th order Lagrangian interpolation in space */
+  Lag6 = 6,   /* 4th order Lagrangian interpolation in space */
+  Lag8 = 8,   /* 4th order Lagrangian interpolation in space */
+
+  /* Spatial Differentiation & Interpolation Flags for GetVelocityGradient & GetPressureGradient */
+  FD4NoInt = 40, /* 4th order finite differential scheme for grid values, no spatial interpolation */
+  FD6NoInt = 60, /* 6th order finite differential scheme for grid values, no spatial interpolation */
+  FD8NoInt = 80, /* 8th order finite differential scheme for grid values, no spatial interpolation */
+  FD4Lag4 = 44,  /*  4th order finite differential scheme for grid values, 4th order Lagrangian interpolation in space */
+
+
+  /* Old names, for backward compatibility */
   NoSpatialInterpolation = 0,
   Lagrangian4thOrder = 4,
   Lagrangian6thOrder = 6,
-  Lagrangian8thOrder = 8,
-  NoSpatialWith4thOrderForGrid = 40,
-  NoSpatialWith6thOrderForGrid = 60,
-  NoSpatialWith8thOrderForGrid = 80
-  
+  Lagrangian8thOrder = 8
 };
 
 /* Temporal Interpolation Options */
 enum TemporalInterpolation
 {
+  NoTInt = 0,   /* No temporal interpolation */
+  PCHIPInt = 1, /* Piecewise cubic Hermit interpolation in time */
+
+
+  /* Old names, for backward compatibility */
   NoTemporalInterpolation = 0,
   PCHIPInterpolation = 1
 };

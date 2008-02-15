@@ -1,16 +1,22 @@
 program TurbTest
   implicit none
 
-  ! ---- Spatial Interpolation Flags ----
-  integer, parameter :: NoSpatialInterpolation = 0
-  integer, parameter :: Lagrangian4thOrder = 4
-  integer, parameter :: Lagrangian6thOrder = 6
-  integer, parameter :: Lagrangian8thOrder = 8
-
   ! ---- Temporal Interpolation Options ----
-  integer, parameter :: NoTemporalInterpolation = 0
-  integer, parameter :: PCHIPInterpolation = 1
-  
+  integer, parameter :: NoTInt = 0 ! No temporal interpolation
+  integer, parameter :: PCHIPInt = 1 ! Piecewise cubic Hermit interpolation in time
+
+  ! ---- Spatial Interpolation Flags for GetVelocity & GetVelocityAndPressure ----
+  integer, parameter :: NoSInt = 0 ! No spatial interpolation
+  integer, parameter :: Lag4 = 4 ! 4th order Lagrangian interpolation in space
+  integer, parameter :: Lag6 = 6 ! 6th order Lagrangian interpolation in space
+  integer, parameter :: Lag8 = 8 ! 8th order Lagrangian interpolation in space
+
+  ! ---- Spatial Differentiation & Interpolation Flags for GetVelocityGradient & GetPressureGradient ----
+  integer, parameter :: FD4NoInt = 40 ! 4th order finite differential scheme for grid values, no spatial interpolation
+  integer, parameter :: FD6NoInt = 60 ! 6th order finite differential scheme for grid values, no spatial interpolation
+  integer, parameter :: FD8NoInt = 80 ! 8th order finite differential scheme for grid values, no spatial interpolation
+  integer, parameter :: FD4Lag4 = 44 ! 4th order finite differential scheme for grid values, 4th order Lagrangian interpolation in space
+
   !
   ! Choose which dataset to use in this query
   ! Currently, only valid datasets are:
@@ -23,7 +29,7 @@ program TurbTest
   ! If you need one, please visit http://turbulence.pha.jhu.edu/
   ! (We just want to know a bit about our users!)
   !
-  character*100 :: authkey = 'jhu.edu.pha.turbulence.testing-200711' // CHAR(0)
+  character*100 :: authkey = 'jhu.edu.pha.turbulence.testing-200802' // CHAR(0)
 
   real :: time = 0.06
   real points(3, 10)
@@ -46,30 +52,30 @@ program TurbTest
   end do
 
   write(*, *) 'Velocity at 10 particle locations'
-  CALL getvelocity(authkey, dataset,  time, Lagrangian6thOrder , NoTemporalInterpolation, 10, points, dataout3)
+  CALL getvelocity(authkey, dataset,  time, Lag6, NoTInt, 10, points, dataout3)
   do i = 1, 10, 1 
     write(*,*) i, ': (', dataout3(1,i), ', ', dataout3(2,i), ',', dataout3(3,i), ')'
   end do
 
   write(*, *)
   write(*, *) 'Velocity and pressure at 10 particle locations'
-  CALL getvelocityandpressure(authkey, dataset,  time, Lagrangian6thOrder, NoTemporalInterpolation, 10, points, dataout4)
+  CALL getvelocityandpressure(authkey, dataset,  time, Lag6, NoTInt, 10, points, dataout4)
   do i = 1, 10, 1 
     write(*,*) i, ': (', dataout4(1,i), ', ', dataout4(2,i), ',', dataout4(3,i), ',', dataout4(4,i), ')'
   end do
 
-  write(*, *)
-  write(*, *) 'Pressure hessian at 10 particle locations'
-  CALL getpressurehessian(authkey, dataset,  time, Lagrangian6thOrder, NoTemporalInterpolation, 10, points, dataout6)
-  do i = 1, 10, 1 
-    write(*,*) i, ': (d2pdxdx=', dataout6(1,i), ', d2pdxdy=', dataout6(2,i), &
-       ', d2pdxdz=', dataout6(3,i), ', d2pdydy=', dataout6(4,i),  &
-       ', d2pdydz=', dataout6(5,i), ', d2pdzdz', dataout6(6,i), ')'
-  end do
+  !write(*, *)
+  !write(*, *) 'Pressure hessian at 10 particle locations'
+  !CALL getpressurehessian(authkey, dataset,  time, Lag6, NoTInt, 10, points, dataout6)
+  !do i = 1, 10, 1 
+  !  write(*,*) i, ': (d2pdxdx=', dataout6(1,i), ', d2pdxdy=', dataout6(2,i), &
+  !     ', d2pdxdz=', dataout6(3,i), ', d2pdydy=', dataout6(4,i),  &
+  !     ', d2pdydz=', dataout6(5,i), ', d2pdzdz', dataout6(6,i), ')'
+  !end do
 
   write(*, *)
   write(*, *) 'Velocity gradient at 10 particle locations'
-  CALL getvelocitygradient(authkey, dataset,  time, Lagrangian6thOrder, NoTemporalInterpolation, 10, points, dataout9)
+  CALL getvelocitygradient(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout9)
   do i = 1, 10, 1 
     write(*,*) i, ': (duxdx=', dataout9(1,i), ', duxdy=', dataout9(2,i), &
        ', duxdz=', dataout9(3,i), ', duydx=', dataout9(4,i),  &

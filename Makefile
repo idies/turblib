@@ -1,5 +1,5 @@
 CC     = gcc -g
-LD     = gfortran -g
+FC     = gfortran -g
 RM     = rm -f
 CFLAGS = -Wall -g -I..
 LDLIBS = 
@@ -9,16 +9,16 @@ OBJ =	soapC.o \
 	stdsoap2.o \
         turblib.o
 
-all: turbf turbc
-
-turbf : $(OBJ) turbf.o
-	 $(LD) -o $@ $(OBJ) turbf.o $(LDLIBS)
+all: turbc turbf
 
 turbc : $(OBJ) turbc.o
-	 $(LD) -o $@ $(OBJ) turbc.o $(LDLIBS)
+	 $(CC) -o $@ $(OBJ) turbc.o $(LDLIBS)
+
+turbf : $(OBJ) turbf.o
+	 $(FC) -o $@ $(OBJ) turbf.o $(LDLIBS)
 
 turbf.o : turbf.f90
-	gfortran -g -c turbf.f90
+	 $(FC) -c turbf.f90
 
 stdsoap2.o: stdsoap2.c
 	$(CC) $(CFLAGS) -c $<
