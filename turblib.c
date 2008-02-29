@@ -114,7 +114,6 @@ int getVelocity (char *authToken,
   return 0;
 }
 
-
 int getvelocityandpressure_ (char *authToken,
       char *dataset, float *time,
       int *spatial, int *temporal,
@@ -175,7 +174,6 @@ int getpressurehessian_(char *authToken,
     *count, datain, dataout);
 }
 
-
 int getPressureHessian(char *authToken,
       char *dataset, float time,
       enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
@@ -212,8 +210,6 @@ int getPressureHessian(char *authToken,
   return 0;
 }
 
-
-
 int getvelocitygradient_(char *authToken,
       char *dataset, float *time,
       int *spatial, int *temporal,
@@ -225,7 +221,6 @@ int getvelocitygradient_(char *authToken,
     *spatial, *temporal,
     *count, datain, dataout);
 }
-
 
 int getVelocityGradient(char *authToken,
       char *dataset, float time,
@@ -252,6 +247,54 @@ int getVelocityGradient(char *authToken,
   if (rc == SOAP_OK) {
     memcpy(dataout, output.GetVelocityGradientResult->VelocityGradient,
       output.GetVelocityGradientResult->__sizeVelocityGradient * sizeof(float) * 9);
+  } else {
+    fprintf(stdout, ">>> Error...\n");
+    soap_print_fault(&__jhuturbsoap, stdout);
+  }
+  
+  soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
+  soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
+
+  return 0;
+}
+
+int getpressuregradient_(char *authToken,
+      char *dataset, float *time,
+      int *spatial, int *temporal,
+      int *count, float datain[][3], float dataout[][3],
+      int len_a, int len_d)
+{
+  return getPressureGradient(authToken,
+    dataset, *time,
+    *spatial, *temporal,
+    *count, datain, dataout);
+}
+
+int getPressureGradient(char *authToken,
+      char *dataset, float time,
+      enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+      int count, float datain[][3], float dataout[][3])
+{
+  int rc;
+
+  struct _turb1__GetPressureGradient input;
+  struct _turb1__GetPressureGradientResponse output;
+
+  input.authToken = authToken;
+  input.dataset = dataset;
+  input.time = time;
+  input.spatialInterpolation = SpatialIntToEnum(spatial);
+  input.temporalInterpolation = TemporalIntToEnum(temporal);
+
+  struct turb1__ArrayOfPoint3 pointArray;
+  pointArray.__sizePoint3 = count;
+  pointArray.Point3 = (void *)datain;
+  input.points = &pointArray;
+
+  rc = soap_call___turb2__GetPressureGradient (&__jhuturbsoap, NULL, NULL, &input, &output);
+  if (rc == SOAP_OK) {
+    memcpy(dataout, output.GetPressureGradientResult->Vector3,
+      output.GetPressureGradientResult->__sizeVector3 * sizeof(float) * 3);
   } else {
     fprintf(stdout, ">>> Error...\n");
     soap_print_fault(&__jhuturbsoap, stdout);

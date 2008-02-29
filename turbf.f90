@@ -31,7 +31,7 @@ program TurbTest
   !
   character*100 :: authkey = 'jhu.edu.pha.turbulence.testing-200802' // CHAR(0)
 
-  real :: time = 0.06
+  real :: time = 0.08
   real points(3, 10)
   real dataout3(3, 10)  ! x,y,z
   real dataout4(4, 10)  ! x,y,z,p
@@ -82,6 +82,13 @@ program TurbTest
        ', duydy=', dataout9(5,i), ', duydz=', dataout9(6,i),  &
        ', duzdx=', dataout9(7,i), ', duzdy=', dataout9(8,i),  &
        ', duzdz=', dataout9(9,i), ')'
+  end do
+
+  write(*, *)
+  write(*, *) 'Pressure gradient at 10 particle locations'
+  CALL getpressuregradient(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout3)
+  do i = 1, 10, 1 
+    write(*,*) i, ': (dpdx=', dataout3(1,i), ', dpdy=', dataout3(2,i), ', dpdz=', dataout3(3,i), ')'
   end do
 
   !

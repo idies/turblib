@@ -43,12 +43,18 @@ int main(int argc, char *argv[]) {
    }
 
   printf("Requesting velocity gradient at 10 points...\n");
-  getVelocityGradient (authtoken, dataset, time, spatialInterp, temporalInterp, 10, points, result9);
+  getVelocityGradient (authtoken, dataset, time, FD4Lag4, temporalInterp, 10, points, result9);
   for (p = 0; p < 10; p++) {
     printf("%d: duxdx=%f, duxdy=%f, duxdz=%f, duydx=%f, duydy=%f, duydz=%f, duzdx=%f, duzdy=%f, duzdz=%f\n", p,
       result9[p][0], result9[p][1], result9[p][2],
       result9[p][3], result9[p][4], result9[p][5],
       result9[p][6], result9[p][7], result9[p][8]);
+  }
+
+  printf("Requesting pressure gradient at 10 points...\n");
+  getPressureGradient (authtoken, dataset, time, FD4Lag4, temporalInterp, 10, points, result3);
+  for (p = 0; p < 10; p++) {
+    printf("%d: dpdx=%f,dpdy=%f,dpdz=%f\n", p, result3[p][0],  result3[p][1],  result3[p][2]);
   }
 
   /* Free gSOAP resources */

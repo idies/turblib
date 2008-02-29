@@ -109,6 +109,20 @@ int getVelocityGradient(char *authToken,
       enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
       int count, float datain[][3], float dataout[][9]);
 
+/* C */
+int getpressuregradient_(char *authToken,
+      char *dataset, float *time,
+      int *spatial, int *temporal,
+      int *count, float datain[][3], float dataout[][3],
+      int len_a, int len_d);
+
+/* Fortran */
+int getPressureGradient(char *authToken,
+      char *dataset, float time,
+      enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+      int count, float datain[][3], float dataout[][3]);
+
+
 
 #ifdef  __cplusplus
 }
