@@ -31,17 +31,22 @@ wsdl:
 	wsdl2h -o TurbulenceService.h -n turb -c "http://turbulence.pha.jhu.edu/service/turbulence.asmx?WSDL" -l -s
 	soapcpp2 -CLcx -2 TurbulenceService.h
 
+testwsdl:
+	wsdl2h -o TurbulenceService.h -n turb -c "http://dev.turbulence.pha.jhu.edu/service/turbulence.asmx?WSDL" -l -s
+	soapcpp2 -CLcx -2 TurbulenceService.h
+
+devwsdl:
+	wsdl2h -o TurbulenceService.h -n turb -c "http://dev.turbulence.pha.jhu.edu/service/turbulence.asmx?WSDL" -l -s
+	soapcpp2 -CLcx -2 TurbulenceService.h
+
 clean:
 	$(RM) *.o turbf turbc
 
 spotless: clean
-	$(RM) soapClient.c TurbulenceServiceSoap.nsmap  soapH.h TurbulenceServiceSoap12.nsmap soapStub.h soapC.c TurbulenceService.h
-
-lib: $(OBJ)
+	$(RM) soapClient.c TurbulenceServiceSoap.nsmap soapH.h TurbulenceServiceSoap12.nsmap soapStub.h soapC.c TurbulenceService.h
 
 .SUFFIXES:
 .SUFFIXES: .o .c .x
-
 
 .c.o:
 	$(CC) $(CFLAGS) -c $< 
