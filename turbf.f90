@@ -31,12 +31,14 @@ program TurbTest
   !
   character*100 :: authkey = 'jhu.edu.pha.turbulence.testing-200802' // CHAR(0)
 
-  real :: time = 0.08
+  integer, parameter :: timestep = 182
+  real :: time = 0.002 * timestep
   real points(3, 10)
   real dataout3(3, 10)  ! x,y,z
   real dataout4(4, 10)  ! x,y,z,p
-  real dataout6(6, 10)  ! x,y,z
-  real dataout9(9, 10)  ! x,y,z
+  real dataout6(6, 10)  ! results from Pressure Hessian
+  real dataout9(9, 10)  ! results from Velocity Gradient
+
   integer i,rc
 
   !
@@ -64,15 +66,6 @@ program TurbTest
     write(*,*) i, ': (', dataout4(1,i), ', ', dataout4(2,i), ',', dataout4(3,i), ',', dataout4(4,i), ')'
   end do
 
-  !write(*, *)
-  !write(*, *) 'Pressure hessian at 10 particle locations'
-  !CALL getpressurehessian(authkey, dataset,  time, Lag6, NoTInt, 10, points, dataout6)
-  !do i = 1, 10, 1 
-  !  write(*,*) i, ': (d2pdxdx=', dataout6(1,i), ', d2pdxdy=', dataout6(2,i), &
-  !     ', d2pdxdz=', dataout6(3,i), ', d2pdydy=', dataout6(4,i),  &
-  !     ', d2pdydz=', dataout6(5,i), ', d2pdzdz', dataout6(6,i), ')'
-  !end do
-
   write(*, *)
   write(*, *) 'Velocity gradient at 10 particle locations'
   CALL getvelocitygradient(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout9)
@@ -89,6 +82,15 @@ program TurbTest
   CALL getpressuregradient(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout3)
   do i = 1, 10, 1 
     write(*,*) i, ': (dpdx=', dataout3(1,i), ', dpdy=', dataout3(2,i), ', dpdz=', dataout3(3,i), ')'
+  end do
+
+  write(*, *)
+  write(*, *) 'Pressure hessian at 10 particle locations'
+  CALL getpressurehessian(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout6)
+  do i = 1, 10, 1 
+    write(*,*) i, ': (d2pdxdx=', dataout6(1,i), ', d2pdxdy=', dataout6(2,i), &
+       ', d2pdxdz=', dataout6(3,i), ', d2pdydy=', dataout6(4,i),  &
+       ', d2pdydz=', dataout6(5,i), ', d2pdzdz', dataout6(6,i), ')'
   end do
 
   !

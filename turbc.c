@@ -12,13 +12,15 @@ int main(int argc, char *argv[]) {
   enum SpatialInterpolation spatialInterp = Lag6;
   enum TemporalInterpolation temporalInterp = NoTInt;
 
-  float time = 0.08f;
+  int timestep = 182;
+  float time = 0.002 * timestep;
 
   
   float points[10][3];    /* input of x,y,z */
   float result3[10][3];   /* results of x,y,z */
   float result4[10][4];   /* results of x,y,z,p */
-  float result9[10][9];   /* results of Velocity Gradient queries */
+  float result6[10][6];   /* results from Pressure Hessian queries */
+  float result9[10][9];   /* results from Velocity Gradient queries */
   int p;
 
   /* Initialize gSOAP */
@@ -55,6 +57,14 @@ int main(int argc, char *argv[]) {
   getPressureGradient (authtoken, dataset, time, FD4Lag4, temporalInterp, 10, points, result3);
   for (p = 0; p < 10; p++) {
     printf("%d: dpdx=%f,dpdy=%f,dpdz=%f\n", p, result3[p][0],  result3[p][1],  result3[p][2]);
+  }
+
+  printf("Requesting pressure hessian at 10 points...\n");
+  getPressureHessian(authtoken, dataset, time, FD4Lag4, temporalInterp, 10, points, result6);
+  for (p = 0; p < 10; p++) {
+    printf("%d: d2pdxdx=%f,d2pdxdy=%f,d2pdxdz=%f, d2pdydy=%f, d2pdydz=%f, d2pdzdz=%f\n", p,
+           result6[p][0],  result6[p][1],  result6[p][2], result6[p][3],  result6[p][4],  result6[p][5]);
+
   }
 
   /* Free gSOAP resources */
