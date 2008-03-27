@@ -305,3 +305,99 @@ int getPressureGradient(char *authToken,
 
   return 0;
 }
+
+int getvelocityhessian_(char *authToken,
+      char *dataset, float *time,
+      int *spatial, int *temporal,
+      int *count, float datain[][3], float dataout[][18],
+      int len_a, int len_d)
+{
+  return getVelocityHessian(authToken,
+    dataset, *time,
+    *spatial, *temporal,
+    *count, datain, dataout);
+}
+
+int getVelocityHessian(char *authToken,
+      char *dataset, float time,
+      enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+      int count, float datain[][3], float dataout[][18])
+{
+  int rc;
+
+  struct _turb1__GetVelocityHessian input;
+  struct _turb1__GetVelocityHessianResponse output;
+
+  input.authToken = authToken;
+  input.dataset = dataset;
+  input.time = time;
+  input.spatialInterpolation = SpatialIntToEnum(spatial);
+  input.temporalInterpolation = TemporalIntToEnum(temporal);
+
+  struct turb1__ArrayOfPoint3 pointArray;
+  pointArray.__sizePoint3 = count;
+  pointArray.Point3 = (void *)datain;
+  input.points = &pointArray;
+
+  rc = soap_call___turb2__GetVelocityHessian (&__jhuturbsoap, NULL, NULL, &input, &output);
+  if (rc == SOAP_OK) {
+    memcpy(dataout, output.GetVelocityHessianResult->VelocityHessian,
+      output.GetVelocityHessianResult->__sizeVelocityHessian * sizeof(float) * 18);
+  } else {
+    fprintf(stdout, ">>> Error...\n");
+    soap_print_fault(&__jhuturbsoap, stdout);
+  }
+  
+  soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
+  soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
+
+  return 0;
+}
+
+int getvelocitylaplacian_ (char *authToken,
+      char *dataset, float *time,
+      int *spatial, int *temporal,
+      int *count, float datain[][3], float dataout[][3],
+      int len_a, int len_d)
+{
+  return getVelocityLaplacian (authToken,
+    dataset, *time,
+    *spatial, *temporal,
+    *count, datain, dataout);
+}
+
+int getVelocityLaplacian (char *authToken,
+      char *dataset, float time,
+      enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+      int count, float datain[][3], float dataout[][3])
+{
+  int rc;
+
+  struct _turb1__GetVelocityLaplacian input;
+  struct _turb1__GetVelocityLaplacianResponse output;
+
+  input.authToken = authToken;
+  input.dataset = dataset;
+  input.time = time;
+  input.spatialInterpolation = SpatialIntToEnum(spatial);
+  input.temporalInterpolation = TemporalIntToEnum(temporal);
+
+  struct turb1__ArrayOfPoint3 pointArray;
+  pointArray.__sizePoint3 = count;
+  pointArray.Point3 = (void *)datain;
+  input.points = &pointArray;
+
+  rc = soap_call___turb2__GetVelocityLaplacian(&__jhuturbsoap, NULL, NULL, &input, &output);
+  if (rc == SOAP_OK) {
+    memcpy(dataout, output.GetVelocityLaplacianResult->Vector3,
+      output.GetVelocityLaplacianResult->__sizeVector3 * sizeof(float) * 3);
+  } else {
+    fprintf(stdout, ">>> Error...\n");
+    soap_print_fault(&__jhuturbsoap, stdout);
+  }
+  
+  soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
+  soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
+
+  return 0;
+}

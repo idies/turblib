@@ -122,6 +122,31 @@ int getPressureGradient(char *authToken,
       enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
       int count, float datain[][3], float dataout[][3]);
 
+/* C */
+int getvelocityhessian_(char *authToken,
+      char *dataset, float *time,
+      int *spatial, int *temporal,
+      int *count, float datain[][3], float dataout[][18],
+      int len_a, int len_d);
+
+/* Fortran */
+int getVelocityHessian(char *authToken,
+      char *dataset, float time,
+      enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+      int count, float datain[][3], float dataout[][18]);
+
+/* C */
+int getvelocitylaplacian_(char *authToken,
+      char *dataset, float *time,
+      int *spatial, int *temporal,
+      int *count, float datain[][3], float dataout[][3],
+      int len_a, int len_d);
+
+/* Fortran */
+int getVelocityLaplacian(char *authToken,
+      char *dataset, float time,
+      enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+      int count, float datain[][3], float dataout[][3]);
 
 
 #ifdef  __cplusplus
