@@ -29,15 +29,16 @@ program TurbTest
   ! If you need one, please visit http://turbulence.pha.jhu.edu/
   ! (We just want to know a bit about our users!)
   !
-  character*100 :: authkey = 'jhu.edu.pha.turbulence.testing-200803' // CHAR(0)
+  character*100 :: authkey = 'jhu.edu.pha.turbulence.testing-200804' // CHAR(0)
 
   integer, parameter :: timestep = 182
   real :: time = 0.002 * timestep
-  real points(3, 10)
+  real points(3, 10)    ! input
   real dataout3(3, 10)  ! x,y,z
   real dataout4(4, 10)  ! x,y,z,p
   real dataout6(6, 10)  ! results from Pressure Hessian
   real dataout9(9, 10)  ! results from Velocity Gradient
+  real dataout18(18, 10) ! results from Velocity Hessian
 
   integer i,rc
 
@@ -56,14 +57,14 @@ program TurbTest
   write(*, *) 'Velocity at 10 particle locations'
   CALL getvelocity(authkey, dataset,  time, Lag6, NoTInt, 10, points, dataout3)
   do i = 1, 10, 1 
-    write(*,*) i, ': (', dataout3(1,i), ', ', dataout3(2,i), ',', dataout3(3,i), ')'
+    write(*,*) i, ': (', dataout3(1,i), ', ', dataout3(2,i), ', ', dataout3(3,i), ')'
   end do
 
   write(*, *)
   write(*, *) 'Velocity and pressure at 10 particle locations'
   CALL getvelocityandpressure(authkey, dataset,  time, Lag6, NoTInt, 10, points, dataout4)
   do i = 1, 10, 1 
-    write(*,*) i, ': (', dataout4(1,i), ', ', dataout4(2,i), ',', dataout4(3,i), ',', dataout4(4,i), ')'
+    write(*,*) i, ': (', dataout4(1,i), ', ', dataout4(2,i), ', ', dataout4(3,i), ', ', dataout4(4,i), ')'
   end do
 
   write(*, *)
@@ -76,6 +77,36 @@ program TurbTest
        ', duzdx=', dataout9(7,i), ', duzdy=', dataout9(8,i),  &
        ', duzdz=', dataout9(9,i), ')'
   end do
+
+  write(*, *) 'Velocity laplacian at 10 particle locations'
+  CALL getvelocitylaplacian(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout3)
+  do i = 1, 10, 1 
+    write(*,*) i, ': (grad2ux=', dataout3(1,i), ', grad2uy=', dataout3(2,i), ', grad2uz=', dataout3(3,i), ')'
+  end do
+
+  write(*, *) 'Velocity hessian at 10 particle locations'
+  CALL getvelocityhessian(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout18)
+  do i = 1, 10, 1 
+    write(*,*) i, ': (d2uxdxdx=', dataout18(1,i), &
+       ', d2uxdxdy=', dataout18(2,i), &
+       ', d2uxdxdz=', dataout18(3,i), &
+       ', d2uxdydy=', dataout18(4,i), &
+       ', d2uxdydz=', dataout18(5,i), &
+       ', d2uxdzdz=', dataout18(6,i), &
+       ', d2uydxdx=', dataout18(7,i), &
+       ', d2uydxdy=', dataout18(8,i), &
+       ', d2uydxdz=', dataout18(9,i), &
+       ', d2uydydy=', dataout18(10,i), &
+       ', d2uydydz=', dataout18(11,i), &
+       ', d2uydzdz=', dataout18(12,i), &
+       ', d2uzdxdx=', dataout18(13,i), &
+       ', d2uzdxdy=', dataout18(14,i), &
+       ', d2uzdxdz=', dataout18(15,i), &
+       ', d2uzdydy=', dataout18(16,i), &
+       ', d2uzdydz=', dataout18(18,i), &
+       ', d2uzdzdz=', dataout18(18,i), ')'
+  end do
+
 
   write(*, *)
   write(*, *) 'Pressure gradient at 10 particle locations'

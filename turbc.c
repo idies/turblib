@@ -7,7 +7,7 @@
  */
 int main(int argc, char *argv[]) {
 
-  char * authtoken = "jhu.edu.pha.turbulence.testing-200803";
+  char * authtoken = "jhu.edu.pha.turbulence.testing-200804";
   char * dataset = "isotropic1024coarse";
   enum SpatialInterpolation spatialInterp = Lag6;
   enum TemporalInterpolation temporalInterp = NoTInt;
@@ -21,6 +21,7 @@ int main(int argc, char *argv[]) {
   float result4[10][4];   /* results of x,y,z,p */
   float result6[10][6];   /* results from Pressure Hessian queries */
   float result9[10][9];   /* results from Velocity Gradient queries */
+  float result18[10][18];
   int p;
 
   /* Initialize gSOAP */
@@ -51,6 +52,26 @@ int main(int argc, char *argv[]) {
       result9[p][0], result9[p][1], result9[p][2],
       result9[p][3], result9[p][4], result9[p][5],
       result9[p][6], result9[p][7], result9[p][8]);
+  }
+
+  printf("Requesting velocity hessian at 10 points...\n");
+  getVelocityHessian (authtoken, dataset, time, FD4Lag4, temporalInterp, 10, points, result18);
+  for (p = 0; p < 10; p++) {
+    printf("%d: d2uxdxdx=%f, d2uxdxdy=%f, d2uxdxdz=%f, d2uxdydy=%f, d2uxdydz=%f, d2uxdzdz=%f, d2uydxdx=%f, d2uydxdy=%f, d2uydxdz=%f, d2uydydy=%f, d2uydydz=%f, d2uydzdz=%f, d2uzdxdx=%f, d2uzdxdy=%f, d2uzdxdz=%f, d2uzdydy=%f, d2uzdydz=%f, d2uzdzdz=%f\n",
+	p,
+	result18[p][0], result18[p][1], result18[p][2],
+	result18[p][3], result18[p][4], result18[p][5],
+	result18[p][6], result18[p][7], result18[p][8],
+	result18[p][9], result18[p][10], result18[p][11],
+	result18[p][12], result18[p][13], result18[p][14],
+	result18[p][15], result18[p][16], result18[p][17]);
+  }
+
+  printf("Requesting velocity laplacian at 10 points...\n");
+  getVelocityLaplacian (authtoken, dataset, time, FD4Lag4, temporalInterp, 10, points, result3);
+  for (p = 0; p < 10; p++) {
+    printf("%d: grad2ux=%f, grad2uy=%f, grad2uz=%f\n",
+           p, result3[p][0],  result3[p][1],  result3[p][2]);
   }
 
   printf("Requesting pressure gradient at 10 points...\n");

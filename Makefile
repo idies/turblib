@@ -32,7 +32,7 @@ wsdl:
 	soapcpp2 -CLcx -2 TurbulenceService.h
 
 testwsdl:
-	wsdl2h -o TurbulenceService.h -n turb -c "http://dev.turbulence.pha.jhu.edu/service/turbulence.asmx?WSDL" -l -s
+	wsdl2h -o TurbulenceService.h -n turb -c "http://test.turbulence.pha.jhu.edu/service/turbulence.asmx?WSDL" -l -s
 	soapcpp2 -CLcx -2 TurbulenceService.h
 
 devwsdl:
