@@ -49,5 +49,5 @@ package with most Linux distributions.
 **** Other Platforms ****
 
 Not tested.  Pleae let us know if any changes are needed.
-We are aware that the code will not work with other Fotran
-compilers which do different styles of name mangling.
+We are aware that the code may not work with other Fotran
+compilers.
