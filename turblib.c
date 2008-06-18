@@ -111,7 +111,7 @@ int getVelocity (char *authToken,
   soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
   soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
 
-  return 0;
+  return rc;
 }
 
 int getvelocityandpressure_ (char *authToken,
@@ -159,7 +159,7 @@ int getVelocityAndPressure (char *authToken,
   soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
   soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
 
-  return 0;
+  return rc;
 }
 
 int getpressurehessian_(char *authToken,
@@ -207,7 +207,7 @@ int getPressureHessian(char *authToken,
   soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
   soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
 
-  return 0;
+  return rc;
 }
 
 int getvelocitygradient_(char *authToken,
@@ -255,7 +255,7 @@ int getVelocityGradient(char *authToken,
   soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
   soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
 
-  return 0;
+  return rc;
 }
 
 int getpressuregradient_(char *authToken,
@@ -303,7 +303,7 @@ int getPressureGradient(char *authToken,
   soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
   soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
 
-  return 0;
+  return rc;
 }
 
 int getvelocityhessian_(char *authToken,
@@ -351,7 +351,7 @@ int getVelocityHessian(char *authToken,
   soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
   soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
 
-  return 0;
+  return rc;
 }
 
 int getvelocitylaplacian_ (char *authToken,
@@ -399,5 +399,5 @@ int getVelocityLaplacian (char *authToken,
   soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
   soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
 
-  return 0;
+  return rc;
 }
