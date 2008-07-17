@@ -8,7 +8,7 @@
  */
 int main(int argc, char *argv[]) {
 
-  char * authtoken = "jhu.edu.pha.turbulence.testing-200804";
+  char * authtoken = "edu.jhu.pha.turbulence.testing-200807";
   char * dataset = "isotropic1024coarse";
   enum SpatialInterpolation spatialInterp = Lag6;
   enum TemporalInterpolation temporalInterp = NoTInt;
@@ -96,7 +96,7 @@ int main(int argc, char *argv[]) {
 
   }
   
-  printf("Requesting velocity box filter at 1 points...\n");
+  printf("Requesting velocity box filter at 1 point...\n");
   getBoxFilterVelocity(authtoken, dataset, time, filterLength, nLayers,
     temporalInterp, 1, points, result3);
   printf("Layer 1:\n");

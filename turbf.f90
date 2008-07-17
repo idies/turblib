@@ -29,11 +29,12 @@ program TurbTest
   ! If you need one, please visit http://turbulence.pha.jhu.edu/
   ! (We just want to know a bit about our users!)
   !
-  character*100 :: authkey = 'jhu.edu.pha.turbulence.testing-200804' // CHAR(0)
+  character*100 :: authkey = 'edu.jhu.pha.turbulence.testing-200807' // CHAR(0)
 
   integer, parameter :: timestep = 182
   real :: time = 0.002 * timestep
   real points(3, 10)    ! input
+  real dataout1(10)     ! p
   real dataout3(3, 10)  ! x,y,z
   real dataout4(4, 10)  ! x,y,z,p
   real dataout6(6, 10)  ! results from Pressure Hessian
@@ -41,6 +42,9 @@ program TurbTest
   real dataout18(18, 10) ! results from Velocity Hessian
 
   integer i,rc
+
+  real :: filterLength = ((2.0 * 3.24) / 1024) * 16
+  integer :: nLayers = 2
 
   !
   ! Intialize the gSOAP runtime.
@@ -54,21 +58,21 @@ program TurbTest
     points(3, i) = 0.15 * i 
   end do
 
-  write(*, *) 'Velocity at 10 particle locations'
+  write(*,*) 'Velocity at 10 particle locations'
   CALL getvelocity(authkey, dataset,  time, Lag6, NoTInt, 10, points, dataout3)
   do i = 1, 10, 1 
     write(*,*) i, ': (', dataout3(1,i), ', ', dataout3(2,i), ', ', dataout3(3,i), ')'
   end do
 
-  write(*, *)
-  write(*, *) 'Velocity and pressure at 10 particle locations'
+  write(*,*)
+  write(*,*) 'Velocity and pressure at 10 particle locations'
   CALL getvelocityandpressure(authkey, dataset,  time, Lag6, NoTInt, 10, points, dataout4)
   do i = 1, 10, 1 
     write(*,*) i, ': (', dataout4(1,i), ', ', dataout4(2,i), ', ', dataout4(3,i), ', ', dataout4(4,i), ')'
   end do
 
-  write(*, *)
-  write(*, *) 'Velocity gradient at 10 particle locations'
+  write(*,*)
+  write(*,*) 'Velocity gradient at 10 particle locations'
   CALL getvelocitygradient(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout9)
   do i = 1, 10, 1 
     write(*,*) i, ': (duxdx=', dataout9(1,i), ', duxdy=', dataout9(2,i), &
@@ -78,13 +82,13 @@ program TurbTest
        ', duzdz=', dataout9(9,i), ')'
   end do
 
-  write(*, *) 'Velocity laplacian at 10 particle locations'
+  write(*,*) 'Velocity laplacian at 10 particle locations'
   CALL getvelocitylaplacian(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout3)
   do i = 1, 10, 1 
     write(*,*) i, ': (grad2ux=', dataout3(1,i), ', grad2uy=', dataout3(2,i), ', grad2uz=', dataout3(3,i), ')'
   end do
 
-  write(*, *) 'Velocity hessian at 10 particle locations'
+  write(*,*) 'Velocity hessian at 10 particle locations'
   CALL getvelocityhessian(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout18)
   do i = 1, 10, 1 
     write(*,*) i, ': (d2uxdxdx=', dataout18(1,i), &
@@ -107,21 +111,40 @@ program TurbTest
        ', d2uzdzdz=', dataout18(18,i), ')'
   end do
 
-
-  write(*, *)
-  write(*, *) 'Pressure gradient at 10 particle locations'
+  write(*,*)
+  write(*,*) 'Pressure gradient at 10 particle locations'
   CALL getpressuregradient(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout3)
   do i = 1, 10, 1 
     write(*,*) i, ': (dpdx=', dataout3(1,i), ', dpdy=', dataout3(2,i), ', dpdz=', dataout3(3,i), ')'
   end do
 
-  write(*, *)
-  write(*, *) 'Pressure hessian at 10 particle locations'
+  write(*,*)
+  write(*,*) 'Pressure hessian at 10 particle locations'
   CALL getpressurehessian(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout6)
   do i = 1, 10, 1 
     write(*,*) i, ': (d2pdxdx=', dataout6(1,i), ', d2pdxdy=', dataout6(2,i), &
        ', d2pdxdz=', dataout6(3,i), ', d2pdydy=', dataout6(4,i),  &
        ', d2pdydz=', dataout6(5,i), ', d2pdzdz', dataout6(6,i), ')'
+  end do
+
+  write(*,*)
+  write(*,*) 'Velocity box filter at 1 particle location'
+  CALL getboxfiltervelocity(authkey, dataset, time, filterLength, nLayers, NoTInt, 1, points, dataout3)
+  write(*,*) 'Layer 1:'
+  write(*,*) 1, ': (', dataout3(1,1), ', ', dataout3(2,1), ', ', dataout3(3,1), ')'
+  write(*,*) 'Layer 2:'
+  do i = 2, 9, 1 
+    write(*,*) i - 1, ': (', dataout3(1,i), ', ', dataout3(2,i), ', ', dataout3(3,i), ')'
+  end do
+
+  write(*,*)
+  write(*,*) 'Pressure box filter at 1 particle location'
+  CALL getboxfilterpressure(authkey, dataset, time, filterLength, nLayers, NoTInt, 1, points, dataout1)
+  write(*,*) 'Layer 1:'
+  write(*,*) 1, ': (', dataout1(1), ')'
+  write(*,*) 'Layer 2:'
+  do i = 2, 9, 1 
+    write(*,*) i - 1, ': (', dataout1(i), ')'
   end do
 
   !
