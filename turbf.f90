@@ -42,6 +42,7 @@ program TurbTest
   real dataout18(18, 10) ! results from Velocity Hessian
 
   integer i,rc
+  real xp,yp,zp
 
   real :: filterLength = ((2.0 * 3.24) / 1024) * 16
   integer :: nLayers = 2
@@ -130,22 +131,117 @@ program TurbTest
   write(*,*)
   write(*,*) 'Velocity box filter at 1 particle location'
   CALL getboxfiltervelocity(authkey, dataset, time, filterLength, nLayers, NoTInt, 1, points, dataout3)
-  write(*,*) 'Layer 1:'
-  write(*,*) 1, ': (', dataout3(1,1), ', ', dataout3(2,1), ', ', dataout3(3,1), ')'
-  write(*,*) 'Layer 2:'
+  write(*,*) 'Layer 1: (filter length = ', filterLength, ')'
+  write(*,*) 1, ': Location: (', points(1,1), ', ', points(2,1), ', ', points(3,1), ')'
+  write(*,*) '           (', dataout3(1,1), ', ', dataout3(2,1), ', ', dataout3(3,1), ')'
+  write(*,*) 'Layer 2: (filter length = ', filterLength/2.0, ')'
   do i = 2, 9, 1 
-    write(*,*) i - 1, ': (', dataout3(1,i), ', ', dataout3(2,i), ', ', dataout3(3,i), ')'
+    if ( i==2 .OR. i==4 .OR. i==6 .OR. i==8 ) then
+      xp = points(1,1)-filterLength/4.0
+    else
+      xp = points(1,1)+filterLength/4.0
+    endif
+    if ( i==2 .OR. i==3 .OR. i==6 .OR. i==7 ) then
+      yp = points(2,1)-filterLength/4.0
+    else
+      yp = points(2,1)+filterLength/4.0
+    endif
+    if ( i==2 .OR. i==3 .OR. i==4 .OR. i==5 ) then
+      zp = points(3,1)-filterLength/4.0
+    else
+      zp = points(3,1)+filterLength/4.0
+    endif
+    write(*,*) i-1, ': Location: (', xp, ', ', yp, ', ', zp, ')'
+    write(*,*) '           (', dataout3(1,i), ', ', dataout3(2,i), ', ', dataout3(3,i), ')'
   end do
 
   write(*,*)
   write(*,*) 'Pressure box filter at 1 particle location'
   CALL getboxfilterpressure(authkey, dataset, time, filterLength, nLayers, NoTInt, 1, points, dataout1)
-  write(*,*) 'Layer 1:'
-  write(*,*) 1, ': (', dataout1(1), ')'
-  write(*,*) 'Layer 2:'
-  do i = 2, 9, 1 
-    write(*,*) i - 1, ': (', dataout1(i), ')'
+  write(*,*) 'Layer 1: (filter length = ', filterLength, ')'
+  write(*,*) 1, ': Location: (', points(1,1), ', ', points(2,1), ', ', points(3,1), ')'
+  write(*,*) '           (', dataout1(1), ')'
+  write(*,*) 'Layer 2: (filter length = ', filterLength/2.0, ')'
+  do i = 2, 9, 1
+    if ( i==2 .OR. i==4 .OR. i==6 .OR. i==8 ) then
+      xp = points(1,1)-filterLength/4.0
+    else
+      xp = points(1,1)+filterLength/4.0
+    endif
+    if ( i==2 .OR. i==3 .OR. i==6 .OR. i==7 ) then
+      yp = points(2,1)-filterLength/4.0
+    else
+      yp = points(2,1)+filterLength/4.0
+    endif
+    if ( i==2 .OR. i==3 .OR. i==4 .OR. i==5 ) then
+      zp = points(3,1)-filterLength/4.0
+    else
+      zp = points(3,1)+filterLength/4.0
+    endif
+    write(*,*) i-1, ': Location: (', xp, ', ', yp, ', ', zp, ')'
+    write(*,*) '           (', dataout1(i), ')'
   end do
+  
+  write(*,*)
+  write(*,*) 'SGSstress box filter at 1 particle location'
+  CALL getboxfiltersgsstress(authkey, dataset, time, filterLength, nLayers, NoTInt, 1, points, dataout6)
+  write(*,*) 'Layer 1: (filter length = ', filterLength, ')'
+  write(*,*) 1, ': Location: (', points(1,1), ', ', points(2,1), ', ', points(3,1), ')'
+  write(*,*) '           (xx =', dataout6(1,1), ', yy =', dataout6(2,1), ', zz =', dataout6(3,1), &
+                       ', xy =', dataout6(4,1), ', xz =', dataout6(5,1), ', yz =', dataout6(6,1), ')'
+  write(*,*) 'Layer 2: (filter length = ', filterLength/2.0, ')'
+  do i = 2, 9, 1
+    if ( i==2 .OR. i==4 .OR. i==6 .OR. i==8 ) then
+      xp = points(1,1)-filterLength/4.0
+    else
+      xp = points(1,1)+filterLength/4.0
+    endif
+    if ( i==2 .OR. i==3 .OR. i==6 .OR. i==7 ) then
+      yp = points(2,1)-filterLength/4.0
+    else
+      yp = points(2,1)+filterLength/4.0
+    endif
+    if ( i==2 .OR. i==3 .OR. i==4 .OR. i==5 ) then
+      zp = points(3,1)-filterLength/4.0
+    else
+      zp = points(3,1)+filterLength/4.0
+    endif
+    write(*,*) i-1, ': Location: (', xp, ', ', yp, ', ', zp, ')'
+    write(*,*) '           (xx =', dataout6(1,i), ', yy =', dataout6(2,i), ', zz =', dataout6(3,i), &
+                         ', xy =', dataout6(4,i), ', xz =', dataout6(5,i), ', yz =', dataout6(6,i), ')'
+  end do
+
+  write(*,*)
+  write(*,*) 'Velocity gradient box filter at 1 particle location'
+  CALL getboxfiltervelocitygradient(authkey, dataset, time, filterLength, nLayers, NoTInt, 1, points, dataout9)
+  write(*,*) 'Layer 1: (filter length = ', filterLength, ')'
+  write(*,*) 1, ': Location: (', points(1,1), ', ', points(2,1), ', ', points(3,1), ')'
+  write(*,*) '           (duxdx =', dataout9(1,1), ', duxdy =', dataout9(2,1), ', duxdz =', dataout9(3,1), &
+                       ', duydx =', dataout9(4,1), ', duydy =', dataout9(5,1), ', duydz =', dataout9(6,1), &
+                       ', duzdx =', dataout9(7,1), ', duzdy =', dataout9(8,1), ', duzdz =', dataout9(9,1), ')'
+  write(*,*) 'Layer 2: (filter length = ', filterLength/2.0, ')'
+  do i = 2, 9, 1
+    if ( i==2 .OR. i==4 .OR. i==6 .OR. i==8 ) then
+      xp = points(1,1)-filterLength/4.0
+    else
+      xp = points(1,1)+filterLength/4.0
+    endif
+    if ( i==2 .OR. i==3 .OR. i==6 .OR. i==7 ) then
+      yp = points(2,1)-filterLength/4.0
+    else
+      yp = points(2,1)+filterLength/4.0
+    endif
+    if ( i==2 .OR. i==3 .OR. i==4 .OR. i==5 ) then
+      zp = points(3,1)-filterLength/4.0
+    else
+      zp = points(3,1)+filterLength/4.0
+    endif
+    write(*,*) i-1, ': Location: (', xp, ', ', yp, ', ', zp, ')'
+    write(*,*) '           (duxdx =', dataout9(1,i), ', duxdy =', dataout9(2,i), ', duxdz =', dataout9(3,i), &
+                         ', duydx =', dataout9(4,i), ', duydy =', dataout9(5,i), ', duydz =', dataout9(6,i), &
+                         ', duzdx =', dataout9(7,i), ', duzdy =', dataout9(8,i), ', duzdz =', dataout9(9,i), ')'
+  end do
+
 
   !
   ! Destroy the gSOAP runtime.
