@@ -100,7 +100,7 @@ int main(int argc, char *argv[]) {
   getBoxFilterVelocity(authtoken, dataset, time, filterLength, nLayers,
     temporalInterp, 1, points, result3);
   printf("Layer 1:\n");
-  printf("x=%f,y=%f,z=%f\n", result3[p][0],  result3[p][1],  result3[p][2]);
+  printf("x=%f,y=%f,z=%f\n", result3[0][0],  result3[0][1],  result3[0][2]);
   printf("Layer 2:\n");
   for (p = 1; p < 9; p++) {
     printf("%d: x=%f,y=%f,z=%f\n", p, result3[p][0],  result3[p][1],  result3[p][2]);
@@ -110,7 +110,7 @@ int main(int argc, char *argv[]) {
   getBoxFilterPressure(authtoken, dataset, time, filterLength, nLayers,
     temporalInterp, 1, points, result1);
   printf("Layer 1:\n");
-  printf("%d: p=%f\n", p, result1[p]);
+  printf("%d: p=%f\n", p, result1[0]);
   printf("Layer 2:\n");
   for (p = 1; p < 9; p++) {
     printf("%d: p=%f\n", p, result1[p]);
@@ -120,7 +120,7 @@ int main(int argc, char *argv[]) {
   getBoxFilterSGSStress(authtoken, dataset, time, filterLength, nLayers,
     temporalInterp, 1, points, result6);
   printf("Layer 1:\n");
-  printf("xx=%f,yy=%f,zz=%f, xy=%f, xz=%f, yz=%f\n", result6[p][0],  result6[p][1],  result6[p][2], result6[p][3], result6[p][4], result6[p][5]);
+  printf("xx=%f,yy=%f,zz=%f, xy=%f, xz=%f, yz=%f\n", result6[0][0],  result6[0][1],  result6[0][2], result6[0][3], result6[0][4], result6[0][5]);
    
   printf("Layer 2:\n");
   for (p = 1; p < 9; p++) {
@@ -131,9 +131,9 @@ int main(int argc, char *argv[]) {
   getBoxFilterVelocityGradient (authtoken, dataset, time, filterLength, nLayers, temporalInterp, 1, points, result9);
   printf("Layer 1:\n");
   printf("duxdx=%f, duxdy=%f, duxdz=%f, duydx=%f, duydy=%f, duydz=%f, duzdx=%f, duzdy=%f, duzdz=%f\n",
-    result9[p][0], result9[p][1], result9[p][2],
-    result9[p][3], result9[p][4], result9[p][5],
-    result9[p][6], result9[p][7], result9[p][8]);
+    result9[0][0], result9[0][1], result9[0][2],
+    result9[0][3], result9[0][4], result9[0][5],
+    result9[0][6], result9[0][7], result9[0][8]);
   printf("Layer 2:\n");
   for (p = 1; p < 9; p++) {
     printf("%d: duxdx=%f, duxdy=%f, duxdz=%f, duydx=%f, duydy=%f, duydz=%f, duzdx=%f, duzdy=%f, duzdz=%f\n", p,
