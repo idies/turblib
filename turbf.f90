@@ -44,8 +44,9 @@ program TurbTest
   integer i,rc
   real xp,yp,zp
 
-  real :: filterLength = ((2.0 * 3.24) / 1024) * 16
   integer :: nLayers = 2
+  real :: dx = 2.0 * 3.14 / 1024.0;
+  real :: filterLength = (2.0 * 3.14 / 1024.0) * 16.0;  ! 2.0^4.0=16.0
 
   !
   ! Intialize the gSOAP runtime.
