@@ -615,3 +615,51 @@ int getBoxFilterVelocityGradient(char *authToken,
   return rc;
 }
 
+int getForce(char *authToken,
+      char *dataset, float time,
+      enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+      int count, float datain[][3], float dataout[][3])
+{
+  int rc;
+
+  struct _turb1__GetForce input;
+  struct _turb1__GetForceResponse output;
+
+  input.authToken = authToken;
+  input.dataset = dataset;
+  input.time = time;
+  input.spatialInterpolation = SpatialIntToEnum(spatial);
+  input.temporalInterpolation = TemporalIntToEnum(temporal);
+
+  struct turb1__ArrayOfPoint3 pointArray;
+  pointArray.__sizePoint3 = count;
+  pointArray.Point3 = (void *)datain;
+  input.points = &pointArray;
+
+  rc = soap_call___turb2__GetForce(&__jhuturbsoap, NULL, NULL, &input, &output);
+  if (rc == SOAP_OK) {
+    memcpy(dataout, output.GetForceResult->Vector3,
+      output.GetForceResult->__sizeVector3 * sizeof(float) * 3);
+  } else {
+    fprintf(stdout, ">>> Error...\n");
+    soap_print_fault(&__jhuturbsoap, stdout);
+  }
+  
+  soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
+  soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
+
+  return rc;
+}
+
+int getforce_(char *authToken,
+      char *dataset, float *time,
+      int *spatial, int *temporal,
+      int *count, float datain[][3], float dataout[][3],
+      int len_a, int len_d)
+{
+  return getForce (authToken,
+    dataset, *time,
+    *spatial, *temporal,
+    *count, datain, dataout);
+}
+

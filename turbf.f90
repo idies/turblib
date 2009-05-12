@@ -66,6 +66,13 @@ program TurbTest
     write(*,*) i, ': (', dataout3(1,i), ', ', dataout3(2,i), ', ', dataout3(3,i), ')'
   end do
 
+  write(*,*) 'Forcing at 10 particle locations'
+  CALL getforce(authkey, dataset,  time, Lag6, NoTInt, 10, points, dataout3)
+  do i = 1, 10, 1 
+    write(*,*) i, ': (', dataout3(1,i), ', ', dataout3(2,i), ', ', dataout3(3,i), ')'
+  end do
+
+
   write(*,*)
   write(*,*) 'Velocity and pressure at 10 particle locations'
   CALL getvelocityandpressure(authkey, dataset,  time, Lag6, NoTInt, 10, points, dataout4)

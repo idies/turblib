@@ -48,6 +48,12 @@ int main(int argc, char *argv[]) {
     printf("%d: %f,%f,%f\n", p, result3[p][0],  result3[p][1],  result3[p][2]);
   }
 
+  printf("\nRequesting forcing at 10 points...\n");
+  getForce (authtoken, dataset, time, spatialInterp, temporalInterp, 10, points, result3);
+  for (p = 0; p < 10; p++) {
+    printf("%d: %f,%f,%f\n", p, result3[p][0],  result3[p][1],  result3[p][2]);
+  }
+
   printf("\nRequesting velocity and pressure at 10 points...\n");
   getVelocityAndPressure (authtoken, dataset, time, spatialInterp, temporalInterp, 10, points, result4);
    for (p = 0; p < 10; p++) {

@@ -211,6 +211,18 @@ int getboxfiltervelocitygradient_(char *authToken,
       int *count, float datain[][3], float dataout[][9],
       int len_a, int len_d);
 
+/* C */
+int getForce(char *authToken,
+  char *dataset, float time,
+  enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+  int count, float datain[][3], float dataout[][3]);
+
+/* Fortran */
+int getforce_(char *authToken,
+  char *dataset, float *time,
+  int *spatial, int *temporal,
+  int *count, float datain[][3], float dataout[][3],
+  int len_a, int len_d);
 
 #ifdef  __cplusplus
 }
