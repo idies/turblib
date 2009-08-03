@@ -149,6 +149,15 @@ int getvelocitylaplacian_(char *authToken,
       int len_a, int len_d);
 
 /* C */
+int nullOp(char *authToken, int count, 
+      float datain[][3], float dataout[][3]);
+
+/* Fortran */
+int nullop_(char *authToken, int *count, 
+      float datain[][3], float dataout[][3], 
+      int len_a, int len_d);
+
+/* C */
 int getBoxFilterVelocity(char *authToken,
       char *dataset, float time,
       float filterLength, int nylayers,

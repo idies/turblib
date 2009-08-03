@@ -402,6 +402,44 @@ int getVelocityLaplacian (char *authToken,
   return rc;
 }
 
+int nullop_ (char *authToken, int *count, 
+      float datain[][3], float dataout[][3],
+      int len_a, int len_d)
+{
+  return nullOp (authToken, *count, 
+    datain, dataout);
+}
+
+int nullOp (char *authToken, int count, 
+      float datain[][3], float dataout[][3])
+{
+  int rc;
+
+  struct _turb1__NullOp input;
+  struct _turb1__NullOpResponse output;
+
+  input.authToken = authToken;
+
+  struct turb1__ArrayOfPoint3 pointArray;
+  pointArray.__sizePoint3 = count;
+  pointArray.Point3 = (void *)datain;
+  input.points = &pointArray;
+
+  rc = soap_call___turb2__NullOp(&__jhuturbsoap, NULL, NULL, &input, &output);
+  if (rc == SOAP_OK) {
+    memcpy(dataout, output.NullOpResult->Vector3,
+      output.NullOpResult->__sizeVector3 * sizeof(float) * 3);
+  } else {
+    fprintf(stdout, ">>> Error...\n");
+    soap_print_fault(&__jhuturbsoap, stdout);
+  }
+  
+  soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
+  soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
+
+  return 0;
+}
+
 int getboxfiltervelocity_(char *authToken,
       char *dataset, float *time,
       float *filterlength,
