@@ -1,0 +1,44 @@
+JHU Turbulence Database Cluster
+Matlab/Octave Interface Library
+http://turbulence.pha.jhu.edu/
+
+**** About this package ****
+
+This library provides a very simple wrapper around gSOAP for
+calling the JHU Turbulence Database Cluster.
+
+More information can be found at:
+  http://turbulence.pha.jhu.edu/help/matlab/
+
+'make' will build the Matlab mex functions which are called
+directly from Matlab. The file turbm.m is a sample m-file that
+demonstrates how to call the database functions.
+
+Adjust the MEX variable in the Makefile to build for Octave if
+if you do not have Matlab installed.
+
+**** Identification Token (optional, for now) ****
+
+While our service is open to anyone, we would like to keep
+track of who is using the service, and how.  To this end,
+we would like each user or site to obtain an authorization
+token from us:
+  http://turbulence.pha.jhu.edu/help/authtoken.html
+
+If you are just experimenting, the default token included
+in these test files should be valid.
+
+**** Mac OS X Notes ****
+
+You will need the Apple Developer Tools (Xcode), which
+can be found on your OS X install disk, or downloaded
+for free (with registration) from
+   http://developer.apple.com/
+
+**** Linux Notes ****
+
+Most versions of gcc should work.  
+
+**** Other Platforms ****
+
+Not tested.  Pleae let us know if any changes are needed.
