@@ -53,20 +53,20 @@ void mexFunction( int nlhs, mxArray *plhs[],
   }
 
   /* Create output matrix */
- plhs[0] = mxCreateNumericMatrix(ncol,nrow,mxSINGLE_CLASS,mxREAL);
+  plhs[0] = mxCreateNumericMatrix(ncol,nrow,mxSINGLE_CLASS,mxREAL);
 
-/*  Call soap function */
- rc = getVelocity (authkey, dataset, time, spatialInterp, temporalInterp, count, input, output);
+  /*  Call soap function */
+  rc = getVelocity (authkey, dataset, time, spatialInterp, temporalInterp, count, input, output);
  
-/*  Check status of request */
- if (rc != SOAP_OK) {
-   mexErrMsgTxt("Error with data request! Please check inputs.");
-   soapdestroy();
- }
+  /*  Check status of request */
+  if (rc != SOAP_OK) {
+    soapdestroy();
+    mexErrMsgTxt("Error with data request! Please check inputs.");
+  }
 
- memcpy(mxGetPr(plhs[0]), output, nrow*ncol*sizeof(float));
+  memcpy(mxGetPr(plhs[0]), output, nrow*ncol*sizeof(float));
 
- soapdestroy(); 
+  soapdestroy(); 
 
- return;
+  return;
 }

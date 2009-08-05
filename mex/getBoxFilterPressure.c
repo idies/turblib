@@ -60,13 +60,13 @@ void mexFunction( int nlhs, mxArray *plhs[],
   /* Create output matrix */
  plhs[0] = mxCreateNumericMatrix(nrow_out,ncol_out,mxSINGLE_CLASS,mxREAL);
 
-/*  Call soap function */
+ /*  Call soap function */
  rc = getBoxFilterPressure(authkey, dataset, time, filterLength, nLayers, temporalInterp, count, input, output);
  
-/*  Check status of request */
+  /*  Check status of request */
  if (rc != SOAP_OK) {
-   mexErrMsgTxt("Error with data request! Please check inputs.");
    soapdestroy();
+   mexErrMsgTxt("Error with data request! Please check inputs.");
  }
 
  memcpy(mxGetPr(plhs[0]), output, nrow_out*ncol_out*sizeof(float));
