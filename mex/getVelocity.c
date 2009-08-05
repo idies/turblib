@@ -27,14 +27,14 @@ void mexFunction( int nlhs, mxArray *plhs[],
   mwSize i,j,rc;
   mwSize nrow, ncol;
 
-/*  Row-major order */
+  /*  Row-major order */
   nrow = mxGetN(prhs[6]);
   ncol = 3;
 
   float input[nrow][ncol];
   float output[nrow][ncol];
 
-  /* check: only one input and one output argument */
+  /* check for correct number of input and output arguments */
   if (nrhs !=nins)
     mexErrMsgTxt("Must have seven input arguments");
   if (nlhs !=nouts)
