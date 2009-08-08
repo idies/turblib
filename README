@@ -1,5 +1,5 @@
 JHU Turbulence Database Cluster
-Fortran & C Interface Library
+Fortran, C and Matlab Interface Library
 http://turbulence.pha.jhu.edu/
 
 **** About this package ****
@@ -13,6 +13,9 @@ More information can be found at:
 'make' will build both the Fortran and C sample code.
 Use 'make turbc' if you do not have a Frotran compiler
 installed.
+
+The Matlab interface is under the mex/ directory.
+Please see mex/README for instructions.
 
 **** Identification Token (optional, for now) ****
 
@@ -39,15 +42,15 @@ gfortran.  We have been using the precompiled versions
 available from
   http://hpc.sourceforge.net/
 
-
 **** Linux Notes ****
 
-Most versions of gcc should work.  If you wish to use fortran
-you will need to install gfortran, available as an optional
-package with most Linux distributions.
+Most versions of gcc should work.  If you wish to use
+fortran you will need to install gfortran, available as an
+optional package with most Linux distributions.
 
 **** Other Platforms ****
 
 Not tested.  Pleae let us know if any changes are needed.
 We are aware that the code may not work with other Fotran
 compilers.
+
