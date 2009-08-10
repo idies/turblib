@@ -16,21 +16,13 @@ int main(int argc, char *argv[]) {
   int timestep = 182;
   float time = 0.002 * timestep;
 
-  /* For filter functions */
-  int nLayers = 2;
-  float dx = 2.0f * (float)(3.14) / 1024;
-  float filterLength = dx * pow(2.0, 4.0);
-
-  
   float points[10][3];    /* input of x,y,z */
-  float result1[10];      /* results of single dimenbsion (p)*/
   float result3[10][3];   /* results of x,y,z */
   float result4[10][4];   /* results of x,y,z,p */
   float result6[10][6];   /* results from Pressure Hessian queries */
   float result9[10][9];   /* results from Velocity Gradient queries */
   float result18[10][18];
   int p;
-  float xp, yp, zp;
 
   /* Initialize gSOAP */
   soapinit();
@@ -103,108 +95,6 @@ int main(int argc, char *argv[]) {
 
   }
   
-  printf("\nRequesting velocity box filter at 1 point...\n");
-  getBoxFilterVelocity(authtoken, dataset, time, filterLength, nLayers,
-    temporalInterp, 1, points, result3);
-  printf("Layer 1 (filter length = %f) :\n", filterLength);
-  printf("Location: x=%f, y=%f, z=%f\n", points[0][0], points[0][1], points[0][2]);
-  printf("ux=%f,uy=%f,uz=%f\n", result3[0][0],  result3[0][1],  result3[0][2]);
-  printf("Layer 2 (filter length = %f) :\n", filterLength/2.0); 
-  for (p = 1; p < 9; p++) {
-    if (p == 1 || p == 3 || p == 5 || p == 7)  
-      xp = points[0][0] - filterLength/4.0;
-    else
-      xp = points[0][0] + filterLength/4.0;
-    if (p == 1 || p == 2 || p == 5 || p == 6)
-      yp = points[0][1] - filterLength/4.0;
-    else
-      yp = points[0][1] + filterLength/4.0;
-    if (p == 1 || p == 2 || p == 3 || p == 4)
-      zp = points[0][2] - filterLength/4.0;
-    else
-      zp = points[0][2] + filterLength/4.0;
-    printf("%d: Location: x=%f, y=%f, z=%f\n", p, xp, yp, zp); 
-    printf("   ux=%f,uy=%f,uz=%f\n", result3[p][0],  result3[p][1],  result3[p][2]);
-  }
-
-  printf("\nRequesting pressure box filter at 1 points...\n");
-  getBoxFilterPressure(authtoken, dataset, time, filterLength, nLayers,
-    temporalInterp, 1, points, result1);
-  printf("Layer 1 (filter length = %f) :\n", filterLength);
-  printf("Location: x=%f, y=%f, z=%f\n", points[0][0], points[0][1], points[0][2]);
-  printf("p=%f\n", result1[0]);
-  printf("Layer 2 (filter length = %f) :\n", filterLength/2.0);
-  for (p = 1; p < 9; p++) {
-    if (p == 1 || p == 3 || p == 5 || p == 7)
-      xp = points[0][0] - filterLength/4.0;
-    else
-      xp = points[0][0] + filterLength/4.0;
-    if (p == 1 || p == 2 || p == 5 || p == 6)
-      yp = points[0][1] - filterLength/4.0;
-    else
-      yp = points[0][1] + filterLength/4.0;
-    if (p == 1 || p == 2 || p == 3 || p == 4)
-      zp = points[0][2] - filterLength/4.0;
-    else
-      zp = points[0][2] + filterLength/4.0;
-    printf("%d: Location: x=%f, y=%f, z=%f\n", p, xp, yp, zp);
-    printf("   p=%f\n", result1[p]);
-  } 
-
-  printf("\nRequesting SGS stress box filter at 1 points...\n");
-  getBoxFilterSGSStress(authtoken, dataset, time, filterLength, nLayers,
-    temporalInterp, 1, points, result6);
-  printf("Layer 1 (filter length = %f) :\n", filterLength);
-  printf("Location: x=%f, y=%f, z=%f\n", points[0][0], points[0][1], points[0][2]);
-  printf("xx=%f,yy=%f,zz=%f, xy=%f, xz=%f, yz=%f\n", result6[0][0],  result6[0][1],  result6[0][2], result6[0][3], result6[0][4], result6[0][5]);
-  
-  printf("Layer 2 (filter length = %f) :\n", filterLength/2.0);
-  for (p = 1; p < 9; p++) {
-    if (p == 1 || p == 3 || p == 5 || p == 7)
-      xp = points[0][0] - filterLength/4.0;
-    else
-      xp = points[0][0] + filterLength/4.0;
-    if (p == 1 || p == 2 || p == 5 || p == 6)
-      yp = points[0][1] - filterLength/4.0;
-    else
-      yp = points[0][1] + filterLength/4.0;
-    if (p == 1 || p == 2 || p == 3 || p == 4)
-      zp = points[0][2] - filterLength/4.0;
-    else
-      zp = points[0][2] + filterLength/4.0;
-    printf("%d: Location: x=%f, y=%f, z=%f\n", p, xp, yp, zp);
-    printf("   xx=%f,yy=%f,zz=%f, xy=%f, xz=%f, yz=%f\n", result6[p][0],  result6[p][1],  result6[p][2], result6[p][3], result6[p][4], result6[p][5]);
-  }
-
-  printf("\nRequesting velocity gradient box filter at 1 points...\n");
-  getBoxFilterVelocityGradient (authtoken, dataset, time, filterLength, nLayers, temporalInterp, 1, points, result9);
-  printf("Layer 1 (filter length = %f) :\n", filterLength);
-  printf("Location: x=%f, y=%f, z=%f\n", points[0][0], points[0][1], points[0][2]);
-  printf("duxdx=%f, duxdy=%f, duxdz=%f, duydx=%f, duydy=%f, duydz=%f, duzdx=%f, duzdy=%f, duzdz=%f\n",
-    result9[0][0], result9[0][1], result9[0][2],
-    result9[0][3], result9[0][4], result9[0][5],
-    result9[0][6], result9[0][7], result9[0][8]);
-  printf("Layer 2 (filter length = %f) :\n", filterLength/2.0);
-  for (p = 1; p < 9; p++) {
-    if (p == 1 || p == 3 || p == 5 || p == 7)
-      xp = points[0][0] - filterLength/4.0;
-    else
-      xp = points[0][0] + filterLength/4.0;
-    if (p == 1 || p == 2 || p == 5 || p == 6)
-      yp = points[0][1] - filterLength/4.0;
-    else
-      yp = points[0][1] + filterLength/4.0;
-    if (p == 1 || p == 2 || p == 3 || p == 4)
-      zp = points[0][2] - filterLength/4.0;
-    else
-      zp = points[0][2] + filterLength/4.0;
-    printf("%d: Location: x=%f, y=%f, z=%f\n", p, xp, yp, zp);
-    printf("   duxdx=%f, duxdy=%f, duxdz=%f, duydx=%f, duydy=%f, duydz=%f, duzdx=%f, duzdy=%f, duzdz=%f\n",
-      result9[p][0], result9[p][1], result9[p][2],
-      result9[p][3], result9[p][4], result9[p][5],
-      result9[p][6], result9[p][7], result9[p][8]);
-  }
-
   /* Free gSOAP resources */
   soapdestroy();
 

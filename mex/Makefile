@@ -15,8 +15,7 @@ OBJ =	soapC.o \
         turblib.o
 
 all: nullOp getVelocity getForce getVelocityAndPressure getVelocityGradient getVelocityHessian \
-	getVelocityLaplacian getPressureGradient getPressureHessian getBoxFilterVelocity \
-	getBoxFilterPressure getBoxFilterSGSStress getBoxFilterVelocityGradient
+	getVelocityLaplacian getPressureGradient getPressureHessian
 
 nullOp : $(OBJ)
 	$(MEX) nullOp.c $(OBJ)	
@@ -44,18 +43,6 @@ getPressureGradient : $(OBJ)
 
 getPressureHessian : $(OBJ)
 	$(MEX) getPressureHessian.c $(OBJ)
-
-getBoxFilterVelocity : $(OBJ)
-	$(MEX) getBoxFilterVelocity.c $(OBJ)
-
-getBoxFilterPressure : $(OBJ)
-	$(MEX) getBoxFilterPressure.c $(OBJ)
-
-getBoxFilterSGSStress : $(OBJ)
-	$(MEX) getBoxFilterSGSStress.c $(OBJ)
-
-getBoxFilterVelocityGradient : $(OBJ)
-	$(MEX) getBoxFilterVelocityGradient.c $(OBJ)
 
 soapC.o: ../soapC.c
 	$(CC) $(CFLAGS) -c $<
