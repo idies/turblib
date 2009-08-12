@@ -1,5 +1,5 @@
 JHU Turbulence Database Cluster
-Matlab/Octave Interface Library
+Matlab Interface Library
 http://turbulence.pha.jhu.edu/
 
 **** About this package ****
@@ -10,12 +10,19 @@ calling the JHU Turbulence Database Cluster.
 More information can be found at:
   http://turbulence.pha.jhu.edu/help/matlab/
 
-'make' will build the Matlab mex functions which are called
-directly from Matlab. The file turbm.m is a sample m-file that
-demonstrates how to call the database functions.
+Users should first check that the Makefile variables are
+specified to reflect system settings. The MEX variable should
+point to the 'mex' executable located in same directory as the
+'matlab' executable. This can be accomplished by either 
+specifying the absolute path or setting the PATH environment
+variable appropriately. 
 
-Adjust the MEX variable in the Makefile to build for Octave if
-if you do not have Matlab installed.
+NOTE: Users can adjust the MEX variable in the Makefile to build
+for GNU Octave if Matlab is not installed.
+
+Runing 'make' will build the Matlab MEX functions which are 
+called directly from Matlab. The file turbm.m is a sample 
+M-file that demonstrates how to call the database functions.
 
 **** Identification Token (optional, for now) ****
 
