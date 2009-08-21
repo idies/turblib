@@ -4,17 +4,20 @@ http://turbulence.pha.jhu.edu/
 
 **** About this package ****
 
-This library provides a very simple wrapper around gSOAP for
-calling the JHU Turbulence Database Cluster.
+This library provides a gSOAP wrapper for calling the JHU
+Turbulence Database Cluster.
 
 More information can be found at:
-  http://turbulence.pha.jhu.edu/help/matlab/
+http://turbulence.pha.jhu.edu/help/matlab/
 
 Users should first check that the Makefile variables are
 specified to reflect system settings. The MEX variable should
 point to the 'mex' executable located in same directory as the
-'matlab' executable. This can be accomplished by either 
-specifying the absolute path or setting the PATH environment
+'matlab' executable. The 'bin' directory can be obtained by running 
+'[matlabroot '/bin']' from the Matlab Command Window. The 
+specification of the 'mex' executable can be accomplished by either 
+specifying the absolute path (which includes the result provided
+by running '[matlabroot '/bin']') or setting the PATH environment
 variable appropriately. 
 
 NOTE: Users can adjust the MEX variable in the Makefile to build
