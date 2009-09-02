@@ -24,7 +24,7 @@ stdsoap2.o: stdsoap2.c
 	$(CC) $(CFLAGS) -c $<
 
 # Regenerate the gSOAP interfaces if required
-TurbulenceService.h : updatewsdl
+TurbulenceService.h : wsdl
 
 # Update the WSDL and gSOAP interfaces
 wsdl:
@@ -37,6 +37,10 @@ testwsdl:
 
 devwsdl:
 	wsdl2h -o TurbulenceService.h -n turb -c "http://dev.turbulence.pha.jhu.edu/service/turbulence.asmx?WSDL" -l -s
+	soapcpp2 -CLcx -2 TurbulenceService.h
+
+prodtestwsdl:
+	wsdl2h -o TurbulenceService.h -n turb -c "http://prodtest.turbulence.pha.jhu.edu/service/turbulence.asmx?WSDL" -l -s
 	soapcpp2 -CLcx -2 TurbulenceService.h
 
 clean:
