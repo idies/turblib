@@ -1,5 +1,15 @@
-CC     = gcc -g
-FC     = gfortran -g
+
+OSARCH := $(shell uname -sp)
+
+ifeq ($(OSARCH),Darwin i386)
+	# Compile code for both 32- and 64-bit under MacOS X for Intel
+	ARCH_FLAGS = -arch i386 -arch x86_64
+else	
+	ARCH_FLAGS =
+endif
+
+CC     = gcc -g $(ARCH_FLAGS)
+FC     = gfortran $(ARCH_FLAGS)
 RM     = rm -f
 CFLAGS = -Wall -g -I..
 LDLIBS = 
@@ -49,7 +59,6 @@ clean:
 spotless: clean
 	$(RM) soapClient.c TurbulenceServiceSoap.nsmap soapH.h TurbulenceServiceSoap12.nsmap soapStub.h soapC.c TurbulenceService.h
 
-.SUFFIXES:
 .SUFFIXES: .o .c .x
 
 .c.o:
