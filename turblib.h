@@ -7,7 +7,7 @@
 extern "C" {
 #endif
 
-#define TURBLIB_VERSION "0.1.0"
+#define TURBLIB_VERSION "0.1.2"
 
 /* Global gSOAP handle
  * TODO: Figure out how to pass this to/from Fortran
@@ -27,7 +27,7 @@ enum SpatialInterpolation
   FD4NoInt = 40, /* 4th order finite differential scheme for grid values, no spatial interpolation */
   FD6NoInt = 60, /* 6th order finite differential scheme for grid values, no spatial interpolation */
   FD8NoInt = 80, /* 8th order finite differential scheme for grid values, no spatial interpolation */
-  FD4Lag4 = 44,  /*  4th order finite differential scheme for grid values, 4th order Lagrangian interpolation in space */
+  FD4Lag4 = 44,  /* 4th order finite differential scheme for grid values, 4th order Lagrangian interpolation in space */
 
 
   /* Old names, for backward compatibility */
