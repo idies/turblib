@@ -8,6 +8,7 @@ extern "C" {
 #endif
 
 #define TURBLIB_VERSION "0.1.2"
+#define TURB_ERROR_LENGTH 2048
 
 /* Global gSOAP handle
  * TODO: Figure out how to pass this to/from Fortran
@@ -49,13 +50,22 @@ enum TemporalInterpolation
   PCHIPInterpolation = 1
 };
 
-/* C*/
+/* C */
 void soapinit ();
 void soapdestroy ();
 
 /* Fortran */
 void soapinit_ ();
 void soapdestroy_ ();
+
+/* C */
+char *turblibGetErrorString ();
+int turblibGetErrorNumber ();
+void turblibPrintError ();
+
+/* Fortran */
+int turblibgeterrornumber_();
+void turblibprinterror_();
 
 /* C */
 int getVelocity (char *authToken,

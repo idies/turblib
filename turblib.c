@@ -10,6 +10,31 @@
  */
 struct soap __jhuturbsoap;
 
+/* Error reporting - C */
+char __turblib_err[TURB_ERROR_LENGTH];
+int __turblib_errno;
+
+char * turblibGetErrorString() {
+  return __turblib_err;
+}
+
+int turblibGetErrorNumber() {
+  return __turblib_errno;
+}
+
+void turblibPrintError() {
+  fprintf(stderr, "%d: %s\n", turblibGetErrorNumber(), turblibGetErrorString());
+}
+
+/* Error reporting - Fortran */
+int turblibgeterrornumber_() {
+  return turblibGetErrorNumber();
+}
+
+void turblibprinterror_() {
+  turblibPrintError();
+}
+
 /* Return the enum relating to the Fortran constant */
 enum turb1__SpatialInterpolation SpatialIntToEnum(enum SpatialInterpolation spatial)
 {
@@ -104,8 +129,8 @@ int getVelocity (char *authToken,
     memcpy(dataout, output.GetVelocityResult->Vector3,
       output.GetVelocityResult->__sizeVector3 * sizeof(float) * 3);
   } else {
-    fprintf(stdout, ">>> Error...\n");
-    soap_print_fault(&__jhuturbsoap, stdout);
+    __turblib_errno = rc;
+    soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
   }
   
   soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
@@ -152,8 +177,8 @@ int getVelocityAndPressure (char *authToken,
     memcpy(dataout, output.GetVelocityAndPressureResult->Vector3P,
       output.GetVelocityAndPressureResult->__sizeVector3P * sizeof(float) * 4);
   } else {
-    fprintf(stdout, ">>> Error...\n");
-    soap_print_fault(&__jhuturbsoap, stdout);
+    __turblib_errno = rc;
+    soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
   }
   
   soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
@@ -200,8 +225,8 @@ int getPressureHessian(char *authToken,
     memcpy(dataout, output.GetPressureHessianResult->PressureHessian,
       output.GetPressureHessianResult->__sizePressureHessian * sizeof(float) * 6);
   } else {
-    fprintf(stdout, ">>> Error...\n");
-    soap_print_fault(&__jhuturbsoap, stdout);
+    __turblib_errno = rc;
+    soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
   }
   
   soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
@@ -248,8 +273,8 @@ int getVelocityGradient(char *authToken,
     memcpy(dataout, output.GetVelocityGradientResult->VelocityGradient,
       output.GetVelocityGradientResult->__sizeVelocityGradient * sizeof(float) * 9);
   } else {
-    fprintf(stdout, ">>> Error...\n");
-    soap_print_fault(&__jhuturbsoap, stdout);
+    __turblib_errno = rc;
+    soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
   }
   
   soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
@@ -296,8 +321,8 @@ int getPressureGradient(char *authToken,
     memcpy(dataout, output.GetPressureGradientResult->Vector3,
       output.GetPressureGradientResult->__sizeVector3 * sizeof(float) * 3);
   } else {
-    fprintf(stdout, ">>> Error...\n");
-    soap_print_fault(&__jhuturbsoap, stdout);
+    __turblib_errno = rc;
+    soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
   }
   
   soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
@@ -344,8 +369,8 @@ int getVelocityHessian(char *authToken,
     memcpy(dataout, output.GetVelocityHessianResult->VelocityHessian,
       output.GetVelocityHessianResult->__sizeVelocityHessian * sizeof(float) * 18);
   } else {
-    fprintf(stdout, ">>> Error...\n");
-    soap_print_fault(&__jhuturbsoap, stdout);
+    __turblib_errno = rc;
+    soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
   }
   
   soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
@@ -392,8 +417,8 @@ int getVelocityLaplacian (char *authToken,
     memcpy(dataout, output.GetVelocityLaplacianResult->Vector3,
       output.GetVelocityLaplacianResult->__sizeVector3 * sizeof(float) * 3);
   } else {
-    fprintf(stdout, ">>> Error...\n");
-    soap_print_fault(&__jhuturbsoap, stdout);
+    __turblib_errno = rc;
+    soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
   }
   
   soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
@@ -430,8 +455,8 @@ int nullOp (char *authToken, int count,
     memcpy(dataout, output.NullOpResult->Vector3,
       output.NullOpResult->__sizeVector3 * sizeof(float) * 3);
   } else {
-    fprintf(stdout, ">>> Error...\n");
-    soap_print_fault(&__jhuturbsoap, stdout);
+    __turblib_errno = rc;
+    soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
   }
   
   soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
@@ -483,8 +508,8 @@ int getBoxFilterVelocity(char *authToken,
     memcpy(dataout, output.GetBoxFilterVelocityResult->Vector3,
       output.GetBoxFilterVelocityResult->__sizeVector3 * sizeof(float) * 3);
   } else {
-    fprintf(stdout, ">>> Error...\n");
-    soap_print_fault(&__jhuturbsoap, stdout);
+    __turblib_errno = rc;
+    soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
   }
   
   soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
@@ -536,8 +561,8 @@ int getBoxFilterPressure(char *authToken,
     memcpy(dataout, output.GetBoxFilterPressureResult->float_,
       output.GetBoxFilterPressureResult->__sizefloat_ * sizeof(float));
   } else {
-    fprintf(stdout, ">>> Error...\n");
-    soap_print_fault(&__jhuturbsoap, stdout);
+    __turblib_errno = rc;
+    soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
   } 
   
   soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
@@ -590,8 +615,8 @@ int getBoxFilterSGSStress(char *authToken,
     memcpy(dataout, output.GetBoxFilterSGSStressResult->SGSStress,
       output.GetBoxFilterSGSStressResult->__sizeSGSStress * sizeof(float) * 6);
   } else {
-    fprintf(stdout, ">>> Error...\n");
-    soap_print_fault(&__jhuturbsoap, stdout);
+    __turblib_errno = rc;
+    soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
   }
   
   soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
@@ -643,8 +668,8 @@ int getBoxFilterVelocityGradient(char *authToken,
     memcpy(dataout, output.GetBoxFilterVelocityGradientResult->VelocityGradient,
       output.GetBoxFilterVelocityGradientResult->__sizeVelocityGradient * sizeof(float) * 9);
   } else {
-    fprintf(stdout, ">>> Error...\n");
-    soap_print_fault(&__jhuturbsoap, stdout);
+    __turblib_errno = rc;
+    soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
   }
   
   soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
@@ -679,8 +704,8 @@ int getForce(char *authToken,
     memcpy(dataout, output.GetForceResult->Vector3,
       output.GetForceResult->__sizeVector3 * sizeof(float) * 3);
   } else {
-    fprintf(stdout, ">>> Error...\n");
-    soap_print_fault(&__jhuturbsoap, stdout);
+    __turblib_errno = rc;
+    soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
   }
   
   soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
