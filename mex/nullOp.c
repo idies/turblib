@@ -8,6 +8,18 @@ void mexFunction( int nlhs, mxArray *plhs[],
 
   mwSize nins = 3;
   mwSize nouts = 1;
+  
+  char turblibErrMsg[TURB_ERROR_LENGTH];
+
+    /* check for correct number of input and output arguments */
+  if (nrhs !=nins) {
+    sprintf(turblibErrMsg, "Required number of input arguments: %d",nins);
+    mexErrMsgTxt(turblibErrMsg);
+  } else if (nlhs !=nouts) {
+    sprintf(turblibErrMsg, "Required number of output arguments: %d",nouts);
+    mexErrMsgTxt(turblibErrMsg);
+  }  
+
   char * authkey;
   mwSize count;
   double *mat_input;
@@ -25,12 +37,6 @@ void mexFunction( int nlhs, mxArray *plhs[],
 
   float input[nrow][ncol];
   float output[nrow][ncol];
-
-  /* check for correct number of input and output arguments */
-  if (nrhs !=nins)
-    mexErrMsgTxt("Must have three input arguments");
-  if (nlhs !=nouts)
-    mexErrMsgTxt("Must have one output argument");
   
   /* Initialize gSOAP */
   soapinit();
@@ -48,12 +54,9 @@ void mexFunction( int nlhs, mxArray *plhs[],
   plhs[0] = mxCreateNumericMatrix(ncol,nrow,mxSINGLE_CLASS,mxREAL);
 
   /*  Call soap function */
-  rc = nullOp (authkey, count, input, output);
- 
-  /*  Check status of request */
-  if (rc != SOAP_OK) {
-    soapdestroy();
-    mexErrMsgTxt("Error with data request! Please check inputs.");
+  if (nullOp (authkey, count, input, output) != SOAP_OK) {
+    sprintf(turblibErrMsg,"%d: %s\n", turblibGetErrorNumber(), turblibGetErrorString());
+    mexErrMsgTxt(turblibErrMsg);
   }
  
   memcpy(mxGetPr(plhs[0]), output, nrow*ncol*sizeof(float));

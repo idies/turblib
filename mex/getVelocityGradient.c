@@ -8,6 +8,18 @@ void mexFunction( int nlhs, mxArray *plhs[],
 
   mwSize nins = 7;
   mwSize nouts = 1;
+  
+  char turblibErrMsg[TURB_ERROR_LENGTH];
+
+    /* check for correct number of input and output arguments */
+  if (nrhs !=nins) {
+    sprintf(turblibErrMsg, "Required number of input arguments: %d",nins);
+    mexErrMsgTxt(turblibErrMsg);
+  } else if (nlhs !=nouts) {
+    sprintf(turblibErrMsg, "Required number of output arguments: %d",nouts);
+    mexErrMsgTxt(turblibErrMsg);
+  }
+  
   char * authkey;
   char * dataset;
   mwSize spatialInterp;
@@ -36,12 +48,6 @@ void mexFunction( int nlhs, mxArray *plhs[],
   
   float input[nrow][ncol];
   float output[nrow_out][ncol_out];  
-
-  /* check for correct number of input and output arguments */
-  if (nrhs !=nins)
-    mexErrMsgTxt("Must have seven input arguments");
-  if (nlhs !=nouts)
-    mexErrMsgTxt("Must have one output argument");
   
   /* Initialize gSOAP */
   soapinit();
@@ -59,12 +65,9 @@ void mexFunction( int nlhs, mxArray *plhs[],
   plhs[0] = mxCreateNumericMatrix(ncol_out,nrow_out,mxSINGLE_CLASS,mxREAL);
 
   /*  Call soap function */
-  rc = getVelocityGradient (authkey, dataset, time, spatialInterp, temporalInterp, count, input, output);
- 
-  /*  Check status of request */
-  if (rc != SOAP_OK) {
-    soapdestroy();
-    mexErrMsgTxt("Error with data request! Please check inputs.");
+  if (getVelocityGradient (authkey, dataset, time, spatialInterp, temporalInterp, count, input, output) != SOAP_OK) {
+    sprintf(turblibErrMsg,"%d: %s\n", turblibGetErrorNumber(), turblibGetErrorString());
+    mexErrMsgTxt(turblibErrMsg);
   }
 
   memcpy(mxGetPr(plhs[0]), output, nrow_out*ncol_out*sizeof(float));
