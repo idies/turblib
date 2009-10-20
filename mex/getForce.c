@@ -36,7 +36,7 @@ void mexFunction( int nlhs, mxArray *plhs[],
   count   = (int)mxGetScalar(prhs[5]);
   mat_input = mxGetPr(prhs[6]);
 
-  mwSize i,j,rc;
+  mwSize i,j;
   mwSize nrow, ncol;
 
   /* Row-major oder */
