@@ -1,3 +1,4 @@
+/* $Id: */
 #ifndef TURBLIB_H_
 #define TURBLIB_H_
 
@@ -7,7 +8,7 @@
 extern "C" {
 #endif
 
-#define TURBLIB_VERSION "0.1.2"
+#define TURBLIB_VERSION "0.1.3"
 #define TURB_ERROR_LENGTH 2048
 
 /* Global gSOAP handle
@@ -64,6 +65,7 @@ int turblibGetErrorNumber ();
 void turblibPrintError ();
 
 /* Fortran */
+void turblibgeterrorstring_ (char *dest, int len);
 int turblibgeterrornumber_();
 void turblibprinterror_();
 

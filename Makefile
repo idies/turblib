@@ -1,8 +1,9 @@
+# $Id: Makefile,v 1.8 2009-10-22 19:27:10 eric Exp $
 
 OSARCH := $(shell uname -sp)
 
 ifeq ($(OSARCH),Darwin i386)
-	# Compile code for both 32- and 64-bit under MacOS X for Intel
+	# Compile both 32- and 64-bit code under MacOS X for Intel
 	ARCH_FLAGS = -arch i386 -arch x86_64
 else	
 	ARCH_FLAGS =
@@ -11,7 +12,7 @@ endif
 CC     = gcc -g $(ARCH_FLAGS)
 FC     = gfortran $(ARCH_FLAGS)
 RM     = rm -f
-CFLAGS = -Wall -g -I..
+CFLAGS = -Wall -g
 LDLIBS = 
 
 OBJ =	soapC.o \

@@ -115,7 +115,6 @@ int main(int argc, char *argv[]) {
   for (p = 0; p < 10; p++) {
     printf("%d: d2pdxdx=%f,d2pdxdy=%f,d2pdxdz=%f, d2pdydy=%f, d2pdydz=%f, d2pdzdz=%f\n", p,
            result6[p][0],  result6[p][1],  result6[p][2], result6[p][3],  result6[p][4],  result6[p][5]);
-
   }
   
   /* Free gSOAP resources */

@@ -1,21 +1,22 @@
-program TurbTest
+program TurblibTest
   implicit none
 
   ! ---- Temporal Interpolation Options ----
-  integer, parameter :: NoTInt = 0 ! No temporal interpolation
-  integer, parameter :: PCHIPInt = 1 ! Piecewise cubic Hermit interpolation in time
+  integer, parameter :: NoTInt =    0 ! No temporal interpolation
+  integer, parameter :: PCHIPInt =  1 ! Piecewise cubic Hermit interpolation in time
 
   ! ---- Spatial Interpolation Flags for GetVelocity & GetVelocityAndPressure ----
-  integer, parameter :: NoSInt = 0 ! No spatial interpolation
-  integer, parameter :: Lag4 = 4 ! 4th order Lagrangian interpolation in space
-  integer, parameter :: Lag6 = 6 ! 6th order Lagrangian interpolation in space
-  integer, parameter :: Lag8 = 8 ! 8th order Lagrangian interpolation in space
+  integer, parameter :: NoSInt =    0 ! No spatial interpolation
+  integer, parameter :: Lag4 =      4 ! 4th order Lagrangian interpolation in space
+  integer, parameter :: Lag6 =      6 ! 6th order Lagrangian interpolation in space
+  integer, parameter :: Lag8 =      8 ! 8th order Lagrangian interpolation in space
 
   ! ---- Spatial Differentiation & Interpolation Flags for GetVelocityGradient & GetPressureGradient ----
   integer, parameter :: FD4NoInt = 40 ! 4th order finite differential scheme for grid values, no spatial interpolation
   integer, parameter :: FD6NoInt = 60 ! 6th order finite differential scheme for grid values, no spatial interpolation
   integer, parameter :: FD8NoInt = 80 ! 8th order finite differential scheme for grid values, no spatial interpolation
-  integer, parameter :: FD4Lag4 = 44 ! 4th order finite differential scheme for grid values, 4th order Lagrangian interpolation in space
+  integer, parameter :: FD4Lag4 =  44 ! 4th order finite differential scheme for grid values, 4th order Lagrangian interpolation in space
+
 
   !
   ! Choose which dataset to use in this query
@@ -31,17 +32,27 @@ program TurbTest
   !
   character*100 :: authkey = 'edu.jhu.pha.turbulence.testing-200910' // CHAR(0)
 
-  integer, parameter :: timestep = 182
-  real :: time = 0.002 * timestep
-  real points(3, 10)    ! input
-  real dataout1(10)     ! p
-  real dataout3(3, 10)  ! x,y,z
-  real dataout4(4, 10)  ! x,y,z,p
-  real dataout6(6, 10)  ! results from Pressure Hessian
-  real dataout9(9, 10)  ! results from Velocity Gradient
+  real points(3, 10)     ! input
+  real dataout1(10)      ! p
+  real dataout3(3, 10)   ! x,y,z
+  real dataout4(4, 10)   ! x,y,z,p
+  real dataout6(6, 10)   ! results from Pressure Hessian
+  real dataout9(9, 10)   ! results from Velocity Gradient
   real dataout18(18, 10) ! results from Velocity Hessian
 
-  integer i,rc
+  ! Return type declarations for library functions
+  integer :: getVelocity, getForce, getVelocityAndPressure
+  integer :: getVelocityGradient, getVelocityLaplacian
+  integer :: getVelocityHessian, getPressureGradient, getPressureHessian
+
+  integer :: rc ! return code
+  integer, parameter :: SOAP_OK = 0 ! success (from stdsoap2.h)
+
+  integer i
+  integer timestep
+  real time
+  timestep = 182
+  time = 0.002 * timestep
 
   !
   ! Intialize the gSOAP runtime.
@@ -56,13 +67,21 @@ program TurbTest
   end do
 
   write(*,*) 'Velocity at 10 particle locations'
-  CALL getvelocity(authkey, dataset,  time, Lag6, NoTInt, 10, points, dataout3)
+  rc = getVelocity(authkey, dataset,  time, Lag6, NoTInt, 10, points, dataout3)
+  if (rc.ne.SOAP_OK) then
+    CALL turblibPrintError()
+    STOP
+  end if 
   do i = 1, 10, 1 
     write(*,*) i, ': (', dataout3(1,i), ', ', dataout3(2,i), ', ', dataout3(3,i), ')'
   end do
 
   write(*,*) 'Forcing at 10 particle locations'
-  CALL getforce(authkey, dataset,  time, Lag6, NoTInt, 10, points, dataout3)
+  rc = getForce(authkey, dataset,  time, Lag6, NoTInt, 10, points, dataout3)
+  if (rc.ne.SOAP_OK) then
+    CALL turblibPrintError()
+    STOP
+  end if 
   do i = 1, 10, 1 
     write(*,*) i, ': (', dataout3(1,i), ', ', dataout3(2,i), ', ', dataout3(3,i), ')'
   end do
@@ -70,14 +89,22 @@ program TurbTest
 
   write(*,*)
   write(*,*) 'Velocity and pressure at 10 particle locations'
-  CALL getvelocityandpressure(authkey, dataset,  time, Lag6, NoTInt, 10, points, dataout4)
+  rc = getVelocityAndPressure(authkey, dataset,  time, Lag6, NoTInt, 10, points, dataout4)
+  if (rc.ne.SOAP_OK) then
+    CALL turblibPrintError()
+    STOP
+  end if 
   do i = 1, 10, 1 
     write(*,*) i, ': (', dataout4(1,i), ', ', dataout4(2,i), ', ', dataout4(3,i), ', ', dataout4(4,i), ')'
   end do
 
   write(*,*)
   write(*,*) 'Velocity gradient at 10 particle locations'
-  CALL getvelocitygradient(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout9)
+  rc = getVelocityGradient(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout9)
+  if (rc.ne.SOAP_OK) then
+    CALL turblibPrintError()
+    STOP
+  end if 
   do i = 1, 10, 1 
     write(*,*) i, ': (duxdx=', dataout9(1,i), ', duxdy=', dataout9(2,i), &
        ', duxdz=', dataout9(3,i), ', duydx=', dataout9(4,i),  &
@@ -87,13 +114,21 @@ program TurbTest
   end do
 
   write(*,*) 'Velocity laplacian at 10 particle locations'
-  CALL getvelocitylaplacian(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout3)
+  rc = getVelocityLaplacian(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout3)
+  if (rc.ne.SOAP_OK) then
+    CALL turblibPrintError()
+    STOP
+  end if 
   do i = 1, 10, 1 
     write(*,*) i, ': (grad2ux=', dataout3(1,i), ', grad2uy=', dataout3(2,i), ', grad2uz=', dataout3(3,i), ')'
   end do
 
   write(*,*) 'Velocity hessian at 10 particle locations'
-  CALL getvelocityhessian(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout18)
+  rc = getVelocityHessian(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout18)
+  if (rc.ne.SOAP_OK) then
+    CALL turblibPrintError()
+    STOP
+  end if 
   do i = 1, 10, 1 
     write(*,*) i, ': (d2uxdxdx=', dataout18(1,i), &
        ', d2uxdxdy=', dataout18(2,i), &
@@ -117,14 +152,22 @@ program TurbTest
 
   write(*,*)
   write(*,*) 'Pressure gradient at 10 particle locations'
-  CALL getpressuregradient(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout3)
+  rc = getPressureGradient(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout3)
+  if (rc.ne.SOAP_OK) then
+    CALL turblibPrintError()
+    STOP
+  end if 
   do i = 1, 10, 1 
     write(*,*) i, ': (dpdx=', dataout3(1,i), ', dpdy=', dataout3(2,i), ', dpdz=', dataout3(3,i), ')'
   end do
 
   write(*,*)
   write(*,*) 'Pressure hessian at 10 particle locations'
-  CALL getpressurehessian(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout6)
+  rc = getPressureHessian(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout6)
+  if (rc.ne.SOAP_OK) then
+    CALL turblibPrintError()
+    STOP
+  end if 
   do i = 1, 10, 1 
     write(*,*) i, ': (d2pdxdx=', dataout6(1,i), ', d2pdxdy=', dataout6(2,i), &
        ', d2pdxdz=', dataout6(3,i), ', d2pdydy=', dataout6(4,i),  &
@@ -137,5 +180,5 @@ program TurbTest
   !
   CALL soapdestroy()
 
-end program TurbTest
+end program TurblibTest
 

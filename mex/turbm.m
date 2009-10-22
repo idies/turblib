@@ -2,7 +2,7 @@
 % Turbulence Database sample Matlab client code
 %
 
-authkey = 'edu.jhu.pha.turbulence.testing-200908';
+authkey = 'edu.jhu.pha.turbulence.testing-200910';
 dataset = 'isotropic1024coarse';
 
 % ---- Temporal Interpolation Options ----

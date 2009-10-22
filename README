@@ -31,10 +31,11 @@ in these test files should be valid.
 **** Handling intermittent failures ****
 
 We suggest writing code to handle any intermittent network
-or database failures which may occur.  The following
-sample code will try each query up to 25 times, with a delay
-of 1 minute between each attempt.
+or database failures which may occur.  The following sample
+code will try each query up to 25 times, with a delay of 1
+minute between each attempt.
 
+___C:___
 int attempts = 0;
 while (getVelocity ( ... ) != SOAP_OK) {
   if (attempts++ > 25) {
@@ -46,9 +47,24 @@ while (getVelocity ( ... ) != SOAP_OK) {
   sleep(60);
 }
 
+___Fortran:___
+integer attempts
+attempts = 0
+do while (getVelocity( ... ).ne.0)
+  attempts = attempts + 1
+  if (attempts.ge.25) then
+    write(*,*) 'Fatal error: too many failures'
+    STOP
+  else
+    write(*,*) 'Temporary Error (#', attempts, '):'
+    CALL turblibPrintError()
+    CALL sleep(1)
+  end if
+end do
+
 **** Mac OS X Notes ****
 
-This code has been run under Mac OS X 10.4 (Tiger),
+This code has been tested under Mac OS X 10.4 (Tiger),
 10.5 (Leopard) and 10.6 (Snow Leopard).
 
 You will need the Apple Developer Tools (Xcode), which
@@ -72,4 +88,4 @@ an optional package with most Linux distributions.
 Please let us know if any changes are needed for the code
 to compile on other platforms or with different compilers.
 
-$Id: README,v 1.4 2009-10-19 15:29:16 eric Exp $
+$Id: README,v 1.5 2009-10-22 19:27:10 eric Exp $
