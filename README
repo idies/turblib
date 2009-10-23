@@ -19,27 +19,79 @@ Please see mex/README for instructions.
 
 **** Identification Token (required for large queries) ****
 
-While our service is open to anyone, we would like to keep
-track of who is using the service, and how.  To this end,
-we would like each user or site to obtain an authorization
-token from us:
+While our service is open to anyone, we would like to keep track
+of who is using the service, and how.  To this end, we would
+like each user or site to obtain an authorization token from us:
   http://turbulence.pha.jhu.edu/help/authtoken.html
 
-If you are just experimenting, the default token included
-in these test files should be valid.
+If you are just experimenting, the default token included in
+these test files should be valid.
+
+**** Platform-specific notes ****
+___Mac OS X:___
+This code has been tested under Mac OS X 10.4 (Tiger),
+10.5 (Leopard) and 10.6 (Snow Leopard).
+
+You will need the Apple Developer Tools (Xcode), which can be
+found on your OS X install disk, or downloaded for free (with
+registration) from http://developer.apple.com/ .
+
+If you wish to use fortran, you will need to install gfortran.
+We have been using the precompiled versions available from
+http://hpc.sourceforge.net/ .
+
+___Linux:___
+Most gcc releases should work.  If you wish to use fortran you
+will need to install gfortran, available as an optional package
+with most Linux distributions.
+
+___Other:___
+Please let us know if any changes are needed for the code to
+compile on other platforms or with different compilers.
+
+**** Error Handling ****
+
+By default, the turbulence library will print errors out to the
+console and abort the program.  You can change this behavior by
+calling turblibSetExitOnError(0) before making any calls to the
+turbulence database.  You will then be responsible for checking
+the return codes.
+
+___C Example:___
+turblibSetExitOnError(0);
+...
+if (getVelocity ( ... ) != SOAP_OK) {
+  turblibPrintError();
+  exit(1);
+}
+
+__Fortran Example:___
+integer, parameter :: SOAP_OK = 0  ! From stdsoap2.h
+integer rc
+CALL turblibSetExitOnError(0)
+...
+rc = getVelocity( ... )
+if (rc.ne.SOAP_OK) then
+  CALL turblibPrintError()
+  STOP
+end if
+
 
 **** Handling intermittent failures ****
 
-We suggest writing code to handle any intermittent network
-or database failures which may occur.  The following sample
-code will try each query up to 25 times, with a delay of 1
-minute between each attempt.
+We suggest writing long-running code to handle any ntermittent network
+or database failures which may occur.  The following sample code will
+try each query up to 25 times, with a delay of 1 minute between each
+attempt.
+
+In addition, we suggest adding checkpoints to your code to allow
+for the continuation after longer failures.
 
 ___C:___
 int attempts = 0;
 while (getVelocity ( ... ) != SOAP_OK) {
   if (attempts++ > 25) {
-    printf("Fatal error: too many failures\n");
+    printf("Fatal Error: too many failures\n");
     exit(1);
   } else {
     printf("Temporary Error: %s\n", turblibGetErrorString());
@@ -54,6 +106,7 @@ do while (getVelocity( ... ).ne.0)
   attempts = attempts + 1
   if (attempts.ge.25) then
     write(*,*) 'Fatal error: too many failures'
+    CALL turblibPrintError()
     STOP
   else
     write(*,*) 'Temporary Error (#', attempts, '):'
@@ -62,30 +115,4 @@ do while (getVelocity( ... ).ne.0)
   end if
 end do
 
-**** Mac OS X Notes ****
-
-This code has been tested under Mac OS X 10.4 (Tiger),
-10.5 (Leopard) and 10.6 (Snow Leopard).
-
-You will need the Apple Developer Tools (Xcode), which
-can be found on your OS X install disk, or downloaded
-for free (with registration) from
-   http://developer.apple.com/
-
-If you wish to use fortran, you will need to install
-gfortran.  We have been using the precompiled versions
-available from
-  http://hpc.sourceforge.net/
-
-**** Linux Notes ****
-
-Most gcc releases should work.  If you wish to use
-fortran you will need to install gfortran, available as
-an optional package with most Linux distributions.
-
-**** Other Platforms ****
-
-Please let us know if any changes are needed for the code
-to compile on other platforms or with different compilers.
-
-$Id: README,v 1.5 2009-10-22 19:27:10 eric Exp $
+$Id: README,v 1.6 2009-10-23 17:58:57 eric Exp $

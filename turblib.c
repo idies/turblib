@@ -1,4 +1,4 @@
-/* $Id: */
+/* $Id: turblib.c,v 1.13 2009-10-23 17:58:57 eric Exp $ */
 #include <stdio.h>
 
 #include "soapH.h"
@@ -14,7 +14,8 @@ struct soap __jhuturbsoap;
 
 /* Error reporting - C */
 char __turblib_err[TURB_ERROR_LENGTH];
-int __turblib_errno;
+int __turblib_errno = 0;
+int __turblib_exit_on_error = 1;
 
 char * turblibGetErrorString() {
   return __turblib_err;
@@ -28,6 +29,11 @@ void turblibPrintError() {
   fprintf(stderr, "%d: %s\n", turblibGetErrorNumber(), turblibGetErrorString());
 }
 
+void turblibSetExitOnError(int v) {
+  __turblib_exit_on_error = v;
+}
+
+
 /* Error reporting - Fortran */
 void turblibgeterrorstring_ (char *dest, int len) {
   strncpy(dest, __turblib_err, len);
@@ -39,6 +45,18 @@ int turblibgeterrornumber_() {
 
 void turblibprinterror_() {
   turblibPrintError();
+}
+
+void turblibsetexitonerror_(int *v) {
+  turblibSetExitOnError(*v);
+}
+
+/* Determine appropriate error behavior */
+void turblibHandleError() {
+  if (__turblib_exit_on_error) {
+    turblibPrintError();
+    exit(1);
+  }
 }
 
 
@@ -138,12 +156,14 @@ int getVelocity (char *authToken,
     bzero(__turblib_err, TURB_ERROR_LENGTH);
   } else {
     soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
+    turblibHandleError();
   }
   
   soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
   soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
 
   __turblib_errno = rc;
+
   return rc;
 }
 
@@ -187,6 +207,7 @@ int getVelocityAndPressure (char *authToken,
     bzero(__turblib_err, TURB_ERROR_LENGTH);
   } else {
     soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
+    turblibHandleError();
   }
   
   soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
@@ -236,6 +257,7 @@ int getPressureHessian(char *authToken,
     bzero(__turblib_err, TURB_ERROR_LENGTH);
   } else {
     soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
+    turblibHandleError();
   }
   
   soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
@@ -285,6 +307,7 @@ int getVelocityGradient(char *authToken,
     bzero(__turblib_err, TURB_ERROR_LENGTH);
   } else {
     soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
+    turblibHandleError();
   }
   
   soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
@@ -334,6 +357,7 @@ int getPressureGradient(char *authToken,
     bzero(__turblib_err, TURB_ERROR_LENGTH);
   } else {
     soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
+    turblibHandleError();
   }
   
   soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
@@ -383,6 +407,7 @@ int getVelocityHessian(char *authToken,
     bzero(__turblib_err, TURB_ERROR_LENGTH);
   } else {
     soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
+    turblibHandleError();
   }
   
   soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
@@ -432,6 +457,7 @@ int getVelocityLaplacian (char *authToken,
     bzero(__turblib_err, TURB_ERROR_LENGTH);
   } else {
     soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
+    turblibHandleError();
   }
   
   soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
@@ -471,6 +497,7 @@ int nullOp (char *authToken, int count,
     bzero(__turblib_err, TURB_ERROR_LENGTH);
   } else {
     soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
+    turblibHandleError();
   }
   
   soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
@@ -525,6 +552,7 @@ int getBoxFilterVelocity(char *authToken,
     bzero(__turblib_err, TURB_ERROR_LENGTH);
   } else {
     soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
+    turblibHandleError();
   }
   
   soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
@@ -579,6 +607,7 @@ int getBoxFilterPressure(char *authToken,
     bzero(__turblib_err, TURB_ERROR_LENGTH);
   } else {
     soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
+    turblibHandleError();
   } 
   
   soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
@@ -634,6 +663,7 @@ int getBoxFilterSGSStress(char *authToken,
     bzero(__turblib_err, TURB_ERROR_LENGTH);
   } else {
     soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
+    turblibHandleError();
   }
   
   soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
@@ -688,6 +718,7 @@ int getBoxFilterVelocityGradient(char *authToken,
     bzero(__turblib_err, TURB_ERROR_LENGTH);
   } else {
     soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
+    turblibHandleError();
   }
   
   soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
@@ -725,6 +756,7 @@ int getForce(char *authToken,
     bzero(__turblib_err, TURB_ERROR_LENGTH);
   } else {
     soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
+    turblibHandleError();
   }
   
   soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */

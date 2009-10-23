@@ -27,6 +27,9 @@ int main(int argc, char *argv[]) {
   /* Initialize gSOAP */
   soapinit();
 
+  /* Enable exit on error.  See README for details. */
+  turblibSetExitOnError(1);
+
   for (p = 0; p < 10; p++) {
     points[p][0] = 0.20 * (p+1);
     points[p][1] = 0.50 * (p+1);
@@ -34,37 +37,25 @@ int main(int argc, char *argv[]) {
   }
 
   printf("Requesting velocity at 10 points...\n");
-  if (getVelocity (authtoken, dataset, time, spatialInterp, temporalInterp, 10, points, result3) != SOAP_OK) {
-    turblibPrintError();
-    exit(1);
-  }
+  getVelocity (authtoken, dataset, time, spatialInterp, temporalInterp, 10, points, result3);
   for (p = 0; p < 10; p++) {
     printf("%d: %f,%f,%f\n", p, result3[p][0],  result3[p][1],  result3[p][2]);
   }
 
   printf("\nRequesting forcing at 10 points...\n");
-  if (getForce (authtoken, dataset, time, spatialInterp, temporalInterp, 10, points, result3) != SOAP_OK) {
-    turblibPrintError();
-    exit(1);
-  }
+  getForce (authtoken, dataset, time, spatialInterp, temporalInterp, 10, points, result3);
   for (p = 0; p < 10; p++) {
     printf("%d: %f,%f,%f\n", p, result3[p][0],  result3[p][1],  result3[p][2]);
   }
 
   printf("\nRequesting velocity and pressure at 10 points...\n");
-  if (getVelocityAndPressure (authtoken, dataset, time, spatialInterp, temporalInterp, 10, points, result4) != SOAP_OK) {
-    turblibPrintError();
-    exit(1);
-  }
+  getVelocityAndPressure (authtoken, dataset, time, spatialInterp, temporalInterp, 10, points, result4);
    for (p = 0; p < 10; p++) {
      printf("%d: %f,%f,%f p=%f\n", p, result4[p][0], result4[p][1], result4[p][2], result4[p][3]);
   }
 
   printf("\nRequesting velocity gradient at 10 points...\n");
-  if (getVelocityGradient (authtoken, dataset, time, FD4Lag4, temporalInterp, 10, points, result9) != SOAP_OK) {
-    turblibPrintError();
-    exit(1);
-  }
+  getVelocityGradient (authtoken, dataset, time, FD4Lag4, temporalInterp, 10, points, result9);
   for (p = 0; p < 10; p++) {
     printf("%d: duxdx=%f, duxdy=%f, duxdz=%f, duydx=%f, duydy=%f, duydz=%f, duzdx=%f, duzdy=%f, duzdz=%f\n", p,
       result9[p][0], result9[p][1], result9[p][2],
@@ -73,10 +64,7 @@ int main(int argc, char *argv[]) {
   }
 
   printf("\nRequesting velocity hessian at 10 points...\n");
-  if (getVelocityHessian (authtoken, dataset, time, FD4Lag4, temporalInterp, 10, points, result18) != SOAP_OK) {
-    turblibPrintError();
-    exit(1);
-  }
+  getVelocityHessian (authtoken, dataset, time, FD4Lag4, temporalInterp, 10, points, result18);
   for (p = 0; p < 10; p++) {
     printf("%d: d2uxdxdx=%f, d2uxdxdy=%f, d2uxdxdz=%f, d2uxdydy=%f, d2uxdydz=%f, d2uxdzdz=%f, d2uydxdx=%f, d2uydxdy=%f, d2uydxdz=%f, d2uydydy=%f, d2uydydz=%f, d2uydzdz=%f, d2uzdxdx=%f, d2uzdxdy=%f, d2uzdxdz=%f, d2uzdydy=%f, d2uzdydz=%f, d2uzdzdz=%f\n",
 	p,
@@ -89,32 +77,24 @@ int main(int argc, char *argv[]) {
   }
 
   printf("\nRequesting velocity laplacian at 10 points...\n");
-  if (getVelocityLaplacian (authtoken, dataset, time, FD4Lag4, temporalInterp, 10, points, result3) != SOAP_OK) {
-    turblibPrintError();
-    exit(1);
-  }
+  getVelocityLaplacian (authtoken, dataset, time, FD4Lag4, temporalInterp, 10, points, result3);
   for (p = 0; p < 10; p++) {
     printf("%d: grad2ux=%f, grad2uy=%f, grad2uz=%f\n",
            p, result3[p][0],  result3[p][1],  result3[p][2]);
   }
 
   printf("\nRequesting pressure gradient at 10 points...\n");
-  if (getPressureGradient (authtoken, dataset, time, FD4Lag4, temporalInterp, 10, points, result3) != SOAP_OK) {
-    turblibPrintError();
-    exit(1);
-  }
+  getPressureGradient (authtoken, dataset, time, FD4Lag4, temporalInterp, 10, points, result3);
   for (p = 0; p < 10; p++) {
     printf("%d: dpdx=%f,dpdy=%f,dpdz=%f\n", p, result3[p][0],  result3[p][1],  result3[p][2]);
   }
 
   printf("\nRequesting pressure hessian at 10 points...\n");
-  if (getPressureHessian(authtoken, dataset, time, FD4Lag4, temporalInterp, 10, points, result6) != SOAP_OK) {
-    turblibPrintError();
-    exit(1);
-  }
+  getPressureHessian(authtoken, dataset, time, FD4Lag4, temporalInterp, 10, points, result6);
   for (p = 0; p < 10; p++) {
     printf("%d: d2pdxdx=%f,d2pdxdy=%f,d2pdxdz=%f, d2pdydy=%f, d2pdydz=%f, d2pdzdz=%f\n", p,
            result6[p][0],  result6[p][1],  result6[p][2], result6[p][3],  result6[p][4],  result6[p][5]);
+
   }
   
   /* Free gSOAP resources */
