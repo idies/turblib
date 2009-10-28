@@ -63,11 +63,13 @@ void soapdestroy_ ();
 char *turblibGetErrorString ();
 int turblibGetErrorNumber ();
 void turblibPrintError ();
+void turblibSetExitOnError (int);
 
 /* Fortran */
 void turblibgeterrorstring_ (char *dest, int len);
 int turblibgeterrornumber_();
 void turblibprinterror_();
+void turblibsetexitonerror_(int *);
 
 /* C */
 int getVelocity (char *authToken,
