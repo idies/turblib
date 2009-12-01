@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.8 2009-10-22 19:27:10 eric Exp $
+# $Id: Makefile,v 1.9 2009-12-01 19:23:49 eric Exp $
 
 OSARCH := $(shell uname -sp)
 
@@ -39,19 +39,19 @@ TurbulenceService.h : wsdl
 
 # Update the WSDL and gSOAP interfaces
 wsdl:
-	wsdl2h -o TurbulenceService.h -n turb -c "http://turbulence.pha.jhu.edu/service/turbulence.asmx?WSDL" -l -s
+	wsdl2h -o TurbulenceService.h -n turb -c "http://turbulence.pha.jhu.edu/service/turbulence.asmx?WSDL" -s
 	soapcpp2 -CLcx -2 TurbulenceService.h
 
 testwsdl:
-	wsdl2h -o TurbulenceService.h -n turb -c "http://test.turbulence.pha.jhu.edu/service/turbulence.asmx?WSDL" -l -s
+	wsdl2h -o TurbulenceService.h -n turb -c "http://test.turbulence.pha.jhu.edu/service/turbulence.asmx?WSDL" -s
 	soapcpp2 -CLcx -2 TurbulenceService.h
 
 devwsdl:
-	wsdl2h -o TurbulenceService.h -n turb -c "http://dev.turbulence.pha.jhu.edu/service/turbulence.asmx?WSDL" -l -s
+	wsdl2h -o TurbulenceService.h -n turb -c "http://dev.turbulence.pha.jhu.edu/service/turbulence.asmx?WSDL" -s
 	soapcpp2 -CLcx -2 TurbulenceService.h
 
 prodtestwsdl:
-	wsdl2h -o TurbulenceService.h -n turb -c "http://prodtest.turbulence.pha.jhu.edu/service/turbulence.asmx?WSDL" -l -s
+	wsdl2h -o TurbulenceService.h -n turb -c "http://prodtest.turbulence.pha.jhu.edu/service/turbulence.asmx?WSDL" -s
 	soapcpp2 -CLcx -2 TurbulenceService.h
 
 clean:
