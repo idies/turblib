@@ -12,8 +12,13 @@ More information can be found at:
 
 'make' will build both the Fortran and C sample code.
 Use 'make turbc' if you do not have a Fortran compiler
+<<<<<<< README
+installed.  You may need to use GNU Make ('gmake') on
+some platforms.
+=======
 installed.  Note: On some platforms, you may need to use
 'gmake' (GNU Make) instead.
+>>>>>>> 1.7
 
 The Matlab interface is under the mex/ directory.
 Please see mex/README for instructions.
@@ -39,8 +44,9 @@ found on your OS X install disk, or downloaded for free (with
 registration) from http://developer.apple.com/ .
 
 If you wish to use fortran, you will need to install gfortran.
-We have been using the precompiled versions available from
-http://hpc.sourceforge.net/ .
+We used both the precompiled version available from
+http://hpc.sourceforge.net/ or the version bundled with the
+R statistical package ( http://www.r-project.org/ ).
 
 ___Linux:___
 Most gcc releases should work.  If you wish to use fortran you
@@ -83,7 +89,7 @@ end if
 
 We suggest writing long-running code to handle any ntermittent network
 or database failures which may occur.  The following sample code will
-try each query up to 25 times, with a delay of 1 minute between each
+try each query up to 30 times, with a delay of 1 minute between each
 attempt.
 
 In addition, we suggest adding checkpoints to your code to allow
@@ -91,8 +97,9 @@ for the continuation after longer failures.
 
 ___C:___
 int attempts = 0;
+turblibSetExitOnError(0);
 while (getVelocity ( ... ) != SOAP_OK) {
-  if (attempts++ > 25) {
+  if (attempts++ > 30) {
     printf("Fatal Error: too many failures\n");
     exit(1);
   } else {
@@ -104,9 +111,10 @@ while (getVelocity ( ... ) != SOAP_OK) {
 ___Fortran:___
 integer attempts
 attempts = 0
+CALL turblibSetExitOnError(0)
 do while (getVelocity( ... ).ne.0)
   attempts = attempts + 1
-  if (attempts.ge.25) then
+  if (attempts.ge.30) then
     write(*,*) 'Fatal error: too many failures'
     CALL turblibPrintError()
     STOP
@@ -117,4 +125,4 @@ do while (getVelocity( ... ).ne.0)
   end if
 end do
 
-$Id: README,v 1.7 2009-10-28 22:31:49 eric Exp $
+$Id: README,v 1.8 2009-12-01 19:00:16 eric Exp $

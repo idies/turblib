@@ -8,7 +8,7 @@
 extern "C" {
 #endif
 
-#define TURBLIB_VERSION "0.1.3"
+#define TURBLIB_VERSION "0.2"
 #define TURB_ERROR_LENGTH 2048
 
 /* Global gSOAP handle
@@ -25,7 +25,8 @@ enum SpatialInterpolation
   Lag6 = 6,   /* 4th order Lagrangian interpolation in space */
   Lag8 = 8,   /* 4th order Lagrangian interpolation in space */
 
-  /* Spatial Differentiation & Interpolation Flags for GetVelocityGradient & GetPressureGradient */
+  /* Spatial Differentiation and Interpolation Flags for GetVelocityGradient
+   * and GetPressureGradient. */
   FD4NoInt = 40, /* 4th order finite differential scheme for grid values, no spatial interpolation */
   FD6NoInt = 60, /* 6th order finite differential scheme for grid values, no spatial interpolation */
   FD8NoInt = 80, /* 8th order finite differential scheme for grid values, no spatial interpolation */
@@ -44,7 +45,6 @@ enum TemporalInterpolation
 {
   NoTInt = 0,   /* No temporal interpolation */
   PCHIPInt = 1, /* Piecewise cubic Hermit interpolation in time */
-
 
   /* Old names, for backward compatibility */
   NoTemporalInterpolation = 0,
