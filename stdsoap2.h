@@ -1,5 +1,5 @@
 /*
-	stdsoap2.h 2.7.14
+	stdsoap2.h 2.7.15
 
 	gSOAP runtime engine
 
@@ -112,6 +112,15 @@ A commercial use license is available from Genivia, Inc., contact@genivia.com
 /* gSOAP 2.7.4 and higher: fast look-aside buffering is stable */
 #ifndef WITH_FAST
 # define WITH_FAST
+#endif
+
+/* gSOAP 2.7.15 and higher: always retain CDATA in literal XML, unless WITH_LEAN or WITH_NOCDATA */
+#ifndef WITH_LEAN
+# ifndef WITH_NOCDATA
+#  ifndef WITH_CDATA
+#   define WITH_CDATA
+#  endif
+# endif
 #endif
 
 #ifdef WITH_LEANER
@@ -1059,17 +1068,18 @@ extern const struct soap_double_nan { unsigned int n1, n2; } soap_double_nan;
 
 /* Codes 600 to 999 are user definable */
 
-/* Exceptional gSOAP HTTP response status codes >= 1000 */
+/* Exceptional gSOAP HTTP server response status codes >= 1000 */
 
 #define SOAP_STOP		1000	/* No HTTP response */
 #define SOAP_FORM		1001	/* Form request/response */
 #define SOAP_HTML		1002	/* Custom HTML response */
 #define SOAP_FILE		1003	/* Custom file-based response */
 
-/* gSOAP HTTP method codes */
+/* gSOAP HTTP method codes (client) */
 
-#define SOAP_POST		2000
-#define SOAP_GET		2001
+#define SOAP_POST		2000	/* POST request */
+#define SOAP_POST_FILE		2001	/* Custom file-based POST request */
+#define SOAP_GET		2002	/* GET request */
 
 /* gSOAP DIME */
 
@@ -1114,11 +1124,11 @@ typedef soap_int32 soap_mode;
 
 #define SOAP_XML_STRICT		0x00001000	/* apply strict validation */
 #define SOAP_XML_INDENT		0x00002000	/* emit indented XML */
-#define SOAP_XML_DEFAULTNS	0x00004000	/* emit XML default namesp. */
+#define SOAP_XML_DEFAULTNS	0x00004000	/* emit xmlns="..." namesp. */
 #define SOAP_XML_CANONICAL	0x00008000	/* EXC C14N canonical XML */
 #define SOAP_XML_TREE		0x00010000	/* emit XML tree (no id/ref) */
-#define SOAP_XML_GRAPH		0x00020000
-#define SOAP_XML_NIL		0x00040000
+#define SOAP_XML_GRAPH		0x00020000	/* see DOM manual */
+#define SOAP_XML_NIL		0x00040000	/* serialize NULLs as xsi:nil */
 #define SOAP_XML_DOM		0x00080000
 
 #define SOAP_C_NOIOB		0x00100000	/* don't fault on array index out of bounds (just ignore) */
@@ -1835,7 +1845,7 @@ struct SOAP_STD_API soap
   soap();
   soap(soap_mode);
   soap(soap_mode, soap_mode);
-  soap(struct soap&);
+  soap(const struct soap&);
   virtual ~soap();
 #else
   void (*dummy)();
