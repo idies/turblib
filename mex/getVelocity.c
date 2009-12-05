@@ -81,7 +81,6 @@ void mexFunction( int nlhs, mxArray *plhs[],
   }
 
   memcpy(mxGetPr(plhs[0]), output, nrow*ncol*sizeof(float));
-//   memcpy(mxGetPr(plhs[1]), turblibGetErrorNumber(), sizeof(float)); //
 
   soapdestroy(); 
 
