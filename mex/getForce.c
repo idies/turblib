@@ -68,7 +68,7 @@ void mexFunction( int nlhs, mxArray *plhs[],
   plhs[0] = mxCreateNumericMatrix(ncol,nrow,mxSINGLE_CLASS,mxREAL);
   plhs[1] = mxCreateNumericMatrix(1,1,mxINT32_CLASS,mxREAL);
 
-  /* Associate plhs[1] with err */
+  /* Associate plhs[1] with rc */
   rc = (int *)mxGetPr(plhs[1]);  
   
   /*  Call soap function */
