@@ -52,3 +52,58 @@ Most versions of gcc should work.
 **** Other Platforms ****
 
 Not tested.  Pleae let us know if any changes are needed.
+
+**** Error Handling ****
+
+By default, the turbulence library will print errors out to the
+console and abort the program.  You can change this behavior by
+calling turblibSetExitOnError(0) before making any calls to the
+turbulence database.  You will then be responsible for checking
+the return codes.
+
+___C Example:___
+turblibSetExitOnError(0);
+...
+if (getVelocity ( ... ) != SOAP_OK) {
+  turblibPrintError();
+  exit(1);
+}
+
+__Fortran Example:___
+integer, parameter :: SOAP_OK = 0  ! From stdsoap2.h
+integer rc
+CALL turblibSetExitOnError(0)
+...
+rc = getVelocity( ... )
+if (rc.ne.SOAP_OK) then
+  CALL turblibPrintError()
+  STOP
+end if
+
+
+**** Handling intermittent failures ****
+
+We suggest writing long-running code to handle any ntermittent network
+or database failures which may occur.  The following sample code will
+try each query up to 30 times, with a delay of 1 minute between each
+attempt.
+
+In addition, we suggest adding checkpoints to your code to allow
+for the continuation after longer failures.
+
+___Example:___
+SOAP_OK=0;
+rc=1;
+attempts=0;
+while (rc ~= SOAP_OK)
+  attempts=attempts+1
+  [result3, rc] =  getVelocity (...);
+  if (attempts >= 30)
+    error('Fatal Error: Too many failures');
+  else 
+    fprintf('Temporary Error: pausing 60 seconds\n');
+  end
+  pause(60);
+end
+
+

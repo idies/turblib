@@ -1,5 +1,6 @@
 #include <string.h>
-#include <turblib.h>
+#include "turblib.h"
+#include "mexlib.h"
 #include "mex.h"
 
 void mexFunction( int nlhs, mxArray *plhs[],
@@ -7,7 +8,7 @@ void mexFunction( int nlhs, mxArray *plhs[],
 {
 
   mwSize nins = 3;
-  mwSize nouts = 1;
+  mwSize nouts = 2;
   
   char turblibErrMsg[TURB_ERROR_LENGTH];
 
@@ -15,8 +16,8 @@ void mexFunction( int nlhs, mxArray *plhs[],
   if (nrhs !=nins) {
     sprintf(turblibErrMsg, "Required number of input arguments: %d",nins);
     mexErrMsgTxt(turblibErrMsg);
-  } else if (nlhs !=nouts) {
-    sprintf(turblibErrMsg, "Required number of output arguments: %d",nouts);
+  } else if (nlhs > nouts) {
+    sprintf(turblibErrMsg, "Maximum number of output arguments: %d",nouts);
     mexErrMsgTxt(turblibErrMsg);
   }  
 
@@ -35,11 +36,16 @@ void mexFunction( int nlhs, mxArray *plhs[],
   nrow = mxGetN(prhs[2]);
   ncol = 3;
 
+  int *rc=0;
   float input[nrow][ncol];
   float output[nrow][ncol];
   
   /* Initialize gSOAP */
   soapinit();
+
+  /* Turn off implicit error catching; error catching will be handled 
+     via MEX_MSG_TXT */
+  turblibSetExitOnError(0);
 
   /* Transform data to correct shape */
   for(i=0;i<nrow;i++)
@@ -52,11 +58,16 @@ void mexFunction( int nlhs, mxArray *plhs[],
 
   /* Create output matrix; Column-major order */
   plhs[0] = mxCreateNumericMatrix(ncol,nrow,mxSINGLE_CLASS,mxREAL);
+  plhs[1] = mxCreateNumericMatrix(1,1,mxINT32_CLASS,mxREAL);
+
+  /* Associate plhs[1] with err */
+  rc = (int *)mxGetPr(plhs[1]);
 
   /*  Call soap function */
   if (nullOp (authkey, count, input, output) != SOAP_OK) {
-    sprintf(turblibErrMsg,"%d: %s\n", turblibGetErrorNumber(), turblibGetErrorString());
-    mexErrMsgTxt(turblibErrMsg);
+    *rc= turblibGetErrorNumber();
+    sprintf(turblibErrMsg,"%d: %s\n", *rc, turblibGetErrorString());
+    MEX_MSG_TXT(turblibErrMsg);
   }
  
   memcpy(mxGetPr(plhs[0]), output, nrow*ncol*sizeof(float));

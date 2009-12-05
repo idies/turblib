@@ -54,6 +54,10 @@ void mexFunction( int nlhs, mxArray *plhs[],
   /* Initialize gSOAP */
   soapinit();
 
+  /* Turn off implicit error catching; error catching will be handled 
+     via MEX_MSG_TXT */
+  turblibSetExitOnError(0);
+
   /* Transform data to correct shape */
   for(i=0;i<nrow;i++)
   {
@@ -65,11 +69,16 @@ void mexFunction( int nlhs, mxArray *plhs[],
 
   /* Create output matrix; Column-major order */
   plhs[0] = mxCreateNumericMatrix(ncol_out,nrow_out,mxSINGLE_CLASS,mxREAL);
+  plhs[1] = mxCreateNumericMatrix(1,1,mxINT32_CLASS,mxREAL);
+
+  /* Associate plhs[1] with err */
+  rc = (int *)mxGetPr(plhs[1]);
 
   /*  Call soap function */
   if (getPressureHessian(authkey, dataset, time, spatialInterp, temporalInterp, count, input, output) != SOAP_OK) {
-    sprintf(turblibErrMsg,"%d: %s\n", turblibGetErrorNumber(), turblibGetErrorString());
-    mexErrMsgTxt(turblibErrMsg);
+    *rc= turblibGetErrorNumber();
+    sprintf(turblibErrMsg,"%d: %s\n", *rc, turblibGetErrorString());
+    MEX_MSG_TXT(turblibErrMsg);
   }
 
   memcpy(mxGetPr(plhs[0]), output, nrow_out*ncol_out*sizeof(float));

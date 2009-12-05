@@ -23,8 +23,6 @@ FD4Lag4  = 44; % 4th order finite differential scheme for grid values, 4th order
 
 SOAP_OK = 0;
 
-
-
 timestep = 182;
 time = 0.002 * timestep;
 
@@ -45,26 +43,25 @@ for p = 1:npoints
 end
 
 fprintf('\nRequesting velocity at 10 points...\n',npoints);
-[result3, rc] =  getVelocity (authkey, dataset, time, Lag6, NoTInt, npoints, points);
+[result3, rc] =  getVelocity (authkey, dataset, time, Lag6, NoTInt, npoints*2, points);
 for p = 1:npoints
   fprintf(1,'%i: %f, %f, %f\n', p, result3(1,p),  result3(2,p),  result3(3,p));
 end
 
 fprintf('\nRequesting forcing at %i points...\n',npoints);
-result3 =  getForce (authkey, dataset, time, Lag6, NoTInt, npoints, points);
+[result3 rc] =  getForce (authkey, dataset, time, Lag6, NoTInt, npoints*2, points);
 for p = 1:npoints
   fprintf(1,'%i: %f, %f, %f\n', p, result3(1,p),  result3(2,p),  result3(3,p));
 end
 
 fprintf('\nRequesting velocity and pressure at %i points...\n',npoints);
-result4 = getVelocityAndPressure (authkey, dataset, time, Lag6, NoTInt, npoints, points);
+[result4 rc] = getVelocityAndPressure (authkey, dataset, time, Lag6, NoTInt, npoints*2, points);
 for p = 1:npoints
   fprintf(1,'%i: %f, %f, %f, %f\n', p, result4(1,p),  result4(2,p),  result4(3,p), result4(4,p));
 end
 
-
 fprintf('\nRequesting velocity gradient at %i points...\n',npoints);
-result9 = getVelocityGradient (authkey, dataset, time, FD4Lag4, NoTInt, npoints, points);
+[result9 rc] = getVelocityGradient (authkey, dataset, time, FD4Lag4, NoTInt, npoints*2, points);
 for p = 1:npoints
   fprintf(1,'%i: duxdx=%f, duxdy=%f, duxdz=%f, duydx=%f, duydy=%f, duydz=%f, duzdx=%f, duzdy=%f, duzdz=%f\n', p, ...
     result9(1,p), result9(2,p), result9(3,p), ...
@@ -73,7 +70,7 @@ for p = 1:npoints
 end
 
 fprintf('\nRequesting velocity hessian at %i points...\n',npoints);
-result18 = getVelocityHessian (authkey, dataset, time, FD4Lag4, NoTInt, npoints, points);
+[result18 rc] = getVelocityHessian (authkey, dataset, time, FD4Lag4, NoTInt, npoints*2, points);
 for p = 1:npoints
   fprintf(1,'%i: d2uxdxdx=%f, d2uxdxdy=%f, d2uxdxdz=%f, d2uxdydy=%f, d2uxdydz=%f, d2uxdzdz=%f, d2uydxdx=%f, d2uydxdy=%f, d2uydxdz=%f, d2uydydy=%f, d2uydydz=%f, d2uydzdz=%f, d2uzdxdx=%f, d2uzdxdy=%f, d2uzdxdz=%f, d2uzdydy=%f, d2uzdydz=%f, d2uzdzdz=%f\n', p, ...
     result18(1,p), result18(2,p), result18(3,p), result18(4,p), result18(5,p), result18(6,p), ...
@@ -82,19 +79,19 @@ for p = 1:npoints
 end
 
 fprintf('\nRequesting velocity laplacian at %i points...\n',npoints);
-result3 =  getVelocityLaplacian (authkey, dataset, time, FD4Lag4, NoTInt, npoints, points);
+[result3 rc] =  getVelocityLaplacian (authkey, dataset, time, FD4Lag4, NoTInt, npoints*2, points);
 for p = 1:npoints
   fprintf(1,'%i: grad2ux=%f, grad2uy=%f, grad2uz=%f\n', p, result3(1,p),  result3(2,p),  result3(3,p));
 end
 
 fprintf('\nRequesting pressure gradient at %i points...\n',npoints);
-result3 =  getPressureGradient (authkey, dataset, time, FD4Lag4, NoTInt, npoints, points);
+[result3 rc] =  getPressureGradient (authkey, dataset, time, FD4Lag4, NoTInt, npoints*2, points);
 for p = 1:npoints
   fprintf(1,'%i: dpdx=%f,dpdy=%f,dpdz=%f\n', p, result3(1,p),  result3(2,p),  result3(3,p));
 end
 
 fprintf('\nRequesting pressure hessian at %i points...\n',npoints);
-result6 = getPressureHessian (authkey, dataset, time, FD4Lag4, NoTInt, npoints, points);
+[result6 rc] = getPressureHessian (authkey, dataset, time, FD4Lag4, NoTInt, npoints*2, points);
 for p = 1:npoints
   fprintf(1,'%i: d2pdxdx=%f,d2pdxdy=%f,d2pdxdz=%f, d2pdydy=%f, d2pdydz=%f, d2pdzdz=%f\n', p, ...
     result6(1,p), result6(2,p), result6(3,p), ...

@@ -48,12 +48,12 @@ void mexFunction( int nlhs, mxArray *plhs[],
   float input[nrow][ncol];
   float output[nrow][ncol];
 
-  
   /* Initialize gSOAP */
   soapinit();
   
-  /* Set implicit error catching (see mexlib.h) */
-  turblibSetExitOnError(TURBLIB_EXIT_ON_ERROR);
+  /* Turn off implicit error catching; error catching will be handled 
+     via MEX_MSG_TXT */
+  turblibSetExitOnError(0);
 
   /* Transform data to correct shape */
   for(i=0;i<nrow;i++)
@@ -66,7 +66,7 @@ void mexFunction( int nlhs, mxArray *plhs[],
 
   /* Create output matrices */
   plhs[0] = mxCreateNumericMatrix(ncol,nrow,mxSINGLE_CLASS,mxREAL);
-  plhs[1] = mxCreateNumericMatrix(1,1,mxSINGLE_CLASS,mxREAL);
+  plhs[1] = mxCreateNumericMatrix(1,1,mxINT32_CLASS,mxREAL);
 
   /* Associate plhs[1] with err */
   rc = (int *)mxGetPr(plhs[1]);

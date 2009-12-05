@@ -6,11 +6,9 @@
 extern "C" {
 #endif
 
-#define TURBLIB_EXIT_ON_ERROR 0
-
 /* MEX function to print error information:
   mexWarnMsgTxt - warn on error
   mexErrMsgTxt  - exit on error */
-#define MEX_MSG_TXT mexWarnMsgTxt 
+#define MEX_MSG_TXT mexErrMsgTxt 
 
 #endif
