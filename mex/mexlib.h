@@ -6,6 +6,8 @@
 extern "C" {
 #endif
 
-#define MEX_EXIT_ON_ERROR 0
+#define TURBLIB_EXIT_ON_ERROR 0 
+
+#define MEX_MSG_TXT mexWarnMsgTxt /* mexWarnMsgTxt - warn on error; mexErrMsgTxt - exit on error */
 
 #endif

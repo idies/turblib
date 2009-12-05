@@ -53,7 +53,7 @@ void mexFunction( int nlhs, mxArray *plhs[],
   soapinit();
   
   /* Set implicit error catching (see mexlib.h) */
-  turblibSetExitOnError(MEX_EXIT_ON_ERROR);
+  turblibSetExitOnError(TURBLIB_EXIT_ON_ERROR);
 
   /* Transform data to correct shape */
   for(i=0;i<nrow;i++)
@@ -70,14 +70,12 @@ void mexFunction( int nlhs, mxArray *plhs[],
 
   /* Associate plhs[1] with err */
   rc = (int *)mxGetPr(plhs[1]);
-  /* Initialize rc */
   
   /*  Call soap function */
-
   if (getVelocity (authkey, dataset, time, spatialInterp, temporalInterp, count, input, output) != SOAP_OK) {
     *rc= turblibGetErrorNumber();
     sprintf(turblibErrMsg,"%d: %s\n", *rc, turblibGetErrorString());
-    mexWarnMsgTxt(turblibErrMsg);
+    MEX_MSG_TXT(turblibErrMsg);
   }
 
   memcpy(mxGetPr(plhs[0]), output, nrow*ncol*sizeof(float));

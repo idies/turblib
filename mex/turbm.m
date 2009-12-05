@@ -21,6 +21,10 @@ FD6NoInt = 60; % 6th order finite differential scheme for grid values, no spatia
 FD8NoInt = 80; % 8th order finite differential scheme for grid values, no spatial interpolation
 FD4Lag4  = 44; % 4th order finite differential scheme for grid values, 4th order Lagrangian interpolation in space
 
+SOAP_OK = 0;
+
+
+
 timestep = 182;
 time = 0.002 * timestep;
 
@@ -41,6 +45,15 @@ for p = 1:npoints
 end
 
 fprintf('\nRequesting velocity at 10 points...\n',npoints);
+
+rc=1;
+for i=1:3
+  if (rc ~= 0)
+    [result3 rc] =  getVelocity (authkey, dataset, time, Lag6, NoTInt, npoints*2, points);
+  end
+end
+
+
 result3 =  getVelocity (authkey, dataset, time, Lag6, NoTInt, npoints, points);
 for p = 1:npoints
   fprintf(1,'%i: %f, %f, %f\n', p, result3(1,p),  result3(2,p),  result3(3,p));
