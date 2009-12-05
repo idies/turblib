@@ -45,16 +45,7 @@ for p = 1:npoints
 end
 
 fprintf('\nRequesting velocity at 10 points...\n',npoints);
-
-rc=1;
-for i=1:3
-  if (rc ~= 0)
-    [result3 rc] =  getVelocity (authkey, dataset, time, Lag6, NoTInt, npoints*2, points);
-  end
-end
-
-
-result3 =  getVelocity (authkey, dataset, time, Lag6, NoTInt, npoints, points);
+[result3, rc] =  getVelocity (authkey, dataset, time, Lag6, NoTInt, npoints, points);
 for p = 1:npoints
   fprintf(1,'%i: %f, %f, %f\n', p, result3(1,p),  result3(2,p),  result3(3,p));
 end

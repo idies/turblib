@@ -1,5 +1,6 @@
 #include <string.h>
 #include "turblib.h"
+#include "mexlib.h"
 #include "mex.h"
 
 void mexFunction( int nlhs, mxArray *plhs[],
@@ -7,7 +8,19 @@ void mexFunction( int nlhs, mxArray *plhs[],
 {
 
   mwSize nins = 7;
-  mwSize nouts = 1;
+  mwSize nouts = 2;
+
+  char turblibErrMsg[TURB_ERROR_LENGTH];
+
+    /* check for correct number of input and output arguments */
+  if (nrhs != nins) {
+    sprintf(turblibErrMsg, "Required number of input arguments: %d",nins);
+    mexErrMsgTxt(turblibErrMsg);
+  } else if (nlhs > nouts) {
+    sprintf(turblibErrMsg, "Maximum number of output arguments: %d",nouts);
+    mexErrMsgTxt(turblibErrMsg);
+  }
+  
   char * authkey;
   char * dataset;
   mwSize spatialInterp;
@@ -15,17 +28,6 @@ void mexFunction( int nlhs, mxArray *plhs[],
   float time;
   mwSize count;
   double *mat_input;
-
-  char turblibErrMsg[TURB_ERROR_LENGTH];
-
-    /* check for correct number of input and output arguments */
-  if (nrhs !=nins) {
-    sprintf(turblibErrMsg, "Required number of input arguments: %d",nins);
-    mexErrMsgTxt(turblibErrMsg);
-  } else if (nlhs !=nouts) {
-    sprintf(turblibErrMsg, "Required number of output arguments: %d",nouts);
-    mexErrMsgTxt(turblibErrMsg);
-  }
   
   authkey = mxArrayToString(prhs[0]);
   dataset = mxArrayToString(prhs[1]);
@@ -45,12 +47,16 @@ void mexFunction( int nlhs, mxArray *plhs[],
   nrow_out = nrow;
   ncol_out = 3;
   
+  int *rc=0;
   float input[nrow][ncol];
   float output[nrow_out][ncol_out];  
   
   /* Initialize gSOAP */
   soapinit();
 
+  /* Set implicit error catching (see mexlib.h) */
+  turblibSetExitOnError(TURBLIB_EXIT_ON_ERROR);
+  
   /* Transform data to correct shape */
   for(i=0;i<nrow;i++)
   {
@@ -62,11 +68,16 @@ void mexFunction( int nlhs, mxArray *plhs[],
 
   /* Create output matrix; Column-major order */
   plhs[0] = mxCreateNumericMatrix(ncol_out,nrow_out,mxSINGLE_CLASS,mxREAL);
+  plhs[1] = mxCreateNumericMatrix(1,1,mxSINGLE_CLASS,mxREAL);
 
+  /* Associate plhs[1] with err */
+  rc = (int *)mxGetPr(plhs[1]);
+  
   /*  Call soap function */
   if (getPressureGradient(authkey, dataset, time, spatialInterp, temporalInterp, count, input, output) != SOAP_OK) {
-    sprintf(turblibErrMsg,"%d: %s\n", turblibGetErrorNumber(), turblibGetErrorString());
-    mexErrMsgTxt(turblibErrMsg);
+    *rc= turblibGetErrorNumber();
+    sprintf(turblibErrMsg,"%d: %s\n", *rc, turblibGetErrorString());
+    MEX_MSG_TXT(turblibErrMsg);
   }
 
   memcpy(mxGetPr(plhs[0]), output, nrow_out*ncol_out*sizeof(float));

@@ -1,5 +1,6 @@
 #include <string.h>
 #include "turblib.h"
+#include "mexlib.h"
 #include "mex.h"
 
 void mexFunction( int nlhs, mxArray *plhs[],
@@ -7,7 +8,7 @@ void mexFunction( int nlhs, mxArray *plhs[],
 {
 
   mwSize nins = 7;
-  mwSize nouts = 1;
+  mwSize nouts = 2;
   
   char turblibErrMsg[TURB_ERROR_LENGTH];
 
@@ -15,8 +16,8 @@ void mexFunction( int nlhs, mxArray *plhs[],
   if (nrhs !=nins) {
     sprintf(turblibErrMsg, "Required number of input arguments: %d",nins);
     mexErrMsgTxt(turblibErrMsg);
-  } else if (nlhs !=nouts) {
-    sprintf(turblibErrMsg, "Required number of output arguments: %d",nouts);
+  } else if (nlhs > nouts) {
+    sprintf(turblibErrMsg, "Maximum number of output arguments: %d",nouts);
     mexErrMsgTxt(turblibErrMsg);
   }
   
@@ -46,6 +47,7 @@ void mexFunction( int nlhs, mxArray *plhs[],
   nrow_out = nrow;
   ncol_out = 6;
   
+  int *rc=0;
   float input[nrow][ncol];
   float output[nrow_out][ncol_out];  
   
