@@ -1,5 +1,6 @@
 #include <string.h>
 #include "turblib.h"
+#include "mexlib.h"
 #include "mex.h"
 
 void mexFunction( int nlhs, mxArray *plhs[],
@@ -7,16 +8,16 @@ void mexFunction( int nlhs, mxArray *plhs[],
 {
 
   mwSize nins = 7;
-  mwSize nouts = 1;
+  mwSize nouts = 2;
 
   char turblibErrMsg[TURB_ERROR_LENGTH];
 
     /* check for correct number of input and output arguments */
-  if (nrhs !=nins) {
+  if (nrhs != nins) {
     sprintf(turblibErrMsg, "Required number of input arguments: %d",nins);
     mexErrMsgTxt(turblibErrMsg);
-  } else if (nlhs !=nouts) {
-    sprintf(turblibErrMsg, "Required number of output arguments: %d",nouts);
+  } else if (nlhs > nouts) {
+    sprintf(turblibErrMsg, "Maximum number of output arguments: %d",nouts);
     mexErrMsgTxt(turblibErrMsg);
   }
   
@@ -43,12 +44,16 @@ void mexFunction( int nlhs, mxArray *plhs[],
   nrow = mxGetN(prhs[6]);
   ncol = 3;
 
+  int *rc=0;
   float input[nrow][ncol];
   float output[nrow][ncol];
 
   
   /* Initialize gSOAP */
   soapinit();
+  
+  /* Set implicit error catching (see mexlib.h) */
+  turblibSetExitOnError(MEX_EXIT_ON_ERROR);
 
   /* Transform data to correct shape */
   for(i=0;i<nrow;i++)
@@ -59,16 +64,24 @@ void mexFunction( int nlhs, mxArray *plhs[],
     }
   }
 
-  /* Create output matrix */
+  /* Create output matrices */
   plhs[0] = mxCreateNumericMatrix(ncol,nrow,mxSINGLE_CLASS,mxREAL);
+  plhs[1] = mxCreateNumericMatrix(1,1,mxSINGLE_CLASS,mxREAL);
 
+  /* Associate plhs[1] with err */
+  rc = (int *)mxGetPr(plhs[1]);
+  /* Initialize rc */
+  
   /*  Call soap function */
+
   if (getVelocity (authkey, dataset, time, spatialInterp, temporalInterp, count, input, output) != SOAP_OK) {
-    sprintf(turblibErrMsg,"%d: %s\n", turblibGetErrorNumber(), turblibGetErrorString());
-    mexErrMsgTxt(turblibErrMsg);
+    *rc= turblibGetErrorNumber();
+    sprintf(turblibErrMsg,"%d: %s\n", *rc, turblibGetErrorString());
+    mexWarnMsgTxt(turblibErrMsg);
   }
 
   memcpy(mxGetPr(plhs[0]), output, nrow*ncol*sizeof(float));
+//   memcpy(mxGetPr(plhs[1]), turblibGetErrorNumber(), sizeof(float)); //
 
   soapdestroy(); 
 
