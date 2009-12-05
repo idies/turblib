@@ -12,13 +12,8 @@ More information can be found at:
 
 'make' will build both the Fortran and C sample code.
 Use 'make turbc' if you do not have a Fortran compiler
-<<<<<<< README
-installed.  You may need to use GNU Make ('gmake') on
-some platforms.
-=======
 installed.  Note: On some platforms, you may need to use
 'gmake' (GNU Make) instead.
->>>>>>> 1.7
 
 The Matlab interface is under the mex/ directory.
 Please see mex/README for instructions.
@@ -125,4 +120,4 @@ do while (getVelocity( ... ).ne.0)
   end if
 end do
 
-$Id: README,v 1.8 2009-12-01 19:00:16 eric Exp $
+$Id: README,v 1.9 2009-12-05 05:26:39 jgraham Exp $
