@@ -42,7 +42,7 @@ in these test files should be valid.
 
 You will need the Apple Developer Tools (Xcode), which
 can be found on your OS X install disk, or downloaded
-for free (with registration) from
+for free (with registration) from:
    http://developer.apple.com/
 
 **** Linux Notes ****
@@ -56,30 +56,15 @@ Not tested.  Pleae let us know if any changes are needed.
 **** Error Handling ****
 
 By default, the turbulence library will print errors out to the
-console and abort the program.  You can change this behavior by
-calling turblibSetExitOnError(0) before making any calls to the
-turbulence database.  You will then be responsible for checking
-the return codes.
-
-___C Example:___
-turblibSetExitOnError(0);
-...
-if (getVelocity ( ... ) != SOAP_OK) {
-  turblibPrintError();
-  exit(1);
-}
-
-__Fortran Example:___
-integer, parameter :: SOAP_OK = 0  ! From stdsoap2.h
-integer rc
-CALL turblibSetExitOnError(0)
-...
-rc = getVelocity( ... )
-if (rc.ne.SOAP_OK) then
-  CALL turblibPrintError()
-  STOP
-end if
-
+Matlab command window and abort the program.  You can change this 
+behavior by changing the line in mexlib.h from:
+  #define MEX_MSG_TXT mexErrMsgTxt
+to
+  #define MEX_MSG_TXT mexWarnMsgTxt
+and recompiling the mex functions. Errors will still be printed to
+the Matlab command window but you will then be responsible for
+checking the return codes and exiting the program if necessary - see
+the 'Handling intermittent failures' section below.
 
 **** Handling intermittent failures ****
 
