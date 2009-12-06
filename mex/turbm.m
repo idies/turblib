@@ -1,6 +1,8 @@
 %
 % Turbulence Database sample Matlab client code
 %
+clear all;
+close all;
 
 authkey = 'edu.jhu.pha.turbulence.testing-200910';
 dataset = 'isotropic1024coarse';
