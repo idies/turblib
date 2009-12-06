@@ -78,17 +78,18 @@ for the continuation after longer failures.
 
 ___Example:___
 SOAP_OK=0;
-rc=1;
-attempts=0;
-while (rc ~= SOAP_OK)
-  attempts=attempts+1
+nquery=30;
+epause=60;
+for i=1:nquery
   [result3, rc] =  getVelocity (...);
-  if (attempts >= 30)
-    error('Fatal Error: Too many failures');
-  else 
-    fprintf('Temporary Error: pausing 60 seconds\n');
+  if (rc ~= SOAP_OK)
+    if (i == nquery)
+      error('Fatal Error: Too many failures');
+    else
+      fprintf('Temporary Error: pausing $d seconds\n',epause);
+      pause(epause);
+    end
+  else
+    break
   end
-  pause(60);
 end
-
-
