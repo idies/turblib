@@ -86,7 +86,7 @@ for i=1:nquery
     if (i == nquery)
       error('Fatal Error: Too many failures');
     else
-      fprintf('Temporary Error: pausing $d seconds\n',epause);
+      fprintf('Temporary Error: pausing %d seconds\n',epause);
       pause(epause);
     end
   else
