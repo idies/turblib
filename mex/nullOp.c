@@ -67,6 +67,7 @@ void mexFunction( int nlhs, mxArray *plhs[],
   if (nullOp (authkey, count, input, output) != SOAP_OK) {
     *rc= turblibGetErrorNumber();
     sprintf(turblibErrMsg,"%d: %s\n", *rc, turblibGetErrorString());
+    soapdestroy(); 
     MEX_MSG_TXT(turblibErrMsg);
   }
  
