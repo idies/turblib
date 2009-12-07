@@ -68,7 +68,7 @@ the 'Handling intermittent failures' section below.
 
 **** Handling intermittent failures ****
 
-We suggest writing long-running code to handle any ntermittent network
+We suggest writing long-running code to handle any intermittent network
 or database failures which may occur.  The following sample code will
 try each query up to 30 times, with a delay of 1 minute between each
 attempt.
