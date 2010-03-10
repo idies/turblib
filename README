@@ -82,7 +82,7 @@ end if
 
 **** Handling intermittent failures ****
 
-We suggest writing long-running code to handle any ntermittent network
+We suggest writing long-running code to handle any intermittent network
 or database failures which may occur.  The following sample code will
 try each query up to 30 times, with a delay of 1 minute between each
 attempt.
@@ -120,4 +120,4 @@ do while (getVelocity( ... ).ne.0)
   end if
 end do
 
-$Id: README,v 1.9 2009-12-05 05:26:39 jgraham Exp $
+$Id: README,v 1.10 2010-03-10 04:09:00 eric Exp $
