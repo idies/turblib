@@ -29,7 +29,7 @@ program TurbTest
   ! If you need one, please visit http://turbulence.pha.jhu.edu/
   ! (We just want to know a bit about our users!)
   !
-  character*100 :: authkey = 'edu.jhu.pha.turbulence.testing-200910' // CHAR(0)
+  character*100 :: authkey = 'edu.jhu.pha.turbulence.testing-201003' // CHAR(0)
 
   integer, parameter :: timestep = 182
   real :: time = 0.002 * timestep
