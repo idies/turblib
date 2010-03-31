@@ -41,7 +41,18 @@ program TurbTest
   real dataout9(9, 10)  ! results from Velocity Gradient
   real dataout18(18, 10) ! results from Velocity Hessian
 
-  integer i,rc
+
+  ! Declare the return type of the turblib functions as integer.
+  ! This is required for custom error handling (see the README).
+  integer getvelocity, getforce, getvelocityandpressure, getvelocitygradient
+  integer getvelocitylaplacian, getvelocityhessian
+  integer getpressuregradient, getpressurehessian
+
+  ! return code
+  integer rc
+
+  ! loop iterator
+  integer i
 
   !
   ! Intialize the gSOAP runtime.
@@ -59,13 +70,13 @@ program TurbTest
   end do
 
   write(*,*) 'Velocity at 10 particle locations'
-  CALL getvelocity(authkey, dataset,  time, Lag6, NoTInt, 10, points, dataout3)
+  rc = getvelocity(authkey, dataset,  time, Lag6, NoTInt, 10, points, dataout3)
   do i = 1, 10, 1 
     write(*,*) i, ': (', dataout3(1,i), ', ', dataout3(2,i), ', ', dataout3(3,i), ')'
   end do
 
   write(*,*) 'Forcing at 10 particle locations'
-  CALL getforce(authkey, dataset,  time, Lag6, NoTInt, 10, points, dataout3)
+  rc = getforce(authkey, dataset,  time, Lag6, NoTInt, 10, points, dataout3)
   do i = 1, 10, 1 
     write(*,*) i, ': (', dataout3(1,i), ', ', dataout3(2,i), ', ', dataout3(3,i), ')'
   end do
@@ -73,14 +84,14 @@ program TurbTest
 
   write(*,*)
   write(*,*) 'Velocity and pressure at 10 particle locations'
-  CALL getvelocityandpressure(authkey, dataset,  time, Lag6, NoTInt, 10, points, dataout4)
+  rc = getvelocityandpressure(authkey, dataset,  time, Lag6, NoTInt, 10, points, dataout4)
   do i = 1, 10, 1 
     write(*,*) i, ': (', dataout4(1,i), ', ', dataout4(2,i), ', ', dataout4(3,i), ', ', dataout4(4,i), ')'
   end do
 
   write(*,*)
   write(*,*) 'Velocity gradient at 10 particle locations'
-  CALL getvelocitygradient(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout9)
+  rc = getvelocitygradient(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout9)
   do i = 1, 10, 1 
     write(*,*) i, ': (duxdx=', dataout9(1,i), ', duxdy=', dataout9(2,i), &
        ', duxdz=', dataout9(3,i), ', duydx=', dataout9(4,i),  &
@@ -90,13 +101,13 @@ program TurbTest
   end do
 
   write(*,*) 'Velocity laplacian at 10 particle locations'
-  CALL getvelocitylaplacian(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout3)
+  rc = getvelocitylaplacian(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout3)
   do i = 1, 10, 1 
     write(*,*) i, ': (grad2ux=', dataout3(1,i), ', grad2uy=', dataout3(2,i), ', grad2uz=', dataout3(3,i), ')'
   end do
 
   write(*,*) 'Velocity hessian at 10 particle locations'
-  CALL getvelocityhessian(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout18)
+  rc = getvelocityhessian(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout18)
   do i = 1, 10, 1 
     write(*,*) i, ': (d2uxdxdx=', dataout18(1,i), &
        ', d2uxdxdy=', dataout18(2,i), &
@@ -120,14 +131,14 @@ program TurbTest
 
   write(*,*)
   write(*,*) 'Pressure gradient at 10 particle locations'
-  CALL getpressuregradient(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout3)
+  rc = getpressuregradient(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout3)
   do i = 1, 10, 1 
     write(*,*) i, ': (dpdx=', dataout3(1,i), ', dpdy=', dataout3(2,i), ', dpdz=', dataout3(3,i), ')'
   end do
 
   write(*,*)
   write(*,*) 'Pressure hessian at 10 particle locations'
-  CALL getpressurehessian(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout6)
+  rc = getpressurehessian(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout6)
   do i = 1, 10, 1 
     write(*,*) i, ': (d2pdxdx=', dataout6(1,i), ', d2pdxdy=', dataout6(2,i), &
        ', d2pdxdz=', dataout6(3,i), ', d2pdydy=', dataout6(4,i),  &
