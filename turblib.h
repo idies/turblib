@@ -247,6 +247,13 @@ int getforce_(char *authToken,
   int *count, float datain[][3], float dataout[][3],
   int len_a, int len_d);
 
+/* C */
+int getPosition_new(char *authToken,
+  char *dataset, float startTime, float endTime, 
+  int nt,
+  enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+  int count, float datain[][3], float dataout[][3]);
+
 #ifdef  __cplusplus
 }
 #endif
