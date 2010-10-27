@@ -816,6 +816,19 @@ int getPosition_new(char *authToken,
   soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
 
   __turblib_errno = rc;
+
   return rc;
+}
+
+int getposition_new_(char *authToken,
+      char *dataset, float *startTime,float *endTime, int *nt,
+      int *spatial, int *temporal,
+      int *count, float datain[][3], float dataout[][3],
+      int len_a, int len_d)
+{
+  return getposition_new (authToken,
+    dataset, *startTime,*endTime,*nt,
+    *spatial, *temporal,
+    *count, datain, dataout);
 }
 
