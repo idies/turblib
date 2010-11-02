@@ -820,7 +820,7 @@ int getPosition_new(char *authToken,
   return rc;
 }
 
-int getposition_new_(char *authToken,
+/*int getposition_new_(char *authToken,
       char *dataset, float *startTime,float *endTime, int *nt,
       int *spatial, int *temporal,
       int *count, float datain[][3], float dataout[][3],
@@ -830,5 +830,5 @@ int getposition_new_(char *authToken,
     dataset, *startTime,*endTime,*nt,
     *spatial, *temporal,
     *count, datain, dataout);
-}
+}*/
 

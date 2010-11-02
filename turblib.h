@@ -255,12 +255,12 @@ int getPosition_new(char *authToken,
   int count, float datain[][3], float dataout[][3]);
 
 /* Fortran */
-int getPosition_new(char *authToken,
+/*int getPosition_new(char *authToken,
   char *dataset, float *startTime, float *endTime, 
   int *nt,
   int *spatial, int *temporal,
   int *count, float datain[][3], float dataout[][3],
-  int len_a, int len_d);
+  int len_a, int len_d);*/
 
 #ifdef  __cplusplus
 }
