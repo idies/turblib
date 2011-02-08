@@ -20,7 +20,10 @@ OBJ =	soapC.o \
 	stdsoap2.o \
         turblib.o
 
-all: turbc turbf
+all: mhdc turbc turbf
+
+mhdc : $(OBJ) mhdc.o
+	 $(CC) -o $@ $(OBJ) mhdc.o $(LDLIBS)
 
 turbc : $(OBJ) turbc.o
 	 $(CC) -o $@ $(OBJ) turbc.o $(LDLIBS)
@@ -46,8 +49,16 @@ testwsdl:
 	wsdl2h -o TurbulenceService.h -n turb -c "http://test.turbulence.pha.jhu.edu/service/turbulence.asmx?WSDL" -s
 	soapcpp2 -CLcx -2 TurbulenceService.h
 
+mhdtestwsdl:
+	wsdl2h -o TurbulenceService.h -n turb -c "http://mhdtest.turbulence.pha.jhu.edu/service/turbulence.asmx?WSDL" -s
+	soapcpp2 -CLcx -2 TurbulenceService.h
+
 devwsdl:
 	wsdl2h -o TurbulenceService.h -n turb -c "http://dev.turbulence.pha.jhu.edu/service/turbulence.asmx?WSDL" -s
+	soapcpp2 -CLcx -2 TurbulenceService.h
+
+mhddevwsdl:
+	wsdl2h -o TurbulenceService.h -n turb -c "http://mhddev.turbulence.pha.jhu.edu/service/turbulence.asmx?WSDL" -s
 	soapcpp2 -CLcx -2 TurbulenceService.h
 
 prodtestwsdl:
@@ -55,7 +66,7 @@ prodtestwsdl:
 	soapcpp2 -CLcx -2 TurbulenceService.h
 
 clean:
-	$(RM) *.o turbf turbc
+	$(RM) *.o turbf turbc mhdc
 
 spotless: clean
 	$(RM) soapClient.c TurbulenceServiceSoap.nsmap soapH.h TurbulenceServiceSoap12.nsmap soapStub.h soapC.c TurbulenceService.h
