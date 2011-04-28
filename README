@@ -1,5 +1,5 @@
 JHU Turbulence Database Cluster
-Fortran, C and Matlab Interface Library
+C and Fortran Interface Library
 http://turbulence.pha.jhu.edu/
 
 **** About this package ****
@@ -14,9 +14,6 @@ More information can be found at:
 Use 'make turbc' if you do not have a Fortran compiler
 installed.  Note: On some platforms, you may need to use
 'gmake' (GNU Make) instead.
-
-The Matlab interface is under the mex/ directory.
-Please see mex/README for instructions.
 
 **** Identification Token (required for large queries) ****
 
