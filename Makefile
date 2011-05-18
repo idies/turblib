@@ -16,11 +16,11 @@ CFLAGS = -Wall -g
 LDLIBS = 
 
 OBJ =	soapC.o \
-	soapClient.o \
-	stdsoap2.o \
+		soapClient.o \
+		stdsoap2.o \
         turblib.o
 
-all: mhdc turbc turbf
+all: mhdc turbc mhdf turbf
 
 mhdc : $(OBJ) mhdc.o
 	 $(CC) -o $@ $(OBJ) mhdc.o $(LDLIBS)
@@ -33,6 +33,12 @@ turbf : $(OBJ) turbf.o
 
 turbf.o : turbf.f90
 	 $(FC) -c turbf.f90
+
+mhdf : $(OBJ) mhdf.o
+	 $(FC) -o $@ $(OBJ) mhdf.o $(LDLIBS)
+
+mhdf.o : mhdf.f90
+	 $(FC) -c mhdf.f90
 
 stdsoap2.o: stdsoap2.c
 	$(CC) $(CFLAGS) -c $<
@@ -66,7 +72,7 @@ prodtestwsdl:
 	soapcpp2 -CLcx -2 TurbulenceService.h
 
 clean:
-	$(RM) *.o turbf turbc mhdc
+	$(RM) *.o *.exe turbf turbc mhdc mhdf
 
 spotless: clean
 	$(RM) soapClient.c TurbulenceServiceSoap.nsmap soapH.h TurbulenceServiceSoap12.nsmap soapStub.h soapC.c TurbulenceService.h

@@ -29,10 +29,13 @@ program TurbTest
   ! If you need one, please visit http://turbulence.pha.jhu.edu/
   ! (We just want to know a bit about our users!)
   !
-  character*100 :: authkey = 'edu.jhu.pha.turbulence.testing-201003' // CHAR(0)
+  character*100 :: authkey = 'edu.jhu.pha.turbulence.testing-201104' // CHAR(0)
 
   integer, parameter :: timestep = 182
   real :: time = 0.002 * timestep
+  real :: startTime = 0.002 * timestep
+  real :: endTime = 0.002 * (timestep + 5)
+  integer :: nt = 3     ! fraction of database timestep to use for getposition method
   real points(3, 10)    ! input
   real dataout1(10)     ! p
   real dataout3(3, 10)  ! x,y,z
@@ -47,6 +50,7 @@ program TurbTest
   integer getvelocity, getforce, getvelocityandpressure, getvelocitygradient
   integer getvelocitylaplacian, getvelocityhessian
   integer getpressuregradient, getpressurehessian
+  integer getposition
 
   ! return code
   integer rc
@@ -67,6 +71,12 @@ program TurbTest
     points(1, i) = 0.20 * i
     points(2, i) = 0.50 * i
     points(3, i) = 0.15 * i 
+  end do
+
+  write(*,*) 'Advancing 10 particles through time'
+  rc = getposition(authkey, dataset, startTime, endTime, nt, Lag6, PCHIPInt, 10, points, dataout3)
+  do i = 1, 10, 1 
+    write(*,*) i, ': (', dataout3(1,i), ', ', dataout3(2,i), ', ', dataout3(3,i), ')'
   end do
 
   write(*,*) 'Velocity at 10 particle locations'

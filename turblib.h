@@ -171,68 +171,68 @@ int nullop_(char *authToken, int *count,
       float datain[][3], float dataout[][3], 
       int len_a, int len_d);
 
-/* C */
-int getBoxFilterVelocity(char *authToken,
-      char *dataset, float time,
-      float filterLength, int nylayers,
-      enum TemporalInterpolation temporal,
-      int count, float datain[][3], float dataout[][3]);
-
-/* Fortran */
-int getboxfiltervelocity_(char *authToken,
-      char *dataset, float *time,
-      float *filterlength,
-      int *nlayers, int *temporal,
-      int *count, float datain[][3], float dataout[][3],
-      int len_a, int len_d);
-
-/* C */
-int getBoxFilterPressure(char *authToken,
-      char *dataset, float time,
-      float filterLength, int nlayers,
-      enum TemporalInterpolation temporal,
-      int count, float datain[][3], float dataout[]);
-
-/* Fortran */
-int getboxfilterpressure_(char *authToken,
-      char *dataset, float *time,
-      float *filterlength, 
-      int *nlayers,
-      int *temporal,
-      int *count, float datain[][3], float dataout[],
-      int len_a, int len_d);
-
-/* C */
-int getBoxFilterSGSStress(char *authToken,
-      char *dataset, float time,
-      float filterLength, int nlayers,
-      enum TemporalInterpolation temporal,
-      int count, float datain[][3], float dataout[][6]);
-
-/* Fortran */
-int getboxfiltersgsstress_(char *authToken,
-      char *dataset, float *time,
-      float *filterlength,
-      int *nlayers,
-      int *temporal,
-      int *count, float datain[][3], float dataout[][6],
-      int len_a, int len_d);
-
-/* C */
-int getBoxFilterVelocityGradient(char *authToken,
-      char *dataset, float time,
-      float filterLength, int nlayers,
-      enum TemporalInterpolation temporal,
-      int count, float datain[][3], float dataout[][9]);
-
-/* Fortran */
-int getboxfiltervelocitygradient_(char *authToken,
-      char *dataset, float *time,
-      float *filterlength,
-      int *nlayers,
-      int *temporal,
-      int *count, float datain[][3], float dataout[][9],
-      int len_a, int len_d);
+///* C */
+//int getBoxFilterVelocity(char *authToken,
+//      char *dataset, float time,
+//      float filterLength, int nylayers,
+//      enum TemporalInterpolation temporal,
+//      int count, float datain[][3], float dataout[][3]);
+//
+///* Fortran */
+//int getboxfiltervelocity_(char *authToken,
+//      char *dataset, float *time,
+//      float *filterlength,
+//      int *nlayers, int *temporal,
+//      int *count, float datain[][3], float dataout[][3],
+//      int len_a, int len_d);
+//
+///* C */
+//int getBoxFilterPressure(char *authToken,
+//      char *dataset, float time,
+//      float filterLength, int nlayers,
+//      enum TemporalInterpolation temporal,
+//      int count, float datain[][3], float dataout[]);
+//
+///* Fortran */
+//int getboxfilterpressure_(char *authToken,
+//      char *dataset, float *time,
+//      float *filterlength, 
+//      int *nlayers,
+//      int *temporal,
+//      int *count, float datain[][3], float dataout[],
+//      int len_a, int len_d);
+//
+///* C */
+//int getBoxFilterSGSStress(char *authToken,
+//      char *dataset, float time,
+//      float filterLength, int nlayers,
+//      enum TemporalInterpolation temporal,
+//      int count, float datain[][3], float dataout[][6]);
+//
+///* Fortran */
+//int getboxfiltersgsstress_(char *authToken,
+//      char *dataset, float *time,
+//      float *filterlength,
+//      int *nlayers,
+//      int *temporal,
+//      int *count, float datain[][3], float dataout[][6],
+//      int len_a, int len_d);
+//
+///* C */
+//int getBoxFilterVelocityGradient(char *authToken,
+//      char *dataset, float time,
+//      float filterLength, int nlayers,
+//      enum TemporalInterpolation temporal,
+//      int count, float datain[][3], float dataout[][9]);
+//
+///* Fortran */
+//int getboxfiltervelocitygradient_(char *authToken,
+//      char *dataset, float *time,
+//      float *filterlength,
+//      int *nlayers,
+//      int *temporal,
+//      int *count, float datain[][3], float dataout[][9],
+//      int len_a, int len_d);
 
 /* C */
 int getForce(char *authToken,
@@ -247,20 +247,109 @@ int getforce_(char *authToken,
   int *count, float datain[][3], float dataout[][3],
   int len_a, int len_d);
 
+///*C*/ 
+//int getPosition_new(char *authToken,
+//  char *dataset, float startTime, float endTime, 
+//  int nt,
+//  enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+//  int count, float datain[][3], float dataout[][3]);
+//
+///* Fortran */
+//int getpositionnew_(char *authToken,
+//  char *dataset, float *startTime, float *endTime,
+//  int *nt,
+//  int *spatial, int *temporal,
+//  int *count, float datain[][3], float dataout[][3],
+//  int len_a, int len_d);
+
+///*C*/ 
+//int getPosition_new2(char *authToken,
+//  char *dataset, float startTime, float endTime, 
+//  int nt,
+//  enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+//  int count, float datain[][3], float dataout[][3]);
+//
+///* Fortran */
+//int getpositionnew2_(char *authToken,
+//  char *dataset, float *startTime, float *endTime,
+//  int *nt,
+//  int *spatial, int *temporal,
+//  int *count, float datain[][3], float dataout[][3],
+//  int len_a, int len_d);
+
 /*C*/ 
-int getPosition_new(char *authToken,
+int getPosition(char *authToken,
   char *dataset, float startTime, float endTime, 
   int nt,
   enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
   int count, float datain[][3], float dataout[][3]);
 
 /* Fortran */
-/*int getPosition_new(char *authToken,
-  char *dataset, float *startTime, float *endTime, 
+int getposition_(char *authToken,
+  char *dataset, float *startTime, float *endTime,
   int *nt,
   int *spatial, int *temporal,
   int *count, float datain[][3], float dataout[][3],
-  int len_a, int len_d);*/
+  int len_a, int len_d);
+
+/* C */
+int getRawVelocity (char *authToken,
+  char *dataset, float time,
+  int X, int Y, int Z, int Xwidth, int Ywidth, int Zwidth, char dataout[]);
+
+/* C */
+int getMagneticField (char *authToken,
+  char *dataset, float time,
+  enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+  int count, float datain[][3], float dataout[][3]);
+
+/* Fortran */
+int getmagneticfield_ (char *authToken,
+  char *dataset, float *time,
+  int *spatial, int *temporal,
+  int *count, float datain[][3], float dataout[][3],
+  int len_a, int len_d);
+
+/* C */
+int getRawMagneticField (char *authToken,
+  char *dataset, float time,
+  int X, int Y, int Z, int Xwidth, int Ywidth, int Zwidth, char dataout[]);
+
+/* C */
+int getVectorPotential (char *authToken,
+  char *dataset, float time,
+  enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+  int count, float datain[][3], float dataout[][3]);
+
+/* Fortran */
+int getvectorpotential_ (char *authToken,
+  char *dataset, float *time,
+  int *spatial, int *temporal,
+  int *count, float datain[][3], float dataout[][3],
+  int len_a, int len_d);
+
+/* C */
+int getRawVectorPotential (char *authToken,
+  char *dataset, float time,
+  int X, int Y, int Z, int Xwidth, int Ywidth, int Zwidth, char dataout[]);
+
+/* C */
+int getPressure (char *authToken,
+  char *dataset, float time,
+  enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+  int count, float datain[][3], float dataout[]);
+
+/* Fortran */
+int getpressure_ (char *authToken,
+  char *dataset, float *time,
+  int *spatial, int *temporal,
+  int *count, float datain[][3], float dataout[],
+  int len_a, int len_d);
+
+/* C */
+int getRawPressure (char *authToken,
+  char *dataset, float time,
+  int X, int Y, int Z, int Xwidth, int Ywidth, int Zwidth, char dataout[]);
 
 #ifdef  __cplusplus
 }

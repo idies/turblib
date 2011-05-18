@@ -507,226 +507,226 @@ int nullOp (char *authToken, int count,
   return rc;
 }
 
-int getboxfiltervelocity_(char *authToken,
-      char *dataset, float *time,
-      float *filterlength,
-      int *nlayers,
-      int *temporal,
-      int *count, float datain[][3], float dataout[][3],
-      int len_a, int len_d)
-{
-  return getBoxFilterVelocity(authToken,
-    dataset, *time,
-    *filterlength, *nlayers,
-    *temporal,
-    *count, datain, dataout);
-}
-
-int getBoxFilterVelocity(char *authToken,
-      char *dataset, float time,
-      float filterLength, int nlayers,
-      enum TemporalInterpolation temporal,
-      int count, float datain[][3], float dataout[][3])
-{
-  int rc;
-
-  struct _turb1__GetBoxFilterVelocity input;
-  struct _turb1__GetBoxFilterVelocityResponse output;
-
-  input.authToken = authToken;
-  input.dataset = dataset;
-  input.time = time;
-  input.filterlength = filterLength;
-  input.nlayers = nlayers;
-  input.temporalInterpolation = TemporalIntToEnum(temporal);
-
-  struct turb1__ArrayOfPoint3 pointArray;
-  pointArray.__sizePoint3 = count;
-  pointArray.Point3 = (void *)datain;
-  input.points = &pointArray;
-
-  rc = soap_call___turb2__GetBoxFilterVelocity(&__jhuturbsoap, NULL, NULL, &input, &output);
-  if (rc == SOAP_OK) {
-    memcpy(dataout, output.GetBoxFilterVelocityResult->Vector3,
-      output.GetBoxFilterVelocityResult->__sizeVector3 * sizeof(float) * 3);
-    bzero(__turblib_err, TURB_ERROR_LENGTH);
-  } else {
-    soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
-    turblibHandleError();
-  }
-  
-  soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
-  soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
-
-  __turblib_errno = rc;
-  return rc;
-}
-
-int getboxfilterpressure_(char *authToken,
-      char *dataset, float *time,
-      float *filterlength,
-      int *nlayers,
-      int *temporal,
-      int *count, float datain[][3], float dataout[],
-      int len_a, int len_d)
-{
-  return getBoxFilterPressure(authToken,
-    dataset, *time,
-    *filterlength, *nlayers,
-    *temporal,
-    *count, datain, dataout);
-}
-
-int getBoxFilterPressure(char *authToken,
-      char *dataset, float time,
-      float filterLength, int nlayers,
-      enum TemporalInterpolation temporal,
-      int count, float datain[][3], float dataout[])
-{
-  int rc;
-
-  struct _turb1__GetBoxFilterPressure input;
-  struct _turb1__GetBoxFilterPressureResponse output;
-
-  input.authToken = authToken;
-  input.dataset = dataset;
-  input.time = time;
-  input.filterlength = filterLength;
-  input.nlayers = nlayers;
-  input.temporalInterpolation = TemporalIntToEnum(temporal);
-
-  struct turb1__ArrayOfPoint3 pointArray;
-  pointArray.__sizePoint3 = count;
-  pointArray.Point3 = (void *)datain;
-  input.points = &pointArray;
-
-  rc = soap_call___turb2__GetBoxFilterPressure(&__jhuturbsoap, NULL, NULL, &input, &output);
-  if (rc == SOAP_OK) {
-    memcpy(dataout, output.GetBoxFilterPressureResult->float_,
-      output.GetBoxFilterPressureResult->__sizefloat_ * sizeof(float));
-    bzero(__turblib_err, TURB_ERROR_LENGTH);
-  } else {
-    soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
-    turblibHandleError();
-  } 
-  
-  soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
-  soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
-
-  __turblib_errno = rc;
-  return rc;
-}
-
-
-int getboxfiltersgsstress_(char *authToken,
-      char *dataset, float *time,
-      float *filterlength,
-      int *nlayers,
-      int *temporal,
-      int *count, float datain[][3], float dataout[][6],
-      int len_a, int len_d)
-{
-  return getBoxFilterSGSStress(authToken,
-    dataset, *time,
-    *filterlength, *nlayers,
-    *temporal,
-    *count, datain, dataout);
-}
-
-int getBoxFilterSGSStress(char *authToken,
-      char *dataset, float time,
-      float filterLength, int nlayers,
-      enum TemporalInterpolation temporal,
-      int count, float datain[][3], float dataout[][6])
-{
-  int rc;
-
-  struct _turb1__GetBoxFilterSGSStress input;
-  struct _turb1__GetBoxFilterSGSStressResponse output;
-
-  input.authToken = authToken;
-  input.dataset = dataset;
-  input.time = time;
-  input.filterlength = filterLength;
-  input.nlayers = nlayers;
-  input.temporalInterpolation = TemporalIntToEnum(temporal);
-
-  struct turb1__ArrayOfPoint3 pointArray;
-  pointArray.__sizePoint3 = count;
-  pointArray.Point3 = (void *)datain;
-  input.points = &pointArray;
-
-  rc = soap_call___turb2__GetBoxFilterSGSStress(&__jhuturbsoap, NULL, NULL, &input, &output);
-  if (rc == SOAP_OK) {
-    memcpy(dataout, output.GetBoxFilterSGSStressResult->SGSStress,
-      output.GetBoxFilterSGSStressResult->__sizeSGSStress * sizeof(float) * 6);
-    bzero(__turblib_err, TURB_ERROR_LENGTH);
-  } else {
-    soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
-    turblibHandleError();
-  }
-  
-  soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
-  soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
-
-  __turblib_errno = rc;
-  return rc;
-}
-
-int getboxfiltervelocitygradient_(char *authToken,
-      char *dataset, float *time,
-      float *filterlength,
-      int *nlayers,
-      int *temporal,
-      int *count, float datain[][3], float dataout[][9],
-      int len_a, int len_d)
-{
-  return getBoxFilterVelocityGradient(authToken,
-    dataset, *time,
-    *filterlength, *nlayers,
-    *temporal,
-    *count, datain, dataout);
-}
-
-int getBoxFilterVelocityGradient(char *authToken,
-      char *dataset, float time,
-      float filterLength, int nlayers,
-      enum TemporalInterpolation temporal,
-      int count, float datain[][3], float dataout[][9])
-{
-  int rc;
-
-  struct _turb1__GetBoxFilterVelocityGradient input;
-  struct _turb1__GetBoxFilterVelocityGradientResponse output;
-
-  input.authToken = authToken;
-  input.dataset = dataset;
-  input.time = time;
-  input.filterlength = filterLength;
-  input.nlayers = nlayers;
-  input.temporalInterpolation = TemporalIntToEnum(temporal);
-
-  struct turb1__ArrayOfPoint3 pointArray;
-  pointArray.__sizePoint3 = count;
-  pointArray.Point3 = (void *)datain;
-  input.points = &pointArray;
-
-  rc = soap_call___turb2__GetBoxFilterVelocityGradient(&__jhuturbsoap, NULL, NULL, &input, &output);
-  if (rc == SOAP_OK) {
-    memcpy(dataout, output.GetBoxFilterVelocityGradientResult->VelocityGradient,
-      output.GetBoxFilterVelocityGradientResult->__sizeVelocityGradient * sizeof(float) * 9);
-    bzero(__turblib_err, TURB_ERROR_LENGTH);
-  } else {
-    soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
-    turblibHandleError();
-  }
-  
-  soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
-  soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
-
-  __turblib_errno = rc;
-  return rc;
-}
+//int getboxfiltervelocity_(char *authToken,
+//      char *dataset, float *time,
+//      float *filterlength,
+//      int *nlayers,
+//      int *temporal,
+//      int *count, float datain[][3], float dataout[][3],
+//      int len_a, int len_d)
+//{
+//  return getBoxFilterVelocity(authToken,
+//    dataset, *time,
+//    *filterlength, *nlayers,
+//    *temporal,
+//    *count, datain, dataout);
+//}
+//
+//int getBoxFilterVelocity(char *authToken,
+//      char *dataset, float time,
+//      float filterLength, int nlayers,
+//      enum TemporalInterpolation temporal,
+//      int count, float datain[][3], float dataout[][3])
+//{
+//  int rc;
+//
+//  struct _turb1__GetBoxFilterVelocity input;
+//  struct _turb1__GetBoxFilterVelocityResponse output;
+//
+//  input.authToken = authToken;
+//  input.dataset = dataset;
+//  input.time = time;
+//  input.filterlength = filterLength;
+//  input.nlayers = nlayers;
+//  input.temporalInterpolation = TemporalIntToEnum(temporal);
+//
+//  struct turb1__ArrayOfPoint3 pointArray;
+//  pointArray.__sizePoint3 = count;
+//  pointArray.Point3 = (void *)datain;
+//  input.points = &pointArray;
+//
+//  rc = soap_call___turb2__GetBoxFilterVelocity(&__jhuturbsoap, NULL, NULL, &input, &output);
+//  if (rc == SOAP_OK) {
+//    memcpy(dataout, output.GetBoxFilterVelocityResult->Vector3,
+//      output.GetBoxFilterVelocityResult->__sizeVector3 * sizeof(float) * 3);
+//    bzero(__turblib_err, TURB_ERROR_LENGTH);
+//  } else {
+//    soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
+//    turblibHandleError();
+//  }
+//  
+//  soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
+//  soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
+//
+//  __turblib_errno = rc;
+//  return rc;
+//}
+//
+//int getboxfilterpressure_(char *authToken,
+//      char *dataset, float *time,
+//      float *filterlength,
+//      int *nlayers,
+//      int *temporal,
+//      int *count, float datain[][3], float dataout[],
+//      int len_a, int len_d)
+//{
+//  return getBoxFilterPressure(authToken,
+//    dataset, *time,
+//    *filterlength, *nlayers,
+//    *temporal,
+//    *count, datain, dataout);
+//}
+//
+//int getBoxFilterPressure(char *authToken,
+//      char *dataset, float time,
+//      float filterLength, int nlayers,
+//      enum TemporalInterpolation temporal,
+//      int count, float datain[][3], float dataout[])
+//{
+//  int rc;
+//
+//  struct _turb1__GetBoxFilterPressure input;
+//  struct _turb1__GetBoxFilterPressureResponse output;
+//
+//  input.authToken = authToken;
+//  input.dataset = dataset;
+//  input.time = time;
+//  input.filterlength = filterLength;
+//  input.nlayers = nlayers;
+//  input.temporalInterpolation = TemporalIntToEnum(temporal);
+//
+//  struct turb1__ArrayOfPoint3 pointArray;
+//  pointArray.__sizePoint3 = count;
+//  pointArray.Point3 = (void *)datain;
+//  input.points = &pointArray;
+//
+//  rc = soap_call___turb2__GetBoxFilterPressure(&__jhuturbsoap, NULL, NULL, &input, &output);
+//  if (rc == SOAP_OK) {
+//    memcpy(dataout, output.GetBoxFilterPressureResult->float_,
+//      output.GetBoxFilterPressureResult->__sizefloat_ * sizeof(float));
+//    bzero(__turblib_err, TURB_ERROR_LENGTH);
+//  } else {
+//    soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
+//    turblibHandleError();
+//  } 
+//  
+//  soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
+//  soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
+//
+//  __turblib_errno = rc;
+//  return rc;
+//}
+//
+//
+//int getboxfiltersgsstress_(char *authToken,
+//      char *dataset, float *time,
+//      float *filterlength,
+//      int *nlayers,
+//      int *temporal,
+//      int *count, float datain[][3], float dataout[][6],
+//      int len_a, int len_d)
+//{
+//  return getBoxFilterSGSStress(authToken,
+//    dataset, *time,
+//    *filterlength, *nlayers,
+//    *temporal,
+//    *count, datain, dataout);
+//}
+//
+//int getBoxFilterSGSStress(char *authToken,
+//      char *dataset, float time,
+//      float filterLength, int nlayers,
+//      enum TemporalInterpolation temporal,
+//      int count, float datain[][3], float dataout[][6])
+//{
+//  int rc;
+//
+//  struct _turb1__GetBoxFilterSGSStress input;
+//  struct _turb1__GetBoxFilterSGSStressResponse output;
+//
+//  input.authToken = authToken;
+//  input.dataset = dataset;
+//  input.time = time;
+//  input.filterlength = filterLength;
+//  input.nlayers = nlayers;
+//  input.temporalInterpolation = TemporalIntToEnum(temporal);
+//
+//  struct turb1__ArrayOfPoint3 pointArray;
+//  pointArray.__sizePoint3 = count;
+//  pointArray.Point3 = (void *)datain;
+//  input.points = &pointArray;
+//
+//  rc = soap_call___turb2__GetBoxFilterSGSStress(&__jhuturbsoap, NULL, NULL, &input, &output);
+//  if (rc == SOAP_OK) {
+//    memcpy(dataout, output.GetBoxFilterSGSStressResult->SGSStress,
+//      output.GetBoxFilterSGSStressResult->__sizeSGSStress * sizeof(float) * 6);
+//    bzero(__turblib_err, TURB_ERROR_LENGTH);
+//  } else {
+//    soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
+//    turblibHandleError();
+//  }
+//  
+//  soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
+//  soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
+//
+//  __turblib_errno = rc;
+//  return rc;
+//}
+//
+//int getboxfiltervelocitygradient_(char *authToken,
+//      char *dataset, float *time,
+//      float *filterlength,
+//      int *nlayers,
+//      int *temporal,
+//      int *count, float datain[][3], float dataout[][9],
+//      int len_a, int len_d)
+//{
+//  return getBoxFilterVelocityGradient(authToken,
+//    dataset, *time,
+//    *filterlength, *nlayers,
+//    *temporal,
+//    *count, datain, dataout);
+//}
+//
+//int getBoxFilterVelocityGradient(char *authToken,
+//      char *dataset, float time,
+//      float filterLength, int nlayers,
+//      enum TemporalInterpolation temporal,
+//      int count, float datain[][3], float dataout[][9])
+//{
+//  int rc;
+//
+//  struct _turb1__GetBoxFilterVelocityGradient input;
+//  struct _turb1__GetBoxFilterVelocityGradientResponse output;
+//
+//  input.authToken = authToken;
+//  input.dataset = dataset;
+//  input.time = time;
+//  input.filterlength = filterLength;
+//  input.nlayers = nlayers;
+//  input.temporalInterpolation = TemporalIntToEnum(temporal);
+//
+//  struct turb1__ArrayOfPoint3 pointArray;
+//  pointArray.__sizePoint3 = count;
+//  pointArray.Point3 = (void *)datain;
+//  input.points = &pointArray;
+//
+//  rc = soap_call___turb2__GetBoxFilterVelocityGradient(&__jhuturbsoap, NULL, NULL, &input, &output);
+//  if (rc == SOAP_OK) {
+//    memcpy(dataout, output.GetBoxFilterVelocityGradientResult->VelocityGradient,
+//      output.GetBoxFilterVelocityGradientResult->__sizeVelocityGradient * sizeof(float) * 9);
+//    bzero(__turblib_err, TURB_ERROR_LENGTH);
+//  } else {
+//    soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
+//    turblibHandleError();
+//  }
+//  
+//  soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
+//  soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
+//
+//  __turblib_errno = rc;
+//  return rc;
+//}
 
 int getForce(char *authToken,
       char *dataset, float time,
@@ -778,7 +778,63 @@ int getforce_(char *authToken,
     *count, datain, dataout);
 }
 
-int getPosition_new(char *authToken,
+//int getPosition_new(char *authToken,
+//  char *dataset, float startTime, float endTime, 
+//  int nt,
+//  enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+//  int count, float datain[][3], float dataout[][3])
+//{
+//  int rc;
+//
+//  struct _turb1__GetPosition_USCOREnew input;
+//  struct _turb1__GetPosition_USCOREnewResponse output;
+//
+//  input.authToken = authToken;
+//  input.dataset = dataset;
+//  input.StartTime = startTime;
+//  input.EndTime = endTime;
+//  input.nt = nt;
+//  input.spatialInterpolation = SpatialIntToEnum(spatial);
+//  input.temporalInterpolation = TemporalIntToEnum(temporal);
+//
+//  struct turb1__ArrayOfPoint3 pointArray;
+//  pointArray.__sizePoint3 = count;
+//  pointArray.Point3 = (void *)datain;
+//  input.points = &pointArray;
+//
+//  rc = soap_call___turb2__GetPosition_USCOREnew(&__jhuturbsoap, NULL, NULL, &input, &output);
+//  if (rc == SOAP_OK) {
+//    memcpy(dataout, output.GetPosition_USCOREnewResult->Point3,
+//      output.GetPosition_USCOREnewResult->__sizePoint3 * sizeof(float) * 3);
+//    bzero(__turblib_err, TURB_ERROR_LENGTH);
+//  } else {
+//    soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
+//    turblibHandleError();
+//  }
+//  
+//  soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
+//  soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
+//
+//  __turblib_errno = rc;
+//
+//  return rc;
+//}
+//
+//int getpositionnew_(char *authToken,
+//      char *dataset, float *startTime, float *endTime,
+//	  int *nt,
+//      int *spatial, int *temporal,
+//      int *count, float datain[][3], float dataout[][3],
+//      int len_a, int len_d)
+//{
+//  return getPosition_new (authToken,
+//    dataset, *startTime, *endTime,
+//	*nt,
+//    *spatial, *temporal,
+//    *count, datain, dataout);
+//}
+
+int getPosition(char *authToken,
   char *dataset, float startTime, float endTime, 
   int nt,
   enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
@@ -786,8 +842,8 @@ int getPosition_new(char *authToken,
 {
   int rc;
 
-  struct _turb1__GetPosition_USCOREnew input;
-  struct _turb1__GetPosition_USCOREnewResponse output;
+  struct _turb1__GetPosition input;
+  struct _turb1__GetPositionResponse output;
 
   input.authToken = authToken;
   input.dataset = dataset;
@@ -802,10 +858,10 @@ int getPosition_new(char *authToken,
   pointArray.Point3 = (void *)datain;
   input.points = &pointArray;
 
-  rc = soap_call___turb2__GetPosition_USCOREnew(&__jhuturbsoap, NULL, NULL, &input, &output);
+  rc = soap_call___turb2__GetPosition(&__jhuturbsoap, NULL, NULL, &input, &output);
   if (rc == SOAP_OK) {
-    memcpy(dataout, output.GetPosition_USCOREnewResult->Point3,
-      output.GetPosition_USCOREnewResult->__sizePoint3 * sizeof(float) * 3);
+    memcpy(dataout, output.GetPositionResult->Point3,
+      output.GetPositionResult->__sizePoint3 * sizeof(float) * 3);
     bzero(__turblib_err, TURB_ERROR_LENGTH);
   } else {
     soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
@@ -820,15 +876,374 @@ int getPosition_new(char *authToken,
   return rc;
 }
 
-/*int getposition_new_(char *authToken,
-      char *dataset, float *startTime,float *endTime, int *nt,
+int getposition_(char *authToken,
+      char *dataset, float *startTime, float *endTime,
+	  int *nt,
       int *spatial, int *temporal,
       int *count, float datain[][3], float dataout[][3],
       int len_a, int len_d)
 {
-  return getposition_new (authToken,
-    dataset, *startTime,*endTime,*nt,
+  return getPosition (authToken,
+    dataset, *startTime, *endTime,
+	*nt,
     *spatial, *temporal,
     *count, datain, dataout);
-}*/
+}
+
+int getRawVelocity (char *authToken,
+      char *dataset, float time,
+	  int X, int Y, int Z, int Xwidth, int Ywidth, int Zwidth, char dataout[])
+{
+  int rc;
+
+  struct _turb1__GetRawVelocity input;
+  struct _turb1__GetRawVelocityResponse output;
+
+  input.authToken = authToken;
+  input.dataset = dataset;
+  input.time = time;
+  input.X = X;
+  input.Y = Y;
+  input.Z = Z;
+  input.Xwidth = Xwidth;
+  input.Ywidth = Ywidth;
+  input.Zwidth = Zwidth;
+
+  rc = soap_call___turb2__GetRawVelocity(&__jhuturbsoap, NULL, NULL, &input, &output);
+  if (rc == SOAP_OK) {
+    memcpy(dataout, output.GetRawVelocityResult->__ptr,
+      output.GetRawVelocityResult->__size );
+    bzero(__turblib_err, TURB_ERROR_LENGTH);
+  } else {
+    soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
+    turblibHandleError();
+  }
+  
+  soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
+  soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
+
+  __turblib_errno = rc;
+
+  return rc;
+}
+
+int getmagneticfield_ (char *authToken,
+      char *dataset, float *time,
+      int *spatial, int *temporal,
+      int *count, float datain[][3], float dataout[][3],
+      int len_a, int len_d)
+{
+  return getMagneticField (authToken,
+    dataset, *time,
+    *spatial, *temporal,
+    *count, datain, dataout);
+}
+
+int getMagneticField (char *authToken,
+      char *dataset, float time,
+      enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+      int count, float datain[][3], float dataout[][3])
+{
+  int rc;
+
+  struct _turb1__GetMagneticField input;
+  struct _turb1__GetMagneticFieldResponse output;
+
+  input.authToken = authToken;
+  input.dataset = dataset;
+  input.time = time;
+  input.spatialInterpolation = SpatialIntToEnum(spatial);
+  input.temporalInterpolation = TemporalIntToEnum(temporal);
+
+  struct turb1__ArrayOfPoint3 pointArray;
+  pointArray.__sizePoint3 = count;
+  pointArray.Point3 = (void *)datain;
+  input.points = &pointArray;
+
+  rc = soap_call___turb2__GetMagneticField(&__jhuturbsoap, NULL, NULL, &input, &output);
+  if (rc == SOAP_OK) {
+    memcpy(dataout, output.GetMagneticFieldResult->Vector3,
+      output.GetMagneticFieldResult->__sizeVector3 * sizeof(float) * 3);
+    bzero(__turblib_err, TURB_ERROR_LENGTH);
+  } else {
+    soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
+    turblibHandleError();
+  }
+  
+  soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
+  soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
+
+  __turblib_errno = rc;
+
+  return rc;
+}
+
+int getRawMagneticField (char *authToken,
+      char *dataset, float time,
+	  int X, int Y, int Z, int Xwidth, int Ywidth, int Zwidth, char dataout[])
+{
+  int rc;
+
+  struct _turb1__GetRawMagneticField input;
+  struct _turb1__GetRawMagneticFieldResponse output;
+
+  input.authToken = authToken;
+  input.dataset = dataset;
+  input.time = time;
+  input.X = X;
+  input.Y = Y;
+  input.Z = Z;
+  input.Xwidth = Xwidth;
+  input.Ywidth = Ywidth;
+  input.Zwidth = Zwidth;
+
+  rc = soap_call___turb2__GetRawMagneticField(&__jhuturbsoap, NULL, NULL, &input, &output);
+  if (rc == SOAP_OK) {
+    memcpy(dataout, output.GetRawMagneticFieldResult->__ptr,
+      output.GetRawMagneticFieldResult->__size );
+    bzero(__turblib_err, TURB_ERROR_LENGTH);
+  } else {
+    soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
+    turblibHandleError();
+  }
+  
+  soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
+  soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
+
+  __turblib_errno = rc;
+
+  return rc;
+}
+
+int getvectorpotential_ (char *authToken,
+      char *dataset, float *time,
+      int *spatial, int *temporal,
+      int *count, float datain[][3], float dataout[][3],
+      int len_a, int len_d)
+{
+  return getVectorPotential (authToken,
+    dataset, *time,
+    *spatial, *temporal,
+    *count, datain, dataout);
+}
+
+int getVectorPotential (char *authToken,
+      char *dataset, float time,
+      enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+      int count, float datain[][3], float dataout[][3])
+{
+  int rc;
+
+  struct _turb1__GetVectorPotential input;
+  struct _turb1__GetVectorPotentialResponse output;
+
+  input.authToken = authToken;
+  input.dataset = dataset;
+  input.time = time;
+  input.spatialInterpolation = SpatialIntToEnum(spatial);
+  input.temporalInterpolation = TemporalIntToEnum(temporal);
+
+  struct turb1__ArrayOfPoint3 pointArray;
+  pointArray.__sizePoint3 = count;
+  pointArray.Point3 = (void *)datain;
+  input.points = &pointArray;
+
+  rc = soap_call___turb2__GetVectorPotential(&__jhuturbsoap, NULL, NULL, &input, &output);
+  if (rc == SOAP_OK) {
+    memcpy(dataout, output.GetVectorPotentialResult->Vector3,
+      output.GetVectorPotentialResult->__sizeVector3 * sizeof(float) * 3);
+    bzero(__turblib_err, TURB_ERROR_LENGTH);
+  } else {
+    soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
+    turblibHandleError();
+  }
+  
+  soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
+  soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
+
+  __turblib_errno = rc;
+
+  return rc;
+}
+
+int getRawVectorPotential (char *authToken,
+      char *dataset, float time,
+	  int X, int Y, int Z, int Xwidth, int Ywidth, int Zwidth, char dataout[])
+{
+  int rc;
+
+  struct _turb1__GetRawVectorPotential input;
+  struct _turb1__GetRawVectorPotentialResponse output;
+
+  input.authToken = authToken;
+  input.dataset = dataset;
+  input.time = time;
+  input.X = X;
+  input.Y = Y;
+  input.Z = Z;
+  input.Xwidth = Xwidth;
+  input.Ywidth = Ywidth;
+  input.Zwidth = Zwidth;
+
+  rc = soap_call___turb2__GetRawVectorPotential(&__jhuturbsoap, NULL, NULL, &input, &output);
+  if (rc == SOAP_OK) {
+    memcpy(dataout, output.GetRawVectorPotentialResult->__ptr,
+      output.GetRawVectorPotentialResult->__size );
+    bzero(__turblib_err, TURB_ERROR_LENGTH);
+  } else {
+    soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
+    turblibHandleError();
+  }
+  
+  soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
+  soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
+
+  __turblib_errno = rc;
+
+  return rc;
+}
+
+int getpressure_ (char *authToken,
+      char *dataset, float *time,
+      int *spatial, int *temporal,
+      int *count, float datain[][3], float dataout[],
+      int len_a, int len_d)
+{
+  return getPressure (authToken,
+    dataset, *time,
+    *spatial, *temporal,
+    *count, datain, dataout);
+}
+
+int getPressure (char *authToken,
+      char *dataset, float time,
+      enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+      int count, float datain[][3], float dataout[])
+{
+  int rc;
+
+  struct _turb1__GetPressure input;
+  struct _turb1__GetPressureResponse output;
+
+  input.authToken = authToken;
+  input.dataset = dataset;
+  input.time = time;
+  input.spatialInterpolation = SpatialIntToEnum(spatial);
+  input.temporalInterpolation = TemporalIntToEnum(temporal);
+
+  struct turb1__ArrayOfPoint3 pointArray;
+  pointArray.__sizePoint3 = count;
+  pointArray.Point3 = (void *)datain;
+  input.points = &pointArray;
+
+  rc = soap_call___turb2__GetPressure(&__jhuturbsoap, NULL, NULL, &input, &output);
+  if (rc == SOAP_OK) {
+    memcpy(dataout, output.GetPressureResult->Pressure,
+      output.GetPressureResult->__sizePressure * sizeof(float));
+    bzero(__turblib_err, TURB_ERROR_LENGTH);
+  } else {
+    soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
+    turblibHandleError();
+  }
+  
+  soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
+  soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
+
+  __turblib_errno = rc;
+
+  return rc;
+}
+
+int getRawPressure (char *authToken,
+      char *dataset, float time,
+	  int X, int Y, int Z, int Xwidth, int Ywidth, int Zwidth, char dataout[])
+{
+  int rc;
+
+  struct _turb1__GetRawPressure input;
+  struct _turb1__GetRawPressureResponse output;
+
+  input.authToken = authToken;
+  input.dataset = dataset;
+  input.time = time;
+  input.X = X;
+  input.Y = Y;
+  input.Z = Z;
+  input.Xwidth = Xwidth;
+  input.Ywidth = Ywidth;
+  input.Zwidth = Zwidth;
+
+  rc = soap_call___turb2__GetRawPressure(&__jhuturbsoap, NULL, NULL, &input, &output);
+  if (rc == SOAP_OK) {
+    memcpy(dataout, output.GetRawPressureResult->__ptr,
+      output.GetRawPressureResult->__size );
+    bzero(__turblib_err, TURB_ERROR_LENGTH);
+  } else {
+    soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
+    turblibHandleError();
+  }
+  
+  soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
+  soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
+
+  __turblib_errno = rc;
+
+  return rc;
+}
+
+//int getPosition_new2(char *authToken,
+//  char *dataset, float startTime, float endTime, 
+//  int nt,
+//  enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+//  int count, float datain[][3], float dataout[][3])
+//{
+//  int rc;
+//
+//  struct _turb1__GetPosition_USCOREnew2 input;
+//  struct _turb1__GetPosition_USCOREnew2Response output;
+//
+//  input.authToken = authToken;
+//  input.dataset = dataset;
+//  input.StartTime = startTime;
+//  input.EndTime = endTime;
+//  input.nt = nt;
+//  input.spatialInterpolation = SpatialIntToEnum(spatial);
+//  input.temporalInterpolation = TemporalIntToEnum(temporal);
+//
+//  struct turb1__ArrayOfPoint3 pointArray;
+//  pointArray.__sizePoint3 = count;
+//  pointArray.Point3 = (void *)datain;
+//  input.points = &pointArray;
+//
+//  rc = soap_call___turb2__GetPosition_USCOREnew2(&__jhuturbsoap, NULL, NULL, &input, &output);
+//  if (rc == SOAP_OK) {
+//    memcpy(dataout, output.GetPosition_USCOREnew2Result->Point3,
+//      output.GetPosition_USCOREnew2Result->__sizePoint3 * sizeof(float) * 3);
+//    bzero(__turblib_err, TURB_ERROR_LENGTH);
+//  } else {
+//    soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
+//    turblibHandleError();
+//  }
+//  
+//  soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
+//  soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
+//
+//  __turblib_errno = rc;
+//
+//  return rc;
+//}
+//
+//int getpositionnew2_(char *authToken,
+//      char *dataset, float *startTime, float *endTime,
+//	  int *nt,
+//      int *spatial, int *temporal,
+//      int *count, float datain[][3], float dataout[][3],
+//      int len_a, int len_d)
+//{
+//  return getPosition_new2 (authToken,
+//    dataset, *startTime, *endTime,
+//	*nt,
+//    *spatial, *temporal,
+//    *count, datain, dataout);
+//}
 
