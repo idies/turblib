@@ -14,13 +14,12 @@ int main(int argc, char *argv[]) {
   char * dataset = "isotropic1024coarse";
   enum SpatialInterpolation spatialInterp = Lag6;
   enum TemporalInterpolation temporalInterp = NoTInt;
-  enum TemporalInterpolation GetPositionTInt = PCHIPInt;
 
-  int nt = 3;
+  float dt = 0.0004F;
 
-  float dt = 0.002F;
+  float grid_dt = 0.002F;
   int timestep = 182;
-  float time = dt * timestep;
+  float time = grid_dt * timestep;
 
   float points[N][3];    /* input of x,y,z */
   float result3[N][3];   /* results of x,y,z */
@@ -46,7 +45,7 @@ int main(int argc, char *argv[]) {
   }
 
   printf("Requesting position at %d points, starting at time %f and ending at time %f...\n", N, st, et);
-  getPosition (authtoken, dataset, st, et, nt, spatialInterp, GetPositionTInt, N, points, result3);
+  getPosition (authtoken, dataset, st, et, dt, spatialInterp, N, points, result3);
   for (p = 0; p < N; p++) {
     printf("%d: %f,%f,%f\n", p, result3[p][0],  result3[p][1],  result3[p][2]);
   }

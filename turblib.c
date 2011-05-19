@@ -836,8 +836,8 @@ int getforce_(char *authToken,
 
 int getPosition(char *authToken,
   char *dataset, float startTime, float endTime, 
-  int nt,
-  enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+  float dt,
+  enum SpatialInterpolation spatial,
   int count, float datain[][3], float dataout[][3])
 {
   int rc;
@@ -849,9 +849,8 @@ int getPosition(char *authToken,
   input.dataset = dataset;
   input.StartTime = startTime;
   input.EndTime = endTime;
-  input.nt = nt;
+  input.dt = dt;
   input.spatialInterpolation = SpatialIntToEnum(spatial);
-  input.temporalInterpolation = TemporalIntToEnum(temporal);
 
   struct turb1__ArrayOfPoint3 pointArray;
   pointArray.__sizePoint3 = count;
@@ -878,8 +877,8 @@ int getPosition(char *authToken,
 
 int getposition_(char *authToken,
       char *dataset, float *startTime, float *endTime,
-	  int *nt,
-      int *spatial, int *temporal,
+	  float *dt,
+      int *spatial,
       int *count, float datain[][3], float dataout[][3],
       int len_a, int len_d)
 {

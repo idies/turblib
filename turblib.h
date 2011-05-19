@@ -280,15 +280,15 @@ int getforce_(char *authToken,
 /*C*/ 
 int getPosition(char *authToken,
   char *dataset, float startTime, float endTime, 
-  int nt,
-  enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+  float dt,
+  enum SpatialInterpolation spatial,
   int count, float datain[][3], float dataout[][3]);
 
 /* Fortran */
 int getposition_(char *authToken,
   char *dataset, float *startTime, float *endTime,
-  int *nt,
-  int *spatial, int *temporal,
+  float *dt,
+  int *spatial,
   int *count, float datain[][3], float dataout[][3],
   int len_a, int len_d);
 
