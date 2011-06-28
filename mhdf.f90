@@ -36,6 +36,7 @@ program TurbTest
   ! Declare the return type of the mhdlib functions as integer.
   ! This is required for custom error handling (see the README).
   integer getvelocity, getmagneticfield, getvectorpotential, getpressure
+  integer getposition
 
   ! return code
   integer rc
