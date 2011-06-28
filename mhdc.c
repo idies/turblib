@@ -32,6 +32,10 @@ int main(int argc, char *argv[]) {
   float pressure[N];	 /* results for pressure */
   int p;
 
+  float dt = 0.0004F;
+  float st = 0.285656F;
+  float et = 0.295697F;
+
   /* Initialize gSOAP */
   soapinit();
 
@@ -42,6 +46,12 @@ int main(int argc, char *argv[]) {
 	  points[p][0] = (float)rand()/RAND_MAX*2*3.141592F;
 	  points[p][1] = (float)rand()/RAND_MAX*2*3.141592F;
 	  points[p][2] = (float)rand()/RAND_MAX*2*3.141592F;
+  }
+
+  printf("Requesting position at %d points, starting at time %f and ending at time %f...\n", N, st, et);
+  getPosition (authtoken, dataset, st, et, dt, spatialInterp, N, points, result3);
+  for (p = 0; p < N; p++) {
+    printf("%d: %f,%f,%f\n", p, result3[p][0],  result3[p][1],  result3[p][2]);
   }
 
   printf("Requesting raw velocity data...\n");
