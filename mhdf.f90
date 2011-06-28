@@ -25,6 +25,9 @@ program TurbTest
 
   integer, parameter :: timestep = 199
   real :: time = 0.002 * timestep
+  real :: startTime = 0.002 * timestep
+  real :: endTime = 0.002 * (timestep + 5)
+  real :: dt = 0.0004   ! timestep to use for getposition method
   real points(3, 10)    ! input
   real dataout3(3, 10)  ! x,y,z
   real dataout1(10)  ! x,y,z
@@ -53,6 +56,12 @@ program TurbTest
     points(1, i) = 0.56 * i
     points(2, i) = 0.15 * i
     points(3, i) = 0.60 * i 
+  end do
+
+  write(*,*) 'Advancing 10 particles through time'
+  rc = getposition(authkey, dataset, startTime, endTime, dt, Lag6, 10, points, dataout3)
+  do i = 1, 10, 1 
+    write(*,*) i, ': (', dataout3(1,i), ', ', dataout3(2,i), ', ', dataout3(3,i), ')'
   end do
 
   write(*,*) 'Velocity at 10 particle locations'
