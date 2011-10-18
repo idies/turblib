@@ -1,3 +1,18 @@
+//	Copyright 2011 Johns Hopkins University
+//
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
+
+
 /* $Id: turblib.c,v 1.13 2009-10-23 17:58:57 eric Exp $ */
 #include <stdio.h>
 
@@ -302,8 +317,8 @@ int getVelocityGradient(char *authToken,
 
   rc = soap_call___turb2__GetVelocityGradient (&__jhuturbsoap, NULL, NULL, &input, &output);
   if (rc == SOAP_OK) {
-    memcpy(dataout, output.GetVelocityGradientResult->VelocityGradient,
-      output.GetVelocityGradientResult->__sizeVelocityGradient * sizeof(float) * 9);
+    memcpy(dataout, output.GetVelocityGradientResult->Gradient,
+      output.GetVelocityGradientResult->__sizeGradient * sizeof(float) * 9);
     bzero(__turblib_err, TURB_ERROR_LENGTH);
   } else {
     soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
@@ -402,8 +417,8 @@ int getVelocityHessian(char *authToken,
 
   rc = soap_call___turb2__GetVelocityHessian (&__jhuturbsoap, NULL, NULL, &input, &output);
   if (rc == SOAP_OK) {
-    memcpy(dataout, output.GetVelocityHessianResult->VelocityHessian,
-      output.GetVelocityHessianResult->__sizeVelocityHessian * sizeof(float) * 18);
+    memcpy(dataout, output.GetVelocityHessianResult->Hessian,
+      output.GetVelocityHessianResult->__sizeHessian * sizeof(float) * 18);
     bzero(__turblib_err, TURB_ERROR_LENGTH);
   } else {
     soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
@@ -778,62 +793,6 @@ int getforce_(char *authToken,
     *count, datain, dataout);
 }
 
-//int getPosition_new(char *authToken,
-//  char *dataset, float startTime, float endTime, 
-//  int nt,
-//  enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
-//  int count, float datain[][3], float dataout[][3])
-//{
-//  int rc;
-//
-//  struct _turb1__GetPosition_USCOREnew input;
-//  struct _turb1__GetPosition_USCOREnewResponse output;
-//
-//  input.authToken = authToken;
-//  input.dataset = dataset;
-//  input.StartTime = startTime;
-//  input.EndTime = endTime;
-//  input.nt = nt;
-//  input.spatialInterpolation = SpatialIntToEnum(spatial);
-//  input.temporalInterpolation = TemporalIntToEnum(temporal);
-//
-//  struct turb1__ArrayOfPoint3 pointArray;
-//  pointArray.__sizePoint3 = count;
-//  pointArray.Point3 = (void *)datain;
-//  input.points = &pointArray;
-//
-//  rc = soap_call___turb2__GetPosition_USCOREnew(&__jhuturbsoap, NULL, NULL, &input, &output);
-//  if (rc == SOAP_OK) {
-//    memcpy(dataout, output.GetPosition_USCOREnewResult->Point3,
-//      output.GetPosition_USCOREnewResult->__sizePoint3 * sizeof(float) * 3);
-//    bzero(__turblib_err, TURB_ERROR_LENGTH);
-//  } else {
-//    soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
-//    turblibHandleError();
-//  }
-//  
-//  soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
-//  soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
-//
-//  __turblib_errno = rc;
-//
-//  return rc;
-//}
-//
-//int getpositionnew_(char *authToken,
-//      char *dataset, float *startTime, float *endTime,
-//	  int *nt,
-//      int *spatial, int *temporal,
-//      int *count, float datain[][3], float dataout[][3],
-//      int len_a, int len_d)
-//{
-//  return getPosition_new (authToken,
-//    dataset, *startTime, *endTime,
-//	*nt,
-//    *spatial, *temporal,
-//    *count, datain, dataout);
-//}
-
 int getPosition(char *authToken,
   char *dataset, float startTime, float endTime, 
   float dt,
@@ -884,8 +843,8 @@ int getposition_(char *authToken,
 {
   return getPosition (authToken,
     dataset, *startTime, *endTime,
-	*nt,
-    *spatial, *temporal,
+	*dt,
+    *spatial,
     *count, datain, dataout);
 }
 
