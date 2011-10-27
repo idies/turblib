@@ -17,7 +17,7 @@ program TurbTest
 
   implicit none
   
-  integer, parameter :: rp=4 ! Number of bytes for reals (single precision)
+  integer, parameter :: RP=4 ! Number of bytes for reals (single precision)
 
   ! ---- Temporal Interpolation Options ----
   integer, parameter :: NoTInt = 0   ! No temporal interpolation
@@ -50,19 +50,19 @@ program TurbTest
   character(*), parameter :: authkey = 'edu.jhu.pha.turbulence.testing-201104' // CHAR(0)
 
   integer, parameter :: timestep = 182
-  real(rp), parameter :: dt = 0.002_rp
-  real(rp), parameter :: time = timestep * dt
-  real(rp), parameter :: startTime = 0.285656_rp;
-  real(rp), parameter :: endTime = 0.295697_rp;
-  real(rp), parameter :: lag_dt = 0.0004_rp     ! fraction of database timestep to use for 
+  real(RP), parameter :: dt = 0.002_RP
+  real(RP), parameter :: time = timestep * dt
+  real(RP), parameter :: startTime = 0.285656_RP;
+  real(RP), parameter :: endTime = 0.295697_RP;
+  real(RP), parameter :: lag_dt = 0.0004_RP     ! fraction of database timestep to use for 
                                                 ! getposition method (Lagrangian integration time step)
-  real(rp) :: points(3, 10)    ! input
-  real(rp) :: dataout1(10)     ! p
-  real(rp) :: dataout3(3, 10)  ! x,y,z
-  real(rp) :: dataout4(4, 10)  ! x,y,z,p
-  real(rp) :: dataout6(6, 10)  ! results from Pressure Hessian
-  real(rp) :: dataout9(9, 10)  ! results from Velocity Gradient
-  real(rp) :: dataout18(18, 10) ! results from Velocity Hessian
+  real(RP) :: points(3, 10)    ! input
+  real(RP) :: dataout1(10)     ! p
+  real(RP) :: dataout3(3, 10)  ! x,y,z
+  real(RP) :: dataout4(4, 10)  ! x,y,z,p
+  real(RP) :: dataout6(6, 10)  ! results from Pressure Hessian
+  real(RP) :: dataout9(9, 10)  ! results from Velocity Gradient
+  real(RP) :: dataout18(18, 10) ! results from Velocity Hessian
 
 
   ! Declare the return type of the turblib functions as integer.
@@ -93,7 +93,7 @@ program TurbTest
   ! Enable exit on error.  See README for details.
   CALL turblibSetExitOnError(1)
 
-  do i = 1, 10, 1
+  do i = 1, 10
     points(1, i) = 0.20 * i
     points(2, i) = 0.50 * i
     points(3, i) = 0.15 * i 
@@ -109,28 +109,28 @@ program TurbTest
   write(*,*)
   write(*,'(a)') 'Requesting velocity at 10 points...'
   rc = getvelocity(authkey, dataset,  time, Lag6, NoTInt, 10, points, dataout3)
-  do i = 1, 10, 1 
+  do i = 1, 10
     write(*,format3) i, ': ', dataout3(1,i), ', ', dataout3(2,i), ', ', dataout3(3,i)
   end do
 
   write(*,*)
   write(*,'(a)') 'Requesting forcing at 10 points...'
   rc = getforce(authkey, dataset,  time, Lag6, NoTInt, 10, points, dataout3)
-  do i = 1, 10, 1 
+  do i = 1, 10 
     write(*,format3) i, ': ', dataout3(1,i), ', ', dataout3(2,i), ', ', dataout3(3,i)
   end do
 
   write(*,*)
   write(*,'(a)') 'Requesting velocity and pressure at 10 points...'
   rc = getvelocityandpressure(authkey, dataset,  time, Lag6, NoTInt, 10, points, dataout4)
-  do i = 1, 10, 1 
+  do i = 1, 10 
     write(*,format4) i, ': ', dataout4(1,i), ', ', dataout4(2,i), ', ', dataout4(3,i), ', ', dataout4(4,i)
   end do
 
   write(*,*)
   write(*,'(a)') 'Requesting velocity gradient at 10 points...'
   rc = getvelocitygradient(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout9)
-  do i = 1, 10, 1 
+  do i = 1, 10 
     write(*,format9) i, ': duxdx=', dataout9(1,i), ', duxdy=', dataout9(2,i), &
        ', duxdz=', dataout9(3,i), ', duydx=', dataout9(4,i),  &
        ', duydy=', dataout9(5,i), ', duydz=', dataout9(6,i),  &
@@ -141,14 +141,14 @@ program TurbTest
   write(*,*)
   write(*,'(a)') 'Requesting velocity laplacian at 10 points...'
   rc = getvelocitylaplacian(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout3)
-  do i = 1, 10, 1 
+  do i = 1, 10 
     write(*,format3) i, ': grad2ux=', dataout3(1,i), ', grad2uy=', dataout3(2,i), ', grad2uz=', dataout3(3,i)
   end do
 
   write(*,*)
   write(*,'(a)') 'Requesting velocity hessian at 10 points...'
   rc = getvelocityhessian(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout18)
-  do i = 1, 10, 1 
+  do i = 1, 10 
     write(*,format18) i, ': d2uxdxdx=', dataout18(1,i), &
        ', d2uxdxdy=', dataout18(2,i), &
        ', d2uxdxdz=', dataout18(3,i), &
@@ -172,14 +172,14 @@ program TurbTest
   write(*,*)
   write(*,'(a)') 'Requesting pressure gradient at 10 points...'
   rc = getpressuregradient(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout3)
-  do i = 1, 10, 1 
+  do i = 1, 10 
     write(*,format3) i, ': dpdx=', dataout3(1,i), ', dpdy=', dataout3(2,i), ', dpdz=', dataout3(3,i)
   end do
 
   write(*,*)
   write(*,'(a)') 'Requesting pressure hessian at 10 points...'
   rc = getpressurehessian(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout6)
-  do i = 1, 10, 1 
+  do i = 1, 10 
     write(*,format6) i, ': d2pdxdx=', dataout6(1,i), ', d2pdxdy=', dataout6(2,i), &
        ', d2pdxdz=', dataout6(3,i), ', d2pdydy=', dataout6(4,i),  &
        ', d2pdydz=', dataout6(5,i), ', d2pdzdz', dataout6(6,i)
