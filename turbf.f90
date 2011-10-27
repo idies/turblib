@@ -51,7 +51,7 @@ program TurbTest
 
   integer, parameter :: timestep = 182
   real(rp), parameter :: dt = 0.002_rp
-  real(rp), parameter :: time = 0.002_rp * timestep 
+  real(rp), parameter :: time = timestep * dt
   real(rp), parameter :: startTime = 0.285656_rp;
   real(rp), parameter :: endTime = 0.295697_rp;
   real(rp), parameter :: lag_dt = 0.0004_rp     ! fraction of database timestep to use for 
