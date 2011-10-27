@@ -49,11 +49,9 @@ program TurbTest
   !
   character(*), parameter :: authkey = 'edu.jhu.pha.turbulence.testing-201104' // CHAR(0)
 
-  integer, parameter :: timestep = 182
-  real(RP), parameter :: dt = 0.002_RP
-  real(RP), parameter :: time = timestep * dt
-  real(RP), parameter :: startTime = 0.285656_RP;
-  real(RP), parameter :: endTime = 0.295697_RP;
+  real(RP), parameter :: time = 0.364_RP;
+  real(RP), parameter :: startTime = 0.364_RP;
+  real(RP), parameter :: endTime = 0.376_RP;
   real(RP), parameter :: lag_dt = 0.0004_RP     ! fraction of database timestep to use for 
                                                 ! getposition method (Lagrangian integration time step)
   real(RP) :: points(3, 10)    ! input
@@ -99,12 +97,12 @@ program TurbTest
     points(3, i) = 0.15 * i 
   end do
 
-  write(*,'(2(a,f8.6),a)') 'Requesting position at 10 points, starting at time ', &
-       startTime, ' and ending at time ', endTime, '...'
-  rc = getposition(authkey, dataset, startTime, endTime, lag_dt, Lag6, 10, points, dataout3)
-  do i = 1, 10, 1 
-    write(*,format3) i, ': ', dataout3(1,i), ', ', dataout3(2,i), ', ', dataout3(3,i)
+  write(*,*)
+  write(*,'(a)') "Coordinates of 10 points where variables are requested:"
+  do i = 1, 10
+    write(*,format3) i, ': ', points(1,i), ', ', points(2,i), ', ', points(3,i)
   end do
+  
 
   write(*,*)
   write(*,'(a)') 'Requesting velocity at 10 points...'
@@ -183,6 +181,23 @@ program TurbTest
     write(*,format6) i, ': d2pdxdx=', dataout6(1,i), ', d2pdxdy=', dataout6(2,i), &
        ', d2pdxdz=', dataout6(3,i), ', d2pdydy=', dataout6(4,i),  &
        ', d2pdydz=', dataout6(5,i), ', d2pdzdz', dataout6(6,i)
+  end do
+
+  write(*,*)
+  write(*,'(2(a,f8.6),a)') 'Requesting position at 10 points, starting at time ', &
+       startTime, ' and ending at time ', endTime, '...'
+  rc = getposition(authkey, dataset, startTime, endTime, lag_dt, Lag6, 10, points, dataout3)
+
+  write(*,*)
+  write(*,'(a)') 'Coordinates of 10 points at startTime:'
+  do i = 1, 10
+    write(*,format3) i, ': ', points(1,i), ', ', points(2,i), ', ', points(3,i)
+  end do
+
+  write(*,*)
+  write(*,'(a)') 'Coordinates of 10 points at endTime:'
+  do i = 1, 10
+    write(*,format3) i, ': ', dataout3(1,i), ', ', dataout3(2,i), ', ', dataout3(3,i)
   end do
 
   !
