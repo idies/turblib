@@ -317,8 +317,8 @@ int getVelocityGradient(char *authToken,
 
   rc = soap_call___turb2__GetVelocityGradient (&__jhuturbsoap, NULL, NULL, &input, &output);
   if (rc == SOAP_OK) {
-    memcpy(dataout, output.GetVelocityGradientResult->Gradient,
-      output.GetVelocityGradientResult->__sizeGradient * sizeof(float) * 9);
+    memcpy(dataout, output.GetVelocityGradientResult->VelocityGradient,
+      output.GetVelocityGradientResult->__sizeVelocityGradient * sizeof(float) * 9);
     bzero(__turblib_err, TURB_ERROR_LENGTH);
   } else {
     soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
@@ -417,8 +417,8 @@ int getVelocityHessian(char *authToken,
 
   rc = soap_call___turb2__GetVelocityHessian (&__jhuturbsoap, NULL, NULL, &input, &output);
   if (rc == SOAP_OK) {
-    memcpy(dataout, output.GetVelocityHessianResult->Hessian,
-      output.GetVelocityHessianResult->__sizeHessian * sizeof(float) * 18);
+    memcpy(dataout, output.GetVelocityHessianResult->VelocityHessian,
+      output.GetVelocityHessianResult->__sizeVelocityHessian * sizeof(float) * 18);
     bzero(__turblib_err, TURB_ERROR_LENGTH);
   } else {
     soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
@@ -848,6 +848,7 @@ int getposition_(char *authToken,
     *count, datain, dataout);
 }
 
+
 int getRawVelocity (char *authToken,
       char *dataset, float time,
 	  int X, int Y, int Z, int Xwidth, int Ywidth, int Zwidth, char dataout[])
@@ -877,8 +878,8 @@ int getRawVelocity (char *authToken,
     turblibHandleError();
   }
   
-  soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
-  soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
+  soap_end(&__jhuturbsoap);  // remove deserialized data and clean up
+  soap_done(&__jhuturbsoap); //  detach the gSOAP environment
 
   __turblib_errno = rc;
 
@@ -928,8 +929,8 @@ int getMagneticField (char *authToken,
     turblibHandleError();
   }
   
-  soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
-  soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
+  soap_end(&__jhuturbsoap);  //remove deserialized data and clean up
+  soap_done(&__jhuturbsoap); //detach the gSOAP environment
 
   __turblib_errno = rc;
 
@@ -965,8 +966,8 @@ int getRawMagneticField (char *authToken,
     turblibHandleError();
   }
   
-  soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
-  soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
+  soap_end(&__jhuturbsoap);  // remove deserialized data and clean up
+  soap_done(&__jhuturbsoap); // detach the gSOAP environment
 
   __turblib_errno = rc;
 
@@ -1016,8 +1017,8 @@ int getVectorPotential (char *authToken,
     turblibHandleError();
   }
   
-  soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
-  soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
+  soap_end(&__jhuturbsoap);  // remove deserialized data and clean up
+  soap_done(&__jhuturbsoap); //  detach the gSOAP environment
 
   __turblib_errno = rc;
 
@@ -1053,13 +1054,14 @@ int getRawVectorPotential (char *authToken,
     turblibHandleError();
   }
   
-  soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
-  soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
+  soap_end(&__jhuturbsoap);  // remove deserialized data and clean up
+  soap_done(&__jhuturbsoap); // detach the gSOAP environment
 
   __turblib_errno = rc;
 
   return rc;
 }
+
 
 int getpressure_ (char *authToken,
       char *dataset, float *time,
@@ -1104,13 +1106,14 @@ int getPressure (char *authToken,
     turblibHandleError();
   }
   
-  soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
-  soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
+  soap_end(&__jhuturbsoap);  // remove deserialized data and clean up
+  soap_done(&__jhuturbsoap); // detach the gSOAP environment
 
   __turblib_errno = rc;
 
   return rc;
 }
+
 
 int getRawPressure (char *authToken,
       char *dataset, float time,
@@ -1141,67 +1144,14 @@ int getRawPressure (char *authToken,
     turblibHandleError();
   }
   
-  soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
-  soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
+  soap_end(&__jhuturbsoap);  // remove deserialized data and clean up
+  soap_done(&__jhuturbsoap); // detach the gSOAP environment
 
   __turblib_errno = rc;
 
   return rc;
 }
 
-//int getPosition_new2(char *authToken,
-//  char *dataset, float startTime, float endTime, 
-//  int nt,
-//  enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
-//  int count, float datain[][3], float dataout[][3])
-//{
-//  int rc;
-//
-//  struct _turb1__GetPosition_USCOREnew2 input;
-//  struct _turb1__GetPosition_USCOREnew2Response output;
-//
-//  input.authToken = authToken;
-//  input.dataset = dataset;
-//  input.StartTime = startTime;
-//  input.EndTime = endTime;
-//  input.nt = nt;
-//  input.spatialInterpolation = SpatialIntToEnum(spatial);
-//  input.temporalInterpolation = TemporalIntToEnum(temporal);
-//
-//  struct turb1__ArrayOfPoint3 pointArray;
-//  pointArray.__sizePoint3 = count;
-//  pointArray.Point3 = (void *)datain;
-//  input.points = &pointArray;
-//
-//  rc = soap_call___turb2__GetPosition_USCOREnew2(&__jhuturbsoap, NULL, NULL, &input, &output);
-//  if (rc == SOAP_OK) {
-//    memcpy(dataout, output.GetPosition_USCOREnew2Result->Point3,
-//      output.GetPosition_USCOREnew2Result->__sizePoint3 * sizeof(float) * 3);
-//    bzero(__turblib_err, TURB_ERROR_LENGTH);
-//  } else {
-//    soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
-//    turblibHandleError();
-//  }
-//  
-//  soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
-//  soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
-//
-//  __turblib_errno = rc;
-//
-//  return rc;
-//}
-//
-//int getpositionnew2_(char *authToken,
-//      char *dataset, float *startTime, float *endTime,
-//	  int *nt,
-//      int *spatial, int *temporal,
-//      int *count, float datain[][3], float dataout[][3],
-//      int len_a, int len_d)
-//{
-//  return getPosition_new2 (authToken,
-//    dataset, *startTime, *endTime,
-//	*nt,
-//    *spatial, *temporal,
-//    *count, datain, dataout);
-//}
+
+
 
