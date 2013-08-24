@@ -40,11 +40,32 @@ like each user or site to obtain an authorization token from us:
 If you are just experimenting, the default token included in
 these test files should be valid.
 
+**** Working with hdf5 cutout files ****
+
+Cutouts of data from the dataset can be downloaded in hdf5 format by
+visiting "http://turbulence.pha.jhu.edu/cutout.aspx". 
+
+If you wish to work with hdf5 files downloaded from our cutout
+utility you need an hdf5 installation. In order to use the
+functions for computing interpolation, derivatives, etc. locally 
+(rather than submitting queries to the Web server)
+you need to build the code with the option "CUTOUT_SUPPORT=1", e.g.:
+
+$ make turbc CUTOUT_SUPPORT=1
+
+The Makefile looks for an hdf5 installation in the hdf5-1.8.9 directory 
+in the user's local directory ("~/hdf5-1.8.9"). To specify a different 
+installation directory change the H5DIR variable in the Makefile.
+
+Cutout files are loaded with the turblibAddLocalSource() function, which
+takes the filename as argument. Multiple files can be loaded (make a
+call to turblibAddLocalSource() for each additional file). 
+
 **** Platform-specific notes ****
 
 ___Mac OS X:___
 This code has been tested under Mac OS X 10.4 (Tiger),
-10.5 (Leopard) and 10.6 (Snow Leopard).
+10.5 (Leopard), 10.6 (Snow Leopard) and 10.7 (Lion).
 
 You will need the Apple Developer Tools (Xcode), which can be
 found on your OS X install disk, or downloaded for free (with

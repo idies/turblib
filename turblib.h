@@ -17,6 +17,10 @@
 #ifndef TURBLIB_H_
 #define TURBLIB_H_
 
+#ifdef CUTOUT_SUPPORT
+#include "hdf5.h"
+#endif
+
 #include "soapH.h"
 
 #ifdef  __cplusplus
@@ -35,7 +39,7 @@ extern struct soap __jhuturbsoap;
 enum SpatialInterpolation
 {
   /* Spatial Interpolation Flags for GetVelocity & GetVelocityAndPressure */
-  NoSInt = 0, /* No spatial interpolatio */
+  NoSInt = 0, /* No spatial interpolation */
   Lag4 = 4,   /* 4th order Lagrangian interpolation in space */
   Lag6 = 6,   /* 4th order Lagrangian interpolation in space */
   Lag8 = 8,   /* 4th order Lagrangian interpolation in space */
@@ -46,7 +50,6 @@ enum SpatialInterpolation
   FD6NoInt = 60, /* 6th order finite differential scheme for grid values, no spatial interpolation */
   FD8NoInt = 80, /* 8th order finite differential scheme for grid values, no spatial interpolation */
   FD4Lag4 = 44,  /* 4th order finite differential scheme for grid values, 4th order Lagrangian interpolation in space */
-
 
   /* Old names, for backward compatibility */
   NoSpatialInterpolation = 0,
@@ -59,12 +62,75 @@ enum SpatialInterpolation
 enum TemporalInterpolation
 {
   NoTInt = 0,   /* No temporal interpolation */
-  PCHIPInt = 1, /* Piecewise cubic Hermit interpolation in time */
+  PCHIPInt = 1, /* Piecewise cubic Hermite interpolation in time */
 
   /* Old names, for backward compatibility */
   NoTemporalInterpolation = 0,
   PCHIPInterpolation = 1
 };
+
+#ifdef CUTOUT_SUPPORT
+typedef enum
+{
+  isotropic1024old = 1,
+  isotropic1024fine_old = 2,
+  mhd1024 = 3,
+  isotropic1024coarse = 4,
+  isotropic1024fine = 5
+} TurbDataset;
+
+typedef enum
+{
+  turb_velocity= 0,
+  turb_pressure= 1,
+  turb_magnetic = 2,
+  turb_potential = 3,
+  turb_vp = 4
+} TurbField;
+
+typedef struct
+{
+  float dx, dt;
+  int size;
+} set_info;
+
+typedef struct
+{
+  char prefix;
+  int comps;
+} turb_fn;
+
+typedef struct dataBlock dataBlock;
+
+struct dataBlock
+{
+  float *data;
+  TurbField function;
+  TurbDataset dataset;
+  int xl, yl, zl;  //Lower bounds                                                                        
+  int hx, hy, hz, comps; //Dimensions                                                                    
+  dataBlock* next;
+};
+
+typedef struct cutoutFile cutoutFile;
+struct cutoutFile
+{
+  hid_t file;
+  int start[4], size[4];
+  int contents[4];
+  dataBlock *data[4][1024];
+  TurbDataset dataset;
+  cutoutFile *next;
+};
+
+typedef struct
+{
+  float* data;
+  int x, y, z;
+  int hx, hy, hz, comps;
+  int persist;
+} dataKernel;
+#endif
 
 /* C */
 void soapinit ();
@@ -86,6 +152,27 @@ int turblibgeterrornumber_();
 void turblibprinterror_();
 void turblibsetexitonerror_(int *);
 
+#ifndef CUTOUT_SUPPORT
+
+#define getVelocity getVelocitySoap
+#define getVelocityGradient getVelocityGradientSoap
+#define getVelocityLaplacian getVelocityLaplacianSoap
+#define getMagneticField getMagneticFieldSoap
+#define getVectorPotential getVectorPotentialSoap
+#define getVelocityHessian getVelocityHessianSoap
+#define getVelocityAndPressure getVelocityAndPressureSoap
+#define getMagneticFieldLaplacian getMagneticFieldLaplacianSoap
+#define getVectorPotentialLaplacian getVectorPotentialLaplacianSoap
+#define getPressureHessian getPressureHessianSoap
+#define getMagneticFieldHessian getMagneticFieldHessianSoap
+#define getVectorPotentialHessian getVectorPotentialHessianSoap
+#define getPressureGradient getPressureGradientSoap
+#define getMagneticFieldGradient getMagneticFieldGradientSoap
+#define getVectorPotentialGradient getVectorPotentialGradientSoap
+#define getPressure getPressureSoap
+
+#endif
+
 /* C */
 int getVelocity (char *authToken,
   char *dataset, float time,
@@ -94,10 +181,45 @@ int getVelocity (char *authToken,
 
 /* Fortran */
 int getvelocity_ (char *authToken,
-  char *dataset, float *time,
-  int *spatial, int *temporal,
-  int *count, float datain[][3], float dataout[][3],
-  int len_a, int len_d);
+                  char *dataset, float *time,
+                  int *spatial, int *temporal,
+                  int *count, float datain[][3], float dataout[][3],
+                  int len_a, int len_d);
+    
+/* C */
+int getBoxFilter (char *authToken,
+                  char *dataset, char *field, float time, float filterwidth,
+                  int count, float datain[][3], float dataout[][3]);
+    
+/* Fortran */
+int getboxfilter_ (char *authToken,
+                   char *dataset, char *field, float *time, float *filterwidth,
+                   int *count, float datain[][3], float dataout[][3],
+                   int len_a, int len_d);
+    
+/* C */
+int getBoxFilterSGS (char *authToken,
+                  char *dataset, char *field, float time, float filterwidth,
+                  int count, float datain[][3], float dataout[][6]);
+    
+/* Fortran */
+int getboxfiltersgs_ (char *authToken,
+                   char *dataset, char *field, float *time, float *filterwidth,
+                   int *count, float datain[][3], float dataout[][6],
+                   int len_a, int len_d);
+
+/* C */
+int getBoxFilterGradient(char *authToken,
+			 char *dataset, char *field, float time,
+			 float filterwidth, float spacing, 
+			 int count, float datain[][3], float dataout[][9]);
+
+/* Fortran */
+int getboxfiltergradient_(char *authToken,
+			  char *dataset, char*field, float *time,
+			  float *filterwidth, float* spacing, 
+			  int *count, float datain[][3], float dataout[][9],
+			  int len_a, int len_d);
 
 /* C */
 int getVelocityAndPressure (char *authToken,
@@ -133,6 +255,32 @@ int getVelocityGradient(char *authToken,
 
 /* Fortran */
 int getvelocitygradient_(char *authToken,
+      char *dataset, float *time,
+      int *spatial, int *temporal,
+      int *count, float datain[][3], float dataout[][9],
+      int len_a, int len_d);
+
+/* C */
+int getMagneticFieldGradient(char *authToken,
+      char *dataset, float time,
+      enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+      int count, float datain[][3], float dataout[][9]);
+
+/* Fortran */
+int getmagneticfieldgradient_(char *authToken,
+      char *dataset, float *time,
+      int *spatial, int *temporal,
+      int *count, float datain[][3], float dataout[][9],
+      int len_a, int len_d);
+
+/* C */
+int getVectorPotentialGradient(char *authToken,
+      char *dataset, float time,
+      enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+      int count, float datain[][3], float dataout[][9]);
+
+/* Fortran */
+int getvectorpotentialgradient_(char *authToken,
       char *dataset, float *time,
       int *spatial, int *temporal,
       int *count, float datain[][3], float dataout[][9],
@@ -178,6 +326,58 @@ int getvelocitylaplacian_(char *authToken,
       int len_a, int len_d);
 
 /* C */
+int getMagneticFieldHessian(char *authToken,
+      char *dataset, float time,
+      enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+      int count, float datain[][3], float dataout[][18]);
+
+/* Fortran */
+int getmagneticfieldhessian_(char *authToken,
+      char *dataset, float *time,
+      int *spatial, int *temporal,
+      int *count, float datain[][3], float dataout[][18],
+      int len_a, int len_d);
+
+/* C */
+int getMagneticFieldLaplacian(char *authToken,
+      char *dataset, float time,
+      enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+      int count, float datain[][3], float dataout[][3]);
+
+/* Fortran */
+int getmagneticfieldlaplacian_(char *authToken,
+      char *dataset, float *time,
+      int *spatial, int *temporal,
+      int *count, float datain[][3], float dataout[][3],
+      int len_a, int len_d);
+
+/* C */
+int getVectorPotentialHessian(char *authToken,
+      char *dataset, float time,
+      enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+      int count, float datain[][3], float dataout[][18]);
+
+/* Fortran */
+int getvectorpotentialhessian_(char *authToken,
+      char *dataset, float *time,
+      int *spatial, int *temporal,
+      int *count, float datain[][3], float dataout[][18],
+      int len_a, int len_d);
+
+/* C */
+int getVectorPotentialLaplacian(char *authToken,
+      char *dataset, float time,
+      enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+      int count, float datain[][3], float dataout[][3]);
+
+/* Fortran */
+int getvectorpotentiallaplacian_(char *authToken,
+      char *dataset, float *time,
+      int *spatial, int *temporal,
+      int *count, float datain[][3], float dataout[][3],
+      int len_a, int len_d);
+
+/* C */
 int nullOp(char *authToken, int count, 
       float datain[][3], float dataout[][3]);
 
@@ -185,69 +385,6 @@ int nullOp(char *authToken, int count,
 int nullop_(char *authToken, int *count, 
       float datain[][3], float dataout[][3], 
       int len_a, int len_d);
-
-///* C */
-//int getBoxFilterVelocity(char *authToken,
-//      char *dataset, float time,
-//      float filterLength, int nylayers,
-//      enum TemporalInterpolation temporal,
-//      int count, float datain[][3], float dataout[][3]);
-//
-///* Fortran */
-//int getboxfiltervelocity_(char *authToken,
-//      char *dataset, float *time,
-//      float *filterlength,
-//      int *nlayers, int *temporal,
-//      int *count, float datain[][3], float dataout[][3],
-//      int len_a, int len_d);
-//
-///* C */
-//int getBoxFilterPressure(char *authToken,
-//      char *dataset, float time,
-//      float filterLength, int nlayers,
-//      enum TemporalInterpolation temporal,
-//      int count, float datain[][3], float dataout[]);
-//
-///* Fortran */
-//int getboxfilterpressure_(char *authToken,
-//      char *dataset, float *time,
-//      float *filterlength, 
-//      int *nlayers,
-//      int *temporal,
-//      int *count, float datain[][3], float dataout[],
-//      int len_a, int len_d);
-//
-///* C */
-//int getBoxFilterSGSStress(char *authToken,
-//      char *dataset, float time,
-//      float filterLength, int nlayers,
-//      enum TemporalInterpolation temporal,
-//      int count, float datain[][3], float dataout[][6]);
-//
-///* Fortran */
-//int getboxfiltersgsstress_(char *authToken,
-//      char *dataset, float *time,
-//      float *filterlength,
-//      int *nlayers,
-//      int *temporal,
-//      int *count, float datain[][3], float dataout[][6],
-//      int len_a, int len_d);
-//
-///* C */
-//int getBoxFilterVelocityGradient(char *authToken,
-//      char *dataset, float time,
-//      float filterLength, int nlayers,
-//      enum TemporalInterpolation temporal,
-//      int count, float datain[][3], float dataout[][9]);
-//
-///* Fortran */
-//int getboxfiltervelocitygradient_(char *authToken,
-//      char *dataset, float *time,
-//      float *filterlength,
-//      int *nlayers,
-//      int *temporal,
-//      int *count, float datain[][3], float dataout[][9],
-//      int len_a, int len_d);
 
 /* C */
 int getForce(char *authToken,
@@ -261,36 +398,6 @@ int getforce_(char *authToken,
   int *spatial, int *temporal,
   int *count, float datain[][3], float dataout[][3],
   int len_a, int len_d);
-
-///*C*/ 
-//int getPosition_new(char *authToken,
-//  char *dataset, float startTime, float endTime, 
-//  int nt,
-//  enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
-//  int count, float datain[][3], float dataout[][3]);
-//
-///* Fortran */
-//int getpositionnew_(char *authToken,
-//  char *dataset, float *startTime, float *endTime,
-//  int *nt,
-//  int *spatial, int *temporal,
-//  int *count, float datain[][3], float dataout[][3],
-//  int len_a, int len_d);
-
-///*C*/ 
-//int getPosition_new2(char *authToken,
-//  char *dataset, float startTime, float endTime, 
-//  int nt,
-//  enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
-//  int count, float datain[][3], float dataout[][3]);
-//
-///* Fortran */
-//int getpositionnew2_(char *authToken,
-//  char *dataset, float *startTime, float *endTime,
-//  int *nt,
-//  int *spatial, int *temporal,
-//  int *count, float datain[][3], float dataout[][3],
-//  int len_a, int len_d);
 
 /*C*/ 
 int getPosition(char *authToken,
@@ -365,6 +472,171 @@ int getpressure_ (char *authToken,
 int getRawPressure (char *authToken,
   char *dataset, float time,
   int X, int Y, int Z, int Xwidth, int Ywidth, int Zwidth, char dataout[]);
+
+
+/* Local vs Soap functions */
+
+#ifdef CUTOUT_SUPPORT
+
+int getVelocitySoap (char *authToken, 
+		     char *dataset, float time, 
+		     enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+		     int count, float datain[][3], float dataout[][3]);
+
+int getVelocityGradientLocal (TurbDataset dataset, float time, 
+			      enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+			      int count, float input[][3], float output[][9]);
+int getVelocityGradientSoap(char *authToken, char *dataset, float time, 
+			    enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+			    int count, float datain[][3], float dataout[][9]);
+
+int getVelocityLaplacianLocal (TurbDataset dataset, float time, 
+			       enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+			       int count, float input[][3], float output[][3]);
+int getVelocityLaplacianSoap (char *authToken, char *dataset, float time, 
+			      enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+			      int count, float datain[][3], float dataout[][3]);
+      
+int getMagneticFieldSoap(char *authToken, char *dataset, float time, 
+			 enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+			 int count, float datain[][3], float dataout[][3]);
+
+int getVectorPotentialSoap(char *authToken, char *dataset, float time, 
+			   enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+			   int count, float datain[][3], float dataout[][3]);
+  
+int getVelocityHessianLocal (TurbDataset dataset, float time, 
+			     enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+			     int count, float input[][3], float output[][18]);
+int getVelocityHessianSoap(char *authToken, char *dataset, float time, 
+			   enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+			   int count, float datain[][3], float dataout[][18]);
+
+int getVelocityAndPressureLocal (TurbDataset dataset, float time, 
+				 enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+				 int count, float datain[][3], float dataout[][4]);
+int getVelocityAndPressureSoap (char *authToken, char *dataset, float time, 
+				enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+				int count, float datain[][3], float dataout[][4]);
+      
+int getMagneticFieldLaplacianLocal (TurbDataset dataset, float time, 
+				    enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+				    int count, float datain[][3], float dataout[][3]);
+int getMagneticFieldLaplacianSoap (char *authToken, char *dataset, float time, 
+				   enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+				   int count, float datain[][3], float dataout[][3]);
+      
+int getVectorPotentialLaplacianLocal (TurbDataset dataset, float time, 
+				      enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+				      int count, float datain[][3], float dataout[][3]);
+int getVectorPotentialLaplacianSoap (char *authToken, char *dataset, float time, 
+				     enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+				     int count, float datain[][3], float dataout[][3]);
+
+int getPressureHessianLocal (TurbDataset dataset, float time, 
+			     enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+			     int count, float datain[][3], float dataout[][6]);
+int getPressureHessianSoap (char *authToken, char *dataset, float time, 
+			    enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+			    int count, float datain[][3], float dataout[][6]);
+  
+int getMagneticFieldHessianLocal (TurbDataset dataset, float time, 
+				  enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+				  int count, float datain[][3], float dataout[][18]);
+int getMagneticFieldHessianSoap (char *authToken, char *dataset, float time, 
+				 enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+				 int count, float datain[][3], float dataout[][18]);
+      
+int getVectorPotentialHessianLocal (TurbDataset dataset, float time, 
+				    enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+				    int count, float datain[][3], float dataout[][18]);
+int getVectorPotentialHessianSoap (char *authToken, char *dataset, float time, 
+				   enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+				   int count, float datain[][3], float dataout[][18]);
+
+int getPressureGradientLocal (TurbDataset dataset, float time, 
+			      enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+			      int count, float datain[][3], float dataout[][3]);
+int getPressureGradientSoap (char *authToken, char *dataset, float time, 
+			     enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+			     int count, float datain[][3], float dataout[][3]);
+
+int getMagneticFieldGradientLocal (TurbDataset dataset, float time, 
+				   enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+				   int count, float datain[][3], float dataout[][9]);
+int getMagneticFieldGradientSoap (char *authToken, char *dataset, float time, 
+				  enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+				  int count, float datain[][3], float dataout[][9]);
+
+int getVectorPotentialGradientLocal (TurbDataset dataset, float time, 
+				     enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+				     int count, float datain[][3], float dataout[][9]);
+int getVectorPotentialGradientSoap (char *authToken, char *dataset, float time, 
+				    enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+				    int count, float datain[][3], float dataout[][9]);
+
+int getPressureSoap (char *authToken, char *dataset, float time, 
+		     enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+		     int count, float datain[][3], float dataout[]);
+
+/* Cutout functions */
+
+/* Fortran */
+int turblibaddlocalsource_ (char *filename);
+int turblibAddLocalSource(char *filename);
+dataKernel* getDataCube(TurbDataset dataset, TurbField function, int x, int y, int z, int timestep, int size);
+int validateParams(enum SpatialInterpolation spatial, TurbDataset set, int useFD);
+TurbDataset getDataSet(char *setname);
+int isDataAvailable(TurbDataset set, TurbField function, int count, float position[][3], float time, 
+		    enum SpatialInterpolation spatial, enum TemporalInterpolation temporal);
+cutoutFile* findDataBlock(TurbDataset dataset, TurbField function, int x, int y, int z, int xw, int yw, int zw, int timestep);
+int isWithinFile(TurbDataset dataset, TurbField function, int x, int y, int z, int xw, int yw, int zw, int timestep, cutoutFile* file);
+int isDataComplete(TurbDataset dataset, TurbField function, int x, int y, int z, int xw, int yw, int zw, int timestep);
+int turblibSetPrefetching(int);
+int loadNeededData(TurbDataset set, TurbField function, int count, float position[][3], float time, 
+		   enum SpatialInterpolation spatial, enum TemporalInterpolation temporal);
+int freeLoadedMemory(void);
+void freeDataCube(dataKernel* cube);
+int loadDataCube(TurbDataset dataset, TurbField function, int x, int y, int z, int timestep, int size, float *buff);
+int loadSubBlock(TurbDataset dataset, TurbField function, int timestep, hid_t mspace, float *buff,
+                 int x, int y, int z, int wx, int wy, int wz, int dest_x, int dest_y, int dest_z);
+int loadDataToMemory(cutoutFile *src, TurbField function, int timestep, int xl, int yl, int zl, int xh, int yh, int zh);
+int getValueLocal(TurbDataset dataset, TurbField func, 
+		  enum SpatialInterpolation spatial, enum TemporalInterpolation temporal, 
+		  float time, int count, float position[][3], float *result);
+int getSingleValue(TurbDataset dataset, TurbField func, float position[3], int timestep, 
+		   enum SpatialInterpolation spatial, float *output);
+int getGradient (TurbDataset dataset, TurbField function, float time, 
+		 enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+  int count, float input[count][3], float *output);
+int getLaplacian (TurbDataset dataset, TurbField function, float time, 
+		  enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+  int count, float input[count][3], float output[count][3]);
+int getHessian (TurbDataset dataset, TurbField function, float time, 
+		enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+  int count, float input[count][3], float *output);
+  
+int lagrangianInterp(int comps, float *kernel, float position[3], int nOrder, float dx, float result[comps]);
+int lagrangianInterp2(int comps, dataKernel *kernel, float position[3], int nOrder, float dx, float result[comps]);
+int pchipInterp(int comps, float data[4][comps], float time, int timestep, float dt, float result[comps]);
+
+int computeGradient(dataKernel* kernel, int comps, float dx, int size, int nOrder, float *output);
+int computeHessian(dataKernel* kernel, int comps, float dx, int size, int nOrder, float *output);
+int computeLaplacian(dataKernel* kernel, int comps, float dx, int size, int nOrder, float *output);
+
+#define SecFiniteDiff4(dx, x1, x2, x3, x4, x5) 4.0f / 3.0f / dx / dx * (x2 + x4 - 2.0f * x3) - 1.0f / 12.0f / dx / dx * (x1 + x5 - 2.0f * x3)
+
+#define SecFiniteDiff6(dx, x1, x2, x3, x4, x5, x6, x7) 3.0f / 2.0f / dx / dx * (x3 + x5 - 2.0f * x4) - 3.0f / 20.0f / dx / dx * (x2 + x6 - 2.0f * x4) + 1.0f / 90.0f / dx / dx * (x1 + x7 - 2.0f * x4)
+
+#define SecFiniteDiff8(dx, x1, x2, x3, x4, x5, x6, x7, x8, x9) 792.0f / 591.0f / dx / dx * (x4 + x6 - 2.0f * x5) - 207.0f / 2955.0f / dx / dx * (x3 + x7 - 2.0f * x5) - 104.0f / 8865.0f / dx / dx * (x2 + x8 - 2.0f * x5) + 9.0f / 3152.0f / dx / dx * (x1 + x9 - 2.0f * x5)
+
+#define CrossFiniteDiff4(dx, x1, x2, x3, x4, x5, x6, x7, x8) 1.0f / 3.0f / dx / dx * (x5 + x7 - x6 - x8) - 1.0f / 48.0f / dx / dx * (x1 + x3 - x2 - x4)
+
+#define CrossFiniteDiff6(dx, x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12)  3.0f / 8.0f / dx / dx * (x9 + x11 - x10 - x12) - 3.0f / 80.0f / dx / dx * (x5 + x7 - x6 - x8) + 1.0f / 360.0f / dx / dx * (x1 + x3 - x2 - x4)
+
+#define CrossFiniteDiff8(dx, x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13, x14, x15, x16) 14.0f / 35.0f / dx / dx * (x13 + x15 - x14 - x16) - 1.0f / 20.0f / dx / dx * (x9 + x11 - x10 - x12) + 2.0f / 315.0f / dx / dx * (x5 + x7 - x6 - x8) - 1.0f / 2240.0f / dx / dx * (x1 + x3 - x2 - x4)
+
+#endif
 
 #ifdef  __cplusplus
 }

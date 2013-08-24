@@ -25,7 +25,7 @@
 
 int main(int argc, char *argv[]) {
 
-  char * authtoken = "edu.jhu.pha.turbulence.testing-201104";
+  char * authtoken = "edu.jhu.pha.turbulence.testing-201302";
   char * dataset = "isotropic1024coarse";
   enum SpatialInterpolation spatialInterp = Lag6;
   enum TemporalInterpolation temporalInterp = NoTInt;
@@ -44,16 +44,95 @@ int main(int argc, char *argv[]) {
   float endTime = 0.376F;
   float lag_dt = 0.0004F;
 
+  int X = 0, Y = 0, Z = 0, Xwidth = 16, Ywidth = 16, Zwidth = 16;
+  int components = 3;
+  float * rawdata = (float*) malloc(Xwidth*Ywidth*Zwidth*sizeof(float)*components);
+  int pressure_components = 1;
+  float * rawpressure = (float*) malloc(Xwidth*Ywidth*Zwidth*sizeof(float)*pressure_components);
+
+  char * field = "velocity";
+  float dx = 2.0f * 3.14159265f / 1024.0f;
+  float filterwidth = 7.0f * dx;
+  float spacing = 4.0f*dx;
+
   /* Initialize gSOAP */
   soapinit();
 
   /* Enable exit on error.  See README for details. */
   turblibSetExitOnError(1);
 
+  /* If working with cutout files, CUTOUT_SUPPORT should be defined during compilation. 
+     Make sure to run make with the "CUTOUT_SUPPORT=1" option, e.g.:
+     $ make turbc CUTOUT_SUPPORT=1
+     Change the filename to the name of the downloaded cutout file or supply it at the command line.
+     Detailed instructions and an example is provided below.
+  */
+#ifdef CUTOUT_SUPPORT
+  if (argc > 1)
+    {
+      turblibAddLocalSource(argv[1]);
+    }
+  //turblibAddLocalSource("isotropic1024coarse.h5");
+#endif
+
+  /* The client library implements all of the server-side functionality "locally" (except 
+     for particle tracking and filtering). Therefore, if an hdf5 file with cutout data is 
+     available and loaded as above all queries for data that are within the region defined
+     in the file will be evaluated locally (without being sent to the server). An example
+     is provided below. 
+
+     Please note that the use of this feature of the client library requires an hdf5 
+     installation. The standard approach of simply executing queries through the server 
+     does not require hdf5 or downloading any cutout data.
+
+     For users that make frequent calls for data in a particular region and would like to
+     download this data to their local machine the only change in their existing code
+     will be to use the turblibAddLocalSource function to load the hdf5 file that they
+     have downloaded. Each function call will determine whether the data is available
+     locally and will evaluate the query locally if it is and will make a call to the
+     Web-services on the server if it is not.
+
+     The steps below can be followed to download data cutouts in hdf5 format and use the
+     client library locally:
+     1) Download an hdf5 file containing a cubic region of the velocity data at timestep 0 
+        with the following download link:
+	http://turbulence.pha.jhu.edu/download.aspx/[authorization Token]/isotropic1024coarse/u/0,1/0,16/0,16/0,16/
+     2) Compile this sample code with the "CUTOUT_SUPPORT=1" option, e.g.:
+        $ make turbc CUTOUT_SUPPORT=1
+     3) Uncomment the line below to Load the hdf5 cutout file:
+  */
+
+  //  turblibAddLocalSource("isotropic1024coarse.h5");
+  
+  /* 4) Uncomment the code below to restrict target locations to within the data region downloaded:
+  */
+
+  //  for (p = 0; p < N; p++) {
+  //    points[p][0] = (float)rand()/RAND_MAX*2*3.141592F/64.0F;
+  //    points[p][1] = (float)rand()/RAND_MAX*2*3.141592F/64.0F;
+  //    points[p][2] = (float)rand()/RAND_MAX*2*3.141592F/64.0F;
+  //  }
+  
+  /*
+    5) Uncomment the code below to call getVelocity, which will be evaluated locally as 
+       the time chosen is 0.0, which corresponds to timestep 0 and no spatial or temporal
+       interpolation is requested:
+   */
+
+  //  printf("\nRequesting velocity at %d points...\n", N);
+  //  getVelocity (authtoken, dataset, 0.0F, NoSInt, NoTInt, N, points, result3);
+  //  for (p = 0; p < N; p++) {
+  //    printf("%d: %13.6e, %13.6e, %13.6e\n", p, result3[p][0],  result3[p][1],  result3[p][2]);
+  //  }
+
+  /* In this sample code, the default time chosen is 0.364, so all of the function calls in the 
+     remainder of the sample code will be evaluated at the server.
+  */
+
   for (p = 0; p < N; p++) { 
-	  points[p][0] = (float)rand()/RAND_MAX*2*3.141592F;
-	  points[p][1] = (float)rand()/RAND_MAX*2*3.141592F;
-	  points[p][2] = (float)rand()/RAND_MAX*2*3.141592F;
+    points[p][0] = (float)rand()/RAND_MAX*2*3.141592F;
+    points[p][1] = (float)rand()/RAND_MAX*2*3.141592F;
+    points[p][2] = (float)rand()/RAND_MAX*2*3.141592F;
   }
 
   printf("\nCoordinates of %d points where variables are requested:\n", N);
@@ -119,6 +198,18 @@ int main(int argc, char *argv[]) {
 
   }
 
+  printf("Requesting raw velocity data...\n");
+  getRawVelocity(authtoken, dataset, time, X, Y, Z, Xwidth, Ywidth, Zwidth, (char*)rawdata);
+  for (p = 0; p < Xwidth*Ywidth*Zwidth; p++) {
+    //printf("%d: Vx=%f, Vy=%f, Vz=%f\n", p, rawdata[3*p],  rawdata[3*p+1], rawdata[3*p+2]);             
+  }
+
+  printf("Requesting raw pressure data...\n");
+  getRawPressure (authtoken, dataset, time, X, Y, Z, Xwidth, Ywidth, Zwidth, (char*)rawpressure);
+  for (p = 0; p < Xwidth*Ywidth*Zwidth; p++) {
+    //printf("%d: P=%f\n", p, rawpressure[p]);                                                           
+  }
+
   printf("\nRequesting position at %d points, starting at time %f and ending at time %f...\n", N, startTime, endTime);
   getPosition (authtoken, dataset, startTime, endTime, lag_dt, spatialInterp, N, points, result3);
 
@@ -129,6 +220,28 @@ int main(int argc, char *argv[]) {
   printf("\nCoordinates of 10 points at endTime:\n");  
   for (p = 0; p < N; p++) {
     printf("%d: %13.6e, %13.6e, %13.6e\n", p, result3[p][0],  result3[p][1],  result3[p][2]);
+  }
+
+  printf("\nRequesting box filter of velocity at %d points...\n", N);
+  getBoxFilter (authtoken, dataset, field, time, filterwidth, N, points, result3);
+  for (p = 0; p < N; p++) {
+    printf("%d: %13.6e, %13.6e, %13.6e\n", p, result3[p][0],  result3[p][1],  result3[p][2]);
+  }
+
+  printf("\nRequesting sub-grid stress tensor at %d points...\n", N);
+  getBoxFilterSGS (authtoken, dataset, field, time, filterwidth, N, points, result6);
+  for (p = 0; p < N; p++) {
+    printf("%d: %13.6e, %13.6e, %13.6e, %13.6e, %13.6e, %13.6e\n", p,
+           result6[p][0],  result6[p][1],  result6[p][2],
+           result6[p][3],  result6[p][4],  result6[p][5]);
+  }
+
+  printf("\nRequesting box filter of velocity gradient at %d points...\n", N);
+  getBoxFilterGradient (authtoken, dataset, field, time, filterwidth, spacing, N, points, result9);
+  for (p = 0; p < N; p++) {
+    printf("%d: duxdx=%13.6e, duxdy=%13.6e, duxdz=%13.6e, ", p, result9[p][0], result9[p][1], result9[p][2]);
+    printf("duydx=%13.6e, duydy=%13.6e, duydz=%13.6e, ", result9[p][3], result9[p][4], result9[p][5]);
+    printf("duzdx=%13.6e, duzdy=%13.6e, duzdz=%13.6e\n", result9[p][6], result9[p][7], result9[p][8]);
   }
   
   /* Free gSOAP resources */

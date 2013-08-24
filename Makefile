@@ -14,33 +14,59 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
+define HDF5_ERROR
+
+Error in make!
+An hdf5 installation is required for working with cutoutfiles and h5cc was not found! 
+Please, edit the Makefile with the installation directory of hdf5
+endef
+
 OSARCH := $(shell uname -sp)
 
 ifeq ($(OSARCH),Darwin i386)
 	# Compile both 32- and 64-bit code under MacOS X for Intel
-	ARCH_FLAGS = -arch i386 -arch x86_64
+	# ARCH_FLAGS = -arch i386 -arch x86_64
 else	
 	ARCH_FLAGS =
 endif
 
-CC     = gcc -g $(ARCH_FLAGS)
-FC     = gfortran $(ARCH_FLAGS)
 RM     = rm -f
-CFLAGS = -Wall -g
+CFLAGS = -Wall
 LDLIBS = 
 
+ifeq ($(CUTOUT_SUPPORT), 1)
+#If you built HDF5 from source yourself, fill in the path to your HDF5 installation
+   H5DIR  = /usr/local/hdf5
+   H5INC  = $(H5DIR)/include
+   H5CC   = $(H5DIR)/bin/h5cc
+   H5FC   = $(H5DIR)/bin/h5fc
+   CC     = $(H5CC) -g $(ARCH_FLAGS)
+   FC     = $(H5FC) $(ARCH_FLAGS)
+   CFLAGS += -D CUTOUT_SUPPORT -I$(H5INC)
+   ifeq ($(wildcard $(H5CC)),)
+      $(error $(HDF5_ERROR))
+   endif
+else
+   CC     = gcc -g $(ARCH_FLAGS)
+   FC     = gfortran $(ARCH_FLAGS)
+endif
+
 OBJ =	soapC.o \
-		soapClient.o \
-		stdsoap2.o \
+	soapClient.o \
+	stdsoap2.o \
         turblib.o
 
-all: mhdc turbc mhdf turbf
+all: turbc turbf mhdc mhdf
 
 mhdc : $(OBJ) mhdc.o
 	 $(CC) -o $@ $(OBJ) mhdc.o $(LDLIBS)
 
+mhdc.o: compiler_flags
+
 turbc : $(OBJ) turbc.o
 	 $(CC) -o $@ $(OBJ) turbc.o $(LDLIBS)
+
+turbc.o: compiler_flags
 
 turbf : $(OBJ) turbf.o
 	 $(FC) -o $@ $(OBJ) turbf.o $(LDLIBS)
@@ -86,7 +112,7 @@ prodtestwsdl:
 	soapcpp2 -CLcx -2 TurbulenceService.h
 
 clean:
-	$(RM) *.o *.exe turbf turbc mhdc mhdf
+	$(RM) *.o *.exe turbf turbc mhdc mhdf compiler_flags
 
 spotless: clean
 	$(RM) soapClient.c TurbulenceServiceSoap.nsmap soapH.h TurbulenceServiceSoap12.nsmap soapStub.h soapC.c TurbulenceService.h
@@ -95,4 +121,10 @@ spotless: clean
 
 .c.o:
 	$(CC) $(CFLAGS) -c $< 
+
+.PHONY: force
+compiler_flags: force
+	echo '$(CFLAGS)' | cmp -s - $@ || echo '$(CFLAGS)' > $@
+
+$(OBJ): compiler_flags
 

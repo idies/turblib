@@ -47,7 +47,11 @@ program TurbTest
   ! If you need one, please visit http://turbulence.pha.jhu.edu/
   ! (We just want to know a bit about our users!)
   !
-  character(*), parameter :: authkey = 'edu.jhu.pha.turbulence.testing-201104' // CHAR(0)
+  character(*), parameter :: authkey = 'edu.jhu.pha.turbulence.testing-201302' // CHAR(0)
+
+  character(*), parameter :: field = 'velocity' // CHAR(0) ! field used for box filter
+  real(RP), parameter :: filterwidth = 0.055223308_RP ! 9 * dx, where dx = 2*PI/1024
+  real(RP), parameter :: spacing = 0.030680_RP ! 5 * dx    
 
   real(RP), parameter :: time = 0.364_RP;
   real(RP), parameter :: startTime = 0.364_RP;
@@ -66,9 +70,14 @@ program TurbTest
   ! Declare the return type of the turblib functions as integer.
   ! This is required for custom error handling (see the README).
   integer :: getvelocity, getforce, getvelocityandpressure, getvelocitygradient
+  integer :: getboxfilter, getboxfiltersgs, getboxfiltergradient
   integer :: getvelocitylaplacian, getvelocityhessian
   integer :: getpressuregradient, getpressurehessian
   integer :: getposition
+  ! If working with hdf5 cutout files, uncomment the lines below
+  ! to load the file and use the functions locally:
+  ! character(*), parameter :: filename = 'isotropic1024coarse.h5' // CHAR(0)
+  ! integer :: turblibaddlocalsource
 
   ! return code
   integer :: rc
@@ -90,6 +99,64 @@ program TurbTest
 
   ! Enable exit on error.  See README for details.
   CALL turblibSetExitOnError(1)
+
+  ! If working with cutout files, CUTOUT_SUPPORT should be defined during compilation.
+  ! Make sure to run make with the "CUTOUT_SUPPORT=1" option, e.g.:
+  ! $ make turbf CUTOUT_SUPPORT=1
+  ! Change the filename to the name of the downloaded cutout file
+  ! and uncomment the line below:
+  ! rc = turblibaddlocalsource(filename);
+
+
+  !   The client library implements all of the server-side functionality "locally" (except 
+  !   for particle tracking and filtering). Therefore, if an hdf5 file with cutout data is 
+  !   available and loaded as above all queries for data that are within the region defined
+  !   in the file will be evaluated locally (without being sent to the server). An example
+  !   is provided below. 
+
+  !   Please note that the use of this feature of the client library requires an hdf5 
+  !   installation. The standard approach of simply executing queries through the server 
+  !   does not require hdf5 or downloading any cutout data.
+
+  !   For users that make frequent calls for data in a particular region and would like to
+  !   download this data to their local machine the only change in their existing code
+  !   will be to use the turblibAddLocalSource function to load the hdf5 file that they
+  !   have downloaded. Each function call will determine whether the data is available
+  !   locally and will evaluate the query locally if it is and will make a call to the
+  !   Web-services on the server if it is not.
+
+  !   The steps below can be followed to download data cutouts in hdf5 format and use the
+  !   client library locally:
+  !   1) Download an hdf5 file containing a cubic region of the velocity data at timestep 0 
+  !      with the following download link:
+  !	http://turbulence.pha.jhu.edu/download.aspx/[authorization Token]/isotropic1024coarse/u/0,1/0,16/0,16/0,16/
+  !   2) Compile this sample code with the "CUTOUT_SUPPORT=1" option, e.g.:
+  !      $ make turbf CUTOUT_SUPPORT=1
+  !   3) Uncomment the line below to Load the hdf5 cutout file:
+
+  ! rc = turblibAddLocalSource(filename);
+  
+  !   4) Uncomment the code below to restrict target locations to within the data region downloaded:
+  
+  ! do i = 1, 10
+  !   points(1, i) = 2 * 3.141592 / 1024.0 * i
+  !   points(2, i) = 2 * 3.141592 / 1024.0 * i
+  !   points(3, i) = 2 * 3.141592 / 1024.0 * i
+  ! end do
+  
+  !  5) Uncomment the code below to call getVelocity, which will be evaluated locally as 
+  !     the time chosen is 0.0, which corresponds to timestep 0 and no spatial or temporal
+  !     interpolation is requested:
+
+  ! write(*,*)
+  ! write(*,'(a)') 'Requesting velocity at 10 points...'
+  ! rc = getvelocity(authkey, dataset,  0.0, NoSInt, NoTInt, 10, points, dataout3)
+  ! do i = 1, 10
+  !   write(*,format3) i, ': ', dataout3(1,i), ', ', dataout3(2,i), ', ', dataout3(3,i)
+  ! end do
+
+  ! In this sample code, the default time chosen is 0.364, so all of the function calls in the 
+  !   remainder of the sample code will be evaluated at the server.
 
   do i = 1, 10
     points(1, i) = 0.20 * i
@@ -198,6 +265,33 @@ program TurbTest
   write(*,'(a)') 'Coordinates of 10 points at endTime:'
   do i = 1, 10
     write(*,format3) i, ': ', dataout3(1,i), ', ', dataout3(2,i), ', ', dataout3(3,i)
+  end do
+
+  write(*,*)
+  write(*,'(a)') 'Requesting box filter of velocity at 10 points...'
+  rc = getboxfilter(authkey, dataset, field, time, filterwidth, 10, points, dataout3)
+  do i = 1, 10
+    write(*,format3) i, ': ', dataout3(1,i), ', ', dataout3(2,i), ', ', dataout3(3,i)
+  end do
+
+  write(*,*)
+  write(*,'(a)') 'Requesting sub-grid stress tensor at 10 points...'
+  rc = getboxfiltersgs(authkey, dataset, field, time, filterwidth, 10, points, dataout6)
+  do i = 1, 10
+    write(*,format6) i, ': xx=', dataout6(1,i), ', yy=', dataout6(2,i), &
+       ', zz=', dataout6(3,i), ', xy=', dataout6(4,i),  &
+       ', xz=', dataout6(5,i), ', yz', dataout6(6,i)
+  end do
+
+  write(*,*)
+  write(*,'(a)') 'Requesting box filter of velocity gradient at 10 points...'
+  rc = getboxfiltergradient(authkey, dataset, field, time, filterwidth, spacing, 10, points, dataout9)
+  do i = 1, 10
+    write(*,format9) i, ': duxdx=', dataout9(1,i), ', duxdy=', dataout9(2,i), &
+       ', duxdz=', dataout9(3,i), ', duydx=', dataout9(4,i),  &
+       ', duydy=', dataout9(5,i), ', duydz=', dataout9(6,i),  &
+       ', duzdx=', dataout9(7,i), ', duzdy=', dataout9(8,i),  &
+       ', duzdz=', dataout9(9,i)
   end do
 
   !
