@@ -2760,7 +2760,7 @@ int getHessian (TurbDataset dataset, TurbField function, float time, enum Spatia
 
         {
           fdkernel = getDataCube(dataset, function, x, y, z, timestep+j-1, kernelsize);
-          computeHessian(fdkernel, 3, dx, gradientSize, nOrderFD, lagkernel);
+          computeHessian(fdkernel, comps, dx, gradientSize, nOrderFD, lagkernel);
           lagrangianInterp(comps * 6, lagkernel, input[i], nOrderLag, dx, temp[j]);
           freeDataCube(fdkernel);
         }
@@ -2778,7 +2778,7 @@ int getHessian (TurbDataset dataset, TurbField function, float time, enum Spatia
         for (j = 0; j < 4; j++)
         {
           fdkernel = getDataCube(dataset, function, x, y, z, timestep+j-1, kernelsize);
-          computeHessian(fdkernel, 3, dx, gradientSize, nOrderFD, temp[j]);
+          computeHessian(fdkernel, comps, dx, gradientSize, nOrderFD, temp[j]);
           freeDataCube(fdkernel);
         }
         pchipInterp(comps * 6, temp, time, timestep, dt, output+i*6*comps);
@@ -2802,7 +2802,7 @@ int getHessian (TurbDataset dataset, TurbField function, float time, enum Spatia
         z = (int) (input[i][2]/dx) - (kernelsize / 2) + 1;
       
         fdkernel = getDataCube(dataset, function, x, y, z, timestep, kernelsize);
-        computeHessian(fdkernel, 3, dx, gradientSize, nOrderFD, lagkernel);
+        computeHessian(fdkernel, comps, dx, gradientSize, nOrderFD, lagkernel);
         lagrangianInterp(comps * 6, lagkernel, input[i], nOrderLag, dx, output+i*6*comps);
         freeDataCube(fdkernel);
       }
@@ -2815,7 +2815,7 @@ int getHessian (TurbDataset dataset, TurbField function, float time, enum Spatia
         y = (int) (input[i][1]/dx + 0.5f) - nOrderFD/2;
         z = (int) (input[i][2]/dx + 0.5f) - nOrderFD/2;
         fdkernel = getDataCube(dataset, function, x, y, z, timestep, kernelsize);
-        computeHessian(fdkernel, 3, dx, gradientSize, nOrderFD, output+i*6*comps);
+        computeHessian(fdkernel, comps, dx, gradientSize, nOrderFD, output+i*6*comps);
         freeDataCube(fdkernel);
       }
     }
