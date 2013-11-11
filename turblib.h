@@ -443,6 +443,12 @@ int getRawMagneticField (char *authToken,
   char *dataset, float time,
   int X, int Y, int Z, int Xwidth, int Ywidth, int Zwidth, char dataout[]);
 
+/* Fortran */
+int getrawmagneticfield_ (char *authToken,
+  char *dataset, float *time,
+  int *X, int *Y, int *Z, int *Xwidth, int *Ywidth, int *Zwidth,
+  float dataout[]);
+
 /* C */
 int getVectorPotential (char *authToken,
   char *dataset, float time,
@@ -460,6 +466,12 @@ int getvectorpotential_ (char *authToken,
 int getRawVectorPotential (char *authToken,
   char *dataset, float time,
   int X, int Y, int Z, int Xwidth, int Ywidth, int Zwidth, char dataout[]);
+
+/* Fortran */
+int getrawvectorpotential_ (char *authToken,
+  char *dataset, float *time,
+  int *X, int *Y, int *Z, int *Xwidth, int *Ywidth, int *Zwidth,
+  float dataout[]);
 
 /* C */
 int getPressure (char *authToken,

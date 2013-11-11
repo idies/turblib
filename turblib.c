@@ -1201,6 +1201,15 @@ int getMagneticFieldSoap (char *authToken,
   return rc;
 }
 
+int getrawmagneticfield_ (char *authToken,
+  char *dataset, float *time,
+  int *X, int *Y, int *Z, int *Xwidth, int *Ywidth, int *Zwidth,
+  float dataout[])
+{
+  return getRawMagneticField (authToken, dataset, *time, *X, *Y, *Z,
+                              *Xwidth, *Ywidth, *Zwidth, (char*) dataout);
+}
+
 int getRawMagneticField (char *authToken,
       char *dataset, float time,
 	  int X, int Y, int Z, int Xwidth, int Ywidth, int Zwidth, char dataout[])
@@ -1287,6 +1296,15 @@ int getVectorPotentialSoap (char *authToken,
   __turblib_errno = rc;
 
   return rc;
+}
+
+int getrawvectorpotential_ (char *authToken,
+  char *dataset, float *time,
+  int *X, int *Y, int *Z, int *Xwidth, int *Ywidth, int *Zwidth,
+  float dataout[])
+{
+  return getRawVectorPotential (authToken, dataset, *time, *X, *Y, *Z,
+                                *Xwidth, *Ywidth, *Zwidth, (char*) dataout);
 }
 
 int getRawVectorPotential (char *authToken,
