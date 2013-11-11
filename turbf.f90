@@ -67,7 +67,8 @@ program TurbTest
   real(RP) :: dataout18(18, 10) ! results from Velocity Hessian
 
   integer,parameter :: x=0, y=0, z=0, xwidth=16, ywidth=16, zwidth=16
-  real(RP) :: rawvelocity(xwidth*ywidth*zwidth*3)
+  !real(RP) :: rawvelocity(xwidth*ywidth*zwidth*3)
+  real(RP) :: rawvelocity(3,xwidth*ywidth*zwidth)
   real(RP) :: rawpressure(xwidth*ywidth*zwidth)
 
   ! Declare the return type of the turblib functions as integer.
@@ -269,7 +270,8 @@ program TurbTest
   write(*,'(a)') 'Requesting raw velocity ...'
   rc = getrawvelocity(authkey, dataset,  time, x, y, z, xwidth, ywidth, zwidth, rawvelocity)
   do i = 1, xwidth*ywidth*zwidth
-    !write(*,rawformat3) i, ': Vx=', rawvelocity(3*i), ', Vy=', rawvelocity(3*i+1), ', Vz=', rawvelocity(3*i+2)
+    !write(*,rawformat3) i, ': Vx=', rawvelocity(3*(i-1)+1), ', Vy=', rawvelocity(3*(i-1)+2), ', Vz=', rawvelocity(3*(i-1)+3)
+    !write(*,rawformat3) i, ': Vx=', rawvelocity(1,i), ', Vy=', rawvelocity(2,i), ', Vz=', rawvelocity(3,i)
   end do
 
   write(*,*)
