@@ -67,7 +67,8 @@ program TurbTest
   real(RP) :: dataout18(18, 10) ! results from Velocity Hessian
 
   integer,parameter :: x=0, y=0, z=0, xwidth=16, ywidth=16, zwidth=16
-  real(RP),dimension(xwidth*ywidth*zwidth*3) :: rawvelocity 
+  real(RP) :: rawvelocity(xwidth*ywidth*zwidth*3)
+  real(RP) :: rawpressure(xwidth*ywidth*zwidth)
 
   ! Declare the return type of the turblib functions as integer.
   ! This is required for custom error handling (see the README).
@@ -90,7 +91,9 @@ program TurbTest
 
   ! Formatting rules
   character(*), parameter :: format1='(i3,1(a,e13.6))'
+  character(*), parameter :: rawformat1='(i4,1(a,e13.6))'
   character(*), parameter :: format3='(i3,3(a,e13.6))'
+  character(*), parameter :: rawformat3='(i4,3(a,e13.6))'
   character(*), parameter :: format4='(i3,4(a,e13.6))'
   character(*), parameter :: format6='(i3,6(a,e13.6))'
   character(*), parameter :: format9='(i3,9(a,e13.6))'
@@ -262,15 +265,21 @@ program TurbTest
   end do
 
  
-  ! getrawvelocity
-  !write(*,*)
-  !write(*,'(a)') 'Requesting raw velocity at 10 points...'
-  !rc = getrawvelocity(authkey, dataset,  time, x, y, z, xwidth, ywidth, zwidth, rawvelocity)
-  !do i = 1, 10
-  !  write(*,format3) i, ': Vx=', rawvelocity(3*i), ', Vy=', rawvelocity(3*i+1), ', Vz=', rawvelocity(3*i+2)
-  !end do
+  write(*,*)
+  write(*,'(a)') 'Requesting raw velocity ...'
+  rc = getrawvelocity(authkey, dataset,  time, x, y, z, xwidth, ywidth, zwidth, rawvelocity)
+  do i = 1, xwidth*ywidth*zwidth
+    !write(*,rawformat3) i, ': Vx=', rawvelocity(3*i), ', Vy=', rawvelocity(3*i+1), ', Vz=', rawvelocity(3*i+2)
+  end do
 
-  ! getrawpressure
+  write(*,*)
+  write(*,'(a)') 'Requesting raw pressure ...'
+  rc = getrawpressure(authkey, dataset,  time, x, y, z, xwidth, ywidth, zwidth, rawpressure)
+  do i = 1, xwidth*ywidth*zwidth 
+    !write(*,rawformat1) i, ': ', rawpressure(i)
+  end do
+
+
 
   write(*,*)
   write(*,'(2(a,f8.6),a)') 'Requesting position at 10 points, starting at time ', &

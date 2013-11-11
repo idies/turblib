@@ -1105,6 +1105,14 @@ int getposition_(char *authToken,
 }
 
 
+int getrawvelocity_(char *authToken, char *dataset, float *time,
+  int *X, int *Y, int *Z, int *Xwidth, int *Ywidth, int *Zwidth,
+  float dataout[])
+{
+    return getRawVelocity(authToken, dataset, *time, *X, *Y, *Z, 
+                          *Xwidth, *Ywidth, *Zwidth, (char*)dataout);
+}
+
 int getRawVelocity (char *authToken,
       char *dataset, float time,
 	  int X, int Y, int Z, int Xwidth, int Ywidth, int Zwidth, char dataout[])
@@ -1368,6 +1376,14 @@ int getPressureSoap (char *authToken,
   __turblib_errno = rc;
 
   return rc;
+}
+
+int getrawpressure_ (char *authToken, char *dataset, float *time,
+  int *X, int *Y, int *Z, int *Xwidth, int *Ywidth, int *Zwidth,
+  float dataout[])
+{
+  return getRawPressure(authToken, dataset, *time, *X, *Y, *Z,
+                        *Xwidth, *Ywidth, *Zwidth,(char*)dataout);
 }
 
 int getRawPressure (char *authToken,

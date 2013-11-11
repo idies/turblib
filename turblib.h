@@ -419,6 +419,12 @@ int getRawVelocity (char *authToken,
   char *dataset, float time,
   int X, int Y, int Z, int Xwidth, int Ywidth, int Zwidth, char dataout[]);
 
+/* Fortran */
+int getrawvelocity_ (char *authToken,
+  char *dataset, float *time,
+  int *X, int *Y, int *Z, int *Xwidth, int *Ywidth, int *Zwidth,
+  float dataout[]);
+
 /* C */
 int getMagneticField (char *authToken,
   char *dataset, float time,
@@ -472,6 +478,11 @@ int getpressure_ (char *authToken,
 int getRawPressure (char *authToken,
   char *dataset, float time,
   int X, int Y, int Z, int Xwidth, int Ywidth, int Zwidth, char dataout[]);
+
+/* Fortran */
+int getrawpressure_ (char *authToken,
+  char *dataset, float *time,
+  int *X, int *Y, int *Z, int *Xwidth, int *Ywidth, int *Zwidth, float dataout[]);
 
 
 /* Local vs Soap functions */
