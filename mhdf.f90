@@ -61,6 +61,7 @@ program TurbTest
   real(RP) :: points(3, 10)    ! input
   real(RP) :: dataout1(10)     ! p
   real(RP) :: dataout3(3, 10)  ! x,y,z
+  real(RP) :: dataout4(4, 10)  ! x,y,z,p
   real(RP) :: dataout6(6, 10)  ! results from Pressure Hessian
   real(RP) :: dataout9(9, 10)  ! results from Gradient function
   real(RP) :: dataout18(18, 10) ! results from Hessian function
@@ -68,7 +69,7 @@ program TurbTest
 
   ! Declare the return type of the turblib functions as integer.
   ! This is required for custom error handling (see the README).
-  integer :: getvelocity, getvelocitygradient
+  integer :: getvelocity, getforce, getvelocityandpressure, getvelocitygradient
   integer :: getboxfilter, getboxfiltersgs, getboxfiltergradient
   integer :: getvelocitylaplacian, getvelocityhessian
   integer :: getmagneticfield, getmagneticfieldgradient
@@ -180,6 +181,20 @@ program TurbTest
   rc = getvelocity(authkey, dataset,  time, Lag6, NoTInt, 10, points, dataout3)
   do i = 1, 10
     write(*,format3) i, ': ', dataout3(1,i), ', ', dataout3(2,i), ', ', dataout3(3,i)
+  end do
+
+  write(*,*)
+  write(*,'(a)') 'Requesting forcing at 10 points...'
+  rc = getforce(authkey, dataset,  time, Lag6, NoTInt, 10, points, dataout3)
+  do i = 1, 10
+    write(*,format3) i, ': ', dataout3(1,i), ', ', dataout3(2,i), ', ', dataout3(3,i)
+  end do
+
+  write(*,*)
+  write(*,'(a)') 'Requesting velocity and pressure at 10 points...'
+  rc = getvelocityandpressure(authkey, dataset,  time, Lag6, NoTInt, 10, points, dataout4)
+  do i = 1, 10
+    write(*,format4) i, ': ', dataout4(1,i), ', ', dataout4(2,i), ', ', dataout4(3,i), ', ', dataout4(4,i)
   end do
 
   write(*,*)

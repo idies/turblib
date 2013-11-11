@@ -33,8 +33,9 @@ int main(int argc, char *argv[]) {
   float time = 0.364F;
 
   float points[N][3];    /* input of x,y,z */
-  float result3[N][3];   /* results of x,y,z */
   float result[N];       /* results from GetPressure */
+  float result3[N][3];   /* results of x,y,z */
+  float result4[N][4];   /* results of x,y,z velocity and pressure */
   float result6[N][6];   /* results from Pressure Hessian and SGS queries */
   float result9[N][9];   /* results from Gradient queries */
   float result18[N][18]; /* results from Hessian queries */
@@ -143,6 +144,18 @@ int main(int argc, char *argv[]) {
   getVelocity (authtoken, dataset, time, spatialInterp, temporalInterp, N, points, result3);
   for (p = 0; p < N; p++) {
     printf("%d: %13.6e, %13.6e, %13.6e\n", p, result3[p][0],  result3[p][1],  result3[p][2]);
+  }
+
+  printf("\nRequesting forcing at %d points...\n", N);
+  getForce (authtoken, dataset, time, spatialInterp, temporalInterp, N, points, result3);
+  for (p = 0; p < N; p++) {
+    printf("%d: %13.6e, %13.6e, %13.6e\n", p, result3[p][0],  result3[p][1],  result3[p][2]);
+  }
+
+  printf("\nRequesting velocity and pressure at %d points...\n", N);
+  getVelocityAndPressure (authtoken, dataset, time, spatialInterp, temporalInterp, N, points, result4);
+   for (p = 0; p < N; p++) {
+     printf("%d: %13.6e, %13.6e, %13.6e, p=%13.6e\n", p, result4[p][0], result4[p][1], result4[p][2], result4[p][3]);
   }
 
   printf("\nRequesting velocity gradient at %d points...\n", N);
