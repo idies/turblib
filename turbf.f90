@@ -66,13 +66,16 @@ program TurbTest
   real(RP) :: dataout9(9, 10)  ! results from Velocity Gradient
   real(RP) :: dataout18(18, 10) ! results from Velocity Hessian
 
+  integer,parameter :: x=0, y=0, z=0, xwidth=16, ywidth=16, zwidth=16
+  real(RP),dimension(xwidth*ywidth*zwidth*3) :: rawvelocity 
 
   ! Declare the return type of the turblib functions as integer.
   ! This is required for custom error handling (see the README).
   integer :: getvelocity, getforce, getvelocityandpressure, getvelocitygradient
   integer :: getboxfilter, getboxfiltersgs, getboxfiltergradient
   integer :: getvelocitylaplacian, getvelocityhessian
-  integer :: getpressuregradient, getpressurehessian
+  integer :: getpressure, getpressuregradient, getpressurehessian
+  integer :: getrawvelocity, getrawpressure
   integer :: getposition
   ! If working with hdf5 cutout files, uncomment the lines below
   ! to load the file and use the functions locally:
@@ -86,6 +89,7 @@ program TurbTest
   integer :: i
 
   ! Formatting rules
+  character(*), parameter :: format1='(i3,1(a,e13.6))'
   character(*), parameter :: format3='(i3,3(a,e13.6))'
   character(*), parameter :: format4='(i3,4(a,e13.6))'
   character(*), parameter :: format6='(i3,6(a,e13.6))'
@@ -235,6 +239,13 @@ program TurbTest
   end do
 
   write(*,*)
+  write(*,'(a)') 'Requesting pressure at 10 points...'
+  rc = getpressure(authkey, dataset,  time, Lag6, NoTInt, 10, points, dataout1)
+  do i = 1, 10 
+    write(*,format1) i, ': ', dataout1(i)
+  end do
+
+  write(*,*)
   write(*,'(a)') 'Requesting pressure gradient at 10 points...'
   rc = getpressuregradient(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout3)
   do i = 1, 10 
@@ -249,6 +260,17 @@ program TurbTest
        ', d2pdxdz=', dataout6(3,i), ', d2pdydy=', dataout6(4,i),  &
        ', d2pdydz=', dataout6(5,i), ', d2pdzdz', dataout6(6,i)
   end do
+
+ 
+  ! getrawvelocity
+  !write(*,*)
+  !write(*,'(a)') 'Requesting raw velocity at 10 points...'
+  !rc = getrawvelocity(authkey, dataset,  time, x, y, z, xwidth, ywidth, zwidth, rawvelocity)
+  !do i = 1, 10
+  !  write(*,format3) i, ': Vx=', rawvelocity(3*i), ', Vy=', rawvelocity(3*i+1), ', Vz=', rawvelocity(3*i+2)
+  !end do
+
+  ! getrawpressure
 
   write(*,*)
   write(*,'(2(a,f8.6),a)') 'Requesting position at 10 points, starting at time ', &
