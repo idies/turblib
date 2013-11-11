@@ -33,6 +33,7 @@ int main(int argc, char *argv[]) {
   float time = 0.364F;
 
   float points[N][3];    /* input of x,y,z */
+  float result1[N];    /* input of x,y,z */
   float result3[N][3];   /* results of x,y,z */
   float result4[N][4];   /* results of x,y,z,p */
   float result6[N][6];   /* results from Pressure Hessian queries */
@@ -182,6 +183,12 @@ int main(int argc, char *argv[]) {
   for (p = 0; p < N; p++) {
     printf("%d: grad2ux=%13.6e, grad2uy=%13.6e, grad2uz=%13.6e\n",
            p, result3[p][0],  result3[p][1],  result3[p][2]);
+  }
+
+  printf("\nRequesting pressure at %d points...\n", N);
+  getPressure (authtoken, dataset, time, spatialInterp, temporalInterp, N, points, result1);
+   for (p = 0; p < N; p++) {
+     printf("%d: p=%13.6e\n", p, result1[p]);
   }
 
   printf("\nRequesting pressure gradient at %d points...\n", N);
