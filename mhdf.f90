@@ -387,16 +387,16 @@ program TurbTest
   write(*,'(a)') 'Requesting raw magnetic field ...'
   rc = getrawmagneticfield(authkey, dataset,  time, x, y, z, xwidth, ywidth, zwidth, rawdata)
   do i = 1, xwidth*ywidth*zwidth
-    !write(*,rawformat3) i, ': Vx=', rawdata(3*(i-1)+1), ', Vy=', rawdata(3*(i-1)+2), ', Vz=', rawdata(3*(i-1)+3)
-    !write(*,rawformat3) i, ': Vx=', rawdata(1,i), ', Vy=', rawdata(2,i), ', Vz=', rawdata(3,i)
+    !write(*,rawformat3) i, ': bx=', rawdata(3*(i-1)+1), ', by=', rawdata(3*(i-1)+2), ', bz=', rawdata(3*(i-1)+3)
+    !write(*,rawformat3) i, ': bx=', rawdata(1,i), ', by=', rawdata(2,i), ', bz=', rawdata(3,i)
   end do
 
   write(*,*)
   write(*,'(a)') 'Requesting raw vector potential ...'
   rc = getrawvectorpotential(authkey, dataset,  time, x, y, z, xwidth, ywidth, zwidth, rawdata)
   do i = 1, xwidth*ywidth*zwidth
-    !write(*,rawformat3) i, ': Vx=', rawdata(3*(i-1)+1), ', Vy=', rawdata(3*(i-1)+2), ', Vz=', rawdata(3*(i-1)+3)
-    !write(*,rawformat3) i, ': Vx=', rawdata(1,i), ', Vy=', rawdata(2,i), ', Vz=', rawdata(3,i)
+    !write(*,rawformat3) i, ': ax=', rawdata(3*(i-1)+1), ', ay=', rawdata(3*(i-1)+2), ', az=', rawdata(3*(i-1)+3)
+    !write(*,rawformat3) i, ': ax=', rawdata(1,i), ', ay=', rawdata(2,i), ', az=', rawdata(3,i)
   end do
 
   write(*,*)
