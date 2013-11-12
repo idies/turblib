@@ -24,8 +24,8 @@ endef
 OSARCH := $(shell uname -sp)
 
 ifeq ($(OSARCH),Darwin i386)
-	# Compile both 32- and 64-bit code under MacOS X for Intel
-	# ARCH_FLAGS = -arch i386 -arch x86_64
+# Compile both 32- and 64-bit code under MacOS X for Intel
+# ARCH_FLAGS = -arch i386 -arch x86_64
 else	
 	ARCH_FLAGS =
 endif
@@ -56,7 +56,7 @@ OBJ =	soapC.o \
 	stdsoap2.o \
         turblib.o
 
-all: turbc turbf mhdc mhdf
+all: turbc turbf mhdc mhdf channelc channelf
 
 mhdc : $(OBJ) mhdc.o
 	 $(CC) -o $@ $(OBJ) mhdc.o $(LDLIBS)
@@ -79,6 +79,17 @@ mhdf : $(OBJ) mhdf.o
 
 mhdf.o : mhdf.f90
 	 $(FC) -c mhdf.f90
+
+channelc : $(OBJ) channelc.o
+	 $(CC) -o $@ $(OBJ) channelc.o $(LDLIBS)
+
+channelc.o: compiler_flags
+
+channelf : $(OBJ) channelf.o
+	 $(FC) -o $@ $(OBJ) channelf.o $(LDLIBS)
+
+channelf.o : channelf.f90
+	 $(FC) -c channelf.f90
 
 stdsoap2.o: stdsoap2.c
 	$(CC) $(CFLAGS) -c $<
@@ -112,7 +123,7 @@ prodtestwsdl:
 	soapcpp2 -CLcx -2 TurbulenceService.h
 
 clean:
-	$(RM) *.o *.exe turbf turbc mhdc mhdf compiler_flags
+	$(RM) *.o *.exe turbf turbc mhdc mhdf channelc channelf compiler_flags
 
 spotless: clean
 	$(RM) soapClient.c TurbulenceServiceSoap.nsmap soapH.h TurbulenceServiceSoap12.nsmap soapStub.h soapC.c TurbulenceService.h

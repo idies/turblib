@@ -2121,14 +2121,23 @@ int loadNeededData(TurbDataset set, TurbField function, int count, float positio
 TurbDataset getDataSet(char *name)
 {
   if (strcmp("isotropic1024coarse", name) == 0) return isotropic1024coarse;
+  if (strcmp("isotropic1024", name) == 0) return isotropic1024coarse;
   if (strcmp("isotropic1024fine", name) == 0) return isotropic1024fine;
   if (strcmp("mhd1024", name) == 0) return mhd1024;
+  if (strcmp("channel", name) == 0) return channel;
   
   return -1;
 }
 
 int isDataAvailable(TurbDataset set, TurbField function, int count, float position[][3], float time, enum SpatialInterpolation spatial, enum TemporalInterpolation temporal)
 {
+  if (set == channel)
+    {
+      printf("The client library does not currently provide local implementaions of the server-side functions."
+	     " Redirecting to the server...\n");
+      return 0;
+    }
+
   float dx = DataSets[set].dx, dt = DataSets[set].dt;
   //Determine availability of data locally
   int nOrderLag = spatial % 10;

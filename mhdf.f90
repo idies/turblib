@@ -38,7 +38,7 @@ program TurbTest
   !
   ! Choose which dataset to use in this query
   ! Currently, only valid datasets are:
-  !   'isotropic1024fine' and 'isotropic1024coarse'
+  !   'isotropic1024coarse', 'isotropic1024fine', 'mhd1024' and 'channel'
   !
   character(*), parameter :: dataset = 'mhd1024' // CHAR(0)
 
