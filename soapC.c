@@ -19,7 +19,7 @@ compiling, linking, and/or using OpenSSL is allowed.
 extern "C" {
 #endif
 
-SOAP_SOURCE_STAMP("@(#) soapC.c ver 2.8.8 2013-11-12 18:46:26 GMT")
+SOAP_SOURCE_STAMP("@(#) soapC.c ver 2.8.8 2013-11-19 14:06:44 GMT")
 
 
 #ifndef WITH_NOGLOBAL
@@ -240,10 +240,6 @@ SOAP_FMAC3 void * SOAP_FMAC4 soap_getelement(struct soap *soap, int *type)
 		return soap_in_PointerTo_turb1__GetLaplacianOfGradientResponse(soap, NULL, NULL, "turb1:GetLaplacianOfGradientResponse");
 	case SOAP_TYPE_PointerTo_turb1__GetLaplacianOfGradient:
 		return soap_in_PointerTo_turb1__GetLaplacianOfGradient(soap, NULL, NULL, "turb1:GetLaplacianOfGradient");
-	case SOAP_TYPE_PointerTo_turb1__GetPositionDBEvaluationResponse:
-		return soap_in_PointerTo_turb1__GetPositionDBEvaluationResponse(soap, NULL, NULL, "turb1:GetPositionDBEvaluationResponse");
-	case SOAP_TYPE_PointerTo_turb1__GetPositionDBEvaluation:
-		return soap_in_PointerTo_turb1__GetPositionDBEvaluation(soap, NULL, NULL, "turb1:GetPositionDBEvaluation");
 	case SOAP_TYPE_PointerTo_turb1__GetBoxFilterGradientResponse:
 		return soap_in_PointerTo_turb1__GetBoxFilterGradientResponse(soap, NULL, NULL, "turb1:GetBoxFilterGradientResponse");
 	case SOAP_TYPE_PointerTo_turb1__GetBoxFilterGradient:
@@ -518,14 +514,6 @@ SOAP_FMAC3 void * SOAP_FMAC4 soap_getelement(struct soap *soap, int *type)
 		if (!soap_match_tag(soap, t, "turb1:GetLaplacianOfGradient"))
 		{	*type = SOAP_TYPE__turb1__GetLaplacianOfGradient;
 			return soap_in__turb1__GetLaplacianOfGradient(soap, NULL, NULL, NULL);
-		}
-		if (!soap_match_tag(soap, t, "turb1:GetPositionDBEvaluationResponse"))
-		{	*type = SOAP_TYPE__turb1__GetPositionDBEvaluationResponse;
-			return soap_in__turb1__GetPositionDBEvaluationResponse(soap, NULL, NULL, NULL);
-		}
-		if (!soap_match_tag(soap, t, "turb1:GetPositionDBEvaluation"))
-		{	*type = SOAP_TYPE__turb1__GetPositionDBEvaluation;
-			return soap_in__turb1__GetPositionDBEvaluation(soap, NULL, NULL, NULL);
 		}
 		if (!soap_match_tag(soap, t, "turb1:GetBoxFilterGradientResponse"))
 		{	*type = SOAP_TYPE__turb1__GetBoxFilterGradientResponse;
@@ -818,10 +806,6 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_putelement(struct soap *soap, const void *ptr, co
 		return soap_out__turb1__GetLaplacianOfGradientResponse(soap, "turb1:GetLaplacianOfGradientResponse", id, (const struct _turb1__GetLaplacianOfGradientResponse *)ptr, NULL);
 	case SOAP_TYPE__turb1__GetLaplacianOfGradient:
 		return soap_out__turb1__GetLaplacianOfGradient(soap, "turb1:GetLaplacianOfGradient", id, (const struct _turb1__GetLaplacianOfGradient *)ptr, NULL);
-	case SOAP_TYPE__turb1__GetPositionDBEvaluationResponse:
-		return soap_out__turb1__GetPositionDBEvaluationResponse(soap, "turb1:GetPositionDBEvaluationResponse", id, (const struct _turb1__GetPositionDBEvaluationResponse *)ptr, NULL);
-	case SOAP_TYPE__turb1__GetPositionDBEvaluation:
-		return soap_out__turb1__GetPositionDBEvaluation(soap, "turb1:GetPositionDBEvaluation", id, (const struct _turb1__GetPositionDBEvaluation *)ptr, NULL);
 	case SOAP_TYPE__turb1__GetBoxFilterGradientResponse:
 		return soap_out__turb1__GetBoxFilterGradientResponse(soap, "turb1:GetBoxFilterGradientResponse", id, (const struct _turb1__GetBoxFilterGradientResponse *)ptr, NULL);
 	case SOAP_TYPE__turb1__GetBoxFilterGradient:
@@ -968,10 +952,6 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_putelement(struct soap *soap, const void *ptr, co
 		return soap_out_PointerTo_turb1__GetLaplacianOfGradientResponse(soap, tag, id, (struct _turb1__GetLaplacianOfGradientResponse *const*)ptr, "turb1:GetLaplacianOfGradientResponse");
 	case SOAP_TYPE_PointerTo_turb1__GetLaplacianOfGradient:
 		return soap_out_PointerTo_turb1__GetLaplacianOfGradient(soap, tag, id, (struct _turb1__GetLaplacianOfGradient *const*)ptr, "turb1:GetLaplacianOfGradient");
-	case SOAP_TYPE_PointerTo_turb1__GetPositionDBEvaluationResponse:
-		return soap_out_PointerTo_turb1__GetPositionDBEvaluationResponse(soap, tag, id, (struct _turb1__GetPositionDBEvaluationResponse *const*)ptr, "turb1:GetPositionDBEvaluationResponse");
-	case SOAP_TYPE_PointerTo_turb1__GetPositionDBEvaluation:
-		return soap_out_PointerTo_turb1__GetPositionDBEvaluation(soap, tag, id, (struct _turb1__GetPositionDBEvaluation *const*)ptr, "turb1:GetPositionDBEvaluation");
 	case SOAP_TYPE_PointerTo_turb1__GetBoxFilterGradientResponse:
 		return soap_out_PointerTo_turb1__GetBoxFilterGradientResponse(soap, tag, id, (struct _turb1__GetBoxFilterGradientResponse *const*)ptr, "turb1:GetBoxFilterGradientResponse");
 	case SOAP_TYPE_PointerTo_turb1__GetBoxFilterGradient:
@@ -1134,9 +1114,6 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_markelement(struct soap *soap, const void *ptr, 
 	case SOAP_TYPE___turb3__GetLaplacianOfGradient:
 		soap_serialize___turb3__GetLaplacianOfGradient(soap, (const struct __turb3__GetLaplacianOfGradient *)ptr);
 		break;
-	case SOAP_TYPE___turb3__GetPositionDBEvaluation:
-		soap_serialize___turb3__GetPositionDBEvaluation(soap, (const struct __turb3__GetPositionDBEvaluation *)ptr);
-		break;
 	case SOAP_TYPE___turb3__GetBoxFilterGradient:
 		soap_serialize___turb3__GetBoxFilterGradient(soap, (const struct __turb3__GetBoxFilterGradient *)ptr);
 		break;
@@ -1220,9 +1197,6 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_markelement(struct soap *soap, const void *ptr, 
 		break;
 	case SOAP_TYPE___turb2__GetLaplacianOfGradient:
 		soap_serialize___turb2__GetLaplacianOfGradient(soap, (const struct __turb2__GetLaplacianOfGradient *)ptr);
-		break;
-	case SOAP_TYPE___turb2__GetPositionDBEvaluation:
-		soap_serialize___turb2__GetPositionDBEvaluation(soap, (const struct __turb2__GetPositionDBEvaluation *)ptr);
 		break;
 	case SOAP_TYPE___turb2__GetBoxFilterGradient:
 		soap_serialize___turb2__GetBoxFilterGradient(soap, (const struct __turb2__GetBoxFilterGradient *)ptr);
@@ -1310,12 +1284,6 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_markelement(struct soap *soap, const void *ptr, 
 		break;
 	case SOAP_TYPE__turb1__GetLaplacianOfGradient:
 		soap_serialize__turb1__GetLaplacianOfGradient(soap, (const struct _turb1__GetLaplacianOfGradient *)ptr);
-		break;
-	case SOAP_TYPE__turb1__GetPositionDBEvaluationResponse:
-		soap_serialize__turb1__GetPositionDBEvaluationResponse(soap, (const struct _turb1__GetPositionDBEvaluationResponse *)ptr);
-		break;
-	case SOAP_TYPE__turb1__GetPositionDBEvaluation:
-		soap_serialize__turb1__GetPositionDBEvaluation(soap, (const struct _turb1__GetPositionDBEvaluation *)ptr);
 		break;
 	case SOAP_TYPE__turb1__GetBoxFilterGradientResponse:
 		soap_serialize__turb1__GetBoxFilterGradientResponse(soap, (const struct _turb1__GetBoxFilterGradientResponse *)ptr);
@@ -1535,12 +1503,6 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_markelement(struct soap *soap, const void *ptr, 
 		break;
 	case SOAP_TYPE_PointerTo_turb1__GetLaplacianOfGradient:
 		soap_serialize_PointerTo_turb1__GetLaplacianOfGradient(soap, (struct _turb1__GetLaplacianOfGradient *const*)ptr);
-		break;
-	case SOAP_TYPE_PointerTo_turb1__GetPositionDBEvaluationResponse:
-		soap_serialize_PointerTo_turb1__GetPositionDBEvaluationResponse(soap, (struct _turb1__GetPositionDBEvaluationResponse *const*)ptr);
-		break;
-	case SOAP_TYPE_PointerTo_turb1__GetPositionDBEvaluation:
-		soap_serialize_PointerTo_turb1__GetPositionDBEvaluation(soap, (struct _turb1__GetPositionDBEvaluation *const*)ptr);
 		break;
 	case SOAP_TYPE_PointerTo_turb1__GetBoxFilterGradientResponse:
 		soap_serialize_PointerTo_turb1__GetBoxFilterGradientResponse(soap, (struct _turb1__GetBoxFilterGradientResponse *const*)ptr);
@@ -2663,70 +2625,6 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb3__GetLaplacianOfGradient(struct soap *
 SOAP_FMAC3 struct __turb3__GetLaplacianOfGradient * SOAP_FMAC4 soap_get___turb3__GetLaplacianOfGradient(struct soap *soap, struct __turb3__GetLaplacianOfGradient *p, const char *tag, const char *type)
 {
 	if ((p = soap_in___turb3__GetLaplacianOfGradient(soap, tag, p, type)))
-		if (soap_getindependent(soap))
-			return NULL;
-	return p;
-}
-
-SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb3__GetPositionDBEvaluation(struct soap *soap, struct __turb3__GetPositionDBEvaluation *a)
-{
-	(void)soap; (void)a; /* appease -Wall -Werror */
-	a->turb1__GetPositionDBEvaluation = NULL;
-}
-
-SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb3__GetPositionDBEvaluation(struct soap *soap, const struct __turb3__GetPositionDBEvaluation *a)
-{
-	(void)soap; (void)a; /* appease -Wall -Werror */
-	soap_serialize_PointerTo_turb1__GetPositionDBEvaluation(soap, &a->turb1__GetPositionDBEvaluation);
-}
-
-SOAP_FMAC3 int SOAP_FMAC4 soap_out___turb3__GetPositionDBEvaluation(struct soap *soap, const char *tag, int id, const struct __turb3__GetPositionDBEvaluation *a, const char *type)
-{
-	(void)soap; (void)tag; (void)id; (void)type;
-	if (soap_out_PointerTo_turb1__GetPositionDBEvaluation(soap, "turb1:GetPositionDBEvaluation", -1, &a->turb1__GetPositionDBEvaluation, ""))
-		return soap->error;
-	return SOAP_OK;
-}
-
-SOAP_FMAC3 struct __turb3__GetPositionDBEvaluation * SOAP_FMAC4 soap_in___turb3__GetPositionDBEvaluation(struct soap *soap, const char *tag, struct __turb3__GetPositionDBEvaluation *a, const char *type)
-{
-	size_t soap_flag_turb1__GetPositionDBEvaluation = 1;
-	short soap_flag;
-	a = (struct __turb3__GetPositionDBEvaluation *)soap_id_enter(soap, "", a, SOAP_TYPE___turb3__GetPositionDBEvaluation, sizeof(struct __turb3__GetPositionDBEvaluation), 0, NULL, NULL, NULL);
-	if (!a)
-		return NULL;
-	soap_default___turb3__GetPositionDBEvaluation(soap, a);
-		for (soap_flag = 0;; soap_flag = 1)
-		{	soap->error = SOAP_TAG_MISMATCH;
-			if (soap_flag_turb1__GetPositionDBEvaluation && soap->error == SOAP_TAG_MISMATCH)
-				if (soap_in_PointerTo_turb1__GetPositionDBEvaluation(soap, "turb1:GetPositionDBEvaluation", &a->turb1__GetPositionDBEvaluation, ""))
-				{	soap_flag_turb1__GetPositionDBEvaluation--;
-					continue;
-				}
-			if (soap->error == SOAP_TAG_MISMATCH)
-				if (soap_flag)
-				{	soap->error = SOAP_OK;
-					break;
-				}
-			if (soap_flag && soap->error == SOAP_NO_TAG)
-				break;
-			if (soap->error)
-				return NULL;
-		}
-	return a;
-}
-
-SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb3__GetPositionDBEvaluation(struct soap *soap, const struct __turb3__GetPositionDBEvaluation *a, const char *tag, const char *type)
-{
-	register int id = 0;
-	if (soap_out___turb3__GetPositionDBEvaluation(soap, tag?tag:"-turb3:GetPositionDBEvaluation", id, a, type))
-		return soap->error;
-	return SOAP_OK;
-}
-
-SOAP_FMAC3 struct __turb3__GetPositionDBEvaluation * SOAP_FMAC4 soap_get___turb3__GetPositionDBEvaluation(struct soap *soap, struct __turb3__GetPositionDBEvaluation *p, const char *tag, const char *type)
-{
-	if ((p = soap_in___turb3__GetPositionDBEvaluation(soap, tag, p, type)))
 		if (soap_getindependent(soap))
 			return NULL;
 	return p;
@@ -4519,70 +4417,6 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb2__GetLaplacianOfGradient(struct soap *
 SOAP_FMAC3 struct __turb2__GetLaplacianOfGradient * SOAP_FMAC4 soap_get___turb2__GetLaplacianOfGradient(struct soap *soap, struct __turb2__GetLaplacianOfGradient *p, const char *tag, const char *type)
 {
 	if ((p = soap_in___turb2__GetLaplacianOfGradient(soap, tag, p, type)))
-		if (soap_getindependent(soap))
-			return NULL;
-	return p;
-}
-
-SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb2__GetPositionDBEvaluation(struct soap *soap, struct __turb2__GetPositionDBEvaluation *a)
-{
-	(void)soap; (void)a; /* appease -Wall -Werror */
-	a->turb1__GetPositionDBEvaluation = NULL;
-}
-
-SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb2__GetPositionDBEvaluation(struct soap *soap, const struct __turb2__GetPositionDBEvaluation *a)
-{
-	(void)soap; (void)a; /* appease -Wall -Werror */
-	soap_serialize_PointerTo_turb1__GetPositionDBEvaluation(soap, &a->turb1__GetPositionDBEvaluation);
-}
-
-SOAP_FMAC3 int SOAP_FMAC4 soap_out___turb2__GetPositionDBEvaluation(struct soap *soap, const char *tag, int id, const struct __turb2__GetPositionDBEvaluation *a, const char *type)
-{
-	(void)soap; (void)tag; (void)id; (void)type;
-	if (soap_out_PointerTo_turb1__GetPositionDBEvaluation(soap, "turb1:GetPositionDBEvaluation", -1, &a->turb1__GetPositionDBEvaluation, ""))
-		return soap->error;
-	return SOAP_OK;
-}
-
-SOAP_FMAC3 struct __turb2__GetPositionDBEvaluation * SOAP_FMAC4 soap_in___turb2__GetPositionDBEvaluation(struct soap *soap, const char *tag, struct __turb2__GetPositionDBEvaluation *a, const char *type)
-{
-	size_t soap_flag_turb1__GetPositionDBEvaluation = 1;
-	short soap_flag;
-	a = (struct __turb2__GetPositionDBEvaluation *)soap_id_enter(soap, "", a, SOAP_TYPE___turb2__GetPositionDBEvaluation, sizeof(struct __turb2__GetPositionDBEvaluation), 0, NULL, NULL, NULL);
-	if (!a)
-		return NULL;
-	soap_default___turb2__GetPositionDBEvaluation(soap, a);
-		for (soap_flag = 0;; soap_flag = 1)
-		{	soap->error = SOAP_TAG_MISMATCH;
-			if (soap_flag_turb1__GetPositionDBEvaluation && soap->error == SOAP_TAG_MISMATCH)
-				if (soap_in_PointerTo_turb1__GetPositionDBEvaluation(soap, "turb1:GetPositionDBEvaluation", &a->turb1__GetPositionDBEvaluation, ""))
-				{	soap_flag_turb1__GetPositionDBEvaluation--;
-					continue;
-				}
-			if (soap->error == SOAP_TAG_MISMATCH)
-				if (soap_flag)
-				{	soap->error = SOAP_OK;
-					break;
-				}
-			if (soap_flag && soap->error == SOAP_NO_TAG)
-				break;
-			if (soap->error)
-				return NULL;
-		}
-	return a;
-}
-
-SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb2__GetPositionDBEvaluation(struct soap *soap, const struct __turb2__GetPositionDBEvaluation *a, const char *tag, const char *type)
-{
-	register int id = 0;
-	if (soap_out___turb2__GetPositionDBEvaluation(soap, tag?tag:"-turb2:GetPositionDBEvaluation", id, a, type))
-		return soap->error;
-	return SOAP_OK;
-}
-
-SOAP_FMAC3 struct __turb2__GetPositionDBEvaluation * SOAP_FMAC4 soap_get___turb2__GetPositionDBEvaluation(struct soap *soap, struct __turb2__GetPositionDBEvaluation *p, const char *tag, const char *type)
-{
-	if ((p = soap_in___turb2__GetPositionDBEvaluation(soap, tag, p, type)))
 		if (soap_getindependent(soap))
 			return NULL;
 	return p;
@@ -6523,217 +6357,6 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetLaplacianOfGradient(struct soap *s
 SOAP_FMAC3 struct _turb1__GetLaplacianOfGradient * SOAP_FMAC4 soap_get__turb1__GetLaplacianOfGradient(struct soap *soap, struct _turb1__GetLaplacianOfGradient *p, const char *tag, const char *type)
 {
 	if ((p = soap_in__turb1__GetLaplacianOfGradient(soap, tag, p, type)))
-		if (soap_getindependent(soap))
-			return NULL;
-	return p;
-}
-
-SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetPositionDBEvaluationResponse(struct soap *soap, struct _turb1__GetPositionDBEvaluationResponse *a)
-{
-	(void)soap; (void)a; /* appease -Wall -Werror */
-	a->GetPositionDBEvaluationResult = NULL;
-}
-
-SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetPositionDBEvaluationResponse(struct soap *soap, const struct _turb1__GetPositionDBEvaluationResponse *a)
-{
-	(void)soap; (void)a; /* appease -Wall -Werror */
-	soap_serialize_PointerToturb1__ArrayOfPoint3(soap, &a->GetPositionDBEvaluationResult);
-}
-
-SOAP_FMAC3 int SOAP_FMAC4 soap_out__turb1__GetPositionDBEvaluationResponse(struct soap *soap, const char *tag, int id, const struct _turb1__GetPositionDBEvaluationResponse *a, const char *type)
-{
-	(void)soap; (void)tag; (void)id; (void)type;
-	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE__turb1__GetPositionDBEvaluationResponse), type))
-		return soap->error;
-	if (a->GetPositionDBEvaluationResult)
-		soap_element_result(soap, "turb1:GetPositionDBEvaluationResult");
-	if (soap_out_PointerToturb1__ArrayOfPoint3(soap, "turb1:GetPositionDBEvaluationResult", -1, &a->GetPositionDBEvaluationResult, ""))
-		return soap->error;
-	return soap_element_end_out(soap, tag);
-}
-
-SOAP_FMAC3 struct _turb1__GetPositionDBEvaluationResponse * SOAP_FMAC4 soap_in__turb1__GetPositionDBEvaluationResponse(struct soap *soap, const char *tag, struct _turb1__GetPositionDBEvaluationResponse *a, const char *type)
-{
-	size_t soap_flag_GetPositionDBEvaluationResult = 1;
-	if (soap_element_begin_in(soap, tag, 0, type))
-		return NULL;
-	a = (struct _turb1__GetPositionDBEvaluationResponse *)soap_id_enter(soap, soap->id, a, SOAP_TYPE__turb1__GetPositionDBEvaluationResponse, sizeof(struct _turb1__GetPositionDBEvaluationResponse), 0, NULL, NULL, NULL);
-	if (!a)
-		return NULL;
-	soap_default__turb1__GetPositionDBEvaluationResponse(soap, a);
-	if (soap->body && !*soap->href)
-	{
-		for (;;)
-		{	soap->error = SOAP_TAG_MISMATCH;
-			if (soap_flag_GetPositionDBEvaluationResult && soap->error == SOAP_TAG_MISMATCH)
-				if (soap_in_PointerToturb1__ArrayOfPoint3(soap, "turb1:GetPositionDBEvaluationResult", &a->GetPositionDBEvaluationResult, "turb1:ArrayOfPoint3"))
-				{	soap_flag_GetPositionDBEvaluationResult--;
-					continue;
-				}
-			soap_check_result(soap, "turb1:GetPositionDBEvaluationResult");
-			if (soap->error == SOAP_TAG_MISMATCH)
-				soap->error = soap_ignore_element(soap);
-			if (soap->error == SOAP_NO_TAG)
-				break;
-			if (soap->error)
-				return NULL;
-		}
-		if (soap_element_end_in(soap, tag))
-			return NULL;
-	}
-	else
-	{	a = (struct _turb1__GetPositionDBEvaluationResponse *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE__turb1__GetPositionDBEvaluationResponse, 0, sizeof(struct _turb1__GetPositionDBEvaluationResponse), 0, NULL);
-		if (soap->body && soap_element_end_in(soap, tag))
-			return NULL;
-	}
-	return a;
-}
-
-SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetPositionDBEvaluationResponse(struct soap *soap, const struct _turb1__GetPositionDBEvaluationResponse *a, const char *tag, const char *type)
-{
-	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE__turb1__GetPositionDBEvaluationResponse);
-	if (soap_out__turb1__GetPositionDBEvaluationResponse(soap, tag?tag:"turb1:GetPositionDBEvaluationResponse", id, a, type))
-		return soap->error;
-	return soap_putindependent(soap);
-}
-
-SOAP_FMAC3 struct _turb1__GetPositionDBEvaluationResponse * SOAP_FMAC4 soap_get__turb1__GetPositionDBEvaluationResponse(struct soap *soap, struct _turb1__GetPositionDBEvaluationResponse *p, const char *tag, const char *type)
-{
-	if ((p = soap_in__turb1__GetPositionDBEvaluationResponse(soap, tag, p, type)))
-		if (soap_getindependent(soap))
-			return NULL;
-	return p;
-}
-
-SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetPositionDBEvaluation(struct soap *soap, struct _turb1__GetPositionDBEvaluation *a)
-{
-	(void)soap; (void)a; /* appease -Wall -Werror */
-	soap_default_string(soap, &a->authToken);
-	soap_default_string(soap, &a->dataset);
-	soap_default_float(soap, &a->StartTime);
-	soap_default_float(soap, &a->EndTime);
-	soap_default_float(soap, &a->dt);
-	soap_default_turb1__SpatialInterpolation(soap, &a->spatialInterpolation);
-	a->points = NULL;
-}
-
-SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetPositionDBEvaluation(struct soap *soap, const struct _turb1__GetPositionDBEvaluation *a)
-{
-	(void)soap; (void)a; /* appease -Wall -Werror */
-	soap_serialize_string(soap, &a->authToken);
-	soap_serialize_string(soap, &a->dataset);
-	soap_serialize_PointerToturb1__ArrayOfPoint3(soap, &a->points);
-}
-
-SOAP_FMAC3 int SOAP_FMAC4 soap_out__turb1__GetPositionDBEvaluation(struct soap *soap, const char *tag, int id, const struct _turb1__GetPositionDBEvaluation *a, const char *type)
-{
-	(void)soap; (void)tag; (void)id; (void)type;
-	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE__turb1__GetPositionDBEvaluation), type))
-		return soap->error;
-	if (soap_out_string(soap, "turb1:authToken", -1, &a->authToken, ""))
-		return soap->error;
-	if (soap_out_string(soap, "turb1:dataset", -1, &a->dataset, ""))
-		return soap->error;
-	if (soap_out_float(soap, "turb1:StartTime", -1, &a->StartTime, ""))
-		return soap->error;
-	if (soap_out_float(soap, "turb1:EndTime", -1, &a->EndTime, ""))
-		return soap->error;
-	if (soap_out_float(soap, "turb1:dt", -1, &a->dt, ""))
-		return soap->error;
-	if (soap_out_turb1__SpatialInterpolation(soap, "turb1:spatialInterpolation", -1, &a->spatialInterpolation, ""))
-		return soap->error;
-	if (soap_out_PointerToturb1__ArrayOfPoint3(soap, "turb1:points", -1, &a->points, ""))
-		return soap->error;
-	return soap_element_end_out(soap, tag);
-}
-
-SOAP_FMAC3 struct _turb1__GetPositionDBEvaluation * SOAP_FMAC4 soap_in__turb1__GetPositionDBEvaluation(struct soap *soap, const char *tag, struct _turb1__GetPositionDBEvaluation *a, const char *type)
-{
-	size_t soap_flag_authToken = 1;
-	size_t soap_flag_dataset = 1;
-	size_t soap_flag_StartTime = 1;
-	size_t soap_flag_EndTime = 1;
-	size_t soap_flag_dt = 1;
-	size_t soap_flag_spatialInterpolation = 1;
-	size_t soap_flag_points = 1;
-	if (soap_element_begin_in(soap, tag, 0, type))
-		return NULL;
-	a = (struct _turb1__GetPositionDBEvaluation *)soap_id_enter(soap, soap->id, a, SOAP_TYPE__turb1__GetPositionDBEvaluation, sizeof(struct _turb1__GetPositionDBEvaluation), 0, NULL, NULL, NULL);
-	if (!a)
-		return NULL;
-	soap_default__turb1__GetPositionDBEvaluation(soap, a);
-	if (soap->body && !*soap->href)
-	{
-		for (;;)
-		{	soap->error = SOAP_TAG_MISMATCH;
-			if (soap_flag_authToken && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
-				if (soap_in_string(soap, "turb1:authToken", &a->authToken, "xsd:string"))
-				{	soap_flag_authToken--;
-					continue;
-				}
-			if (soap_flag_dataset && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
-				if (soap_in_string(soap, "turb1:dataset", &a->dataset, "xsd:string"))
-				{	soap_flag_dataset--;
-					continue;
-				}
-			if (soap_flag_StartTime && soap->error == SOAP_TAG_MISMATCH)
-				if (soap_in_float(soap, "turb1:StartTime", &a->StartTime, "xsd:float"))
-				{	soap_flag_StartTime--;
-					continue;
-				}
-			if (soap_flag_EndTime && soap->error == SOAP_TAG_MISMATCH)
-				if (soap_in_float(soap, "turb1:EndTime", &a->EndTime, "xsd:float"))
-				{	soap_flag_EndTime--;
-					continue;
-				}
-			if (soap_flag_dt && soap->error == SOAP_TAG_MISMATCH)
-				if (soap_in_float(soap, "turb1:dt", &a->dt, "xsd:float"))
-				{	soap_flag_dt--;
-					continue;
-				}
-			if (soap_flag_spatialInterpolation && soap->error == SOAP_TAG_MISMATCH)
-				if (soap_in_turb1__SpatialInterpolation(soap, "turb1:spatialInterpolation", &a->spatialInterpolation, "turb1:SpatialInterpolation"))
-				{	soap_flag_spatialInterpolation--;
-					continue;
-				}
-			if (soap_flag_points && soap->error == SOAP_TAG_MISMATCH)
-				if (soap_in_PointerToturb1__ArrayOfPoint3(soap, "turb1:points", &a->points, "turb1:ArrayOfPoint3"))
-				{	soap_flag_points--;
-					continue;
-				}
-			if (soap->error == SOAP_TAG_MISMATCH)
-				soap->error = soap_ignore_element(soap);
-			if (soap->error == SOAP_NO_TAG)
-				break;
-			if (soap->error)
-				return NULL;
-		}
-		if (soap_element_end_in(soap, tag))
-			return NULL;
-	}
-	else
-	{	a = (struct _turb1__GetPositionDBEvaluation *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE__turb1__GetPositionDBEvaluation, 0, sizeof(struct _turb1__GetPositionDBEvaluation), 0, NULL);
-		if (soap->body && soap_element_end_in(soap, tag))
-			return NULL;
-	}
-	if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_StartTime > 0 || soap_flag_EndTime > 0 || soap_flag_dt > 0 || soap_flag_spatialInterpolation > 0))
-	{	soap->error = SOAP_OCCURS;
-		return NULL;
-	}
-	return a;
-}
-
-SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetPositionDBEvaluation(struct soap *soap, const struct _turb1__GetPositionDBEvaluation *a, const char *tag, const char *type)
-{
-	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE__turb1__GetPositionDBEvaluation);
-	if (soap_out__turb1__GetPositionDBEvaluation(soap, tag?tag:"turb1:GetPositionDBEvaluation", id, a, type))
-		return soap->error;
-	return soap_putindependent(soap);
-}
-
-SOAP_FMAC3 struct _turb1__GetPositionDBEvaluation * SOAP_FMAC4 soap_get__turb1__GetPositionDBEvaluation(struct soap *soap, struct _turb1__GetPositionDBEvaluation *p, const char *tag, const char *type)
-{
-	if ((p = soap_in__turb1__GetPositionDBEvaluation(soap, tag, p, type)))
 		if (soap_getindependent(soap))
 			return NULL;
 	return p;
@@ -14469,108 +14092,6 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetLaplacianOfGradient(struc
 SOAP_FMAC3 struct _turb1__GetLaplacianOfGradient ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetLaplacianOfGradient(struct soap *soap, struct _turb1__GetLaplacianOfGradient **p, const char *tag, const char *type)
 {
 	if ((p = soap_in_PointerTo_turb1__GetLaplacianOfGradient(soap, tag, p, type)))
-		if (soap_getindependent(soap))
-			return NULL;
-	return p;
-}
-
-SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetPositionDBEvaluationResponse(struct soap *soap, struct _turb1__GetPositionDBEvaluationResponse *const*a)
-{
-	if (!soap_reference(soap, *a, SOAP_TYPE__turb1__GetPositionDBEvaluationResponse))
-		soap_serialize__turb1__GetPositionDBEvaluationResponse(soap, *a);
-}
-
-SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetPositionDBEvaluationResponse(struct soap *soap, const char *tag, int id, struct _turb1__GetPositionDBEvaluationResponse *const*a, const char *type)
-{
-	id = soap_element_id(soap, tag, id, *a, NULL, 0, type, SOAP_TYPE__turb1__GetPositionDBEvaluationResponse);
-	if (id < 0)
-		return soap->error;
-	return soap_out__turb1__GetPositionDBEvaluationResponse(soap, tag, id, *a, type);
-}
-
-SOAP_FMAC3 struct _turb1__GetPositionDBEvaluationResponse ** SOAP_FMAC4 soap_in_PointerTo_turb1__GetPositionDBEvaluationResponse(struct soap *soap, const char *tag, struct _turb1__GetPositionDBEvaluationResponse **a, const char *type)
-{
-	if (soap_element_begin_in(soap, tag, 1, NULL))
-		return NULL;
-	if (!a)
-		if (!(a = (struct _turb1__GetPositionDBEvaluationResponse **)soap_malloc(soap, sizeof(struct _turb1__GetPositionDBEvaluationResponse *))))
-			return NULL;
-	*a = NULL;
-	if (!soap->null && *soap->href != '#')
-	{	soap_revert(soap);
-		if (!(*a = soap_in__turb1__GetPositionDBEvaluationResponse(soap, tag, *a, type)))
-			return NULL;
-	}
-	else
-	{	a = (struct _turb1__GetPositionDBEvaluationResponse **)soap_id_lookup(soap, soap->href, (void**)a, SOAP_TYPE__turb1__GetPositionDBEvaluationResponse, sizeof(struct _turb1__GetPositionDBEvaluationResponse), 0);
-		if (soap->body && soap_element_end_in(soap, tag))
-			return NULL;
-	}
-	return a;
-}
-
-SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetPositionDBEvaluationResponse(struct soap *soap, struct _turb1__GetPositionDBEvaluationResponse *const*a, const char *tag, const char *type)
-{
-	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE_PointerTo_turb1__GetPositionDBEvaluationResponse);
-	if (soap_out_PointerTo_turb1__GetPositionDBEvaluationResponse(soap, tag?tag:"turb1:GetPositionDBEvaluationResponse", id, a, type))
-		return soap->error;
-	return soap_putindependent(soap);
-}
-
-SOAP_FMAC3 struct _turb1__GetPositionDBEvaluationResponse ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetPositionDBEvaluationResponse(struct soap *soap, struct _turb1__GetPositionDBEvaluationResponse **p, const char *tag, const char *type)
-{
-	if ((p = soap_in_PointerTo_turb1__GetPositionDBEvaluationResponse(soap, tag, p, type)))
-		if (soap_getindependent(soap))
-			return NULL;
-	return p;
-}
-
-SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetPositionDBEvaluation(struct soap *soap, struct _turb1__GetPositionDBEvaluation *const*a)
-{
-	if (!soap_reference(soap, *a, SOAP_TYPE__turb1__GetPositionDBEvaluation))
-		soap_serialize__turb1__GetPositionDBEvaluation(soap, *a);
-}
-
-SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetPositionDBEvaluation(struct soap *soap, const char *tag, int id, struct _turb1__GetPositionDBEvaluation *const*a, const char *type)
-{
-	id = soap_element_id(soap, tag, id, *a, NULL, 0, type, SOAP_TYPE__turb1__GetPositionDBEvaluation);
-	if (id < 0)
-		return soap->error;
-	return soap_out__turb1__GetPositionDBEvaluation(soap, tag, id, *a, type);
-}
-
-SOAP_FMAC3 struct _turb1__GetPositionDBEvaluation ** SOAP_FMAC4 soap_in_PointerTo_turb1__GetPositionDBEvaluation(struct soap *soap, const char *tag, struct _turb1__GetPositionDBEvaluation **a, const char *type)
-{
-	if (soap_element_begin_in(soap, tag, 1, NULL))
-		return NULL;
-	if (!a)
-		if (!(a = (struct _turb1__GetPositionDBEvaluation **)soap_malloc(soap, sizeof(struct _turb1__GetPositionDBEvaluation *))))
-			return NULL;
-	*a = NULL;
-	if (!soap->null && *soap->href != '#')
-	{	soap_revert(soap);
-		if (!(*a = soap_in__turb1__GetPositionDBEvaluation(soap, tag, *a, type)))
-			return NULL;
-	}
-	else
-	{	a = (struct _turb1__GetPositionDBEvaluation **)soap_id_lookup(soap, soap->href, (void**)a, SOAP_TYPE__turb1__GetPositionDBEvaluation, sizeof(struct _turb1__GetPositionDBEvaluation), 0);
-		if (soap->body && soap_element_end_in(soap, tag))
-			return NULL;
-	}
-	return a;
-}
-
-SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetPositionDBEvaluation(struct soap *soap, struct _turb1__GetPositionDBEvaluation *const*a, const char *tag, const char *type)
-{
-	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE_PointerTo_turb1__GetPositionDBEvaluation);
-	if (soap_out_PointerTo_turb1__GetPositionDBEvaluation(soap, tag?tag:"turb1:GetPositionDBEvaluation", id, a, type))
-		return soap->error;
-	return soap_putindependent(soap);
-}
-
-SOAP_FMAC3 struct _turb1__GetPositionDBEvaluation ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetPositionDBEvaluation(struct soap *soap, struct _turb1__GetPositionDBEvaluation **p, const char *tag, const char *type)
-{
-	if ((p = soap_in_PointerTo_turb1__GetPositionDBEvaluation(soap, tag, p, type)))
 		if (soap_getindependent(soap))
 			return NULL;
 	return p;
