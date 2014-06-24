@@ -1493,8 +1493,8 @@ int getValueLocal(TurbDataset dataset, TurbField func, enum SpatialInterpolation
       getSingleValue(dataset, func, position[i], timestep, spatial, result + i*comps);
     }
   }
-  return 0;
   freeLoadedMemory();
+  return 0;
 }
 
 int getVelocityAndPressure (char *authToken,
@@ -1893,10 +1893,16 @@ int turblibAddLocalSource(char *fname)
   H5Dclose(set_size);
   H5Dclose(set_contents);
   
-  cutoutFile** last = &__turblib_cutouts;
-  while(*last != NULL) last = &((*last)->next);
-  
-  *last = src;
+  if (__turblib_cutouts == NULL) {
+      __turblib_cutouts = src;
+    }
+  else {
+    cutoutFile* last = __turblib_cutouts;
+    while(last->next != NULL)
+      last = last->next;
+
+    last->next = src;
+  }
 
   return 0;
 }
