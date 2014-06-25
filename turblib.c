@@ -1838,6 +1838,7 @@ int turblibAddLocalSource(char *fname)
   if (file < 0) return -1;
   
   cutoutFile *src = malloc(sizeof(cutoutFile));
+  src->next = NULL;
   src->file = file;
   
   //Determine which set
