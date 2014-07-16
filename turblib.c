@@ -42,13 +42,15 @@ int __turblib_prefetching = 0;
 //Linked list of all added cutout files
 cutoutFile* __turblib_cutouts = NULL;
 
-set_info DataSets[6] = {
+set_info DataSets[8] = {
  { 0, 0, 0 },
  { 2.0f * 3.14159265358979f / 1024.0f, .002f,  1024 }, //isotropic1024old
  { 2.0f * 3.14159265358979f / 1024.0f, .0002f,  1024 }, //isotropicfine_old
  { 2.0f * 3.14159265358979f / 1024.0f, .0025f, 1024 },  //mhd1024
  { 2.0f * 3.14159265358979f / 1024.0f, .002f,  1024 }, //isotropic1024coarse
- { 2.0f * 3.14159265358979f / 1024.0f, .0002f, 1024 } //isotropic1024fine
+ { 2.0f * 3.14159265358979f / 1024.0f, .0002f, 1024 }, //isotropic1024fine
+ { 0, 0, 0 },
+ { 2.0f * 3.14159265358979f / 1024.0f, .0025f, 1024 } //custom_dataset
 };
 
 turb_fn TurbFields[4] = 
@@ -1834,6 +1836,7 @@ int turblibaddlocalsource_ (char *fname)
 
 int turblibAddLocalSource(char *fname)
 {
+  fprintf(stderr, "opening %s\n", fname);
   hid_t file = H5Fopen(fname, H5F_ACC_RDONLY, H5P_DEFAULT);
   if (file < 0) return -1;
   
@@ -2132,6 +2135,7 @@ TurbDataset getDataSet(char *name)
   if (strcmp("isotropic1024fine", name) == 0) return isotropic1024fine;
   if (strcmp("mhd1024", name) == 0) return mhd1024;
   if (strcmp("channel", name) == 0) return channel;
+  if (strcmp("custom", name) == 0) return custom_dataset;
   
   return -1;
 }
@@ -2174,6 +2178,7 @@ int isDataAvailable(TurbDataset set, TurbField function, int count, float positi
       }
 
     int timestep = (int)ceil(time/dt - .5f);
+//    fprintf(stderr, "timestep is %d %f %f\n", timestep, time, dt);
   
     if (temporal == PCHIPInt)
     {
@@ -2309,6 +2314,11 @@ cutoutFile* findDataBlock(TurbDataset dataset, TurbField function, int x, int y,
 
 int isWithinFile(TurbDataset dataset, TurbField function, int x, int y, int z, int xw, int yw, int zw, int timestep, cutoutFile* file)
 {
+  //fprintf(stderr, "\nisWithinFile, %d %d\n", dataset, file->dataset);
+  //fprintf(stderr,   "isWithinFile, %d %d %d\n", timestep, file->start[0], file->size[0]);
+  //fprintf(stderr,   "isWithinFile, %d %d %d\n", x, file->start[1], file->size[1]);
+  //fprintf(stderr,   "isWithinFile, %d %d %d\n", y, file->start[2], file->size[2]);
+  //fprintf(stderr,   "isWithinFile, %d %d %d\n", z, file->start[3], file->size[3]);
     if (file->dataset == dataset && 
        (function == turb_vp ? file->contents[turb_pressure] && file->contents[turb_velocity] : file->contents[function]) && 
        timestep >= file->start[0] && timestep           <= (file->start[0] + file->size[0]-1) && 
