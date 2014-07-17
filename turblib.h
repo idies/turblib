@@ -77,7 +77,8 @@ typedef enum
   mhd1024 = 3,
   isotropic1024coarse = 4,
   isotropic1024fine = 5,
-  channel = 6
+  channel = 6,
+  custom_dataset = 7
 } TurbDataset;
 
 typedef enum
