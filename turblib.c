@@ -2178,7 +2178,6 @@ int isDataAvailable(TurbDataset set, TurbField function, int count, float positi
       }
 
     int timestep = (int)ceil(time/dt - .5f);
-//    fprintf(stderr, "timestep is %d %f %f\n", timestep, time, dt);
   
     if (temporal == PCHIPInt)
     {
@@ -2314,19 +2313,34 @@ cutoutFile* findDataBlock(TurbDataset dataset, TurbField function, int x, int y,
 
 int isWithinFile(TurbDataset dataset, TurbField function, int x, int y, int z, int xw, int yw, int zw, int timestep, cutoutFile* file)
 {
-  //fprintf(stderr, "\nisWithinFile, %d %d\n", dataset, file->dataset);
-  //fprintf(stderr,   "isWithinFile, %d %d %d\n", timestep, file->start[0], file->size[0]);
-  //fprintf(stderr,   "isWithinFile, %d %d %d\n", x, file->start[1], file->size[1]);
-  //fprintf(stderr,   "isWithinFile, %d %d %d\n", y, file->start[2], file->size[2]);
-  //fprintf(stderr,   "isWithinFile, %d %d %d\n", z, file->start[3], file->size[3]);
-    if (file->dataset == dataset && 
-       (function == turb_vp ? file->contents[turb_pressure] && file->contents[turb_velocity] : file->contents[function]) && 
+  //int result;
+  //result = (file->dataset == dataset);
+  ////fprintf(stderr,   "\nisWithinFile, %s\n", result ? "true" : "false");
+  //result = result && 
+  //     (function == turb_vp ? file->contents[turb_pressure] && file->contents[turb_velocity] : file->contents[function]);
+  ////fprintf(stderr,   "isWithinFile, %s\n", result ? "true" : "false");
+  //result = result && 
+  //     timestep >= file->start[0] && timestep           <= (file->start[0] + file->size[0]-1);
+  ////fprintf(stderr,   "isWithinFile, %s\n", result ? "true" : "false");
+  //result = result && 
+  //     x        >= file->start[1] && (x + xw) <= (file->start[1] + file->size[1]);
+  ////fprintf(stderr,   "isWithinFile, %s\n", result ? "true" : "false");
+  //result = result && 
+  //     y        >= file->start[2] && (y + yw) <= (file->start[2] + file->size[2]);
+  ////fprintf(stderr,   "isWithinFile, %s\n", result ? "true" : "false");
+  //result = result &&
+  //     z        >= file->start[3] && (z + zw) <= (file->start[3] + file->size[3]);
+  ////fprintf(stderr,   "isWithinFile, %s\n", result ? "true" : "false");
+  ////fprintf(stderr,   "isWithinFile, %d %d %d %d\n", z, zw, file->start[3], file->size[3]);
+  //if (result)
+  if ((file->dataset == dataset) && 
+      (function == turb_vp ? file->contents[turb_pressure] && file->contents[turb_velocity] : file->contents[function]) && 
        timestep >= file->start[0] && timestep           <= (file->start[0] + file->size[0]-1) && 
        x        >= file->start[1] && (x + xw) <= (file->start[1] + file->size[1]) && 
        y        >= file->start[2] && (y + yw) <= (file->start[2] + file->size[2]) &&
        z        >= file->start[3] && (z + zw) <= (file->start[3] + file->size[3]))
-         return 1;
-    return 0;
+    return 1;
+  return 0;
 }
 
 /* zyx order */
