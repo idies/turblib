@@ -30,7 +30,7 @@ extern "C" {
 #ifndef SOAP_TYPE_turb1__SpatialInterpolation
 #define SOAP_TYPE_turb1__SpatialInterpolation (11)
 /* turb1:SpatialInterpolation */
-enum turb1__SpatialInterpolation {turb1__SpatialInterpolation__None = 0, turb1__SpatialInterpolation__None_USCOREFd4 = 1, turb1__SpatialInterpolation__None_USCOREFd6 = 2, turb1__SpatialInterpolation__None_USCOREFd8 = 3, turb1__SpatialInterpolation__Fd4Lag4 = 4, turb1__SpatialInterpolation__Lag4 = 5, turb1__SpatialInterpolation__Lag6 = 6, turb1__SpatialInterpolation__Lag8 = 7};
+enum turb1__SpatialInterpolation {turb1__SpatialInterpolation__None = 0, turb1__SpatialInterpolation__None_USCOREFd4 = 1, turb1__SpatialInterpolation__None_USCOREFd6 = 2, turb1__SpatialInterpolation__None_USCOREFd8 = 3, turb1__SpatialInterpolation__Fd4Lag4 = 4, turb1__SpatialInterpolation__Lag4 = 5, turb1__SpatialInterpolation__Lag6 = 6, turb1__SpatialInterpolation__Lag8 = 7, turb1__SpatialInterpolation__M1Q4 = 8, turb1__SpatialInterpolation__M2Q4 = 9, turb1__SpatialInterpolation__M3Q4 = 10, turb1__SpatialInterpolation__M4Q4 = 11, turb1__SpatialInterpolation__M1Q6 = 12, turb1__SpatialInterpolation__M2Q6 = 13, turb1__SpatialInterpolation__M3Q6 = 14, turb1__SpatialInterpolation__M4Q6 = 15, turb1__SpatialInterpolation__M1Q8 = 16, turb1__SpatialInterpolation__M2Q8 = 17, turb1__SpatialInterpolation__M3Q8 = 18, turb1__SpatialInterpolation__M4Q8 = 19, turb1__SpatialInterpolation__M1Q10 = 20, turb1__SpatialInterpolation__M2Q10 = 21, turb1__SpatialInterpolation__M3Q10 = 22, turb1__SpatialInterpolation__M4Q10 = 23, turb1__SpatialInterpolation__M1Q12 = 24, turb1__SpatialInterpolation__M2Q12 = 25, turb1__SpatialInterpolation__M3Q12 = 26, turb1__SpatialInterpolation__M4Q12 = 27, turb1__SpatialInterpolation__M1Q14 = 28, turb1__SpatialInterpolation__M2Q14 = 29, turb1__SpatialInterpolation__M3Q14 = 30, turb1__SpatialInterpolation__M4Q14 = 31};
 #endif
 
 #ifndef SOAP_TYPE_turb1__TemporalInterpolation
@@ -131,8 +131,32 @@ struct turb1__Pressure
 };
 #endif
 
+#ifndef SOAP_TYPE_turb1__ArrayOfPressureHessian
+#define SOAP_TYPE_turb1__ArrayOfPressureHessian (23)
+/* turb1:ArrayOfPressureHessian */
+struct turb1__ArrayOfPressureHessian
+{
+	int __sizePressureHessian;	/* sequence of elements <PressureHessian> */
+	struct turb1__PressureHessian *PressureHessian;	/* optional element of type turb1:PressureHessian */
+};
+#endif
+
+#ifndef SOAP_TYPE_turb1__PressureHessian
+#define SOAP_TYPE_turb1__PressureHessian (24)
+/* turb1:PressureHessian */
+struct turb1__PressureHessian
+{
+	float d2pdxdx;	/* required element of type xsd:float */
+	float d2pdxdy;	/* required element of type xsd:float */
+	float d2pdxdz;	/* required element of type xsd:float */
+	float d2pdydy;	/* required element of type xsd:float */
+	float d2pdydz;	/* required element of type xsd:float */
+	float d2pdzdz;	/* required element of type xsd:float */
+};
+#endif
+
 #ifndef SOAP_TYPE_turb1__ArrayOfVector3P
-#define SOAP_TYPE_turb1__ArrayOfVector3P (23)
+#define SOAP_TYPE_turb1__ArrayOfVector3P (26)
 /* turb1:ArrayOfVector3P */
 struct turb1__ArrayOfVector3P
 {
@@ -142,7 +166,7 @@ struct turb1__ArrayOfVector3P
 #endif
 
 #ifndef SOAP_TYPE_turb1__Vector3P
-#define SOAP_TYPE_turb1__Vector3P (24)
+#define SOAP_TYPE_turb1__Vector3P (27)
 /* turb1:Vector3P */
 struct turb1__Vector3P
 {
@@ -154,7 +178,7 @@ struct turb1__Vector3P
 #endif
 
 #ifndef SOAP_TYPE_turb1__ArrayOfVelocityGradient
-#define SOAP_TYPE_turb1__ArrayOfVelocityGradient (26)
+#define SOAP_TYPE_turb1__ArrayOfVelocityGradient (29)
 /* turb1:ArrayOfVelocityGradient */
 struct turb1__ArrayOfVelocityGradient
 {
@@ -164,7 +188,7 @@ struct turb1__ArrayOfVelocityGradient
 #endif
 
 #ifndef SOAP_TYPE_turb1__VelocityGradient
-#define SOAP_TYPE_turb1__VelocityGradient (27)
+#define SOAP_TYPE_turb1__VelocityGradient (30)
 /* turb1:VelocityGradient */
 struct turb1__VelocityGradient
 {
@@ -177,30 +201,6 @@ struct turb1__VelocityGradient
 	float duzdx;	/* required element of type xsd:float */
 	float duzdy;	/* required element of type xsd:float */
 	float duzdz;	/* required element of type xsd:float */
-};
-#endif
-
-#ifndef SOAP_TYPE_turb1__ArrayOfPressureHessian
-#define SOAP_TYPE_turb1__ArrayOfPressureHessian (29)
-/* turb1:ArrayOfPressureHessian */
-struct turb1__ArrayOfPressureHessian
-{
-	int __sizePressureHessian;	/* sequence of elements <PressureHessian> */
-	struct turb1__PressureHessian *PressureHessian;	/* optional element of type turb1:PressureHessian */
-};
-#endif
-
-#ifndef SOAP_TYPE_turb1__PressureHessian
-#define SOAP_TYPE_turb1__PressureHessian (30)
-/* turb1:PressureHessian */
-struct turb1__PressureHessian
-{
-	float d2pdxdx;	/* required element of type xsd:float */
-	float d2pdxdy;	/* required element of type xsd:float */
-	float d2pdxdz;	/* required element of type xsd:float */
-	float d2pdydy;	/* required element of type xsd:float */
-	float d2pdydz;	/* required element of type xsd:float */
-	float d2pdzdz;	/* required element of type xsd:float */
 };
 #endif
 
@@ -264,8 +264,30 @@ struct turb1__SGSTensor
 };
 #endif
 
+#ifndef SOAP_TYPE_turb1__ArrayOfThresholdInfo
+#define SOAP_TYPE_turb1__ArrayOfThresholdInfo (38)
+/* turb1:ArrayOfThresholdInfo */
+struct turb1__ArrayOfThresholdInfo
+{
+	int __sizeThresholdInfo;	/* sequence of elements <ThresholdInfo> */
+	struct turb1__ThresholdInfo *ThresholdInfo;	/* optional element of type turb1:ThresholdInfo */
+};
+#endif
+
+#ifndef SOAP_TYPE_turb1__ThresholdInfo
+#define SOAP_TYPE_turb1__ThresholdInfo (39)
+/* turb1:ThresholdInfo */
+struct turb1__ThresholdInfo
+{
+	int x;	/* required element of type xsd:int */
+	int y;	/* required element of type xsd:int */
+	int z;	/* required element of type xsd:int */
+	float value;	/* required element of type xsd:float */
+};
+#endif
+
 #ifndef SOAP_TYPE__turb1__NullOp
-#define SOAP_TYPE__turb1__NullOp (38)
+#define SOAP_TYPE__turb1__NullOp (41)
 /* turb1:NullOp */
 struct _turb1__NullOp
 {
@@ -275,7 +297,7 @@ struct _turb1__NullOp
 #endif
 
 #ifndef SOAP_TYPE__turb1__NullOpResponse
-#define SOAP_TYPE__turb1__NullOpResponse (40)
+#define SOAP_TYPE__turb1__NullOpResponse (43)
 /* turb1:NullOpResponse */
 struct _turb1__NullOpResponse
 {
@@ -284,7 +306,7 @@ struct _turb1__NullOpResponse
 #endif
 
 #ifndef SOAP_TYPE__turb1__GetVelocity
-#define SOAP_TYPE__turb1__GetVelocity (42)
+#define SOAP_TYPE__turb1__GetVelocity (45)
 /* turb1:GetVelocity */
 struct _turb1__GetVelocity
 {
@@ -298,7 +320,7 @@ struct _turb1__GetVelocity
 #endif
 
 #ifndef SOAP_TYPE__turb1__GetVelocityResponse
-#define SOAP_TYPE__turb1__GetVelocityResponse (43)
+#define SOAP_TYPE__turb1__GetVelocityResponse (46)
 /* turb1:GetVelocityResponse */
 struct _turb1__GetVelocityResponse
 {
@@ -307,7 +329,7 @@ struct _turb1__GetVelocityResponse
 #endif
 
 #ifndef SOAP_TYPE__turb1__GetVelocityBatch
-#define SOAP_TYPE__turb1__GetVelocityBatch (44)
+#define SOAP_TYPE__turb1__GetVelocityBatch (47)
 /* turb1:GetVelocityBatch */
 struct _turb1__GetVelocityBatch
 {
@@ -321,7 +343,7 @@ struct _turb1__GetVelocityBatch
 #endif
 
 #ifndef SOAP_TYPE__turb1__GetVelocityBatchResponse
-#define SOAP_TYPE__turb1__GetVelocityBatchResponse (45)
+#define SOAP_TYPE__turb1__GetVelocityBatchResponse (48)
 /* turb1:GetVelocityBatchResponse */
 struct _turb1__GetVelocityBatchResponse
 {
@@ -330,7 +352,7 @@ struct _turb1__GetVelocityBatchResponse
 #endif
 
 #ifndef SOAP_TYPE__turb1__GetRawVelocity
-#define SOAP_TYPE__turb1__GetRawVelocity (46)
+#define SOAP_TYPE__turb1__GetRawVelocity (49)
 /* turb1:GetRawVelocity */
 struct _turb1__GetRawVelocity
 {
@@ -347,7 +369,7 @@ struct _turb1__GetRawVelocity
 #endif
 
 #ifndef SOAP_TYPE__turb1__GetRawVelocityResponse
-#define SOAP_TYPE__turb1__GetRawVelocityResponse (47)
+#define SOAP_TYPE__turb1__GetRawVelocityResponse (50)
 /* turb1:GetRawVelocityResponse */
 struct _turb1__GetRawVelocityResponse
 {
@@ -356,7 +378,7 @@ struct _turb1__GetRawVelocityResponse
 #endif
 
 #ifndef SOAP_TYPE__turb1__GetPressure
-#define SOAP_TYPE__turb1__GetPressure (49)
+#define SOAP_TYPE__turb1__GetPressure (52)
 /* turb1:GetPressure */
 struct _turb1__GetPressure
 {
@@ -370,7 +392,7 @@ struct _turb1__GetPressure
 #endif
 
 #ifndef SOAP_TYPE__turb1__GetPressureResponse
-#define SOAP_TYPE__turb1__GetPressureResponse (50)
+#define SOAP_TYPE__turb1__GetPressureResponse (53)
 /* turb1:GetPressureResponse */
 struct _turb1__GetPressureResponse
 {
@@ -379,7 +401,7 @@ struct _turb1__GetPressureResponse
 #endif
 
 #ifndef SOAP_TYPE__turb1__GetRawPressure
-#define SOAP_TYPE__turb1__GetRawPressure (52)
+#define SOAP_TYPE__turb1__GetRawPressure (55)
 /* turb1:GetRawPressure */
 struct _turb1__GetRawPressure
 {
@@ -396,7 +418,7 @@ struct _turb1__GetRawPressure
 #endif
 
 #ifndef SOAP_TYPE__turb1__GetRawPressureResponse
-#define SOAP_TYPE__turb1__GetRawPressureResponse (53)
+#define SOAP_TYPE__turb1__GetRawPressureResponse (56)
 /* turb1:GetRawPressureResponse */
 struct _turb1__GetRawPressureResponse
 {
@@ -405,7 +427,7 @@ struct _turb1__GetRawPressureResponse
 #endif
 
 #ifndef SOAP_TYPE__turb1__GetMagneticField
-#define SOAP_TYPE__turb1__GetMagneticField (54)
+#define SOAP_TYPE__turb1__GetMagneticField (57)
 /* turb1:GetMagneticField */
 struct _turb1__GetMagneticField
 {
@@ -419,7 +441,7 @@ struct _turb1__GetMagneticField
 #endif
 
 #ifndef SOAP_TYPE__turb1__GetMagneticFieldResponse
-#define SOAP_TYPE__turb1__GetMagneticFieldResponse (55)
+#define SOAP_TYPE__turb1__GetMagneticFieldResponse (58)
 /* turb1:GetMagneticFieldResponse */
 struct _turb1__GetMagneticFieldResponse
 {
@@ -428,7 +450,7 @@ struct _turb1__GetMagneticFieldResponse
 #endif
 
 #ifndef SOAP_TYPE__turb1__GetRawMagneticField
-#define SOAP_TYPE__turb1__GetRawMagneticField (56)
+#define SOAP_TYPE__turb1__GetRawMagneticField (59)
 /* turb1:GetRawMagneticField */
 struct _turb1__GetRawMagneticField
 {
@@ -445,7 +467,7 @@ struct _turb1__GetRawMagneticField
 #endif
 
 #ifndef SOAP_TYPE__turb1__GetRawMagneticFieldResponse
-#define SOAP_TYPE__turb1__GetRawMagneticFieldResponse (57)
+#define SOAP_TYPE__turb1__GetRawMagneticFieldResponse (60)
 /* turb1:GetRawMagneticFieldResponse */
 struct _turb1__GetRawMagneticFieldResponse
 {
@@ -454,7 +476,7 @@ struct _turb1__GetRawMagneticFieldResponse
 #endif
 
 #ifndef SOAP_TYPE__turb1__GetVectorPotential
-#define SOAP_TYPE__turb1__GetVectorPotential (58)
+#define SOAP_TYPE__turb1__GetVectorPotential (61)
 /* turb1:GetVectorPotential */
 struct _turb1__GetVectorPotential
 {
@@ -468,7 +490,7 @@ struct _turb1__GetVectorPotential
 #endif
 
 #ifndef SOAP_TYPE__turb1__GetVectorPotentialResponse
-#define SOAP_TYPE__turb1__GetVectorPotentialResponse (59)
+#define SOAP_TYPE__turb1__GetVectorPotentialResponse (62)
 /* turb1:GetVectorPotentialResponse */
 struct _turb1__GetVectorPotentialResponse
 {
@@ -477,7 +499,7 @@ struct _turb1__GetVectorPotentialResponse
 #endif
 
 #ifndef SOAP_TYPE__turb1__GetRawVectorPotential
-#define SOAP_TYPE__turb1__GetRawVectorPotential (60)
+#define SOAP_TYPE__turb1__GetRawVectorPotential (63)
 /* turb1:GetRawVectorPotential */
 struct _turb1__GetRawVectorPotential
 {
@@ -494,7 +516,7 @@ struct _turb1__GetRawVectorPotential
 #endif
 
 #ifndef SOAP_TYPE__turb1__GetRawVectorPotentialResponse
-#define SOAP_TYPE__turb1__GetRawVectorPotentialResponse (61)
+#define SOAP_TYPE__turb1__GetRawVectorPotentialResponse (64)
 /* turb1:GetRawVectorPotentialResponse */
 struct _turb1__GetRawVectorPotentialResponse
 {
@@ -502,8 +524,103 @@ struct _turb1__GetRawVectorPotentialResponse
 };
 #endif
 
+#ifndef SOAP_TYPE__turb1__GetDensity
+#define SOAP_TYPE__turb1__GetDensity (65)
+/* turb1:GetDensity */
+struct _turb1__GetDensity
+{
+	char *authToken;	/* optional element of type xsd:string */
+	char *dataset;	/* optional element of type xsd:string */
+	float time;	/* required element of type xsd:float */
+	enum turb1__SpatialInterpolation spatialInterpolation;	/* required element of type turb1:SpatialInterpolation */
+	enum turb1__TemporalInterpolation temporalInterpolation;	/* required element of type turb1:TemporalInterpolation */
+	struct turb1__ArrayOfPoint3 *points;	/* optional element of type turb1:ArrayOfPoint3 */
+};
+#endif
+
+#ifndef SOAP_TYPE__turb1__GetDensityResponse
+#define SOAP_TYPE__turb1__GetDensityResponse (66)
+/* turb1:GetDensityResponse */
+struct _turb1__GetDensityResponse
+{
+	struct turb1__ArrayOfPressure *GetDensityResult;	/* SOAP 1.2 RPC return element (when namespace qualified) */	/* optional element of type turb1:ArrayOfPressure */
+};
+#endif
+
+#ifndef SOAP_TYPE__turb1__GetDensityGradient
+#define SOAP_TYPE__turb1__GetDensityGradient (67)
+/* turb1:GetDensityGradient */
+struct _turb1__GetDensityGradient
+{
+	char *authToken;	/* optional element of type xsd:string */
+	char *dataset;	/* optional element of type xsd:string */
+	float time;	/* required element of type xsd:float */
+	enum turb1__SpatialInterpolation spatialInterpolation;	/* required element of type turb1:SpatialInterpolation */
+	enum turb1__TemporalInterpolation temporalInterpolation;	/* required element of type turb1:TemporalInterpolation */
+	struct turb1__ArrayOfPoint3 *points;	/* optional element of type turb1:ArrayOfPoint3 */
+};
+#endif
+
+#ifndef SOAP_TYPE__turb1__GetDensityGradientResponse
+#define SOAP_TYPE__turb1__GetDensityGradientResponse (68)
+/* turb1:GetDensityGradientResponse */
+struct _turb1__GetDensityGradientResponse
+{
+	struct turb1__ArrayOfVector3 *GetDensityGradientResult;	/* SOAP 1.2 RPC return element (when namespace qualified) */	/* optional element of type turb1:ArrayOfVector3 */
+};
+#endif
+
+#ifndef SOAP_TYPE__turb1__GetDensityHessian
+#define SOAP_TYPE__turb1__GetDensityHessian (69)
+/* turb1:GetDensityHessian */
+struct _turb1__GetDensityHessian
+{
+	char *authToken;	/* optional element of type xsd:string */
+	char *dataset;	/* optional element of type xsd:string */
+	float time;	/* required element of type xsd:float */
+	enum turb1__SpatialInterpolation spatialInterpolation;	/* required element of type turb1:SpatialInterpolation */
+	enum turb1__TemporalInterpolation temporalInterpolation;	/* required element of type turb1:TemporalInterpolation */
+	struct turb1__ArrayOfPoint3 *points;	/* optional element of type turb1:ArrayOfPoint3 */
+};
+#endif
+
+#ifndef SOAP_TYPE__turb1__GetDensityHessianResponse
+#define SOAP_TYPE__turb1__GetDensityHessianResponse (70)
+/* turb1:GetDensityHessianResponse */
+struct _turb1__GetDensityHessianResponse
+{
+	struct turb1__ArrayOfPressureHessian *GetDensityHessianResult;	/* SOAP 1.2 RPC return element (when namespace qualified) */	/* optional element of type turb1:ArrayOfPressureHessian */
+};
+#endif
+
+#ifndef SOAP_TYPE__turb1__GetRawDensity
+#define SOAP_TYPE__turb1__GetRawDensity (72)
+/* turb1:GetRawDensity */
+struct _turb1__GetRawDensity
+{
+	char *authToken;	/* optional element of type xsd:string */
+	char *dataset;	/* optional element of type xsd:string */
+	float time;	/* required element of type xsd:float */
+	int X;	/* required element of type xsd:int */
+	int Y;	/* required element of type xsd:int */
+	int Z;	/* required element of type xsd:int */
+	int Xwidth;	/* required element of type xsd:int */
+	int Ywidth;	/* required element of type xsd:int */
+	int Zwidth;	/* required element of type xsd:int */
+};
+#endif
+
+#ifndef SOAP_TYPE__turb1__GetRawDensityResponse
+#define SOAP_TYPE__turb1__GetRawDensityResponse (73)
+/* turb1:GetRawDensityResponse */
+struct _turb1__GetRawDensityResponse
+{
+	struct xsd__base64Binary *GetRawDensityResult;	/* SOAP 1.2 RPC return element (when namespace qualified) */	/* optional element of type xsd:base64Binary */
+};
+#endif
+
 #ifndef SOAP_TYPE__turb1__GetForce
-#define SOAP_TYPE__turb1__GetForce (62)
+#define SOAP_TYPE__turb1__GetForce (74)
 /* turb1:GetForce */
 struct _turb1__GetForce
 {
@@ -517,7 +634,7 @@ struct _turb1__GetForce
 #endif
 
 #ifndef SOAP_TYPE__turb1__GetForceResponse
-#define SOAP_TYPE__turb1__GetForceResponse (63)
+#define SOAP_TYPE__turb1__GetForceResponse (75)
 /* turb1:GetForceResponse */
 struct _turb1__GetForceResponse
 {
@@ -526,7 +643,7 @@ struct _turb1__GetForceResponse
 #endif
 
 #ifndef SOAP_TYPE__turb1__GetVelocityAndPressure
-#define SOAP_TYPE__turb1__GetVelocityAndPressure (64)
+#define SOAP_TYPE__turb1__GetVelocityAndPressure (76)
 /* turb1:GetVelocityAndPressure */
 struct _turb1__GetVelocityAndPressure
 {
@@ -540,7 +657,7 @@ struct _turb1__GetVelocityAndPressure
 #endif
 
 #ifndef SOAP_TYPE__turb1__GetVelocityAndPressureResponse
-#define SOAP_TYPE__turb1__GetVelocityAndPressureResponse (65)
+#define SOAP_TYPE__turb1__GetVelocityAndPressureResponse (77)
 /* turb1:GetVelocityAndPressureResponse */
 struct _turb1__GetVelocityAndPressureResponse
 {
@@ -549,7 +666,7 @@ struct _turb1__GetVelocityAndPressureResponse
 #endif
 
 #ifndef SOAP_TYPE__turb1__GetVelocityGradient
-#define SOAP_TYPE__turb1__GetVelocityGradient (67)
+#define SOAP_TYPE__turb1__GetVelocityGradient (79)
 /* turb1:GetVelocityGradient */
 struct _turb1__GetVelocityGradient
 {
@@ -563,7 +680,7 @@ struct _turb1__GetVelocityGradient
 #endif
 
 #ifndef SOAP_TYPE__turb1__GetVelocityGradientResponse
-#define SOAP_TYPE__turb1__GetVelocityGradientResponse (68)
+#define SOAP_TYPE__turb1__GetVelocityGradientResponse (80)
 /* turb1:GetVelocityGradientResponse */
 struct _turb1__GetVelocityGradientResponse
 {
@@ -572,7 +689,7 @@ struct _turb1__GetVelocityGradientResponse
 #endif
 
 #ifndef SOAP_TYPE__turb1__GetMagneticFieldGradient
-#define SOAP_TYPE__turb1__GetMagneticFieldGradient (70)
+#define SOAP_TYPE__turb1__GetMagneticFieldGradient (82)
 /* turb1:GetMagneticFieldGradient */
 struct _turb1__GetMagneticFieldGradient
 {
@@ -586,7 +703,7 @@ struct _turb1__GetMagneticFieldGradient
 #endif
 
 #ifndef SOAP_TYPE__turb1__GetMagneticFieldGradientResponse
-#define SOAP_TYPE__turb1__GetMagneticFieldGradientResponse (71)
+#define SOAP_TYPE__turb1__GetMagneticFieldGradientResponse (83)
 /* turb1:GetMagneticFieldGradientResponse */
 struct _turb1__GetMagneticFieldGradientResponse
 {
@@ -595,7 +712,7 @@ struct _turb1__GetMagneticFieldGradientResponse
 #endif
 
 #ifndef SOAP_TYPE__turb1__GetVectorPotentialGradient
-#define SOAP_TYPE__turb1__GetVectorPotentialGradient (72)
+#define SOAP_TYPE__turb1__GetVectorPotentialGradient (84)
 /* turb1:GetVectorPotentialGradient */
 struct _turb1__GetVectorPotentialGradient
 {
@@ -609,7 +726,7 @@ struct _turb1__GetVectorPotentialGradient
 #endif
 
 #ifndef SOAP_TYPE__turb1__GetVectorPotentialGradientResponse
-#define SOAP_TYPE__turb1__GetVectorPotentialGradientResponse (73)
+#define SOAP_TYPE__turb1__GetVectorPotentialGradientResponse (85)
 /* turb1:GetVectorPotentialGradientResponse */
 struct _turb1__GetVectorPotentialGradientResponse
 {
@@ -618,7 +735,7 @@ struct _turb1__GetVectorPotentialGradientResponse
 #endif
 
 #ifndef SOAP_TYPE__turb1__GetPressureGradient
-#define SOAP_TYPE__turb1__GetPressureGradient (74)
+#define SOAP_TYPE__turb1__GetPressureGradient (86)
 /* turb1:GetPressureGradient */
 struct _turb1__GetPressureGradient
 {
@@ -632,7 +749,7 @@ struct _turb1__GetPressureGradient
 #endif
 
 #ifndef SOAP_TYPE__turb1__GetPressureGradientResponse
-#define SOAP_TYPE__turb1__GetPressureGradientResponse (75)
+#define SOAP_TYPE__turb1__GetPressureGradientResponse (87)
 /* turb1:GetPressureGradientResponse */
 struct _turb1__GetPressureGradientResponse
 {
@@ -641,7 +758,7 @@ struct _turb1__GetPressureGradientResponse
 #endif
 
 #ifndef SOAP_TYPE__turb1__GetPressureHessian
-#define SOAP_TYPE__turb1__GetPressureHessian (76)
+#define SOAP_TYPE__turb1__GetPressureHessian (88)
 /* turb1:GetPressureHessian */
 struct _turb1__GetPressureHessian
 {
@@ -655,7 +772,7 @@ struct _turb1__GetPressureHessian
 #endif
 
 #ifndef SOAP_TYPE__turb1__GetPressureHessianResponse
-#define SOAP_TYPE__turb1__GetPressureHessianResponse (77)
+#define SOAP_TYPE__turb1__GetPressureHessianResponse (89)
 /* turb1:GetPressureHessianResponse */
 struct _turb1__GetPressureHessianResponse
 {
@@ -664,7 +781,7 @@ struct _turb1__GetPressureHessianResponse
 #endif
 
 #ifndef SOAP_TYPE__turb1__GetVelocityHessian
-#define SOAP_TYPE__turb1__GetVelocityHessian (79)
+#define SOAP_TYPE__turb1__GetVelocityHessian (90)
 /* turb1:GetVelocityHessian */
 struct _turb1__GetVelocityHessian
 {
@@ -678,7 +795,7 @@ struct _turb1__GetVelocityHessian
 #endif
 
 #ifndef SOAP_TYPE__turb1__GetVelocityHessianResponse
-#define SOAP_TYPE__turb1__GetVelocityHessianResponse (80)
+#define SOAP_TYPE__turb1__GetVelocityHessianResponse (91)
 /* turb1:GetVelocityHessianResponse */
 struct _turb1__GetVelocityHessianResponse
 {
@@ -687,7 +804,7 @@ struct _turb1__GetVelocityHessianResponse
 #endif
 
 #ifndef SOAP_TYPE__turb1__GetMagneticHessian
-#define SOAP_TYPE__turb1__GetMagneticHessian (82)
+#define SOAP_TYPE__turb1__GetMagneticHessian (93)
 /* turb1:GetMagneticHessian */
 struct _turb1__GetMagneticHessian
 {
@@ -701,7 +818,7 @@ struct _turb1__GetMagneticHessian
 #endif
 
 #ifndef SOAP_TYPE__turb1__GetMagneticHessianResponse
-#define SOAP_TYPE__turb1__GetMagneticHessianResponse (83)
+#define SOAP_TYPE__turb1__GetMagneticHessianResponse (94)
 /* turb1:GetMagneticHessianResponse */
 struct _turb1__GetMagneticHessianResponse
 {
@@ -710,7 +827,7 @@ struct _turb1__GetMagneticHessianResponse
 #endif
 
 #ifndef SOAP_TYPE__turb1__GetVectorPotentialHessian
-#define SOAP_TYPE__turb1__GetVectorPotentialHessian (84)
+#define SOAP_TYPE__turb1__GetVectorPotentialHessian (95)
 /* turb1:GetVectorPotentialHessian */
 struct _turb1__GetVectorPotentialHessian
 {
@@ -724,7 +841,7 @@ struct _turb1__GetVectorPotentialHessian
 #endif
 
 #ifndef SOAP_TYPE__turb1__GetVectorPotentialHessianResponse
-#define SOAP_TYPE__turb1__GetVectorPotentialHessianResponse (85)
+#define SOAP_TYPE__turb1__GetVectorPotentialHessianResponse (96)
 /* turb1:GetVectorPotentialHessianResponse */
 struct _turb1__GetVectorPotentialHessianResponse
 {
@@ -733,7 +850,7 @@ struct _turb1__GetVectorPotentialHessianResponse
 #endif
 
 #ifndef SOAP_TYPE__turb1__GetVelocityLaplacian
-#define SOAP_TYPE__turb1__GetVelocityLaplacian (86)
+#define SOAP_TYPE__turb1__GetVelocityLaplacian (97)
 /* turb1:GetVelocityLaplacian */
 struct _turb1__GetVelocityLaplacian
 {
@@ -747,7 +864,7 @@ struct _turb1__GetVelocityLaplacian
 #endif
 
 #ifndef SOAP_TYPE__turb1__GetVelocityLaplacianResponse
-#define SOAP_TYPE__turb1__GetVelocityLaplacianResponse (87)
+#define SOAP_TYPE__turb1__GetVelocityLaplacianResponse (98)
 /* turb1:GetVelocityLaplacianResponse */
 struct _turb1__GetVelocityLaplacianResponse
 {
@@ -756,7 +873,7 @@ struct _turb1__GetVelocityLaplacianResponse
 #endif
 
 #ifndef SOAP_TYPE__turb1__GetMagneticFieldLaplacian
-#define SOAP_TYPE__turb1__GetMagneticFieldLaplacian (88)
+#define SOAP_TYPE__turb1__GetMagneticFieldLaplacian (99)
 /* turb1:GetMagneticFieldLaplacian */
 struct _turb1__GetMagneticFieldLaplacian
 {
@@ -770,7 +887,7 @@ struct _turb1__GetMagneticFieldLaplacian
 #endif
 
 #ifndef SOAP_TYPE__turb1__GetMagneticFieldLaplacianResponse
-#define SOAP_TYPE__turb1__GetMagneticFieldLaplacianResponse (89)
+#define SOAP_TYPE__turb1__GetMagneticFieldLaplacianResponse (100)
 /* turb1:GetMagneticFieldLaplacianResponse */
 struct _turb1__GetMagneticFieldLaplacianResponse
 {
@@ -779,7 +896,7 @@ struct _turb1__GetMagneticFieldLaplacianResponse
 #endif
 
 #ifndef SOAP_TYPE__turb1__GetVectorPotentialLaplacian
-#define SOAP_TYPE__turb1__GetVectorPotentialLaplacian (90)
+#define SOAP_TYPE__turb1__GetVectorPotentialLaplacian (101)
 /* turb1:GetVectorPotentialLaplacian */
 struct _turb1__GetVectorPotentialLaplacian
 {
@@ -793,7 +910,7 @@ struct _turb1__GetVectorPotentialLaplacian
 #endif
 
 #ifndef SOAP_TYPE__turb1__GetVectorPotentialLaplacianResponse
-#define SOAP_TYPE__turb1__GetVectorPotentialLaplacianResponse (91)
+#define SOAP_TYPE__turb1__GetVectorPotentialLaplacianResponse (102)
 /* turb1:GetVectorPotentialLaplacianResponse */
 struct _turb1__GetVectorPotentialLaplacianResponse
 {
@@ -802,7 +919,7 @@ struct _turb1__GetVectorPotentialLaplacianResponse
 #endif
 
 #ifndef SOAP_TYPE__turb1__GetPosition
-#define SOAP_TYPE__turb1__GetPosition (92)
+#define SOAP_TYPE__turb1__GetPosition (103)
 /* turb1:GetPosition */
 struct _turb1__GetPosition
 {
@@ -817,7 +934,7 @@ struct _turb1__GetPosition
 #endif
 
 #ifndef SOAP_TYPE__turb1__GetPositionResponse
-#define SOAP_TYPE__turb1__GetPositionResponse (93)
+#define SOAP_TYPE__turb1__GetPositionResponse (104)
 /* turb1:GetPositionResponse */
 struct _turb1__GetPositionResponse
 {
@@ -826,7 +943,7 @@ struct _turb1__GetPositionResponse
 #endif
 
 #ifndef SOAP_TYPE__turb1__GetBoxFilter
-#define SOAP_TYPE__turb1__GetBoxFilter (94)
+#define SOAP_TYPE__turb1__GetBoxFilter (105)
 /* turb1:GetBoxFilter */
 struct _turb1__GetBoxFilter
 {
@@ -840,7 +957,7 @@ struct _turb1__GetBoxFilter
 #endif
 
 #ifndef SOAP_TYPE__turb1__GetBoxFilterResponse
-#define SOAP_TYPE__turb1__GetBoxFilterResponse (95)
+#define SOAP_TYPE__turb1__GetBoxFilterResponse (106)
 /* turb1:GetBoxFilterResponse */
 struct _turb1__GetBoxFilterResponse
 {
@@ -849,7 +966,7 @@ struct _turb1__GetBoxFilterResponse
 #endif
 
 #ifndef SOAP_TYPE__turb1__GetBoxFilterSGS
-#define SOAP_TYPE__turb1__GetBoxFilterSGS (96)
+#define SOAP_TYPE__turb1__GetBoxFilterSGS (107)
 /* turb1:GetBoxFilterSGS */
 struct _turb1__GetBoxFilterSGS
 {
@@ -863,7 +980,7 @@ struct _turb1__GetBoxFilterSGS
 #endif
 
 #ifndef SOAP_TYPE__turb1__GetBoxFilterSGSResponse
-#define SOAP_TYPE__turb1__GetBoxFilterSGSResponse (97)
+#define SOAP_TYPE__turb1__GetBoxFilterSGSResponse (108)
 /* turb1:GetBoxFilterSGSResponse */
 struct _turb1__GetBoxFilterSGSResponse
 {
@@ -872,7 +989,7 @@ struct _turb1__GetBoxFilterSGSResponse
 #endif
 
 #ifndef SOAP_TYPE__turb1__GetBoxFilterGradient
-#define SOAP_TYPE__turb1__GetBoxFilterGradient (99)
+#define SOAP_TYPE__turb1__GetBoxFilterGradient (110)
 /* turb1:GetBoxFilterGradient */
 struct _turb1__GetBoxFilterGradient
 {
@@ -887,7 +1004,7 @@ struct _turb1__GetBoxFilterGradient
 #endif
 
 #ifndef SOAP_TYPE__turb1__GetBoxFilterGradientResponse
-#define SOAP_TYPE__turb1__GetBoxFilterGradientResponse (100)
+#define SOAP_TYPE__turb1__GetBoxFilterGradientResponse (111)
 /* turb1:GetBoxFilterGradientResponse */
 struct _turb1__GetBoxFilterGradientResponse
 {
@@ -895,8 +1012,37 @@ struct _turb1__GetBoxFilterGradientResponse
 };
 #endif
 
+#ifndef SOAP_TYPE__turb1__GetThreshold
+#define SOAP_TYPE__turb1__GetThreshold (112)
+/* turb1:GetThreshold */
+struct _turb1__GetThreshold
+{
+	char *authToken;	/* optional element of type xsd:string */
+	char *dataset;	/* optional element of type xsd:string */
+	char *field;	/* optional element of type xsd:string */
+	float time;	/* required element of type xsd:float */
+	float threshold;	/* required element of type xsd:float */
+	enum turb1__SpatialInterpolation spatialInterpolation;	/* required element of type turb1:SpatialInterpolation */
+	int X;	/* required element of type xsd:int */
+	int Y;	/* required element of type xsd:int */
+	int Z;	/* required element of type xsd:int */
+	int Xwidth;	/* required element of type xsd:int */
+	int Ywidth;	/* required element of type xsd:int */
+	int Zwidth;	/* required element of type xsd:int */
+};
+#endif
+
+#ifndef SOAP_TYPE__turb1__GetThresholdResponse
+#define SOAP_TYPE__turb1__GetThresholdResponse (113)
+/* turb1:GetThresholdResponse */
+struct _turb1__GetThresholdResponse
+{
+	struct turb1__ArrayOfThresholdInfo *GetThresholdResult;	/* SOAP 1.2 RPC return element (when namespace qualified) */	/* optional element of type turb1:ArrayOfThresholdInfo */
+};
+#endif
+
 #ifndef SOAP_TYPE__turb1__GetLaplacianOfGradient
-#define SOAP_TYPE__turb1__GetLaplacianOfGradient (101)
+#define SOAP_TYPE__turb1__GetLaplacianOfGradient (115)
 /* turb1:GetLaplacianOfGradient */
 struct _turb1__GetLaplacianOfGradient
 {
@@ -911,7 +1057,7 @@ struct _turb1__GetLaplacianOfGradient
 #endif
 
 #ifndef SOAP_TYPE__turb1__GetLaplacianOfGradientResponse
-#define SOAP_TYPE__turb1__GetLaplacianOfGradientResponse (102)
+#define SOAP_TYPE__turb1__GetLaplacianOfGradientResponse (116)
 /* turb1:GetLaplacianOfGradientResponse */
 struct _turb1__GetLaplacianOfGradientResponse
 {
@@ -920,7 +1066,7 @@ struct _turb1__GetLaplacianOfGradientResponse
 #endif
 
 #ifndef SOAP_TYPE___turb2__NullOp
-#define SOAP_TYPE___turb2__NullOp (106)
+#define SOAP_TYPE___turb2__NullOp (120)
 /* Operation wrapper: */
 struct __turb2__NullOp
 {
@@ -929,7 +1075,7 @@ struct __turb2__NullOp
 #endif
 
 #ifndef SOAP_TYPE___turb2__GetVelocity
-#define SOAP_TYPE___turb2__GetVelocity (110)
+#define SOAP_TYPE___turb2__GetVelocity (124)
 /* Operation wrapper: */
 struct __turb2__GetVelocity
 {
@@ -938,7 +1084,7 @@ struct __turb2__GetVelocity
 #endif
 
 #ifndef SOAP_TYPE___turb2__GetVelocityBatch
-#define SOAP_TYPE___turb2__GetVelocityBatch (114)
+#define SOAP_TYPE___turb2__GetVelocityBatch (128)
 /* Operation wrapper: */
 struct __turb2__GetVelocityBatch
 {
@@ -947,7 +1093,7 @@ struct __turb2__GetVelocityBatch
 #endif
 
 #ifndef SOAP_TYPE___turb2__GetRawVelocity
-#define SOAP_TYPE___turb2__GetRawVelocity (118)
+#define SOAP_TYPE___turb2__GetRawVelocity (132)
 /* Operation wrapper: */
 struct __turb2__GetRawVelocity
 {
@@ -956,7 +1102,7 @@ struct __turb2__GetRawVelocity
 #endif
 
 #ifndef SOAP_TYPE___turb2__GetPressure
-#define SOAP_TYPE___turb2__GetPressure (122)
+#define SOAP_TYPE___turb2__GetPressure (136)
 /* Operation wrapper: */
 struct __turb2__GetPressure
 {
@@ -965,7 +1111,7 @@ struct __turb2__GetPressure
 #endif
 
 #ifndef SOAP_TYPE___turb2__GetRawPressure
-#define SOAP_TYPE___turb2__GetRawPressure (126)
+#define SOAP_TYPE___turb2__GetRawPressure (140)
 /* Operation wrapper: */
 struct __turb2__GetRawPressure
 {
@@ -974,7 +1120,7 @@ struct __turb2__GetRawPressure
 #endif
 
 #ifndef SOAP_TYPE___turb2__GetMagneticField
-#define SOAP_TYPE___turb2__GetMagneticField (130)
+#define SOAP_TYPE___turb2__GetMagneticField (144)
 /* Operation wrapper: */
 struct __turb2__GetMagneticField
 {
@@ -983,7 +1129,7 @@ struct __turb2__GetMagneticField
 #endif
 
 #ifndef SOAP_TYPE___turb2__GetRawMagneticField
-#define SOAP_TYPE___turb2__GetRawMagneticField (134)
+#define SOAP_TYPE___turb2__GetRawMagneticField (148)
 /* Operation wrapper: */
 struct __turb2__GetRawMagneticField
 {
@@ -992,7 +1138,7 @@ struct __turb2__GetRawMagneticField
 #endif
 
 #ifndef SOAP_TYPE___turb2__GetVectorPotential
-#define SOAP_TYPE___turb2__GetVectorPotential (138)
+#define SOAP_TYPE___turb2__GetVectorPotential (152)
 /* Operation wrapper: */
 struct __turb2__GetVectorPotential
 {
@@ -1001,7 +1147,7 @@ struct __turb2__GetVectorPotential
 #endif
 
 #ifndef SOAP_TYPE___turb2__GetRawVectorPotential
-#define SOAP_TYPE___turb2__GetRawVectorPotential (142)
+#define SOAP_TYPE___turb2__GetRawVectorPotential (156)
 /* Operation wrapper: */
 struct __turb2__GetRawVectorPotential
 {
@@ -1009,8 +1155,44 @@ struct __turb2__GetRawVectorPotential
 };
 #endif
 
+#ifndef SOAP_TYPE___turb2__GetDensity
+#define SOAP_TYPE___turb2__GetDensity (160)
+/* Operation wrapper: */
+struct __turb2__GetDensity
+{
+	struct _turb1__GetDensity *turb1__GetDensity;	/* optional element of type turb1:GetDensity */
+};
+#endif
+
+#ifndef SOAP_TYPE___turb2__GetDensityGradient
+#define SOAP_TYPE___turb2__GetDensityGradient (164)
+/* Operation wrapper: */
+struct __turb2__GetDensityGradient
+{
+	struct _turb1__GetDensityGradient *turb1__GetDensityGradient;	/* optional element of type turb1:GetDensityGradient */
+};
+#endif
+
+#ifndef SOAP_TYPE___turb2__GetDensityHessian
+#define SOAP_TYPE___turb2__GetDensityHessian (168)
+/* Operation wrapper: */
+struct __turb2__GetDensityHessian
+{
+	struct _turb1__GetDensityHessian *turb1__GetDensityHessian;	/* optional element of type turb1:GetDensityHessian */
+};
+#endif
+
+#ifndef SOAP_TYPE___turb2__GetRawDensity
+#define SOAP_TYPE___turb2__GetRawDensity (172)
+/* Operation wrapper: */
+struct __turb2__GetRawDensity
+{
+	struct _turb1__GetRawDensity *turb1__GetRawDensity;	/* optional element of type turb1:GetRawDensity */
+};
+#endif
+
 #ifndef SOAP_TYPE___turb2__GetForce
-#define SOAP_TYPE___turb2__GetForce (146)
+#define SOAP_TYPE___turb2__GetForce (176)
 /* Operation wrapper: */
 struct __turb2__GetForce
 {
@@ -1019,7 +1201,7 @@ struct __turb2__GetForce
 #endif
 
 #ifndef SOAP_TYPE___turb2__GetVelocityAndPressure
-#define SOAP_TYPE___turb2__GetVelocityAndPressure (150)
+#define SOAP_TYPE___turb2__GetVelocityAndPressure (180)
 /* Operation wrapper: */
 struct __turb2__GetVelocityAndPressure
 {
@@ -1028,7 +1210,7 @@ struct __turb2__GetVelocityAndPressure
 #endif
 
 #ifndef SOAP_TYPE___turb2__GetVelocityGradient
-#define SOAP_TYPE___turb2__GetVelocityGradient (154)
+#define SOAP_TYPE___turb2__GetVelocityGradient (184)
 /* Operation wrapper: */
 struct __turb2__GetVelocityGradient
 {
@@ -1037,7 +1219,7 @@ struct __turb2__GetVelocityGradient
 #endif
 
 #ifndef SOAP_TYPE___turb2__GetMagneticFieldGradient
-#define SOAP_TYPE___turb2__GetMagneticFieldGradient (158)
+#define SOAP_TYPE___turb2__GetMagneticFieldGradient (188)
 /* Operation wrapper: */
 struct __turb2__GetMagneticFieldGradient
 {
@@ -1046,7 +1228,7 @@ struct __turb2__GetMagneticFieldGradient
 #endif
 
 #ifndef SOAP_TYPE___turb2__GetVectorPotentialGradient
-#define SOAP_TYPE___turb2__GetVectorPotentialGradient (162)
+#define SOAP_TYPE___turb2__GetVectorPotentialGradient (192)
 /* Operation wrapper: */
 struct __turb2__GetVectorPotentialGradient
 {
@@ -1055,7 +1237,7 @@ struct __turb2__GetVectorPotentialGradient
 #endif
 
 #ifndef SOAP_TYPE___turb2__GetPressureGradient
-#define SOAP_TYPE___turb2__GetPressureGradient (166)
+#define SOAP_TYPE___turb2__GetPressureGradient (196)
 /* Operation wrapper: */
 struct __turb2__GetPressureGradient
 {
@@ -1064,7 +1246,7 @@ struct __turb2__GetPressureGradient
 #endif
 
 #ifndef SOAP_TYPE___turb2__GetPressureHessian
-#define SOAP_TYPE___turb2__GetPressureHessian (170)
+#define SOAP_TYPE___turb2__GetPressureHessian (200)
 /* Operation wrapper: */
 struct __turb2__GetPressureHessian
 {
@@ -1073,7 +1255,7 @@ struct __turb2__GetPressureHessian
 #endif
 
 #ifndef SOAP_TYPE___turb2__GetVelocityHessian
-#define SOAP_TYPE___turb2__GetVelocityHessian (174)
+#define SOAP_TYPE___turb2__GetVelocityHessian (204)
 /* Operation wrapper: */
 struct __turb2__GetVelocityHessian
 {
@@ -1082,7 +1264,7 @@ struct __turb2__GetVelocityHessian
 #endif
 
 #ifndef SOAP_TYPE___turb2__GetMagneticHessian
-#define SOAP_TYPE___turb2__GetMagneticHessian (178)
+#define SOAP_TYPE___turb2__GetMagneticHessian (208)
 /* Operation wrapper: */
 struct __turb2__GetMagneticHessian
 {
@@ -1091,7 +1273,7 @@ struct __turb2__GetMagneticHessian
 #endif
 
 #ifndef SOAP_TYPE___turb2__GetVectorPotentialHessian
-#define SOAP_TYPE___turb2__GetVectorPotentialHessian (182)
+#define SOAP_TYPE___turb2__GetVectorPotentialHessian (212)
 /* Operation wrapper: */
 struct __turb2__GetVectorPotentialHessian
 {
@@ -1100,7 +1282,7 @@ struct __turb2__GetVectorPotentialHessian
 #endif
 
 #ifndef SOAP_TYPE___turb2__GetVelocityLaplacian
-#define SOAP_TYPE___turb2__GetVelocityLaplacian (186)
+#define SOAP_TYPE___turb2__GetVelocityLaplacian (216)
 /* Operation wrapper: */
 struct __turb2__GetVelocityLaplacian
 {
@@ -1109,7 +1291,7 @@ struct __turb2__GetVelocityLaplacian
 #endif
 
 #ifndef SOAP_TYPE___turb2__GetMagneticFieldLaplacian
-#define SOAP_TYPE___turb2__GetMagneticFieldLaplacian (190)
+#define SOAP_TYPE___turb2__GetMagneticFieldLaplacian (220)
 /* Operation wrapper: */
 struct __turb2__GetMagneticFieldLaplacian
 {
@@ -1118,7 +1300,7 @@ struct __turb2__GetMagneticFieldLaplacian
 #endif
 
 #ifndef SOAP_TYPE___turb2__GetVectorPotentialLaplacian
-#define SOAP_TYPE___turb2__GetVectorPotentialLaplacian (194)
+#define SOAP_TYPE___turb2__GetVectorPotentialLaplacian (224)
 /* Operation wrapper: */
 struct __turb2__GetVectorPotentialLaplacian
 {
@@ -1127,7 +1309,7 @@ struct __turb2__GetVectorPotentialLaplacian
 #endif
 
 #ifndef SOAP_TYPE___turb2__GetPosition
-#define SOAP_TYPE___turb2__GetPosition (198)
+#define SOAP_TYPE___turb2__GetPosition (228)
 /* Operation wrapper: */
 struct __turb2__GetPosition
 {
@@ -1136,7 +1318,7 @@ struct __turb2__GetPosition
 #endif
 
 #ifndef SOAP_TYPE___turb2__GetBoxFilter
-#define SOAP_TYPE___turb2__GetBoxFilter (202)
+#define SOAP_TYPE___turb2__GetBoxFilter (232)
 /* Operation wrapper: */
 struct __turb2__GetBoxFilter
 {
@@ -1145,7 +1327,7 @@ struct __turb2__GetBoxFilter
 #endif
 
 #ifndef SOAP_TYPE___turb2__GetBoxFilterSGS
-#define SOAP_TYPE___turb2__GetBoxFilterSGS (206)
+#define SOAP_TYPE___turb2__GetBoxFilterSGS (236)
 /* Operation wrapper: */
 struct __turb2__GetBoxFilterSGS
 {
@@ -1154,7 +1336,7 @@ struct __turb2__GetBoxFilterSGS
 #endif
 
 #ifndef SOAP_TYPE___turb2__GetBoxFilterGradient
-#define SOAP_TYPE___turb2__GetBoxFilterGradient (210)
+#define SOAP_TYPE___turb2__GetBoxFilterGradient (240)
 /* Operation wrapper: */
 struct __turb2__GetBoxFilterGradient
 {
@@ -1162,8 +1344,17 @@ struct __turb2__GetBoxFilterGradient
 };
 #endif
 
+#ifndef SOAP_TYPE___turb2__GetThreshold
+#define SOAP_TYPE___turb2__GetThreshold (244)
+/* Operation wrapper: */
+struct __turb2__GetThreshold
+{
+	struct _turb1__GetThreshold *turb1__GetThreshold;	/* optional element of type turb1:GetThreshold */
+};
+#endif
+
 #ifndef SOAP_TYPE___turb2__GetLaplacianOfGradient
-#define SOAP_TYPE___turb2__GetLaplacianOfGradient (214)
+#define SOAP_TYPE___turb2__GetLaplacianOfGradient (248)
 /* Operation wrapper: */
 struct __turb2__GetLaplacianOfGradient
 {
@@ -1172,7 +1363,7 @@ struct __turb2__GetLaplacianOfGradient
 #endif
 
 #ifndef SOAP_TYPE___turb3__NullOp
-#define SOAP_TYPE___turb3__NullOp (216)
+#define SOAP_TYPE___turb3__NullOp (250)
 /* Operation wrapper: */
 struct __turb3__NullOp
 {
@@ -1181,7 +1372,7 @@ struct __turb3__NullOp
 #endif
 
 #ifndef SOAP_TYPE___turb3__GetVelocity
-#define SOAP_TYPE___turb3__GetVelocity (218)
+#define SOAP_TYPE___turb3__GetVelocity (252)
 /* Operation wrapper: */
 struct __turb3__GetVelocity
 {
@@ -1190,7 +1381,7 @@ struct __turb3__GetVelocity
 #endif
 
 #ifndef SOAP_TYPE___turb3__GetVelocityBatch
-#define SOAP_TYPE___turb3__GetVelocityBatch (220)
+#define SOAP_TYPE___turb3__GetVelocityBatch (254)
 /* Operation wrapper: */
 struct __turb3__GetVelocityBatch
 {
@@ -1199,7 +1390,7 @@ struct __turb3__GetVelocityBatch
 #endif
 
 #ifndef SOAP_TYPE___turb3__GetRawVelocity
-#define SOAP_TYPE___turb3__GetRawVelocity (222)
+#define SOAP_TYPE___turb3__GetRawVelocity (256)
 /* Operation wrapper: */
 struct __turb3__GetRawVelocity
 {
@@ -1208,7 +1399,7 @@ struct __turb3__GetRawVelocity
 #endif
 
 #ifndef SOAP_TYPE___turb3__GetPressure
-#define SOAP_TYPE___turb3__GetPressure (224)
+#define SOAP_TYPE___turb3__GetPressure (258)
 /* Operation wrapper: */
 struct __turb3__GetPressure
 {
@@ -1217,7 +1408,7 @@ struct __turb3__GetPressure
 #endif
 
 #ifndef SOAP_TYPE___turb3__GetRawPressure
-#define SOAP_TYPE___turb3__GetRawPressure (226)
+#define SOAP_TYPE___turb3__GetRawPressure (260)
 /* Operation wrapper: */
 struct __turb3__GetRawPressure
 {
@@ -1226,7 +1417,7 @@ struct __turb3__GetRawPressure
 #endif
 
 #ifndef SOAP_TYPE___turb3__GetMagneticField
-#define SOAP_TYPE___turb3__GetMagneticField (228)
+#define SOAP_TYPE___turb3__GetMagneticField (262)
 /* Operation wrapper: */
 struct __turb3__GetMagneticField
 {
@@ -1235,7 +1426,7 @@ struct __turb3__GetMagneticField
 #endif
 
 #ifndef SOAP_TYPE___turb3__GetRawMagneticField
-#define SOAP_TYPE___turb3__GetRawMagneticField (230)
+#define SOAP_TYPE___turb3__GetRawMagneticField (264)
 /* Operation wrapper: */
 struct __turb3__GetRawMagneticField
 {
@@ -1244,7 +1435,7 @@ struct __turb3__GetRawMagneticField
 #endif
 
 #ifndef SOAP_TYPE___turb3__GetVectorPotential
-#define SOAP_TYPE___turb3__GetVectorPotential (232)
+#define SOAP_TYPE___turb3__GetVectorPotential (266)
 /* Operation wrapper: */
 struct __turb3__GetVectorPotential
 {
@@ -1253,7 +1444,7 @@ struct __turb3__GetVectorPotential
 #endif
 
 #ifndef SOAP_TYPE___turb3__GetRawVectorPotential
-#define SOAP_TYPE___turb3__GetRawVectorPotential (234)
+#define SOAP_TYPE___turb3__GetRawVectorPotential (268)
 /* Operation wrapper: */
 struct __turb3__GetRawVectorPotential
 {
@@ -1261,8 +1452,44 @@ struct __turb3__GetRawVectorPotential
 };
 #endif
 
+#ifndef SOAP_TYPE___turb3__GetDensity
+#define SOAP_TYPE___turb3__GetDensity (270)
+/* Operation wrapper: */
+struct __turb3__GetDensity
+{
+	struct _turb1__GetDensity *turb1__GetDensity;	/* optional element of type turb1:GetDensity */
+};
+#endif
+
+#ifndef SOAP_TYPE___turb3__GetDensityGradient
+#define SOAP_TYPE___turb3__GetDensityGradient (272)
+/* Operation wrapper: */
+struct __turb3__GetDensityGradient
+{
+	struct _turb1__GetDensityGradient *turb1__GetDensityGradient;	/* optional element of type turb1:GetDensityGradient */
+};
+#endif
+
+#ifndef SOAP_TYPE___turb3__GetDensityHessian
+#define SOAP_TYPE___turb3__GetDensityHessian (274)
+/* Operation wrapper: */
+struct __turb3__GetDensityHessian
+{
+	struct _turb1__GetDensityHessian *turb1__GetDensityHessian;	/* optional element of type turb1:GetDensityHessian */
+};
+#endif
+
+#ifndef SOAP_TYPE___turb3__GetRawDensity
+#define SOAP_TYPE___turb3__GetRawDensity (276)
+/* Operation wrapper: */
+struct __turb3__GetRawDensity
+{
+	struct _turb1__GetRawDensity *turb1__GetRawDensity;	/* optional element of type turb1:GetRawDensity */
+};
+#endif
+
 #ifndef SOAP_TYPE___turb3__GetForce
-#define SOAP_TYPE___turb3__GetForce (236)
+#define SOAP_TYPE___turb3__GetForce (278)
 /* Operation wrapper: */
 struct __turb3__GetForce
 {
@@ -1271,7 +1498,7 @@ struct __turb3__GetForce
 #endif
 
 #ifndef SOAP_TYPE___turb3__GetVelocityAndPressure
-#define SOAP_TYPE___turb3__GetVelocityAndPressure (238)
+#define SOAP_TYPE___turb3__GetVelocityAndPressure (280)
 /* Operation wrapper: */
 struct __turb3__GetVelocityAndPressure
 {
@@ -1280,7 +1507,7 @@ struct __turb3__GetVelocityAndPressure
 #endif
 
 #ifndef SOAP_TYPE___turb3__GetVelocityGradient
-#define SOAP_TYPE___turb3__GetVelocityGradient (240)
+#define SOAP_TYPE___turb3__GetVelocityGradient (282)
 /* Operation wrapper: */
 struct __turb3__GetVelocityGradient
 {
@@ -1289,7 +1516,7 @@ struct __turb3__GetVelocityGradient
 #endif
 
 #ifndef SOAP_TYPE___turb3__GetMagneticFieldGradient
-#define SOAP_TYPE___turb3__GetMagneticFieldGradient (242)
+#define SOAP_TYPE___turb3__GetMagneticFieldGradient (284)
 /* Operation wrapper: */
 struct __turb3__GetMagneticFieldGradient
 {
@@ -1298,7 +1525,7 @@ struct __turb3__GetMagneticFieldGradient
 #endif
 
 #ifndef SOAP_TYPE___turb3__GetVectorPotentialGradient
-#define SOAP_TYPE___turb3__GetVectorPotentialGradient (244)
+#define SOAP_TYPE___turb3__GetVectorPotentialGradient (286)
 /* Operation wrapper: */
 struct __turb3__GetVectorPotentialGradient
 {
@@ -1307,7 +1534,7 @@ struct __turb3__GetVectorPotentialGradient
 #endif
 
 #ifndef SOAP_TYPE___turb3__GetPressureGradient
-#define SOAP_TYPE___turb3__GetPressureGradient (246)
+#define SOAP_TYPE___turb3__GetPressureGradient (288)
 /* Operation wrapper: */
 struct __turb3__GetPressureGradient
 {
@@ -1316,7 +1543,7 @@ struct __turb3__GetPressureGradient
 #endif
 
 #ifndef SOAP_TYPE___turb3__GetPressureHessian
-#define SOAP_TYPE___turb3__GetPressureHessian (248)
+#define SOAP_TYPE___turb3__GetPressureHessian (290)
 /* Operation wrapper: */
 struct __turb3__GetPressureHessian
 {
@@ -1325,7 +1552,7 @@ struct __turb3__GetPressureHessian
 #endif
 
 #ifndef SOAP_TYPE___turb3__GetVelocityHessian
-#define SOAP_TYPE___turb3__GetVelocityHessian (250)
+#define SOAP_TYPE___turb3__GetVelocityHessian (292)
 /* Operation wrapper: */
 struct __turb3__GetVelocityHessian
 {
@@ -1334,7 +1561,7 @@ struct __turb3__GetVelocityHessian
 #endif
 
 #ifndef SOAP_TYPE___turb3__GetMagneticHessian
-#define SOAP_TYPE___turb3__GetMagneticHessian (252)
+#define SOAP_TYPE___turb3__GetMagneticHessian (294)
 /* Operation wrapper: */
 struct __turb3__GetMagneticHessian
 {
@@ -1343,7 +1570,7 @@ struct __turb3__GetMagneticHessian
 #endif
 
 #ifndef SOAP_TYPE___turb3__GetVectorPotentialHessian
-#define SOAP_TYPE___turb3__GetVectorPotentialHessian (254)
+#define SOAP_TYPE___turb3__GetVectorPotentialHessian (296)
 /* Operation wrapper: */
 struct __turb3__GetVectorPotentialHessian
 {
@@ -1352,7 +1579,7 @@ struct __turb3__GetVectorPotentialHessian
 #endif
 
 #ifndef SOAP_TYPE___turb3__GetVelocityLaplacian
-#define SOAP_TYPE___turb3__GetVelocityLaplacian (256)
+#define SOAP_TYPE___turb3__GetVelocityLaplacian (298)
 /* Operation wrapper: */
 struct __turb3__GetVelocityLaplacian
 {
@@ -1361,7 +1588,7 @@ struct __turb3__GetVelocityLaplacian
 #endif
 
 #ifndef SOAP_TYPE___turb3__GetMagneticFieldLaplacian
-#define SOAP_TYPE___turb3__GetMagneticFieldLaplacian (258)
+#define SOAP_TYPE___turb3__GetMagneticFieldLaplacian (300)
 /* Operation wrapper: */
 struct __turb3__GetMagneticFieldLaplacian
 {
@@ -1370,7 +1597,7 @@ struct __turb3__GetMagneticFieldLaplacian
 #endif
 
 #ifndef SOAP_TYPE___turb3__GetVectorPotentialLaplacian
-#define SOAP_TYPE___turb3__GetVectorPotentialLaplacian (260)
+#define SOAP_TYPE___turb3__GetVectorPotentialLaplacian (302)
 /* Operation wrapper: */
 struct __turb3__GetVectorPotentialLaplacian
 {
@@ -1379,7 +1606,7 @@ struct __turb3__GetVectorPotentialLaplacian
 #endif
 
 #ifndef SOAP_TYPE___turb3__GetPosition
-#define SOAP_TYPE___turb3__GetPosition (262)
+#define SOAP_TYPE___turb3__GetPosition (304)
 /* Operation wrapper: */
 struct __turb3__GetPosition
 {
@@ -1388,7 +1615,7 @@ struct __turb3__GetPosition
 #endif
 
 #ifndef SOAP_TYPE___turb3__GetBoxFilter
-#define SOAP_TYPE___turb3__GetBoxFilter (264)
+#define SOAP_TYPE___turb3__GetBoxFilter (306)
 /* Operation wrapper: */
 struct __turb3__GetBoxFilter
 {
@@ -1397,7 +1624,7 @@ struct __turb3__GetBoxFilter
 #endif
 
 #ifndef SOAP_TYPE___turb3__GetBoxFilterSGS
-#define SOAP_TYPE___turb3__GetBoxFilterSGS (266)
+#define SOAP_TYPE___turb3__GetBoxFilterSGS (308)
 /* Operation wrapper: */
 struct __turb3__GetBoxFilterSGS
 {
@@ -1406,7 +1633,7 @@ struct __turb3__GetBoxFilterSGS
 #endif
 
 #ifndef SOAP_TYPE___turb3__GetBoxFilterGradient
-#define SOAP_TYPE___turb3__GetBoxFilterGradient (268)
+#define SOAP_TYPE___turb3__GetBoxFilterGradient (310)
 /* Operation wrapper: */
 struct __turb3__GetBoxFilterGradient
 {
@@ -1414,8 +1641,17 @@ struct __turb3__GetBoxFilterGradient
 };
 #endif
 
+#ifndef SOAP_TYPE___turb3__GetThreshold
+#define SOAP_TYPE___turb3__GetThreshold (312)
+/* Operation wrapper: */
+struct __turb3__GetThreshold
+{
+	struct _turb1__GetThreshold *turb1__GetThreshold;	/* optional element of type turb1:GetThreshold */
+};
+#endif
+
 #ifndef SOAP_TYPE___turb3__GetLaplacianOfGradient
-#define SOAP_TYPE___turb3__GetLaplacianOfGradient (270)
+#define SOAP_TYPE___turb3__GetLaplacianOfGradient (314)
 /* Operation wrapper: */
 struct __turb3__GetLaplacianOfGradient
 {
@@ -1426,7 +1662,7 @@ struct __turb3__GetLaplacianOfGradient
 #ifndef WITH_NOGLOBAL
 
 #ifndef SOAP_TYPE_SOAP_ENV__Header
-#define SOAP_TYPE_SOAP_ENV__Header (271)
+#define SOAP_TYPE_SOAP_ENV__Header (315)
 /* SOAP Header: */
 struct SOAP_ENV__Header
 {
@@ -1441,7 +1677,7 @@ struct SOAP_ENV__Header
 #ifndef WITH_NOGLOBAL
 
 #ifndef SOAP_TYPE_SOAP_ENV__Code
-#define SOAP_TYPE_SOAP_ENV__Code (272)
+#define SOAP_TYPE_SOAP_ENV__Code (316)
 /* SOAP Fault Code: */
 struct SOAP_ENV__Code
 {
@@ -1455,7 +1691,7 @@ struct SOAP_ENV__Code
 #ifndef WITH_NOGLOBAL
 
 #ifndef SOAP_TYPE_SOAP_ENV__Detail
-#define SOAP_TYPE_SOAP_ENV__Detail (274)
+#define SOAP_TYPE_SOAP_ENV__Detail (318)
 /* SOAP-ENV:Detail */
 struct SOAP_ENV__Detail
 {
@@ -1470,7 +1706,7 @@ struct SOAP_ENV__Detail
 #ifndef WITH_NOGLOBAL
 
 #ifndef SOAP_TYPE_SOAP_ENV__Reason
-#define SOAP_TYPE_SOAP_ENV__Reason (277)
+#define SOAP_TYPE_SOAP_ENV__Reason (321)
 /* SOAP-ENV:Reason */
 struct SOAP_ENV__Reason
 {
@@ -1483,7 +1719,7 @@ struct SOAP_ENV__Reason
 #ifndef WITH_NOGLOBAL
 
 #ifndef SOAP_TYPE_SOAP_ENV__Fault
-#define SOAP_TYPE_SOAP_ENV__Fault (278)
+#define SOAP_TYPE_SOAP_ENV__Fault (322)
 /* SOAP Fault: */
 struct SOAP_ENV__Fault
 {
@@ -1552,6 +1788,14 @@ SOAP_FMAC5 int SOAP_FMAC6 soap_call___turb2__GetVectorPotential(struct soap *soa
 
 SOAP_FMAC5 int SOAP_FMAC6 soap_call___turb2__GetRawVectorPotential(struct soap *soap, const char *soap_endpoint, const char *soap_action, struct _turb1__GetRawVectorPotential *turb1__GetRawVectorPotential, struct _turb1__GetRawVectorPotentialResponse *turb1__GetRawVectorPotentialResponse);
 
+SOAP_FMAC5 int SOAP_FMAC6 soap_call___turb2__GetDensity(struct soap *soap, const char *soap_endpoint, const char *soap_action, struct _turb1__GetDensity *turb1__GetDensity, struct _turb1__GetDensityResponse *turb1__GetDensityResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_call___turb2__GetDensityGradient(struct soap *soap, const char *soap_endpoint, const char *soap_action, struct _turb1__GetDensityGradient *turb1__GetDensityGradient, struct _turb1__GetDensityGradientResponse *turb1__GetDensityGradientResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_call___turb2__GetDensityHessian(struct soap *soap, const char *soap_endpoint, const char *soap_action, struct _turb1__GetDensityHessian *turb1__GetDensityHessian, struct _turb1__GetDensityHessianResponse *turb1__GetDensityHessianResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_call___turb2__GetRawDensity(struct soap *soap, const char *soap_endpoint, const char *soap_action, struct _turb1__GetRawDensity *turb1__GetRawDensity, struct _turb1__GetRawDensityResponse *turb1__GetRawDensityResponse);
+
 SOAP_FMAC5 int SOAP_FMAC6 soap_call___turb2__GetForce(struct soap *soap, const char *soap_endpoint, const char *soap_action, struct _turb1__GetForce *turb1__GetForce, struct _turb1__GetForceResponse *turb1__GetForceResponse);
 
 SOAP_FMAC5 int SOAP_FMAC6 soap_call___turb2__GetVelocityAndPressure(struct soap *soap, const char *soap_endpoint, const char *soap_action, struct _turb1__GetVelocityAndPressure *turb1__GetVelocityAndPressure, struct _turb1__GetVelocityAndPressureResponse *turb1__GetVelocityAndPressureResponse);
@@ -1586,6 +1830,8 @@ SOAP_FMAC5 int SOAP_FMAC6 soap_call___turb2__GetBoxFilterSGS(struct soap *soap, 
 
 SOAP_FMAC5 int SOAP_FMAC6 soap_call___turb2__GetBoxFilterGradient(struct soap *soap, const char *soap_endpoint, const char *soap_action, struct _turb1__GetBoxFilterGradient *turb1__GetBoxFilterGradient, struct _turb1__GetBoxFilterGradientResponse *turb1__GetBoxFilterGradientResponse);
 
+SOAP_FMAC5 int SOAP_FMAC6 soap_call___turb2__GetThreshold(struct soap *soap, const char *soap_endpoint, const char *soap_action, struct _turb1__GetThreshold *turb1__GetThreshold, struct _turb1__GetThresholdResponse *turb1__GetThresholdResponse);
+
 SOAP_FMAC5 int SOAP_FMAC6 soap_call___turb2__GetLaplacianOfGradient(struct soap *soap, const char *soap_endpoint, const char *soap_action, struct _turb1__GetLaplacianOfGradient *turb1__GetLaplacianOfGradient, struct _turb1__GetLaplacianOfGradientResponse *turb1__GetLaplacianOfGradientResponse);
 
 SOAP_FMAC5 int SOAP_FMAC6 soap_call___turb3__NullOp(struct soap *soap, const char *soap_endpoint, const char *soap_action, struct _turb1__NullOp *turb1__NullOp, struct _turb1__NullOpResponse *turb1__NullOpResponse);
@@ -1607,6 +1853,14 @@ SOAP_FMAC5 int SOAP_FMAC6 soap_call___turb3__GetRawMagneticField(struct soap *so
 SOAP_FMAC5 int SOAP_FMAC6 soap_call___turb3__GetVectorPotential(struct soap *soap, const char *soap_endpoint, const char *soap_action, struct _turb1__GetVectorPotential *turb1__GetVectorPotential, struct _turb1__GetVectorPotentialResponse *turb1__GetVectorPotentialResponse);
 
 SOAP_FMAC5 int SOAP_FMAC6 soap_call___turb3__GetRawVectorPotential(struct soap *soap, const char *soap_endpoint, const char *soap_action, struct _turb1__GetRawVectorPotential *turb1__GetRawVectorPotential, struct _turb1__GetRawVectorPotentialResponse *turb1__GetRawVectorPotentialResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_call___turb3__GetDensity(struct soap *soap, const char *soap_endpoint, const char *soap_action, struct _turb1__GetDensity *turb1__GetDensity, struct _turb1__GetDensityResponse *turb1__GetDensityResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_call___turb3__GetDensityGradient(struct soap *soap, const char *soap_endpoint, const char *soap_action, struct _turb1__GetDensityGradient *turb1__GetDensityGradient, struct _turb1__GetDensityGradientResponse *turb1__GetDensityGradientResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_call___turb3__GetDensityHessian(struct soap *soap, const char *soap_endpoint, const char *soap_action, struct _turb1__GetDensityHessian *turb1__GetDensityHessian, struct _turb1__GetDensityHessianResponse *turb1__GetDensityHessianResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_call___turb3__GetRawDensity(struct soap *soap, const char *soap_endpoint, const char *soap_action, struct _turb1__GetRawDensity *turb1__GetRawDensity, struct _turb1__GetRawDensityResponse *turb1__GetRawDensityResponse);
 
 SOAP_FMAC5 int SOAP_FMAC6 soap_call___turb3__GetForce(struct soap *soap, const char *soap_endpoint, const char *soap_action, struct _turb1__GetForce *turb1__GetForce, struct _turb1__GetForceResponse *turb1__GetForceResponse);
 
@@ -1641,6 +1895,8 @@ SOAP_FMAC5 int SOAP_FMAC6 soap_call___turb3__GetBoxFilter(struct soap *soap, con
 SOAP_FMAC5 int SOAP_FMAC6 soap_call___turb3__GetBoxFilterSGS(struct soap *soap, const char *soap_endpoint, const char *soap_action, struct _turb1__GetBoxFilterSGS *turb1__GetBoxFilterSGS, struct _turb1__GetBoxFilterSGSResponse *turb1__GetBoxFilterSGSResponse);
 
 SOAP_FMAC5 int SOAP_FMAC6 soap_call___turb3__GetBoxFilterGradient(struct soap *soap, const char *soap_endpoint, const char *soap_action, struct _turb1__GetBoxFilterGradient *turb1__GetBoxFilterGradient, struct _turb1__GetBoxFilterGradientResponse *turb1__GetBoxFilterGradientResponse);
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_call___turb3__GetThreshold(struct soap *soap, const char *soap_endpoint, const char *soap_action, struct _turb1__GetThreshold *turb1__GetThreshold, struct _turb1__GetThresholdResponse *turb1__GetThresholdResponse);
 
 SOAP_FMAC5 int SOAP_FMAC6 soap_call___turb3__GetLaplacianOfGradient(struct soap *soap, const char *soap_endpoint, const char *soap_action, struct _turb1__GetLaplacianOfGradient *turb1__GetLaplacianOfGradient, struct _turb1__GetLaplacianOfGradientResponse *turb1__GetLaplacianOfGradientResponse);
 

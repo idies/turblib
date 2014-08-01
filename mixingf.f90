@@ -38,9 +38,9 @@ program TurbTest
   !
   ! Choose which dataset to use in this query
   ! Currently, only valid datasets are:
-  !   'isotropic1024coarse', 'isotropic1024fine', 'mhd1024' and 'channel'
+  !   'isotropic1024coarse', 'isotropic1024fine', 'mhd1024', 'channel' and 'mixing'
   !
-  character(*), parameter :: dataset = 'mhd1024' // CHAR(0)
+  character(*), parameter :: dataset = 'mixing' // CHAR(0)
 
   !
   ! Specify your access key here.
@@ -51,43 +51,39 @@ program TurbTest
 
   character(*), parameter :: field = 'velocity' // CHAR(0) ! field used for box filter
   real(RP), parameter :: filterwidth = 0.055223308_RP ! 9 * dx, where dx = 2*PI/1024
-  real(RP), parameter :: spacing = 0.030680_RP ! 5 * dx
+  real(RP), parameter :: spacing = 0.030680_RP ! 5 * dx    
 
-  real(RP), parameter :: time = 0.364_RP;
-  real(RP), parameter :: startTime = 0.364_RP;
-  real(RP), parameter :: endTime = 0.376_RP;
-  real(RP), parameter :: lag_dt = 0.0004_RP     ! fraction of database timestep to use for 
+  real(RP), parameter :: time = 5.0_RP;
+  real(RP), parameter :: startTime = 5.0_RP;
+  real(RP), parameter :: endTime = 5.08_RP;
+  real(RP), parameter :: lag_dt = 0.02_RP     ! fraction of database timestep to use for 
                                                 ! getposition method (Lagrangian integration time step)
   real(RP) :: points(3, 10)    ! input
   real(RP) :: dataout1(10)     ! p
   real(RP) :: dataout3(3, 10)  ! x,y,z
   real(RP) :: dataout4(4, 10)  ! x,y,z,p
   real(RP) :: dataout6(6, 10)  ! results from Pressure Hessian
-  real(RP) :: dataout9(9, 10)  ! results from Gradient function
-  real(RP) :: dataout18(18, 10) ! results from Hessian function
+  real(RP) :: dataout9(9, 10)  ! results from Velocity Gradient
+  real(RP) :: dataout18(18, 10) ! results from Velocity Hessian
 
   integer,parameter :: x=0, y=0, z=0, xwidth=16, ywidth=16, zwidth=16
-  !real(RP) :: rawdata(xwidth*ywidth*zwidth*3)
-  real(RP) :: rawdata(3,xwidth*ywidth*zwidth)
+  !real(RP) :: rawvelocity(xwidth*ywidth*zwidth*3)
+  real(RP) :: rawvelocity(3,xwidth*ywidth*zwidth)
   real(RP) :: rawpressure(xwidth*ywidth*zwidth)
+  real(RP) :: rawdensity(xwidth*ywidth*zwidth)
 
   ! Declare the return type of the turblib functions as integer.
   ! This is required for custom error handling (see the README).
-  integer :: getvelocity, getforce, getvelocityandpressure, getvelocitygradient
+  integer :: getvelocity, getvelocityandpressure, getvelocitygradient
   integer :: getboxfilter, getboxfiltersgs, getboxfiltergradient
   integer :: getvelocitylaplacian, getvelocityhessian
-  integer :: getmagneticfield, getmagneticfieldgradient
-  integer :: getmagneticfieldlaplacian, getmagneticfieldhessian
-  integer :: getvectorpotential, getvectorpotentialgradient
-  integer :: getvectorpotentiallaplacian, getvectorpotentialhessian
-  integer :: getpressuregradient, getpressurehessian
-  integer :: getrawvelocity, getrawpressure
-  integer :: getrawmagneticfield, getrawvectorpotential
+  integer :: getpressure, getpressuregradient, getpressurehessian
+  integer :: getdensity, getdensitygradient, getdensityhessian
+  integer :: getrawvelocity, getrawpressure, getrawdensity
   integer :: getposition
-  integer :: getpressure
   ! If working with hdf5 cutout files, uncomment the lines below
   ! to load the file and use the functions locally:
-  ! character(*), parameter :: filename = 'mhd1024.h5' // CHAR(0)
+  ! character(*), parameter :: filename = 'isotropic1024coarse.h5' // CHAR(0)
   ! integer :: turblibaddlocalsource
 
   ! return code
@@ -116,7 +112,7 @@ program TurbTest
 
   ! If working with cutout files, CUTOUT_SUPPORT should be defined during compilation.
   ! Make sure to run make with the "CUTOUT_SUPPORT=1" option, e.g.:
-  ! $ make mhdf CUTOUT_SUPPORT=1
+  ! $ make turbf CUTOUT_SUPPORT=1
   ! Change the filename to the name of the downloaded cutout file
   ! and uncomment the line below:
   ! rc = turblibaddlocalsource(filename);
@@ -143,9 +139,9 @@ program TurbTest
   !   client library locally:
   !   1) Download an hdf5 file containing a cubic region of the velocity data at timestep 0 
   !      with the following download link:
-  !	http://turbulence.pha.jhu.edu/download.aspx/[authorization Token]/mhd1024/u/0,1/0,16/0,16/0,16/
+  !	http://turbulence.pha.jhu.edu/download.aspx/[authorization Token]/isotropic1024coarse/u/0,1/0,16/0,16/0,16/
   !   2) Compile this sample code with the "CUTOUT_SUPPORT=1" option, e.g.:
-  !      $ make mhdf CUTOUT_SUPPORT=1
+  !      $ make turbf CUTOUT_SUPPORT=1
   !   3) Uncomment the line below to Load the hdf5 cutout file:
 
   ! rc = turblibAddLocalSource(filename);
@@ -175,7 +171,7 @@ program TurbTest
   do i = 1, 10
     points(1, i) = 0.20 * i
     points(2, i) = 0.50 * i
-    points(3, i) = 0.15 * i
+    points(3, i) = 0.15 * i 
   end do
 
   write(*,*)
@@ -183,6 +179,7 @@ program TurbTest
   do i = 1, 10
     write(*,format3) i, ': ', points(1,i), ', ', points(2,i), ', ', points(3,i)
   end do
+  
 
   write(*,*)
   write(*,'(a)') 'Requesting velocity at 10 points...'
@@ -192,16 +189,9 @@ program TurbTest
   end do
 
   write(*,*)
-  write(*,'(a)') 'Requesting forcing at 10 points...'
-  rc = getforce(authkey, dataset,  time, Lag6, NoTInt, 10, points, dataout3)
-  do i = 1, 10
-    write(*,format3) i, ': ', dataout3(1,i), ', ', dataout3(2,i), ', ', dataout3(3,i)
-  end do
-
-  write(*,*)
   write(*,'(a)') 'Requesting velocity and pressure at 10 points...'
   rc = getvelocityandpressure(authkey, dataset,  time, Lag6, NoTInt, 10, points, dataout4)
-  do i = 1, 10
+  do i = 1, 10 
     write(*,format4) i, ': ', dataout4(1,i), ', ', dataout4(2,i), ', ', dataout4(3,i), ', ', dataout4(4,i)
   end do
 
@@ -248,107 +238,9 @@ program TurbTest
   end do
 
   write(*,*)
-  write(*,'(a)') 'Requesting magnetic field at 10 points...'
-  rc = getmagneticfield(authkey, dataset,  time, Lag6, NoTInt, 10, points, dataout3)
-  do i = 1, 10
-    write(*,format3) i, ': ', dataout3(1,i), ', ', dataout3(2,i), ', ', dataout3(3,i)
-  end do
-
-  write(*,*)
-  write(*,'(a)') 'Requesting magnetic field gradient at 10 points...'
-  rc = getmagneticfieldgradient(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout9)
-  do i = 1, 10 
-    write(*,format9) i, ': duxdx=', dataout9(1,i), ', duxdy=', dataout9(2,i), &
-       ', duxdz=', dataout9(3,i), ', duydx=', dataout9(4,i),  &
-       ', duydy=', dataout9(5,i), ', duydz=', dataout9(6,i),  &
-       ', duzdx=', dataout9(7,i), ', duzdy=', dataout9(8,i),  &
-       ', duzdz=', dataout9(9,i)
-  end do
-
-  write(*,*)
-  write(*,'(a)') 'Requesting magnetic field laplacian at 10 points...'
-  rc = getmagneticfieldlaplacian(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout3)
-  do i = 1, 10 
-    write(*,format3) i, ': grad2ux=', dataout3(1,i), ', grad2uy=', dataout3(2,i), ', grad2uz=', dataout3(3,i)
-  end do
-
-  write(*,*)
-  write(*,'(a)') 'Requesting magnetic field hessian at 10 points...'
-  rc = getmagneticfieldhessian(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout18)
-  do i = 1, 10 
-    write(*,format18) i, ': d2uxdxdx=', dataout18(1,i), &
-       ', d2uxdxdy=', dataout18(2,i), &
-       ', d2uxdxdz=', dataout18(3,i), &
-       ', d2uxdydy=', dataout18(4,i), &
-       ', d2uxdydz=', dataout18(5,i), &
-       ', d2uxdzdz=', dataout18(6,i), &
-       ', d2uydxdx=', dataout18(7,i), &
-       ', d2uydxdy=', dataout18(8,i), &
-       ', d2uydxdz=', dataout18(9,i), &
-       ', d2uydydy=', dataout18(10,i), &
-       ', d2uydydz=', dataout18(11,i), &
-       ', d2uydzdz=', dataout18(12,i), &
-       ', d2uzdxdx=', dataout18(13,i), &
-       ', d2uzdxdy=', dataout18(14,i), &
-       ', d2uzdxdz=', dataout18(15,i), &
-       ', d2uzdydy=', dataout18(16,i), &
-       ', d2uzdydz=', dataout18(18,i), &
-       ', d2uzdzdz=', dataout18(18,i)
-  end do
-
-  write(*,*)
-  write(*,'(a)') 'Requesting vector potential at 10 points...'
-  rc = getvectorpotential(authkey, dataset,  time, Lag6, NoTInt, 10, points, dataout3)
-  do i = 1, 10
-    write(*,format3) i, ': ', dataout3(1,i), ', ', dataout3(2,i), ', ', dataout3(3,i)
-  end do
-
-  write(*,*)
-  write(*,'(a)') 'Requesting vector potential gradient at 10 points...'
-  rc = getvectorpotentialgradient(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout9)
-  do i = 1, 10 
-    write(*,format9) i, ': duxdx=', dataout9(1,i), ', duxdy=', dataout9(2,i), &
-       ', duxdz=', dataout9(3,i), ', duydx=', dataout9(4,i),  &
-       ', duydy=', dataout9(5,i), ', duydz=', dataout9(6,i),  &
-       ', duzdx=', dataout9(7,i), ', duzdy=', dataout9(8,i),  &
-       ', duzdz=', dataout9(9,i)
-  end do
-
-  write(*,*)
-  write(*,'(a)') 'Requesting vector potential laplacian at 10 points...'
-  rc = getvectorpotentiallaplacian(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout3)
-  do i = 1, 10 
-    write(*,format3) i, ': grad2ux=', dataout3(1,i), ', grad2uy=', dataout3(2,i), ', grad2uz=', dataout3(3,i)
-  end do
-
-  write(*,*)
-  write(*,'(a)') 'Requesting vector potential hessian at 10 points...'
-  rc = getvectorpotentialhessian(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout18)
-  do i = 1, 10 
-    write(*,format18) i, ': d2uxdxdx=', dataout18(1,i), &
-       ', d2uxdxdy=', dataout18(2,i), &
-       ', d2uxdxdz=', dataout18(3,i), &
-       ', d2uxdydy=', dataout18(4,i), &
-       ', d2uxdydz=', dataout18(5,i), &
-       ', d2uxdzdz=', dataout18(6,i), &
-       ', d2uydxdx=', dataout18(7,i), &
-       ', d2uydxdy=', dataout18(8,i), &
-       ', d2uydxdz=', dataout18(9,i), &
-       ', d2uydydy=', dataout18(10,i), &
-       ', d2uydydz=', dataout18(11,i), &
-       ', d2uydzdz=', dataout18(12,i), &
-       ', d2uzdxdx=', dataout18(13,i), &
-       ', d2uzdxdy=', dataout18(14,i), &
-       ', d2uzdxdz=', dataout18(15,i), &
-       ', d2uzdydy=', dataout18(16,i), &
-       ', d2uzdydz=', dataout18(18,i), &
-       ', d2uzdzdz=', dataout18(18,i)
-  end do
-
-  write(*,*)
   write(*,'(a)') 'Requesting pressure at 10 points...'
   rc = getpressure(authkey, dataset,  time, Lag6, NoTInt, 10, points, dataout1)
-  do i = 1, 10
+  do i = 1, 10 
     write(*,format1) i, ': ', dataout1(i)
   end do
 
@@ -369,35 +261,51 @@ program TurbTest
   end do
 
   write(*,*)
+  write(*,'(a)') 'Requesting density at 10 points...'
+  rc = getdensity(authkey, dataset,  time, Lag6, NoTInt, 10, points, dataout1)
+  do i = 1, 10 
+    write(*,format1) i, ': ', dataout1(i)
+  end do
+
+  write(*,*)
+  write(*,'(a)') 'Requesting density gradient at 10 points...'
+  rc = getdensitygradient(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout3)
+  do i = 1, 10 
+    write(*,format3) i, ': dpdx=', dataout3(1,i), ', dpdy=', dataout3(2,i), ', dpdz=', dataout3(3,i)
+  end do
+
+  write(*,*)
+  write(*,'(a)') 'Requesting density hessian at 10 points...'
+  rc = getdensityhessian(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout6)
+  do i = 1, 10 
+    write(*,format6) i, ': d2pdxdx=', dataout6(1,i), ', d2pdxdy=', dataout6(2,i), &
+       ', d2pdxdz=', dataout6(3,i), ', d2pdydy=', dataout6(4,i),  &
+       ', d2pdydz=', dataout6(5,i), ', d2pdzdz', dataout6(6,i)
+  end do
+
+ 
+  write(*,*)
   write(*,'(a)') 'Requesting raw velocity ...'
-  rc = getrawvelocity(authkey, dataset,  time, x, y, z, xwidth, ywidth, zwidth, rawdata)
+  rc = getrawvelocity(authkey, dataset,  time, x, y, z, xwidth, ywidth, zwidth, rawvelocity)
   do i = 1, xwidth*ywidth*zwidth
-    !write(*,rawformat3) i, ': Vx=', rawdata(3*(i-1)+1), ', Vy=', rawdata(3*(i-1)+2), ', Vz=', rawdata(3*(i-1)+3)
-    !write(*,rawformat3) i, ': Vx=', rawdata(1,i), ', Vy=', rawdata(2,i), ', Vz=', rawdata(3,i)
+    !write(*,rawformat3) i, ': Vx=', rawvelocity(3*(i-1)+1), ', Vy=', rawvelocity(3*(i-1)+2), ', Vz=', rawvelocity(3*(i-1)+3)
+    !write(*,rawformat3) i, ': Vx=', rawvelocity(1,i), ', Vy=', rawvelocity(2,i), ', Vz=', rawvelocity(3,i)
   end do
 
   write(*,*)
   write(*,'(a)') 'Requesting raw pressure ...'
   rc = getrawpressure(authkey, dataset,  time, x, y, z, xwidth, ywidth, zwidth, rawpressure)
-  do i = 1, xwidth*ywidth*zwidth
+  do i = 1, xwidth*ywidth*zwidth 
     !write(*,rawformat1) i, ': ', rawpressure(i)
   end do
 
   write(*,*)
-  write(*,'(a)') 'Requesting raw magnetic field ...'
-  rc = getrawmagneticfield(authkey, dataset,  time, x, y, z, xwidth, ywidth, zwidth, rawdata)
-  do i = 1, xwidth*ywidth*zwidth
-    !write(*,rawformat3) i, ': bx=', rawdata(3*(i-1)+1), ', by=', rawdata(3*(i-1)+2), ', bz=', rawdata(3*(i-1)+3)
-    !write(*,rawformat3) i, ': bx=', rawdata(1,i), ', by=', rawdata(2,i), ', bz=', rawdata(3,i)
+  write(*,'(a)') 'Requesting raw density ...'
+  rc = getrawdensity(authkey, dataset,  time, x, y, z, xwidth, ywidth, zwidth, rawdensity)
+  do i = 1, xwidth*ywidth*zwidth 
+    !write(*,rawformat1) i, ': ', rawdensity(i)
   end do
 
-  write(*,*)
-  write(*,'(a)') 'Requesting raw vector potential ...'
-  rc = getrawvectorpotential(authkey, dataset,  time, x, y, z, xwidth, ywidth, zwidth, rawdata)
-  do i = 1, xwidth*ywidth*zwidth
-    !write(*,rawformat3) i, ': ax=', rawdata(3*(i-1)+1), ', ay=', rawdata(3*(i-1)+2), ', az=', rawdata(3*(i-1)+3)
-    !write(*,rawformat3) i, ': ax=', rawdata(1,i), ', ay=', rawdata(2,i), ', az=', rawdata(3,i)
-  end do
 
   write(*,*)
   write(*,'(2(a,f8.6),a)') 'Requesting position at 10 points, starting at time ', &
@@ -435,7 +343,7 @@ program TurbTest
   write(*,*)
   write(*,'(a)') 'Requesting box filter of velocity gradient at 10 points...'
   rc = getboxfiltergradient(authkey, dataset, field, time, filterwidth, spacing, 10, points, dataout9)
-  do i = 1, 10 
+  do i = 1, 10
     write(*,format9) i, ': duxdx=', dataout9(1,i), ', duxdy=', dataout9(2,i), &
        ', duxdz=', dataout9(3,i), ', duydx=', dataout9(4,i),  &
        ', duydy=', dataout9(5,i), ', duydz=', dataout9(6,i),  &

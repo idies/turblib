@@ -43,6 +43,30 @@ enum SpatialInterpolation
   Lag4 = 4,   /* 4th order Lagrangian interpolation in space */
   Lag6 = 6,   /* 4th order Lagrangian interpolation in space */
   Lag8 = 8,   /* 4th order Lagrangian interpolation in space */
+  M1Q4 = 104,
+  M1Q6 = 106,
+  M1Q8 = 108,
+  M1Q10 = 110,
+  M1Q12 = 112,
+  M1Q14 = 114,
+  M2Q4 = 204,
+  M2Q6 = 206,
+  M2Q8 = 208,
+  M2Q10 = 210,
+  M2Q12 = 212,
+  M2Q14 = 214,
+  M3Q4 = 304,
+  M3Q6 = 306,
+  M3Q8 = 308,
+  M3Q10 = 310,
+  M3Q12 = 312,
+  M3Q14 = 314,
+  M4Q4 = 404,
+  M4Q6 = 406,
+  M4Q8 = 408,
+  M4Q10 = 410,
+  M4Q12 = 412,
+  M4Q14 = 414,
 
   /* Spatial Differentiation and Interpolation Flags for GetVelocityGradient
    * and GetPressureGradient. */
@@ -78,7 +102,7 @@ typedef enum
   isotropic1024coarse = 4,
   isotropic1024fine = 5,
   channel = 6,
-  custom_dataset = 7
+  mixing = 7
 } TurbDataset;
 
 typedef enum
@@ -87,7 +111,8 @@ typedef enum
   turb_pressure= 1,
   turb_magnetic = 2,
   turb_potential = 3,
-  turb_vp = 4
+  turb_vp = 4,
+  turb_density = 5
 } TurbField;
 
 typedef struct
@@ -119,7 +144,7 @@ struct cutoutFile
 {
   hid_t file;
   int start[4], size[4];
-  int contents[4];
+  int contents[5];
   dataBlock *data[4][1024];
   TurbDataset dataset;
   cutoutFile *next;
@@ -172,6 +197,9 @@ void turblibsetexitonerror_(int *);
 #define getMagneticFieldGradient getMagneticFieldGradientSoap
 #define getVectorPotentialGradient getVectorPotentialGradientSoap
 #define getPressure getPressureSoap
+#define getDensity getDensitySoap
+#define getDensityGradient getDensityGradientSoap
+#define getDensityHessian getDensityHessianSoap
 
 #endif
 
@@ -498,6 +526,55 @@ int getrawpressure_ (char *authToken,
   char *dataset, float *time,
   int *X, int *Y, int *Z, int *Xwidth, int *Ywidth, int *Zwidth, float dataout[]);
 
+/* C */
+int getDensity (char *authToken,
+  char *dataset, float time,
+  enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+  int count, float datain[][3], float dataout[]);
+
+/* Fortran */
+int getdensity_ (char *authToken,
+  char *dataset, float *time,
+  int *spatial, int *temporal,
+  int *count, float datain[][3], float dataout[],
+  int len_a, int len_d);
+
+/* C */
+int getDensityGradient(char *authToken,
+      char *dataset, float time,
+      enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+      int count, float datain[][3], float dataout[][3]);
+
+/* Fortran */
+int getdensitygradient_(char *authToken,
+      char *dataset, float *time,
+      int *spatial, int *temporal,
+      int *count, float datain[][3], float dataout[][3],
+      int len_a, int len_d);
+
+/* C */
+int getDensityHessian(char *authToken,
+      char *dataset, float time,
+      enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+      int count, float datain[][3], float dataout[][6]);
+
+/* Fortran */
+int getdensityhessian_(char *authToken,
+      char *dataset, float *time,
+      int *spatial, int *temporal,
+      int *count, float datain[][3], float dataout[][6],
+      int len_a, int len_d);
+
+/* C */
+int getRawDensity (char *authToken,
+  char *dataset, float time,
+  int X, int Y, int Z, int Xwidth, int Ywidth, int Zwidth, char dataout[]);
+
+/* Fortran */
+int getrawdensity_ (char *authToken,
+  char *dataset, float *time,
+  int *X, int *Y, int *Z, int *Xwidth, int *Ywidth, int *Zwidth, float dataout[]);
+
 
 /* Local vs Soap functions */
 
@@ -603,6 +680,24 @@ int getVectorPotentialGradientSoap (char *authToken, char *dataset, float time,
 int getPressureSoap (char *authToken, char *dataset, float time, 
 		     enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
 		     int count, float datain[][3], float dataout[]);
+
+int getDensitySoap (char *authToken, char *dataset, float time, 
+		     enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+		     int count, float datain[][3], float dataout[]);
+
+int getDensityGradientLocal (TurbDataset dataset, float time, 
+			      enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+			      int count, float datain[][3], float dataout[][3]);
+int getDensityGradientSoap (char *authToken, char *dataset, float time, 
+			     enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+			     int count, float datain[][3], float dataout[][3]);
+
+int getDensityHessianLocal (TurbDataset dataset, float time, 
+			     enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+			     int count, float datain[][3], float dataout[][6]);
+int getDensityHessianSoap (char *authToken, char *dataset, float time, 
+			    enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+			    int count, float datain[][3], float dataout[][6]);
 
 /* Cutout functions */
 

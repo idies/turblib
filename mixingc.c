@@ -26,11 +26,11 @@
 int main(int argc, char *argv[]) {
 
   char * authtoken = "edu.jhu.pha.turbulence.testing-201406";
-  char * dataset = "isotropic1024coarse";
+  char * dataset = "mixing";
   enum SpatialInterpolation spatialInterp = Lag6;
   enum TemporalInterpolation temporalInterp = NoTInt;
 
-  float time = 0.364F;
+  float time = 5.0F;
 
   float points[N][3];    /* input of x,y,z */
   float result1[N];    /* input of x,y,z */
@@ -41,15 +41,17 @@ int main(int argc, char *argv[]) {
   float result18[N][18];
   int p;
 
-  float startTime = 0.364F;
-  float endTime = 0.376F;
-  float lag_dt = 0.0004F;
+  float startTime = 5.0F;
+  float endTime = 5.08F;
+  float lag_dt = 0.02F;
 
   int X = 0, Y = 0, Z = 0, Xwidth = 16, Ywidth = 16, Zwidth = 16;
   int components = 3;
   float * rawdata = (float*) malloc(Xwidth*Ywidth*Zwidth*sizeof(float)*components);
   int pressure_components = 1;
   float * rawpressure = (float*) malloc(Xwidth*Ywidth*Zwidth*sizeof(float)*pressure_components);
+  int density_components = 1;
+  float * rawdensity = (float*) malloc(Xwidth*Ywidth*Zwidth*sizeof(float)*density_components);
 
   char * field = "velocity";
   float dx = 2.0f * 3.14159265f / 1024.0f;
@@ -147,12 +149,6 @@ int main(int argc, char *argv[]) {
     printf("%d: %13.6e, %13.6e, %13.6e\n", p, result3[p][0],  result3[p][1],  result3[p][2]);
   }
 
-  printf("\nRequesting forcing at %d points...\n", N);
-  getForce (authtoken, dataset, time, spatialInterp, temporalInterp, N, points, result3);
-  for (p = 0; p < N; p++) {
-    printf("%d: %13.6e, %13.6e, %13.6e\n", p, result3[p][0],  result3[p][1],  result3[p][2]);
-  }
-
   printf("\nRequesting velocity and pressure at %d points...\n", N);
   getVelocityAndPressure (authtoken, dataset, time, spatialInterp, temporalInterp, N, points, result4);
    for (p = 0; p < N; p++) {
@@ -205,6 +201,26 @@ int main(int argc, char *argv[]) {
 
   }
 
+  printf("\nRequesting density at %d points...\n", N);
+  getDensity (authtoken, dataset, time, spatialInterp, temporalInterp, N, points, result1);
+   for (p = 0; p < N; p++) {
+     printf("%d: p=%13.6e\n", p, result1[p]);
+  }
+
+  printf("\nRequesting density gradient at %d points...\n", N);
+  getDensityGradient (authtoken, dataset, time, FD4Lag4, temporalInterp, N, points, result3);
+  for (p = 0; p < N; p++) {
+    printf("%d: dpdx=%13.6e, dpdy=%13.6e, dpdz=%13.6e\n", p, result3[p][0],  result3[p][1],  result3[p][2]);
+  }
+
+  printf("\nRequesting density hessian at %d points...\n", N);
+  getDensityHessian(authtoken, dataset, time, FD4Lag4, temporalInterp, N, points, result6);
+  for (p = 0; p < N; p++) {
+    printf("%d: d2pdxdx=%13.6e, d2pdxdy=%13.6e, d2pdxdz=%13.6e, d2pdydy=%13.6e, d2pdydz=%13.6e, d2pdzdz=%13.6e\n", p,
+           result6[p][0],  result6[p][1],  result6[p][2], result6[p][3],  result6[p][4],  result6[p][5]);
+
+  }
+
   printf("Requesting raw velocity data...\n");
   getRawVelocity(authtoken, dataset, time, X, Y, Z, Xwidth, Ywidth, Zwidth, (char*)rawdata);
   for (p = 0; p < Xwidth*Ywidth*Zwidth; p++) {
@@ -215,6 +231,12 @@ int main(int argc, char *argv[]) {
   getRawPressure (authtoken, dataset, time, X, Y, Z, Xwidth, Ywidth, Zwidth, (char*)rawpressure);
   for (p = 0; p < Xwidth*Ywidth*Zwidth; p++) {
     //printf("%d: P=%f\n", p, rawpressure[p]);                                                           
+  }
+
+  printf("Requesting raw density data...\n");
+  getRawDensity (authtoken, dataset, time, X, Y, Z, Xwidth, Ywidth, Zwidth, (char*)rawdensity);
+  for (p = 0; p < Xwidth*Ywidth*Zwidth; p++) {
+    //printf("%d: P=%f\n", p, rawdensity[p]);              
   }
 
   printf("\nRequesting position at %d points, starting at time %f and ending at time %f...\n", N, startTime, endTime);

@@ -174,7 +174,7 @@ SOAP_FMAC3 enum turb1__SpatialInterpolation * SOAP_FMAC4 soap_get_turb1__Spatial
 #ifndef WITH_NOGLOBAL
 
 #ifndef SOAP_TYPE_SOAP_ENV__Fault
-#define SOAP_TYPE_SOAP_ENV__Fault (278)
+#define SOAP_TYPE_SOAP_ENV__Fault (322)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default_SOAP_ENV__Fault(struct soap*, struct SOAP_ENV__Fault *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_SOAP_ENV__Fault(struct soap*, const struct SOAP_ENV__Fault *);
@@ -199,7 +199,7 @@ SOAP_FMAC3 struct SOAP_ENV__Fault * SOAP_FMAC4 soap_get_SOAP_ENV__Fault(struct s
 #ifndef WITH_NOGLOBAL
 
 #ifndef SOAP_TYPE_SOAP_ENV__Reason
-#define SOAP_TYPE_SOAP_ENV__Reason (277)
+#define SOAP_TYPE_SOAP_ENV__Reason (321)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default_SOAP_ENV__Reason(struct soap*, struct SOAP_ENV__Reason *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_SOAP_ENV__Reason(struct soap*, const struct SOAP_ENV__Reason *);
@@ -224,7 +224,7 @@ SOAP_FMAC3 struct SOAP_ENV__Reason * SOAP_FMAC4 soap_get_SOAP_ENV__Reason(struct
 #ifndef WITH_NOGLOBAL
 
 #ifndef SOAP_TYPE_SOAP_ENV__Detail
-#define SOAP_TYPE_SOAP_ENV__Detail (274)
+#define SOAP_TYPE_SOAP_ENV__Detail (318)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default_SOAP_ENV__Detail(struct soap*, struct SOAP_ENV__Detail *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_SOAP_ENV__Detail(struct soap*, const struct SOAP_ENV__Detail *);
@@ -249,7 +249,7 @@ SOAP_FMAC3 struct SOAP_ENV__Detail * SOAP_FMAC4 soap_get_SOAP_ENV__Detail(struct
 #ifndef WITH_NOGLOBAL
 
 #ifndef SOAP_TYPE_SOAP_ENV__Code
-#define SOAP_TYPE_SOAP_ENV__Code (272)
+#define SOAP_TYPE_SOAP_ENV__Code (316)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default_SOAP_ENV__Code(struct soap*, struct SOAP_ENV__Code *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_SOAP_ENV__Code(struct soap*, const struct SOAP_ENV__Code *);
@@ -274,7 +274,7 @@ SOAP_FMAC3 struct SOAP_ENV__Code * SOAP_FMAC4 soap_get_SOAP_ENV__Code(struct soa
 #ifndef WITH_NOGLOBAL
 
 #ifndef SOAP_TYPE_SOAP_ENV__Header
-#define SOAP_TYPE_SOAP_ENV__Header (271)
+#define SOAP_TYPE_SOAP_ENV__Header (315)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default_SOAP_ENV__Header(struct soap*, struct SOAP_ENV__Header *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_SOAP_ENV__Header(struct soap*, const struct SOAP_ENV__Header *);
@@ -297,7 +297,7 @@ SOAP_FMAC3 struct SOAP_ENV__Header * SOAP_FMAC4 soap_get_SOAP_ENV__Header(struct
 #endif
 
 #ifndef SOAP_TYPE___turb3__GetLaplacianOfGradient
-#define SOAP_TYPE___turb3__GetLaplacianOfGradient (270)
+#define SOAP_TYPE___turb3__GetLaplacianOfGradient (314)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb3__GetLaplacianOfGradient(struct soap*, struct __turb3__GetLaplacianOfGradient *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb3__GetLaplacianOfGradient(struct soap*, const struct __turb3__GetLaplacianOfGradient *);
@@ -317,8 +317,29 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb3__GetLaplacianOfGradient(struct soap*,
 
 SOAP_FMAC3 struct __turb3__GetLaplacianOfGradient * SOAP_FMAC4 soap_get___turb3__GetLaplacianOfGradient(struct soap*, struct __turb3__GetLaplacianOfGradient *, const char*, const char*);
 
+#ifndef SOAP_TYPE___turb3__GetThreshold
+#define SOAP_TYPE___turb3__GetThreshold (312)
+#endif
+SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb3__GetThreshold(struct soap*, struct __turb3__GetThreshold *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb3__GetThreshold(struct soap*, const struct __turb3__GetThreshold *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out___turb3__GetThreshold(struct soap*, const char*, int, const struct __turb3__GetThreshold *, const char*);
+SOAP_FMAC3 struct __turb3__GetThreshold * SOAP_FMAC4 soap_in___turb3__GetThreshold(struct soap*, const char*, struct __turb3__GetThreshold *, const char*);
+
+#ifndef soap_write___turb3__GetThreshold
+#define soap_write___turb3__GetThreshold(soap, data) ( soap_begin_send(soap) || (soap_serialize___turb3__GetThreshold(soap, data), 0) || soap_put___turb3__GetThreshold(soap, data, "-turb3:GetThreshold", NULL) || soap_end_send(soap) )
+#endif
+
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb3__GetThreshold(struct soap*, const struct __turb3__GetThreshold *, const char*, const char*);
+
+#ifndef soap_read___turb3__GetThreshold
+#define soap_read___turb3__GetThreshold(soap, data) ( soap_begin_recv(soap) || !soap_get___turb3__GetThreshold(soap, data, NULL, NULL) || soap_end_recv(soap) )
+#endif
+
+SOAP_FMAC3 struct __turb3__GetThreshold * SOAP_FMAC4 soap_get___turb3__GetThreshold(struct soap*, struct __turb3__GetThreshold *, const char*, const char*);
+
 #ifndef SOAP_TYPE___turb3__GetBoxFilterGradient
-#define SOAP_TYPE___turb3__GetBoxFilterGradient (268)
+#define SOAP_TYPE___turb3__GetBoxFilterGradient (310)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb3__GetBoxFilterGradient(struct soap*, struct __turb3__GetBoxFilterGradient *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb3__GetBoxFilterGradient(struct soap*, const struct __turb3__GetBoxFilterGradient *);
@@ -339,7 +360,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb3__GetBoxFilterGradient(struct soap*, c
 SOAP_FMAC3 struct __turb3__GetBoxFilterGradient * SOAP_FMAC4 soap_get___turb3__GetBoxFilterGradient(struct soap*, struct __turb3__GetBoxFilterGradient *, const char*, const char*);
 
 #ifndef SOAP_TYPE___turb3__GetBoxFilterSGS
-#define SOAP_TYPE___turb3__GetBoxFilterSGS (266)
+#define SOAP_TYPE___turb3__GetBoxFilterSGS (308)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb3__GetBoxFilterSGS(struct soap*, struct __turb3__GetBoxFilterSGS *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb3__GetBoxFilterSGS(struct soap*, const struct __turb3__GetBoxFilterSGS *);
@@ -360,7 +381,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb3__GetBoxFilterSGS(struct soap*, const 
 SOAP_FMAC3 struct __turb3__GetBoxFilterSGS * SOAP_FMAC4 soap_get___turb3__GetBoxFilterSGS(struct soap*, struct __turb3__GetBoxFilterSGS *, const char*, const char*);
 
 #ifndef SOAP_TYPE___turb3__GetBoxFilter
-#define SOAP_TYPE___turb3__GetBoxFilter (264)
+#define SOAP_TYPE___turb3__GetBoxFilter (306)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb3__GetBoxFilter(struct soap*, struct __turb3__GetBoxFilter *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb3__GetBoxFilter(struct soap*, const struct __turb3__GetBoxFilter *);
@@ -381,7 +402,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb3__GetBoxFilter(struct soap*, const str
 SOAP_FMAC3 struct __turb3__GetBoxFilter * SOAP_FMAC4 soap_get___turb3__GetBoxFilter(struct soap*, struct __turb3__GetBoxFilter *, const char*, const char*);
 
 #ifndef SOAP_TYPE___turb3__GetPosition
-#define SOAP_TYPE___turb3__GetPosition (262)
+#define SOAP_TYPE___turb3__GetPosition (304)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb3__GetPosition(struct soap*, struct __turb3__GetPosition *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb3__GetPosition(struct soap*, const struct __turb3__GetPosition *);
@@ -402,7 +423,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb3__GetPosition(struct soap*, const stru
 SOAP_FMAC3 struct __turb3__GetPosition * SOAP_FMAC4 soap_get___turb3__GetPosition(struct soap*, struct __turb3__GetPosition *, const char*, const char*);
 
 #ifndef SOAP_TYPE___turb3__GetVectorPotentialLaplacian
-#define SOAP_TYPE___turb3__GetVectorPotentialLaplacian (260)
+#define SOAP_TYPE___turb3__GetVectorPotentialLaplacian (302)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb3__GetVectorPotentialLaplacian(struct soap*, struct __turb3__GetVectorPotentialLaplacian *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb3__GetVectorPotentialLaplacian(struct soap*, const struct __turb3__GetVectorPotentialLaplacian *);
@@ -423,7 +444,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb3__GetVectorPotentialLaplacian(struct s
 SOAP_FMAC3 struct __turb3__GetVectorPotentialLaplacian * SOAP_FMAC4 soap_get___turb3__GetVectorPotentialLaplacian(struct soap*, struct __turb3__GetVectorPotentialLaplacian *, const char*, const char*);
 
 #ifndef SOAP_TYPE___turb3__GetMagneticFieldLaplacian
-#define SOAP_TYPE___turb3__GetMagneticFieldLaplacian (258)
+#define SOAP_TYPE___turb3__GetMagneticFieldLaplacian (300)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb3__GetMagneticFieldLaplacian(struct soap*, struct __turb3__GetMagneticFieldLaplacian *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb3__GetMagneticFieldLaplacian(struct soap*, const struct __turb3__GetMagneticFieldLaplacian *);
@@ -444,7 +465,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb3__GetMagneticFieldLaplacian(struct soa
 SOAP_FMAC3 struct __turb3__GetMagneticFieldLaplacian * SOAP_FMAC4 soap_get___turb3__GetMagneticFieldLaplacian(struct soap*, struct __turb3__GetMagneticFieldLaplacian *, const char*, const char*);
 
 #ifndef SOAP_TYPE___turb3__GetVelocityLaplacian
-#define SOAP_TYPE___turb3__GetVelocityLaplacian (256)
+#define SOAP_TYPE___turb3__GetVelocityLaplacian (298)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb3__GetVelocityLaplacian(struct soap*, struct __turb3__GetVelocityLaplacian *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb3__GetVelocityLaplacian(struct soap*, const struct __turb3__GetVelocityLaplacian *);
@@ -465,7 +486,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb3__GetVelocityLaplacian(struct soap*, c
 SOAP_FMAC3 struct __turb3__GetVelocityLaplacian * SOAP_FMAC4 soap_get___turb3__GetVelocityLaplacian(struct soap*, struct __turb3__GetVelocityLaplacian *, const char*, const char*);
 
 #ifndef SOAP_TYPE___turb3__GetVectorPotentialHessian
-#define SOAP_TYPE___turb3__GetVectorPotentialHessian (254)
+#define SOAP_TYPE___turb3__GetVectorPotentialHessian (296)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb3__GetVectorPotentialHessian(struct soap*, struct __turb3__GetVectorPotentialHessian *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb3__GetVectorPotentialHessian(struct soap*, const struct __turb3__GetVectorPotentialHessian *);
@@ -486,7 +507,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb3__GetVectorPotentialHessian(struct soa
 SOAP_FMAC3 struct __turb3__GetVectorPotentialHessian * SOAP_FMAC4 soap_get___turb3__GetVectorPotentialHessian(struct soap*, struct __turb3__GetVectorPotentialHessian *, const char*, const char*);
 
 #ifndef SOAP_TYPE___turb3__GetMagneticHessian
-#define SOAP_TYPE___turb3__GetMagneticHessian (252)
+#define SOAP_TYPE___turb3__GetMagneticHessian (294)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb3__GetMagneticHessian(struct soap*, struct __turb3__GetMagneticHessian *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb3__GetMagneticHessian(struct soap*, const struct __turb3__GetMagneticHessian *);
@@ -507,7 +528,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb3__GetMagneticHessian(struct soap*, con
 SOAP_FMAC3 struct __turb3__GetMagneticHessian * SOAP_FMAC4 soap_get___turb3__GetMagneticHessian(struct soap*, struct __turb3__GetMagneticHessian *, const char*, const char*);
 
 #ifndef SOAP_TYPE___turb3__GetVelocityHessian
-#define SOAP_TYPE___turb3__GetVelocityHessian (250)
+#define SOAP_TYPE___turb3__GetVelocityHessian (292)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb3__GetVelocityHessian(struct soap*, struct __turb3__GetVelocityHessian *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb3__GetVelocityHessian(struct soap*, const struct __turb3__GetVelocityHessian *);
@@ -528,7 +549,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb3__GetVelocityHessian(struct soap*, con
 SOAP_FMAC3 struct __turb3__GetVelocityHessian * SOAP_FMAC4 soap_get___turb3__GetVelocityHessian(struct soap*, struct __turb3__GetVelocityHessian *, const char*, const char*);
 
 #ifndef SOAP_TYPE___turb3__GetPressureHessian
-#define SOAP_TYPE___turb3__GetPressureHessian (248)
+#define SOAP_TYPE___turb3__GetPressureHessian (290)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb3__GetPressureHessian(struct soap*, struct __turb3__GetPressureHessian *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb3__GetPressureHessian(struct soap*, const struct __turb3__GetPressureHessian *);
@@ -549,7 +570,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb3__GetPressureHessian(struct soap*, con
 SOAP_FMAC3 struct __turb3__GetPressureHessian * SOAP_FMAC4 soap_get___turb3__GetPressureHessian(struct soap*, struct __turb3__GetPressureHessian *, const char*, const char*);
 
 #ifndef SOAP_TYPE___turb3__GetPressureGradient
-#define SOAP_TYPE___turb3__GetPressureGradient (246)
+#define SOAP_TYPE___turb3__GetPressureGradient (288)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb3__GetPressureGradient(struct soap*, struct __turb3__GetPressureGradient *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb3__GetPressureGradient(struct soap*, const struct __turb3__GetPressureGradient *);
@@ -570,7 +591,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb3__GetPressureGradient(struct soap*, co
 SOAP_FMAC3 struct __turb3__GetPressureGradient * SOAP_FMAC4 soap_get___turb3__GetPressureGradient(struct soap*, struct __turb3__GetPressureGradient *, const char*, const char*);
 
 #ifndef SOAP_TYPE___turb3__GetVectorPotentialGradient
-#define SOAP_TYPE___turb3__GetVectorPotentialGradient (244)
+#define SOAP_TYPE___turb3__GetVectorPotentialGradient (286)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb3__GetVectorPotentialGradient(struct soap*, struct __turb3__GetVectorPotentialGradient *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb3__GetVectorPotentialGradient(struct soap*, const struct __turb3__GetVectorPotentialGradient *);
@@ -591,7 +612,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb3__GetVectorPotentialGradient(struct so
 SOAP_FMAC3 struct __turb3__GetVectorPotentialGradient * SOAP_FMAC4 soap_get___turb3__GetVectorPotentialGradient(struct soap*, struct __turb3__GetVectorPotentialGradient *, const char*, const char*);
 
 #ifndef SOAP_TYPE___turb3__GetMagneticFieldGradient
-#define SOAP_TYPE___turb3__GetMagneticFieldGradient (242)
+#define SOAP_TYPE___turb3__GetMagneticFieldGradient (284)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb3__GetMagneticFieldGradient(struct soap*, struct __turb3__GetMagneticFieldGradient *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb3__GetMagneticFieldGradient(struct soap*, const struct __turb3__GetMagneticFieldGradient *);
@@ -612,7 +633,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb3__GetMagneticFieldGradient(struct soap
 SOAP_FMAC3 struct __turb3__GetMagneticFieldGradient * SOAP_FMAC4 soap_get___turb3__GetMagneticFieldGradient(struct soap*, struct __turb3__GetMagneticFieldGradient *, const char*, const char*);
 
 #ifndef SOAP_TYPE___turb3__GetVelocityGradient
-#define SOAP_TYPE___turb3__GetVelocityGradient (240)
+#define SOAP_TYPE___turb3__GetVelocityGradient (282)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb3__GetVelocityGradient(struct soap*, struct __turb3__GetVelocityGradient *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb3__GetVelocityGradient(struct soap*, const struct __turb3__GetVelocityGradient *);
@@ -633,7 +654,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb3__GetVelocityGradient(struct soap*, co
 SOAP_FMAC3 struct __turb3__GetVelocityGradient * SOAP_FMAC4 soap_get___turb3__GetVelocityGradient(struct soap*, struct __turb3__GetVelocityGradient *, const char*, const char*);
 
 #ifndef SOAP_TYPE___turb3__GetVelocityAndPressure
-#define SOAP_TYPE___turb3__GetVelocityAndPressure (238)
+#define SOAP_TYPE___turb3__GetVelocityAndPressure (280)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb3__GetVelocityAndPressure(struct soap*, struct __turb3__GetVelocityAndPressure *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb3__GetVelocityAndPressure(struct soap*, const struct __turb3__GetVelocityAndPressure *);
@@ -654,7 +675,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb3__GetVelocityAndPressure(struct soap*,
 SOAP_FMAC3 struct __turb3__GetVelocityAndPressure * SOAP_FMAC4 soap_get___turb3__GetVelocityAndPressure(struct soap*, struct __turb3__GetVelocityAndPressure *, const char*, const char*);
 
 #ifndef SOAP_TYPE___turb3__GetForce
-#define SOAP_TYPE___turb3__GetForce (236)
+#define SOAP_TYPE___turb3__GetForce (278)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb3__GetForce(struct soap*, struct __turb3__GetForce *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb3__GetForce(struct soap*, const struct __turb3__GetForce *);
@@ -674,8 +695,92 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb3__GetForce(struct soap*, const struct 
 
 SOAP_FMAC3 struct __turb3__GetForce * SOAP_FMAC4 soap_get___turb3__GetForce(struct soap*, struct __turb3__GetForce *, const char*, const char*);
 
+#ifndef SOAP_TYPE___turb3__GetRawDensity
+#define SOAP_TYPE___turb3__GetRawDensity (276)
+#endif
+SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb3__GetRawDensity(struct soap*, struct __turb3__GetRawDensity *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb3__GetRawDensity(struct soap*, const struct __turb3__GetRawDensity *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out___turb3__GetRawDensity(struct soap*, const char*, int, const struct __turb3__GetRawDensity *, const char*);
+SOAP_FMAC3 struct __turb3__GetRawDensity * SOAP_FMAC4 soap_in___turb3__GetRawDensity(struct soap*, const char*, struct __turb3__GetRawDensity *, const char*);
+
+#ifndef soap_write___turb3__GetRawDensity
+#define soap_write___turb3__GetRawDensity(soap, data) ( soap_begin_send(soap) || (soap_serialize___turb3__GetRawDensity(soap, data), 0) || soap_put___turb3__GetRawDensity(soap, data, "-turb3:GetRawDensity", NULL) || soap_end_send(soap) )
+#endif
+
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb3__GetRawDensity(struct soap*, const struct __turb3__GetRawDensity *, const char*, const char*);
+
+#ifndef soap_read___turb3__GetRawDensity
+#define soap_read___turb3__GetRawDensity(soap, data) ( soap_begin_recv(soap) || !soap_get___turb3__GetRawDensity(soap, data, NULL, NULL) || soap_end_recv(soap) )
+#endif
+
+SOAP_FMAC3 struct __turb3__GetRawDensity * SOAP_FMAC4 soap_get___turb3__GetRawDensity(struct soap*, struct __turb3__GetRawDensity *, const char*, const char*);
+
+#ifndef SOAP_TYPE___turb3__GetDensityHessian
+#define SOAP_TYPE___turb3__GetDensityHessian (274)
+#endif
+SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb3__GetDensityHessian(struct soap*, struct __turb3__GetDensityHessian *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb3__GetDensityHessian(struct soap*, const struct __turb3__GetDensityHessian *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out___turb3__GetDensityHessian(struct soap*, const char*, int, const struct __turb3__GetDensityHessian *, const char*);
+SOAP_FMAC3 struct __turb3__GetDensityHessian * SOAP_FMAC4 soap_in___turb3__GetDensityHessian(struct soap*, const char*, struct __turb3__GetDensityHessian *, const char*);
+
+#ifndef soap_write___turb3__GetDensityHessian
+#define soap_write___turb3__GetDensityHessian(soap, data) ( soap_begin_send(soap) || (soap_serialize___turb3__GetDensityHessian(soap, data), 0) || soap_put___turb3__GetDensityHessian(soap, data, "-turb3:GetDensityHessian", NULL) || soap_end_send(soap) )
+#endif
+
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb3__GetDensityHessian(struct soap*, const struct __turb3__GetDensityHessian *, const char*, const char*);
+
+#ifndef soap_read___turb3__GetDensityHessian
+#define soap_read___turb3__GetDensityHessian(soap, data) ( soap_begin_recv(soap) || !soap_get___turb3__GetDensityHessian(soap, data, NULL, NULL) || soap_end_recv(soap) )
+#endif
+
+SOAP_FMAC3 struct __turb3__GetDensityHessian * SOAP_FMAC4 soap_get___turb3__GetDensityHessian(struct soap*, struct __turb3__GetDensityHessian *, const char*, const char*);
+
+#ifndef SOAP_TYPE___turb3__GetDensityGradient
+#define SOAP_TYPE___turb3__GetDensityGradient (272)
+#endif
+SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb3__GetDensityGradient(struct soap*, struct __turb3__GetDensityGradient *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb3__GetDensityGradient(struct soap*, const struct __turb3__GetDensityGradient *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out___turb3__GetDensityGradient(struct soap*, const char*, int, const struct __turb3__GetDensityGradient *, const char*);
+SOAP_FMAC3 struct __turb3__GetDensityGradient * SOAP_FMAC4 soap_in___turb3__GetDensityGradient(struct soap*, const char*, struct __turb3__GetDensityGradient *, const char*);
+
+#ifndef soap_write___turb3__GetDensityGradient
+#define soap_write___turb3__GetDensityGradient(soap, data) ( soap_begin_send(soap) || (soap_serialize___turb3__GetDensityGradient(soap, data), 0) || soap_put___turb3__GetDensityGradient(soap, data, "-turb3:GetDensityGradient", NULL) || soap_end_send(soap) )
+#endif
+
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb3__GetDensityGradient(struct soap*, const struct __turb3__GetDensityGradient *, const char*, const char*);
+
+#ifndef soap_read___turb3__GetDensityGradient
+#define soap_read___turb3__GetDensityGradient(soap, data) ( soap_begin_recv(soap) || !soap_get___turb3__GetDensityGradient(soap, data, NULL, NULL) || soap_end_recv(soap) )
+#endif
+
+SOAP_FMAC3 struct __turb3__GetDensityGradient * SOAP_FMAC4 soap_get___turb3__GetDensityGradient(struct soap*, struct __turb3__GetDensityGradient *, const char*, const char*);
+
+#ifndef SOAP_TYPE___turb3__GetDensity
+#define SOAP_TYPE___turb3__GetDensity (270)
+#endif
+SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb3__GetDensity(struct soap*, struct __turb3__GetDensity *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb3__GetDensity(struct soap*, const struct __turb3__GetDensity *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out___turb3__GetDensity(struct soap*, const char*, int, const struct __turb3__GetDensity *, const char*);
+SOAP_FMAC3 struct __turb3__GetDensity * SOAP_FMAC4 soap_in___turb3__GetDensity(struct soap*, const char*, struct __turb3__GetDensity *, const char*);
+
+#ifndef soap_write___turb3__GetDensity
+#define soap_write___turb3__GetDensity(soap, data) ( soap_begin_send(soap) || (soap_serialize___turb3__GetDensity(soap, data), 0) || soap_put___turb3__GetDensity(soap, data, "-turb3:GetDensity", NULL) || soap_end_send(soap) )
+#endif
+
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb3__GetDensity(struct soap*, const struct __turb3__GetDensity *, const char*, const char*);
+
+#ifndef soap_read___turb3__GetDensity
+#define soap_read___turb3__GetDensity(soap, data) ( soap_begin_recv(soap) || !soap_get___turb3__GetDensity(soap, data, NULL, NULL) || soap_end_recv(soap) )
+#endif
+
+SOAP_FMAC3 struct __turb3__GetDensity * SOAP_FMAC4 soap_get___turb3__GetDensity(struct soap*, struct __turb3__GetDensity *, const char*, const char*);
+
 #ifndef SOAP_TYPE___turb3__GetRawVectorPotential
-#define SOAP_TYPE___turb3__GetRawVectorPotential (234)
+#define SOAP_TYPE___turb3__GetRawVectorPotential (268)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb3__GetRawVectorPotential(struct soap*, struct __turb3__GetRawVectorPotential *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb3__GetRawVectorPotential(struct soap*, const struct __turb3__GetRawVectorPotential *);
@@ -696,7 +801,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb3__GetRawVectorPotential(struct soap*, 
 SOAP_FMAC3 struct __turb3__GetRawVectorPotential * SOAP_FMAC4 soap_get___turb3__GetRawVectorPotential(struct soap*, struct __turb3__GetRawVectorPotential *, const char*, const char*);
 
 #ifndef SOAP_TYPE___turb3__GetVectorPotential
-#define SOAP_TYPE___turb3__GetVectorPotential (232)
+#define SOAP_TYPE___turb3__GetVectorPotential (266)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb3__GetVectorPotential(struct soap*, struct __turb3__GetVectorPotential *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb3__GetVectorPotential(struct soap*, const struct __turb3__GetVectorPotential *);
@@ -717,7 +822,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb3__GetVectorPotential(struct soap*, con
 SOAP_FMAC3 struct __turb3__GetVectorPotential * SOAP_FMAC4 soap_get___turb3__GetVectorPotential(struct soap*, struct __turb3__GetVectorPotential *, const char*, const char*);
 
 #ifndef SOAP_TYPE___turb3__GetRawMagneticField
-#define SOAP_TYPE___turb3__GetRawMagneticField (230)
+#define SOAP_TYPE___turb3__GetRawMagneticField (264)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb3__GetRawMagneticField(struct soap*, struct __turb3__GetRawMagneticField *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb3__GetRawMagneticField(struct soap*, const struct __turb3__GetRawMagneticField *);
@@ -738,7 +843,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb3__GetRawMagneticField(struct soap*, co
 SOAP_FMAC3 struct __turb3__GetRawMagneticField * SOAP_FMAC4 soap_get___turb3__GetRawMagneticField(struct soap*, struct __turb3__GetRawMagneticField *, const char*, const char*);
 
 #ifndef SOAP_TYPE___turb3__GetMagneticField
-#define SOAP_TYPE___turb3__GetMagneticField (228)
+#define SOAP_TYPE___turb3__GetMagneticField (262)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb3__GetMagneticField(struct soap*, struct __turb3__GetMagneticField *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb3__GetMagneticField(struct soap*, const struct __turb3__GetMagneticField *);
@@ -759,7 +864,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb3__GetMagneticField(struct soap*, const
 SOAP_FMAC3 struct __turb3__GetMagneticField * SOAP_FMAC4 soap_get___turb3__GetMagneticField(struct soap*, struct __turb3__GetMagneticField *, const char*, const char*);
 
 #ifndef SOAP_TYPE___turb3__GetRawPressure
-#define SOAP_TYPE___turb3__GetRawPressure (226)
+#define SOAP_TYPE___turb3__GetRawPressure (260)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb3__GetRawPressure(struct soap*, struct __turb3__GetRawPressure *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb3__GetRawPressure(struct soap*, const struct __turb3__GetRawPressure *);
@@ -780,7 +885,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb3__GetRawPressure(struct soap*, const s
 SOAP_FMAC3 struct __turb3__GetRawPressure * SOAP_FMAC4 soap_get___turb3__GetRawPressure(struct soap*, struct __turb3__GetRawPressure *, const char*, const char*);
 
 #ifndef SOAP_TYPE___turb3__GetPressure
-#define SOAP_TYPE___turb3__GetPressure (224)
+#define SOAP_TYPE___turb3__GetPressure (258)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb3__GetPressure(struct soap*, struct __turb3__GetPressure *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb3__GetPressure(struct soap*, const struct __turb3__GetPressure *);
@@ -801,7 +906,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb3__GetPressure(struct soap*, const stru
 SOAP_FMAC3 struct __turb3__GetPressure * SOAP_FMAC4 soap_get___turb3__GetPressure(struct soap*, struct __turb3__GetPressure *, const char*, const char*);
 
 #ifndef SOAP_TYPE___turb3__GetRawVelocity
-#define SOAP_TYPE___turb3__GetRawVelocity (222)
+#define SOAP_TYPE___turb3__GetRawVelocity (256)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb3__GetRawVelocity(struct soap*, struct __turb3__GetRawVelocity *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb3__GetRawVelocity(struct soap*, const struct __turb3__GetRawVelocity *);
@@ -822,7 +927,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb3__GetRawVelocity(struct soap*, const s
 SOAP_FMAC3 struct __turb3__GetRawVelocity * SOAP_FMAC4 soap_get___turb3__GetRawVelocity(struct soap*, struct __turb3__GetRawVelocity *, const char*, const char*);
 
 #ifndef SOAP_TYPE___turb3__GetVelocityBatch
-#define SOAP_TYPE___turb3__GetVelocityBatch (220)
+#define SOAP_TYPE___turb3__GetVelocityBatch (254)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb3__GetVelocityBatch(struct soap*, struct __turb3__GetVelocityBatch *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb3__GetVelocityBatch(struct soap*, const struct __turb3__GetVelocityBatch *);
@@ -843,7 +948,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb3__GetVelocityBatch(struct soap*, const
 SOAP_FMAC3 struct __turb3__GetVelocityBatch * SOAP_FMAC4 soap_get___turb3__GetVelocityBatch(struct soap*, struct __turb3__GetVelocityBatch *, const char*, const char*);
 
 #ifndef SOAP_TYPE___turb3__GetVelocity
-#define SOAP_TYPE___turb3__GetVelocity (218)
+#define SOAP_TYPE___turb3__GetVelocity (252)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb3__GetVelocity(struct soap*, struct __turb3__GetVelocity *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb3__GetVelocity(struct soap*, const struct __turb3__GetVelocity *);
@@ -864,7 +969,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb3__GetVelocity(struct soap*, const stru
 SOAP_FMAC3 struct __turb3__GetVelocity * SOAP_FMAC4 soap_get___turb3__GetVelocity(struct soap*, struct __turb3__GetVelocity *, const char*, const char*);
 
 #ifndef SOAP_TYPE___turb3__NullOp
-#define SOAP_TYPE___turb3__NullOp (216)
+#define SOAP_TYPE___turb3__NullOp (250)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb3__NullOp(struct soap*, struct __turb3__NullOp *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb3__NullOp(struct soap*, const struct __turb3__NullOp *);
@@ -885,7 +990,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb3__NullOp(struct soap*, const struct __
 SOAP_FMAC3 struct __turb3__NullOp * SOAP_FMAC4 soap_get___turb3__NullOp(struct soap*, struct __turb3__NullOp *, const char*, const char*);
 
 #ifndef SOAP_TYPE___turb2__GetLaplacianOfGradient
-#define SOAP_TYPE___turb2__GetLaplacianOfGradient (214)
+#define SOAP_TYPE___turb2__GetLaplacianOfGradient (248)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb2__GetLaplacianOfGradient(struct soap*, struct __turb2__GetLaplacianOfGradient *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb2__GetLaplacianOfGradient(struct soap*, const struct __turb2__GetLaplacianOfGradient *);
@@ -905,8 +1010,29 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb2__GetLaplacianOfGradient(struct soap*,
 
 SOAP_FMAC3 struct __turb2__GetLaplacianOfGradient * SOAP_FMAC4 soap_get___turb2__GetLaplacianOfGradient(struct soap*, struct __turb2__GetLaplacianOfGradient *, const char*, const char*);
 
+#ifndef SOAP_TYPE___turb2__GetThreshold
+#define SOAP_TYPE___turb2__GetThreshold (244)
+#endif
+SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb2__GetThreshold(struct soap*, struct __turb2__GetThreshold *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb2__GetThreshold(struct soap*, const struct __turb2__GetThreshold *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out___turb2__GetThreshold(struct soap*, const char*, int, const struct __turb2__GetThreshold *, const char*);
+SOAP_FMAC3 struct __turb2__GetThreshold * SOAP_FMAC4 soap_in___turb2__GetThreshold(struct soap*, const char*, struct __turb2__GetThreshold *, const char*);
+
+#ifndef soap_write___turb2__GetThreshold
+#define soap_write___turb2__GetThreshold(soap, data) ( soap_begin_send(soap) || (soap_serialize___turb2__GetThreshold(soap, data), 0) || soap_put___turb2__GetThreshold(soap, data, "-turb2:GetThreshold", NULL) || soap_end_send(soap) )
+#endif
+
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb2__GetThreshold(struct soap*, const struct __turb2__GetThreshold *, const char*, const char*);
+
+#ifndef soap_read___turb2__GetThreshold
+#define soap_read___turb2__GetThreshold(soap, data) ( soap_begin_recv(soap) || !soap_get___turb2__GetThreshold(soap, data, NULL, NULL) || soap_end_recv(soap) )
+#endif
+
+SOAP_FMAC3 struct __turb2__GetThreshold * SOAP_FMAC4 soap_get___turb2__GetThreshold(struct soap*, struct __turb2__GetThreshold *, const char*, const char*);
+
 #ifndef SOAP_TYPE___turb2__GetBoxFilterGradient
-#define SOAP_TYPE___turb2__GetBoxFilterGradient (210)
+#define SOAP_TYPE___turb2__GetBoxFilterGradient (240)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb2__GetBoxFilterGradient(struct soap*, struct __turb2__GetBoxFilterGradient *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb2__GetBoxFilterGradient(struct soap*, const struct __turb2__GetBoxFilterGradient *);
@@ -927,7 +1053,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb2__GetBoxFilterGradient(struct soap*, c
 SOAP_FMAC3 struct __turb2__GetBoxFilterGradient * SOAP_FMAC4 soap_get___turb2__GetBoxFilterGradient(struct soap*, struct __turb2__GetBoxFilterGradient *, const char*, const char*);
 
 #ifndef SOAP_TYPE___turb2__GetBoxFilterSGS
-#define SOAP_TYPE___turb2__GetBoxFilterSGS (206)
+#define SOAP_TYPE___turb2__GetBoxFilterSGS (236)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb2__GetBoxFilterSGS(struct soap*, struct __turb2__GetBoxFilterSGS *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb2__GetBoxFilterSGS(struct soap*, const struct __turb2__GetBoxFilterSGS *);
@@ -948,7 +1074,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb2__GetBoxFilterSGS(struct soap*, const 
 SOAP_FMAC3 struct __turb2__GetBoxFilterSGS * SOAP_FMAC4 soap_get___turb2__GetBoxFilterSGS(struct soap*, struct __turb2__GetBoxFilterSGS *, const char*, const char*);
 
 #ifndef SOAP_TYPE___turb2__GetBoxFilter
-#define SOAP_TYPE___turb2__GetBoxFilter (202)
+#define SOAP_TYPE___turb2__GetBoxFilter (232)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb2__GetBoxFilter(struct soap*, struct __turb2__GetBoxFilter *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb2__GetBoxFilter(struct soap*, const struct __turb2__GetBoxFilter *);
@@ -969,7 +1095,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb2__GetBoxFilter(struct soap*, const str
 SOAP_FMAC3 struct __turb2__GetBoxFilter * SOAP_FMAC4 soap_get___turb2__GetBoxFilter(struct soap*, struct __turb2__GetBoxFilter *, const char*, const char*);
 
 #ifndef SOAP_TYPE___turb2__GetPosition
-#define SOAP_TYPE___turb2__GetPosition (198)
+#define SOAP_TYPE___turb2__GetPosition (228)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb2__GetPosition(struct soap*, struct __turb2__GetPosition *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb2__GetPosition(struct soap*, const struct __turb2__GetPosition *);
@@ -990,7 +1116,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb2__GetPosition(struct soap*, const stru
 SOAP_FMAC3 struct __turb2__GetPosition * SOAP_FMAC4 soap_get___turb2__GetPosition(struct soap*, struct __turb2__GetPosition *, const char*, const char*);
 
 #ifndef SOAP_TYPE___turb2__GetVectorPotentialLaplacian
-#define SOAP_TYPE___turb2__GetVectorPotentialLaplacian (194)
+#define SOAP_TYPE___turb2__GetVectorPotentialLaplacian (224)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb2__GetVectorPotentialLaplacian(struct soap*, struct __turb2__GetVectorPotentialLaplacian *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb2__GetVectorPotentialLaplacian(struct soap*, const struct __turb2__GetVectorPotentialLaplacian *);
@@ -1011,7 +1137,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb2__GetVectorPotentialLaplacian(struct s
 SOAP_FMAC3 struct __turb2__GetVectorPotentialLaplacian * SOAP_FMAC4 soap_get___turb2__GetVectorPotentialLaplacian(struct soap*, struct __turb2__GetVectorPotentialLaplacian *, const char*, const char*);
 
 #ifndef SOAP_TYPE___turb2__GetMagneticFieldLaplacian
-#define SOAP_TYPE___turb2__GetMagneticFieldLaplacian (190)
+#define SOAP_TYPE___turb2__GetMagneticFieldLaplacian (220)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb2__GetMagneticFieldLaplacian(struct soap*, struct __turb2__GetMagneticFieldLaplacian *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb2__GetMagneticFieldLaplacian(struct soap*, const struct __turb2__GetMagneticFieldLaplacian *);
@@ -1032,7 +1158,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb2__GetMagneticFieldLaplacian(struct soa
 SOAP_FMAC3 struct __turb2__GetMagneticFieldLaplacian * SOAP_FMAC4 soap_get___turb2__GetMagneticFieldLaplacian(struct soap*, struct __turb2__GetMagneticFieldLaplacian *, const char*, const char*);
 
 #ifndef SOAP_TYPE___turb2__GetVelocityLaplacian
-#define SOAP_TYPE___turb2__GetVelocityLaplacian (186)
+#define SOAP_TYPE___turb2__GetVelocityLaplacian (216)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb2__GetVelocityLaplacian(struct soap*, struct __turb2__GetVelocityLaplacian *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb2__GetVelocityLaplacian(struct soap*, const struct __turb2__GetVelocityLaplacian *);
@@ -1053,7 +1179,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb2__GetVelocityLaplacian(struct soap*, c
 SOAP_FMAC3 struct __turb2__GetVelocityLaplacian * SOAP_FMAC4 soap_get___turb2__GetVelocityLaplacian(struct soap*, struct __turb2__GetVelocityLaplacian *, const char*, const char*);
 
 #ifndef SOAP_TYPE___turb2__GetVectorPotentialHessian
-#define SOAP_TYPE___turb2__GetVectorPotentialHessian (182)
+#define SOAP_TYPE___turb2__GetVectorPotentialHessian (212)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb2__GetVectorPotentialHessian(struct soap*, struct __turb2__GetVectorPotentialHessian *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb2__GetVectorPotentialHessian(struct soap*, const struct __turb2__GetVectorPotentialHessian *);
@@ -1074,7 +1200,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb2__GetVectorPotentialHessian(struct soa
 SOAP_FMAC3 struct __turb2__GetVectorPotentialHessian * SOAP_FMAC4 soap_get___turb2__GetVectorPotentialHessian(struct soap*, struct __turb2__GetVectorPotentialHessian *, const char*, const char*);
 
 #ifndef SOAP_TYPE___turb2__GetMagneticHessian
-#define SOAP_TYPE___turb2__GetMagneticHessian (178)
+#define SOAP_TYPE___turb2__GetMagneticHessian (208)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb2__GetMagneticHessian(struct soap*, struct __turb2__GetMagneticHessian *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb2__GetMagneticHessian(struct soap*, const struct __turb2__GetMagneticHessian *);
@@ -1095,7 +1221,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb2__GetMagneticHessian(struct soap*, con
 SOAP_FMAC3 struct __turb2__GetMagneticHessian * SOAP_FMAC4 soap_get___turb2__GetMagneticHessian(struct soap*, struct __turb2__GetMagneticHessian *, const char*, const char*);
 
 #ifndef SOAP_TYPE___turb2__GetVelocityHessian
-#define SOAP_TYPE___turb2__GetVelocityHessian (174)
+#define SOAP_TYPE___turb2__GetVelocityHessian (204)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb2__GetVelocityHessian(struct soap*, struct __turb2__GetVelocityHessian *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb2__GetVelocityHessian(struct soap*, const struct __turb2__GetVelocityHessian *);
@@ -1116,7 +1242,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb2__GetVelocityHessian(struct soap*, con
 SOAP_FMAC3 struct __turb2__GetVelocityHessian * SOAP_FMAC4 soap_get___turb2__GetVelocityHessian(struct soap*, struct __turb2__GetVelocityHessian *, const char*, const char*);
 
 #ifndef SOAP_TYPE___turb2__GetPressureHessian
-#define SOAP_TYPE___turb2__GetPressureHessian (170)
+#define SOAP_TYPE___turb2__GetPressureHessian (200)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb2__GetPressureHessian(struct soap*, struct __turb2__GetPressureHessian *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb2__GetPressureHessian(struct soap*, const struct __turb2__GetPressureHessian *);
@@ -1137,7 +1263,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb2__GetPressureHessian(struct soap*, con
 SOAP_FMAC3 struct __turb2__GetPressureHessian * SOAP_FMAC4 soap_get___turb2__GetPressureHessian(struct soap*, struct __turb2__GetPressureHessian *, const char*, const char*);
 
 #ifndef SOAP_TYPE___turb2__GetPressureGradient
-#define SOAP_TYPE___turb2__GetPressureGradient (166)
+#define SOAP_TYPE___turb2__GetPressureGradient (196)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb2__GetPressureGradient(struct soap*, struct __turb2__GetPressureGradient *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb2__GetPressureGradient(struct soap*, const struct __turb2__GetPressureGradient *);
@@ -1158,7 +1284,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb2__GetPressureGradient(struct soap*, co
 SOAP_FMAC3 struct __turb2__GetPressureGradient * SOAP_FMAC4 soap_get___turb2__GetPressureGradient(struct soap*, struct __turb2__GetPressureGradient *, const char*, const char*);
 
 #ifndef SOAP_TYPE___turb2__GetVectorPotentialGradient
-#define SOAP_TYPE___turb2__GetVectorPotentialGradient (162)
+#define SOAP_TYPE___turb2__GetVectorPotentialGradient (192)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb2__GetVectorPotentialGradient(struct soap*, struct __turb2__GetVectorPotentialGradient *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb2__GetVectorPotentialGradient(struct soap*, const struct __turb2__GetVectorPotentialGradient *);
@@ -1179,7 +1305,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb2__GetVectorPotentialGradient(struct so
 SOAP_FMAC3 struct __turb2__GetVectorPotentialGradient * SOAP_FMAC4 soap_get___turb2__GetVectorPotentialGradient(struct soap*, struct __turb2__GetVectorPotentialGradient *, const char*, const char*);
 
 #ifndef SOAP_TYPE___turb2__GetMagneticFieldGradient
-#define SOAP_TYPE___turb2__GetMagneticFieldGradient (158)
+#define SOAP_TYPE___turb2__GetMagneticFieldGradient (188)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb2__GetMagneticFieldGradient(struct soap*, struct __turb2__GetMagneticFieldGradient *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb2__GetMagneticFieldGradient(struct soap*, const struct __turb2__GetMagneticFieldGradient *);
@@ -1200,7 +1326,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb2__GetMagneticFieldGradient(struct soap
 SOAP_FMAC3 struct __turb2__GetMagneticFieldGradient * SOAP_FMAC4 soap_get___turb2__GetMagneticFieldGradient(struct soap*, struct __turb2__GetMagneticFieldGradient *, const char*, const char*);
 
 #ifndef SOAP_TYPE___turb2__GetVelocityGradient
-#define SOAP_TYPE___turb2__GetVelocityGradient (154)
+#define SOAP_TYPE___turb2__GetVelocityGradient (184)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb2__GetVelocityGradient(struct soap*, struct __turb2__GetVelocityGradient *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb2__GetVelocityGradient(struct soap*, const struct __turb2__GetVelocityGradient *);
@@ -1221,7 +1347,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb2__GetVelocityGradient(struct soap*, co
 SOAP_FMAC3 struct __turb2__GetVelocityGradient * SOAP_FMAC4 soap_get___turb2__GetVelocityGradient(struct soap*, struct __turb2__GetVelocityGradient *, const char*, const char*);
 
 #ifndef SOAP_TYPE___turb2__GetVelocityAndPressure
-#define SOAP_TYPE___turb2__GetVelocityAndPressure (150)
+#define SOAP_TYPE___turb2__GetVelocityAndPressure (180)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb2__GetVelocityAndPressure(struct soap*, struct __turb2__GetVelocityAndPressure *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb2__GetVelocityAndPressure(struct soap*, const struct __turb2__GetVelocityAndPressure *);
@@ -1242,7 +1368,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb2__GetVelocityAndPressure(struct soap*,
 SOAP_FMAC3 struct __turb2__GetVelocityAndPressure * SOAP_FMAC4 soap_get___turb2__GetVelocityAndPressure(struct soap*, struct __turb2__GetVelocityAndPressure *, const char*, const char*);
 
 #ifndef SOAP_TYPE___turb2__GetForce
-#define SOAP_TYPE___turb2__GetForce (146)
+#define SOAP_TYPE___turb2__GetForce (176)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb2__GetForce(struct soap*, struct __turb2__GetForce *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb2__GetForce(struct soap*, const struct __turb2__GetForce *);
@@ -1262,8 +1388,92 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb2__GetForce(struct soap*, const struct 
 
 SOAP_FMAC3 struct __turb2__GetForce * SOAP_FMAC4 soap_get___turb2__GetForce(struct soap*, struct __turb2__GetForce *, const char*, const char*);
 
+#ifndef SOAP_TYPE___turb2__GetRawDensity
+#define SOAP_TYPE___turb2__GetRawDensity (172)
+#endif
+SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb2__GetRawDensity(struct soap*, struct __turb2__GetRawDensity *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb2__GetRawDensity(struct soap*, const struct __turb2__GetRawDensity *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out___turb2__GetRawDensity(struct soap*, const char*, int, const struct __turb2__GetRawDensity *, const char*);
+SOAP_FMAC3 struct __turb2__GetRawDensity * SOAP_FMAC4 soap_in___turb2__GetRawDensity(struct soap*, const char*, struct __turb2__GetRawDensity *, const char*);
+
+#ifndef soap_write___turb2__GetRawDensity
+#define soap_write___turb2__GetRawDensity(soap, data) ( soap_begin_send(soap) || (soap_serialize___turb2__GetRawDensity(soap, data), 0) || soap_put___turb2__GetRawDensity(soap, data, "-turb2:GetRawDensity", NULL) || soap_end_send(soap) )
+#endif
+
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb2__GetRawDensity(struct soap*, const struct __turb2__GetRawDensity *, const char*, const char*);
+
+#ifndef soap_read___turb2__GetRawDensity
+#define soap_read___turb2__GetRawDensity(soap, data) ( soap_begin_recv(soap) || !soap_get___turb2__GetRawDensity(soap, data, NULL, NULL) || soap_end_recv(soap) )
+#endif
+
+SOAP_FMAC3 struct __turb2__GetRawDensity * SOAP_FMAC4 soap_get___turb2__GetRawDensity(struct soap*, struct __turb2__GetRawDensity *, const char*, const char*);
+
+#ifndef SOAP_TYPE___turb2__GetDensityHessian
+#define SOAP_TYPE___turb2__GetDensityHessian (168)
+#endif
+SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb2__GetDensityHessian(struct soap*, struct __turb2__GetDensityHessian *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb2__GetDensityHessian(struct soap*, const struct __turb2__GetDensityHessian *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out___turb2__GetDensityHessian(struct soap*, const char*, int, const struct __turb2__GetDensityHessian *, const char*);
+SOAP_FMAC3 struct __turb2__GetDensityHessian * SOAP_FMAC4 soap_in___turb2__GetDensityHessian(struct soap*, const char*, struct __turb2__GetDensityHessian *, const char*);
+
+#ifndef soap_write___turb2__GetDensityHessian
+#define soap_write___turb2__GetDensityHessian(soap, data) ( soap_begin_send(soap) || (soap_serialize___turb2__GetDensityHessian(soap, data), 0) || soap_put___turb2__GetDensityHessian(soap, data, "-turb2:GetDensityHessian", NULL) || soap_end_send(soap) )
+#endif
+
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb2__GetDensityHessian(struct soap*, const struct __turb2__GetDensityHessian *, const char*, const char*);
+
+#ifndef soap_read___turb2__GetDensityHessian
+#define soap_read___turb2__GetDensityHessian(soap, data) ( soap_begin_recv(soap) || !soap_get___turb2__GetDensityHessian(soap, data, NULL, NULL) || soap_end_recv(soap) )
+#endif
+
+SOAP_FMAC3 struct __turb2__GetDensityHessian * SOAP_FMAC4 soap_get___turb2__GetDensityHessian(struct soap*, struct __turb2__GetDensityHessian *, const char*, const char*);
+
+#ifndef SOAP_TYPE___turb2__GetDensityGradient
+#define SOAP_TYPE___turb2__GetDensityGradient (164)
+#endif
+SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb2__GetDensityGradient(struct soap*, struct __turb2__GetDensityGradient *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb2__GetDensityGradient(struct soap*, const struct __turb2__GetDensityGradient *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out___turb2__GetDensityGradient(struct soap*, const char*, int, const struct __turb2__GetDensityGradient *, const char*);
+SOAP_FMAC3 struct __turb2__GetDensityGradient * SOAP_FMAC4 soap_in___turb2__GetDensityGradient(struct soap*, const char*, struct __turb2__GetDensityGradient *, const char*);
+
+#ifndef soap_write___turb2__GetDensityGradient
+#define soap_write___turb2__GetDensityGradient(soap, data) ( soap_begin_send(soap) || (soap_serialize___turb2__GetDensityGradient(soap, data), 0) || soap_put___turb2__GetDensityGradient(soap, data, "-turb2:GetDensityGradient", NULL) || soap_end_send(soap) )
+#endif
+
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb2__GetDensityGradient(struct soap*, const struct __turb2__GetDensityGradient *, const char*, const char*);
+
+#ifndef soap_read___turb2__GetDensityGradient
+#define soap_read___turb2__GetDensityGradient(soap, data) ( soap_begin_recv(soap) || !soap_get___turb2__GetDensityGradient(soap, data, NULL, NULL) || soap_end_recv(soap) )
+#endif
+
+SOAP_FMAC3 struct __turb2__GetDensityGradient * SOAP_FMAC4 soap_get___turb2__GetDensityGradient(struct soap*, struct __turb2__GetDensityGradient *, const char*, const char*);
+
+#ifndef SOAP_TYPE___turb2__GetDensity
+#define SOAP_TYPE___turb2__GetDensity (160)
+#endif
+SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb2__GetDensity(struct soap*, struct __turb2__GetDensity *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb2__GetDensity(struct soap*, const struct __turb2__GetDensity *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out___turb2__GetDensity(struct soap*, const char*, int, const struct __turb2__GetDensity *, const char*);
+SOAP_FMAC3 struct __turb2__GetDensity * SOAP_FMAC4 soap_in___turb2__GetDensity(struct soap*, const char*, struct __turb2__GetDensity *, const char*);
+
+#ifndef soap_write___turb2__GetDensity
+#define soap_write___turb2__GetDensity(soap, data) ( soap_begin_send(soap) || (soap_serialize___turb2__GetDensity(soap, data), 0) || soap_put___turb2__GetDensity(soap, data, "-turb2:GetDensity", NULL) || soap_end_send(soap) )
+#endif
+
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb2__GetDensity(struct soap*, const struct __turb2__GetDensity *, const char*, const char*);
+
+#ifndef soap_read___turb2__GetDensity
+#define soap_read___turb2__GetDensity(soap, data) ( soap_begin_recv(soap) || !soap_get___turb2__GetDensity(soap, data, NULL, NULL) || soap_end_recv(soap) )
+#endif
+
+SOAP_FMAC3 struct __turb2__GetDensity * SOAP_FMAC4 soap_get___turb2__GetDensity(struct soap*, struct __turb2__GetDensity *, const char*, const char*);
+
 #ifndef SOAP_TYPE___turb2__GetRawVectorPotential
-#define SOAP_TYPE___turb2__GetRawVectorPotential (142)
+#define SOAP_TYPE___turb2__GetRawVectorPotential (156)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb2__GetRawVectorPotential(struct soap*, struct __turb2__GetRawVectorPotential *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb2__GetRawVectorPotential(struct soap*, const struct __turb2__GetRawVectorPotential *);
@@ -1284,7 +1494,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb2__GetRawVectorPotential(struct soap*, 
 SOAP_FMAC3 struct __turb2__GetRawVectorPotential * SOAP_FMAC4 soap_get___turb2__GetRawVectorPotential(struct soap*, struct __turb2__GetRawVectorPotential *, const char*, const char*);
 
 #ifndef SOAP_TYPE___turb2__GetVectorPotential
-#define SOAP_TYPE___turb2__GetVectorPotential (138)
+#define SOAP_TYPE___turb2__GetVectorPotential (152)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb2__GetVectorPotential(struct soap*, struct __turb2__GetVectorPotential *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb2__GetVectorPotential(struct soap*, const struct __turb2__GetVectorPotential *);
@@ -1305,7 +1515,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb2__GetVectorPotential(struct soap*, con
 SOAP_FMAC3 struct __turb2__GetVectorPotential * SOAP_FMAC4 soap_get___turb2__GetVectorPotential(struct soap*, struct __turb2__GetVectorPotential *, const char*, const char*);
 
 #ifndef SOAP_TYPE___turb2__GetRawMagneticField
-#define SOAP_TYPE___turb2__GetRawMagneticField (134)
+#define SOAP_TYPE___turb2__GetRawMagneticField (148)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb2__GetRawMagneticField(struct soap*, struct __turb2__GetRawMagneticField *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb2__GetRawMagneticField(struct soap*, const struct __turb2__GetRawMagneticField *);
@@ -1326,7 +1536,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb2__GetRawMagneticField(struct soap*, co
 SOAP_FMAC3 struct __turb2__GetRawMagneticField * SOAP_FMAC4 soap_get___turb2__GetRawMagneticField(struct soap*, struct __turb2__GetRawMagneticField *, const char*, const char*);
 
 #ifndef SOAP_TYPE___turb2__GetMagneticField
-#define SOAP_TYPE___turb2__GetMagneticField (130)
+#define SOAP_TYPE___turb2__GetMagneticField (144)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb2__GetMagneticField(struct soap*, struct __turb2__GetMagneticField *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb2__GetMagneticField(struct soap*, const struct __turb2__GetMagneticField *);
@@ -1347,7 +1557,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb2__GetMagneticField(struct soap*, const
 SOAP_FMAC3 struct __turb2__GetMagneticField * SOAP_FMAC4 soap_get___turb2__GetMagneticField(struct soap*, struct __turb2__GetMagneticField *, const char*, const char*);
 
 #ifndef SOAP_TYPE___turb2__GetRawPressure
-#define SOAP_TYPE___turb2__GetRawPressure (126)
+#define SOAP_TYPE___turb2__GetRawPressure (140)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb2__GetRawPressure(struct soap*, struct __turb2__GetRawPressure *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb2__GetRawPressure(struct soap*, const struct __turb2__GetRawPressure *);
@@ -1368,7 +1578,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb2__GetRawPressure(struct soap*, const s
 SOAP_FMAC3 struct __turb2__GetRawPressure * SOAP_FMAC4 soap_get___turb2__GetRawPressure(struct soap*, struct __turb2__GetRawPressure *, const char*, const char*);
 
 #ifndef SOAP_TYPE___turb2__GetPressure
-#define SOAP_TYPE___turb2__GetPressure (122)
+#define SOAP_TYPE___turb2__GetPressure (136)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb2__GetPressure(struct soap*, struct __turb2__GetPressure *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb2__GetPressure(struct soap*, const struct __turb2__GetPressure *);
@@ -1389,7 +1599,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb2__GetPressure(struct soap*, const stru
 SOAP_FMAC3 struct __turb2__GetPressure * SOAP_FMAC4 soap_get___turb2__GetPressure(struct soap*, struct __turb2__GetPressure *, const char*, const char*);
 
 #ifndef SOAP_TYPE___turb2__GetRawVelocity
-#define SOAP_TYPE___turb2__GetRawVelocity (118)
+#define SOAP_TYPE___turb2__GetRawVelocity (132)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb2__GetRawVelocity(struct soap*, struct __turb2__GetRawVelocity *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb2__GetRawVelocity(struct soap*, const struct __turb2__GetRawVelocity *);
@@ -1410,7 +1620,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb2__GetRawVelocity(struct soap*, const s
 SOAP_FMAC3 struct __turb2__GetRawVelocity * SOAP_FMAC4 soap_get___turb2__GetRawVelocity(struct soap*, struct __turb2__GetRawVelocity *, const char*, const char*);
 
 #ifndef SOAP_TYPE___turb2__GetVelocityBatch
-#define SOAP_TYPE___turb2__GetVelocityBatch (114)
+#define SOAP_TYPE___turb2__GetVelocityBatch (128)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb2__GetVelocityBatch(struct soap*, struct __turb2__GetVelocityBatch *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb2__GetVelocityBatch(struct soap*, const struct __turb2__GetVelocityBatch *);
@@ -1431,7 +1641,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb2__GetVelocityBatch(struct soap*, const
 SOAP_FMAC3 struct __turb2__GetVelocityBatch * SOAP_FMAC4 soap_get___turb2__GetVelocityBatch(struct soap*, struct __turb2__GetVelocityBatch *, const char*, const char*);
 
 #ifndef SOAP_TYPE___turb2__GetVelocity
-#define SOAP_TYPE___turb2__GetVelocity (110)
+#define SOAP_TYPE___turb2__GetVelocity (124)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb2__GetVelocity(struct soap*, struct __turb2__GetVelocity *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb2__GetVelocity(struct soap*, const struct __turb2__GetVelocity *);
@@ -1452,7 +1662,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb2__GetVelocity(struct soap*, const stru
 SOAP_FMAC3 struct __turb2__GetVelocity * SOAP_FMAC4 soap_get___turb2__GetVelocity(struct soap*, struct __turb2__GetVelocity *, const char*, const char*);
 
 #ifndef SOAP_TYPE___turb2__NullOp
-#define SOAP_TYPE___turb2__NullOp (106)
+#define SOAP_TYPE___turb2__NullOp (120)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb2__NullOp(struct soap*, struct __turb2__NullOp *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb2__NullOp(struct soap*, const struct __turb2__NullOp *);
@@ -1473,7 +1683,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb2__NullOp(struct soap*, const struct __
 SOAP_FMAC3 struct __turb2__NullOp * SOAP_FMAC4 soap_get___turb2__NullOp(struct soap*, struct __turb2__NullOp *, const char*, const char*);
 
 #ifndef SOAP_TYPE__turb1__GetLaplacianOfGradientResponse
-#define SOAP_TYPE__turb1__GetLaplacianOfGradientResponse (102)
+#define SOAP_TYPE__turb1__GetLaplacianOfGradientResponse (116)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetLaplacianOfGradientResponse(struct soap*, struct _turb1__GetLaplacianOfGradientResponse *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetLaplacianOfGradientResponse(struct soap*, const struct _turb1__GetLaplacianOfGradientResponse *);
@@ -1494,7 +1704,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetLaplacianOfGradientResponse(struct
 SOAP_FMAC3 struct _turb1__GetLaplacianOfGradientResponse * SOAP_FMAC4 soap_get__turb1__GetLaplacianOfGradientResponse(struct soap*, struct _turb1__GetLaplacianOfGradientResponse *, const char*, const char*);
 
 #ifndef SOAP_TYPE__turb1__GetLaplacianOfGradient
-#define SOAP_TYPE__turb1__GetLaplacianOfGradient (101)
+#define SOAP_TYPE__turb1__GetLaplacianOfGradient (115)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetLaplacianOfGradient(struct soap*, struct _turb1__GetLaplacianOfGradient *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetLaplacianOfGradient(struct soap*, const struct _turb1__GetLaplacianOfGradient *);
@@ -1514,8 +1724,50 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetLaplacianOfGradient(struct soap*, 
 
 SOAP_FMAC3 struct _turb1__GetLaplacianOfGradient * SOAP_FMAC4 soap_get__turb1__GetLaplacianOfGradient(struct soap*, struct _turb1__GetLaplacianOfGradient *, const char*, const char*);
 
+#ifndef SOAP_TYPE__turb1__GetThresholdResponse
+#define SOAP_TYPE__turb1__GetThresholdResponse (113)
+#endif
+SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetThresholdResponse(struct soap*, struct _turb1__GetThresholdResponse *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetThresholdResponse(struct soap*, const struct _turb1__GetThresholdResponse *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out__turb1__GetThresholdResponse(struct soap*, const char*, int, const struct _turb1__GetThresholdResponse *, const char*);
+SOAP_FMAC3 struct _turb1__GetThresholdResponse * SOAP_FMAC4 soap_in__turb1__GetThresholdResponse(struct soap*, const char*, struct _turb1__GetThresholdResponse *, const char*);
+
+#ifndef soap_write__turb1__GetThresholdResponse
+#define soap_write__turb1__GetThresholdResponse(soap, data) ( soap_begin_send(soap) || (soap_serialize__turb1__GetThresholdResponse(soap, data), 0) || soap_put__turb1__GetThresholdResponse(soap, data, "turb1:GetThresholdResponse", NULL) || soap_end_send(soap) )
+#endif
+
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetThresholdResponse(struct soap*, const struct _turb1__GetThresholdResponse *, const char*, const char*);
+
+#ifndef soap_read__turb1__GetThresholdResponse
+#define soap_read__turb1__GetThresholdResponse(soap, data) ( soap_begin_recv(soap) || !soap_get__turb1__GetThresholdResponse(soap, data, NULL, NULL) || soap_end_recv(soap) )
+#endif
+
+SOAP_FMAC3 struct _turb1__GetThresholdResponse * SOAP_FMAC4 soap_get__turb1__GetThresholdResponse(struct soap*, struct _turb1__GetThresholdResponse *, const char*, const char*);
+
+#ifndef SOAP_TYPE__turb1__GetThreshold
+#define SOAP_TYPE__turb1__GetThreshold (112)
+#endif
+SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetThreshold(struct soap*, struct _turb1__GetThreshold *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetThreshold(struct soap*, const struct _turb1__GetThreshold *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out__turb1__GetThreshold(struct soap*, const char*, int, const struct _turb1__GetThreshold *, const char*);
+SOAP_FMAC3 struct _turb1__GetThreshold * SOAP_FMAC4 soap_in__turb1__GetThreshold(struct soap*, const char*, struct _turb1__GetThreshold *, const char*);
+
+#ifndef soap_write__turb1__GetThreshold
+#define soap_write__turb1__GetThreshold(soap, data) ( soap_begin_send(soap) || (soap_serialize__turb1__GetThreshold(soap, data), 0) || soap_put__turb1__GetThreshold(soap, data, "turb1:GetThreshold", NULL) || soap_end_send(soap) )
+#endif
+
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetThreshold(struct soap*, const struct _turb1__GetThreshold *, const char*, const char*);
+
+#ifndef soap_read__turb1__GetThreshold
+#define soap_read__turb1__GetThreshold(soap, data) ( soap_begin_recv(soap) || !soap_get__turb1__GetThreshold(soap, data, NULL, NULL) || soap_end_recv(soap) )
+#endif
+
+SOAP_FMAC3 struct _turb1__GetThreshold * SOAP_FMAC4 soap_get__turb1__GetThreshold(struct soap*, struct _turb1__GetThreshold *, const char*, const char*);
+
 #ifndef SOAP_TYPE__turb1__GetBoxFilterGradientResponse
-#define SOAP_TYPE__turb1__GetBoxFilterGradientResponse (100)
+#define SOAP_TYPE__turb1__GetBoxFilterGradientResponse (111)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetBoxFilterGradientResponse(struct soap*, struct _turb1__GetBoxFilterGradientResponse *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetBoxFilterGradientResponse(struct soap*, const struct _turb1__GetBoxFilterGradientResponse *);
@@ -1536,7 +1788,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetBoxFilterGradientResponse(struct s
 SOAP_FMAC3 struct _turb1__GetBoxFilterGradientResponse * SOAP_FMAC4 soap_get__turb1__GetBoxFilterGradientResponse(struct soap*, struct _turb1__GetBoxFilterGradientResponse *, const char*, const char*);
 
 #ifndef SOAP_TYPE__turb1__GetBoxFilterGradient
-#define SOAP_TYPE__turb1__GetBoxFilterGradient (99)
+#define SOAP_TYPE__turb1__GetBoxFilterGradient (110)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetBoxFilterGradient(struct soap*, struct _turb1__GetBoxFilterGradient *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetBoxFilterGradient(struct soap*, const struct _turb1__GetBoxFilterGradient *);
@@ -1557,7 +1809,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetBoxFilterGradient(struct soap*, co
 SOAP_FMAC3 struct _turb1__GetBoxFilterGradient * SOAP_FMAC4 soap_get__turb1__GetBoxFilterGradient(struct soap*, struct _turb1__GetBoxFilterGradient *, const char*, const char*);
 
 #ifndef SOAP_TYPE__turb1__GetBoxFilterSGSResponse
-#define SOAP_TYPE__turb1__GetBoxFilterSGSResponse (97)
+#define SOAP_TYPE__turb1__GetBoxFilterSGSResponse (108)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetBoxFilterSGSResponse(struct soap*, struct _turb1__GetBoxFilterSGSResponse *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetBoxFilterSGSResponse(struct soap*, const struct _turb1__GetBoxFilterSGSResponse *);
@@ -1578,7 +1830,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetBoxFilterSGSResponse(struct soap*,
 SOAP_FMAC3 struct _turb1__GetBoxFilterSGSResponse * SOAP_FMAC4 soap_get__turb1__GetBoxFilterSGSResponse(struct soap*, struct _turb1__GetBoxFilterSGSResponse *, const char*, const char*);
 
 #ifndef SOAP_TYPE__turb1__GetBoxFilterSGS
-#define SOAP_TYPE__turb1__GetBoxFilterSGS (96)
+#define SOAP_TYPE__turb1__GetBoxFilterSGS (107)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetBoxFilterSGS(struct soap*, struct _turb1__GetBoxFilterSGS *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetBoxFilterSGS(struct soap*, const struct _turb1__GetBoxFilterSGS *);
@@ -1599,7 +1851,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetBoxFilterSGS(struct soap*, const s
 SOAP_FMAC3 struct _turb1__GetBoxFilterSGS * SOAP_FMAC4 soap_get__turb1__GetBoxFilterSGS(struct soap*, struct _turb1__GetBoxFilterSGS *, const char*, const char*);
 
 #ifndef SOAP_TYPE__turb1__GetBoxFilterResponse
-#define SOAP_TYPE__turb1__GetBoxFilterResponse (95)
+#define SOAP_TYPE__turb1__GetBoxFilterResponse (106)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetBoxFilterResponse(struct soap*, struct _turb1__GetBoxFilterResponse *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetBoxFilterResponse(struct soap*, const struct _turb1__GetBoxFilterResponse *);
@@ -1620,7 +1872,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetBoxFilterResponse(struct soap*, co
 SOAP_FMAC3 struct _turb1__GetBoxFilterResponse * SOAP_FMAC4 soap_get__turb1__GetBoxFilterResponse(struct soap*, struct _turb1__GetBoxFilterResponse *, const char*, const char*);
 
 #ifndef SOAP_TYPE__turb1__GetBoxFilter
-#define SOAP_TYPE__turb1__GetBoxFilter (94)
+#define SOAP_TYPE__turb1__GetBoxFilter (105)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetBoxFilter(struct soap*, struct _turb1__GetBoxFilter *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetBoxFilter(struct soap*, const struct _turb1__GetBoxFilter *);
@@ -1641,7 +1893,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetBoxFilter(struct soap*, const stru
 SOAP_FMAC3 struct _turb1__GetBoxFilter * SOAP_FMAC4 soap_get__turb1__GetBoxFilter(struct soap*, struct _turb1__GetBoxFilter *, const char*, const char*);
 
 #ifndef SOAP_TYPE__turb1__GetPositionResponse
-#define SOAP_TYPE__turb1__GetPositionResponse (93)
+#define SOAP_TYPE__turb1__GetPositionResponse (104)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetPositionResponse(struct soap*, struct _turb1__GetPositionResponse *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetPositionResponse(struct soap*, const struct _turb1__GetPositionResponse *);
@@ -1662,7 +1914,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetPositionResponse(struct soap*, con
 SOAP_FMAC3 struct _turb1__GetPositionResponse * SOAP_FMAC4 soap_get__turb1__GetPositionResponse(struct soap*, struct _turb1__GetPositionResponse *, const char*, const char*);
 
 #ifndef SOAP_TYPE__turb1__GetPosition
-#define SOAP_TYPE__turb1__GetPosition (92)
+#define SOAP_TYPE__turb1__GetPosition (103)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetPosition(struct soap*, struct _turb1__GetPosition *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetPosition(struct soap*, const struct _turb1__GetPosition *);
@@ -1683,7 +1935,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetPosition(struct soap*, const struc
 SOAP_FMAC3 struct _turb1__GetPosition * SOAP_FMAC4 soap_get__turb1__GetPosition(struct soap*, struct _turb1__GetPosition *, const char*, const char*);
 
 #ifndef SOAP_TYPE__turb1__GetVectorPotentialLaplacianResponse
-#define SOAP_TYPE__turb1__GetVectorPotentialLaplacianResponse (91)
+#define SOAP_TYPE__turb1__GetVectorPotentialLaplacianResponse (102)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetVectorPotentialLaplacianResponse(struct soap*, struct _turb1__GetVectorPotentialLaplacianResponse *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetVectorPotentialLaplacianResponse(struct soap*, const struct _turb1__GetVectorPotentialLaplacianResponse *);
@@ -1704,7 +1956,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetVectorPotentialLaplacianResponse(s
 SOAP_FMAC3 struct _turb1__GetVectorPotentialLaplacianResponse * SOAP_FMAC4 soap_get__turb1__GetVectorPotentialLaplacianResponse(struct soap*, struct _turb1__GetVectorPotentialLaplacianResponse *, const char*, const char*);
 
 #ifndef SOAP_TYPE__turb1__GetVectorPotentialLaplacian
-#define SOAP_TYPE__turb1__GetVectorPotentialLaplacian (90)
+#define SOAP_TYPE__turb1__GetVectorPotentialLaplacian (101)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetVectorPotentialLaplacian(struct soap*, struct _turb1__GetVectorPotentialLaplacian *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetVectorPotentialLaplacian(struct soap*, const struct _turb1__GetVectorPotentialLaplacian *);
@@ -1725,7 +1977,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetVectorPotentialLaplacian(struct so
 SOAP_FMAC3 struct _turb1__GetVectorPotentialLaplacian * SOAP_FMAC4 soap_get__turb1__GetVectorPotentialLaplacian(struct soap*, struct _turb1__GetVectorPotentialLaplacian *, const char*, const char*);
 
 #ifndef SOAP_TYPE__turb1__GetMagneticFieldLaplacianResponse
-#define SOAP_TYPE__turb1__GetMagneticFieldLaplacianResponse (89)
+#define SOAP_TYPE__turb1__GetMagneticFieldLaplacianResponse (100)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetMagneticFieldLaplacianResponse(struct soap*, struct _turb1__GetMagneticFieldLaplacianResponse *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetMagneticFieldLaplacianResponse(struct soap*, const struct _turb1__GetMagneticFieldLaplacianResponse *);
@@ -1746,7 +1998,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetMagneticFieldLaplacianResponse(str
 SOAP_FMAC3 struct _turb1__GetMagneticFieldLaplacianResponse * SOAP_FMAC4 soap_get__turb1__GetMagneticFieldLaplacianResponse(struct soap*, struct _turb1__GetMagneticFieldLaplacianResponse *, const char*, const char*);
 
 #ifndef SOAP_TYPE__turb1__GetMagneticFieldLaplacian
-#define SOAP_TYPE__turb1__GetMagneticFieldLaplacian (88)
+#define SOAP_TYPE__turb1__GetMagneticFieldLaplacian (99)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetMagneticFieldLaplacian(struct soap*, struct _turb1__GetMagneticFieldLaplacian *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetMagneticFieldLaplacian(struct soap*, const struct _turb1__GetMagneticFieldLaplacian *);
@@ -1767,7 +2019,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetMagneticFieldLaplacian(struct soap
 SOAP_FMAC3 struct _turb1__GetMagneticFieldLaplacian * SOAP_FMAC4 soap_get__turb1__GetMagneticFieldLaplacian(struct soap*, struct _turb1__GetMagneticFieldLaplacian *, const char*, const char*);
 
 #ifndef SOAP_TYPE__turb1__GetVelocityLaplacianResponse
-#define SOAP_TYPE__turb1__GetVelocityLaplacianResponse (87)
+#define SOAP_TYPE__turb1__GetVelocityLaplacianResponse (98)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetVelocityLaplacianResponse(struct soap*, struct _turb1__GetVelocityLaplacianResponse *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetVelocityLaplacianResponse(struct soap*, const struct _turb1__GetVelocityLaplacianResponse *);
@@ -1788,7 +2040,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetVelocityLaplacianResponse(struct s
 SOAP_FMAC3 struct _turb1__GetVelocityLaplacianResponse * SOAP_FMAC4 soap_get__turb1__GetVelocityLaplacianResponse(struct soap*, struct _turb1__GetVelocityLaplacianResponse *, const char*, const char*);
 
 #ifndef SOAP_TYPE__turb1__GetVelocityLaplacian
-#define SOAP_TYPE__turb1__GetVelocityLaplacian (86)
+#define SOAP_TYPE__turb1__GetVelocityLaplacian (97)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetVelocityLaplacian(struct soap*, struct _turb1__GetVelocityLaplacian *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetVelocityLaplacian(struct soap*, const struct _turb1__GetVelocityLaplacian *);
@@ -1809,7 +2061,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetVelocityLaplacian(struct soap*, co
 SOAP_FMAC3 struct _turb1__GetVelocityLaplacian * SOAP_FMAC4 soap_get__turb1__GetVelocityLaplacian(struct soap*, struct _turb1__GetVelocityLaplacian *, const char*, const char*);
 
 #ifndef SOAP_TYPE__turb1__GetVectorPotentialHessianResponse
-#define SOAP_TYPE__turb1__GetVectorPotentialHessianResponse (85)
+#define SOAP_TYPE__turb1__GetVectorPotentialHessianResponse (96)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetVectorPotentialHessianResponse(struct soap*, struct _turb1__GetVectorPotentialHessianResponse *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetVectorPotentialHessianResponse(struct soap*, const struct _turb1__GetVectorPotentialHessianResponse *);
@@ -1830,7 +2082,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetVectorPotentialHessianResponse(str
 SOAP_FMAC3 struct _turb1__GetVectorPotentialHessianResponse * SOAP_FMAC4 soap_get__turb1__GetVectorPotentialHessianResponse(struct soap*, struct _turb1__GetVectorPotentialHessianResponse *, const char*, const char*);
 
 #ifndef SOAP_TYPE__turb1__GetVectorPotentialHessian
-#define SOAP_TYPE__turb1__GetVectorPotentialHessian (84)
+#define SOAP_TYPE__turb1__GetVectorPotentialHessian (95)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetVectorPotentialHessian(struct soap*, struct _turb1__GetVectorPotentialHessian *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetVectorPotentialHessian(struct soap*, const struct _turb1__GetVectorPotentialHessian *);
@@ -1851,7 +2103,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetVectorPotentialHessian(struct soap
 SOAP_FMAC3 struct _turb1__GetVectorPotentialHessian * SOAP_FMAC4 soap_get__turb1__GetVectorPotentialHessian(struct soap*, struct _turb1__GetVectorPotentialHessian *, const char*, const char*);
 
 #ifndef SOAP_TYPE__turb1__GetMagneticHessianResponse
-#define SOAP_TYPE__turb1__GetMagneticHessianResponse (83)
+#define SOAP_TYPE__turb1__GetMagneticHessianResponse (94)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetMagneticHessianResponse(struct soap*, struct _turb1__GetMagneticHessianResponse *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetMagneticHessianResponse(struct soap*, const struct _turb1__GetMagneticHessianResponse *);
@@ -1872,7 +2124,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetMagneticHessianResponse(struct soa
 SOAP_FMAC3 struct _turb1__GetMagneticHessianResponse * SOAP_FMAC4 soap_get__turb1__GetMagneticHessianResponse(struct soap*, struct _turb1__GetMagneticHessianResponse *, const char*, const char*);
 
 #ifndef SOAP_TYPE__turb1__GetMagneticHessian
-#define SOAP_TYPE__turb1__GetMagneticHessian (82)
+#define SOAP_TYPE__turb1__GetMagneticHessian (93)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetMagneticHessian(struct soap*, struct _turb1__GetMagneticHessian *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetMagneticHessian(struct soap*, const struct _turb1__GetMagneticHessian *);
@@ -1893,7 +2145,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetMagneticHessian(struct soap*, cons
 SOAP_FMAC3 struct _turb1__GetMagneticHessian * SOAP_FMAC4 soap_get__turb1__GetMagneticHessian(struct soap*, struct _turb1__GetMagneticHessian *, const char*, const char*);
 
 #ifndef SOAP_TYPE__turb1__GetVelocityHessianResponse
-#define SOAP_TYPE__turb1__GetVelocityHessianResponse (80)
+#define SOAP_TYPE__turb1__GetVelocityHessianResponse (91)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetVelocityHessianResponse(struct soap*, struct _turb1__GetVelocityHessianResponse *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetVelocityHessianResponse(struct soap*, const struct _turb1__GetVelocityHessianResponse *);
@@ -1914,7 +2166,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetVelocityHessianResponse(struct soa
 SOAP_FMAC3 struct _turb1__GetVelocityHessianResponse * SOAP_FMAC4 soap_get__turb1__GetVelocityHessianResponse(struct soap*, struct _turb1__GetVelocityHessianResponse *, const char*, const char*);
 
 #ifndef SOAP_TYPE__turb1__GetVelocityHessian
-#define SOAP_TYPE__turb1__GetVelocityHessian (79)
+#define SOAP_TYPE__turb1__GetVelocityHessian (90)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetVelocityHessian(struct soap*, struct _turb1__GetVelocityHessian *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetVelocityHessian(struct soap*, const struct _turb1__GetVelocityHessian *);
@@ -1935,7 +2187,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetVelocityHessian(struct soap*, cons
 SOAP_FMAC3 struct _turb1__GetVelocityHessian * SOAP_FMAC4 soap_get__turb1__GetVelocityHessian(struct soap*, struct _turb1__GetVelocityHessian *, const char*, const char*);
 
 #ifndef SOAP_TYPE__turb1__GetPressureHessianResponse
-#define SOAP_TYPE__turb1__GetPressureHessianResponse (77)
+#define SOAP_TYPE__turb1__GetPressureHessianResponse (89)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetPressureHessianResponse(struct soap*, struct _turb1__GetPressureHessianResponse *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetPressureHessianResponse(struct soap*, const struct _turb1__GetPressureHessianResponse *);
@@ -1956,7 +2208,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetPressureHessianResponse(struct soa
 SOAP_FMAC3 struct _turb1__GetPressureHessianResponse * SOAP_FMAC4 soap_get__turb1__GetPressureHessianResponse(struct soap*, struct _turb1__GetPressureHessianResponse *, const char*, const char*);
 
 #ifndef SOAP_TYPE__turb1__GetPressureHessian
-#define SOAP_TYPE__turb1__GetPressureHessian (76)
+#define SOAP_TYPE__turb1__GetPressureHessian (88)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetPressureHessian(struct soap*, struct _turb1__GetPressureHessian *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetPressureHessian(struct soap*, const struct _turb1__GetPressureHessian *);
@@ -1977,7 +2229,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetPressureHessian(struct soap*, cons
 SOAP_FMAC3 struct _turb1__GetPressureHessian * SOAP_FMAC4 soap_get__turb1__GetPressureHessian(struct soap*, struct _turb1__GetPressureHessian *, const char*, const char*);
 
 #ifndef SOAP_TYPE__turb1__GetPressureGradientResponse
-#define SOAP_TYPE__turb1__GetPressureGradientResponse (75)
+#define SOAP_TYPE__turb1__GetPressureGradientResponse (87)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetPressureGradientResponse(struct soap*, struct _turb1__GetPressureGradientResponse *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetPressureGradientResponse(struct soap*, const struct _turb1__GetPressureGradientResponse *);
@@ -1998,7 +2250,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetPressureGradientResponse(struct so
 SOAP_FMAC3 struct _turb1__GetPressureGradientResponse * SOAP_FMAC4 soap_get__turb1__GetPressureGradientResponse(struct soap*, struct _turb1__GetPressureGradientResponse *, const char*, const char*);
 
 #ifndef SOAP_TYPE__turb1__GetPressureGradient
-#define SOAP_TYPE__turb1__GetPressureGradient (74)
+#define SOAP_TYPE__turb1__GetPressureGradient (86)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetPressureGradient(struct soap*, struct _turb1__GetPressureGradient *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetPressureGradient(struct soap*, const struct _turb1__GetPressureGradient *);
@@ -2019,7 +2271,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetPressureGradient(struct soap*, con
 SOAP_FMAC3 struct _turb1__GetPressureGradient * SOAP_FMAC4 soap_get__turb1__GetPressureGradient(struct soap*, struct _turb1__GetPressureGradient *, const char*, const char*);
 
 #ifndef SOAP_TYPE__turb1__GetVectorPotentialGradientResponse
-#define SOAP_TYPE__turb1__GetVectorPotentialGradientResponse (73)
+#define SOAP_TYPE__turb1__GetVectorPotentialGradientResponse (85)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetVectorPotentialGradientResponse(struct soap*, struct _turb1__GetVectorPotentialGradientResponse *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetVectorPotentialGradientResponse(struct soap*, const struct _turb1__GetVectorPotentialGradientResponse *);
@@ -2040,7 +2292,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetVectorPotentialGradientResponse(st
 SOAP_FMAC3 struct _turb1__GetVectorPotentialGradientResponse * SOAP_FMAC4 soap_get__turb1__GetVectorPotentialGradientResponse(struct soap*, struct _turb1__GetVectorPotentialGradientResponse *, const char*, const char*);
 
 #ifndef SOAP_TYPE__turb1__GetVectorPotentialGradient
-#define SOAP_TYPE__turb1__GetVectorPotentialGradient (72)
+#define SOAP_TYPE__turb1__GetVectorPotentialGradient (84)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetVectorPotentialGradient(struct soap*, struct _turb1__GetVectorPotentialGradient *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetVectorPotentialGradient(struct soap*, const struct _turb1__GetVectorPotentialGradient *);
@@ -2061,7 +2313,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetVectorPotentialGradient(struct soa
 SOAP_FMAC3 struct _turb1__GetVectorPotentialGradient * SOAP_FMAC4 soap_get__turb1__GetVectorPotentialGradient(struct soap*, struct _turb1__GetVectorPotentialGradient *, const char*, const char*);
 
 #ifndef SOAP_TYPE__turb1__GetMagneticFieldGradientResponse
-#define SOAP_TYPE__turb1__GetMagneticFieldGradientResponse (71)
+#define SOAP_TYPE__turb1__GetMagneticFieldGradientResponse (83)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetMagneticFieldGradientResponse(struct soap*, struct _turb1__GetMagneticFieldGradientResponse *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetMagneticFieldGradientResponse(struct soap*, const struct _turb1__GetMagneticFieldGradientResponse *);
@@ -2082,7 +2334,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetMagneticFieldGradientResponse(stru
 SOAP_FMAC3 struct _turb1__GetMagneticFieldGradientResponse * SOAP_FMAC4 soap_get__turb1__GetMagneticFieldGradientResponse(struct soap*, struct _turb1__GetMagneticFieldGradientResponse *, const char*, const char*);
 
 #ifndef SOAP_TYPE__turb1__GetMagneticFieldGradient
-#define SOAP_TYPE__turb1__GetMagneticFieldGradient (70)
+#define SOAP_TYPE__turb1__GetMagneticFieldGradient (82)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetMagneticFieldGradient(struct soap*, struct _turb1__GetMagneticFieldGradient *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetMagneticFieldGradient(struct soap*, const struct _turb1__GetMagneticFieldGradient *);
@@ -2103,7 +2355,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetMagneticFieldGradient(struct soap*
 SOAP_FMAC3 struct _turb1__GetMagneticFieldGradient * SOAP_FMAC4 soap_get__turb1__GetMagneticFieldGradient(struct soap*, struct _turb1__GetMagneticFieldGradient *, const char*, const char*);
 
 #ifndef SOAP_TYPE__turb1__GetVelocityGradientResponse
-#define SOAP_TYPE__turb1__GetVelocityGradientResponse (68)
+#define SOAP_TYPE__turb1__GetVelocityGradientResponse (80)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetVelocityGradientResponse(struct soap*, struct _turb1__GetVelocityGradientResponse *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetVelocityGradientResponse(struct soap*, const struct _turb1__GetVelocityGradientResponse *);
@@ -2124,7 +2376,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetVelocityGradientResponse(struct so
 SOAP_FMAC3 struct _turb1__GetVelocityGradientResponse * SOAP_FMAC4 soap_get__turb1__GetVelocityGradientResponse(struct soap*, struct _turb1__GetVelocityGradientResponse *, const char*, const char*);
 
 #ifndef SOAP_TYPE__turb1__GetVelocityGradient
-#define SOAP_TYPE__turb1__GetVelocityGradient (67)
+#define SOAP_TYPE__turb1__GetVelocityGradient (79)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetVelocityGradient(struct soap*, struct _turb1__GetVelocityGradient *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetVelocityGradient(struct soap*, const struct _turb1__GetVelocityGradient *);
@@ -2145,7 +2397,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetVelocityGradient(struct soap*, con
 SOAP_FMAC3 struct _turb1__GetVelocityGradient * SOAP_FMAC4 soap_get__turb1__GetVelocityGradient(struct soap*, struct _turb1__GetVelocityGradient *, const char*, const char*);
 
 #ifndef SOAP_TYPE__turb1__GetVelocityAndPressureResponse
-#define SOAP_TYPE__turb1__GetVelocityAndPressureResponse (65)
+#define SOAP_TYPE__turb1__GetVelocityAndPressureResponse (77)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetVelocityAndPressureResponse(struct soap*, struct _turb1__GetVelocityAndPressureResponse *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetVelocityAndPressureResponse(struct soap*, const struct _turb1__GetVelocityAndPressureResponse *);
@@ -2166,7 +2418,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetVelocityAndPressureResponse(struct
 SOAP_FMAC3 struct _turb1__GetVelocityAndPressureResponse * SOAP_FMAC4 soap_get__turb1__GetVelocityAndPressureResponse(struct soap*, struct _turb1__GetVelocityAndPressureResponse *, const char*, const char*);
 
 #ifndef SOAP_TYPE__turb1__GetVelocityAndPressure
-#define SOAP_TYPE__turb1__GetVelocityAndPressure (64)
+#define SOAP_TYPE__turb1__GetVelocityAndPressure (76)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetVelocityAndPressure(struct soap*, struct _turb1__GetVelocityAndPressure *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetVelocityAndPressure(struct soap*, const struct _turb1__GetVelocityAndPressure *);
@@ -2187,7 +2439,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetVelocityAndPressure(struct soap*, 
 SOAP_FMAC3 struct _turb1__GetVelocityAndPressure * SOAP_FMAC4 soap_get__turb1__GetVelocityAndPressure(struct soap*, struct _turb1__GetVelocityAndPressure *, const char*, const char*);
 
 #ifndef SOAP_TYPE__turb1__GetForceResponse
-#define SOAP_TYPE__turb1__GetForceResponse (63)
+#define SOAP_TYPE__turb1__GetForceResponse (75)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetForceResponse(struct soap*, struct _turb1__GetForceResponse *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetForceResponse(struct soap*, const struct _turb1__GetForceResponse *);
@@ -2208,7 +2460,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetForceResponse(struct soap*, const 
 SOAP_FMAC3 struct _turb1__GetForceResponse * SOAP_FMAC4 soap_get__turb1__GetForceResponse(struct soap*, struct _turb1__GetForceResponse *, const char*, const char*);
 
 #ifndef SOAP_TYPE__turb1__GetForce
-#define SOAP_TYPE__turb1__GetForce (62)
+#define SOAP_TYPE__turb1__GetForce (74)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetForce(struct soap*, struct _turb1__GetForce *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetForce(struct soap*, const struct _turb1__GetForce *);
@@ -2228,8 +2480,176 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetForce(struct soap*, const struct _
 
 SOAP_FMAC3 struct _turb1__GetForce * SOAP_FMAC4 soap_get__turb1__GetForce(struct soap*, struct _turb1__GetForce *, const char*, const char*);
 
+#ifndef SOAP_TYPE__turb1__GetRawDensityResponse
+#define SOAP_TYPE__turb1__GetRawDensityResponse (73)
+#endif
+SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetRawDensityResponse(struct soap*, struct _turb1__GetRawDensityResponse *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetRawDensityResponse(struct soap*, const struct _turb1__GetRawDensityResponse *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out__turb1__GetRawDensityResponse(struct soap*, const char*, int, const struct _turb1__GetRawDensityResponse *, const char*);
+SOAP_FMAC3 struct _turb1__GetRawDensityResponse * SOAP_FMAC4 soap_in__turb1__GetRawDensityResponse(struct soap*, const char*, struct _turb1__GetRawDensityResponse *, const char*);
+
+#ifndef soap_write__turb1__GetRawDensityResponse
+#define soap_write__turb1__GetRawDensityResponse(soap, data) ( soap_begin_send(soap) || (soap_serialize__turb1__GetRawDensityResponse(soap, data), 0) || soap_put__turb1__GetRawDensityResponse(soap, data, "turb1:GetRawDensityResponse", NULL) || soap_end_send(soap) )
+#endif
+
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetRawDensityResponse(struct soap*, const struct _turb1__GetRawDensityResponse *, const char*, const char*);
+
+#ifndef soap_read__turb1__GetRawDensityResponse
+#define soap_read__turb1__GetRawDensityResponse(soap, data) ( soap_begin_recv(soap) || !soap_get__turb1__GetRawDensityResponse(soap, data, NULL, NULL) || soap_end_recv(soap) )
+#endif
+
+SOAP_FMAC3 struct _turb1__GetRawDensityResponse * SOAP_FMAC4 soap_get__turb1__GetRawDensityResponse(struct soap*, struct _turb1__GetRawDensityResponse *, const char*, const char*);
+
+#ifndef SOAP_TYPE__turb1__GetRawDensity
+#define SOAP_TYPE__turb1__GetRawDensity (72)
+#endif
+SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetRawDensity(struct soap*, struct _turb1__GetRawDensity *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetRawDensity(struct soap*, const struct _turb1__GetRawDensity *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out__turb1__GetRawDensity(struct soap*, const char*, int, const struct _turb1__GetRawDensity *, const char*);
+SOAP_FMAC3 struct _turb1__GetRawDensity * SOAP_FMAC4 soap_in__turb1__GetRawDensity(struct soap*, const char*, struct _turb1__GetRawDensity *, const char*);
+
+#ifndef soap_write__turb1__GetRawDensity
+#define soap_write__turb1__GetRawDensity(soap, data) ( soap_begin_send(soap) || (soap_serialize__turb1__GetRawDensity(soap, data), 0) || soap_put__turb1__GetRawDensity(soap, data, "turb1:GetRawDensity", NULL) || soap_end_send(soap) )
+#endif
+
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetRawDensity(struct soap*, const struct _turb1__GetRawDensity *, const char*, const char*);
+
+#ifndef soap_read__turb1__GetRawDensity
+#define soap_read__turb1__GetRawDensity(soap, data) ( soap_begin_recv(soap) || !soap_get__turb1__GetRawDensity(soap, data, NULL, NULL) || soap_end_recv(soap) )
+#endif
+
+SOAP_FMAC3 struct _turb1__GetRawDensity * SOAP_FMAC4 soap_get__turb1__GetRawDensity(struct soap*, struct _turb1__GetRawDensity *, const char*, const char*);
+
+#ifndef SOAP_TYPE__turb1__GetDensityHessianResponse
+#define SOAP_TYPE__turb1__GetDensityHessianResponse (70)
+#endif
+SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetDensityHessianResponse(struct soap*, struct _turb1__GetDensityHessianResponse *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetDensityHessianResponse(struct soap*, const struct _turb1__GetDensityHessianResponse *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out__turb1__GetDensityHessianResponse(struct soap*, const char*, int, const struct _turb1__GetDensityHessianResponse *, const char*);
+SOAP_FMAC3 struct _turb1__GetDensityHessianResponse * SOAP_FMAC4 soap_in__turb1__GetDensityHessianResponse(struct soap*, const char*, struct _turb1__GetDensityHessianResponse *, const char*);
+
+#ifndef soap_write__turb1__GetDensityHessianResponse
+#define soap_write__turb1__GetDensityHessianResponse(soap, data) ( soap_begin_send(soap) || (soap_serialize__turb1__GetDensityHessianResponse(soap, data), 0) || soap_put__turb1__GetDensityHessianResponse(soap, data, "turb1:GetDensityHessianResponse", NULL) || soap_end_send(soap) )
+#endif
+
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetDensityHessianResponse(struct soap*, const struct _turb1__GetDensityHessianResponse *, const char*, const char*);
+
+#ifndef soap_read__turb1__GetDensityHessianResponse
+#define soap_read__turb1__GetDensityHessianResponse(soap, data) ( soap_begin_recv(soap) || !soap_get__turb1__GetDensityHessianResponse(soap, data, NULL, NULL) || soap_end_recv(soap) )
+#endif
+
+SOAP_FMAC3 struct _turb1__GetDensityHessianResponse * SOAP_FMAC4 soap_get__turb1__GetDensityHessianResponse(struct soap*, struct _turb1__GetDensityHessianResponse *, const char*, const char*);
+
+#ifndef SOAP_TYPE__turb1__GetDensityHessian
+#define SOAP_TYPE__turb1__GetDensityHessian (69)
+#endif
+SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetDensityHessian(struct soap*, struct _turb1__GetDensityHessian *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetDensityHessian(struct soap*, const struct _turb1__GetDensityHessian *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out__turb1__GetDensityHessian(struct soap*, const char*, int, const struct _turb1__GetDensityHessian *, const char*);
+SOAP_FMAC3 struct _turb1__GetDensityHessian * SOAP_FMAC4 soap_in__turb1__GetDensityHessian(struct soap*, const char*, struct _turb1__GetDensityHessian *, const char*);
+
+#ifndef soap_write__turb1__GetDensityHessian
+#define soap_write__turb1__GetDensityHessian(soap, data) ( soap_begin_send(soap) || (soap_serialize__turb1__GetDensityHessian(soap, data), 0) || soap_put__turb1__GetDensityHessian(soap, data, "turb1:GetDensityHessian", NULL) || soap_end_send(soap) )
+#endif
+
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetDensityHessian(struct soap*, const struct _turb1__GetDensityHessian *, const char*, const char*);
+
+#ifndef soap_read__turb1__GetDensityHessian
+#define soap_read__turb1__GetDensityHessian(soap, data) ( soap_begin_recv(soap) || !soap_get__turb1__GetDensityHessian(soap, data, NULL, NULL) || soap_end_recv(soap) )
+#endif
+
+SOAP_FMAC3 struct _turb1__GetDensityHessian * SOAP_FMAC4 soap_get__turb1__GetDensityHessian(struct soap*, struct _turb1__GetDensityHessian *, const char*, const char*);
+
+#ifndef SOAP_TYPE__turb1__GetDensityGradientResponse
+#define SOAP_TYPE__turb1__GetDensityGradientResponse (68)
+#endif
+SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetDensityGradientResponse(struct soap*, struct _turb1__GetDensityGradientResponse *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetDensityGradientResponse(struct soap*, const struct _turb1__GetDensityGradientResponse *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out__turb1__GetDensityGradientResponse(struct soap*, const char*, int, const struct _turb1__GetDensityGradientResponse *, const char*);
+SOAP_FMAC3 struct _turb1__GetDensityGradientResponse * SOAP_FMAC4 soap_in__turb1__GetDensityGradientResponse(struct soap*, const char*, struct _turb1__GetDensityGradientResponse *, const char*);
+
+#ifndef soap_write__turb1__GetDensityGradientResponse
+#define soap_write__turb1__GetDensityGradientResponse(soap, data) ( soap_begin_send(soap) || (soap_serialize__turb1__GetDensityGradientResponse(soap, data), 0) || soap_put__turb1__GetDensityGradientResponse(soap, data, "turb1:GetDensityGradientResponse", NULL) || soap_end_send(soap) )
+#endif
+
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetDensityGradientResponse(struct soap*, const struct _turb1__GetDensityGradientResponse *, const char*, const char*);
+
+#ifndef soap_read__turb1__GetDensityGradientResponse
+#define soap_read__turb1__GetDensityGradientResponse(soap, data) ( soap_begin_recv(soap) || !soap_get__turb1__GetDensityGradientResponse(soap, data, NULL, NULL) || soap_end_recv(soap) )
+#endif
+
+SOAP_FMAC3 struct _turb1__GetDensityGradientResponse * SOAP_FMAC4 soap_get__turb1__GetDensityGradientResponse(struct soap*, struct _turb1__GetDensityGradientResponse *, const char*, const char*);
+
+#ifndef SOAP_TYPE__turb1__GetDensityGradient
+#define SOAP_TYPE__turb1__GetDensityGradient (67)
+#endif
+SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetDensityGradient(struct soap*, struct _turb1__GetDensityGradient *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetDensityGradient(struct soap*, const struct _turb1__GetDensityGradient *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out__turb1__GetDensityGradient(struct soap*, const char*, int, const struct _turb1__GetDensityGradient *, const char*);
+SOAP_FMAC3 struct _turb1__GetDensityGradient * SOAP_FMAC4 soap_in__turb1__GetDensityGradient(struct soap*, const char*, struct _turb1__GetDensityGradient *, const char*);
+
+#ifndef soap_write__turb1__GetDensityGradient
+#define soap_write__turb1__GetDensityGradient(soap, data) ( soap_begin_send(soap) || (soap_serialize__turb1__GetDensityGradient(soap, data), 0) || soap_put__turb1__GetDensityGradient(soap, data, "turb1:GetDensityGradient", NULL) || soap_end_send(soap) )
+#endif
+
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetDensityGradient(struct soap*, const struct _turb1__GetDensityGradient *, const char*, const char*);
+
+#ifndef soap_read__turb1__GetDensityGradient
+#define soap_read__turb1__GetDensityGradient(soap, data) ( soap_begin_recv(soap) || !soap_get__turb1__GetDensityGradient(soap, data, NULL, NULL) || soap_end_recv(soap) )
+#endif
+
+SOAP_FMAC3 struct _turb1__GetDensityGradient * SOAP_FMAC4 soap_get__turb1__GetDensityGradient(struct soap*, struct _turb1__GetDensityGradient *, const char*, const char*);
+
+#ifndef SOAP_TYPE__turb1__GetDensityResponse
+#define SOAP_TYPE__turb1__GetDensityResponse (66)
+#endif
+SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetDensityResponse(struct soap*, struct _turb1__GetDensityResponse *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetDensityResponse(struct soap*, const struct _turb1__GetDensityResponse *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out__turb1__GetDensityResponse(struct soap*, const char*, int, const struct _turb1__GetDensityResponse *, const char*);
+SOAP_FMAC3 struct _turb1__GetDensityResponse * SOAP_FMAC4 soap_in__turb1__GetDensityResponse(struct soap*, const char*, struct _turb1__GetDensityResponse *, const char*);
+
+#ifndef soap_write__turb1__GetDensityResponse
+#define soap_write__turb1__GetDensityResponse(soap, data) ( soap_begin_send(soap) || (soap_serialize__turb1__GetDensityResponse(soap, data), 0) || soap_put__turb1__GetDensityResponse(soap, data, "turb1:GetDensityResponse", NULL) || soap_end_send(soap) )
+#endif
+
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetDensityResponse(struct soap*, const struct _turb1__GetDensityResponse *, const char*, const char*);
+
+#ifndef soap_read__turb1__GetDensityResponse
+#define soap_read__turb1__GetDensityResponse(soap, data) ( soap_begin_recv(soap) || !soap_get__turb1__GetDensityResponse(soap, data, NULL, NULL) || soap_end_recv(soap) )
+#endif
+
+SOAP_FMAC3 struct _turb1__GetDensityResponse * SOAP_FMAC4 soap_get__turb1__GetDensityResponse(struct soap*, struct _turb1__GetDensityResponse *, const char*, const char*);
+
+#ifndef SOAP_TYPE__turb1__GetDensity
+#define SOAP_TYPE__turb1__GetDensity (65)
+#endif
+SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetDensity(struct soap*, struct _turb1__GetDensity *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetDensity(struct soap*, const struct _turb1__GetDensity *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out__turb1__GetDensity(struct soap*, const char*, int, const struct _turb1__GetDensity *, const char*);
+SOAP_FMAC3 struct _turb1__GetDensity * SOAP_FMAC4 soap_in__turb1__GetDensity(struct soap*, const char*, struct _turb1__GetDensity *, const char*);
+
+#ifndef soap_write__turb1__GetDensity
+#define soap_write__turb1__GetDensity(soap, data) ( soap_begin_send(soap) || (soap_serialize__turb1__GetDensity(soap, data), 0) || soap_put__turb1__GetDensity(soap, data, "turb1:GetDensity", NULL) || soap_end_send(soap) )
+#endif
+
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetDensity(struct soap*, const struct _turb1__GetDensity *, const char*, const char*);
+
+#ifndef soap_read__turb1__GetDensity
+#define soap_read__turb1__GetDensity(soap, data) ( soap_begin_recv(soap) || !soap_get__turb1__GetDensity(soap, data, NULL, NULL) || soap_end_recv(soap) )
+#endif
+
+SOAP_FMAC3 struct _turb1__GetDensity * SOAP_FMAC4 soap_get__turb1__GetDensity(struct soap*, struct _turb1__GetDensity *, const char*, const char*);
+
 #ifndef SOAP_TYPE__turb1__GetRawVectorPotentialResponse
-#define SOAP_TYPE__turb1__GetRawVectorPotentialResponse (61)
+#define SOAP_TYPE__turb1__GetRawVectorPotentialResponse (64)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetRawVectorPotentialResponse(struct soap*, struct _turb1__GetRawVectorPotentialResponse *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetRawVectorPotentialResponse(struct soap*, const struct _turb1__GetRawVectorPotentialResponse *);
@@ -2250,7 +2670,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetRawVectorPotentialResponse(struct 
 SOAP_FMAC3 struct _turb1__GetRawVectorPotentialResponse * SOAP_FMAC4 soap_get__turb1__GetRawVectorPotentialResponse(struct soap*, struct _turb1__GetRawVectorPotentialResponse *, const char*, const char*);
 
 #ifndef SOAP_TYPE__turb1__GetRawVectorPotential
-#define SOAP_TYPE__turb1__GetRawVectorPotential (60)
+#define SOAP_TYPE__turb1__GetRawVectorPotential (63)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetRawVectorPotential(struct soap*, struct _turb1__GetRawVectorPotential *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetRawVectorPotential(struct soap*, const struct _turb1__GetRawVectorPotential *);
@@ -2271,7 +2691,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetRawVectorPotential(struct soap*, c
 SOAP_FMAC3 struct _turb1__GetRawVectorPotential * SOAP_FMAC4 soap_get__turb1__GetRawVectorPotential(struct soap*, struct _turb1__GetRawVectorPotential *, const char*, const char*);
 
 #ifndef SOAP_TYPE__turb1__GetVectorPotentialResponse
-#define SOAP_TYPE__turb1__GetVectorPotentialResponse (59)
+#define SOAP_TYPE__turb1__GetVectorPotentialResponse (62)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetVectorPotentialResponse(struct soap*, struct _turb1__GetVectorPotentialResponse *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetVectorPotentialResponse(struct soap*, const struct _turb1__GetVectorPotentialResponse *);
@@ -2292,7 +2712,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetVectorPotentialResponse(struct soa
 SOAP_FMAC3 struct _turb1__GetVectorPotentialResponse * SOAP_FMAC4 soap_get__turb1__GetVectorPotentialResponse(struct soap*, struct _turb1__GetVectorPotentialResponse *, const char*, const char*);
 
 #ifndef SOAP_TYPE__turb1__GetVectorPotential
-#define SOAP_TYPE__turb1__GetVectorPotential (58)
+#define SOAP_TYPE__turb1__GetVectorPotential (61)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetVectorPotential(struct soap*, struct _turb1__GetVectorPotential *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetVectorPotential(struct soap*, const struct _turb1__GetVectorPotential *);
@@ -2313,7 +2733,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetVectorPotential(struct soap*, cons
 SOAP_FMAC3 struct _turb1__GetVectorPotential * SOAP_FMAC4 soap_get__turb1__GetVectorPotential(struct soap*, struct _turb1__GetVectorPotential *, const char*, const char*);
 
 #ifndef SOAP_TYPE__turb1__GetRawMagneticFieldResponse
-#define SOAP_TYPE__turb1__GetRawMagneticFieldResponse (57)
+#define SOAP_TYPE__turb1__GetRawMagneticFieldResponse (60)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetRawMagneticFieldResponse(struct soap*, struct _turb1__GetRawMagneticFieldResponse *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetRawMagneticFieldResponse(struct soap*, const struct _turb1__GetRawMagneticFieldResponse *);
@@ -2334,7 +2754,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetRawMagneticFieldResponse(struct so
 SOAP_FMAC3 struct _turb1__GetRawMagneticFieldResponse * SOAP_FMAC4 soap_get__turb1__GetRawMagneticFieldResponse(struct soap*, struct _turb1__GetRawMagneticFieldResponse *, const char*, const char*);
 
 #ifndef SOAP_TYPE__turb1__GetRawMagneticField
-#define SOAP_TYPE__turb1__GetRawMagneticField (56)
+#define SOAP_TYPE__turb1__GetRawMagneticField (59)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetRawMagneticField(struct soap*, struct _turb1__GetRawMagneticField *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetRawMagneticField(struct soap*, const struct _turb1__GetRawMagneticField *);
@@ -2355,7 +2775,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetRawMagneticField(struct soap*, con
 SOAP_FMAC3 struct _turb1__GetRawMagneticField * SOAP_FMAC4 soap_get__turb1__GetRawMagneticField(struct soap*, struct _turb1__GetRawMagneticField *, const char*, const char*);
 
 #ifndef SOAP_TYPE__turb1__GetMagneticFieldResponse
-#define SOAP_TYPE__turb1__GetMagneticFieldResponse (55)
+#define SOAP_TYPE__turb1__GetMagneticFieldResponse (58)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetMagneticFieldResponse(struct soap*, struct _turb1__GetMagneticFieldResponse *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetMagneticFieldResponse(struct soap*, const struct _turb1__GetMagneticFieldResponse *);
@@ -2376,7 +2796,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetMagneticFieldResponse(struct soap*
 SOAP_FMAC3 struct _turb1__GetMagneticFieldResponse * SOAP_FMAC4 soap_get__turb1__GetMagneticFieldResponse(struct soap*, struct _turb1__GetMagneticFieldResponse *, const char*, const char*);
 
 #ifndef SOAP_TYPE__turb1__GetMagneticField
-#define SOAP_TYPE__turb1__GetMagneticField (54)
+#define SOAP_TYPE__turb1__GetMagneticField (57)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetMagneticField(struct soap*, struct _turb1__GetMagneticField *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetMagneticField(struct soap*, const struct _turb1__GetMagneticField *);
@@ -2397,7 +2817,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetMagneticField(struct soap*, const 
 SOAP_FMAC3 struct _turb1__GetMagneticField * SOAP_FMAC4 soap_get__turb1__GetMagneticField(struct soap*, struct _turb1__GetMagneticField *, const char*, const char*);
 
 #ifndef SOAP_TYPE__turb1__GetRawPressureResponse
-#define SOAP_TYPE__turb1__GetRawPressureResponse (53)
+#define SOAP_TYPE__turb1__GetRawPressureResponse (56)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetRawPressureResponse(struct soap*, struct _turb1__GetRawPressureResponse *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetRawPressureResponse(struct soap*, const struct _turb1__GetRawPressureResponse *);
@@ -2418,7 +2838,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetRawPressureResponse(struct soap*, 
 SOAP_FMAC3 struct _turb1__GetRawPressureResponse * SOAP_FMAC4 soap_get__turb1__GetRawPressureResponse(struct soap*, struct _turb1__GetRawPressureResponse *, const char*, const char*);
 
 #ifndef SOAP_TYPE__turb1__GetRawPressure
-#define SOAP_TYPE__turb1__GetRawPressure (52)
+#define SOAP_TYPE__turb1__GetRawPressure (55)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetRawPressure(struct soap*, struct _turb1__GetRawPressure *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetRawPressure(struct soap*, const struct _turb1__GetRawPressure *);
@@ -2439,7 +2859,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetRawPressure(struct soap*, const st
 SOAP_FMAC3 struct _turb1__GetRawPressure * SOAP_FMAC4 soap_get__turb1__GetRawPressure(struct soap*, struct _turb1__GetRawPressure *, const char*, const char*);
 
 #ifndef SOAP_TYPE__turb1__GetPressureResponse
-#define SOAP_TYPE__turb1__GetPressureResponse (50)
+#define SOAP_TYPE__turb1__GetPressureResponse (53)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetPressureResponse(struct soap*, struct _turb1__GetPressureResponse *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetPressureResponse(struct soap*, const struct _turb1__GetPressureResponse *);
@@ -2460,7 +2880,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetPressureResponse(struct soap*, con
 SOAP_FMAC3 struct _turb1__GetPressureResponse * SOAP_FMAC4 soap_get__turb1__GetPressureResponse(struct soap*, struct _turb1__GetPressureResponse *, const char*, const char*);
 
 #ifndef SOAP_TYPE__turb1__GetPressure
-#define SOAP_TYPE__turb1__GetPressure (49)
+#define SOAP_TYPE__turb1__GetPressure (52)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetPressure(struct soap*, struct _turb1__GetPressure *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetPressure(struct soap*, const struct _turb1__GetPressure *);
@@ -2481,7 +2901,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetPressure(struct soap*, const struc
 SOAP_FMAC3 struct _turb1__GetPressure * SOAP_FMAC4 soap_get__turb1__GetPressure(struct soap*, struct _turb1__GetPressure *, const char*, const char*);
 
 #ifndef SOAP_TYPE__turb1__GetRawVelocityResponse
-#define SOAP_TYPE__turb1__GetRawVelocityResponse (47)
+#define SOAP_TYPE__turb1__GetRawVelocityResponse (50)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetRawVelocityResponse(struct soap*, struct _turb1__GetRawVelocityResponse *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetRawVelocityResponse(struct soap*, const struct _turb1__GetRawVelocityResponse *);
@@ -2502,7 +2922,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetRawVelocityResponse(struct soap*, 
 SOAP_FMAC3 struct _turb1__GetRawVelocityResponse * SOAP_FMAC4 soap_get__turb1__GetRawVelocityResponse(struct soap*, struct _turb1__GetRawVelocityResponse *, const char*, const char*);
 
 #ifndef SOAP_TYPE__turb1__GetRawVelocity
-#define SOAP_TYPE__turb1__GetRawVelocity (46)
+#define SOAP_TYPE__turb1__GetRawVelocity (49)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetRawVelocity(struct soap*, struct _turb1__GetRawVelocity *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetRawVelocity(struct soap*, const struct _turb1__GetRawVelocity *);
@@ -2523,7 +2943,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetRawVelocity(struct soap*, const st
 SOAP_FMAC3 struct _turb1__GetRawVelocity * SOAP_FMAC4 soap_get__turb1__GetRawVelocity(struct soap*, struct _turb1__GetRawVelocity *, const char*, const char*);
 
 #ifndef SOAP_TYPE__turb1__GetVelocityBatchResponse
-#define SOAP_TYPE__turb1__GetVelocityBatchResponse (45)
+#define SOAP_TYPE__turb1__GetVelocityBatchResponse (48)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetVelocityBatchResponse(struct soap*, struct _turb1__GetVelocityBatchResponse *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetVelocityBatchResponse(struct soap*, const struct _turb1__GetVelocityBatchResponse *);
@@ -2544,7 +2964,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetVelocityBatchResponse(struct soap*
 SOAP_FMAC3 struct _turb1__GetVelocityBatchResponse * SOAP_FMAC4 soap_get__turb1__GetVelocityBatchResponse(struct soap*, struct _turb1__GetVelocityBatchResponse *, const char*, const char*);
 
 #ifndef SOAP_TYPE__turb1__GetVelocityBatch
-#define SOAP_TYPE__turb1__GetVelocityBatch (44)
+#define SOAP_TYPE__turb1__GetVelocityBatch (47)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetVelocityBatch(struct soap*, struct _turb1__GetVelocityBatch *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetVelocityBatch(struct soap*, const struct _turb1__GetVelocityBatch *);
@@ -2565,7 +2985,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetVelocityBatch(struct soap*, const 
 SOAP_FMAC3 struct _turb1__GetVelocityBatch * SOAP_FMAC4 soap_get__turb1__GetVelocityBatch(struct soap*, struct _turb1__GetVelocityBatch *, const char*, const char*);
 
 #ifndef SOAP_TYPE__turb1__GetVelocityResponse
-#define SOAP_TYPE__turb1__GetVelocityResponse (43)
+#define SOAP_TYPE__turb1__GetVelocityResponse (46)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetVelocityResponse(struct soap*, struct _turb1__GetVelocityResponse *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetVelocityResponse(struct soap*, const struct _turb1__GetVelocityResponse *);
@@ -2586,7 +3006,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetVelocityResponse(struct soap*, con
 SOAP_FMAC3 struct _turb1__GetVelocityResponse * SOAP_FMAC4 soap_get__turb1__GetVelocityResponse(struct soap*, struct _turb1__GetVelocityResponse *, const char*, const char*);
 
 #ifndef SOAP_TYPE__turb1__GetVelocity
-#define SOAP_TYPE__turb1__GetVelocity (42)
+#define SOAP_TYPE__turb1__GetVelocity (45)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetVelocity(struct soap*, struct _turb1__GetVelocity *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetVelocity(struct soap*, const struct _turb1__GetVelocity *);
@@ -2607,7 +3027,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetVelocity(struct soap*, const struc
 SOAP_FMAC3 struct _turb1__GetVelocity * SOAP_FMAC4 soap_get__turb1__GetVelocity(struct soap*, struct _turb1__GetVelocity *, const char*, const char*);
 
 #ifndef SOAP_TYPE__turb1__NullOpResponse
-#define SOAP_TYPE__turb1__NullOpResponse (40)
+#define SOAP_TYPE__turb1__NullOpResponse (43)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__NullOpResponse(struct soap*, struct _turb1__NullOpResponse *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__NullOpResponse(struct soap*, const struct _turb1__NullOpResponse *);
@@ -2628,7 +3048,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__NullOpResponse(struct soap*, const st
 SOAP_FMAC3 struct _turb1__NullOpResponse * SOAP_FMAC4 soap_get__turb1__NullOpResponse(struct soap*, struct _turb1__NullOpResponse *, const char*, const char*);
 
 #ifndef SOAP_TYPE__turb1__NullOp
-#define SOAP_TYPE__turb1__NullOp (38)
+#define SOAP_TYPE__turb1__NullOp (41)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__NullOp(struct soap*, struct _turb1__NullOp *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__NullOp(struct soap*, const struct _turb1__NullOp *);
@@ -2647,6 +3067,48 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__NullOp(struct soap*, const struct _tu
 #endif
 
 SOAP_FMAC3 struct _turb1__NullOp * SOAP_FMAC4 soap_get__turb1__NullOp(struct soap*, struct _turb1__NullOp *, const char*, const char*);
+
+#ifndef SOAP_TYPE_turb1__ThresholdInfo
+#define SOAP_TYPE_turb1__ThresholdInfo (39)
+#endif
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_turb1__ThresholdInfo(struct soap*, struct turb1__ThresholdInfo *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_turb1__ThresholdInfo(struct soap*, const struct turb1__ThresholdInfo *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_turb1__ThresholdInfo(struct soap*, const char*, int, const struct turb1__ThresholdInfo *, const char*);
+SOAP_FMAC3 struct turb1__ThresholdInfo * SOAP_FMAC4 soap_in_turb1__ThresholdInfo(struct soap*, const char*, struct turb1__ThresholdInfo *, const char*);
+
+#ifndef soap_write_turb1__ThresholdInfo
+#define soap_write_turb1__ThresholdInfo(soap, data) ( soap_begin_send(soap) || (soap_serialize_turb1__ThresholdInfo(soap, data), 0) || soap_put_turb1__ThresholdInfo(soap, data, "turb1:ThresholdInfo", NULL) || soap_end_send(soap) )
+#endif
+
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_turb1__ThresholdInfo(struct soap*, const struct turb1__ThresholdInfo *, const char*, const char*);
+
+#ifndef soap_read_turb1__ThresholdInfo
+#define soap_read_turb1__ThresholdInfo(soap, data) ( soap_begin_recv(soap) || !soap_get_turb1__ThresholdInfo(soap, data, NULL, NULL) || soap_end_recv(soap) )
+#endif
+
+SOAP_FMAC3 struct turb1__ThresholdInfo * SOAP_FMAC4 soap_get_turb1__ThresholdInfo(struct soap*, struct turb1__ThresholdInfo *, const char*, const char*);
+
+#ifndef SOAP_TYPE_turb1__ArrayOfThresholdInfo
+#define SOAP_TYPE_turb1__ArrayOfThresholdInfo (38)
+#endif
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_turb1__ArrayOfThresholdInfo(struct soap*, struct turb1__ArrayOfThresholdInfo *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_turb1__ArrayOfThresholdInfo(struct soap*, const struct turb1__ArrayOfThresholdInfo *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_turb1__ArrayOfThresholdInfo(struct soap*, const char*, int, const struct turb1__ArrayOfThresholdInfo *, const char*);
+SOAP_FMAC3 struct turb1__ArrayOfThresholdInfo * SOAP_FMAC4 soap_in_turb1__ArrayOfThresholdInfo(struct soap*, const char*, struct turb1__ArrayOfThresholdInfo *, const char*);
+
+#ifndef soap_write_turb1__ArrayOfThresholdInfo
+#define soap_write_turb1__ArrayOfThresholdInfo(soap, data) ( soap_begin_send(soap) || (soap_serialize_turb1__ArrayOfThresholdInfo(soap, data), 0) || soap_put_turb1__ArrayOfThresholdInfo(soap, data, "turb1:ArrayOfThresholdInfo", NULL) || soap_end_send(soap) )
+#endif
+
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_turb1__ArrayOfThresholdInfo(struct soap*, const struct turb1__ArrayOfThresholdInfo *, const char*, const char*);
+
+#ifndef soap_read_turb1__ArrayOfThresholdInfo
+#define soap_read_turb1__ArrayOfThresholdInfo(soap, data) ( soap_begin_recv(soap) || !soap_get_turb1__ArrayOfThresholdInfo(soap, data, NULL, NULL) || soap_end_recv(soap) )
+#endif
+
+SOAP_FMAC3 struct turb1__ArrayOfThresholdInfo * SOAP_FMAC4 soap_get_turb1__ArrayOfThresholdInfo(struct soap*, struct turb1__ArrayOfThresholdInfo *, const char*, const char*);
 
 #ifndef SOAP_TYPE_turb1__SGSTensor
 #define SOAP_TYPE_turb1__SGSTensor (36)
@@ -2732,50 +3194,8 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_turb1__ArrayOfVelocityHessian(struct soap*, c
 
 SOAP_FMAC3 struct turb1__ArrayOfVelocityHessian * SOAP_FMAC4 soap_get_turb1__ArrayOfVelocityHessian(struct soap*, struct turb1__ArrayOfVelocityHessian *, const char*, const char*);
 
-#ifndef SOAP_TYPE_turb1__PressureHessian
-#define SOAP_TYPE_turb1__PressureHessian (30)
-#endif
-SOAP_FMAC3 void SOAP_FMAC4 soap_default_turb1__PressureHessian(struct soap*, struct turb1__PressureHessian *);
-SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_turb1__PressureHessian(struct soap*, const struct turb1__PressureHessian *);
-SOAP_FMAC3 int SOAP_FMAC4 soap_out_turb1__PressureHessian(struct soap*, const char*, int, const struct turb1__PressureHessian *, const char*);
-SOAP_FMAC3 struct turb1__PressureHessian * SOAP_FMAC4 soap_in_turb1__PressureHessian(struct soap*, const char*, struct turb1__PressureHessian *, const char*);
-
-#ifndef soap_write_turb1__PressureHessian
-#define soap_write_turb1__PressureHessian(soap, data) ( soap_begin_send(soap) || (soap_serialize_turb1__PressureHessian(soap, data), 0) || soap_put_turb1__PressureHessian(soap, data, "turb1:PressureHessian", NULL) || soap_end_send(soap) )
-#endif
-
-
-SOAP_FMAC3 int SOAP_FMAC4 soap_put_turb1__PressureHessian(struct soap*, const struct turb1__PressureHessian *, const char*, const char*);
-
-#ifndef soap_read_turb1__PressureHessian
-#define soap_read_turb1__PressureHessian(soap, data) ( soap_begin_recv(soap) || !soap_get_turb1__PressureHessian(soap, data, NULL, NULL) || soap_end_recv(soap) )
-#endif
-
-SOAP_FMAC3 struct turb1__PressureHessian * SOAP_FMAC4 soap_get_turb1__PressureHessian(struct soap*, struct turb1__PressureHessian *, const char*, const char*);
-
-#ifndef SOAP_TYPE_turb1__ArrayOfPressureHessian
-#define SOAP_TYPE_turb1__ArrayOfPressureHessian (29)
-#endif
-SOAP_FMAC3 void SOAP_FMAC4 soap_default_turb1__ArrayOfPressureHessian(struct soap*, struct turb1__ArrayOfPressureHessian *);
-SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_turb1__ArrayOfPressureHessian(struct soap*, const struct turb1__ArrayOfPressureHessian *);
-SOAP_FMAC3 int SOAP_FMAC4 soap_out_turb1__ArrayOfPressureHessian(struct soap*, const char*, int, const struct turb1__ArrayOfPressureHessian *, const char*);
-SOAP_FMAC3 struct turb1__ArrayOfPressureHessian * SOAP_FMAC4 soap_in_turb1__ArrayOfPressureHessian(struct soap*, const char*, struct turb1__ArrayOfPressureHessian *, const char*);
-
-#ifndef soap_write_turb1__ArrayOfPressureHessian
-#define soap_write_turb1__ArrayOfPressureHessian(soap, data) ( soap_begin_send(soap) || (soap_serialize_turb1__ArrayOfPressureHessian(soap, data), 0) || soap_put_turb1__ArrayOfPressureHessian(soap, data, "turb1:ArrayOfPressureHessian", NULL) || soap_end_send(soap) )
-#endif
-
-
-SOAP_FMAC3 int SOAP_FMAC4 soap_put_turb1__ArrayOfPressureHessian(struct soap*, const struct turb1__ArrayOfPressureHessian *, const char*, const char*);
-
-#ifndef soap_read_turb1__ArrayOfPressureHessian
-#define soap_read_turb1__ArrayOfPressureHessian(soap, data) ( soap_begin_recv(soap) || !soap_get_turb1__ArrayOfPressureHessian(soap, data, NULL, NULL) || soap_end_recv(soap) )
-#endif
-
-SOAP_FMAC3 struct turb1__ArrayOfPressureHessian * SOAP_FMAC4 soap_get_turb1__ArrayOfPressureHessian(struct soap*, struct turb1__ArrayOfPressureHessian *, const char*, const char*);
-
 #ifndef SOAP_TYPE_turb1__VelocityGradient
-#define SOAP_TYPE_turb1__VelocityGradient (27)
+#define SOAP_TYPE_turb1__VelocityGradient (30)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default_turb1__VelocityGradient(struct soap*, struct turb1__VelocityGradient *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_turb1__VelocityGradient(struct soap*, const struct turb1__VelocityGradient *);
@@ -2796,7 +3216,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_turb1__VelocityGradient(struct soap*, const s
 SOAP_FMAC3 struct turb1__VelocityGradient * SOAP_FMAC4 soap_get_turb1__VelocityGradient(struct soap*, struct turb1__VelocityGradient *, const char*, const char*);
 
 #ifndef SOAP_TYPE_turb1__ArrayOfVelocityGradient
-#define SOAP_TYPE_turb1__ArrayOfVelocityGradient (26)
+#define SOAP_TYPE_turb1__ArrayOfVelocityGradient (29)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default_turb1__ArrayOfVelocityGradient(struct soap*, struct turb1__ArrayOfVelocityGradient *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_turb1__ArrayOfVelocityGradient(struct soap*, const struct turb1__ArrayOfVelocityGradient *);
@@ -2817,7 +3237,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_turb1__ArrayOfVelocityGradient(struct soap*, 
 SOAP_FMAC3 struct turb1__ArrayOfVelocityGradient * SOAP_FMAC4 soap_get_turb1__ArrayOfVelocityGradient(struct soap*, struct turb1__ArrayOfVelocityGradient *, const char*, const char*);
 
 #ifndef SOAP_TYPE_turb1__Vector3P
-#define SOAP_TYPE_turb1__Vector3P (24)
+#define SOAP_TYPE_turb1__Vector3P (27)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default_turb1__Vector3P(struct soap*, struct turb1__Vector3P *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_turb1__Vector3P(struct soap*, const struct turb1__Vector3P *);
@@ -2838,7 +3258,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_turb1__Vector3P(struct soap*, const struct tu
 SOAP_FMAC3 struct turb1__Vector3P * SOAP_FMAC4 soap_get_turb1__Vector3P(struct soap*, struct turb1__Vector3P *, const char*, const char*);
 
 #ifndef SOAP_TYPE_turb1__ArrayOfVector3P
-#define SOAP_TYPE_turb1__ArrayOfVector3P (23)
+#define SOAP_TYPE_turb1__ArrayOfVector3P (26)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_default_turb1__ArrayOfVector3P(struct soap*, struct turb1__ArrayOfVector3P *);
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_turb1__ArrayOfVector3P(struct soap*, const struct turb1__ArrayOfVector3P *);
@@ -2857,6 +3277,48 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_turb1__ArrayOfVector3P(struct soap*, const st
 #endif
 
 SOAP_FMAC3 struct turb1__ArrayOfVector3P * SOAP_FMAC4 soap_get_turb1__ArrayOfVector3P(struct soap*, struct turb1__ArrayOfVector3P *, const char*, const char*);
+
+#ifndef SOAP_TYPE_turb1__PressureHessian
+#define SOAP_TYPE_turb1__PressureHessian (24)
+#endif
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_turb1__PressureHessian(struct soap*, struct turb1__PressureHessian *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_turb1__PressureHessian(struct soap*, const struct turb1__PressureHessian *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_turb1__PressureHessian(struct soap*, const char*, int, const struct turb1__PressureHessian *, const char*);
+SOAP_FMAC3 struct turb1__PressureHessian * SOAP_FMAC4 soap_in_turb1__PressureHessian(struct soap*, const char*, struct turb1__PressureHessian *, const char*);
+
+#ifndef soap_write_turb1__PressureHessian
+#define soap_write_turb1__PressureHessian(soap, data) ( soap_begin_send(soap) || (soap_serialize_turb1__PressureHessian(soap, data), 0) || soap_put_turb1__PressureHessian(soap, data, "turb1:PressureHessian", NULL) || soap_end_send(soap) )
+#endif
+
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_turb1__PressureHessian(struct soap*, const struct turb1__PressureHessian *, const char*, const char*);
+
+#ifndef soap_read_turb1__PressureHessian
+#define soap_read_turb1__PressureHessian(soap, data) ( soap_begin_recv(soap) || !soap_get_turb1__PressureHessian(soap, data, NULL, NULL) || soap_end_recv(soap) )
+#endif
+
+SOAP_FMAC3 struct turb1__PressureHessian * SOAP_FMAC4 soap_get_turb1__PressureHessian(struct soap*, struct turb1__PressureHessian *, const char*, const char*);
+
+#ifndef SOAP_TYPE_turb1__ArrayOfPressureHessian
+#define SOAP_TYPE_turb1__ArrayOfPressureHessian (23)
+#endif
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_turb1__ArrayOfPressureHessian(struct soap*, struct turb1__ArrayOfPressureHessian *);
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_turb1__ArrayOfPressureHessian(struct soap*, const struct turb1__ArrayOfPressureHessian *);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_turb1__ArrayOfPressureHessian(struct soap*, const char*, int, const struct turb1__ArrayOfPressureHessian *, const char*);
+SOAP_FMAC3 struct turb1__ArrayOfPressureHessian * SOAP_FMAC4 soap_in_turb1__ArrayOfPressureHessian(struct soap*, const char*, struct turb1__ArrayOfPressureHessian *, const char*);
+
+#ifndef soap_write_turb1__ArrayOfPressureHessian
+#define soap_write_turb1__ArrayOfPressureHessian(soap, data) ( soap_begin_send(soap) || (soap_serialize_turb1__ArrayOfPressureHessian(soap, data), 0) || soap_put_turb1__ArrayOfPressureHessian(soap, data, "turb1:ArrayOfPressureHessian", NULL) || soap_end_send(soap) )
+#endif
+
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_turb1__ArrayOfPressureHessian(struct soap*, const struct turb1__ArrayOfPressureHessian *, const char*, const char*);
+
+#ifndef soap_read_turb1__ArrayOfPressureHessian
+#define soap_read_turb1__ArrayOfPressureHessian(soap, data) ( soap_begin_recv(soap) || !soap_get_turb1__ArrayOfPressureHessian(soap, data, NULL, NULL) || soap_end_recv(soap) )
+#endif
+
+SOAP_FMAC3 struct turb1__ArrayOfPressureHessian * SOAP_FMAC4 soap_get_turb1__ArrayOfPressureHessian(struct soap*, struct turb1__ArrayOfPressureHessian *, const char*, const char*);
 
 #ifndef SOAP_TYPE_turb1__Pressure
 #define SOAP_TYPE_turb1__Pressure (21)
@@ -3008,7 +3470,7 @@ SOAP_FMAC3 struct xsd__base64Binary * SOAP_FMAC4 soap_get_xsd__base64Binary(stru
 #ifndef WITH_NOGLOBAL
 
 #ifndef SOAP_TYPE_PointerToSOAP_ENV__Reason
-#define SOAP_TYPE_PointerToSOAP_ENV__Reason (280)
+#define SOAP_TYPE_PointerToSOAP_ENV__Reason (324)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerToSOAP_ENV__Reason(struct soap*, struct SOAP_ENV__Reason *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerToSOAP_ENV__Reason(struct soap*, const char *, int, struct SOAP_ENV__Reason *const*, const char *);
@@ -3031,7 +3493,7 @@ SOAP_FMAC3 struct SOAP_ENV__Reason ** SOAP_FMAC4 soap_get_PointerToSOAP_ENV__Rea
 #ifndef WITH_NOGLOBAL
 
 #ifndef SOAP_TYPE_PointerToSOAP_ENV__Detail
-#define SOAP_TYPE_PointerToSOAP_ENV__Detail (279)
+#define SOAP_TYPE_PointerToSOAP_ENV__Detail (323)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerToSOAP_ENV__Detail(struct soap*, struct SOAP_ENV__Detail *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerToSOAP_ENV__Detail(struct soap*, const char *, int, struct SOAP_ENV__Detail *const*, const char *);
@@ -3054,7 +3516,7 @@ SOAP_FMAC3 struct SOAP_ENV__Detail ** SOAP_FMAC4 soap_get_PointerToSOAP_ENV__Det
 #ifndef WITH_NOGLOBAL
 
 #ifndef SOAP_TYPE_PointerToSOAP_ENV__Code
-#define SOAP_TYPE_PointerToSOAP_ENV__Code (273)
+#define SOAP_TYPE_PointerToSOAP_ENV__Code (317)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerToSOAP_ENV__Code(struct soap*, struct SOAP_ENV__Code *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerToSOAP_ENV__Code(struct soap*, const char *, int, struct SOAP_ENV__Code *const*, const char *);
@@ -3075,7 +3537,7 @@ SOAP_FMAC3 struct SOAP_ENV__Code ** SOAP_FMAC4 soap_get_PointerToSOAP_ENV__Code(
 #endif
 
 #ifndef SOAP_TYPE_PointerTo_turb1__GetLaplacianOfGradientResponse
-#define SOAP_TYPE_PointerTo_turb1__GetLaplacianOfGradientResponse (212)
+#define SOAP_TYPE_PointerTo_turb1__GetLaplacianOfGradientResponse (246)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetLaplacianOfGradientResponse(struct soap*, struct _turb1__GetLaplacianOfGradientResponse *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetLaplacianOfGradientResponse(struct soap*, const char *, int, struct _turb1__GetLaplacianOfGradientResponse *const*, const char *);
@@ -3094,7 +3556,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetLaplacianOfGradientRespon
 SOAP_FMAC3 struct _turb1__GetLaplacianOfGradientResponse ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetLaplacianOfGradientResponse(struct soap*, struct _turb1__GetLaplacianOfGradientResponse **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerTo_turb1__GetLaplacianOfGradient
-#define SOAP_TYPE_PointerTo_turb1__GetLaplacianOfGradient (211)
+#define SOAP_TYPE_PointerTo_turb1__GetLaplacianOfGradient (245)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetLaplacianOfGradient(struct soap*, struct _turb1__GetLaplacianOfGradient *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetLaplacianOfGradient(struct soap*, const char *, int, struct _turb1__GetLaplacianOfGradient *const*, const char *);
@@ -3112,8 +3574,46 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetLaplacianOfGradient(struc
 
 SOAP_FMAC3 struct _turb1__GetLaplacianOfGradient ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetLaplacianOfGradient(struct soap*, struct _turb1__GetLaplacianOfGradient **, const char*, const char*);
 
+#ifndef SOAP_TYPE_PointerTo_turb1__GetThresholdResponse
+#define SOAP_TYPE_PointerTo_turb1__GetThresholdResponse (242)
+#endif
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetThresholdResponse(struct soap*, struct _turb1__GetThresholdResponse *const*);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetThresholdResponse(struct soap*, const char *, int, struct _turb1__GetThresholdResponse *const*, const char *);
+SOAP_FMAC3 struct _turb1__GetThresholdResponse ** SOAP_FMAC4 soap_in_PointerTo_turb1__GetThresholdResponse(struct soap*, const char*, struct _turb1__GetThresholdResponse **, const char*);
+
+#ifndef soap_write_PointerTo_turb1__GetThresholdResponse
+#define soap_write_PointerTo_turb1__GetThresholdResponse(soap, data) ( soap_begin_send(soap) || (soap_serialize_PointerTo_turb1__GetThresholdResponse(soap, data), 0) || soap_put_PointerTo_turb1__GetThresholdResponse(soap, data, "turb1:GetThresholdResponse", NULL) || soap_end_send(soap) )
+#endif
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetThresholdResponse(struct soap*, struct _turb1__GetThresholdResponse *const*, const char*, const char*);
+
+#ifndef soap_read_PointerTo_turb1__GetThresholdResponse
+#define soap_read_PointerTo_turb1__GetThresholdResponse(soap, data) ( soap_begin_recv(soap) || !soap_get_PointerTo_turb1__GetThresholdResponse(soap, data, NULL, NULL) || soap_end_recv(soap) )
+#endif
+
+SOAP_FMAC3 struct _turb1__GetThresholdResponse ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetThresholdResponse(struct soap*, struct _turb1__GetThresholdResponse **, const char*, const char*);
+
+#ifndef SOAP_TYPE_PointerTo_turb1__GetThreshold
+#define SOAP_TYPE_PointerTo_turb1__GetThreshold (241)
+#endif
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetThreshold(struct soap*, struct _turb1__GetThreshold *const*);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetThreshold(struct soap*, const char *, int, struct _turb1__GetThreshold *const*, const char *);
+SOAP_FMAC3 struct _turb1__GetThreshold ** SOAP_FMAC4 soap_in_PointerTo_turb1__GetThreshold(struct soap*, const char*, struct _turb1__GetThreshold **, const char*);
+
+#ifndef soap_write_PointerTo_turb1__GetThreshold
+#define soap_write_PointerTo_turb1__GetThreshold(soap, data) ( soap_begin_send(soap) || (soap_serialize_PointerTo_turb1__GetThreshold(soap, data), 0) || soap_put_PointerTo_turb1__GetThreshold(soap, data, "turb1:GetThreshold", NULL) || soap_end_send(soap) )
+#endif
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetThreshold(struct soap*, struct _turb1__GetThreshold *const*, const char*, const char*);
+
+#ifndef soap_read_PointerTo_turb1__GetThreshold
+#define soap_read_PointerTo_turb1__GetThreshold(soap, data) ( soap_begin_recv(soap) || !soap_get_PointerTo_turb1__GetThreshold(soap, data, NULL, NULL) || soap_end_recv(soap) )
+#endif
+
+SOAP_FMAC3 struct _turb1__GetThreshold ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetThreshold(struct soap*, struct _turb1__GetThreshold **, const char*, const char*);
+
 #ifndef SOAP_TYPE_PointerTo_turb1__GetBoxFilterGradientResponse
-#define SOAP_TYPE_PointerTo_turb1__GetBoxFilterGradientResponse (208)
+#define SOAP_TYPE_PointerTo_turb1__GetBoxFilterGradientResponse (238)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetBoxFilterGradientResponse(struct soap*, struct _turb1__GetBoxFilterGradientResponse *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetBoxFilterGradientResponse(struct soap*, const char *, int, struct _turb1__GetBoxFilterGradientResponse *const*, const char *);
@@ -3132,7 +3632,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetBoxFilterGradientResponse
 SOAP_FMAC3 struct _turb1__GetBoxFilterGradientResponse ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetBoxFilterGradientResponse(struct soap*, struct _turb1__GetBoxFilterGradientResponse **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerTo_turb1__GetBoxFilterGradient
-#define SOAP_TYPE_PointerTo_turb1__GetBoxFilterGradient (207)
+#define SOAP_TYPE_PointerTo_turb1__GetBoxFilterGradient (237)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetBoxFilterGradient(struct soap*, struct _turb1__GetBoxFilterGradient *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetBoxFilterGradient(struct soap*, const char *, int, struct _turb1__GetBoxFilterGradient *const*, const char *);
@@ -3151,7 +3651,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetBoxFilterGradient(struct 
 SOAP_FMAC3 struct _turb1__GetBoxFilterGradient ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetBoxFilterGradient(struct soap*, struct _turb1__GetBoxFilterGradient **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerTo_turb1__GetBoxFilterSGSResponse
-#define SOAP_TYPE_PointerTo_turb1__GetBoxFilterSGSResponse (204)
+#define SOAP_TYPE_PointerTo_turb1__GetBoxFilterSGSResponse (234)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetBoxFilterSGSResponse(struct soap*, struct _turb1__GetBoxFilterSGSResponse *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetBoxFilterSGSResponse(struct soap*, const char *, int, struct _turb1__GetBoxFilterSGSResponse *const*, const char *);
@@ -3170,7 +3670,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetBoxFilterSGSResponse(stru
 SOAP_FMAC3 struct _turb1__GetBoxFilterSGSResponse ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetBoxFilterSGSResponse(struct soap*, struct _turb1__GetBoxFilterSGSResponse **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerTo_turb1__GetBoxFilterSGS
-#define SOAP_TYPE_PointerTo_turb1__GetBoxFilterSGS (203)
+#define SOAP_TYPE_PointerTo_turb1__GetBoxFilterSGS (233)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetBoxFilterSGS(struct soap*, struct _turb1__GetBoxFilterSGS *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetBoxFilterSGS(struct soap*, const char *, int, struct _turb1__GetBoxFilterSGS *const*, const char *);
@@ -3189,7 +3689,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetBoxFilterSGS(struct soap*
 SOAP_FMAC3 struct _turb1__GetBoxFilterSGS ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetBoxFilterSGS(struct soap*, struct _turb1__GetBoxFilterSGS **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerTo_turb1__GetBoxFilterResponse
-#define SOAP_TYPE_PointerTo_turb1__GetBoxFilterResponse (200)
+#define SOAP_TYPE_PointerTo_turb1__GetBoxFilterResponse (230)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetBoxFilterResponse(struct soap*, struct _turb1__GetBoxFilterResponse *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetBoxFilterResponse(struct soap*, const char *, int, struct _turb1__GetBoxFilterResponse *const*, const char *);
@@ -3208,7 +3708,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetBoxFilterResponse(struct 
 SOAP_FMAC3 struct _turb1__GetBoxFilterResponse ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetBoxFilterResponse(struct soap*, struct _turb1__GetBoxFilterResponse **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerTo_turb1__GetBoxFilter
-#define SOAP_TYPE_PointerTo_turb1__GetBoxFilter (199)
+#define SOAP_TYPE_PointerTo_turb1__GetBoxFilter (229)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetBoxFilter(struct soap*, struct _turb1__GetBoxFilter *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetBoxFilter(struct soap*, const char *, int, struct _turb1__GetBoxFilter *const*, const char *);
@@ -3227,7 +3727,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetBoxFilter(struct soap*, s
 SOAP_FMAC3 struct _turb1__GetBoxFilter ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetBoxFilter(struct soap*, struct _turb1__GetBoxFilter **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerTo_turb1__GetPositionResponse
-#define SOAP_TYPE_PointerTo_turb1__GetPositionResponse (196)
+#define SOAP_TYPE_PointerTo_turb1__GetPositionResponse (226)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetPositionResponse(struct soap*, struct _turb1__GetPositionResponse *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetPositionResponse(struct soap*, const char *, int, struct _turb1__GetPositionResponse *const*, const char *);
@@ -3246,7 +3746,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetPositionResponse(struct s
 SOAP_FMAC3 struct _turb1__GetPositionResponse ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetPositionResponse(struct soap*, struct _turb1__GetPositionResponse **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerTo_turb1__GetPosition
-#define SOAP_TYPE_PointerTo_turb1__GetPosition (195)
+#define SOAP_TYPE_PointerTo_turb1__GetPosition (225)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetPosition(struct soap*, struct _turb1__GetPosition *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetPosition(struct soap*, const char *, int, struct _turb1__GetPosition *const*, const char *);
@@ -3265,7 +3765,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetPosition(struct soap*, st
 SOAP_FMAC3 struct _turb1__GetPosition ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetPosition(struct soap*, struct _turb1__GetPosition **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerTo_turb1__GetVectorPotentialLaplacianResponse
-#define SOAP_TYPE_PointerTo_turb1__GetVectorPotentialLaplacianResponse (192)
+#define SOAP_TYPE_PointerTo_turb1__GetVectorPotentialLaplacianResponse (222)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetVectorPotentialLaplacianResponse(struct soap*, struct _turb1__GetVectorPotentialLaplacianResponse *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetVectorPotentialLaplacianResponse(struct soap*, const char *, int, struct _turb1__GetVectorPotentialLaplacianResponse *const*, const char *);
@@ -3284,7 +3784,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetVectorPotentialLaplacianR
 SOAP_FMAC3 struct _turb1__GetVectorPotentialLaplacianResponse ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetVectorPotentialLaplacianResponse(struct soap*, struct _turb1__GetVectorPotentialLaplacianResponse **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerTo_turb1__GetVectorPotentialLaplacian
-#define SOAP_TYPE_PointerTo_turb1__GetVectorPotentialLaplacian (191)
+#define SOAP_TYPE_PointerTo_turb1__GetVectorPotentialLaplacian (221)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetVectorPotentialLaplacian(struct soap*, struct _turb1__GetVectorPotentialLaplacian *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetVectorPotentialLaplacian(struct soap*, const char *, int, struct _turb1__GetVectorPotentialLaplacian *const*, const char *);
@@ -3303,7 +3803,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetVectorPotentialLaplacian(
 SOAP_FMAC3 struct _turb1__GetVectorPotentialLaplacian ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetVectorPotentialLaplacian(struct soap*, struct _turb1__GetVectorPotentialLaplacian **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerTo_turb1__GetMagneticFieldLaplacianResponse
-#define SOAP_TYPE_PointerTo_turb1__GetMagneticFieldLaplacianResponse (188)
+#define SOAP_TYPE_PointerTo_turb1__GetMagneticFieldLaplacianResponse (218)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetMagneticFieldLaplacianResponse(struct soap*, struct _turb1__GetMagneticFieldLaplacianResponse *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetMagneticFieldLaplacianResponse(struct soap*, const char *, int, struct _turb1__GetMagneticFieldLaplacianResponse *const*, const char *);
@@ -3322,7 +3822,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetMagneticFieldLaplacianRes
 SOAP_FMAC3 struct _turb1__GetMagneticFieldLaplacianResponse ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetMagneticFieldLaplacianResponse(struct soap*, struct _turb1__GetMagneticFieldLaplacianResponse **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerTo_turb1__GetMagneticFieldLaplacian
-#define SOAP_TYPE_PointerTo_turb1__GetMagneticFieldLaplacian (187)
+#define SOAP_TYPE_PointerTo_turb1__GetMagneticFieldLaplacian (217)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetMagneticFieldLaplacian(struct soap*, struct _turb1__GetMagneticFieldLaplacian *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetMagneticFieldLaplacian(struct soap*, const char *, int, struct _turb1__GetMagneticFieldLaplacian *const*, const char *);
@@ -3341,7 +3841,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetMagneticFieldLaplacian(st
 SOAP_FMAC3 struct _turb1__GetMagneticFieldLaplacian ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetMagneticFieldLaplacian(struct soap*, struct _turb1__GetMagneticFieldLaplacian **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerTo_turb1__GetVelocityLaplacianResponse
-#define SOAP_TYPE_PointerTo_turb1__GetVelocityLaplacianResponse (184)
+#define SOAP_TYPE_PointerTo_turb1__GetVelocityLaplacianResponse (214)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetVelocityLaplacianResponse(struct soap*, struct _turb1__GetVelocityLaplacianResponse *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetVelocityLaplacianResponse(struct soap*, const char *, int, struct _turb1__GetVelocityLaplacianResponse *const*, const char *);
@@ -3360,7 +3860,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetVelocityLaplacianResponse
 SOAP_FMAC3 struct _turb1__GetVelocityLaplacianResponse ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetVelocityLaplacianResponse(struct soap*, struct _turb1__GetVelocityLaplacianResponse **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerTo_turb1__GetVelocityLaplacian
-#define SOAP_TYPE_PointerTo_turb1__GetVelocityLaplacian (183)
+#define SOAP_TYPE_PointerTo_turb1__GetVelocityLaplacian (213)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetVelocityLaplacian(struct soap*, struct _turb1__GetVelocityLaplacian *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetVelocityLaplacian(struct soap*, const char *, int, struct _turb1__GetVelocityLaplacian *const*, const char *);
@@ -3379,7 +3879,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetVelocityLaplacian(struct 
 SOAP_FMAC3 struct _turb1__GetVelocityLaplacian ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetVelocityLaplacian(struct soap*, struct _turb1__GetVelocityLaplacian **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerTo_turb1__GetVectorPotentialHessianResponse
-#define SOAP_TYPE_PointerTo_turb1__GetVectorPotentialHessianResponse (180)
+#define SOAP_TYPE_PointerTo_turb1__GetVectorPotentialHessianResponse (210)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetVectorPotentialHessianResponse(struct soap*, struct _turb1__GetVectorPotentialHessianResponse *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetVectorPotentialHessianResponse(struct soap*, const char *, int, struct _turb1__GetVectorPotentialHessianResponse *const*, const char *);
@@ -3398,7 +3898,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetVectorPotentialHessianRes
 SOAP_FMAC3 struct _turb1__GetVectorPotentialHessianResponse ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetVectorPotentialHessianResponse(struct soap*, struct _turb1__GetVectorPotentialHessianResponse **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerTo_turb1__GetVectorPotentialHessian
-#define SOAP_TYPE_PointerTo_turb1__GetVectorPotentialHessian (179)
+#define SOAP_TYPE_PointerTo_turb1__GetVectorPotentialHessian (209)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetVectorPotentialHessian(struct soap*, struct _turb1__GetVectorPotentialHessian *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetVectorPotentialHessian(struct soap*, const char *, int, struct _turb1__GetVectorPotentialHessian *const*, const char *);
@@ -3417,7 +3917,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetVectorPotentialHessian(st
 SOAP_FMAC3 struct _turb1__GetVectorPotentialHessian ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetVectorPotentialHessian(struct soap*, struct _turb1__GetVectorPotentialHessian **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerTo_turb1__GetMagneticHessianResponse
-#define SOAP_TYPE_PointerTo_turb1__GetMagneticHessianResponse (176)
+#define SOAP_TYPE_PointerTo_turb1__GetMagneticHessianResponse (206)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetMagneticHessianResponse(struct soap*, struct _turb1__GetMagneticHessianResponse *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetMagneticHessianResponse(struct soap*, const char *, int, struct _turb1__GetMagneticHessianResponse *const*, const char *);
@@ -3436,7 +3936,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetMagneticHessianResponse(s
 SOAP_FMAC3 struct _turb1__GetMagneticHessianResponse ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetMagneticHessianResponse(struct soap*, struct _turb1__GetMagneticHessianResponse **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerTo_turb1__GetMagneticHessian
-#define SOAP_TYPE_PointerTo_turb1__GetMagneticHessian (175)
+#define SOAP_TYPE_PointerTo_turb1__GetMagneticHessian (205)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetMagneticHessian(struct soap*, struct _turb1__GetMagneticHessian *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetMagneticHessian(struct soap*, const char *, int, struct _turb1__GetMagneticHessian *const*, const char *);
@@ -3455,7 +3955,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetMagneticHessian(struct so
 SOAP_FMAC3 struct _turb1__GetMagneticHessian ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetMagneticHessian(struct soap*, struct _turb1__GetMagneticHessian **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerTo_turb1__GetVelocityHessianResponse
-#define SOAP_TYPE_PointerTo_turb1__GetVelocityHessianResponse (172)
+#define SOAP_TYPE_PointerTo_turb1__GetVelocityHessianResponse (202)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetVelocityHessianResponse(struct soap*, struct _turb1__GetVelocityHessianResponse *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetVelocityHessianResponse(struct soap*, const char *, int, struct _turb1__GetVelocityHessianResponse *const*, const char *);
@@ -3474,7 +3974,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetVelocityHessianResponse(s
 SOAP_FMAC3 struct _turb1__GetVelocityHessianResponse ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetVelocityHessianResponse(struct soap*, struct _turb1__GetVelocityHessianResponse **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerTo_turb1__GetVelocityHessian
-#define SOAP_TYPE_PointerTo_turb1__GetVelocityHessian (171)
+#define SOAP_TYPE_PointerTo_turb1__GetVelocityHessian (201)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetVelocityHessian(struct soap*, struct _turb1__GetVelocityHessian *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetVelocityHessian(struct soap*, const char *, int, struct _turb1__GetVelocityHessian *const*, const char *);
@@ -3493,7 +3993,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetVelocityHessian(struct so
 SOAP_FMAC3 struct _turb1__GetVelocityHessian ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetVelocityHessian(struct soap*, struct _turb1__GetVelocityHessian **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerTo_turb1__GetPressureHessianResponse
-#define SOAP_TYPE_PointerTo_turb1__GetPressureHessianResponse (168)
+#define SOAP_TYPE_PointerTo_turb1__GetPressureHessianResponse (198)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetPressureHessianResponse(struct soap*, struct _turb1__GetPressureHessianResponse *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetPressureHessianResponse(struct soap*, const char *, int, struct _turb1__GetPressureHessianResponse *const*, const char *);
@@ -3512,7 +4012,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetPressureHessianResponse(s
 SOAP_FMAC3 struct _turb1__GetPressureHessianResponse ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetPressureHessianResponse(struct soap*, struct _turb1__GetPressureHessianResponse **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerTo_turb1__GetPressureHessian
-#define SOAP_TYPE_PointerTo_turb1__GetPressureHessian (167)
+#define SOAP_TYPE_PointerTo_turb1__GetPressureHessian (197)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetPressureHessian(struct soap*, struct _turb1__GetPressureHessian *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetPressureHessian(struct soap*, const char *, int, struct _turb1__GetPressureHessian *const*, const char *);
@@ -3531,7 +4031,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetPressureHessian(struct so
 SOAP_FMAC3 struct _turb1__GetPressureHessian ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetPressureHessian(struct soap*, struct _turb1__GetPressureHessian **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerTo_turb1__GetPressureGradientResponse
-#define SOAP_TYPE_PointerTo_turb1__GetPressureGradientResponse (164)
+#define SOAP_TYPE_PointerTo_turb1__GetPressureGradientResponse (194)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetPressureGradientResponse(struct soap*, struct _turb1__GetPressureGradientResponse *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetPressureGradientResponse(struct soap*, const char *, int, struct _turb1__GetPressureGradientResponse *const*, const char *);
@@ -3550,7 +4050,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetPressureGradientResponse(
 SOAP_FMAC3 struct _turb1__GetPressureGradientResponse ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetPressureGradientResponse(struct soap*, struct _turb1__GetPressureGradientResponse **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerTo_turb1__GetPressureGradient
-#define SOAP_TYPE_PointerTo_turb1__GetPressureGradient (163)
+#define SOAP_TYPE_PointerTo_turb1__GetPressureGradient (193)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetPressureGradient(struct soap*, struct _turb1__GetPressureGradient *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetPressureGradient(struct soap*, const char *, int, struct _turb1__GetPressureGradient *const*, const char *);
@@ -3569,7 +4069,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetPressureGradient(struct s
 SOAP_FMAC3 struct _turb1__GetPressureGradient ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetPressureGradient(struct soap*, struct _turb1__GetPressureGradient **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerTo_turb1__GetVectorPotentialGradientResponse
-#define SOAP_TYPE_PointerTo_turb1__GetVectorPotentialGradientResponse (160)
+#define SOAP_TYPE_PointerTo_turb1__GetVectorPotentialGradientResponse (190)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetVectorPotentialGradientResponse(struct soap*, struct _turb1__GetVectorPotentialGradientResponse *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetVectorPotentialGradientResponse(struct soap*, const char *, int, struct _turb1__GetVectorPotentialGradientResponse *const*, const char *);
@@ -3588,7 +4088,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetVectorPotentialGradientRe
 SOAP_FMAC3 struct _turb1__GetVectorPotentialGradientResponse ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetVectorPotentialGradientResponse(struct soap*, struct _turb1__GetVectorPotentialGradientResponse **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerTo_turb1__GetVectorPotentialGradient
-#define SOAP_TYPE_PointerTo_turb1__GetVectorPotentialGradient (159)
+#define SOAP_TYPE_PointerTo_turb1__GetVectorPotentialGradient (189)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetVectorPotentialGradient(struct soap*, struct _turb1__GetVectorPotentialGradient *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetVectorPotentialGradient(struct soap*, const char *, int, struct _turb1__GetVectorPotentialGradient *const*, const char *);
@@ -3607,7 +4107,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetVectorPotentialGradient(s
 SOAP_FMAC3 struct _turb1__GetVectorPotentialGradient ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetVectorPotentialGradient(struct soap*, struct _turb1__GetVectorPotentialGradient **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerTo_turb1__GetMagneticFieldGradientResponse
-#define SOAP_TYPE_PointerTo_turb1__GetMagneticFieldGradientResponse (156)
+#define SOAP_TYPE_PointerTo_turb1__GetMagneticFieldGradientResponse (186)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetMagneticFieldGradientResponse(struct soap*, struct _turb1__GetMagneticFieldGradientResponse *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetMagneticFieldGradientResponse(struct soap*, const char *, int, struct _turb1__GetMagneticFieldGradientResponse *const*, const char *);
@@ -3626,7 +4126,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetMagneticFieldGradientResp
 SOAP_FMAC3 struct _turb1__GetMagneticFieldGradientResponse ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetMagneticFieldGradientResponse(struct soap*, struct _turb1__GetMagneticFieldGradientResponse **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerTo_turb1__GetMagneticFieldGradient
-#define SOAP_TYPE_PointerTo_turb1__GetMagneticFieldGradient (155)
+#define SOAP_TYPE_PointerTo_turb1__GetMagneticFieldGradient (185)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetMagneticFieldGradient(struct soap*, struct _turb1__GetMagneticFieldGradient *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetMagneticFieldGradient(struct soap*, const char *, int, struct _turb1__GetMagneticFieldGradient *const*, const char *);
@@ -3645,7 +4145,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetMagneticFieldGradient(str
 SOAP_FMAC3 struct _turb1__GetMagneticFieldGradient ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetMagneticFieldGradient(struct soap*, struct _turb1__GetMagneticFieldGradient **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerTo_turb1__GetVelocityGradientResponse
-#define SOAP_TYPE_PointerTo_turb1__GetVelocityGradientResponse (152)
+#define SOAP_TYPE_PointerTo_turb1__GetVelocityGradientResponse (182)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetVelocityGradientResponse(struct soap*, struct _turb1__GetVelocityGradientResponse *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetVelocityGradientResponse(struct soap*, const char *, int, struct _turb1__GetVelocityGradientResponse *const*, const char *);
@@ -3664,7 +4164,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetVelocityGradientResponse(
 SOAP_FMAC3 struct _turb1__GetVelocityGradientResponse ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetVelocityGradientResponse(struct soap*, struct _turb1__GetVelocityGradientResponse **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerTo_turb1__GetVelocityGradient
-#define SOAP_TYPE_PointerTo_turb1__GetVelocityGradient (151)
+#define SOAP_TYPE_PointerTo_turb1__GetVelocityGradient (181)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetVelocityGradient(struct soap*, struct _turb1__GetVelocityGradient *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetVelocityGradient(struct soap*, const char *, int, struct _turb1__GetVelocityGradient *const*, const char *);
@@ -3683,7 +4183,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetVelocityGradient(struct s
 SOAP_FMAC3 struct _turb1__GetVelocityGradient ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetVelocityGradient(struct soap*, struct _turb1__GetVelocityGradient **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerTo_turb1__GetVelocityAndPressureResponse
-#define SOAP_TYPE_PointerTo_turb1__GetVelocityAndPressureResponse (148)
+#define SOAP_TYPE_PointerTo_turb1__GetVelocityAndPressureResponse (178)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetVelocityAndPressureResponse(struct soap*, struct _turb1__GetVelocityAndPressureResponse *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetVelocityAndPressureResponse(struct soap*, const char *, int, struct _turb1__GetVelocityAndPressureResponse *const*, const char *);
@@ -3702,7 +4202,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetVelocityAndPressureRespon
 SOAP_FMAC3 struct _turb1__GetVelocityAndPressureResponse ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetVelocityAndPressureResponse(struct soap*, struct _turb1__GetVelocityAndPressureResponse **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerTo_turb1__GetVelocityAndPressure
-#define SOAP_TYPE_PointerTo_turb1__GetVelocityAndPressure (147)
+#define SOAP_TYPE_PointerTo_turb1__GetVelocityAndPressure (177)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetVelocityAndPressure(struct soap*, struct _turb1__GetVelocityAndPressure *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetVelocityAndPressure(struct soap*, const char *, int, struct _turb1__GetVelocityAndPressure *const*, const char *);
@@ -3721,7 +4221,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetVelocityAndPressure(struc
 SOAP_FMAC3 struct _turb1__GetVelocityAndPressure ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetVelocityAndPressure(struct soap*, struct _turb1__GetVelocityAndPressure **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerTo_turb1__GetForceResponse
-#define SOAP_TYPE_PointerTo_turb1__GetForceResponse (144)
+#define SOAP_TYPE_PointerTo_turb1__GetForceResponse (174)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetForceResponse(struct soap*, struct _turb1__GetForceResponse *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetForceResponse(struct soap*, const char *, int, struct _turb1__GetForceResponse *const*, const char *);
@@ -3740,7 +4240,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetForceResponse(struct soap
 SOAP_FMAC3 struct _turb1__GetForceResponse ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetForceResponse(struct soap*, struct _turb1__GetForceResponse **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerTo_turb1__GetForce
-#define SOAP_TYPE_PointerTo_turb1__GetForce (143)
+#define SOAP_TYPE_PointerTo_turb1__GetForce (173)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetForce(struct soap*, struct _turb1__GetForce *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetForce(struct soap*, const char *, int, struct _turb1__GetForce *const*, const char *);
@@ -3758,8 +4258,160 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetForce(struct soap*, struc
 
 SOAP_FMAC3 struct _turb1__GetForce ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetForce(struct soap*, struct _turb1__GetForce **, const char*, const char*);
 
+#ifndef SOAP_TYPE_PointerTo_turb1__GetRawDensityResponse
+#define SOAP_TYPE_PointerTo_turb1__GetRawDensityResponse (170)
+#endif
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetRawDensityResponse(struct soap*, struct _turb1__GetRawDensityResponse *const*);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetRawDensityResponse(struct soap*, const char *, int, struct _turb1__GetRawDensityResponse *const*, const char *);
+SOAP_FMAC3 struct _turb1__GetRawDensityResponse ** SOAP_FMAC4 soap_in_PointerTo_turb1__GetRawDensityResponse(struct soap*, const char*, struct _turb1__GetRawDensityResponse **, const char*);
+
+#ifndef soap_write_PointerTo_turb1__GetRawDensityResponse
+#define soap_write_PointerTo_turb1__GetRawDensityResponse(soap, data) ( soap_begin_send(soap) || (soap_serialize_PointerTo_turb1__GetRawDensityResponse(soap, data), 0) || soap_put_PointerTo_turb1__GetRawDensityResponse(soap, data, "turb1:GetRawDensityResponse", NULL) || soap_end_send(soap) )
+#endif
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetRawDensityResponse(struct soap*, struct _turb1__GetRawDensityResponse *const*, const char*, const char*);
+
+#ifndef soap_read_PointerTo_turb1__GetRawDensityResponse
+#define soap_read_PointerTo_turb1__GetRawDensityResponse(soap, data) ( soap_begin_recv(soap) || !soap_get_PointerTo_turb1__GetRawDensityResponse(soap, data, NULL, NULL) || soap_end_recv(soap) )
+#endif
+
+SOAP_FMAC3 struct _turb1__GetRawDensityResponse ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetRawDensityResponse(struct soap*, struct _turb1__GetRawDensityResponse **, const char*, const char*);
+
+#ifndef SOAP_TYPE_PointerTo_turb1__GetRawDensity
+#define SOAP_TYPE_PointerTo_turb1__GetRawDensity (169)
+#endif
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetRawDensity(struct soap*, struct _turb1__GetRawDensity *const*);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetRawDensity(struct soap*, const char *, int, struct _turb1__GetRawDensity *const*, const char *);
+SOAP_FMAC3 struct _turb1__GetRawDensity ** SOAP_FMAC4 soap_in_PointerTo_turb1__GetRawDensity(struct soap*, const char*, struct _turb1__GetRawDensity **, const char*);
+
+#ifndef soap_write_PointerTo_turb1__GetRawDensity
+#define soap_write_PointerTo_turb1__GetRawDensity(soap, data) ( soap_begin_send(soap) || (soap_serialize_PointerTo_turb1__GetRawDensity(soap, data), 0) || soap_put_PointerTo_turb1__GetRawDensity(soap, data, "turb1:GetRawDensity", NULL) || soap_end_send(soap) )
+#endif
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetRawDensity(struct soap*, struct _turb1__GetRawDensity *const*, const char*, const char*);
+
+#ifndef soap_read_PointerTo_turb1__GetRawDensity
+#define soap_read_PointerTo_turb1__GetRawDensity(soap, data) ( soap_begin_recv(soap) || !soap_get_PointerTo_turb1__GetRawDensity(soap, data, NULL, NULL) || soap_end_recv(soap) )
+#endif
+
+SOAP_FMAC3 struct _turb1__GetRawDensity ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetRawDensity(struct soap*, struct _turb1__GetRawDensity **, const char*, const char*);
+
+#ifndef SOAP_TYPE_PointerTo_turb1__GetDensityHessianResponse
+#define SOAP_TYPE_PointerTo_turb1__GetDensityHessianResponse (166)
+#endif
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetDensityHessianResponse(struct soap*, struct _turb1__GetDensityHessianResponse *const*);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetDensityHessianResponse(struct soap*, const char *, int, struct _turb1__GetDensityHessianResponse *const*, const char *);
+SOAP_FMAC3 struct _turb1__GetDensityHessianResponse ** SOAP_FMAC4 soap_in_PointerTo_turb1__GetDensityHessianResponse(struct soap*, const char*, struct _turb1__GetDensityHessianResponse **, const char*);
+
+#ifndef soap_write_PointerTo_turb1__GetDensityHessianResponse
+#define soap_write_PointerTo_turb1__GetDensityHessianResponse(soap, data) ( soap_begin_send(soap) || (soap_serialize_PointerTo_turb1__GetDensityHessianResponse(soap, data), 0) || soap_put_PointerTo_turb1__GetDensityHessianResponse(soap, data, "turb1:GetDensityHessianResponse", NULL) || soap_end_send(soap) )
+#endif
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetDensityHessianResponse(struct soap*, struct _turb1__GetDensityHessianResponse *const*, const char*, const char*);
+
+#ifndef soap_read_PointerTo_turb1__GetDensityHessianResponse
+#define soap_read_PointerTo_turb1__GetDensityHessianResponse(soap, data) ( soap_begin_recv(soap) || !soap_get_PointerTo_turb1__GetDensityHessianResponse(soap, data, NULL, NULL) || soap_end_recv(soap) )
+#endif
+
+SOAP_FMAC3 struct _turb1__GetDensityHessianResponse ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetDensityHessianResponse(struct soap*, struct _turb1__GetDensityHessianResponse **, const char*, const char*);
+
+#ifndef SOAP_TYPE_PointerTo_turb1__GetDensityHessian
+#define SOAP_TYPE_PointerTo_turb1__GetDensityHessian (165)
+#endif
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetDensityHessian(struct soap*, struct _turb1__GetDensityHessian *const*);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetDensityHessian(struct soap*, const char *, int, struct _turb1__GetDensityHessian *const*, const char *);
+SOAP_FMAC3 struct _turb1__GetDensityHessian ** SOAP_FMAC4 soap_in_PointerTo_turb1__GetDensityHessian(struct soap*, const char*, struct _turb1__GetDensityHessian **, const char*);
+
+#ifndef soap_write_PointerTo_turb1__GetDensityHessian
+#define soap_write_PointerTo_turb1__GetDensityHessian(soap, data) ( soap_begin_send(soap) || (soap_serialize_PointerTo_turb1__GetDensityHessian(soap, data), 0) || soap_put_PointerTo_turb1__GetDensityHessian(soap, data, "turb1:GetDensityHessian", NULL) || soap_end_send(soap) )
+#endif
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetDensityHessian(struct soap*, struct _turb1__GetDensityHessian *const*, const char*, const char*);
+
+#ifndef soap_read_PointerTo_turb1__GetDensityHessian
+#define soap_read_PointerTo_turb1__GetDensityHessian(soap, data) ( soap_begin_recv(soap) || !soap_get_PointerTo_turb1__GetDensityHessian(soap, data, NULL, NULL) || soap_end_recv(soap) )
+#endif
+
+SOAP_FMAC3 struct _turb1__GetDensityHessian ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetDensityHessian(struct soap*, struct _turb1__GetDensityHessian **, const char*, const char*);
+
+#ifndef SOAP_TYPE_PointerTo_turb1__GetDensityGradientResponse
+#define SOAP_TYPE_PointerTo_turb1__GetDensityGradientResponse (162)
+#endif
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetDensityGradientResponse(struct soap*, struct _turb1__GetDensityGradientResponse *const*);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetDensityGradientResponse(struct soap*, const char *, int, struct _turb1__GetDensityGradientResponse *const*, const char *);
+SOAP_FMAC3 struct _turb1__GetDensityGradientResponse ** SOAP_FMAC4 soap_in_PointerTo_turb1__GetDensityGradientResponse(struct soap*, const char*, struct _turb1__GetDensityGradientResponse **, const char*);
+
+#ifndef soap_write_PointerTo_turb1__GetDensityGradientResponse
+#define soap_write_PointerTo_turb1__GetDensityGradientResponse(soap, data) ( soap_begin_send(soap) || (soap_serialize_PointerTo_turb1__GetDensityGradientResponse(soap, data), 0) || soap_put_PointerTo_turb1__GetDensityGradientResponse(soap, data, "turb1:GetDensityGradientResponse", NULL) || soap_end_send(soap) )
+#endif
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetDensityGradientResponse(struct soap*, struct _turb1__GetDensityGradientResponse *const*, const char*, const char*);
+
+#ifndef soap_read_PointerTo_turb1__GetDensityGradientResponse
+#define soap_read_PointerTo_turb1__GetDensityGradientResponse(soap, data) ( soap_begin_recv(soap) || !soap_get_PointerTo_turb1__GetDensityGradientResponse(soap, data, NULL, NULL) || soap_end_recv(soap) )
+#endif
+
+SOAP_FMAC3 struct _turb1__GetDensityGradientResponse ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetDensityGradientResponse(struct soap*, struct _turb1__GetDensityGradientResponse **, const char*, const char*);
+
+#ifndef SOAP_TYPE_PointerTo_turb1__GetDensityGradient
+#define SOAP_TYPE_PointerTo_turb1__GetDensityGradient (161)
+#endif
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetDensityGradient(struct soap*, struct _turb1__GetDensityGradient *const*);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetDensityGradient(struct soap*, const char *, int, struct _turb1__GetDensityGradient *const*, const char *);
+SOAP_FMAC3 struct _turb1__GetDensityGradient ** SOAP_FMAC4 soap_in_PointerTo_turb1__GetDensityGradient(struct soap*, const char*, struct _turb1__GetDensityGradient **, const char*);
+
+#ifndef soap_write_PointerTo_turb1__GetDensityGradient
+#define soap_write_PointerTo_turb1__GetDensityGradient(soap, data) ( soap_begin_send(soap) || (soap_serialize_PointerTo_turb1__GetDensityGradient(soap, data), 0) || soap_put_PointerTo_turb1__GetDensityGradient(soap, data, "turb1:GetDensityGradient", NULL) || soap_end_send(soap) )
+#endif
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetDensityGradient(struct soap*, struct _turb1__GetDensityGradient *const*, const char*, const char*);
+
+#ifndef soap_read_PointerTo_turb1__GetDensityGradient
+#define soap_read_PointerTo_turb1__GetDensityGradient(soap, data) ( soap_begin_recv(soap) || !soap_get_PointerTo_turb1__GetDensityGradient(soap, data, NULL, NULL) || soap_end_recv(soap) )
+#endif
+
+SOAP_FMAC3 struct _turb1__GetDensityGradient ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetDensityGradient(struct soap*, struct _turb1__GetDensityGradient **, const char*, const char*);
+
+#ifndef SOAP_TYPE_PointerTo_turb1__GetDensityResponse
+#define SOAP_TYPE_PointerTo_turb1__GetDensityResponse (158)
+#endif
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetDensityResponse(struct soap*, struct _turb1__GetDensityResponse *const*);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetDensityResponse(struct soap*, const char *, int, struct _turb1__GetDensityResponse *const*, const char *);
+SOAP_FMAC3 struct _turb1__GetDensityResponse ** SOAP_FMAC4 soap_in_PointerTo_turb1__GetDensityResponse(struct soap*, const char*, struct _turb1__GetDensityResponse **, const char*);
+
+#ifndef soap_write_PointerTo_turb1__GetDensityResponse
+#define soap_write_PointerTo_turb1__GetDensityResponse(soap, data) ( soap_begin_send(soap) || (soap_serialize_PointerTo_turb1__GetDensityResponse(soap, data), 0) || soap_put_PointerTo_turb1__GetDensityResponse(soap, data, "turb1:GetDensityResponse", NULL) || soap_end_send(soap) )
+#endif
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetDensityResponse(struct soap*, struct _turb1__GetDensityResponse *const*, const char*, const char*);
+
+#ifndef soap_read_PointerTo_turb1__GetDensityResponse
+#define soap_read_PointerTo_turb1__GetDensityResponse(soap, data) ( soap_begin_recv(soap) || !soap_get_PointerTo_turb1__GetDensityResponse(soap, data, NULL, NULL) || soap_end_recv(soap) )
+#endif
+
+SOAP_FMAC3 struct _turb1__GetDensityResponse ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetDensityResponse(struct soap*, struct _turb1__GetDensityResponse **, const char*, const char*);
+
+#ifndef SOAP_TYPE_PointerTo_turb1__GetDensity
+#define SOAP_TYPE_PointerTo_turb1__GetDensity (157)
+#endif
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetDensity(struct soap*, struct _turb1__GetDensity *const*);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetDensity(struct soap*, const char *, int, struct _turb1__GetDensity *const*, const char *);
+SOAP_FMAC3 struct _turb1__GetDensity ** SOAP_FMAC4 soap_in_PointerTo_turb1__GetDensity(struct soap*, const char*, struct _turb1__GetDensity **, const char*);
+
+#ifndef soap_write_PointerTo_turb1__GetDensity
+#define soap_write_PointerTo_turb1__GetDensity(soap, data) ( soap_begin_send(soap) || (soap_serialize_PointerTo_turb1__GetDensity(soap, data), 0) || soap_put_PointerTo_turb1__GetDensity(soap, data, "turb1:GetDensity", NULL) || soap_end_send(soap) )
+#endif
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetDensity(struct soap*, struct _turb1__GetDensity *const*, const char*, const char*);
+
+#ifndef soap_read_PointerTo_turb1__GetDensity
+#define soap_read_PointerTo_turb1__GetDensity(soap, data) ( soap_begin_recv(soap) || !soap_get_PointerTo_turb1__GetDensity(soap, data, NULL, NULL) || soap_end_recv(soap) )
+#endif
+
+SOAP_FMAC3 struct _turb1__GetDensity ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetDensity(struct soap*, struct _turb1__GetDensity **, const char*, const char*);
+
 #ifndef SOAP_TYPE_PointerTo_turb1__GetRawVectorPotentialResponse
-#define SOAP_TYPE_PointerTo_turb1__GetRawVectorPotentialResponse (140)
+#define SOAP_TYPE_PointerTo_turb1__GetRawVectorPotentialResponse (154)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetRawVectorPotentialResponse(struct soap*, struct _turb1__GetRawVectorPotentialResponse *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetRawVectorPotentialResponse(struct soap*, const char *, int, struct _turb1__GetRawVectorPotentialResponse *const*, const char *);
@@ -3778,7 +4430,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetRawVectorPotentialRespons
 SOAP_FMAC3 struct _turb1__GetRawVectorPotentialResponse ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetRawVectorPotentialResponse(struct soap*, struct _turb1__GetRawVectorPotentialResponse **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerTo_turb1__GetRawVectorPotential
-#define SOAP_TYPE_PointerTo_turb1__GetRawVectorPotential (139)
+#define SOAP_TYPE_PointerTo_turb1__GetRawVectorPotential (153)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetRawVectorPotential(struct soap*, struct _turb1__GetRawVectorPotential *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetRawVectorPotential(struct soap*, const char *, int, struct _turb1__GetRawVectorPotential *const*, const char *);
@@ -3797,7 +4449,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetRawVectorPotential(struct
 SOAP_FMAC3 struct _turb1__GetRawVectorPotential ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetRawVectorPotential(struct soap*, struct _turb1__GetRawVectorPotential **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerTo_turb1__GetVectorPotentialResponse
-#define SOAP_TYPE_PointerTo_turb1__GetVectorPotentialResponse (136)
+#define SOAP_TYPE_PointerTo_turb1__GetVectorPotentialResponse (150)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetVectorPotentialResponse(struct soap*, struct _turb1__GetVectorPotentialResponse *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetVectorPotentialResponse(struct soap*, const char *, int, struct _turb1__GetVectorPotentialResponse *const*, const char *);
@@ -3816,7 +4468,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetVectorPotentialResponse(s
 SOAP_FMAC3 struct _turb1__GetVectorPotentialResponse ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetVectorPotentialResponse(struct soap*, struct _turb1__GetVectorPotentialResponse **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerTo_turb1__GetVectorPotential
-#define SOAP_TYPE_PointerTo_turb1__GetVectorPotential (135)
+#define SOAP_TYPE_PointerTo_turb1__GetVectorPotential (149)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetVectorPotential(struct soap*, struct _turb1__GetVectorPotential *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetVectorPotential(struct soap*, const char *, int, struct _turb1__GetVectorPotential *const*, const char *);
@@ -3835,7 +4487,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetVectorPotential(struct so
 SOAP_FMAC3 struct _turb1__GetVectorPotential ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetVectorPotential(struct soap*, struct _turb1__GetVectorPotential **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerTo_turb1__GetRawMagneticFieldResponse
-#define SOAP_TYPE_PointerTo_turb1__GetRawMagneticFieldResponse (132)
+#define SOAP_TYPE_PointerTo_turb1__GetRawMagneticFieldResponse (146)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetRawMagneticFieldResponse(struct soap*, struct _turb1__GetRawMagneticFieldResponse *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetRawMagneticFieldResponse(struct soap*, const char *, int, struct _turb1__GetRawMagneticFieldResponse *const*, const char *);
@@ -3854,7 +4506,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetRawMagneticFieldResponse(
 SOAP_FMAC3 struct _turb1__GetRawMagneticFieldResponse ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetRawMagneticFieldResponse(struct soap*, struct _turb1__GetRawMagneticFieldResponse **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerTo_turb1__GetRawMagneticField
-#define SOAP_TYPE_PointerTo_turb1__GetRawMagneticField (131)
+#define SOAP_TYPE_PointerTo_turb1__GetRawMagneticField (145)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetRawMagneticField(struct soap*, struct _turb1__GetRawMagneticField *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetRawMagneticField(struct soap*, const char *, int, struct _turb1__GetRawMagneticField *const*, const char *);
@@ -3873,7 +4525,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetRawMagneticField(struct s
 SOAP_FMAC3 struct _turb1__GetRawMagneticField ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetRawMagneticField(struct soap*, struct _turb1__GetRawMagneticField **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerTo_turb1__GetMagneticFieldResponse
-#define SOAP_TYPE_PointerTo_turb1__GetMagneticFieldResponse (128)
+#define SOAP_TYPE_PointerTo_turb1__GetMagneticFieldResponse (142)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetMagneticFieldResponse(struct soap*, struct _turb1__GetMagneticFieldResponse *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetMagneticFieldResponse(struct soap*, const char *, int, struct _turb1__GetMagneticFieldResponse *const*, const char *);
@@ -3892,7 +4544,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetMagneticFieldResponse(str
 SOAP_FMAC3 struct _turb1__GetMagneticFieldResponse ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetMagneticFieldResponse(struct soap*, struct _turb1__GetMagneticFieldResponse **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerTo_turb1__GetMagneticField
-#define SOAP_TYPE_PointerTo_turb1__GetMagneticField (127)
+#define SOAP_TYPE_PointerTo_turb1__GetMagneticField (141)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetMagneticField(struct soap*, struct _turb1__GetMagneticField *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetMagneticField(struct soap*, const char *, int, struct _turb1__GetMagneticField *const*, const char *);
@@ -3911,7 +4563,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetMagneticField(struct soap
 SOAP_FMAC3 struct _turb1__GetMagneticField ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetMagneticField(struct soap*, struct _turb1__GetMagneticField **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerTo_turb1__GetRawPressureResponse
-#define SOAP_TYPE_PointerTo_turb1__GetRawPressureResponse (124)
+#define SOAP_TYPE_PointerTo_turb1__GetRawPressureResponse (138)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetRawPressureResponse(struct soap*, struct _turb1__GetRawPressureResponse *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetRawPressureResponse(struct soap*, const char *, int, struct _turb1__GetRawPressureResponse *const*, const char *);
@@ -3930,7 +4582,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetRawPressureResponse(struc
 SOAP_FMAC3 struct _turb1__GetRawPressureResponse ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetRawPressureResponse(struct soap*, struct _turb1__GetRawPressureResponse **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerTo_turb1__GetRawPressure
-#define SOAP_TYPE_PointerTo_turb1__GetRawPressure (123)
+#define SOAP_TYPE_PointerTo_turb1__GetRawPressure (137)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetRawPressure(struct soap*, struct _turb1__GetRawPressure *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetRawPressure(struct soap*, const char *, int, struct _turb1__GetRawPressure *const*, const char *);
@@ -3949,7 +4601,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetRawPressure(struct soap*,
 SOAP_FMAC3 struct _turb1__GetRawPressure ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetRawPressure(struct soap*, struct _turb1__GetRawPressure **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerTo_turb1__GetPressureResponse
-#define SOAP_TYPE_PointerTo_turb1__GetPressureResponse (120)
+#define SOAP_TYPE_PointerTo_turb1__GetPressureResponse (134)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetPressureResponse(struct soap*, struct _turb1__GetPressureResponse *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetPressureResponse(struct soap*, const char *, int, struct _turb1__GetPressureResponse *const*, const char *);
@@ -3968,7 +4620,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetPressureResponse(struct s
 SOAP_FMAC3 struct _turb1__GetPressureResponse ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetPressureResponse(struct soap*, struct _turb1__GetPressureResponse **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerTo_turb1__GetPressure
-#define SOAP_TYPE_PointerTo_turb1__GetPressure (119)
+#define SOAP_TYPE_PointerTo_turb1__GetPressure (133)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetPressure(struct soap*, struct _turb1__GetPressure *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetPressure(struct soap*, const char *, int, struct _turb1__GetPressure *const*, const char *);
@@ -3987,7 +4639,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetPressure(struct soap*, st
 SOAP_FMAC3 struct _turb1__GetPressure ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetPressure(struct soap*, struct _turb1__GetPressure **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerTo_turb1__GetRawVelocityResponse
-#define SOAP_TYPE_PointerTo_turb1__GetRawVelocityResponse (116)
+#define SOAP_TYPE_PointerTo_turb1__GetRawVelocityResponse (130)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetRawVelocityResponse(struct soap*, struct _turb1__GetRawVelocityResponse *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetRawVelocityResponse(struct soap*, const char *, int, struct _turb1__GetRawVelocityResponse *const*, const char *);
@@ -4006,7 +4658,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetRawVelocityResponse(struc
 SOAP_FMAC3 struct _turb1__GetRawVelocityResponse ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetRawVelocityResponse(struct soap*, struct _turb1__GetRawVelocityResponse **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerTo_turb1__GetRawVelocity
-#define SOAP_TYPE_PointerTo_turb1__GetRawVelocity (115)
+#define SOAP_TYPE_PointerTo_turb1__GetRawVelocity (129)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetRawVelocity(struct soap*, struct _turb1__GetRawVelocity *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetRawVelocity(struct soap*, const char *, int, struct _turb1__GetRawVelocity *const*, const char *);
@@ -4025,7 +4677,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetRawVelocity(struct soap*,
 SOAP_FMAC3 struct _turb1__GetRawVelocity ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetRawVelocity(struct soap*, struct _turb1__GetRawVelocity **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerTo_turb1__GetVelocityBatchResponse
-#define SOAP_TYPE_PointerTo_turb1__GetVelocityBatchResponse (112)
+#define SOAP_TYPE_PointerTo_turb1__GetVelocityBatchResponse (126)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetVelocityBatchResponse(struct soap*, struct _turb1__GetVelocityBatchResponse *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetVelocityBatchResponse(struct soap*, const char *, int, struct _turb1__GetVelocityBatchResponse *const*, const char *);
@@ -4044,7 +4696,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetVelocityBatchResponse(str
 SOAP_FMAC3 struct _turb1__GetVelocityBatchResponse ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetVelocityBatchResponse(struct soap*, struct _turb1__GetVelocityBatchResponse **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerTo_turb1__GetVelocityBatch
-#define SOAP_TYPE_PointerTo_turb1__GetVelocityBatch (111)
+#define SOAP_TYPE_PointerTo_turb1__GetVelocityBatch (125)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetVelocityBatch(struct soap*, struct _turb1__GetVelocityBatch *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetVelocityBatch(struct soap*, const char *, int, struct _turb1__GetVelocityBatch *const*, const char *);
@@ -4063,7 +4715,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetVelocityBatch(struct soap
 SOAP_FMAC3 struct _turb1__GetVelocityBatch ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetVelocityBatch(struct soap*, struct _turb1__GetVelocityBatch **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerTo_turb1__GetVelocityResponse
-#define SOAP_TYPE_PointerTo_turb1__GetVelocityResponse (108)
+#define SOAP_TYPE_PointerTo_turb1__GetVelocityResponse (122)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetVelocityResponse(struct soap*, struct _turb1__GetVelocityResponse *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetVelocityResponse(struct soap*, const char *, int, struct _turb1__GetVelocityResponse *const*, const char *);
@@ -4082,7 +4734,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetVelocityResponse(struct s
 SOAP_FMAC3 struct _turb1__GetVelocityResponse ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetVelocityResponse(struct soap*, struct _turb1__GetVelocityResponse **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerTo_turb1__GetVelocity
-#define SOAP_TYPE_PointerTo_turb1__GetVelocity (107)
+#define SOAP_TYPE_PointerTo_turb1__GetVelocity (121)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetVelocity(struct soap*, struct _turb1__GetVelocity *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetVelocity(struct soap*, const char *, int, struct _turb1__GetVelocity *const*, const char *);
@@ -4101,7 +4753,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetVelocity(struct soap*, st
 SOAP_FMAC3 struct _turb1__GetVelocity ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetVelocity(struct soap*, struct _turb1__GetVelocity **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerTo_turb1__NullOpResponse
-#define SOAP_TYPE_PointerTo_turb1__NullOpResponse (104)
+#define SOAP_TYPE_PointerTo_turb1__NullOpResponse (118)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__NullOpResponse(struct soap*, struct _turb1__NullOpResponse *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__NullOpResponse(struct soap*, const char *, int, struct _turb1__NullOpResponse *const*, const char *);
@@ -4120,7 +4772,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__NullOpResponse(struct soap*,
 SOAP_FMAC3 struct _turb1__NullOpResponse ** SOAP_FMAC4 soap_get_PointerTo_turb1__NullOpResponse(struct soap*, struct _turb1__NullOpResponse **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerTo_turb1__NullOp
-#define SOAP_TYPE_PointerTo_turb1__NullOp (103)
+#define SOAP_TYPE_PointerTo_turb1__NullOp (117)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__NullOp(struct soap*, struct _turb1__NullOp *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__NullOp(struct soap*, const char *, int, struct _turb1__NullOp *const*, const char *);
@@ -4138,8 +4790,27 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__NullOp(struct soap*, struct 
 
 SOAP_FMAC3 struct _turb1__NullOp ** SOAP_FMAC4 soap_get_PointerTo_turb1__NullOp(struct soap*, struct _turb1__NullOp **, const char*, const char*);
 
+#ifndef SOAP_TYPE_PointerToturb1__ArrayOfThresholdInfo
+#define SOAP_TYPE_PointerToturb1__ArrayOfThresholdInfo (114)
+#endif
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerToturb1__ArrayOfThresholdInfo(struct soap*, struct turb1__ArrayOfThresholdInfo *const*);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerToturb1__ArrayOfThresholdInfo(struct soap*, const char *, int, struct turb1__ArrayOfThresholdInfo *const*, const char *);
+SOAP_FMAC3 struct turb1__ArrayOfThresholdInfo ** SOAP_FMAC4 soap_in_PointerToturb1__ArrayOfThresholdInfo(struct soap*, const char*, struct turb1__ArrayOfThresholdInfo **, const char*);
+
+#ifndef soap_write_PointerToturb1__ArrayOfThresholdInfo
+#define soap_write_PointerToturb1__ArrayOfThresholdInfo(soap, data) ( soap_begin_send(soap) || (soap_serialize_PointerToturb1__ArrayOfThresholdInfo(soap, data), 0) || soap_put_PointerToturb1__ArrayOfThresholdInfo(soap, data, "turb1:ArrayOfThresholdInfo", NULL) || soap_end_send(soap) )
+#endif
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerToturb1__ArrayOfThresholdInfo(struct soap*, struct turb1__ArrayOfThresholdInfo *const*, const char*, const char*);
+
+#ifndef soap_read_PointerToturb1__ArrayOfThresholdInfo
+#define soap_read_PointerToturb1__ArrayOfThresholdInfo(soap, data) ( soap_begin_recv(soap) || !soap_get_PointerToturb1__ArrayOfThresholdInfo(soap, data, NULL, NULL) || soap_end_recv(soap) )
+#endif
+
+SOAP_FMAC3 struct turb1__ArrayOfThresholdInfo ** SOAP_FMAC4 soap_get_PointerToturb1__ArrayOfThresholdInfo(struct soap*, struct turb1__ArrayOfThresholdInfo **, const char*, const char*);
+
 #ifndef SOAP_TYPE_PointerToturb1__ArrayOfSGSTensor
-#define SOAP_TYPE_PointerToturb1__ArrayOfSGSTensor (98)
+#define SOAP_TYPE_PointerToturb1__ArrayOfSGSTensor (109)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerToturb1__ArrayOfSGSTensor(struct soap*, struct turb1__ArrayOfSGSTensor *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerToturb1__ArrayOfSGSTensor(struct soap*, const char *, int, struct turb1__ArrayOfSGSTensor *const*, const char *);
@@ -4158,7 +4829,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerToturb1__ArrayOfSGSTensor(struct soap*
 SOAP_FMAC3 struct turb1__ArrayOfSGSTensor ** SOAP_FMAC4 soap_get_PointerToturb1__ArrayOfSGSTensor(struct soap*, struct turb1__ArrayOfSGSTensor **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerToturb1__ArrayOfVelocityHessian
-#define SOAP_TYPE_PointerToturb1__ArrayOfVelocityHessian (81)
+#define SOAP_TYPE_PointerToturb1__ArrayOfVelocityHessian (92)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerToturb1__ArrayOfVelocityHessian(struct soap*, struct turb1__ArrayOfVelocityHessian *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerToturb1__ArrayOfVelocityHessian(struct soap*, const char *, int, struct turb1__ArrayOfVelocityHessian *const*, const char *);
@@ -4176,27 +4847,8 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerToturb1__ArrayOfVelocityHessian(struct
 
 SOAP_FMAC3 struct turb1__ArrayOfVelocityHessian ** SOAP_FMAC4 soap_get_PointerToturb1__ArrayOfVelocityHessian(struct soap*, struct turb1__ArrayOfVelocityHessian **, const char*, const char*);
 
-#ifndef SOAP_TYPE_PointerToturb1__ArrayOfPressureHessian
-#define SOAP_TYPE_PointerToturb1__ArrayOfPressureHessian (78)
-#endif
-SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerToturb1__ArrayOfPressureHessian(struct soap*, struct turb1__ArrayOfPressureHessian *const*);
-SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerToturb1__ArrayOfPressureHessian(struct soap*, const char *, int, struct turb1__ArrayOfPressureHessian *const*, const char *);
-SOAP_FMAC3 struct turb1__ArrayOfPressureHessian ** SOAP_FMAC4 soap_in_PointerToturb1__ArrayOfPressureHessian(struct soap*, const char*, struct turb1__ArrayOfPressureHessian **, const char*);
-
-#ifndef soap_write_PointerToturb1__ArrayOfPressureHessian
-#define soap_write_PointerToturb1__ArrayOfPressureHessian(soap, data) ( soap_begin_send(soap) || (soap_serialize_PointerToturb1__ArrayOfPressureHessian(soap, data), 0) || soap_put_PointerToturb1__ArrayOfPressureHessian(soap, data, "turb1:ArrayOfPressureHessian", NULL) || soap_end_send(soap) )
-#endif
-
-SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerToturb1__ArrayOfPressureHessian(struct soap*, struct turb1__ArrayOfPressureHessian *const*, const char*, const char*);
-
-#ifndef soap_read_PointerToturb1__ArrayOfPressureHessian
-#define soap_read_PointerToturb1__ArrayOfPressureHessian(soap, data) ( soap_begin_recv(soap) || !soap_get_PointerToturb1__ArrayOfPressureHessian(soap, data, NULL, NULL) || soap_end_recv(soap) )
-#endif
-
-SOAP_FMAC3 struct turb1__ArrayOfPressureHessian ** SOAP_FMAC4 soap_get_PointerToturb1__ArrayOfPressureHessian(struct soap*, struct turb1__ArrayOfPressureHessian **, const char*, const char*);
-
 #ifndef SOAP_TYPE_PointerToturb1__ArrayOfVelocityGradient
-#define SOAP_TYPE_PointerToturb1__ArrayOfVelocityGradient (69)
+#define SOAP_TYPE_PointerToturb1__ArrayOfVelocityGradient (81)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerToturb1__ArrayOfVelocityGradient(struct soap*, struct turb1__ArrayOfVelocityGradient *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerToturb1__ArrayOfVelocityGradient(struct soap*, const char *, int, struct turb1__ArrayOfVelocityGradient *const*, const char *);
@@ -4215,7 +4867,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerToturb1__ArrayOfVelocityGradient(struc
 SOAP_FMAC3 struct turb1__ArrayOfVelocityGradient ** SOAP_FMAC4 soap_get_PointerToturb1__ArrayOfVelocityGradient(struct soap*, struct turb1__ArrayOfVelocityGradient **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerToturb1__ArrayOfVector3P
-#define SOAP_TYPE_PointerToturb1__ArrayOfVector3P (66)
+#define SOAP_TYPE_PointerToturb1__ArrayOfVector3P (78)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerToturb1__ArrayOfVector3P(struct soap*, struct turb1__ArrayOfVector3P *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerToturb1__ArrayOfVector3P(struct soap*, const char *, int, struct turb1__ArrayOfVector3P *const*, const char *);
@@ -4233,8 +4885,27 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerToturb1__ArrayOfVector3P(struct soap*,
 
 SOAP_FMAC3 struct turb1__ArrayOfVector3P ** SOAP_FMAC4 soap_get_PointerToturb1__ArrayOfVector3P(struct soap*, struct turb1__ArrayOfVector3P **, const char*, const char*);
 
+#ifndef SOAP_TYPE_PointerToturb1__ArrayOfPressureHessian
+#define SOAP_TYPE_PointerToturb1__ArrayOfPressureHessian (71)
+#endif
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerToturb1__ArrayOfPressureHessian(struct soap*, struct turb1__ArrayOfPressureHessian *const*);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerToturb1__ArrayOfPressureHessian(struct soap*, const char *, int, struct turb1__ArrayOfPressureHessian *const*, const char *);
+SOAP_FMAC3 struct turb1__ArrayOfPressureHessian ** SOAP_FMAC4 soap_in_PointerToturb1__ArrayOfPressureHessian(struct soap*, const char*, struct turb1__ArrayOfPressureHessian **, const char*);
+
+#ifndef soap_write_PointerToturb1__ArrayOfPressureHessian
+#define soap_write_PointerToturb1__ArrayOfPressureHessian(soap, data) ( soap_begin_send(soap) || (soap_serialize_PointerToturb1__ArrayOfPressureHessian(soap, data), 0) || soap_put_PointerToturb1__ArrayOfPressureHessian(soap, data, "turb1:ArrayOfPressureHessian", NULL) || soap_end_send(soap) )
+#endif
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerToturb1__ArrayOfPressureHessian(struct soap*, struct turb1__ArrayOfPressureHessian *const*, const char*, const char*);
+
+#ifndef soap_read_PointerToturb1__ArrayOfPressureHessian
+#define soap_read_PointerToturb1__ArrayOfPressureHessian(soap, data) ( soap_begin_recv(soap) || !soap_get_PointerToturb1__ArrayOfPressureHessian(soap, data, NULL, NULL) || soap_end_recv(soap) )
+#endif
+
+SOAP_FMAC3 struct turb1__ArrayOfPressureHessian ** SOAP_FMAC4 soap_get_PointerToturb1__ArrayOfPressureHessian(struct soap*, struct turb1__ArrayOfPressureHessian **, const char*, const char*);
+
 #ifndef SOAP_TYPE_PointerToturb1__ArrayOfPressure
-#define SOAP_TYPE_PointerToturb1__ArrayOfPressure (51)
+#define SOAP_TYPE_PointerToturb1__ArrayOfPressure (54)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerToturb1__ArrayOfPressure(struct soap*, struct turb1__ArrayOfPressure *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerToturb1__ArrayOfPressure(struct soap*, const char *, int, struct turb1__ArrayOfPressure *const*, const char *);
@@ -4253,7 +4924,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerToturb1__ArrayOfPressure(struct soap*,
 SOAP_FMAC3 struct turb1__ArrayOfPressure ** SOAP_FMAC4 soap_get_PointerToturb1__ArrayOfPressure(struct soap*, struct turb1__ArrayOfPressure **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerToxsd__base64Binary
-#define SOAP_TYPE_PointerToxsd__base64Binary (48)
+#define SOAP_TYPE_PointerToxsd__base64Binary (51)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerToxsd__base64Binary(struct soap*, struct xsd__base64Binary *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerToxsd__base64Binary(struct soap*, const char *, int, struct xsd__base64Binary *const*, const char *);
@@ -4272,7 +4943,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerToxsd__base64Binary(struct soap*, stru
 SOAP_FMAC3 struct xsd__base64Binary ** SOAP_FMAC4 soap_get_PointerToxsd__base64Binary(struct soap*, struct xsd__base64Binary **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerToturb1__ArrayOfVector3
-#define SOAP_TYPE_PointerToturb1__ArrayOfVector3 (41)
+#define SOAP_TYPE_PointerToturb1__ArrayOfVector3 (44)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerToturb1__ArrayOfVector3(struct soap*, struct turb1__ArrayOfVector3 *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerToturb1__ArrayOfVector3(struct soap*, const char *, int, struct turb1__ArrayOfVector3 *const*, const char *);
@@ -4291,7 +4962,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerToturb1__ArrayOfVector3(struct soap*, 
 SOAP_FMAC3 struct turb1__ArrayOfVector3 ** SOAP_FMAC4 soap_get_PointerToturb1__ArrayOfVector3(struct soap*, struct turb1__ArrayOfVector3 **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerToturb1__ArrayOfPoint3
-#define SOAP_TYPE_PointerToturb1__ArrayOfPoint3 (39)
+#define SOAP_TYPE_PointerToturb1__ArrayOfPoint3 (42)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerToturb1__ArrayOfPoint3(struct soap*, struct turb1__ArrayOfPoint3 *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerToturb1__ArrayOfPoint3(struct soap*, const char *, int, struct turb1__ArrayOfPoint3 *const*, const char *);
@@ -4308,6 +4979,25 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerToturb1__ArrayOfPoint3(struct soap*, s
 #endif
 
 SOAP_FMAC3 struct turb1__ArrayOfPoint3 ** SOAP_FMAC4 soap_get_PointerToturb1__ArrayOfPoint3(struct soap*, struct turb1__ArrayOfPoint3 **, const char*, const char*);
+
+#ifndef SOAP_TYPE_PointerToturb1__ThresholdInfo
+#define SOAP_TYPE_PointerToturb1__ThresholdInfo (40)
+#endif
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerToturb1__ThresholdInfo(struct soap*, struct turb1__ThresholdInfo *const*);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerToturb1__ThresholdInfo(struct soap*, const char *, int, struct turb1__ThresholdInfo *const*, const char *);
+SOAP_FMAC3 struct turb1__ThresholdInfo ** SOAP_FMAC4 soap_in_PointerToturb1__ThresholdInfo(struct soap*, const char*, struct turb1__ThresholdInfo **, const char*);
+
+#ifndef soap_write_PointerToturb1__ThresholdInfo
+#define soap_write_PointerToturb1__ThresholdInfo(soap, data) ( soap_begin_send(soap) || (soap_serialize_PointerToturb1__ThresholdInfo(soap, data), 0) || soap_put_PointerToturb1__ThresholdInfo(soap, data, "turb1:ThresholdInfo", NULL) || soap_end_send(soap) )
+#endif
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerToturb1__ThresholdInfo(struct soap*, struct turb1__ThresholdInfo *const*, const char*, const char*);
+
+#ifndef soap_read_PointerToturb1__ThresholdInfo
+#define soap_read_PointerToturb1__ThresholdInfo(soap, data) ( soap_begin_recv(soap) || !soap_get_PointerToturb1__ThresholdInfo(soap, data, NULL, NULL) || soap_end_recv(soap) )
+#endif
+
+SOAP_FMAC3 struct turb1__ThresholdInfo ** SOAP_FMAC4 soap_get_PointerToturb1__ThresholdInfo(struct soap*, struct turb1__ThresholdInfo **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerToturb1__SGSTensor
 #define SOAP_TYPE_PointerToturb1__SGSTensor (37)
@@ -4347,27 +5037,8 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerToturb1__VelocityHessian(struct soap*,
 
 SOAP_FMAC3 struct turb1__VelocityHessian ** SOAP_FMAC4 soap_get_PointerToturb1__VelocityHessian(struct soap*, struct turb1__VelocityHessian **, const char*, const char*);
 
-#ifndef SOAP_TYPE_PointerToturb1__PressureHessian
-#define SOAP_TYPE_PointerToturb1__PressureHessian (31)
-#endif
-SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerToturb1__PressureHessian(struct soap*, struct turb1__PressureHessian *const*);
-SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerToturb1__PressureHessian(struct soap*, const char *, int, struct turb1__PressureHessian *const*, const char *);
-SOAP_FMAC3 struct turb1__PressureHessian ** SOAP_FMAC4 soap_in_PointerToturb1__PressureHessian(struct soap*, const char*, struct turb1__PressureHessian **, const char*);
-
-#ifndef soap_write_PointerToturb1__PressureHessian
-#define soap_write_PointerToturb1__PressureHessian(soap, data) ( soap_begin_send(soap) || (soap_serialize_PointerToturb1__PressureHessian(soap, data), 0) || soap_put_PointerToturb1__PressureHessian(soap, data, "turb1:PressureHessian", NULL) || soap_end_send(soap) )
-#endif
-
-SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerToturb1__PressureHessian(struct soap*, struct turb1__PressureHessian *const*, const char*, const char*);
-
-#ifndef soap_read_PointerToturb1__PressureHessian
-#define soap_read_PointerToturb1__PressureHessian(soap, data) ( soap_begin_recv(soap) || !soap_get_PointerToturb1__PressureHessian(soap, data, NULL, NULL) || soap_end_recv(soap) )
-#endif
-
-SOAP_FMAC3 struct turb1__PressureHessian ** SOAP_FMAC4 soap_get_PointerToturb1__PressureHessian(struct soap*, struct turb1__PressureHessian **, const char*, const char*);
-
 #ifndef SOAP_TYPE_PointerToturb1__VelocityGradient
-#define SOAP_TYPE_PointerToturb1__VelocityGradient (28)
+#define SOAP_TYPE_PointerToturb1__VelocityGradient (31)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerToturb1__VelocityGradient(struct soap*, struct turb1__VelocityGradient *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerToturb1__VelocityGradient(struct soap*, const char *, int, struct turb1__VelocityGradient *const*, const char *);
@@ -4386,7 +5057,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerToturb1__VelocityGradient(struct soap*
 SOAP_FMAC3 struct turb1__VelocityGradient ** SOAP_FMAC4 soap_get_PointerToturb1__VelocityGradient(struct soap*, struct turb1__VelocityGradient **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerToturb1__Vector3P
-#define SOAP_TYPE_PointerToturb1__Vector3P (25)
+#define SOAP_TYPE_PointerToturb1__Vector3P (28)
 #endif
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerToturb1__Vector3P(struct soap*, struct turb1__Vector3P *const*);
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerToturb1__Vector3P(struct soap*, const char *, int, struct turb1__Vector3P *const*, const char *);
@@ -4403,6 +5074,25 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerToturb1__Vector3P(struct soap*, struct
 #endif
 
 SOAP_FMAC3 struct turb1__Vector3P ** SOAP_FMAC4 soap_get_PointerToturb1__Vector3P(struct soap*, struct turb1__Vector3P **, const char*, const char*);
+
+#ifndef SOAP_TYPE_PointerToturb1__PressureHessian
+#define SOAP_TYPE_PointerToturb1__PressureHessian (25)
+#endif
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerToturb1__PressureHessian(struct soap*, struct turb1__PressureHessian *const*);
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerToturb1__PressureHessian(struct soap*, const char *, int, struct turb1__PressureHessian *const*, const char *);
+SOAP_FMAC3 struct turb1__PressureHessian ** SOAP_FMAC4 soap_in_PointerToturb1__PressureHessian(struct soap*, const char*, struct turb1__PressureHessian **, const char*);
+
+#ifndef soap_write_PointerToturb1__PressureHessian
+#define soap_write_PointerToturb1__PressureHessian(soap, data) ( soap_begin_send(soap) || (soap_serialize_PointerToturb1__PressureHessian(soap, data), 0) || soap_put_PointerToturb1__PressureHessian(soap, data, "turb1:PressureHessian", NULL) || soap_end_send(soap) )
+#endif
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerToturb1__PressureHessian(struct soap*, struct turb1__PressureHessian *const*, const char*, const char*);
+
+#ifndef soap_read_PointerToturb1__PressureHessian
+#define soap_read_PointerToturb1__PressureHessian(soap, data) ( soap_begin_recv(soap) || !soap_get_PointerToturb1__PressureHessian(soap, data, NULL, NULL) || soap_end_recv(soap) )
+#endif
+
+SOAP_FMAC3 struct turb1__PressureHessian ** SOAP_FMAC4 soap_get_PointerToturb1__PressureHessian(struct soap*, struct turb1__PressureHessian **, const char*, const char*);
 
 #ifndef SOAP_TYPE_PointerToturb1__Pressure
 #define SOAP_TYPE_PointerToturb1__Pressure (22)

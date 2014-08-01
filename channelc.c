@@ -25,7 +25,7 @@
 
 int main(int argc, char *argv[]) {
 
-  char * authtoken = "edu.jhu.pha.turbulence.testing-201311";
+  char * authtoken = "edu.jhu.pha.turbulence.testing-201406";
   char * dataset = "channel";
   enum SpatialInterpolation spatialInterp = Lag6;
   enum TemporalInterpolation temporalInterp = NoTInt;

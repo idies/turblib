@@ -56,7 +56,7 @@ OBJ =	soapC.o \
 	stdsoap2.o \
         turblib.o
 
-all: turbc turbf mhdc mhdf channelc channelf
+all: turbc turbf mhdc mhdf channelc channelf mixingc mixingf
 
 mhdc : $(OBJ) mhdc.o
 	 $(CC) -o $@ $(OBJ) mhdc.o $(LDLIBS)
@@ -91,6 +91,17 @@ channelf : $(OBJ) channelf.o
 channelf.o : channelf.f90
 	 $(FC) -c channelf.f90
 
+mixingc : $(OBJ) mixingc.o
+	 $(CC) -o $@ $(OBJ) mixingc.o $(LDLIBS)
+
+mixingc.o: compiler_flags
+
+mixingf : $(OBJ) mixingf.o
+	 $(FC) -o $@ $(OBJ) mixingf.o $(LDLIBS)
+
+mixingf.o : mixingf.f90
+	 $(FC) -c mixingf.f90
+
 stdsoap2.o: stdsoap2.c
 	$(CC) $(CFLAGS) -c $<
 
@@ -123,7 +134,7 @@ prodtestwsdl:
 	soapcpp2 -CLcx -2 TurbulenceService.h
 
 clean:
-	$(RM) *.o *.exe turbf turbc mhdc mhdf channelc channelf compiler_flags
+	$(RM) *.o *.exe turbf turbc mhdc mhdf channelc channelf mixingc mixingf compiler_flags
 
 spotless: clean
 	$(RM) soapClient.c TurbulenceServiceSoap.nsmap soapH.h TurbulenceServiceSoap12.nsmap soapStub.h soapC.c TurbulenceService.h

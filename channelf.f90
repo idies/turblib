@@ -47,7 +47,7 @@ program TurbTest
   ! If you need one, please visit http://turbulence.pha.jhu.edu/
   ! (We just want to know a bit about our users!)
   !
-  character(*), parameter :: authkey = 'edu.jhu.pha.turbulence.testing-201311' // CHAR(0)
+  character(*), parameter :: authkey = 'edu.jhu.pha.turbulence.testing-201406' // CHAR(0)
 
   real(RP), parameter :: time = 0.364_RP;
 

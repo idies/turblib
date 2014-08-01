@@ -19,7 +19,7 @@ compiling, linking, and/or using OpenSSL is allowed.
 extern "C" {
 #endif
 
-SOAP_SOURCE_STAMP("@(#) soapC.c ver 2.8.8 2013-11-19 14:06:44 GMT")
+SOAP_SOURCE_STAMP("@(#) soapC.c ver 2.8.8 2014-08-01 18:48:23 GMT")
 
 
 #ifndef WITH_NOGLOBAL
@@ -202,6 +202,10 @@ SOAP_FMAC3 void * SOAP_FMAC4 soap_getelement(struct soap *soap, int *type)
 		return soap_in_turb1__TemporalInterpolation(soap, NULL, NULL, "turb1:TemporalInterpolation");
 	case SOAP_TYPE_turb1__SpatialInterpolation:
 		return soap_in_turb1__SpatialInterpolation(soap, NULL, NULL, "turb1:SpatialInterpolation");
+	case SOAP_TYPE_turb1__ThresholdInfo:
+		return soap_in_turb1__ThresholdInfo(soap, NULL, NULL, "turb1:ThresholdInfo");
+	case SOAP_TYPE_turb1__ArrayOfThresholdInfo:
+		return soap_in_turb1__ArrayOfThresholdInfo(soap, NULL, NULL, "turb1:ArrayOfThresholdInfo");
 	case SOAP_TYPE_turb1__SGSTensor:
 		return soap_in_turb1__SGSTensor(soap, NULL, NULL, "turb1:SGSTensor");
 	case SOAP_TYPE_turb1__ArrayOfSGSTensor:
@@ -210,10 +214,6 @@ SOAP_FMAC3 void * SOAP_FMAC4 soap_getelement(struct soap *soap, int *type)
 		return soap_in_turb1__VelocityHessian(soap, NULL, NULL, "turb1:VelocityHessian");
 	case SOAP_TYPE_turb1__ArrayOfVelocityHessian:
 		return soap_in_turb1__ArrayOfVelocityHessian(soap, NULL, NULL, "turb1:ArrayOfVelocityHessian");
-	case SOAP_TYPE_turb1__PressureHessian:
-		return soap_in_turb1__PressureHessian(soap, NULL, NULL, "turb1:PressureHessian");
-	case SOAP_TYPE_turb1__ArrayOfPressureHessian:
-		return soap_in_turb1__ArrayOfPressureHessian(soap, NULL, NULL, "turb1:ArrayOfPressureHessian");
 	case SOAP_TYPE_turb1__VelocityGradient:
 		return soap_in_turb1__VelocityGradient(soap, NULL, NULL, "turb1:VelocityGradient");
 	case SOAP_TYPE_turb1__ArrayOfVelocityGradient:
@@ -222,6 +222,10 @@ SOAP_FMAC3 void * SOAP_FMAC4 soap_getelement(struct soap *soap, int *type)
 		return soap_in_turb1__Vector3P(soap, NULL, NULL, "turb1:Vector3P");
 	case SOAP_TYPE_turb1__ArrayOfVector3P:
 		return soap_in_turb1__ArrayOfVector3P(soap, NULL, NULL, "turb1:ArrayOfVector3P");
+	case SOAP_TYPE_turb1__PressureHessian:
+		return soap_in_turb1__PressureHessian(soap, NULL, NULL, "turb1:PressureHessian");
+	case SOAP_TYPE_turb1__ArrayOfPressureHessian:
+		return soap_in_turb1__ArrayOfPressureHessian(soap, NULL, NULL, "turb1:ArrayOfPressureHessian");
 	case SOAP_TYPE_turb1__Pressure:
 		return soap_in_turb1__Pressure(soap, NULL, NULL, "turb1:Pressure");
 	case SOAP_TYPE_turb1__ArrayOfPressure:
@@ -240,6 +244,10 @@ SOAP_FMAC3 void * SOAP_FMAC4 soap_getelement(struct soap *soap, int *type)
 		return soap_in_PointerTo_turb1__GetLaplacianOfGradientResponse(soap, NULL, NULL, "turb1:GetLaplacianOfGradientResponse");
 	case SOAP_TYPE_PointerTo_turb1__GetLaplacianOfGradient:
 		return soap_in_PointerTo_turb1__GetLaplacianOfGradient(soap, NULL, NULL, "turb1:GetLaplacianOfGradient");
+	case SOAP_TYPE_PointerTo_turb1__GetThresholdResponse:
+		return soap_in_PointerTo_turb1__GetThresholdResponse(soap, NULL, NULL, "turb1:GetThresholdResponse");
+	case SOAP_TYPE_PointerTo_turb1__GetThreshold:
+		return soap_in_PointerTo_turb1__GetThreshold(soap, NULL, NULL, "turb1:GetThreshold");
 	case SOAP_TYPE_PointerTo_turb1__GetBoxFilterGradientResponse:
 		return soap_in_PointerTo_turb1__GetBoxFilterGradientResponse(soap, NULL, NULL, "turb1:GetBoxFilterGradientResponse");
 	case SOAP_TYPE_PointerTo_turb1__GetBoxFilterGradient:
@@ -308,6 +316,22 @@ SOAP_FMAC3 void * SOAP_FMAC4 soap_getelement(struct soap *soap, int *type)
 		return soap_in_PointerTo_turb1__GetForceResponse(soap, NULL, NULL, "turb1:GetForceResponse");
 	case SOAP_TYPE_PointerTo_turb1__GetForce:
 		return soap_in_PointerTo_turb1__GetForce(soap, NULL, NULL, "turb1:GetForce");
+	case SOAP_TYPE_PointerTo_turb1__GetRawDensityResponse:
+		return soap_in_PointerTo_turb1__GetRawDensityResponse(soap, NULL, NULL, "turb1:GetRawDensityResponse");
+	case SOAP_TYPE_PointerTo_turb1__GetRawDensity:
+		return soap_in_PointerTo_turb1__GetRawDensity(soap, NULL, NULL, "turb1:GetRawDensity");
+	case SOAP_TYPE_PointerTo_turb1__GetDensityHessianResponse:
+		return soap_in_PointerTo_turb1__GetDensityHessianResponse(soap, NULL, NULL, "turb1:GetDensityHessianResponse");
+	case SOAP_TYPE_PointerTo_turb1__GetDensityHessian:
+		return soap_in_PointerTo_turb1__GetDensityHessian(soap, NULL, NULL, "turb1:GetDensityHessian");
+	case SOAP_TYPE_PointerTo_turb1__GetDensityGradientResponse:
+		return soap_in_PointerTo_turb1__GetDensityGradientResponse(soap, NULL, NULL, "turb1:GetDensityGradientResponse");
+	case SOAP_TYPE_PointerTo_turb1__GetDensityGradient:
+		return soap_in_PointerTo_turb1__GetDensityGradient(soap, NULL, NULL, "turb1:GetDensityGradient");
+	case SOAP_TYPE_PointerTo_turb1__GetDensityResponse:
+		return soap_in_PointerTo_turb1__GetDensityResponse(soap, NULL, NULL, "turb1:GetDensityResponse");
+	case SOAP_TYPE_PointerTo_turb1__GetDensity:
+		return soap_in_PointerTo_turb1__GetDensity(soap, NULL, NULL, "turb1:GetDensity");
 	case SOAP_TYPE_PointerTo_turb1__GetRawVectorPotentialResponse:
 		return soap_in_PointerTo_turb1__GetRawVectorPotentialResponse(soap, NULL, NULL, "turb1:GetRawVectorPotentialResponse");
 	case SOAP_TYPE_PointerTo_turb1__GetRawVectorPotential:
@@ -348,16 +372,18 @@ SOAP_FMAC3 void * SOAP_FMAC4 soap_getelement(struct soap *soap, int *type)
 		return soap_in_PointerTo_turb1__NullOpResponse(soap, NULL, NULL, "turb1:NullOpResponse");
 	case SOAP_TYPE_PointerTo_turb1__NullOp:
 		return soap_in_PointerTo_turb1__NullOp(soap, NULL, NULL, "turb1:NullOp");
+	case SOAP_TYPE_PointerToturb1__ArrayOfThresholdInfo:
+		return soap_in_PointerToturb1__ArrayOfThresholdInfo(soap, NULL, NULL, "turb1:ArrayOfThresholdInfo");
 	case SOAP_TYPE_PointerToturb1__ArrayOfSGSTensor:
 		return soap_in_PointerToturb1__ArrayOfSGSTensor(soap, NULL, NULL, "turb1:ArrayOfSGSTensor");
 	case SOAP_TYPE_PointerToturb1__ArrayOfVelocityHessian:
 		return soap_in_PointerToturb1__ArrayOfVelocityHessian(soap, NULL, NULL, "turb1:ArrayOfVelocityHessian");
-	case SOAP_TYPE_PointerToturb1__ArrayOfPressureHessian:
-		return soap_in_PointerToturb1__ArrayOfPressureHessian(soap, NULL, NULL, "turb1:ArrayOfPressureHessian");
 	case SOAP_TYPE_PointerToturb1__ArrayOfVelocityGradient:
 		return soap_in_PointerToturb1__ArrayOfVelocityGradient(soap, NULL, NULL, "turb1:ArrayOfVelocityGradient");
 	case SOAP_TYPE_PointerToturb1__ArrayOfVector3P:
 		return soap_in_PointerToturb1__ArrayOfVector3P(soap, NULL, NULL, "turb1:ArrayOfVector3P");
+	case SOAP_TYPE_PointerToturb1__ArrayOfPressureHessian:
+		return soap_in_PointerToturb1__ArrayOfPressureHessian(soap, NULL, NULL, "turb1:ArrayOfPressureHessian");
 	case SOAP_TYPE_PointerToturb1__ArrayOfPressure:
 		return soap_in_PointerToturb1__ArrayOfPressure(soap, NULL, NULL, "turb1:ArrayOfPressure");
 	case SOAP_TYPE_PointerToxsd__base64Binary:
@@ -366,16 +392,18 @@ SOAP_FMAC3 void * SOAP_FMAC4 soap_getelement(struct soap *soap, int *type)
 		return soap_in_PointerToturb1__ArrayOfVector3(soap, NULL, NULL, "turb1:ArrayOfVector3");
 	case SOAP_TYPE_PointerToturb1__ArrayOfPoint3:
 		return soap_in_PointerToturb1__ArrayOfPoint3(soap, NULL, NULL, "turb1:ArrayOfPoint3");
+	case SOAP_TYPE_PointerToturb1__ThresholdInfo:
+		return soap_in_PointerToturb1__ThresholdInfo(soap, NULL, NULL, "turb1:ThresholdInfo");
 	case SOAP_TYPE_PointerToturb1__SGSTensor:
 		return soap_in_PointerToturb1__SGSTensor(soap, NULL, NULL, "turb1:SGSTensor");
 	case SOAP_TYPE_PointerToturb1__VelocityHessian:
 		return soap_in_PointerToturb1__VelocityHessian(soap, NULL, NULL, "turb1:VelocityHessian");
-	case SOAP_TYPE_PointerToturb1__PressureHessian:
-		return soap_in_PointerToturb1__PressureHessian(soap, NULL, NULL, "turb1:PressureHessian");
 	case SOAP_TYPE_PointerToturb1__VelocityGradient:
 		return soap_in_PointerToturb1__VelocityGradient(soap, NULL, NULL, "turb1:VelocityGradient");
 	case SOAP_TYPE_PointerToturb1__Vector3P:
 		return soap_in_PointerToturb1__Vector3P(soap, NULL, NULL, "turb1:Vector3P");
+	case SOAP_TYPE_PointerToturb1__PressureHessian:
+		return soap_in_PointerToturb1__PressureHessian(soap, NULL, NULL, "turb1:PressureHessian");
 	case SOAP_TYPE_PointerToturb1__Pressure:
 		return soap_in_PointerToturb1__Pressure(soap, NULL, NULL, "turb1:Pressure");
 	case SOAP_TYPE_PointerToturb1__Vector3:
@@ -426,6 +454,14 @@ SOAP_FMAC3 void * SOAP_FMAC4 soap_getelement(struct soap *soap, int *type)
 		{	*type = SOAP_TYPE_turb1__SpatialInterpolation;
 			return soap_in_turb1__SpatialInterpolation(soap, NULL, NULL, NULL);
 		}
+		if (!soap_match_tag(soap, t, "turb1:ThresholdInfo"))
+		{	*type = SOAP_TYPE_turb1__ThresholdInfo;
+			return soap_in_turb1__ThresholdInfo(soap, NULL, NULL, NULL);
+		}
+		if (!soap_match_tag(soap, t, "turb1:ArrayOfThresholdInfo"))
+		{	*type = SOAP_TYPE_turb1__ArrayOfThresholdInfo;
+			return soap_in_turb1__ArrayOfThresholdInfo(soap, NULL, NULL, NULL);
+		}
 		if (!soap_match_tag(soap, t, "turb1:SGSTensor"))
 		{	*type = SOAP_TYPE_turb1__SGSTensor;
 			return soap_in_turb1__SGSTensor(soap, NULL, NULL, NULL);
@@ -442,14 +478,6 @@ SOAP_FMAC3 void * SOAP_FMAC4 soap_getelement(struct soap *soap, int *type)
 		{	*type = SOAP_TYPE_turb1__ArrayOfVelocityHessian;
 			return soap_in_turb1__ArrayOfVelocityHessian(soap, NULL, NULL, NULL);
 		}
-		if (!soap_match_tag(soap, t, "turb1:PressureHessian"))
-		{	*type = SOAP_TYPE_turb1__PressureHessian;
-			return soap_in_turb1__PressureHessian(soap, NULL, NULL, NULL);
-		}
-		if (!soap_match_tag(soap, t, "turb1:ArrayOfPressureHessian"))
-		{	*type = SOAP_TYPE_turb1__ArrayOfPressureHessian;
-			return soap_in_turb1__ArrayOfPressureHessian(soap, NULL, NULL, NULL);
-		}
 		if (!soap_match_tag(soap, t, "turb1:VelocityGradient"))
 		{	*type = SOAP_TYPE_turb1__VelocityGradient;
 			return soap_in_turb1__VelocityGradient(soap, NULL, NULL, NULL);
@@ -465,6 +493,14 @@ SOAP_FMAC3 void * SOAP_FMAC4 soap_getelement(struct soap *soap, int *type)
 		if (!soap_match_tag(soap, t, "turb1:ArrayOfVector3P"))
 		{	*type = SOAP_TYPE_turb1__ArrayOfVector3P;
 			return soap_in_turb1__ArrayOfVector3P(soap, NULL, NULL, NULL);
+		}
+		if (!soap_match_tag(soap, t, "turb1:PressureHessian"))
+		{	*type = SOAP_TYPE_turb1__PressureHessian;
+			return soap_in_turb1__PressureHessian(soap, NULL, NULL, NULL);
+		}
+		if (!soap_match_tag(soap, t, "turb1:ArrayOfPressureHessian"))
+		{	*type = SOAP_TYPE_turb1__ArrayOfPressureHessian;
+			return soap_in_turb1__ArrayOfPressureHessian(soap, NULL, NULL, NULL);
 		}
 		if (!soap_match_tag(soap, t, "turb1:Pressure"))
 		{	*type = SOAP_TYPE_turb1__Pressure;
@@ -514,6 +550,14 @@ SOAP_FMAC3 void * SOAP_FMAC4 soap_getelement(struct soap *soap, int *type)
 		if (!soap_match_tag(soap, t, "turb1:GetLaplacianOfGradient"))
 		{	*type = SOAP_TYPE__turb1__GetLaplacianOfGradient;
 			return soap_in__turb1__GetLaplacianOfGradient(soap, NULL, NULL, NULL);
+		}
+		if (!soap_match_tag(soap, t, "turb1:GetThresholdResponse"))
+		{	*type = SOAP_TYPE__turb1__GetThresholdResponse;
+			return soap_in__turb1__GetThresholdResponse(soap, NULL, NULL, NULL);
+		}
+		if (!soap_match_tag(soap, t, "turb1:GetThreshold"))
+		{	*type = SOAP_TYPE__turb1__GetThreshold;
+			return soap_in__turb1__GetThreshold(soap, NULL, NULL, NULL);
 		}
 		if (!soap_match_tag(soap, t, "turb1:GetBoxFilterGradientResponse"))
 		{	*type = SOAP_TYPE__turb1__GetBoxFilterGradientResponse;
@@ -650,6 +694,38 @@ SOAP_FMAC3 void * SOAP_FMAC4 soap_getelement(struct soap *soap, int *type)
 		if (!soap_match_tag(soap, t, "turb1:GetForce"))
 		{	*type = SOAP_TYPE__turb1__GetForce;
 			return soap_in__turb1__GetForce(soap, NULL, NULL, NULL);
+		}
+		if (!soap_match_tag(soap, t, "turb1:GetRawDensityResponse"))
+		{	*type = SOAP_TYPE__turb1__GetRawDensityResponse;
+			return soap_in__turb1__GetRawDensityResponse(soap, NULL, NULL, NULL);
+		}
+		if (!soap_match_tag(soap, t, "turb1:GetRawDensity"))
+		{	*type = SOAP_TYPE__turb1__GetRawDensity;
+			return soap_in__turb1__GetRawDensity(soap, NULL, NULL, NULL);
+		}
+		if (!soap_match_tag(soap, t, "turb1:GetDensityHessianResponse"))
+		{	*type = SOAP_TYPE__turb1__GetDensityHessianResponse;
+			return soap_in__turb1__GetDensityHessianResponse(soap, NULL, NULL, NULL);
+		}
+		if (!soap_match_tag(soap, t, "turb1:GetDensityHessian"))
+		{	*type = SOAP_TYPE__turb1__GetDensityHessian;
+			return soap_in__turb1__GetDensityHessian(soap, NULL, NULL, NULL);
+		}
+		if (!soap_match_tag(soap, t, "turb1:GetDensityGradientResponse"))
+		{	*type = SOAP_TYPE__turb1__GetDensityGradientResponse;
+			return soap_in__turb1__GetDensityGradientResponse(soap, NULL, NULL, NULL);
+		}
+		if (!soap_match_tag(soap, t, "turb1:GetDensityGradient"))
+		{	*type = SOAP_TYPE__turb1__GetDensityGradient;
+			return soap_in__turb1__GetDensityGradient(soap, NULL, NULL, NULL);
+		}
+		if (!soap_match_tag(soap, t, "turb1:GetDensityResponse"))
+		{	*type = SOAP_TYPE__turb1__GetDensityResponse;
+			return soap_in__turb1__GetDensityResponse(soap, NULL, NULL, NULL);
+		}
+		if (!soap_match_tag(soap, t, "turb1:GetDensity"))
+		{	*type = SOAP_TYPE__turb1__GetDensity;
+			return soap_in__turb1__GetDensity(soap, NULL, NULL, NULL);
 		}
 		if (!soap_match_tag(soap, t, "turb1:GetRawVectorPotentialResponse"))
 		{	*type = SOAP_TYPE__turb1__GetRawVectorPotentialResponse;
@@ -806,6 +882,10 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_putelement(struct soap *soap, const void *ptr, co
 		return soap_out__turb1__GetLaplacianOfGradientResponse(soap, "turb1:GetLaplacianOfGradientResponse", id, (const struct _turb1__GetLaplacianOfGradientResponse *)ptr, NULL);
 	case SOAP_TYPE__turb1__GetLaplacianOfGradient:
 		return soap_out__turb1__GetLaplacianOfGradient(soap, "turb1:GetLaplacianOfGradient", id, (const struct _turb1__GetLaplacianOfGradient *)ptr, NULL);
+	case SOAP_TYPE__turb1__GetThresholdResponse:
+		return soap_out__turb1__GetThresholdResponse(soap, "turb1:GetThresholdResponse", id, (const struct _turb1__GetThresholdResponse *)ptr, NULL);
+	case SOAP_TYPE__turb1__GetThreshold:
+		return soap_out__turb1__GetThreshold(soap, "turb1:GetThreshold", id, (const struct _turb1__GetThreshold *)ptr, NULL);
 	case SOAP_TYPE__turb1__GetBoxFilterGradientResponse:
 		return soap_out__turb1__GetBoxFilterGradientResponse(soap, "turb1:GetBoxFilterGradientResponse", id, (const struct _turb1__GetBoxFilterGradientResponse *)ptr, NULL);
 	case SOAP_TYPE__turb1__GetBoxFilterGradient:
@@ -874,6 +954,22 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_putelement(struct soap *soap, const void *ptr, co
 		return soap_out__turb1__GetForceResponse(soap, "turb1:GetForceResponse", id, (const struct _turb1__GetForceResponse *)ptr, NULL);
 	case SOAP_TYPE__turb1__GetForce:
 		return soap_out__turb1__GetForce(soap, "turb1:GetForce", id, (const struct _turb1__GetForce *)ptr, NULL);
+	case SOAP_TYPE__turb1__GetRawDensityResponse:
+		return soap_out__turb1__GetRawDensityResponse(soap, "turb1:GetRawDensityResponse", id, (const struct _turb1__GetRawDensityResponse *)ptr, NULL);
+	case SOAP_TYPE__turb1__GetRawDensity:
+		return soap_out__turb1__GetRawDensity(soap, "turb1:GetRawDensity", id, (const struct _turb1__GetRawDensity *)ptr, NULL);
+	case SOAP_TYPE__turb1__GetDensityHessianResponse:
+		return soap_out__turb1__GetDensityHessianResponse(soap, "turb1:GetDensityHessianResponse", id, (const struct _turb1__GetDensityHessianResponse *)ptr, NULL);
+	case SOAP_TYPE__turb1__GetDensityHessian:
+		return soap_out__turb1__GetDensityHessian(soap, "turb1:GetDensityHessian", id, (const struct _turb1__GetDensityHessian *)ptr, NULL);
+	case SOAP_TYPE__turb1__GetDensityGradientResponse:
+		return soap_out__turb1__GetDensityGradientResponse(soap, "turb1:GetDensityGradientResponse", id, (const struct _turb1__GetDensityGradientResponse *)ptr, NULL);
+	case SOAP_TYPE__turb1__GetDensityGradient:
+		return soap_out__turb1__GetDensityGradient(soap, "turb1:GetDensityGradient", id, (const struct _turb1__GetDensityGradient *)ptr, NULL);
+	case SOAP_TYPE__turb1__GetDensityResponse:
+		return soap_out__turb1__GetDensityResponse(soap, "turb1:GetDensityResponse", id, (const struct _turb1__GetDensityResponse *)ptr, NULL);
+	case SOAP_TYPE__turb1__GetDensity:
+		return soap_out__turb1__GetDensity(soap, "turb1:GetDensity", id, (const struct _turb1__GetDensity *)ptr, NULL);
 	case SOAP_TYPE__turb1__GetRawVectorPotentialResponse:
 		return soap_out__turb1__GetRawVectorPotentialResponse(soap, "turb1:GetRawVectorPotentialResponse", id, (const struct _turb1__GetRawVectorPotentialResponse *)ptr, NULL);
 	case SOAP_TYPE__turb1__GetRawVectorPotential:
@@ -914,6 +1010,10 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_putelement(struct soap *soap, const void *ptr, co
 		return soap_out__turb1__NullOpResponse(soap, "turb1:NullOpResponse", id, (const struct _turb1__NullOpResponse *)ptr, NULL);
 	case SOAP_TYPE__turb1__NullOp:
 		return soap_out__turb1__NullOp(soap, "turb1:NullOp", id, (const struct _turb1__NullOp *)ptr, NULL);
+	case SOAP_TYPE_turb1__ThresholdInfo:
+		return soap_out_turb1__ThresholdInfo(soap, tag, id, (const struct turb1__ThresholdInfo *)ptr, "turb1:ThresholdInfo");
+	case SOAP_TYPE_turb1__ArrayOfThresholdInfo:
+		return soap_out_turb1__ArrayOfThresholdInfo(soap, tag, id, (const struct turb1__ArrayOfThresholdInfo *)ptr, "turb1:ArrayOfThresholdInfo");
 	case SOAP_TYPE_turb1__SGSTensor:
 		return soap_out_turb1__SGSTensor(soap, tag, id, (const struct turb1__SGSTensor *)ptr, "turb1:SGSTensor");
 	case SOAP_TYPE_turb1__ArrayOfSGSTensor:
@@ -922,10 +1022,6 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_putelement(struct soap *soap, const void *ptr, co
 		return soap_out_turb1__VelocityHessian(soap, tag, id, (const struct turb1__VelocityHessian *)ptr, "turb1:VelocityHessian");
 	case SOAP_TYPE_turb1__ArrayOfVelocityHessian:
 		return soap_out_turb1__ArrayOfVelocityHessian(soap, tag, id, (const struct turb1__ArrayOfVelocityHessian *)ptr, "turb1:ArrayOfVelocityHessian");
-	case SOAP_TYPE_turb1__PressureHessian:
-		return soap_out_turb1__PressureHessian(soap, tag, id, (const struct turb1__PressureHessian *)ptr, "turb1:PressureHessian");
-	case SOAP_TYPE_turb1__ArrayOfPressureHessian:
-		return soap_out_turb1__ArrayOfPressureHessian(soap, tag, id, (const struct turb1__ArrayOfPressureHessian *)ptr, "turb1:ArrayOfPressureHessian");
 	case SOAP_TYPE_turb1__VelocityGradient:
 		return soap_out_turb1__VelocityGradient(soap, tag, id, (const struct turb1__VelocityGradient *)ptr, "turb1:VelocityGradient");
 	case SOAP_TYPE_turb1__ArrayOfVelocityGradient:
@@ -934,6 +1030,10 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_putelement(struct soap *soap, const void *ptr, co
 		return soap_out_turb1__Vector3P(soap, tag, id, (const struct turb1__Vector3P *)ptr, "turb1:Vector3P");
 	case SOAP_TYPE_turb1__ArrayOfVector3P:
 		return soap_out_turb1__ArrayOfVector3P(soap, tag, id, (const struct turb1__ArrayOfVector3P *)ptr, "turb1:ArrayOfVector3P");
+	case SOAP_TYPE_turb1__PressureHessian:
+		return soap_out_turb1__PressureHessian(soap, tag, id, (const struct turb1__PressureHessian *)ptr, "turb1:PressureHessian");
+	case SOAP_TYPE_turb1__ArrayOfPressureHessian:
+		return soap_out_turb1__ArrayOfPressureHessian(soap, tag, id, (const struct turb1__ArrayOfPressureHessian *)ptr, "turb1:ArrayOfPressureHessian");
 	case SOAP_TYPE_turb1__Pressure:
 		return soap_out_turb1__Pressure(soap, tag, id, (const struct turb1__Pressure *)ptr, "turb1:Pressure");
 	case SOAP_TYPE_turb1__ArrayOfPressure:
@@ -952,6 +1052,10 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_putelement(struct soap *soap, const void *ptr, co
 		return soap_out_PointerTo_turb1__GetLaplacianOfGradientResponse(soap, tag, id, (struct _turb1__GetLaplacianOfGradientResponse *const*)ptr, "turb1:GetLaplacianOfGradientResponse");
 	case SOAP_TYPE_PointerTo_turb1__GetLaplacianOfGradient:
 		return soap_out_PointerTo_turb1__GetLaplacianOfGradient(soap, tag, id, (struct _turb1__GetLaplacianOfGradient *const*)ptr, "turb1:GetLaplacianOfGradient");
+	case SOAP_TYPE_PointerTo_turb1__GetThresholdResponse:
+		return soap_out_PointerTo_turb1__GetThresholdResponse(soap, tag, id, (struct _turb1__GetThresholdResponse *const*)ptr, "turb1:GetThresholdResponse");
+	case SOAP_TYPE_PointerTo_turb1__GetThreshold:
+		return soap_out_PointerTo_turb1__GetThreshold(soap, tag, id, (struct _turb1__GetThreshold *const*)ptr, "turb1:GetThreshold");
 	case SOAP_TYPE_PointerTo_turb1__GetBoxFilterGradientResponse:
 		return soap_out_PointerTo_turb1__GetBoxFilterGradientResponse(soap, tag, id, (struct _turb1__GetBoxFilterGradientResponse *const*)ptr, "turb1:GetBoxFilterGradientResponse");
 	case SOAP_TYPE_PointerTo_turb1__GetBoxFilterGradient:
@@ -1020,6 +1124,22 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_putelement(struct soap *soap, const void *ptr, co
 		return soap_out_PointerTo_turb1__GetForceResponse(soap, tag, id, (struct _turb1__GetForceResponse *const*)ptr, "turb1:GetForceResponse");
 	case SOAP_TYPE_PointerTo_turb1__GetForce:
 		return soap_out_PointerTo_turb1__GetForce(soap, tag, id, (struct _turb1__GetForce *const*)ptr, "turb1:GetForce");
+	case SOAP_TYPE_PointerTo_turb1__GetRawDensityResponse:
+		return soap_out_PointerTo_turb1__GetRawDensityResponse(soap, tag, id, (struct _turb1__GetRawDensityResponse *const*)ptr, "turb1:GetRawDensityResponse");
+	case SOAP_TYPE_PointerTo_turb1__GetRawDensity:
+		return soap_out_PointerTo_turb1__GetRawDensity(soap, tag, id, (struct _turb1__GetRawDensity *const*)ptr, "turb1:GetRawDensity");
+	case SOAP_TYPE_PointerTo_turb1__GetDensityHessianResponse:
+		return soap_out_PointerTo_turb1__GetDensityHessianResponse(soap, tag, id, (struct _turb1__GetDensityHessianResponse *const*)ptr, "turb1:GetDensityHessianResponse");
+	case SOAP_TYPE_PointerTo_turb1__GetDensityHessian:
+		return soap_out_PointerTo_turb1__GetDensityHessian(soap, tag, id, (struct _turb1__GetDensityHessian *const*)ptr, "turb1:GetDensityHessian");
+	case SOAP_TYPE_PointerTo_turb1__GetDensityGradientResponse:
+		return soap_out_PointerTo_turb1__GetDensityGradientResponse(soap, tag, id, (struct _turb1__GetDensityGradientResponse *const*)ptr, "turb1:GetDensityGradientResponse");
+	case SOAP_TYPE_PointerTo_turb1__GetDensityGradient:
+		return soap_out_PointerTo_turb1__GetDensityGradient(soap, tag, id, (struct _turb1__GetDensityGradient *const*)ptr, "turb1:GetDensityGradient");
+	case SOAP_TYPE_PointerTo_turb1__GetDensityResponse:
+		return soap_out_PointerTo_turb1__GetDensityResponse(soap, tag, id, (struct _turb1__GetDensityResponse *const*)ptr, "turb1:GetDensityResponse");
+	case SOAP_TYPE_PointerTo_turb1__GetDensity:
+		return soap_out_PointerTo_turb1__GetDensity(soap, tag, id, (struct _turb1__GetDensity *const*)ptr, "turb1:GetDensity");
 	case SOAP_TYPE_PointerTo_turb1__GetRawVectorPotentialResponse:
 		return soap_out_PointerTo_turb1__GetRawVectorPotentialResponse(soap, tag, id, (struct _turb1__GetRawVectorPotentialResponse *const*)ptr, "turb1:GetRawVectorPotentialResponse");
 	case SOAP_TYPE_PointerTo_turb1__GetRawVectorPotential:
@@ -1060,16 +1180,18 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_putelement(struct soap *soap, const void *ptr, co
 		return soap_out_PointerTo_turb1__NullOpResponse(soap, tag, id, (struct _turb1__NullOpResponse *const*)ptr, "turb1:NullOpResponse");
 	case SOAP_TYPE_PointerTo_turb1__NullOp:
 		return soap_out_PointerTo_turb1__NullOp(soap, tag, id, (struct _turb1__NullOp *const*)ptr, "turb1:NullOp");
+	case SOAP_TYPE_PointerToturb1__ArrayOfThresholdInfo:
+		return soap_out_PointerToturb1__ArrayOfThresholdInfo(soap, tag, id, (struct turb1__ArrayOfThresholdInfo *const*)ptr, "turb1:ArrayOfThresholdInfo");
 	case SOAP_TYPE_PointerToturb1__ArrayOfSGSTensor:
 		return soap_out_PointerToturb1__ArrayOfSGSTensor(soap, tag, id, (struct turb1__ArrayOfSGSTensor *const*)ptr, "turb1:ArrayOfSGSTensor");
 	case SOAP_TYPE_PointerToturb1__ArrayOfVelocityHessian:
 		return soap_out_PointerToturb1__ArrayOfVelocityHessian(soap, tag, id, (struct turb1__ArrayOfVelocityHessian *const*)ptr, "turb1:ArrayOfVelocityHessian");
-	case SOAP_TYPE_PointerToturb1__ArrayOfPressureHessian:
-		return soap_out_PointerToturb1__ArrayOfPressureHessian(soap, tag, id, (struct turb1__ArrayOfPressureHessian *const*)ptr, "turb1:ArrayOfPressureHessian");
 	case SOAP_TYPE_PointerToturb1__ArrayOfVelocityGradient:
 		return soap_out_PointerToturb1__ArrayOfVelocityGradient(soap, tag, id, (struct turb1__ArrayOfVelocityGradient *const*)ptr, "turb1:ArrayOfVelocityGradient");
 	case SOAP_TYPE_PointerToturb1__ArrayOfVector3P:
 		return soap_out_PointerToturb1__ArrayOfVector3P(soap, tag, id, (struct turb1__ArrayOfVector3P *const*)ptr, "turb1:ArrayOfVector3P");
+	case SOAP_TYPE_PointerToturb1__ArrayOfPressureHessian:
+		return soap_out_PointerToturb1__ArrayOfPressureHessian(soap, tag, id, (struct turb1__ArrayOfPressureHessian *const*)ptr, "turb1:ArrayOfPressureHessian");
 	case SOAP_TYPE_PointerToturb1__ArrayOfPressure:
 		return soap_out_PointerToturb1__ArrayOfPressure(soap, tag, id, (struct turb1__ArrayOfPressure *const*)ptr, "turb1:ArrayOfPressure");
 	case SOAP_TYPE_PointerToxsd__base64Binary:
@@ -1078,16 +1200,18 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_putelement(struct soap *soap, const void *ptr, co
 		return soap_out_PointerToturb1__ArrayOfVector3(soap, tag, id, (struct turb1__ArrayOfVector3 *const*)ptr, "turb1:ArrayOfVector3");
 	case SOAP_TYPE_PointerToturb1__ArrayOfPoint3:
 		return soap_out_PointerToturb1__ArrayOfPoint3(soap, tag, id, (struct turb1__ArrayOfPoint3 *const*)ptr, "turb1:ArrayOfPoint3");
+	case SOAP_TYPE_PointerToturb1__ThresholdInfo:
+		return soap_out_PointerToturb1__ThresholdInfo(soap, tag, id, (struct turb1__ThresholdInfo *const*)ptr, "turb1:ThresholdInfo");
 	case SOAP_TYPE_PointerToturb1__SGSTensor:
 		return soap_out_PointerToturb1__SGSTensor(soap, tag, id, (struct turb1__SGSTensor *const*)ptr, "turb1:SGSTensor");
 	case SOAP_TYPE_PointerToturb1__VelocityHessian:
 		return soap_out_PointerToturb1__VelocityHessian(soap, tag, id, (struct turb1__VelocityHessian *const*)ptr, "turb1:VelocityHessian");
-	case SOAP_TYPE_PointerToturb1__PressureHessian:
-		return soap_out_PointerToturb1__PressureHessian(soap, tag, id, (struct turb1__PressureHessian *const*)ptr, "turb1:PressureHessian");
 	case SOAP_TYPE_PointerToturb1__VelocityGradient:
 		return soap_out_PointerToturb1__VelocityGradient(soap, tag, id, (struct turb1__VelocityGradient *const*)ptr, "turb1:VelocityGradient");
 	case SOAP_TYPE_PointerToturb1__Vector3P:
 		return soap_out_PointerToturb1__Vector3P(soap, tag, id, (struct turb1__Vector3P *const*)ptr, "turb1:Vector3P");
+	case SOAP_TYPE_PointerToturb1__PressureHessian:
+		return soap_out_PointerToturb1__PressureHessian(soap, tag, id, (struct turb1__PressureHessian *const*)ptr, "turb1:PressureHessian");
 	case SOAP_TYPE_PointerToturb1__Pressure:
 		return soap_out_PointerToturb1__Pressure(soap, tag, id, (struct turb1__Pressure *const*)ptr, "turb1:Pressure");
 	case SOAP_TYPE_PointerToturb1__Vector3:
@@ -1113,6 +1237,9 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_markelement(struct soap *soap, const void *ptr, 
 	{
 	case SOAP_TYPE___turb3__GetLaplacianOfGradient:
 		soap_serialize___turb3__GetLaplacianOfGradient(soap, (const struct __turb3__GetLaplacianOfGradient *)ptr);
+		break;
+	case SOAP_TYPE___turb3__GetThreshold:
+		soap_serialize___turb3__GetThreshold(soap, (const struct __turb3__GetThreshold *)ptr);
 		break;
 	case SOAP_TYPE___turb3__GetBoxFilterGradient:
 		soap_serialize___turb3__GetBoxFilterGradient(soap, (const struct __turb3__GetBoxFilterGradient *)ptr);
@@ -1165,6 +1292,18 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_markelement(struct soap *soap, const void *ptr, 
 	case SOAP_TYPE___turb3__GetForce:
 		soap_serialize___turb3__GetForce(soap, (const struct __turb3__GetForce *)ptr);
 		break;
+	case SOAP_TYPE___turb3__GetRawDensity:
+		soap_serialize___turb3__GetRawDensity(soap, (const struct __turb3__GetRawDensity *)ptr);
+		break;
+	case SOAP_TYPE___turb3__GetDensityHessian:
+		soap_serialize___turb3__GetDensityHessian(soap, (const struct __turb3__GetDensityHessian *)ptr);
+		break;
+	case SOAP_TYPE___turb3__GetDensityGradient:
+		soap_serialize___turb3__GetDensityGradient(soap, (const struct __turb3__GetDensityGradient *)ptr);
+		break;
+	case SOAP_TYPE___turb3__GetDensity:
+		soap_serialize___turb3__GetDensity(soap, (const struct __turb3__GetDensity *)ptr);
+		break;
 	case SOAP_TYPE___turb3__GetRawVectorPotential:
 		soap_serialize___turb3__GetRawVectorPotential(soap, (const struct __turb3__GetRawVectorPotential *)ptr);
 		break;
@@ -1197,6 +1336,9 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_markelement(struct soap *soap, const void *ptr, 
 		break;
 	case SOAP_TYPE___turb2__GetLaplacianOfGradient:
 		soap_serialize___turb2__GetLaplacianOfGradient(soap, (const struct __turb2__GetLaplacianOfGradient *)ptr);
+		break;
+	case SOAP_TYPE___turb2__GetThreshold:
+		soap_serialize___turb2__GetThreshold(soap, (const struct __turb2__GetThreshold *)ptr);
 		break;
 	case SOAP_TYPE___turb2__GetBoxFilterGradient:
 		soap_serialize___turb2__GetBoxFilterGradient(soap, (const struct __turb2__GetBoxFilterGradient *)ptr);
@@ -1249,6 +1391,18 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_markelement(struct soap *soap, const void *ptr, 
 	case SOAP_TYPE___turb2__GetForce:
 		soap_serialize___turb2__GetForce(soap, (const struct __turb2__GetForce *)ptr);
 		break;
+	case SOAP_TYPE___turb2__GetRawDensity:
+		soap_serialize___turb2__GetRawDensity(soap, (const struct __turb2__GetRawDensity *)ptr);
+		break;
+	case SOAP_TYPE___turb2__GetDensityHessian:
+		soap_serialize___turb2__GetDensityHessian(soap, (const struct __turb2__GetDensityHessian *)ptr);
+		break;
+	case SOAP_TYPE___turb2__GetDensityGradient:
+		soap_serialize___turb2__GetDensityGradient(soap, (const struct __turb2__GetDensityGradient *)ptr);
+		break;
+	case SOAP_TYPE___turb2__GetDensity:
+		soap_serialize___turb2__GetDensity(soap, (const struct __turb2__GetDensity *)ptr);
+		break;
 	case SOAP_TYPE___turb2__GetRawVectorPotential:
 		soap_serialize___turb2__GetRawVectorPotential(soap, (const struct __turb2__GetRawVectorPotential *)ptr);
 		break;
@@ -1284,6 +1438,12 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_markelement(struct soap *soap, const void *ptr, 
 		break;
 	case SOAP_TYPE__turb1__GetLaplacianOfGradient:
 		soap_serialize__turb1__GetLaplacianOfGradient(soap, (const struct _turb1__GetLaplacianOfGradient *)ptr);
+		break;
+	case SOAP_TYPE__turb1__GetThresholdResponse:
+		soap_serialize__turb1__GetThresholdResponse(soap, (const struct _turb1__GetThresholdResponse *)ptr);
+		break;
+	case SOAP_TYPE__turb1__GetThreshold:
+		soap_serialize__turb1__GetThreshold(soap, (const struct _turb1__GetThreshold *)ptr);
 		break;
 	case SOAP_TYPE__turb1__GetBoxFilterGradientResponse:
 		soap_serialize__turb1__GetBoxFilterGradientResponse(soap, (const struct _turb1__GetBoxFilterGradientResponse *)ptr);
@@ -1387,6 +1547,30 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_markelement(struct soap *soap, const void *ptr, 
 	case SOAP_TYPE__turb1__GetForce:
 		soap_serialize__turb1__GetForce(soap, (const struct _turb1__GetForce *)ptr);
 		break;
+	case SOAP_TYPE__turb1__GetRawDensityResponse:
+		soap_serialize__turb1__GetRawDensityResponse(soap, (const struct _turb1__GetRawDensityResponse *)ptr);
+		break;
+	case SOAP_TYPE__turb1__GetRawDensity:
+		soap_serialize__turb1__GetRawDensity(soap, (const struct _turb1__GetRawDensity *)ptr);
+		break;
+	case SOAP_TYPE__turb1__GetDensityHessianResponse:
+		soap_serialize__turb1__GetDensityHessianResponse(soap, (const struct _turb1__GetDensityHessianResponse *)ptr);
+		break;
+	case SOAP_TYPE__turb1__GetDensityHessian:
+		soap_serialize__turb1__GetDensityHessian(soap, (const struct _turb1__GetDensityHessian *)ptr);
+		break;
+	case SOAP_TYPE__turb1__GetDensityGradientResponse:
+		soap_serialize__turb1__GetDensityGradientResponse(soap, (const struct _turb1__GetDensityGradientResponse *)ptr);
+		break;
+	case SOAP_TYPE__turb1__GetDensityGradient:
+		soap_serialize__turb1__GetDensityGradient(soap, (const struct _turb1__GetDensityGradient *)ptr);
+		break;
+	case SOAP_TYPE__turb1__GetDensityResponse:
+		soap_serialize__turb1__GetDensityResponse(soap, (const struct _turb1__GetDensityResponse *)ptr);
+		break;
+	case SOAP_TYPE__turb1__GetDensity:
+		soap_serialize__turb1__GetDensity(soap, (const struct _turb1__GetDensity *)ptr);
+		break;
 	case SOAP_TYPE__turb1__GetRawVectorPotentialResponse:
 		soap_serialize__turb1__GetRawVectorPotentialResponse(soap, (const struct _turb1__GetRawVectorPotentialResponse *)ptr);
 		break;
@@ -1447,6 +1631,12 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_markelement(struct soap *soap, const void *ptr, 
 	case SOAP_TYPE__turb1__NullOp:
 		soap_serialize__turb1__NullOp(soap, (const struct _turb1__NullOp *)ptr);
 		break;
+	case SOAP_TYPE_turb1__ThresholdInfo:
+		soap_serialize_turb1__ThresholdInfo(soap, (const struct turb1__ThresholdInfo *)ptr);
+		break;
+	case SOAP_TYPE_turb1__ArrayOfThresholdInfo:
+		soap_serialize_turb1__ArrayOfThresholdInfo(soap, (const struct turb1__ArrayOfThresholdInfo *)ptr);
+		break;
 	case SOAP_TYPE_turb1__SGSTensor:
 		soap_serialize_turb1__SGSTensor(soap, (const struct turb1__SGSTensor *)ptr);
 		break;
@@ -1459,12 +1649,6 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_markelement(struct soap *soap, const void *ptr, 
 	case SOAP_TYPE_turb1__ArrayOfVelocityHessian:
 		soap_serialize_turb1__ArrayOfVelocityHessian(soap, (const struct turb1__ArrayOfVelocityHessian *)ptr);
 		break;
-	case SOAP_TYPE_turb1__PressureHessian:
-		soap_serialize_turb1__PressureHessian(soap, (const struct turb1__PressureHessian *)ptr);
-		break;
-	case SOAP_TYPE_turb1__ArrayOfPressureHessian:
-		soap_serialize_turb1__ArrayOfPressureHessian(soap, (const struct turb1__ArrayOfPressureHessian *)ptr);
-		break;
 	case SOAP_TYPE_turb1__VelocityGradient:
 		soap_serialize_turb1__VelocityGradient(soap, (const struct turb1__VelocityGradient *)ptr);
 		break;
@@ -1476,6 +1660,12 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_markelement(struct soap *soap, const void *ptr, 
 		break;
 	case SOAP_TYPE_turb1__ArrayOfVector3P:
 		soap_serialize_turb1__ArrayOfVector3P(soap, (const struct turb1__ArrayOfVector3P *)ptr);
+		break;
+	case SOAP_TYPE_turb1__PressureHessian:
+		soap_serialize_turb1__PressureHessian(soap, (const struct turb1__PressureHessian *)ptr);
+		break;
+	case SOAP_TYPE_turb1__ArrayOfPressureHessian:
+		soap_serialize_turb1__ArrayOfPressureHessian(soap, (const struct turb1__ArrayOfPressureHessian *)ptr);
 		break;
 	case SOAP_TYPE_turb1__Pressure:
 		soap_serialize_turb1__Pressure(soap, (const struct turb1__Pressure *)ptr);
@@ -1503,6 +1693,12 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_markelement(struct soap *soap, const void *ptr, 
 		break;
 	case SOAP_TYPE_PointerTo_turb1__GetLaplacianOfGradient:
 		soap_serialize_PointerTo_turb1__GetLaplacianOfGradient(soap, (struct _turb1__GetLaplacianOfGradient *const*)ptr);
+		break;
+	case SOAP_TYPE_PointerTo_turb1__GetThresholdResponse:
+		soap_serialize_PointerTo_turb1__GetThresholdResponse(soap, (struct _turb1__GetThresholdResponse *const*)ptr);
+		break;
+	case SOAP_TYPE_PointerTo_turb1__GetThreshold:
+		soap_serialize_PointerTo_turb1__GetThreshold(soap, (struct _turb1__GetThreshold *const*)ptr);
 		break;
 	case SOAP_TYPE_PointerTo_turb1__GetBoxFilterGradientResponse:
 		soap_serialize_PointerTo_turb1__GetBoxFilterGradientResponse(soap, (struct _turb1__GetBoxFilterGradientResponse *const*)ptr);
@@ -1606,6 +1802,30 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_markelement(struct soap *soap, const void *ptr, 
 	case SOAP_TYPE_PointerTo_turb1__GetForce:
 		soap_serialize_PointerTo_turb1__GetForce(soap, (struct _turb1__GetForce *const*)ptr);
 		break;
+	case SOAP_TYPE_PointerTo_turb1__GetRawDensityResponse:
+		soap_serialize_PointerTo_turb1__GetRawDensityResponse(soap, (struct _turb1__GetRawDensityResponse *const*)ptr);
+		break;
+	case SOAP_TYPE_PointerTo_turb1__GetRawDensity:
+		soap_serialize_PointerTo_turb1__GetRawDensity(soap, (struct _turb1__GetRawDensity *const*)ptr);
+		break;
+	case SOAP_TYPE_PointerTo_turb1__GetDensityHessianResponse:
+		soap_serialize_PointerTo_turb1__GetDensityHessianResponse(soap, (struct _turb1__GetDensityHessianResponse *const*)ptr);
+		break;
+	case SOAP_TYPE_PointerTo_turb1__GetDensityHessian:
+		soap_serialize_PointerTo_turb1__GetDensityHessian(soap, (struct _turb1__GetDensityHessian *const*)ptr);
+		break;
+	case SOAP_TYPE_PointerTo_turb1__GetDensityGradientResponse:
+		soap_serialize_PointerTo_turb1__GetDensityGradientResponse(soap, (struct _turb1__GetDensityGradientResponse *const*)ptr);
+		break;
+	case SOAP_TYPE_PointerTo_turb1__GetDensityGradient:
+		soap_serialize_PointerTo_turb1__GetDensityGradient(soap, (struct _turb1__GetDensityGradient *const*)ptr);
+		break;
+	case SOAP_TYPE_PointerTo_turb1__GetDensityResponse:
+		soap_serialize_PointerTo_turb1__GetDensityResponse(soap, (struct _turb1__GetDensityResponse *const*)ptr);
+		break;
+	case SOAP_TYPE_PointerTo_turb1__GetDensity:
+		soap_serialize_PointerTo_turb1__GetDensity(soap, (struct _turb1__GetDensity *const*)ptr);
+		break;
 	case SOAP_TYPE_PointerTo_turb1__GetRawVectorPotentialResponse:
 		soap_serialize_PointerTo_turb1__GetRawVectorPotentialResponse(soap, (struct _turb1__GetRawVectorPotentialResponse *const*)ptr);
 		break;
@@ -1666,20 +1886,23 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_markelement(struct soap *soap, const void *ptr, 
 	case SOAP_TYPE_PointerTo_turb1__NullOp:
 		soap_serialize_PointerTo_turb1__NullOp(soap, (struct _turb1__NullOp *const*)ptr);
 		break;
+	case SOAP_TYPE_PointerToturb1__ArrayOfThresholdInfo:
+		soap_serialize_PointerToturb1__ArrayOfThresholdInfo(soap, (struct turb1__ArrayOfThresholdInfo *const*)ptr);
+		break;
 	case SOAP_TYPE_PointerToturb1__ArrayOfSGSTensor:
 		soap_serialize_PointerToturb1__ArrayOfSGSTensor(soap, (struct turb1__ArrayOfSGSTensor *const*)ptr);
 		break;
 	case SOAP_TYPE_PointerToturb1__ArrayOfVelocityHessian:
 		soap_serialize_PointerToturb1__ArrayOfVelocityHessian(soap, (struct turb1__ArrayOfVelocityHessian *const*)ptr);
 		break;
-	case SOAP_TYPE_PointerToturb1__ArrayOfPressureHessian:
-		soap_serialize_PointerToturb1__ArrayOfPressureHessian(soap, (struct turb1__ArrayOfPressureHessian *const*)ptr);
-		break;
 	case SOAP_TYPE_PointerToturb1__ArrayOfVelocityGradient:
 		soap_serialize_PointerToturb1__ArrayOfVelocityGradient(soap, (struct turb1__ArrayOfVelocityGradient *const*)ptr);
 		break;
 	case SOAP_TYPE_PointerToturb1__ArrayOfVector3P:
 		soap_serialize_PointerToturb1__ArrayOfVector3P(soap, (struct turb1__ArrayOfVector3P *const*)ptr);
+		break;
+	case SOAP_TYPE_PointerToturb1__ArrayOfPressureHessian:
+		soap_serialize_PointerToturb1__ArrayOfPressureHessian(soap, (struct turb1__ArrayOfPressureHessian *const*)ptr);
 		break;
 	case SOAP_TYPE_PointerToturb1__ArrayOfPressure:
 		soap_serialize_PointerToturb1__ArrayOfPressure(soap, (struct turb1__ArrayOfPressure *const*)ptr);
@@ -1693,20 +1916,23 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_markelement(struct soap *soap, const void *ptr, 
 	case SOAP_TYPE_PointerToturb1__ArrayOfPoint3:
 		soap_serialize_PointerToturb1__ArrayOfPoint3(soap, (struct turb1__ArrayOfPoint3 *const*)ptr);
 		break;
+	case SOAP_TYPE_PointerToturb1__ThresholdInfo:
+		soap_serialize_PointerToturb1__ThresholdInfo(soap, (struct turb1__ThresholdInfo *const*)ptr);
+		break;
 	case SOAP_TYPE_PointerToturb1__SGSTensor:
 		soap_serialize_PointerToturb1__SGSTensor(soap, (struct turb1__SGSTensor *const*)ptr);
 		break;
 	case SOAP_TYPE_PointerToturb1__VelocityHessian:
 		soap_serialize_PointerToturb1__VelocityHessian(soap, (struct turb1__VelocityHessian *const*)ptr);
 		break;
-	case SOAP_TYPE_PointerToturb1__PressureHessian:
-		soap_serialize_PointerToturb1__PressureHessian(soap, (struct turb1__PressureHessian *const*)ptr);
-		break;
 	case SOAP_TYPE_PointerToturb1__VelocityGradient:
 		soap_serialize_PointerToturb1__VelocityGradient(soap, (struct turb1__VelocityGradient *const*)ptr);
 		break;
 	case SOAP_TYPE_PointerToturb1__Vector3P:
 		soap_serialize_PointerToturb1__Vector3P(soap, (struct turb1__Vector3P *const*)ptr);
+		break;
+	case SOAP_TYPE_PointerToturb1__PressureHessian:
+		soap_serialize_PointerToturb1__PressureHessian(soap, (struct turb1__PressureHessian *const*)ptr);
 		break;
 	case SOAP_TYPE_PointerToturb1__Pressure:
 		soap_serialize_PointerToturb1__Pressure(soap, (struct turb1__Pressure *const*)ptr);
@@ -2015,6 +2241,30 @@ static const struct soap_code_map soap_codes_turb1__SpatialInterpolation[] =
 	{ (long)turb1__SpatialInterpolation__Lag4, "Lag4" },
 	{ (long)turb1__SpatialInterpolation__Lag6, "Lag6" },
 	{ (long)turb1__SpatialInterpolation__Lag8, "Lag8" },
+	{ (long)turb1__SpatialInterpolation__M1Q4, "M1Q4" },
+	{ (long)turb1__SpatialInterpolation__M2Q4, "M2Q4" },
+	{ (long)turb1__SpatialInterpolation__M3Q4, "M3Q4" },
+	{ (long)turb1__SpatialInterpolation__M4Q4, "M4Q4" },
+	{ (long)turb1__SpatialInterpolation__M1Q6, "M1Q6" },
+	{ (long)turb1__SpatialInterpolation__M2Q6, "M2Q6" },
+	{ (long)turb1__SpatialInterpolation__M3Q6, "M3Q6" },
+	{ (long)turb1__SpatialInterpolation__M4Q6, "M4Q6" },
+	{ (long)turb1__SpatialInterpolation__M1Q8, "M1Q8" },
+	{ (long)turb1__SpatialInterpolation__M2Q8, "M2Q8" },
+	{ (long)turb1__SpatialInterpolation__M3Q8, "M3Q8" },
+	{ (long)turb1__SpatialInterpolation__M4Q8, "M4Q8" },
+	{ (long)turb1__SpatialInterpolation__M1Q10, "M1Q10" },
+	{ (long)turb1__SpatialInterpolation__M2Q10, "M2Q10" },
+	{ (long)turb1__SpatialInterpolation__M3Q10, "M3Q10" },
+	{ (long)turb1__SpatialInterpolation__M4Q10, "M4Q10" },
+	{ (long)turb1__SpatialInterpolation__M1Q12, "M1Q12" },
+	{ (long)turb1__SpatialInterpolation__M2Q12, "M2Q12" },
+	{ (long)turb1__SpatialInterpolation__M3Q12, "M3Q12" },
+	{ (long)turb1__SpatialInterpolation__M4Q12, "M4Q12" },
+	{ (long)turb1__SpatialInterpolation__M1Q14, "M1Q14" },
+	{ (long)turb1__SpatialInterpolation__M2Q14, "M2Q14" },
+	{ (long)turb1__SpatialInterpolation__M3Q14, "M3Q14" },
+	{ (long)turb1__SpatialInterpolation__M4Q14, "M4Q14" },
 	{ 0, NULL }
 };
 
@@ -2041,7 +2291,7 @@ SOAP_FMAC3S int SOAP_FMAC4S soap_s2turb1__SpatialInterpolation(struct soap *soap
 		*a = (enum turb1__SpatialInterpolation)map->code;
 	else
 	{	long n;
-		if (soap_s2long(soap, s, &n) || ((soap->mode & SOAP_XML_STRICT) && (n < 0 || n > 7)))
+		if (soap_s2long(soap, s, &n) || ((soap->mode & SOAP_XML_STRICT) && (n < 0 || n > 31)))
 			return soap->error = SOAP_TYPE;
 		*a = (enum turb1__SpatialInterpolation)n;
 	}
@@ -2625,6 +2875,70 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb3__GetLaplacianOfGradient(struct soap *
 SOAP_FMAC3 struct __turb3__GetLaplacianOfGradient * SOAP_FMAC4 soap_get___turb3__GetLaplacianOfGradient(struct soap *soap, struct __turb3__GetLaplacianOfGradient *p, const char *tag, const char *type)
 {
 	if ((p = soap_in___turb3__GetLaplacianOfGradient(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb3__GetThreshold(struct soap *soap, struct __turb3__GetThreshold *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	a->turb1__GetThreshold = NULL;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb3__GetThreshold(struct soap *soap, const struct __turb3__GetThreshold *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_serialize_PointerTo_turb1__GetThreshold(soap, &a->turb1__GetThreshold);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out___turb3__GetThreshold(struct soap *soap, const char *tag, int id, const struct __turb3__GetThreshold *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)type;
+	if (soap_out_PointerTo_turb1__GetThreshold(soap, "turb1:GetThreshold", -1, &a->turb1__GetThreshold, ""))
+		return soap->error;
+	return SOAP_OK;
+}
+
+SOAP_FMAC3 struct __turb3__GetThreshold * SOAP_FMAC4 soap_in___turb3__GetThreshold(struct soap *soap, const char *tag, struct __turb3__GetThreshold *a, const char *type)
+{
+	size_t soap_flag_turb1__GetThreshold = 1;
+	short soap_flag;
+	a = (struct __turb3__GetThreshold *)soap_id_enter(soap, "", a, SOAP_TYPE___turb3__GetThreshold, sizeof(struct __turb3__GetThreshold), 0, NULL, NULL, NULL);
+	if (!a)
+		return NULL;
+	soap_default___turb3__GetThreshold(soap, a);
+		for (soap_flag = 0;; soap_flag = 1)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_turb1__GetThreshold && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_PointerTo_turb1__GetThreshold(soap, "turb1:GetThreshold", &a->turb1__GetThreshold, ""))
+				{	soap_flag_turb1__GetThreshold--;
+					continue;
+				}
+			if (soap->error == SOAP_TAG_MISMATCH)
+				if (soap_flag)
+				{	soap->error = SOAP_OK;
+					break;
+				}
+			if (soap_flag && soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb3__GetThreshold(struct soap *soap, const struct __turb3__GetThreshold *a, const char *tag, const char *type)
+{
+	register int id = 0;
+	if (soap_out___turb3__GetThreshold(soap, tag?tag:"-turb3:GetThreshold", id, a, type))
+		return soap->error;
+	return SOAP_OK;
+}
+
+SOAP_FMAC3 struct __turb3__GetThreshold * SOAP_FMAC4 soap_get___turb3__GetThreshold(struct soap *soap, struct __turb3__GetThreshold *p, const char *tag, const char *type)
+{
+	if ((p = soap_in___turb3__GetThreshold(soap, tag, p, type)))
 		if (soap_getindependent(soap))
 			return NULL;
 	return p;
@@ -3718,6 +4032,262 @@ SOAP_FMAC3 struct __turb3__GetForce * SOAP_FMAC4 soap_get___turb3__GetForce(stru
 	return p;
 }
 
+SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb3__GetRawDensity(struct soap *soap, struct __turb3__GetRawDensity *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	a->turb1__GetRawDensity = NULL;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb3__GetRawDensity(struct soap *soap, const struct __turb3__GetRawDensity *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_serialize_PointerTo_turb1__GetRawDensity(soap, &a->turb1__GetRawDensity);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out___turb3__GetRawDensity(struct soap *soap, const char *tag, int id, const struct __turb3__GetRawDensity *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)type;
+	if (soap_out_PointerTo_turb1__GetRawDensity(soap, "turb1:GetRawDensity", -1, &a->turb1__GetRawDensity, ""))
+		return soap->error;
+	return SOAP_OK;
+}
+
+SOAP_FMAC3 struct __turb3__GetRawDensity * SOAP_FMAC4 soap_in___turb3__GetRawDensity(struct soap *soap, const char *tag, struct __turb3__GetRawDensity *a, const char *type)
+{
+	size_t soap_flag_turb1__GetRawDensity = 1;
+	short soap_flag;
+	a = (struct __turb3__GetRawDensity *)soap_id_enter(soap, "", a, SOAP_TYPE___turb3__GetRawDensity, sizeof(struct __turb3__GetRawDensity), 0, NULL, NULL, NULL);
+	if (!a)
+		return NULL;
+	soap_default___turb3__GetRawDensity(soap, a);
+		for (soap_flag = 0;; soap_flag = 1)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_turb1__GetRawDensity && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_PointerTo_turb1__GetRawDensity(soap, "turb1:GetRawDensity", &a->turb1__GetRawDensity, ""))
+				{	soap_flag_turb1__GetRawDensity--;
+					continue;
+				}
+			if (soap->error == SOAP_TAG_MISMATCH)
+				if (soap_flag)
+				{	soap->error = SOAP_OK;
+					break;
+				}
+			if (soap_flag && soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb3__GetRawDensity(struct soap *soap, const struct __turb3__GetRawDensity *a, const char *tag, const char *type)
+{
+	register int id = 0;
+	if (soap_out___turb3__GetRawDensity(soap, tag?tag:"-turb3:GetRawDensity", id, a, type))
+		return soap->error;
+	return SOAP_OK;
+}
+
+SOAP_FMAC3 struct __turb3__GetRawDensity * SOAP_FMAC4 soap_get___turb3__GetRawDensity(struct soap *soap, struct __turb3__GetRawDensity *p, const char *tag, const char *type)
+{
+	if ((p = soap_in___turb3__GetRawDensity(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb3__GetDensityHessian(struct soap *soap, struct __turb3__GetDensityHessian *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	a->turb1__GetDensityHessian = NULL;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb3__GetDensityHessian(struct soap *soap, const struct __turb3__GetDensityHessian *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_serialize_PointerTo_turb1__GetDensityHessian(soap, &a->turb1__GetDensityHessian);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out___turb3__GetDensityHessian(struct soap *soap, const char *tag, int id, const struct __turb3__GetDensityHessian *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)type;
+	if (soap_out_PointerTo_turb1__GetDensityHessian(soap, "turb1:GetDensityHessian", -1, &a->turb1__GetDensityHessian, ""))
+		return soap->error;
+	return SOAP_OK;
+}
+
+SOAP_FMAC3 struct __turb3__GetDensityHessian * SOAP_FMAC4 soap_in___turb3__GetDensityHessian(struct soap *soap, const char *tag, struct __turb3__GetDensityHessian *a, const char *type)
+{
+	size_t soap_flag_turb1__GetDensityHessian = 1;
+	short soap_flag;
+	a = (struct __turb3__GetDensityHessian *)soap_id_enter(soap, "", a, SOAP_TYPE___turb3__GetDensityHessian, sizeof(struct __turb3__GetDensityHessian), 0, NULL, NULL, NULL);
+	if (!a)
+		return NULL;
+	soap_default___turb3__GetDensityHessian(soap, a);
+		for (soap_flag = 0;; soap_flag = 1)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_turb1__GetDensityHessian && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_PointerTo_turb1__GetDensityHessian(soap, "turb1:GetDensityHessian", &a->turb1__GetDensityHessian, ""))
+				{	soap_flag_turb1__GetDensityHessian--;
+					continue;
+				}
+			if (soap->error == SOAP_TAG_MISMATCH)
+				if (soap_flag)
+				{	soap->error = SOAP_OK;
+					break;
+				}
+			if (soap_flag && soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb3__GetDensityHessian(struct soap *soap, const struct __turb3__GetDensityHessian *a, const char *tag, const char *type)
+{
+	register int id = 0;
+	if (soap_out___turb3__GetDensityHessian(soap, tag?tag:"-turb3:GetDensityHessian", id, a, type))
+		return soap->error;
+	return SOAP_OK;
+}
+
+SOAP_FMAC3 struct __turb3__GetDensityHessian * SOAP_FMAC4 soap_get___turb3__GetDensityHessian(struct soap *soap, struct __turb3__GetDensityHessian *p, const char *tag, const char *type)
+{
+	if ((p = soap_in___turb3__GetDensityHessian(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb3__GetDensityGradient(struct soap *soap, struct __turb3__GetDensityGradient *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	a->turb1__GetDensityGradient = NULL;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb3__GetDensityGradient(struct soap *soap, const struct __turb3__GetDensityGradient *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_serialize_PointerTo_turb1__GetDensityGradient(soap, &a->turb1__GetDensityGradient);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out___turb3__GetDensityGradient(struct soap *soap, const char *tag, int id, const struct __turb3__GetDensityGradient *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)type;
+	if (soap_out_PointerTo_turb1__GetDensityGradient(soap, "turb1:GetDensityGradient", -1, &a->turb1__GetDensityGradient, ""))
+		return soap->error;
+	return SOAP_OK;
+}
+
+SOAP_FMAC3 struct __turb3__GetDensityGradient * SOAP_FMAC4 soap_in___turb3__GetDensityGradient(struct soap *soap, const char *tag, struct __turb3__GetDensityGradient *a, const char *type)
+{
+	size_t soap_flag_turb1__GetDensityGradient = 1;
+	short soap_flag;
+	a = (struct __turb3__GetDensityGradient *)soap_id_enter(soap, "", a, SOAP_TYPE___turb3__GetDensityGradient, sizeof(struct __turb3__GetDensityGradient), 0, NULL, NULL, NULL);
+	if (!a)
+		return NULL;
+	soap_default___turb3__GetDensityGradient(soap, a);
+		for (soap_flag = 0;; soap_flag = 1)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_turb1__GetDensityGradient && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_PointerTo_turb1__GetDensityGradient(soap, "turb1:GetDensityGradient", &a->turb1__GetDensityGradient, ""))
+				{	soap_flag_turb1__GetDensityGradient--;
+					continue;
+				}
+			if (soap->error == SOAP_TAG_MISMATCH)
+				if (soap_flag)
+				{	soap->error = SOAP_OK;
+					break;
+				}
+			if (soap_flag && soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb3__GetDensityGradient(struct soap *soap, const struct __turb3__GetDensityGradient *a, const char *tag, const char *type)
+{
+	register int id = 0;
+	if (soap_out___turb3__GetDensityGradient(soap, tag?tag:"-turb3:GetDensityGradient", id, a, type))
+		return soap->error;
+	return SOAP_OK;
+}
+
+SOAP_FMAC3 struct __turb3__GetDensityGradient * SOAP_FMAC4 soap_get___turb3__GetDensityGradient(struct soap *soap, struct __turb3__GetDensityGradient *p, const char *tag, const char *type)
+{
+	if ((p = soap_in___turb3__GetDensityGradient(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb3__GetDensity(struct soap *soap, struct __turb3__GetDensity *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	a->turb1__GetDensity = NULL;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb3__GetDensity(struct soap *soap, const struct __turb3__GetDensity *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_serialize_PointerTo_turb1__GetDensity(soap, &a->turb1__GetDensity);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out___turb3__GetDensity(struct soap *soap, const char *tag, int id, const struct __turb3__GetDensity *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)type;
+	if (soap_out_PointerTo_turb1__GetDensity(soap, "turb1:GetDensity", -1, &a->turb1__GetDensity, ""))
+		return soap->error;
+	return SOAP_OK;
+}
+
+SOAP_FMAC3 struct __turb3__GetDensity * SOAP_FMAC4 soap_in___turb3__GetDensity(struct soap *soap, const char *tag, struct __turb3__GetDensity *a, const char *type)
+{
+	size_t soap_flag_turb1__GetDensity = 1;
+	short soap_flag;
+	a = (struct __turb3__GetDensity *)soap_id_enter(soap, "", a, SOAP_TYPE___turb3__GetDensity, sizeof(struct __turb3__GetDensity), 0, NULL, NULL, NULL);
+	if (!a)
+		return NULL;
+	soap_default___turb3__GetDensity(soap, a);
+		for (soap_flag = 0;; soap_flag = 1)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_turb1__GetDensity && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_PointerTo_turb1__GetDensity(soap, "turb1:GetDensity", &a->turb1__GetDensity, ""))
+				{	soap_flag_turb1__GetDensity--;
+					continue;
+				}
+			if (soap->error == SOAP_TAG_MISMATCH)
+				if (soap_flag)
+				{	soap->error = SOAP_OK;
+					break;
+				}
+			if (soap_flag && soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb3__GetDensity(struct soap *soap, const struct __turb3__GetDensity *a, const char *tag, const char *type)
+{
+	register int id = 0;
+	if (soap_out___turb3__GetDensity(soap, tag?tag:"-turb3:GetDensity", id, a, type))
+		return soap->error;
+	return SOAP_OK;
+}
+
+SOAP_FMAC3 struct __turb3__GetDensity * SOAP_FMAC4 soap_get___turb3__GetDensity(struct soap *soap, struct __turb3__GetDensity *p, const char *tag, const char *type)
+{
+	if ((p = soap_in___turb3__GetDensity(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
 SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb3__GetRawVectorPotential(struct soap *soap, struct __turb3__GetRawVectorPotential *a)
 {
 	(void)soap; (void)a; /* appease -Wall -Werror */
@@ -4417,6 +4987,70 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb2__GetLaplacianOfGradient(struct soap *
 SOAP_FMAC3 struct __turb2__GetLaplacianOfGradient * SOAP_FMAC4 soap_get___turb2__GetLaplacianOfGradient(struct soap *soap, struct __turb2__GetLaplacianOfGradient *p, const char *tag, const char *type)
 {
 	if ((p = soap_in___turb2__GetLaplacianOfGradient(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb2__GetThreshold(struct soap *soap, struct __turb2__GetThreshold *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	a->turb1__GetThreshold = NULL;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb2__GetThreshold(struct soap *soap, const struct __turb2__GetThreshold *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_serialize_PointerTo_turb1__GetThreshold(soap, &a->turb1__GetThreshold);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out___turb2__GetThreshold(struct soap *soap, const char *tag, int id, const struct __turb2__GetThreshold *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)type;
+	if (soap_out_PointerTo_turb1__GetThreshold(soap, "turb1:GetThreshold", -1, &a->turb1__GetThreshold, ""))
+		return soap->error;
+	return SOAP_OK;
+}
+
+SOAP_FMAC3 struct __turb2__GetThreshold * SOAP_FMAC4 soap_in___turb2__GetThreshold(struct soap *soap, const char *tag, struct __turb2__GetThreshold *a, const char *type)
+{
+	size_t soap_flag_turb1__GetThreshold = 1;
+	short soap_flag;
+	a = (struct __turb2__GetThreshold *)soap_id_enter(soap, "", a, SOAP_TYPE___turb2__GetThreshold, sizeof(struct __turb2__GetThreshold), 0, NULL, NULL, NULL);
+	if (!a)
+		return NULL;
+	soap_default___turb2__GetThreshold(soap, a);
+		for (soap_flag = 0;; soap_flag = 1)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_turb1__GetThreshold && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_PointerTo_turb1__GetThreshold(soap, "turb1:GetThreshold", &a->turb1__GetThreshold, ""))
+				{	soap_flag_turb1__GetThreshold--;
+					continue;
+				}
+			if (soap->error == SOAP_TAG_MISMATCH)
+				if (soap_flag)
+				{	soap->error = SOAP_OK;
+					break;
+				}
+			if (soap_flag && soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb2__GetThreshold(struct soap *soap, const struct __turb2__GetThreshold *a, const char *tag, const char *type)
+{
+	register int id = 0;
+	if (soap_out___turb2__GetThreshold(soap, tag?tag:"-turb2:GetThreshold", id, a, type))
+		return soap->error;
+	return SOAP_OK;
+}
+
+SOAP_FMAC3 struct __turb2__GetThreshold * SOAP_FMAC4 soap_get___turb2__GetThreshold(struct soap *soap, struct __turb2__GetThreshold *p, const char *tag, const char *type)
+{
+	if ((p = soap_in___turb2__GetThreshold(soap, tag, p, type)))
 		if (soap_getindependent(soap))
 			return NULL;
 	return p;
@@ -5510,6 +6144,262 @@ SOAP_FMAC3 struct __turb2__GetForce * SOAP_FMAC4 soap_get___turb2__GetForce(stru
 	return p;
 }
 
+SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb2__GetRawDensity(struct soap *soap, struct __turb2__GetRawDensity *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	a->turb1__GetRawDensity = NULL;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb2__GetRawDensity(struct soap *soap, const struct __turb2__GetRawDensity *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_serialize_PointerTo_turb1__GetRawDensity(soap, &a->turb1__GetRawDensity);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out___turb2__GetRawDensity(struct soap *soap, const char *tag, int id, const struct __turb2__GetRawDensity *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)type;
+	if (soap_out_PointerTo_turb1__GetRawDensity(soap, "turb1:GetRawDensity", -1, &a->turb1__GetRawDensity, ""))
+		return soap->error;
+	return SOAP_OK;
+}
+
+SOAP_FMAC3 struct __turb2__GetRawDensity * SOAP_FMAC4 soap_in___turb2__GetRawDensity(struct soap *soap, const char *tag, struct __turb2__GetRawDensity *a, const char *type)
+{
+	size_t soap_flag_turb1__GetRawDensity = 1;
+	short soap_flag;
+	a = (struct __turb2__GetRawDensity *)soap_id_enter(soap, "", a, SOAP_TYPE___turb2__GetRawDensity, sizeof(struct __turb2__GetRawDensity), 0, NULL, NULL, NULL);
+	if (!a)
+		return NULL;
+	soap_default___turb2__GetRawDensity(soap, a);
+		for (soap_flag = 0;; soap_flag = 1)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_turb1__GetRawDensity && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_PointerTo_turb1__GetRawDensity(soap, "turb1:GetRawDensity", &a->turb1__GetRawDensity, ""))
+				{	soap_flag_turb1__GetRawDensity--;
+					continue;
+				}
+			if (soap->error == SOAP_TAG_MISMATCH)
+				if (soap_flag)
+				{	soap->error = SOAP_OK;
+					break;
+				}
+			if (soap_flag && soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb2__GetRawDensity(struct soap *soap, const struct __turb2__GetRawDensity *a, const char *tag, const char *type)
+{
+	register int id = 0;
+	if (soap_out___turb2__GetRawDensity(soap, tag?tag:"-turb2:GetRawDensity", id, a, type))
+		return soap->error;
+	return SOAP_OK;
+}
+
+SOAP_FMAC3 struct __turb2__GetRawDensity * SOAP_FMAC4 soap_get___turb2__GetRawDensity(struct soap *soap, struct __turb2__GetRawDensity *p, const char *tag, const char *type)
+{
+	if ((p = soap_in___turb2__GetRawDensity(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb2__GetDensityHessian(struct soap *soap, struct __turb2__GetDensityHessian *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	a->turb1__GetDensityHessian = NULL;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb2__GetDensityHessian(struct soap *soap, const struct __turb2__GetDensityHessian *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_serialize_PointerTo_turb1__GetDensityHessian(soap, &a->turb1__GetDensityHessian);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out___turb2__GetDensityHessian(struct soap *soap, const char *tag, int id, const struct __turb2__GetDensityHessian *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)type;
+	if (soap_out_PointerTo_turb1__GetDensityHessian(soap, "turb1:GetDensityHessian", -1, &a->turb1__GetDensityHessian, ""))
+		return soap->error;
+	return SOAP_OK;
+}
+
+SOAP_FMAC3 struct __turb2__GetDensityHessian * SOAP_FMAC4 soap_in___turb2__GetDensityHessian(struct soap *soap, const char *tag, struct __turb2__GetDensityHessian *a, const char *type)
+{
+	size_t soap_flag_turb1__GetDensityHessian = 1;
+	short soap_flag;
+	a = (struct __turb2__GetDensityHessian *)soap_id_enter(soap, "", a, SOAP_TYPE___turb2__GetDensityHessian, sizeof(struct __turb2__GetDensityHessian), 0, NULL, NULL, NULL);
+	if (!a)
+		return NULL;
+	soap_default___turb2__GetDensityHessian(soap, a);
+		for (soap_flag = 0;; soap_flag = 1)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_turb1__GetDensityHessian && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_PointerTo_turb1__GetDensityHessian(soap, "turb1:GetDensityHessian", &a->turb1__GetDensityHessian, ""))
+				{	soap_flag_turb1__GetDensityHessian--;
+					continue;
+				}
+			if (soap->error == SOAP_TAG_MISMATCH)
+				if (soap_flag)
+				{	soap->error = SOAP_OK;
+					break;
+				}
+			if (soap_flag && soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb2__GetDensityHessian(struct soap *soap, const struct __turb2__GetDensityHessian *a, const char *tag, const char *type)
+{
+	register int id = 0;
+	if (soap_out___turb2__GetDensityHessian(soap, tag?tag:"-turb2:GetDensityHessian", id, a, type))
+		return soap->error;
+	return SOAP_OK;
+}
+
+SOAP_FMAC3 struct __turb2__GetDensityHessian * SOAP_FMAC4 soap_get___turb2__GetDensityHessian(struct soap *soap, struct __turb2__GetDensityHessian *p, const char *tag, const char *type)
+{
+	if ((p = soap_in___turb2__GetDensityHessian(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb2__GetDensityGradient(struct soap *soap, struct __turb2__GetDensityGradient *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	a->turb1__GetDensityGradient = NULL;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb2__GetDensityGradient(struct soap *soap, const struct __turb2__GetDensityGradient *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_serialize_PointerTo_turb1__GetDensityGradient(soap, &a->turb1__GetDensityGradient);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out___turb2__GetDensityGradient(struct soap *soap, const char *tag, int id, const struct __turb2__GetDensityGradient *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)type;
+	if (soap_out_PointerTo_turb1__GetDensityGradient(soap, "turb1:GetDensityGradient", -1, &a->turb1__GetDensityGradient, ""))
+		return soap->error;
+	return SOAP_OK;
+}
+
+SOAP_FMAC3 struct __turb2__GetDensityGradient * SOAP_FMAC4 soap_in___turb2__GetDensityGradient(struct soap *soap, const char *tag, struct __turb2__GetDensityGradient *a, const char *type)
+{
+	size_t soap_flag_turb1__GetDensityGradient = 1;
+	short soap_flag;
+	a = (struct __turb2__GetDensityGradient *)soap_id_enter(soap, "", a, SOAP_TYPE___turb2__GetDensityGradient, sizeof(struct __turb2__GetDensityGradient), 0, NULL, NULL, NULL);
+	if (!a)
+		return NULL;
+	soap_default___turb2__GetDensityGradient(soap, a);
+		for (soap_flag = 0;; soap_flag = 1)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_turb1__GetDensityGradient && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_PointerTo_turb1__GetDensityGradient(soap, "turb1:GetDensityGradient", &a->turb1__GetDensityGradient, ""))
+				{	soap_flag_turb1__GetDensityGradient--;
+					continue;
+				}
+			if (soap->error == SOAP_TAG_MISMATCH)
+				if (soap_flag)
+				{	soap->error = SOAP_OK;
+					break;
+				}
+			if (soap_flag && soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb2__GetDensityGradient(struct soap *soap, const struct __turb2__GetDensityGradient *a, const char *tag, const char *type)
+{
+	register int id = 0;
+	if (soap_out___turb2__GetDensityGradient(soap, tag?tag:"-turb2:GetDensityGradient", id, a, type))
+		return soap->error;
+	return SOAP_OK;
+}
+
+SOAP_FMAC3 struct __turb2__GetDensityGradient * SOAP_FMAC4 soap_get___turb2__GetDensityGradient(struct soap *soap, struct __turb2__GetDensityGradient *p, const char *tag, const char *type)
+{
+	if ((p = soap_in___turb2__GetDensityGradient(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb2__GetDensity(struct soap *soap, struct __turb2__GetDensity *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	a->turb1__GetDensity = NULL;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb2__GetDensity(struct soap *soap, const struct __turb2__GetDensity *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_serialize_PointerTo_turb1__GetDensity(soap, &a->turb1__GetDensity);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out___turb2__GetDensity(struct soap *soap, const char *tag, int id, const struct __turb2__GetDensity *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)type;
+	if (soap_out_PointerTo_turb1__GetDensity(soap, "turb1:GetDensity", -1, &a->turb1__GetDensity, ""))
+		return soap->error;
+	return SOAP_OK;
+}
+
+SOAP_FMAC3 struct __turb2__GetDensity * SOAP_FMAC4 soap_in___turb2__GetDensity(struct soap *soap, const char *tag, struct __turb2__GetDensity *a, const char *type)
+{
+	size_t soap_flag_turb1__GetDensity = 1;
+	short soap_flag;
+	a = (struct __turb2__GetDensity *)soap_id_enter(soap, "", a, SOAP_TYPE___turb2__GetDensity, sizeof(struct __turb2__GetDensity), 0, NULL, NULL, NULL);
+	if (!a)
+		return NULL;
+	soap_default___turb2__GetDensity(soap, a);
+		for (soap_flag = 0;; soap_flag = 1)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_turb1__GetDensity && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_PointerTo_turb1__GetDensity(soap, "turb1:GetDensity", &a->turb1__GetDensity, ""))
+				{	soap_flag_turb1__GetDensity--;
+					continue;
+				}
+			if (soap->error == SOAP_TAG_MISMATCH)
+				if (soap_flag)
+				{	soap->error = SOAP_OK;
+					break;
+				}
+			if (soap_flag && soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb2__GetDensity(struct soap *soap, const struct __turb2__GetDensity *a, const char *tag, const char *type)
+{
+	register int id = 0;
+	if (soap_out___turb2__GetDensity(soap, tag?tag:"-turb2:GetDensity", id, a, type))
+		return soap->error;
+	return SOAP_OK;
+}
+
+SOAP_FMAC3 struct __turb2__GetDensity * SOAP_FMAC4 soap_get___turb2__GetDensity(struct soap *soap, struct __turb2__GetDensity *p, const char *tag, const char *type)
+{
+	if ((p = soap_in___turb2__GetDensity(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
 SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb2__GetRawVectorPotential(struct soap *soap, struct __turb2__GetRawVectorPotential *a)
 {
 	(void)soap; (void)a; /* appease -Wall -Werror */
@@ -6357,6 +7247,262 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetLaplacianOfGradient(struct soap *s
 SOAP_FMAC3 struct _turb1__GetLaplacianOfGradient * SOAP_FMAC4 soap_get__turb1__GetLaplacianOfGradient(struct soap *soap, struct _turb1__GetLaplacianOfGradient *p, const char *tag, const char *type)
 {
 	if ((p = soap_in__turb1__GetLaplacianOfGradient(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetThresholdResponse(struct soap *soap, struct _turb1__GetThresholdResponse *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	a->GetThresholdResult = NULL;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetThresholdResponse(struct soap *soap, const struct _turb1__GetThresholdResponse *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_serialize_PointerToturb1__ArrayOfThresholdInfo(soap, &a->GetThresholdResult);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out__turb1__GetThresholdResponse(struct soap *soap, const char *tag, int id, const struct _turb1__GetThresholdResponse *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)type;
+	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE__turb1__GetThresholdResponse), type))
+		return soap->error;
+	if (a->GetThresholdResult)
+		soap_element_result(soap, "turb1:GetThresholdResult");
+	if (soap_out_PointerToturb1__ArrayOfThresholdInfo(soap, "turb1:GetThresholdResult", -1, &a->GetThresholdResult, ""))
+		return soap->error;
+	return soap_element_end_out(soap, tag);
+}
+
+SOAP_FMAC3 struct _turb1__GetThresholdResponse * SOAP_FMAC4 soap_in__turb1__GetThresholdResponse(struct soap *soap, const char *tag, struct _turb1__GetThresholdResponse *a, const char *type)
+{
+	size_t soap_flag_GetThresholdResult = 1;
+	if (soap_element_begin_in(soap, tag, 0, type))
+		return NULL;
+	a = (struct _turb1__GetThresholdResponse *)soap_id_enter(soap, soap->id, a, SOAP_TYPE__turb1__GetThresholdResponse, sizeof(struct _turb1__GetThresholdResponse), 0, NULL, NULL, NULL);
+	if (!a)
+		return NULL;
+	soap_default__turb1__GetThresholdResponse(soap, a);
+	if (soap->body && !*soap->href)
+	{
+		for (;;)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_GetThresholdResult && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_PointerToturb1__ArrayOfThresholdInfo(soap, "turb1:GetThresholdResult", &a->GetThresholdResult, "turb1:ArrayOfThresholdInfo"))
+				{	soap_flag_GetThresholdResult--;
+					continue;
+				}
+			soap_check_result(soap, "turb1:GetThresholdResult");
+			if (soap->error == SOAP_TAG_MISMATCH)
+				soap->error = soap_ignore_element(soap);
+			if (soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+		if (soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	else
+	{	a = (struct _turb1__GetThresholdResponse *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE__turb1__GetThresholdResponse, 0, sizeof(struct _turb1__GetThresholdResponse), 0, NULL);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetThresholdResponse(struct soap *soap, const struct _turb1__GetThresholdResponse *a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE__turb1__GetThresholdResponse);
+	if (soap_out__turb1__GetThresholdResponse(soap, tag?tag:"turb1:GetThresholdResponse", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct _turb1__GetThresholdResponse * SOAP_FMAC4 soap_get__turb1__GetThresholdResponse(struct soap *soap, struct _turb1__GetThresholdResponse *p, const char *tag, const char *type)
+{
+	if ((p = soap_in__turb1__GetThresholdResponse(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetThreshold(struct soap *soap, struct _turb1__GetThreshold *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_default_string(soap, &a->authToken);
+	soap_default_string(soap, &a->dataset);
+	soap_default_string(soap, &a->field);
+	soap_default_float(soap, &a->time);
+	soap_default_float(soap, &a->threshold);
+	soap_default_turb1__SpatialInterpolation(soap, &a->spatialInterpolation);
+	soap_default_int(soap, &a->X);
+	soap_default_int(soap, &a->Y);
+	soap_default_int(soap, &a->Z);
+	soap_default_int(soap, &a->Xwidth);
+	soap_default_int(soap, &a->Ywidth);
+	soap_default_int(soap, &a->Zwidth);
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetThreshold(struct soap *soap, const struct _turb1__GetThreshold *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_serialize_string(soap, &a->authToken);
+	soap_serialize_string(soap, &a->dataset);
+	soap_serialize_string(soap, &a->field);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out__turb1__GetThreshold(struct soap *soap, const char *tag, int id, const struct _turb1__GetThreshold *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)type;
+	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE__turb1__GetThreshold), type))
+		return soap->error;
+	if (soap_out_string(soap, "turb1:authToken", -1, &a->authToken, ""))
+		return soap->error;
+	if (soap_out_string(soap, "turb1:dataset", -1, &a->dataset, ""))
+		return soap->error;
+	if (soap_out_string(soap, "turb1:field", -1, &a->field, ""))
+		return soap->error;
+	if (soap_out_float(soap, "turb1:time", -1, &a->time, ""))
+		return soap->error;
+	if (soap_out_float(soap, "turb1:threshold", -1, &a->threshold, ""))
+		return soap->error;
+	if (soap_out_turb1__SpatialInterpolation(soap, "turb1:spatialInterpolation", -1, &a->spatialInterpolation, ""))
+		return soap->error;
+	if (soap_out_int(soap, "turb1:X", -1, &a->X, ""))
+		return soap->error;
+	if (soap_out_int(soap, "turb1:Y", -1, &a->Y, ""))
+		return soap->error;
+	if (soap_out_int(soap, "turb1:Z", -1, &a->Z, ""))
+		return soap->error;
+	if (soap_out_int(soap, "turb1:Xwidth", -1, &a->Xwidth, ""))
+		return soap->error;
+	if (soap_out_int(soap, "turb1:Ywidth", -1, &a->Ywidth, ""))
+		return soap->error;
+	if (soap_out_int(soap, "turb1:Zwidth", -1, &a->Zwidth, ""))
+		return soap->error;
+	return soap_element_end_out(soap, tag);
+}
+
+SOAP_FMAC3 struct _turb1__GetThreshold * SOAP_FMAC4 soap_in__turb1__GetThreshold(struct soap *soap, const char *tag, struct _turb1__GetThreshold *a, const char *type)
+{
+	size_t soap_flag_authToken = 1;
+	size_t soap_flag_dataset = 1;
+	size_t soap_flag_field = 1;
+	size_t soap_flag_time = 1;
+	size_t soap_flag_threshold = 1;
+	size_t soap_flag_spatialInterpolation = 1;
+	size_t soap_flag_X = 1;
+	size_t soap_flag_Y = 1;
+	size_t soap_flag_Z = 1;
+	size_t soap_flag_Xwidth = 1;
+	size_t soap_flag_Ywidth = 1;
+	size_t soap_flag_Zwidth = 1;
+	if (soap_element_begin_in(soap, tag, 0, type))
+		return NULL;
+	a = (struct _turb1__GetThreshold *)soap_id_enter(soap, soap->id, a, SOAP_TYPE__turb1__GetThreshold, sizeof(struct _turb1__GetThreshold), 0, NULL, NULL, NULL);
+	if (!a)
+		return NULL;
+	soap_default__turb1__GetThreshold(soap, a);
+	if (soap->body && !*soap->href)
+	{
+		for (;;)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_authToken && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_string(soap, "turb1:authToken", &a->authToken, "xsd:string"))
+				{	soap_flag_authToken--;
+					continue;
+				}
+			if (soap_flag_dataset && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_string(soap, "turb1:dataset", &a->dataset, "xsd:string"))
+				{	soap_flag_dataset--;
+					continue;
+				}
+			if (soap_flag_field && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_string(soap, "turb1:field", &a->field, "xsd:string"))
+				{	soap_flag_field--;
+					continue;
+				}
+			if (soap_flag_time && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_float(soap, "turb1:time", &a->time, "xsd:float"))
+				{	soap_flag_time--;
+					continue;
+				}
+			if (soap_flag_threshold && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_float(soap, "turb1:threshold", &a->threshold, "xsd:float"))
+				{	soap_flag_threshold--;
+					continue;
+				}
+			if (soap_flag_spatialInterpolation && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_turb1__SpatialInterpolation(soap, "turb1:spatialInterpolation", &a->spatialInterpolation, "turb1:SpatialInterpolation"))
+				{	soap_flag_spatialInterpolation--;
+					continue;
+				}
+			if (soap_flag_X && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_int(soap, "turb1:X", &a->X, "xsd:int"))
+				{	soap_flag_X--;
+					continue;
+				}
+			if (soap_flag_Y && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_int(soap, "turb1:Y", &a->Y, "xsd:int"))
+				{	soap_flag_Y--;
+					continue;
+				}
+			if (soap_flag_Z && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_int(soap, "turb1:Z", &a->Z, "xsd:int"))
+				{	soap_flag_Z--;
+					continue;
+				}
+			if (soap_flag_Xwidth && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_int(soap, "turb1:Xwidth", &a->Xwidth, "xsd:int"))
+				{	soap_flag_Xwidth--;
+					continue;
+				}
+			if (soap_flag_Ywidth && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_int(soap, "turb1:Ywidth", &a->Ywidth, "xsd:int"))
+				{	soap_flag_Ywidth--;
+					continue;
+				}
+			if (soap_flag_Zwidth && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_int(soap, "turb1:Zwidth", &a->Zwidth, "xsd:int"))
+				{	soap_flag_Zwidth--;
+					continue;
+				}
+			if (soap->error == SOAP_TAG_MISMATCH)
+				soap->error = soap_ignore_element(soap);
+			if (soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+		if (soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	else
+	{	a = (struct _turb1__GetThreshold *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE__turb1__GetThreshold, 0, sizeof(struct _turb1__GetThreshold), 0, NULL);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_time > 0 || soap_flag_threshold > 0 || soap_flag_spatialInterpolation > 0 || soap_flag_X > 0 || soap_flag_Y > 0 || soap_flag_Z > 0 || soap_flag_Xwidth > 0 || soap_flag_Ywidth > 0 || soap_flag_Zwidth > 0))
+	{	soap->error = SOAP_OCCURS;
+		return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetThreshold(struct soap *soap, const struct _turb1__GetThreshold *a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE__turb1__GetThreshold);
+	if (soap_out__turb1__GetThreshold(soap, tag?tag:"turb1:GetThreshold", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct _turb1__GetThreshold * SOAP_FMAC4 soap_get__turb1__GetThreshold(struct soap *soap, struct _turb1__GetThreshold *p, const char *tag, const char *type)
+{
+	if ((p = soap_in__turb1__GetThreshold(soap, tag, p, type)))
 		if (soap_getindependent(soap))
 			return NULL;
 	return p;
@@ -9817,6 +10963,840 @@ SOAP_FMAC3 struct _turb1__GetForce * SOAP_FMAC4 soap_get__turb1__GetForce(struct
 	return p;
 }
 
+SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetRawDensityResponse(struct soap *soap, struct _turb1__GetRawDensityResponse *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	a->GetRawDensityResult = NULL;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetRawDensityResponse(struct soap *soap, const struct _turb1__GetRawDensityResponse *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_serialize_PointerToxsd__base64Binary(soap, &a->GetRawDensityResult);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out__turb1__GetRawDensityResponse(struct soap *soap, const char *tag, int id, const struct _turb1__GetRawDensityResponse *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)type;
+	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE__turb1__GetRawDensityResponse), type))
+		return soap->error;
+	if (a->GetRawDensityResult)
+		soap_element_result(soap, "turb1:GetRawDensityResult");
+	if (soap_out_PointerToxsd__base64Binary(soap, "turb1:GetRawDensityResult", -1, &a->GetRawDensityResult, ""))
+		return soap->error;
+	return soap_element_end_out(soap, tag);
+}
+
+SOAP_FMAC3 struct _turb1__GetRawDensityResponse * SOAP_FMAC4 soap_in__turb1__GetRawDensityResponse(struct soap *soap, const char *tag, struct _turb1__GetRawDensityResponse *a, const char *type)
+{
+	size_t soap_flag_GetRawDensityResult = 1;
+	if (soap_element_begin_in(soap, tag, 0, type))
+		return NULL;
+	a = (struct _turb1__GetRawDensityResponse *)soap_id_enter(soap, soap->id, a, SOAP_TYPE__turb1__GetRawDensityResponse, sizeof(struct _turb1__GetRawDensityResponse), 0, NULL, NULL, NULL);
+	if (!a)
+		return NULL;
+	soap_default__turb1__GetRawDensityResponse(soap, a);
+	if (soap->body && !*soap->href)
+	{
+		for (;;)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_GetRawDensityResult && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_PointerToxsd__base64Binary(soap, "turb1:GetRawDensityResult", &a->GetRawDensityResult, "xsd:base64Binary"))
+				{	soap_flag_GetRawDensityResult--;
+					continue;
+				}
+			soap_check_result(soap, "turb1:GetRawDensityResult");
+			if (soap->error == SOAP_TAG_MISMATCH)
+				soap->error = soap_ignore_element(soap);
+			if (soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+		if (soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	else
+	{	a = (struct _turb1__GetRawDensityResponse *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE__turb1__GetRawDensityResponse, 0, sizeof(struct _turb1__GetRawDensityResponse), 0, NULL);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetRawDensityResponse(struct soap *soap, const struct _turb1__GetRawDensityResponse *a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE__turb1__GetRawDensityResponse);
+	if (soap_out__turb1__GetRawDensityResponse(soap, tag?tag:"turb1:GetRawDensityResponse", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct _turb1__GetRawDensityResponse * SOAP_FMAC4 soap_get__turb1__GetRawDensityResponse(struct soap *soap, struct _turb1__GetRawDensityResponse *p, const char *tag, const char *type)
+{
+	if ((p = soap_in__turb1__GetRawDensityResponse(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetRawDensity(struct soap *soap, struct _turb1__GetRawDensity *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_default_string(soap, &a->authToken);
+	soap_default_string(soap, &a->dataset);
+	soap_default_float(soap, &a->time);
+	soap_default_int(soap, &a->X);
+	soap_default_int(soap, &a->Y);
+	soap_default_int(soap, &a->Z);
+	soap_default_int(soap, &a->Xwidth);
+	soap_default_int(soap, &a->Ywidth);
+	soap_default_int(soap, &a->Zwidth);
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetRawDensity(struct soap *soap, const struct _turb1__GetRawDensity *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_serialize_string(soap, &a->authToken);
+	soap_serialize_string(soap, &a->dataset);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out__turb1__GetRawDensity(struct soap *soap, const char *tag, int id, const struct _turb1__GetRawDensity *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)type;
+	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE__turb1__GetRawDensity), type))
+		return soap->error;
+	if (soap_out_string(soap, "turb1:authToken", -1, &a->authToken, ""))
+		return soap->error;
+	if (soap_out_string(soap, "turb1:dataset", -1, &a->dataset, ""))
+		return soap->error;
+	if (soap_out_float(soap, "turb1:time", -1, &a->time, ""))
+		return soap->error;
+	if (soap_out_int(soap, "turb1:X", -1, &a->X, ""))
+		return soap->error;
+	if (soap_out_int(soap, "turb1:Y", -1, &a->Y, ""))
+		return soap->error;
+	if (soap_out_int(soap, "turb1:Z", -1, &a->Z, ""))
+		return soap->error;
+	if (soap_out_int(soap, "turb1:Xwidth", -1, &a->Xwidth, ""))
+		return soap->error;
+	if (soap_out_int(soap, "turb1:Ywidth", -1, &a->Ywidth, ""))
+		return soap->error;
+	if (soap_out_int(soap, "turb1:Zwidth", -1, &a->Zwidth, ""))
+		return soap->error;
+	return soap_element_end_out(soap, tag);
+}
+
+SOAP_FMAC3 struct _turb1__GetRawDensity * SOAP_FMAC4 soap_in__turb1__GetRawDensity(struct soap *soap, const char *tag, struct _turb1__GetRawDensity *a, const char *type)
+{
+	size_t soap_flag_authToken = 1;
+	size_t soap_flag_dataset = 1;
+	size_t soap_flag_time = 1;
+	size_t soap_flag_X = 1;
+	size_t soap_flag_Y = 1;
+	size_t soap_flag_Z = 1;
+	size_t soap_flag_Xwidth = 1;
+	size_t soap_flag_Ywidth = 1;
+	size_t soap_flag_Zwidth = 1;
+	if (soap_element_begin_in(soap, tag, 0, type))
+		return NULL;
+	a = (struct _turb1__GetRawDensity *)soap_id_enter(soap, soap->id, a, SOAP_TYPE__turb1__GetRawDensity, sizeof(struct _turb1__GetRawDensity), 0, NULL, NULL, NULL);
+	if (!a)
+		return NULL;
+	soap_default__turb1__GetRawDensity(soap, a);
+	if (soap->body && !*soap->href)
+	{
+		for (;;)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_authToken && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_string(soap, "turb1:authToken", &a->authToken, "xsd:string"))
+				{	soap_flag_authToken--;
+					continue;
+				}
+			if (soap_flag_dataset && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_string(soap, "turb1:dataset", &a->dataset, "xsd:string"))
+				{	soap_flag_dataset--;
+					continue;
+				}
+			if (soap_flag_time && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_float(soap, "turb1:time", &a->time, "xsd:float"))
+				{	soap_flag_time--;
+					continue;
+				}
+			if (soap_flag_X && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_int(soap, "turb1:X", &a->X, "xsd:int"))
+				{	soap_flag_X--;
+					continue;
+				}
+			if (soap_flag_Y && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_int(soap, "turb1:Y", &a->Y, "xsd:int"))
+				{	soap_flag_Y--;
+					continue;
+				}
+			if (soap_flag_Z && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_int(soap, "turb1:Z", &a->Z, "xsd:int"))
+				{	soap_flag_Z--;
+					continue;
+				}
+			if (soap_flag_Xwidth && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_int(soap, "turb1:Xwidth", &a->Xwidth, "xsd:int"))
+				{	soap_flag_Xwidth--;
+					continue;
+				}
+			if (soap_flag_Ywidth && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_int(soap, "turb1:Ywidth", &a->Ywidth, "xsd:int"))
+				{	soap_flag_Ywidth--;
+					continue;
+				}
+			if (soap_flag_Zwidth && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_int(soap, "turb1:Zwidth", &a->Zwidth, "xsd:int"))
+				{	soap_flag_Zwidth--;
+					continue;
+				}
+			if (soap->error == SOAP_TAG_MISMATCH)
+				soap->error = soap_ignore_element(soap);
+			if (soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+		if (soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	else
+	{	a = (struct _turb1__GetRawDensity *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE__turb1__GetRawDensity, 0, sizeof(struct _turb1__GetRawDensity), 0, NULL);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_time > 0 || soap_flag_X > 0 || soap_flag_Y > 0 || soap_flag_Z > 0 || soap_flag_Xwidth > 0 || soap_flag_Ywidth > 0 || soap_flag_Zwidth > 0))
+	{	soap->error = SOAP_OCCURS;
+		return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetRawDensity(struct soap *soap, const struct _turb1__GetRawDensity *a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE__turb1__GetRawDensity);
+	if (soap_out__turb1__GetRawDensity(soap, tag?tag:"turb1:GetRawDensity", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct _turb1__GetRawDensity * SOAP_FMAC4 soap_get__turb1__GetRawDensity(struct soap *soap, struct _turb1__GetRawDensity *p, const char *tag, const char *type)
+{
+	if ((p = soap_in__turb1__GetRawDensity(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetDensityHessianResponse(struct soap *soap, struct _turb1__GetDensityHessianResponse *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	a->GetDensityHessianResult = NULL;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetDensityHessianResponse(struct soap *soap, const struct _turb1__GetDensityHessianResponse *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_serialize_PointerToturb1__ArrayOfPressureHessian(soap, &a->GetDensityHessianResult);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out__turb1__GetDensityHessianResponse(struct soap *soap, const char *tag, int id, const struct _turb1__GetDensityHessianResponse *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)type;
+	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE__turb1__GetDensityHessianResponse), type))
+		return soap->error;
+	if (a->GetDensityHessianResult)
+		soap_element_result(soap, "turb1:GetDensityHessianResult");
+	if (soap_out_PointerToturb1__ArrayOfPressureHessian(soap, "turb1:GetDensityHessianResult", -1, &a->GetDensityHessianResult, ""))
+		return soap->error;
+	return soap_element_end_out(soap, tag);
+}
+
+SOAP_FMAC3 struct _turb1__GetDensityHessianResponse * SOAP_FMAC4 soap_in__turb1__GetDensityHessianResponse(struct soap *soap, const char *tag, struct _turb1__GetDensityHessianResponse *a, const char *type)
+{
+	size_t soap_flag_GetDensityHessianResult = 1;
+	if (soap_element_begin_in(soap, tag, 0, type))
+		return NULL;
+	a = (struct _turb1__GetDensityHessianResponse *)soap_id_enter(soap, soap->id, a, SOAP_TYPE__turb1__GetDensityHessianResponse, sizeof(struct _turb1__GetDensityHessianResponse), 0, NULL, NULL, NULL);
+	if (!a)
+		return NULL;
+	soap_default__turb1__GetDensityHessianResponse(soap, a);
+	if (soap->body && !*soap->href)
+	{
+		for (;;)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_GetDensityHessianResult && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_PointerToturb1__ArrayOfPressureHessian(soap, "turb1:GetDensityHessianResult", &a->GetDensityHessianResult, "turb1:ArrayOfPressureHessian"))
+				{	soap_flag_GetDensityHessianResult--;
+					continue;
+				}
+			soap_check_result(soap, "turb1:GetDensityHessianResult");
+			if (soap->error == SOAP_TAG_MISMATCH)
+				soap->error = soap_ignore_element(soap);
+			if (soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+		if (soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	else
+	{	a = (struct _turb1__GetDensityHessianResponse *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE__turb1__GetDensityHessianResponse, 0, sizeof(struct _turb1__GetDensityHessianResponse), 0, NULL);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetDensityHessianResponse(struct soap *soap, const struct _turb1__GetDensityHessianResponse *a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE__turb1__GetDensityHessianResponse);
+	if (soap_out__turb1__GetDensityHessianResponse(soap, tag?tag:"turb1:GetDensityHessianResponse", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct _turb1__GetDensityHessianResponse * SOAP_FMAC4 soap_get__turb1__GetDensityHessianResponse(struct soap *soap, struct _turb1__GetDensityHessianResponse *p, const char *tag, const char *type)
+{
+	if ((p = soap_in__turb1__GetDensityHessianResponse(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetDensityHessian(struct soap *soap, struct _turb1__GetDensityHessian *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_default_string(soap, &a->authToken);
+	soap_default_string(soap, &a->dataset);
+	soap_default_float(soap, &a->time);
+	soap_default_turb1__SpatialInterpolation(soap, &a->spatialInterpolation);
+	soap_default_turb1__TemporalInterpolation(soap, &a->temporalInterpolation);
+	a->points = NULL;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetDensityHessian(struct soap *soap, const struct _turb1__GetDensityHessian *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_serialize_string(soap, &a->authToken);
+	soap_serialize_string(soap, &a->dataset);
+	soap_serialize_PointerToturb1__ArrayOfPoint3(soap, &a->points);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out__turb1__GetDensityHessian(struct soap *soap, const char *tag, int id, const struct _turb1__GetDensityHessian *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)type;
+	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE__turb1__GetDensityHessian), type))
+		return soap->error;
+	if (soap_out_string(soap, "turb1:authToken", -1, &a->authToken, ""))
+		return soap->error;
+	if (soap_out_string(soap, "turb1:dataset", -1, &a->dataset, ""))
+		return soap->error;
+	if (soap_out_float(soap, "turb1:time", -1, &a->time, ""))
+		return soap->error;
+	if (soap_out_turb1__SpatialInterpolation(soap, "turb1:spatialInterpolation", -1, &a->spatialInterpolation, ""))
+		return soap->error;
+	if (soap_out_turb1__TemporalInterpolation(soap, "turb1:temporalInterpolation", -1, &a->temporalInterpolation, ""))
+		return soap->error;
+	if (soap_out_PointerToturb1__ArrayOfPoint3(soap, "turb1:points", -1, &a->points, ""))
+		return soap->error;
+	return soap_element_end_out(soap, tag);
+}
+
+SOAP_FMAC3 struct _turb1__GetDensityHessian * SOAP_FMAC4 soap_in__turb1__GetDensityHessian(struct soap *soap, const char *tag, struct _turb1__GetDensityHessian *a, const char *type)
+{
+	size_t soap_flag_authToken = 1;
+	size_t soap_flag_dataset = 1;
+	size_t soap_flag_time = 1;
+	size_t soap_flag_spatialInterpolation = 1;
+	size_t soap_flag_temporalInterpolation = 1;
+	size_t soap_flag_points = 1;
+	if (soap_element_begin_in(soap, tag, 0, type))
+		return NULL;
+	a = (struct _turb1__GetDensityHessian *)soap_id_enter(soap, soap->id, a, SOAP_TYPE__turb1__GetDensityHessian, sizeof(struct _turb1__GetDensityHessian), 0, NULL, NULL, NULL);
+	if (!a)
+		return NULL;
+	soap_default__turb1__GetDensityHessian(soap, a);
+	if (soap->body && !*soap->href)
+	{
+		for (;;)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_authToken && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_string(soap, "turb1:authToken", &a->authToken, "xsd:string"))
+				{	soap_flag_authToken--;
+					continue;
+				}
+			if (soap_flag_dataset && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_string(soap, "turb1:dataset", &a->dataset, "xsd:string"))
+				{	soap_flag_dataset--;
+					continue;
+				}
+			if (soap_flag_time && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_float(soap, "turb1:time", &a->time, "xsd:float"))
+				{	soap_flag_time--;
+					continue;
+				}
+			if (soap_flag_spatialInterpolation && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_turb1__SpatialInterpolation(soap, "turb1:spatialInterpolation", &a->spatialInterpolation, "turb1:SpatialInterpolation"))
+				{	soap_flag_spatialInterpolation--;
+					continue;
+				}
+			if (soap_flag_temporalInterpolation && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_turb1__TemporalInterpolation(soap, "turb1:temporalInterpolation", &a->temporalInterpolation, "turb1:TemporalInterpolation"))
+				{	soap_flag_temporalInterpolation--;
+					continue;
+				}
+			if (soap_flag_points && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_PointerToturb1__ArrayOfPoint3(soap, "turb1:points", &a->points, "turb1:ArrayOfPoint3"))
+				{	soap_flag_points--;
+					continue;
+				}
+			if (soap->error == SOAP_TAG_MISMATCH)
+				soap->error = soap_ignore_element(soap);
+			if (soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+		if (soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	else
+	{	a = (struct _turb1__GetDensityHessian *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE__turb1__GetDensityHessian, 0, sizeof(struct _turb1__GetDensityHessian), 0, NULL);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_time > 0 || soap_flag_spatialInterpolation > 0 || soap_flag_temporalInterpolation > 0))
+	{	soap->error = SOAP_OCCURS;
+		return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetDensityHessian(struct soap *soap, const struct _turb1__GetDensityHessian *a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE__turb1__GetDensityHessian);
+	if (soap_out__turb1__GetDensityHessian(soap, tag?tag:"turb1:GetDensityHessian", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct _turb1__GetDensityHessian * SOAP_FMAC4 soap_get__turb1__GetDensityHessian(struct soap *soap, struct _turb1__GetDensityHessian *p, const char *tag, const char *type)
+{
+	if ((p = soap_in__turb1__GetDensityHessian(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetDensityGradientResponse(struct soap *soap, struct _turb1__GetDensityGradientResponse *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	a->GetDensityGradientResult = NULL;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetDensityGradientResponse(struct soap *soap, const struct _turb1__GetDensityGradientResponse *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_serialize_PointerToturb1__ArrayOfVector3(soap, &a->GetDensityGradientResult);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out__turb1__GetDensityGradientResponse(struct soap *soap, const char *tag, int id, const struct _turb1__GetDensityGradientResponse *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)type;
+	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE__turb1__GetDensityGradientResponse), type))
+		return soap->error;
+	if (a->GetDensityGradientResult)
+		soap_element_result(soap, "turb1:GetDensityGradientResult");
+	if (soap_out_PointerToturb1__ArrayOfVector3(soap, "turb1:GetDensityGradientResult", -1, &a->GetDensityGradientResult, ""))
+		return soap->error;
+	return soap_element_end_out(soap, tag);
+}
+
+SOAP_FMAC3 struct _turb1__GetDensityGradientResponse * SOAP_FMAC4 soap_in__turb1__GetDensityGradientResponse(struct soap *soap, const char *tag, struct _turb1__GetDensityGradientResponse *a, const char *type)
+{
+	size_t soap_flag_GetDensityGradientResult = 1;
+	if (soap_element_begin_in(soap, tag, 0, type))
+		return NULL;
+	a = (struct _turb1__GetDensityGradientResponse *)soap_id_enter(soap, soap->id, a, SOAP_TYPE__turb1__GetDensityGradientResponse, sizeof(struct _turb1__GetDensityGradientResponse), 0, NULL, NULL, NULL);
+	if (!a)
+		return NULL;
+	soap_default__turb1__GetDensityGradientResponse(soap, a);
+	if (soap->body && !*soap->href)
+	{
+		for (;;)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_GetDensityGradientResult && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_PointerToturb1__ArrayOfVector3(soap, "turb1:GetDensityGradientResult", &a->GetDensityGradientResult, "turb1:ArrayOfVector3"))
+				{	soap_flag_GetDensityGradientResult--;
+					continue;
+				}
+			soap_check_result(soap, "turb1:GetDensityGradientResult");
+			if (soap->error == SOAP_TAG_MISMATCH)
+				soap->error = soap_ignore_element(soap);
+			if (soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+		if (soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	else
+	{	a = (struct _turb1__GetDensityGradientResponse *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE__turb1__GetDensityGradientResponse, 0, sizeof(struct _turb1__GetDensityGradientResponse), 0, NULL);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetDensityGradientResponse(struct soap *soap, const struct _turb1__GetDensityGradientResponse *a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE__turb1__GetDensityGradientResponse);
+	if (soap_out__turb1__GetDensityGradientResponse(soap, tag?tag:"turb1:GetDensityGradientResponse", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct _turb1__GetDensityGradientResponse * SOAP_FMAC4 soap_get__turb1__GetDensityGradientResponse(struct soap *soap, struct _turb1__GetDensityGradientResponse *p, const char *tag, const char *type)
+{
+	if ((p = soap_in__turb1__GetDensityGradientResponse(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetDensityGradient(struct soap *soap, struct _turb1__GetDensityGradient *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_default_string(soap, &a->authToken);
+	soap_default_string(soap, &a->dataset);
+	soap_default_float(soap, &a->time);
+	soap_default_turb1__SpatialInterpolation(soap, &a->spatialInterpolation);
+	soap_default_turb1__TemporalInterpolation(soap, &a->temporalInterpolation);
+	a->points = NULL;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetDensityGradient(struct soap *soap, const struct _turb1__GetDensityGradient *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_serialize_string(soap, &a->authToken);
+	soap_serialize_string(soap, &a->dataset);
+	soap_serialize_PointerToturb1__ArrayOfPoint3(soap, &a->points);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out__turb1__GetDensityGradient(struct soap *soap, const char *tag, int id, const struct _turb1__GetDensityGradient *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)type;
+	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE__turb1__GetDensityGradient), type))
+		return soap->error;
+	if (soap_out_string(soap, "turb1:authToken", -1, &a->authToken, ""))
+		return soap->error;
+	if (soap_out_string(soap, "turb1:dataset", -1, &a->dataset, ""))
+		return soap->error;
+	if (soap_out_float(soap, "turb1:time", -1, &a->time, ""))
+		return soap->error;
+	if (soap_out_turb1__SpatialInterpolation(soap, "turb1:spatialInterpolation", -1, &a->spatialInterpolation, ""))
+		return soap->error;
+	if (soap_out_turb1__TemporalInterpolation(soap, "turb1:temporalInterpolation", -1, &a->temporalInterpolation, ""))
+		return soap->error;
+	if (soap_out_PointerToturb1__ArrayOfPoint3(soap, "turb1:points", -1, &a->points, ""))
+		return soap->error;
+	return soap_element_end_out(soap, tag);
+}
+
+SOAP_FMAC3 struct _turb1__GetDensityGradient * SOAP_FMAC4 soap_in__turb1__GetDensityGradient(struct soap *soap, const char *tag, struct _turb1__GetDensityGradient *a, const char *type)
+{
+	size_t soap_flag_authToken = 1;
+	size_t soap_flag_dataset = 1;
+	size_t soap_flag_time = 1;
+	size_t soap_flag_spatialInterpolation = 1;
+	size_t soap_flag_temporalInterpolation = 1;
+	size_t soap_flag_points = 1;
+	if (soap_element_begin_in(soap, tag, 0, type))
+		return NULL;
+	a = (struct _turb1__GetDensityGradient *)soap_id_enter(soap, soap->id, a, SOAP_TYPE__turb1__GetDensityGradient, sizeof(struct _turb1__GetDensityGradient), 0, NULL, NULL, NULL);
+	if (!a)
+		return NULL;
+	soap_default__turb1__GetDensityGradient(soap, a);
+	if (soap->body && !*soap->href)
+	{
+		for (;;)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_authToken && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_string(soap, "turb1:authToken", &a->authToken, "xsd:string"))
+				{	soap_flag_authToken--;
+					continue;
+				}
+			if (soap_flag_dataset && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_string(soap, "turb1:dataset", &a->dataset, "xsd:string"))
+				{	soap_flag_dataset--;
+					continue;
+				}
+			if (soap_flag_time && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_float(soap, "turb1:time", &a->time, "xsd:float"))
+				{	soap_flag_time--;
+					continue;
+				}
+			if (soap_flag_spatialInterpolation && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_turb1__SpatialInterpolation(soap, "turb1:spatialInterpolation", &a->spatialInterpolation, "turb1:SpatialInterpolation"))
+				{	soap_flag_spatialInterpolation--;
+					continue;
+				}
+			if (soap_flag_temporalInterpolation && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_turb1__TemporalInterpolation(soap, "turb1:temporalInterpolation", &a->temporalInterpolation, "turb1:TemporalInterpolation"))
+				{	soap_flag_temporalInterpolation--;
+					continue;
+				}
+			if (soap_flag_points && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_PointerToturb1__ArrayOfPoint3(soap, "turb1:points", &a->points, "turb1:ArrayOfPoint3"))
+				{	soap_flag_points--;
+					continue;
+				}
+			if (soap->error == SOAP_TAG_MISMATCH)
+				soap->error = soap_ignore_element(soap);
+			if (soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+		if (soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	else
+	{	a = (struct _turb1__GetDensityGradient *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE__turb1__GetDensityGradient, 0, sizeof(struct _turb1__GetDensityGradient), 0, NULL);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_time > 0 || soap_flag_spatialInterpolation > 0 || soap_flag_temporalInterpolation > 0))
+	{	soap->error = SOAP_OCCURS;
+		return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetDensityGradient(struct soap *soap, const struct _turb1__GetDensityGradient *a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE__turb1__GetDensityGradient);
+	if (soap_out__turb1__GetDensityGradient(soap, tag?tag:"turb1:GetDensityGradient", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct _turb1__GetDensityGradient * SOAP_FMAC4 soap_get__turb1__GetDensityGradient(struct soap *soap, struct _turb1__GetDensityGradient *p, const char *tag, const char *type)
+{
+	if ((p = soap_in__turb1__GetDensityGradient(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetDensityResponse(struct soap *soap, struct _turb1__GetDensityResponse *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	a->GetDensityResult = NULL;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetDensityResponse(struct soap *soap, const struct _turb1__GetDensityResponse *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_serialize_PointerToturb1__ArrayOfPressure(soap, &a->GetDensityResult);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out__turb1__GetDensityResponse(struct soap *soap, const char *tag, int id, const struct _turb1__GetDensityResponse *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)type;
+	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE__turb1__GetDensityResponse), type))
+		return soap->error;
+	if (a->GetDensityResult)
+		soap_element_result(soap, "turb1:GetDensityResult");
+	if (soap_out_PointerToturb1__ArrayOfPressure(soap, "turb1:GetDensityResult", -1, &a->GetDensityResult, ""))
+		return soap->error;
+	return soap_element_end_out(soap, tag);
+}
+
+SOAP_FMAC3 struct _turb1__GetDensityResponse * SOAP_FMAC4 soap_in__turb1__GetDensityResponse(struct soap *soap, const char *tag, struct _turb1__GetDensityResponse *a, const char *type)
+{
+	size_t soap_flag_GetDensityResult = 1;
+	if (soap_element_begin_in(soap, tag, 0, type))
+		return NULL;
+	a = (struct _turb1__GetDensityResponse *)soap_id_enter(soap, soap->id, a, SOAP_TYPE__turb1__GetDensityResponse, sizeof(struct _turb1__GetDensityResponse), 0, NULL, NULL, NULL);
+	if (!a)
+		return NULL;
+	soap_default__turb1__GetDensityResponse(soap, a);
+	if (soap->body && !*soap->href)
+	{
+		for (;;)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_GetDensityResult && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_PointerToturb1__ArrayOfPressure(soap, "turb1:GetDensityResult", &a->GetDensityResult, "turb1:ArrayOfPressure"))
+				{	soap_flag_GetDensityResult--;
+					continue;
+				}
+			soap_check_result(soap, "turb1:GetDensityResult");
+			if (soap->error == SOAP_TAG_MISMATCH)
+				soap->error = soap_ignore_element(soap);
+			if (soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+		if (soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	else
+	{	a = (struct _turb1__GetDensityResponse *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE__turb1__GetDensityResponse, 0, sizeof(struct _turb1__GetDensityResponse), 0, NULL);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetDensityResponse(struct soap *soap, const struct _turb1__GetDensityResponse *a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE__turb1__GetDensityResponse);
+	if (soap_out__turb1__GetDensityResponse(soap, tag?tag:"turb1:GetDensityResponse", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct _turb1__GetDensityResponse * SOAP_FMAC4 soap_get__turb1__GetDensityResponse(struct soap *soap, struct _turb1__GetDensityResponse *p, const char *tag, const char *type)
+{
+	if ((p = soap_in__turb1__GetDensityResponse(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetDensity(struct soap *soap, struct _turb1__GetDensity *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_default_string(soap, &a->authToken);
+	soap_default_string(soap, &a->dataset);
+	soap_default_float(soap, &a->time);
+	soap_default_turb1__SpatialInterpolation(soap, &a->spatialInterpolation);
+	soap_default_turb1__TemporalInterpolation(soap, &a->temporalInterpolation);
+	a->points = NULL;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetDensity(struct soap *soap, const struct _turb1__GetDensity *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_serialize_string(soap, &a->authToken);
+	soap_serialize_string(soap, &a->dataset);
+	soap_serialize_PointerToturb1__ArrayOfPoint3(soap, &a->points);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out__turb1__GetDensity(struct soap *soap, const char *tag, int id, const struct _turb1__GetDensity *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)type;
+	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE__turb1__GetDensity), type))
+		return soap->error;
+	if (soap_out_string(soap, "turb1:authToken", -1, &a->authToken, ""))
+		return soap->error;
+	if (soap_out_string(soap, "turb1:dataset", -1, &a->dataset, ""))
+		return soap->error;
+	if (soap_out_float(soap, "turb1:time", -1, &a->time, ""))
+		return soap->error;
+	if (soap_out_turb1__SpatialInterpolation(soap, "turb1:spatialInterpolation", -1, &a->spatialInterpolation, ""))
+		return soap->error;
+	if (soap_out_turb1__TemporalInterpolation(soap, "turb1:temporalInterpolation", -1, &a->temporalInterpolation, ""))
+		return soap->error;
+	if (soap_out_PointerToturb1__ArrayOfPoint3(soap, "turb1:points", -1, &a->points, ""))
+		return soap->error;
+	return soap_element_end_out(soap, tag);
+}
+
+SOAP_FMAC3 struct _turb1__GetDensity * SOAP_FMAC4 soap_in__turb1__GetDensity(struct soap *soap, const char *tag, struct _turb1__GetDensity *a, const char *type)
+{
+	size_t soap_flag_authToken = 1;
+	size_t soap_flag_dataset = 1;
+	size_t soap_flag_time = 1;
+	size_t soap_flag_spatialInterpolation = 1;
+	size_t soap_flag_temporalInterpolation = 1;
+	size_t soap_flag_points = 1;
+	if (soap_element_begin_in(soap, tag, 0, type))
+		return NULL;
+	a = (struct _turb1__GetDensity *)soap_id_enter(soap, soap->id, a, SOAP_TYPE__turb1__GetDensity, sizeof(struct _turb1__GetDensity), 0, NULL, NULL, NULL);
+	if (!a)
+		return NULL;
+	soap_default__turb1__GetDensity(soap, a);
+	if (soap->body && !*soap->href)
+	{
+		for (;;)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_authToken && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_string(soap, "turb1:authToken", &a->authToken, "xsd:string"))
+				{	soap_flag_authToken--;
+					continue;
+				}
+			if (soap_flag_dataset && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_string(soap, "turb1:dataset", &a->dataset, "xsd:string"))
+				{	soap_flag_dataset--;
+					continue;
+				}
+			if (soap_flag_time && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_float(soap, "turb1:time", &a->time, "xsd:float"))
+				{	soap_flag_time--;
+					continue;
+				}
+			if (soap_flag_spatialInterpolation && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_turb1__SpatialInterpolation(soap, "turb1:spatialInterpolation", &a->spatialInterpolation, "turb1:SpatialInterpolation"))
+				{	soap_flag_spatialInterpolation--;
+					continue;
+				}
+			if (soap_flag_temporalInterpolation && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_turb1__TemporalInterpolation(soap, "turb1:temporalInterpolation", &a->temporalInterpolation, "turb1:TemporalInterpolation"))
+				{	soap_flag_temporalInterpolation--;
+					continue;
+				}
+			if (soap_flag_points && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_PointerToturb1__ArrayOfPoint3(soap, "turb1:points", &a->points, "turb1:ArrayOfPoint3"))
+				{	soap_flag_points--;
+					continue;
+				}
+			if (soap->error == SOAP_TAG_MISMATCH)
+				soap->error = soap_ignore_element(soap);
+			if (soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+		if (soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	else
+	{	a = (struct _turb1__GetDensity *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE__turb1__GetDensity, 0, sizeof(struct _turb1__GetDensity), 0, NULL);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_time > 0 || soap_flag_spatialInterpolation > 0 || soap_flag_temporalInterpolation > 0))
+	{	soap->error = SOAP_OCCURS;
+		return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetDensity(struct soap *soap, const struct _turb1__GetDensity *a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE__turb1__GetDensity);
+	if (soap_out__turb1__GetDensity(soap, tag?tag:"turb1:GetDensity", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct _turb1__GetDensity * SOAP_FMAC4 soap_get__turb1__GetDensity(struct soap *soap, struct _turb1__GetDensity *p, const char *tag, const char *type)
+{
+	if ((p = soap_in__turb1__GetDensity(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
 SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetRawVectorPotentialResponse(struct soap *soap, struct _turb1__GetRawVectorPotentialResponse *a)
 {
 	(void)soap; (void)a; /* appease -Wall -Werror */
@@ -11900,6 +13880,216 @@ SOAP_FMAC3 struct _turb1__NullOp * SOAP_FMAC4 soap_get__turb1__NullOp(struct soa
 	return p;
 }
 
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_turb1__ThresholdInfo(struct soap *soap, struct turb1__ThresholdInfo *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_default_int(soap, &a->x);
+	soap_default_int(soap, &a->y);
+	soap_default_int(soap, &a->z);
+	soap_default_float(soap, &a->value);
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_turb1__ThresholdInfo(struct soap *soap, const struct turb1__ThresholdInfo *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_turb1__ThresholdInfo(struct soap *soap, const char *tag, int id, const struct turb1__ThresholdInfo *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)type;
+	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_turb1__ThresholdInfo), type))
+		return soap->error;
+	if (soap_out_int(soap, "turb1:x", -1, &a->x, ""))
+		return soap->error;
+	if (soap_out_int(soap, "turb1:y", -1, &a->y, ""))
+		return soap->error;
+	if (soap_out_int(soap, "turb1:z", -1, &a->z, ""))
+		return soap->error;
+	if (soap_out_float(soap, "turb1:value", -1, &a->value, ""))
+		return soap->error;
+	return soap_element_end_out(soap, tag);
+}
+
+SOAP_FMAC3 struct turb1__ThresholdInfo * SOAP_FMAC4 soap_in_turb1__ThresholdInfo(struct soap *soap, const char *tag, struct turb1__ThresholdInfo *a, const char *type)
+{
+	size_t soap_flag_x = 1;
+	size_t soap_flag_y = 1;
+	size_t soap_flag_z = 1;
+	size_t soap_flag_value = 1;
+	if (soap_element_begin_in(soap, tag, 0, type))
+		return NULL;
+	a = (struct turb1__ThresholdInfo *)soap_id_enter(soap, soap->id, a, SOAP_TYPE_turb1__ThresholdInfo, sizeof(struct turb1__ThresholdInfo), 0, NULL, NULL, NULL);
+	if (!a)
+		return NULL;
+	soap_default_turb1__ThresholdInfo(soap, a);
+	if (soap->body && !*soap->href)
+	{
+		for (;;)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_x && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_int(soap, "turb1:x", &a->x, "xsd:int"))
+				{	soap_flag_x--;
+					continue;
+				}
+			if (soap_flag_y && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_int(soap, "turb1:y", &a->y, "xsd:int"))
+				{	soap_flag_y--;
+					continue;
+				}
+			if (soap_flag_z && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_int(soap, "turb1:z", &a->z, "xsd:int"))
+				{	soap_flag_z--;
+					continue;
+				}
+			if (soap_flag_value && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_float(soap, "turb1:value", &a->value, "xsd:float"))
+				{	soap_flag_value--;
+					continue;
+				}
+			if (soap->error == SOAP_TAG_MISMATCH)
+				soap->error = soap_ignore_element(soap);
+			if (soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+		if (soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	else
+	{	a = (struct turb1__ThresholdInfo *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE_turb1__ThresholdInfo, 0, sizeof(struct turb1__ThresholdInfo), 0, NULL);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_x > 0 || soap_flag_y > 0 || soap_flag_z > 0 || soap_flag_value > 0))
+	{	soap->error = SOAP_OCCURS;
+		return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_turb1__ThresholdInfo(struct soap *soap, const struct turb1__ThresholdInfo *a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE_turb1__ThresholdInfo);
+	if (soap_out_turb1__ThresholdInfo(soap, tag?tag:"turb1:ThresholdInfo", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct turb1__ThresholdInfo * SOAP_FMAC4 soap_get_turb1__ThresholdInfo(struct soap *soap, struct turb1__ThresholdInfo *p, const char *tag, const char *type)
+{
+	if ((p = soap_in_turb1__ThresholdInfo(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_turb1__ArrayOfThresholdInfo(struct soap *soap, struct turb1__ArrayOfThresholdInfo *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	a->__sizeThresholdInfo = 0;
+	a->ThresholdInfo = NULL;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_turb1__ArrayOfThresholdInfo(struct soap *soap, const struct turb1__ArrayOfThresholdInfo *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	if (a->ThresholdInfo)
+	{	int i;
+		for (i = 0; i < a->__sizeThresholdInfo; i++)
+		{
+			soap_embedded(soap, a->ThresholdInfo + i, SOAP_TYPE_turb1__ThresholdInfo);
+			soap_serialize_turb1__ThresholdInfo(soap, a->ThresholdInfo + i);
+		}
+	}
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_turb1__ArrayOfThresholdInfo(struct soap *soap, const char *tag, int id, const struct turb1__ArrayOfThresholdInfo *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)type;
+	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_turb1__ArrayOfThresholdInfo), type))
+		return soap->error;
+	if (a->ThresholdInfo)
+	{	int i;
+		for (i = 0; i < a->__sizeThresholdInfo; i++)
+			if (soap_out_turb1__ThresholdInfo(soap, "turb1:ThresholdInfo", -1, a->ThresholdInfo + i, ""))
+				return soap->error;
+	}
+	return soap_element_end_out(soap, tag);
+}
+
+SOAP_FMAC3 struct turb1__ArrayOfThresholdInfo * SOAP_FMAC4 soap_in_turb1__ArrayOfThresholdInfo(struct soap *soap, const char *tag, struct turb1__ArrayOfThresholdInfo *a, const char *type)
+{
+	struct soap_blist *soap_blist_ThresholdInfo = NULL;
+	if (soap_element_begin_in(soap, tag, 0, type))
+		return NULL;
+	a = (struct turb1__ArrayOfThresholdInfo *)soap_id_enter(soap, soap->id, a, SOAP_TYPE_turb1__ArrayOfThresholdInfo, sizeof(struct turb1__ArrayOfThresholdInfo), 0, NULL, NULL, NULL);
+	if (!a)
+		return NULL;
+	soap_default_turb1__ArrayOfThresholdInfo(soap, a);
+	if (soap->body && !*soap->href)
+	{
+		for (;;)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap->error == SOAP_TAG_MISMATCH && !soap_element_begin_in(soap, "turb1:ThresholdInfo", 1, NULL))
+			{	if (a->ThresholdInfo == NULL)
+				{	if (soap_blist_ThresholdInfo == NULL)
+						soap_blist_ThresholdInfo = soap_new_block(soap);
+					a->ThresholdInfo = (struct turb1__ThresholdInfo *)soap_push_block(soap, soap_blist_ThresholdInfo, sizeof(struct turb1__ThresholdInfo));
+					if (a->ThresholdInfo == NULL)
+						return NULL;
+					soap_default_turb1__ThresholdInfo(soap, a->ThresholdInfo);
+				}
+				soap_revert(soap);
+				if (soap_in_turb1__ThresholdInfo(soap, "turb1:ThresholdInfo", a->ThresholdInfo, "turb1:ThresholdInfo"))
+				{	a->__sizeThresholdInfo++;
+					a->ThresholdInfo = NULL;
+					continue;
+				}
+			}
+			if (soap->error == SOAP_TAG_MISMATCH)
+				soap->error = soap_ignore_element(soap);
+			if (soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+		if (a->ThresholdInfo)
+			soap_pop_block(soap, soap_blist_ThresholdInfo);
+		if (a->__sizeThresholdInfo)
+			a->ThresholdInfo = (struct turb1__ThresholdInfo *)soap_save_block(soap, soap_blist_ThresholdInfo, NULL, 1);
+		else
+		{	a->ThresholdInfo = NULL;
+			if (soap_blist_ThresholdInfo)
+				soap_end_block(soap, soap_blist_ThresholdInfo);
+		}
+		if (soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	else
+	{	a = (struct turb1__ArrayOfThresholdInfo *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE_turb1__ArrayOfThresholdInfo, 0, sizeof(struct turb1__ArrayOfThresholdInfo), 0, NULL);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_turb1__ArrayOfThresholdInfo(struct soap *soap, const struct turb1__ArrayOfThresholdInfo *a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE_turb1__ArrayOfThresholdInfo);
+	if (soap_out_turb1__ArrayOfThresholdInfo(soap, tag?tag:"turb1:ArrayOfThresholdInfo", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct turb1__ArrayOfThresholdInfo * SOAP_FMAC4 soap_get_turb1__ArrayOfThresholdInfo(struct soap *soap, struct turb1__ArrayOfThresholdInfo *p, const char *tag, const char *type)
+{
+	if ((p = soap_in_turb1__ArrayOfThresholdInfo(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
 SOAP_FMAC3 void SOAP_FMAC4 soap_default_turb1__SGSTensor(struct soap *soap, struct turb1__SGSTensor *a)
 {
 	(void)soap; (void)a; /* appease -Wall -Werror */
@@ -12464,234 +14654,6 @@ SOAP_FMAC3 struct turb1__ArrayOfVelocityHessian * SOAP_FMAC4 soap_get_turb1__Arr
 	return p;
 }
 
-SOAP_FMAC3 void SOAP_FMAC4 soap_default_turb1__PressureHessian(struct soap *soap, struct turb1__PressureHessian *a)
-{
-	(void)soap; (void)a; /* appease -Wall -Werror */
-	soap_default_float(soap, &a->d2pdxdx);
-	soap_default_float(soap, &a->d2pdxdy);
-	soap_default_float(soap, &a->d2pdxdz);
-	soap_default_float(soap, &a->d2pdydy);
-	soap_default_float(soap, &a->d2pdydz);
-	soap_default_float(soap, &a->d2pdzdz);
-}
-
-SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_turb1__PressureHessian(struct soap *soap, const struct turb1__PressureHessian *a)
-{
-	(void)soap; (void)a; /* appease -Wall -Werror */
-}
-
-SOAP_FMAC3 int SOAP_FMAC4 soap_out_turb1__PressureHessian(struct soap *soap, const char *tag, int id, const struct turb1__PressureHessian *a, const char *type)
-{
-	(void)soap; (void)tag; (void)id; (void)type;
-	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_turb1__PressureHessian), type))
-		return soap->error;
-	if (soap_out_float(soap, "turb1:d2pdxdx", -1, &a->d2pdxdx, ""))
-		return soap->error;
-	if (soap_out_float(soap, "turb1:d2pdxdy", -1, &a->d2pdxdy, ""))
-		return soap->error;
-	if (soap_out_float(soap, "turb1:d2pdxdz", -1, &a->d2pdxdz, ""))
-		return soap->error;
-	if (soap_out_float(soap, "turb1:d2pdydy", -1, &a->d2pdydy, ""))
-		return soap->error;
-	if (soap_out_float(soap, "turb1:d2pdydz", -1, &a->d2pdydz, ""))
-		return soap->error;
-	if (soap_out_float(soap, "turb1:d2pdzdz", -1, &a->d2pdzdz, ""))
-		return soap->error;
-	return soap_element_end_out(soap, tag);
-}
-
-SOAP_FMAC3 struct turb1__PressureHessian * SOAP_FMAC4 soap_in_turb1__PressureHessian(struct soap *soap, const char *tag, struct turb1__PressureHessian *a, const char *type)
-{
-	size_t soap_flag_d2pdxdx = 1;
-	size_t soap_flag_d2pdxdy = 1;
-	size_t soap_flag_d2pdxdz = 1;
-	size_t soap_flag_d2pdydy = 1;
-	size_t soap_flag_d2pdydz = 1;
-	size_t soap_flag_d2pdzdz = 1;
-	if (soap_element_begin_in(soap, tag, 0, type))
-		return NULL;
-	a = (struct turb1__PressureHessian *)soap_id_enter(soap, soap->id, a, SOAP_TYPE_turb1__PressureHessian, sizeof(struct turb1__PressureHessian), 0, NULL, NULL, NULL);
-	if (!a)
-		return NULL;
-	soap_default_turb1__PressureHessian(soap, a);
-	if (soap->body && !*soap->href)
-	{
-		for (;;)
-		{	soap->error = SOAP_TAG_MISMATCH;
-			if (soap_flag_d2pdxdx && soap->error == SOAP_TAG_MISMATCH)
-				if (soap_in_float(soap, "turb1:d2pdxdx", &a->d2pdxdx, "xsd:float"))
-				{	soap_flag_d2pdxdx--;
-					continue;
-				}
-			if (soap_flag_d2pdxdy && soap->error == SOAP_TAG_MISMATCH)
-				if (soap_in_float(soap, "turb1:d2pdxdy", &a->d2pdxdy, "xsd:float"))
-				{	soap_flag_d2pdxdy--;
-					continue;
-				}
-			if (soap_flag_d2pdxdz && soap->error == SOAP_TAG_MISMATCH)
-				if (soap_in_float(soap, "turb1:d2pdxdz", &a->d2pdxdz, "xsd:float"))
-				{	soap_flag_d2pdxdz--;
-					continue;
-				}
-			if (soap_flag_d2pdydy && soap->error == SOAP_TAG_MISMATCH)
-				if (soap_in_float(soap, "turb1:d2pdydy", &a->d2pdydy, "xsd:float"))
-				{	soap_flag_d2pdydy--;
-					continue;
-				}
-			if (soap_flag_d2pdydz && soap->error == SOAP_TAG_MISMATCH)
-				if (soap_in_float(soap, "turb1:d2pdydz", &a->d2pdydz, "xsd:float"))
-				{	soap_flag_d2pdydz--;
-					continue;
-				}
-			if (soap_flag_d2pdzdz && soap->error == SOAP_TAG_MISMATCH)
-				if (soap_in_float(soap, "turb1:d2pdzdz", &a->d2pdzdz, "xsd:float"))
-				{	soap_flag_d2pdzdz--;
-					continue;
-				}
-			if (soap->error == SOAP_TAG_MISMATCH)
-				soap->error = soap_ignore_element(soap);
-			if (soap->error == SOAP_NO_TAG)
-				break;
-			if (soap->error)
-				return NULL;
-		}
-		if (soap_element_end_in(soap, tag))
-			return NULL;
-	}
-	else
-	{	a = (struct turb1__PressureHessian *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE_turb1__PressureHessian, 0, sizeof(struct turb1__PressureHessian), 0, NULL);
-		if (soap->body && soap_element_end_in(soap, tag))
-			return NULL;
-	}
-	if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_d2pdxdx > 0 || soap_flag_d2pdxdy > 0 || soap_flag_d2pdxdz > 0 || soap_flag_d2pdydy > 0 || soap_flag_d2pdydz > 0 || soap_flag_d2pdzdz > 0))
-	{	soap->error = SOAP_OCCURS;
-		return NULL;
-	}
-	return a;
-}
-
-SOAP_FMAC3 int SOAP_FMAC4 soap_put_turb1__PressureHessian(struct soap *soap, const struct turb1__PressureHessian *a, const char *tag, const char *type)
-{
-	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE_turb1__PressureHessian);
-	if (soap_out_turb1__PressureHessian(soap, tag?tag:"turb1:PressureHessian", id, a, type))
-		return soap->error;
-	return soap_putindependent(soap);
-}
-
-SOAP_FMAC3 struct turb1__PressureHessian * SOAP_FMAC4 soap_get_turb1__PressureHessian(struct soap *soap, struct turb1__PressureHessian *p, const char *tag, const char *type)
-{
-	if ((p = soap_in_turb1__PressureHessian(soap, tag, p, type)))
-		if (soap_getindependent(soap))
-			return NULL;
-	return p;
-}
-
-SOAP_FMAC3 void SOAP_FMAC4 soap_default_turb1__ArrayOfPressureHessian(struct soap *soap, struct turb1__ArrayOfPressureHessian *a)
-{
-	(void)soap; (void)a; /* appease -Wall -Werror */
-	a->__sizePressureHessian = 0;
-	a->PressureHessian = NULL;
-}
-
-SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_turb1__ArrayOfPressureHessian(struct soap *soap, const struct turb1__ArrayOfPressureHessian *a)
-{
-	(void)soap; (void)a; /* appease -Wall -Werror */
-	if (a->PressureHessian)
-	{	int i;
-		for (i = 0; i < a->__sizePressureHessian; i++)
-		{
-			soap_embedded(soap, a->PressureHessian + i, SOAP_TYPE_turb1__PressureHessian);
-			soap_serialize_turb1__PressureHessian(soap, a->PressureHessian + i);
-		}
-	}
-}
-
-SOAP_FMAC3 int SOAP_FMAC4 soap_out_turb1__ArrayOfPressureHessian(struct soap *soap, const char *tag, int id, const struct turb1__ArrayOfPressureHessian *a, const char *type)
-{
-	(void)soap; (void)tag; (void)id; (void)type;
-	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_turb1__ArrayOfPressureHessian), type))
-		return soap->error;
-	if (a->PressureHessian)
-	{	int i;
-		for (i = 0; i < a->__sizePressureHessian; i++)
-			if (soap_out_turb1__PressureHessian(soap, "turb1:PressureHessian", -1, a->PressureHessian + i, ""))
-				return soap->error;
-	}
-	return soap_element_end_out(soap, tag);
-}
-
-SOAP_FMAC3 struct turb1__ArrayOfPressureHessian * SOAP_FMAC4 soap_in_turb1__ArrayOfPressureHessian(struct soap *soap, const char *tag, struct turb1__ArrayOfPressureHessian *a, const char *type)
-{
-	struct soap_blist *soap_blist_PressureHessian = NULL;
-	if (soap_element_begin_in(soap, tag, 0, type))
-		return NULL;
-	a = (struct turb1__ArrayOfPressureHessian *)soap_id_enter(soap, soap->id, a, SOAP_TYPE_turb1__ArrayOfPressureHessian, sizeof(struct turb1__ArrayOfPressureHessian), 0, NULL, NULL, NULL);
-	if (!a)
-		return NULL;
-	soap_default_turb1__ArrayOfPressureHessian(soap, a);
-	if (soap->body && !*soap->href)
-	{
-		for (;;)
-		{	soap->error = SOAP_TAG_MISMATCH;
-			if (soap->error == SOAP_TAG_MISMATCH && !soap_element_begin_in(soap, "turb1:PressureHessian", 1, NULL))
-			{	if (a->PressureHessian == NULL)
-				{	if (soap_blist_PressureHessian == NULL)
-						soap_blist_PressureHessian = soap_new_block(soap);
-					a->PressureHessian = (struct turb1__PressureHessian *)soap_push_block(soap, soap_blist_PressureHessian, sizeof(struct turb1__PressureHessian));
-					if (a->PressureHessian == NULL)
-						return NULL;
-					soap_default_turb1__PressureHessian(soap, a->PressureHessian);
-				}
-				soap_revert(soap);
-				if (soap_in_turb1__PressureHessian(soap, "turb1:PressureHessian", a->PressureHessian, "turb1:PressureHessian"))
-				{	a->__sizePressureHessian++;
-					a->PressureHessian = NULL;
-					continue;
-				}
-			}
-			if (soap->error == SOAP_TAG_MISMATCH)
-				soap->error = soap_ignore_element(soap);
-			if (soap->error == SOAP_NO_TAG)
-				break;
-			if (soap->error)
-				return NULL;
-		}
-		if (a->PressureHessian)
-			soap_pop_block(soap, soap_blist_PressureHessian);
-		if (a->__sizePressureHessian)
-			a->PressureHessian = (struct turb1__PressureHessian *)soap_save_block(soap, soap_blist_PressureHessian, NULL, 1);
-		else
-		{	a->PressureHessian = NULL;
-			if (soap_blist_PressureHessian)
-				soap_end_block(soap, soap_blist_PressureHessian);
-		}
-		if (soap_element_end_in(soap, tag))
-			return NULL;
-	}
-	else
-	{	a = (struct turb1__ArrayOfPressureHessian *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE_turb1__ArrayOfPressureHessian, 0, sizeof(struct turb1__ArrayOfPressureHessian), 0, NULL);
-		if (soap->body && soap_element_end_in(soap, tag))
-			return NULL;
-	}
-	return a;
-}
-
-SOAP_FMAC3 int SOAP_FMAC4 soap_put_turb1__ArrayOfPressureHessian(struct soap *soap, const struct turb1__ArrayOfPressureHessian *a, const char *tag, const char *type)
-{
-	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE_turb1__ArrayOfPressureHessian);
-	if (soap_out_turb1__ArrayOfPressureHessian(soap, tag?tag:"turb1:ArrayOfPressureHessian", id, a, type))
-		return soap->error;
-	return soap_putindependent(soap);
-}
-
-SOAP_FMAC3 struct turb1__ArrayOfPressureHessian * SOAP_FMAC4 soap_get_turb1__ArrayOfPressureHessian(struct soap *soap, struct turb1__ArrayOfPressureHessian *p, const char *tag, const char *type)
-{
-	if ((p = soap_in_turb1__ArrayOfPressureHessian(soap, tag, p, type)))
-		if (soap_getindependent(soap))
-			return NULL;
-	return p;
-}
-
 SOAP_FMAC3 void SOAP_FMAC4 soap_default_turb1__VelocityGradient(struct soap *soap, struct turb1__VelocityGradient *a)
 {
 	(void)soap; (void)a; /* appease -Wall -Werror */
@@ -13152,6 +15114,234 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_turb1__ArrayOfVector3P(struct soap *soap, con
 SOAP_FMAC3 struct turb1__ArrayOfVector3P * SOAP_FMAC4 soap_get_turb1__ArrayOfVector3P(struct soap *soap, struct turb1__ArrayOfVector3P *p, const char *tag, const char *type)
 {
 	if ((p = soap_in_turb1__ArrayOfVector3P(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_turb1__PressureHessian(struct soap *soap, struct turb1__PressureHessian *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_default_float(soap, &a->d2pdxdx);
+	soap_default_float(soap, &a->d2pdxdy);
+	soap_default_float(soap, &a->d2pdxdz);
+	soap_default_float(soap, &a->d2pdydy);
+	soap_default_float(soap, &a->d2pdydz);
+	soap_default_float(soap, &a->d2pdzdz);
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_turb1__PressureHessian(struct soap *soap, const struct turb1__PressureHessian *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_turb1__PressureHessian(struct soap *soap, const char *tag, int id, const struct turb1__PressureHessian *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)type;
+	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_turb1__PressureHessian), type))
+		return soap->error;
+	if (soap_out_float(soap, "turb1:d2pdxdx", -1, &a->d2pdxdx, ""))
+		return soap->error;
+	if (soap_out_float(soap, "turb1:d2pdxdy", -1, &a->d2pdxdy, ""))
+		return soap->error;
+	if (soap_out_float(soap, "turb1:d2pdxdz", -1, &a->d2pdxdz, ""))
+		return soap->error;
+	if (soap_out_float(soap, "turb1:d2pdydy", -1, &a->d2pdydy, ""))
+		return soap->error;
+	if (soap_out_float(soap, "turb1:d2pdydz", -1, &a->d2pdydz, ""))
+		return soap->error;
+	if (soap_out_float(soap, "turb1:d2pdzdz", -1, &a->d2pdzdz, ""))
+		return soap->error;
+	return soap_element_end_out(soap, tag);
+}
+
+SOAP_FMAC3 struct turb1__PressureHessian * SOAP_FMAC4 soap_in_turb1__PressureHessian(struct soap *soap, const char *tag, struct turb1__PressureHessian *a, const char *type)
+{
+	size_t soap_flag_d2pdxdx = 1;
+	size_t soap_flag_d2pdxdy = 1;
+	size_t soap_flag_d2pdxdz = 1;
+	size_t soap_flag_d2pdydy = 1;
+	size_t soap_flag_d2pdydz = 1;
+	size_t soap_flag_d2pdzdz = 1;
+	if (soap_element_begin_in(soap, tag, 0, type))
+		return NULL;
+	a = (struct turb1__PressureHessian *)soap_id_enter(soap, soap->id, a, SOAP_TYPE_turb1__PressureHessian, sizeof(struct turb1__PressureHessian), 0, NULL, NULL, NULL);
+	if (!a)
+		return NULL;
+	soap_default_turb1__PressureHessian(soap, a);
+	if (soap->body && !*soap->href)
+	{
+		for (;;)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_d2pdxdx && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_float(soap, "turb1:d2pdxdx", &a->d2pdxdx, "xsd:float"))
+				{	soap_flag_d2pdxdx--;
+					continue;
+				}
+			if (soap_flag_d2pdxdy && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_float(soap, "turb1:d2pdxdy", &a->d2pdxdy, "xsd:float"))
+				{	soap_flag_d2pdxdy--;
+					continue;
+				}
+			if (soap_flag_d2pdxdz && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_float(soap, "turb1:d2pdxdz", &a->d2pdxdz, "xsd:float"))
+				{	soap_flag_d2pdxdz--;
+					continue;
+				}
+			if (soap_flag_d2pdydy && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_float(soap, "turb1:d2pdydy", &a->d2pdydy, "xsd:float"))
+				{	soap_flag_d2pdydy--;
+					continue;
+				}
+			if (soap_flag_d2pdydz && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_float(soap, "turb1:d2pdydz", &a->d2pdydz, "xsd:float"))
+				{	soap_flag_d2pdydz--;
+					continue;
+				}
+			if (soap_flag_d2pdzdz && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_float(soap, "turb1:d2pdzdz", &a->d2pdzdz, "xsd:float"))
+				{	soap_flag_d2pdzdz--;
+					continue;
+				}
+			if (soap->error == SOAP_TAG_MISMATCH)
+				soap->error = soap_ignore_element(soap);
+			if (soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+		if (soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	else
+	{	a = (struct turb1__PressureHessian *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE_turb1__PressureHessian, 0, sizeof(struct turb1__PressureHessian), 0, NULL);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_d2pdxdx > 0 || soap_flag_d2pdxdy > 0 || soap_flag_d2pdxdz > 0 || soap_flag_d2pdydy > 0 || soap_flag_d2pdydz > 0 || soap_flag_d2pdzdz > 0))
+	{	soap->error = SOAP_OCCURS;
+		return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_turb1__PressureHessian(struct soap *soap, const struct turb1__PressureHessian *a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE_turb1__PressureHessian);
+	if (soap_out_turb1__PressureHessian(soap, tag?tag:"turb1:PressureHessian", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct turb1__PressureHessian * SOAP_FMAC4 soap_get_turb1__PressureHessian(struct soap *soap, struct turb1__PressureHessian *p, const char *tag, const char *type)
+{
+	if ((p = soap_in_turb1__PressureHessian(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_turb1__ArrayOfPressureHessian(struct soap *soap, struct turb1__ArrayOfPressureHessian *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	a->__sizePressureHessian = 0;
+	a->PressureHessian = NULL;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_turb1__ArrayOfPressureHessian(struct soap *soap, const struct turb1__ArrayOfPressureHessian *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	if (a->PressureHessian)
+	{	int i;
+		for (i = 0; i < a->__sizePressureHessian; i++)
+		{
+			soap_embedded(soap, a->PressureHessian + i, SOAP_TYPE_turb1__PressureHessian);
+			soap_serialize_turb1__PressureHessian(soap, a->PressureHessian + i);
+		}
+	}
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_turb1__ArrayOfPressureHessian(struct soap *soap, const char *tag, int id, const struct turb1__ArrayOfPressureHessian *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)type;
+	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_turb1__ArrayOfPressureHessian), type))
+		return soap->error;
+	if (a->PressureHessian)
+	{	int i;
+		for (i = 0; i < a->__sizePressureHessian; i++)
+			if (soap_out_turb1__PressureHessian(soap, "turb1:PressureHessian", -1, a->PressureHessian + i, ""))
+				return soap->error;
+	}
+	return soap_element_end_out(soap, tag);
+}
+
+SOAP_FMAC3 struct turb1__ArrayOfPressureHessian * SOAP_FMAC4 soap_in_turb1__ArrayOfPressureHessian(struct soap *soap, const char *tag, struct turb1__ArrayOfPressureHessian *a, const char *type)
+{
+	struct soap_blist *soap_blist_PressureHessian = NULL;
+	if (soap_element_begin_in(soap, tag, 0, type))
+		return NULL;
+	a = (struct turb1__ArrayOfPressureHessian *)soap_id_enter(soap, soap->id, a, SOAP_TYPE_turb1__ArrayOfPressureHessian, sizeof(struct turb1__ArrayOfPressureHessian), 0, NULL, NULL, NULL);
+	if (!a)
+		return NULL;
+	soap_default_turb1__ArrayOfPressureHessian(soap, a);
+	if (soap->body && !*soap->href)
+	{
+		for (;;)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap->error == SOAP_TAG_MISMATCH && !soap_element_begin_in(soap, "turb1:PressureHessian", 1, NULL))
+			{	if (a->PressureHessian == NULL)
+				{	if (soap_blist_PressureHessian == NULL)
+						soap_blist_PressureHessian = soap_new_block(soap);
+					a->PressureHessian = (struct turb1__PressureHessian *)soap_push_block(soap, soap_blist_PressureHessian, sizeof(struct turb1__PressureHessian));
+					if (a->PressureHessian == NULL)
+						return NULL;
+					soap_default_turb1__PressureHessian(soap, a->PressureHessian);
+				}
+				soap_revert(soap);
+				if (soap_in_turb1__PressureHessian(soap, "turb1:PressureHessian", a->PressureHessian, "turb1:PressureHessian"))
+				{	a->__sizePressureHessian++;
+					a->PressureHessian = NULL;
+					continue;
+				}
+			}
+			if (soap->error == SOAP_TAG_MISMATCH)
+				soap->error = soap_ignore_element(soap);
+			if (soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+		if (a->PressureHessian)
+			soap_pop_block(soap, soap_blist_PressureHessian);
+		if (a->__sizePressureHessian)
+			a->PressureHessian = (struct turb1__PressureHessian *)soap_save_block(soap, soap_blist_PressureHessian, NULL, 1);
+		else
+		{	a->PressureHessian = NULL;
+			if (soap_blist_PressureHessian)
+				soap_end_block(soap, soap_blist_PressureHessian);
+		}
+		if (soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	else
+	{	a = (struct turb1__ArrayOfPressureHessian *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE_turb1__ArrayOfPressureHessian, 0, sizeof(struct turb1__ArrayOfPressureHessian), 0, NULL);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_turb1__ArrayOfPressureHessian(struct soap *soap, const struct turb1__ArrayOfPressureHessian *a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE_turb1__ArrayOfPressureHessian);
+	if (soap_out_turb1__ArrayOfPressureHessian(soap, tag?tag:"turb1:ArrayOfPressureHessian", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct turb1__ArrayOfPressureHessian * SOAP_FMAC4 soap_get_turb1__ArrayOfPressureHessian(struct soap *soap, struct turb1__ArrayOfPressureHessian *p, const char *tag, const char *type)
+{
+	if ((p = soap_in_turb1__ArrayOfPressureHessian(soap, tag, p, type)))
 		if (soap_getindependent(soap))
 			return NULL;
 	return p;
@@ -14092,6 +16282,108 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetLaplacianOfGradient(struc
 SOAP_FMAC3 struct _turb1__GetLaplacianOfGradient ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetLaplacianOfGradient(struct soap *soap, struct _turb1__GetLaplacianOfGradient **p, const char *tag, const char *type)
 {
 	if ((p = soap_in_PointerTo_turb1__GetLaplacianOfGradient(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetThresholdResponse(struct soap *soap, struct _turb1__GetThresholdResponse *const*a)
+{
+	if (!soap_reference(soap, *a, SOAP_TYPE__turb1__GetThresholdResponse))
+		soap_serialize__turb1__GetThresholdResponse(soap, *a);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetThresholdResponse(struct soap *soap, const char *tag, int id, struct _turb1__GetThresholdResponse *const*a, const char *type)
+{
+	id = soap_element_id(soap, tag, id, *a, NULL, 0, type, SOAP_TYPE__turb1__GetThresholdResponse);
+	if (id < 0)
+		return soap->error;
+	return soap_out__turb1__GetThresholdResponse(soap, tag, id, *a, type);
+}
+
+SOAP_FMAC3 struct _turb1__GetThresholdResponse ** SOAP_FMAC4 soap_in_PointerTo_turb1__GetThresholdResponse(struct soap *soap, const char *tag, struct _turb1__GetThresholdResponse **a, const char *type)
+{
+	if (soap_element_begin_in(soap, tag, 1, NULL))
+		return NULL;
+	if (!a)
+		if (!(a = (struct _turb1__GetThresholdResponse **)soap_malloc(soap, sizeof(struct _turb1__GetThresholdResponse *))))
+			return NULL;
+	*a = NULL;
+	if (!soap->null && *soap->href != '#')
+	{	soap_revert(soap);
+		if (!(*a = soap_in__turb1__GetThresholdResponse(soap, tag, *a, type)))
+			return NULL;
+	}
+	else
+	{	a = (struct _turb1__GetThresholdResponse **)soap_id_lookup(soap, soap->href, (void**)a, SOAP_TYPE__turb1__GetThresholdResponse, sizeof(struct _turb1__GetThresholdResponse), 0);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetThresholdResponse(struct soap *soap, struct _turb1__GetThresholdResponse *const*a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE_PointerTo_turb1__GetThresholdResponse);
+	if (soap_out_PointerTo_turb1__GetThresholdResponse(soap, tag?tag:"turb1:GetThresholdResponse", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct _turb1__GetThresholdResponse ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetThresholdResponse(struct soap *soap, struct _turb1__GetThresholdResponse **p, const char *tag, const char *type)
+{
+	if ((p = soap_in_PointerTo_turb1__GetThresholdResponse(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetThreshold(struct soap *soap, struct _turb1__GetThreshold *const*a)
+{
+	if (!soap_reference(soap, *a, SOAP_TYPE__turb1__GetThreshold))
+		soap_serialize__turb1__GetThreshold(soap, *a);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetThreshold(struct soap *soap, const char *tag, int id, struct _turb1__GetThreshold *const*a, const char *type)
+{
+	id = soap_element_id(soap, tag, id, *a, NULL, 0, type, SOAP_TYPE__turb1__GetThreshold);
+	if (id < 0)
+		return soap->error;
+	return soap_out__turb1__GetThreshold(soap, tag, id, *a, type);
+}
+
+SOAP_FMAC3 struct _turb1__GetThreshold ** SOAP_FMAC4 soap_in_PointerTo_turb1__GetThreshold(struct soap *soap, const char *tag, struct _turb1__GetThreshold **a, const char *type)
+{
+	if (soap_element_begin_in(soap, tag, 1, NULL))
+		return NULL;
+	if (!a)
+		if (!(a = (struct _turb1__GetThreshold **)soap_malloc(soap, sizeof(struct _turb1__GetThreshold *))))
+			return NULL;
+	*a = NULL;
+	if (!soap->null && *soap->href != '#')
+	{	soap_revert(soap);
+		if (!(*a = soap_in__turb1__GetThreshold(soap, tag, *a, type)))
+			return NULL;
+	}
+	else
+	{	a = (struct _turb1__GetThreshold **)soap_id_lookup(soap, soap->href, (void**)a, SOAP_TYPE__turb1__GetThreshold, sizeof(struct _turb1__GetThreshold), 0);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetThreshold(struct soap *soap, struct _turb1__GetThreshold *const*a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE_PointerTo_turb1__GetThreshold);
+	if (soap_out_PointerTo_turb1__GetThreshold(soap, tag?tag:"turb1:GetThreshold", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct _turb1__GetThreshold ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetThreshold(struct soap *soap, struct _turb1__GetThreshold **p, const char *tag, const char *type)
+{
+	if ((p = soap_in_PointerTo_turb1__GetThreshold(soap, tag, p, type)))
 		if (soap_getindependent(soap))
 			return NULL;
 	return p;
@@ -15831,6 +18123,414 @@ SOAP_FMAC3 struct _turb1__GetForce ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetFo
 	return p;
 }
 
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetRawDensityResponse(struct soap *soap, struct _turb1__GetRawDensityResponse *const*a)
+{
+	if (!soap_reference(soap, *a, SOAP_TYPE__turb1__GetRawDensityResponse))
+		soap_serialize__turb1__GetRawDensityResponse(soap, *a);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetRawDensityResponse(struct soap *soap, const char *tag, int id, struct _turb1__GetRawDensityResponse *const*a, const char *type)
+{
+	id = soap_element_id(soap, tag, id, *a, NULL, 0, type, SOAP_TYPE__turb1__GetRawDensityResponse);
+	if (id < 0)
+		return soap->error;
+	return soap_out__turb1__GetRawDensityResponse(soap, tag, id, *a, type);
+}
+
+SOAP_FMAC3 struct _turb1__GetRawDensityResponse ** SOAP_FMAC4 soap_in_PointerTo_turb1__GetRawDensityResponse(struct soap *soap, const char *tag, struct _turb1__GetRawDensityResponse **a, const char *type)
+{
+	if (soap_element_begin_in(soap, tag, 1, NULL))
+		return NULL;
+	if (!a)
+		if (!(a = (struct _turb1__GetRawDensityResponse **)soap_malloc(soap, sizeof(struct _turb1__GetRawDensityResponse *))))
+			return NULL;
+	*a = NULL;
+	if (!soap->null && *soap->href != '#')
+	{	soap_revert(soap);
+		if (!(*a = soap_in__turb1__GetRawDensityResponse(soap, tag, *a, type)))
+			return NULL;
+	}
+	else
+	{	a = (struct _turb1__GetRawDensityResponse **)soap_id_lookup(soap, soap->href, (void**)a, SOAP_TYPE__turb1__GetRawDensityResponse, sizeof(struct _turb1__GetRawDensityResponse), 0);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetRawDensityResponse(struct soap *soap, struct _turb1__GetRawDensityResponse *const*a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE_PointerTo_turb1__GetRawDensityResponse);
+	if (soap_out_PointerTo_turb1__GetRawDensityResponse(soap, tag?tag:"turb1:GetRawDensityResponse", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct _turb1__GetRawDensityResponse ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetRawDensityResponse(struct soap *soap, struct _turb1__GetRawDensityResponse **p, const char *tag, const char *type)
+{
+	if ((p = soap_in_PointerTo_turb1__GetRawDensityResponse(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetRawDensity(struct soap *soap, struct _turb1__GetRawDensity *const*a)
+{
+	if (!soap_reference(soap, *a, SOAP_TYPE__turb1__GetRawDensity))
+		soap_serialize__turb1__GetRawDensity(soap, *a);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetRawDensity(struct soap *soap, const char *tag, int id, struct _turb1__GetRawDensity *const*a, const char *type)
+{
+	id = soap_element_id(soap, tag, id, *a, NULL, 0, type, SOAP_TYPE__turb1__GetRawDensity);
+	if (id < 0)
+		return soap->error;
+	return soap_out__turb1__GetRawDensity(soap, tag, id, *a, type);
+}
+
+SOAP_FMAC3 struct _turb1__GetRawDensity ** SOAP_FMAC4 soap_in_PointerTo_turb1__GetRawDensity(struct soap *soap, const char *tag, struct _turb1__GetRawDensity **a, const char *type)
+{
+	if (soap_element_begin_in(soap, tag, 1, NULL))
+		return NULL;
+	if (!a)
+		if (!(a = (struct _turb1__GetRawDensity **)soap_malloc(soap, sizeof(struct _turb1__GetRawDensity *))))
+			return NULL;
+	*a = NULL;
+	if (!soap->null && *soap->href != '#')
+	{	soap_revert(soap);
+		if (!(*a = soap_in__turb1__GetRawDensity(soap, tag, *a, type)))
+			return NULL;
+	}
+	else
+	{	a = (struct _turb1__GetRawDensity **)soap_id_lookup(soap, soap->href, (void**)a, SOAP_TYPE__turb1__GetRawDensity, sizeof(struct _turb1__GetRawDensity), 0);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetRawDensity(struct soap *soap, struct _turb1__GetRawDensity *const*a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE_PointerTo_turb1__GetRawDensity);
+	if (soap_out_PointerTo_turb1__GetRawDensity(soap, tag?tag:"turb1:GetRawDensity", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct _turb1__GetRawDensity ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetRawDensity(struct soap *soap, struct _turb1__GetRawDensity **p, const char *tag, const char *type)
+{
+	if ((p = soap_in_PointerTo_turb1__GetRawDensity(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetDensityHessianResponse(struct soap *soap, struct _turb1__GetDensityHessianResponse *const*a)
+{
+	if (!soap_reference(soap, *a, SOAP_TYPE__turb1__GetDensityHessianResponse))
+		soap_serialize__turb1__GetDensityHessianResponse(soap, *a);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetDensityHessianResponse(struct soap *soap, const char *tag, int id, struct _turb1__GetDensityHessianResponse *const*a, const char *type)
+{
+	id = soap_element_id(soap, tag, id, *a, NULL, 0, type, SOAP_TYPE__turb1__GetDensityHessianResponse);
+	if (id < 0)
+		return soap->error;
+	return soap_out__turb1__GetDensityHessianResponse(soap, tag, id, *a, type);
+}
+
+SOAP_FMAC3 struct _turb1__GetDensityHessianResponse ** SOAP_FMAC4 soap_in_PointerTo_turb1__GetDensityHessianResponse(struct soap *soap, const char *tag, struct _turb1__GetDensityHessianResponse **a, const char *type)
+{
+	if (soap_element_begin_in(soap, tag, 1, NULL))
+		return NULL;
+	if (!a)
+		if (!(a = (struct _turb1__GetDensityHessianResponse **)soap_malloc(soap, sizeof(struct _turb1__GetDensityHessianResponse *))))
+			return NULL;
+	*a = NULL;
+	if (!soap->null && *soap->href != '#')
+	{	soap_revert(soap);
+		if (!(*a = soap_in__turb1__GetDensityHessianResponse(soap, tag, *a, type)))
+			return NULL;
+	}
+	else
+	{	a = (struct _turb1__GetDensityHessianResponse **)soap_id_lookup(soap, soap->href, (void**)a, SOAP_TYPE__turb1__GetDensityHessianResponse, sizeof(struct _turb1__GetDensityHessianResponse), 0);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetDensityHessianResponse(struct soap *soap, struct _turb1__GetDensityHessianResponse *const*a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE_PointerTo_turb1__GetDensityHessianResponse);
+	if (soap_out_PointerTo_turb1__GetDensityHessianResponse(soap, tag?tag:"turb1:GetDensityHessianResponse", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct _turb1__GetDensityHessianResponse ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetDensityHessianResponse(struct soap *soap, struct _turb1__GetDensityHessianResponse **p, const char *tag, const char *type)
+{
+	if ((p = soap_in_PointerTo_turb1__GetDensityHessianResponse(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetDensityHessian(struct soap *soap, struct _turb1__GetDensityHessian *const*a)
+{
+	if (!soap_reference(soap, *a, SOAP_TYPE__turb1__GetDensityHessian))
+		soap_serialize__turb1__GetDensityHessian(soap, *a);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetDensityHessian(struct soap *soap, const char *tag, int id, struct _turb1__GetDensityHessian *const*a, const char *type)
+{
+	id = soap_element_id(soap, tag, id, *a, NULL, 0, type, SOAP_TYPE__turb1__GetDensityHessian);
+	if (id < 0)
+		return soap->error;
+	return soap_out__turb1__GetDensityHessian(soap, tag, id, *a, type);
+}
+
+SOAP_FMAC3 struct _turb1__GetDensityHessian ** SOAP_FMAC4 soap_in_PointerTo_turb1__GetDensityHessian(struct soap *soap, const char *tag, struct _turb1__GetDensityHessian **a, const char *type)
+{
+	if (soap_element_begin_in(soap, tag, 1, NULL))
+		return NULL;
+	if (!a)
+		if (!(a = (struct _turb1__GetDensityHessian **)soap_malloc(soap, sizeof(struct _turb1__GetDensityHessian *))))
+			return NULL;
+	*a = NULL;
+	if (!soap->null && *soap->href != '#')
+	{	soap_revert(soap);
+		if (!(*a = soap_in__turb1__GetDensityHessian(soap, tag, *a, type)))
+			return NULL;
+	}
+	else
+	{	a = (struct _turb1__GetDensityHessian **)soap_id_lookup(soap, soap->href, (void**)a, SOAP_TYPE__turb1__GetDensityHessian, sizeof(struct _turb1__GetDensityHessian), 0);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetDensityHessian(struct soap *soap, struct _turb1__GetDensityHessian *const*a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE_PointerTo_turb1__GetDensityHessian);
+	if (soap_out_PointerTo_turb1__GetDensityHessian(soap, tag?tag:"turb1:GetDensityHessian", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct _turb1__GetDensityHessian ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetDensityHessian(struct soap *soap, struct _turb1__GetDensityHessian **p, const char *tag, const char *type)
+{
+	if ((p = soap_in_PointerTo_turb1__GetDensityHessian(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetDensityGradientResponse(struct soap *soap, struct _turb1__GetDensityGradientResponse *const*a)
+{
+	if (!soap_reference(soap, *a, SOAP_TYPE__turb1__GetDensityGradientResponse))
+		soap_serialize__turb1__GetDensityGradientResponse(soap, *a);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetDensityGradientResponse(struct soap *soap, const char *tag, int id, struct _turb1__GetDensityGradientResponse *const*a, const char *type)
+{
+	id = soap_element_id(soap, tag, id, *a, NULL, 0, type, SOAP_TYPE__turb1__GetDensityGradientResponse);
+	if (id < 0)
+		return soap->error;
+	return soap_out__turb1__GetDensityGradientResponse(soap, tag, id, *a, type);
+}
+
+SOAP_FMAC3 struct _turb1__GetDensityGradientResponse ** SOAP_FMAC4 soap_in_PointerTo_turb1__GetDensityGradientResponse(struct soap *soap, const char *tag, struct _turb1__GetDensityGradientResponse **a, const char *type)
+{
+	if (soap_element_begin_in(soap, tag, 1, NULL))
+		return NULL;
+	if (!a)
+		if (!(a = (struct _turb1__GetDensityGradientResponse **)soap_malloc(soap, sizeof(struct _turb1__GetDensityGradientResponse *))))
+			return NULL;
+	*a = NULL;
+	if (!soap->null && *soap->href != '#')
+	{	soap_revert(soap);
+		if (!(*a = soap_in__turb1__GetDensityGradientResponse(soap, tag, *a, type)))
+			return NULL;
+	}
+	else
+	{	a = (struct _turb1__GetDensityGradientResponse **)soap_id_lookup(soap, soap->href, (void**)a, SOAP_TYPE__turb1__GetDensityGradientResponse, sizeof(struct _turb1__GetDensityGradientResponse), 0);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetDensityGradientResponse(struct soap *soap, struct _turb1__GetDensityGradientResponse *const*a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE_PointerTo_turb1__GetDensityGradientResponse);
+	if (soap_out_PointerTo_turb1__GetDensityGradientResponse(soap, tag?tag:"turb1:GetDensityGradientResponse", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct _turb1__GetDensityGradientResponse ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetDensityGradientResponse(struct soap *soap, struct _turb1__GetDensityGradientResponse **p, const char *tag, const char *type)
+{
+	if ((p = soap_in_PointerTo_turb1__GetDensityGradientResponse(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetDensityGradient(struct soap *soap, struct _turb1__GetDensityGradient *const*a)
+{
+	if (!soap_reference(soap, *a, SOAP_TYPE__turb1__GetDensityGradient))
+		soap_serialize__turb1__GetDensityGradient(soap, *a);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetDensityGradient(struct soap *soap, const char *tag, int id, struct _turb1__GetDensityGradient *const*a, const char *type)
+{
+	id = soap_element_id(soap, tag, id, *a, NULL, 0, type, SOAP_TYPE__turb1__GetDensityGradient);
+	if (id < 0)
+		return soap->error;
+	return soap_out__turb1__GetDensityGradient(soap, tag, id, *a, type);
+}
+
+SOAP_FMAC3 struct _turb1__GetDensityGradient ** SOAP_FMAC4 soap_in_PointerTo_turb1__GetDensityGradient(struct soap *soap, const char *tag, struct _turb1__GetDensityGradient **a, const char *type)
+{
+	if (soap_element_begin_in(soap, tag, 1, NULL))
+		return NULL;
+	if (!a)
+		if (!(a = (struct _turb1__GetDensityGradient **)soap_malloc(soap, sizeof(struct _turb1__GetDensityGradient *))))
+			return NULL;
+	*a = NULL;
+	if (!soap->null && *soap->href != '#')
+	{	soap_revert(soap);
+		if (!(*a = soap_in__turb1__GetDensityGradient(soap, tag, *a, type)))
+			return NULL;
+	}
+	else
+	{	a = (struct _turb1__GetDensityGradient **)soap_id_lookup(soap, soap->href, (void**)a, SOAP_TYPE__turb1__GetDensityGradient, sizeof(struct _turb1__GetDensityGradient), 0);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetDensityGradient(struct soap *soap, struct _turb1__GetDensityGradient *const*a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE_PointerTo_turb1__GetDensityGradient);
+	if (soap_out_PointerTo_turb1__GetDensityGradient(soap, tag?tag:"turb1:GetDensityGradient", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct _turb1__GetDensityGradient ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetDensityGradient(struct soap *soap, struct _turb1__GetDensityGradient **p, const char *tag, const char *type)
+{
+	if ((p = soap_in_PointerTo_turb1__GetDensityGradient(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetDensityResponse(struct soap *soap, struct _turb1__GetDensityResponse *const*a)
+{
+	if (!soap_reference(soap, *a, SOAP_TYPE__turb1__GetDensityResponse))
+		soap_serialize__turb1__GetDensityResponse(soap, *a);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetDensityResponse(struct soap *soap, const char *tag, int id, struct _turb1__GetDensityResponse *const*a, const char *type)
+{
+	id = soap_element_id(soap, tag, id, *a, NULL, 0, type, SOAP_TYPE__turb1__GetDensityResponse);
+	if (id < 0)
+		return soap->error;
+	return soap_out__turb1__GetDensityResponse(soap, tag, id, *a, type);
+}
+
+SOAP_FMAC3 struct _turb1__GetDensityResponse ** SOAP_FMAC4 soap_in_PointerTo_turb1__GetDensityResponse(struct soap *soap, const char *tag, struct _turb1__GetDensityResponse **a, const char *type)
+{
+	if (soap_element_begin_in(soap, tag, 1, NULL))
+		return NULL;
+	if (!a)
+		if (!(a = (struct _turb1__GetDensityResponse **)soap_malloc(soap, sizeof(struct _turb1__GetDensityResponse *))))
+			return NULL;
+	*a = NULL;
+	if (!soap->null && *soap->href != '#')
+	{	soap_revert(soap);
+		if (!(*a = soap_in__turb1__GetDensityResponse(soap, tag, *a, type)))
+			return NULL;
+	}
+	else
+	{	a = (struct _turb1__GetDensityResponse **)soap_id_lookup(soap, soap->href, (void**)a, SOAP_TYPE__turb1__GetDensityResponse, sizeof(struct _turb1__GetDensityResponse), 0);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetDensityResponse(struct soap *soap, struct _turb1__GetDensityResponse *const*a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE_PointerTo_turb1__GetDensityResponse);
+	if (soap_out_PointerTo_turb1__GetDensityResponse(soap, tag?tag:"turb1:GetDensityResponse", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct _turb1__GetDensityResponse ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetDensityResponse(struct soap *soap, struct _turb1__GetDensityResponse **p, const char *tag, const char *type)
+{
+	if ((p = soap_in_PointerTo_turb1__GetDensityResponse(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetDensity(struct soap *soap, struct _turb1__GetDensity *const*a)
+{
+	if (!soap_reference(soap, *a, SOAP_TYPE__turb1__GetDensity))
+		soap_serialize__turb1__GetDensity(soap, *a);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetDensity(struct soap *soap, const char *tag, int id, struct _turb1__GetDensity *const*a, const char *type)
+{
+	id = soap_element_id(soap, tag, id, *a, NULL, 0, type, SOAP_TYPE__turb1__GetDensity);
+	if (id < 0)
+		return soap->error;
+	return soap_out__turb1__GetDensity(soap, tag, id, *a, type);
+}
+
+SOAP_FMAC3 struct _turb1__GetDensity ** SOAP_FMAC4 soap_in_PointerTo_turb1__GetDensity(struct soap *soap, const char *tag, struct _turb1__GetDensity **a, const char *type)
+{
+	if (soap_element_begin_in(soap, tag, 1, NULL))
+		return NULL;
+	if (!a)
+		if (!(a = (struct _turb1__GetDensity **)soap_malloc(soap, sizeof(struct _turb1__GetDensity *))))
+			return NULL;
+	*a = NULL;
+	if (!soap->null && *soap->href != '#')
+	{	soap_revert(soap);
+		if (!(*a = soap_in__turb1__GetDensity(soap, tag, *a, type)))
+			return NULL;
+	}
+	else
+	{	a = (struct _turb1__GetDensity **)soap_id_lookup(soap, soap->href, (void**)a, SOAP_TYPE__turb1__GetDensity, sizeof(struct _turb1__GetDensity), 0);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetDensity(struct soap *soap, struct _turb1__GetDensity *const*a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE_PointerTo_turb1__GetDensity);
+	if (soap_out_PointerTo_turb1__GetDensity(soap, tag?tag:"turb1:GetDensity", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct _turb1__GetDensity ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetDensity(struct soap *soap, struct _turb1__GetDensity **p, const char *tag, const char *type)
+{
+	if ((p = soap_in_PointerTo_turb1__GetDensity(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetRawVectorPotentialResponse(struct soap *soap, struct _turb1__GetRawVectorPotentialResponse *const*a)
 {
 	if (!soap_reference(soap, *a, SOAP_TYPE__turb1__GetRawVectorPotentialResponse))
@@ -16851,6 +19551,57 @@ SOAP_FMAC3 struct _turb1__NullOp ** SOAP_FMAC4 soap_get_PointerTo_turb1__NullOp(
 	return p;
 }
 
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerToturb1__ArrayOfThresholdInfo(struct soap *soap, struct turb1__ArrayOfThresholdInfo *const*a)
+{
+	if (!soap_reference(soap, *a, SOAP_TYPE_turb1__ArrayOfThresholdInfo))
+		soap_serialize_turb1__ArrayOfThresholdInfo(soap, *a);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerToturb1__ArrayOfThresholdInfo(struct soap *soap, const char *tag, int id, struct turb1__ArrayOfThresholdInfo *const*a, const char *type)
+{
+	id = soap_element_id(soap, tag, id, *a, NULL, 0, type, SOAP_TYPE_turb1__ArrayOfThresholdInfo);
+	if (id < 0)
+		return soap->error;
+	return soap_out_turb1__ArrayOfThresholdInfo(soap, tag, id, *a, type);
+}
+
+SOAP_FMAC3 struct turb1__ArrayOfThresholdInfo ** SOAP_FMAC4 soap_in_PointerToturb1__ArrayOfThresholdInfo(struct soap *soap, const char *tag, struct turb1__ArrayOfThresholdInfo **a, const char *type)
+{
+	if (soap_element_begin_in(soap, tag, 1, NULL))
+		return NULL;
+	if (!a)
+		if (!(a = (struct turb1__ArrayOfThresholdInfo **)soap_malloc(soap, sizeof(struct turb1__ArrayOfThresholdInfo *))))
+			return NULL;
+	*a = NULL;
+	if (!soap->null && *soap->href != '#')
+	{	soap_revert(soap);
+		if (!(*a = soap_in_turb1__ArrayOfThresholdInfo(soap, tag, *a, type)))
+			return NULL;
+	}
+	else
+	{	a = (struct turb1__ArrayOfThresholdInfo **)soap_id_lookup(soap, soap->href, (void**)a, SOAP_TYPE_turb1__ArrayOfThresholdInfo, sizeof(struct turb1__ArrayOfThresholdInfo), 0);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerToturb1__ArrayOfThresholdInfo(struct soap *soap, struct turb1__ArrayOfThresholdInfo *const*a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE_PointerToturb1__ArrayOfThresholdInfo);
+	if (soap_out_PointerToturb1__ArrayOfThresholdInfo(soap, tag?tag:"turb1:ArrayOfThresholdInfo", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct turb1__ArrayOfThresholdInfo ** SOAP_FMAC4 soap_get_PointerToturb1__ArrayOfThresholdInfo(struct soap *soap, struct turb1__ArrayOfThresholdInfo **p, const char *tag, const char *type)
+{
+	if ((p = soap_in_PointerToturb1__ArrayOfThresholdInfo(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerToturb1__ArrayOfSGSTensor(struct soap *soap, struct turb1__ArrayOfSGSTensor *const*a)
 {
 	if (!soap_reference(soap, *a, SOAP_TYPE_turb1__ArrayOfSGSTensor))
@@ -16953,57 +19704,6 @@ SOAP_FMAC3 struct turb1__ArrayOfVelocityHessian ** SOAP_FMAC4 soap_get_PointerTo
 	return p;
 }
 
-SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerToturb1__ArrayOfPressureHessian(struct soap *soap, struct turb1__ArrayOfPressureHessian *const*a)
-{
-	if (!soap_reference(soap, *a, SOAP_TYPE_turb1__ArrayOfPressureHessian))
-		soap_serialize_turb1__ArrayOfPressureHessian(soap, *a);
-}
-
-SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerToturb1__ArrayOfPressureHessian(struct soap *soap, const char *tag, int id, struct turb1__ArrayOfPressureHessian *const*a, const char *type)
-{
-	id = soap_element_id(soap, tag, id, *a, NULL, 0, type, SOAP_TYPE_turb1__ArrayOfPressureHessian);
-	if (id < 0)
-		return soap->error;
-	return soap_out_turb1__ArrayOfPressureHessian(soap, tag, id, *a, type);
-}
-
-SOAP_FMAC3 struct turb1__ArrayOfPressureHessian ** SOAP_FMAC4 soap_in_PointerToturb1__ArrayOfPressureHessian(struct soap *soap, const char *tag, struct turb1__ArrayOfPressureHessian **a, const char *type)
-{
-	if (soap_element_begin_in(soap, tag, 1, NULL))
-		return NULL;
-	if (!a)
-		if (!(a = (struct turb1__ArrayOfPressureHessian **)soap_malloc(soap, sizeof(struct turb1__ArrayOfPressureHessian *))))
-			return NULL;
-	*a = NULL;
-	if (!soap->null && *soap->href != '#')
-	{	soap_revert(soap);
-		if (!(*a = soap_in_turb1__ArrayOfPressureHessian(soap, tag, *a, type)))
-			return NULL;
-	}
-	else
-	{	a = (struct turb1__ArrayOfPressureHessian **)soap_id_lookup(soap, soap->href, (void**)a, SOAP_TYPE_turb1__ArrayOfPressureHessian, sizeof(struct turb1__ArrayOfPressureHessian), 0);
-		if (soap->body && soap_element_end_in(soap, tag))
-			return NULL;
-	}
-	return a;
-}
-
-SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerToturb1__ArrayOfPressureHessian(struct soap *soap, struct turb1__ArrayOfPressureHessian *const*a, const char *tag, const char *type)
-{
-	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE_PointerToturb1__ArrayOfPressureHessian);
-	if (soap_out_PointerToturb1__ArrayOfPressureHessian(soap, tag?tag:"turb1:ArrayOfPressureHessian", id, a, type))
-		return soap->error;
-	return soap_putindependent(soap);
-}
-
-SOAP_FMAC3 struct turb1__ArrayOfPressureHessian ** SOAP_FMAC4 soap_get_PointerToturb1__ArrayOfPressureHessian(struct soap *soap, struct turb1__ArrayOfPressureHessian **p, const char *tag, const char *type)
-{
-	if ((p = soap_in_PointerToturb1__ArrayOfPressureHessian(soap, tag, p, type)))
-		if (soap_getindependent(soap))
-			return NULL;
-	return p;
-}
-
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerToturb1__ArrayOfVelocityGradient(struct soap *soap, struct turb1__ArrayOfVelocityGradient *const*a)
 {
 	if (!soap_reference(soap, *a, SOAP_TYPE_turb1__ArrayOfVelocityGradient))
@@ -17101,6 +19801,57 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerToturb1__ArrayOfVector3P(struct soap *
 SOAP_FMAC3 struct turb1__ArrayOfVector3P ** SOAP_FMAC4 soap_get_PointerToturb1__ArrayOfVector3P(struct soap *soap, struct turb1__ArrayOfVector3P **p, const char *tag, const char *type)
 {
 	if ((p = soap_in_PointerToturb1__ArrayOfVector3P(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerToturb1__ArrayOfPressureHessian(struct soap *soap, struct turb1__ArrayOfPressureHessian *const*a)
+{
+	if (!soap_reference(soap, *a, SOAP_TYPE_turb1__ArrayOfPressureHessian))
+		soap_serialize_turb1__ArrayOfPressureHessian(soap, *a);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerToturb1__ArrayOfPressureHessian(struct soap *soap, const char *tag, int id, struct turb1__ArrayOfPressureHessian *const*a, const char *type)
+{
+	id = soap_element_id(soap, tag, id, *a, NULL, 0, type, SOAP_TYPE_turb1__ArrayOfPressureHessian);
+	if (id < 0)
+		return soap->error;
+	return soap_out_turb1__ArrayOfPressureHessian(soap, tag, id, *a, type);
+}
+
+SOAP_FMAC3 struct turb1__ArrayOfPressureHessian ** SOAP_FMAC4 soap_in_PointerToturb1__ArrayOfPressureHessian(struct soap *soap, const char *tag, struct turb1__ArrayOfPressureHessian **a, const char *type)
+{
+	if (soap_element_begin_in(soap, tag, 1, NULL))
+		return NULL;
+	if (!a)
+		if (!(a = (struct turb1__ArrayOfPressureHessian **)soap_malloc(soap, sizeof(struct turb1__ArrayOfPressureHessian *))))
+			return NULL;
+	*a = NULL;
+	if (!soap->null && *soap->href != '#')
+	{	soap_revert(soap);
+		if (!(*a = soap_in_turb1__ArrayOfPressureHessian(soap, tag, *a, type)))
+			return NULL;
+	}
+	else
+	{	a = (struct turb1__ArrayOfPressureHessian **)soap_id_lookup(soap, soap->href, (void**)a, SOAP_TYPE_turb1__ArrayOfPressureHessian, sizeof(struct turb1__ArrayOfPressureHessian), 0);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerToturb1__ArrayOfPressureHessian(struct soap *soap, struct turb1__ArrayOfPressureHessian *const*a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE_PointerToturb1__ArrayOfPressureHessian);
+	if (soap_out_PointerToturb1__ArrayOfPressureHessian(soap, tag?tag:"turb1:ArrayOfPressureHessian", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct turb1__ArrayOfPressureHessian ** SOAP_FMAC4 soap_get_PointerToturb1__ArrayOfPressureHessian(struct soap *soap, struct turb1__ArrayOfPressureHessian **p, const char *tag, const char *type)
+{
+	if ((p = soap_in_PointerToturb1__ArrayOfPressureHessian(soap, tag, p, type)))
 		if (soap_getindependent(soap))
 			return NULL;
 	return p;
@@ -17310,6 +20061,57 @@ SOAP_FMAC3 struct turb1__ArrayOfPoint3 ** SOAP_FMAC4 soap_get_PointerToturb1__Ar
 	return p;
 }
 
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerToturb1__ThresholdInfo(struct soap *soap, struct turb1__ThresholdInfo *const*a)
+{
+	if (!soap_reference(soap, *a, SOAP_TYPE_turb1__ThresholdInfo))
+		soap_serialize_turb1__ThresholdInfo(soap, *a);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerToturb1__ThresholdInfo(struct soap *soap, const char *tag, int id, struct turb1__ThresholdInfo *const*a, const char *type)
+{
+	id = soap_element_id(soap, tag, id, *a, NULL, 0, type, SOAP_TYPE_turb1__ThresholdInfo);
+	if (id < 0)
+		return soap->error;
+	return soap_out_turb1__ThresholdInfo(soap, tag, id, *a, type);
+}
+
+SOAP_FMAC3 struct turb1__ThresholdInfo ** SOAP_FMAC4 soap_in_PointerToturb1__ThresholdInfo(struct soap *soap, const char *tag, struct turb1__ThresholdInfo **a, const char *type)
+{
+	if (soap_element_begin_in(soap, tag, 1, NULL))
+		return NULL;
+	if (!a)
+		if (!(a = (struct turb1__ThresholdInfo **)soap_malloc(soap, sizeof(struct turb1__ThresholdInfo *))))
+			return NULL;
+	*a = NULL;
+	if (!soap->null && *soap->href != '#')
+	{	soap_revert(soap);
+		if (!(*a = soap_in_turb1__ThresholdInfo(soap, tag, *a, type)))
+			return NULL;
+	}
+	else
+	{	a = (struct turb1__ThresholdInfo **)soap_id_lookup(soap, soap->href, (void**)a, SOAP_TYPE_turb1__ThresholdInfo, sizeof(struct turb1__ThresholdInfo), 0);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerToturb1__ThresholdInfo(struct soap *soap, struct turb1__ThresholdInfo *const*a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE_PointerToturb1__ThresholdInfo);
+	if (soap_out_PointerToturb1__ThresholdInfo(soap, tag?tag:"turb1:ThresholdInfo", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct turb1__ThresholdInfo ** SOAP_FMAC4 soap_get_PointerToturb1__ThresholdInfo(struct soap *soap, struct turb1__ThresholdInfo **p, const char *tag, const char *type)
+{
+	if ((p = soap_in_PointerToturb1__ThresholdInfo(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerToturb1__SGSTensor(struct soap *soap, struct turb1__SGSTensor *const*a)
 {
 	if (!soap_reference(soap, *a, SOAP_TYPE_turb1__SGSTensor))
@@ -17412,57 +20214,6 @@ SOAP_FMAC3 struct turb1__VelocityHessian ** SOAP_FMAC4 soap_get_PointerToturb1__
 	return p;
 }
 
-SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerToturb1__PressureHessian(struct soap *soap, struct turb1__PressureHessian *const*a)
-{
-	if (!soap_reference(soap, *a, SOAP_TYPE_turb1__PressureHessian))
-		soap_serialize_turb1__PressureHessian(soap, *a);
-}
-
-SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerToturb1__PressureHessian(struct soap *soap, const char *tag, int id, struct turb1__PressureHessian *const*a, const char *type)
-{
-	id = soap_element_id(soap, tag, id, *a, NULL, 0, type, SOAP_TYPE_turb1__PressureHessian);
-	if (id < 0)
-		return soap->error;
-	return soap_out_turb1__PressureHessian(soap, tag, id, *a, type);
-}
-
-SOAP_FMAC3 struct turb1__PressureHessian ** SOAP_FMAC4 soap_in_PointerToturb1__PressureHessian(struct soap *soap, const char *tag, struct turb1__PressureHessian **a, const char *type)
-{
-	if (soap_element_begin_in(soap, tag, 1, NULL))
-		return NULL;
-	if (!a)
-		if (!(a = (struct turb1__PressureHessian **)soap_malloc(soap, sizeof(struct turb1__PressureHessian *))))
-			return NULL;
-	*a = NULL;
-	if (!soap->null && *soap->href != '#')
-	{	soap_revert(soap);
-		if (!(*a = soap_in_turb1__PressureHessian(soap, tag, *a, type)))
-			return NULL;
-	}
-	else
-	{	a = (struct turb1__PressureHessian **)soap_id_lookup(soap, soap->href, (void**)a, SOAP_TYPE_turb1__PressureHessian, sizeof(struct turb1__PressureHessian), 0);
-		if (soap->body && soap_element_end_in(soap, tag))
-			return NULL;
-	}
-	return a;
-}
-
-SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerToturb1__PressureHessian(struct soap *soap, struct turb1__PressureHessian *const*a, const char *tag, const char *type)
-{
-	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE_PointerToturb1__PressureHessian);
-	if (soap_out_PointerToturb1__PressureHessian(soap, tag?tag:"turb1:PressureHessian", id, a, type))
-		return soap->error;
-	return soap_putindependent(soap);
-}
-
-SOAP_FMAC3 struct turb1__PressureHessian ** SOAP_FMAC4 soap_get_PointerToturb1__PressureHessian(struct soap *soap, struct turb1__PressureHessian **p, const char *tag, const char *type)
-{
-	if ((p = soap_in_PointerToturb1__PressureHessian(soap, tag, p, type)))
-		if (soap_getindependent(soap))
-			return NULL;
-	return p;
-}
-
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerToturb1__VelocityGradient(struct soap *soap, struct turb1__VelocityGradient *const*a)
 {
 	if (!soap_reference(soap, *a, SOAP_TYPE_turb1__VelocityGradient))
@@ -17560,6 +20311,57 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerToturb1__Vector3P(struct soap *soap, s
 SOAP_FMAC3 struct turb1__Vector3P ** SOAP_FMAC4 soap_get_PointerToturb1__Vector3P(struct soap *soap, struct turb1__Vector3P **p, const char *tag, const char *type)
 {
 	if ((p = soap_in_PointerToturb1__Vector3P(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerToturb1__PressureHessian(struct soap *soap, struct turb1__PressureHessian *const*a)
+{
+	if (!soap_reference(soap, *a, SOAP_TYPE_turb1__PressureHessian))
+		soap_serialize_turb1__PressureHessian(soap, *a);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerToturb1__PressureHessian(struct soap *soap, const char *tag, int id, struct turb1__PressureHessian *const*a, const char *type)
+{
+	id = soap_element_id(soap, tag, id, *a, NULL, 0, type, SOAP_TYPE_turb1__PressureHessian);
+	if (id < 0)
+		return soap->error;
+	return soap_out_turb1__PressureHessian(soap, tag, id, *a, type);
+}
+
+SOAP_FMAC3 struct turb1__PressureHessian ** SOAP_FMAC4 soap_in_PointerToturb1__PressureHessian(struct soap *soap, const char *tag, struct turb1__PressureHessian **a, const char *type)
+{
+	if (soap_element_begin_in(soap, tag, 1, NULL))
+		return NULL;
+	if (!a)
+		if (!(a = (struct turb1__PressureHessian **)soap_malloc(soap, sizeof(struct turb1__PressureHessian *))))
+			return NULL;
+	*a = NULL;
+	if (!soap->null && *soap->href != '#')
+	{	soap_revert(soap);
+		if (!(*a = soap_in_turb1__PressureHessian(soap, tag, *a, type)))
+			return NULL;
+	}
+	else
+	{	a = (struct turb1__PressureHessian **)soap_id_lookup(soap, soap->href, (void**)a, SOAP_TYPE_turb1__PressureHessian, sizeof(struct turb1__PressureHessian), 0);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerToturb1__PressureHessian(struct soap *soap, struct turb1__PressureHessian *const*a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE_PointerToturb1__PressureHessian);
+	if (soap_out_PointerToturb1__PressureHessian(soap, tag?tag:"turb1:PressureHessian", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct turb1__PressureHessian ** SOAP_FMAC4 soap_get_PointerToturb1__PressureHessian(struct soap *soap, struct turb1__PressureHessian **p, const char *tag, const char *type)
+{
+	if ((p = soap_in_PointerToturb1__PressureHessian(soap, tag, p, type)))
 		if (soap_getindependent(soap))
 			return NULL;
 	return p;

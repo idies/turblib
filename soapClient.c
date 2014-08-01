@@ -17,7 +17,7 @@ compiling, linking, and/or using OpenSSL is allowed.
 extern "C" {
 #endif
 
-SOAP_SOURCE_STAMP("@(#) soapClient.c ver 2.8.8 2013-11-19 14:06:44 GMT")
+SOAP_SOURCE_STAMP("@(#) soapClient.c ver 2.8.8 2014-08-01 18:48:23 GMT")
 
 
 SOAP_FMAC5 int SOAP_FMAC6 soap_call___turb2__NullOp(struct soap *soap, const char *soap_endpoint, const char *soap_action, struct _turb1__NullOp *turb1__NullOp, struct _turb1__NullOpResponse *turb1__NullOpResponse)
@@ -521,6 +521,210 @@ SOAP_FMAC5 int SOAP_FMAC6 soap_call___turb2__GetRawVectorPotential(struct soap *
 	 || soap_body_begin_in(soap))
 		return soap_closesock(soap);
 	soap_get__turb1__GetRawVectorPotentialResponse(soap, turb1__GetRawVectorPotentialResponse, "turb1:GetRawVectorPotentialResponse", "");
+	if (soap->error)
+		return soap_recv_fault(soap, 0);
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap_closesock(soap);
+	return soap_closesock(soap);
+}
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_call___turb2__GetDensity(struct soap *soap, const char *soap_endpoint, const char *soap_action, struct _turb1__GetDensity *turb1__GetDensity, struct _turb1__GetDensityResponse *turb1__GetDensityResponse)
+{	struct __turb2__GetDensity soap_tmp___turb2__GetDensity;
+	if (!soap_endpoint)
+		soap_endpoint = "http://turbulence.pha.jhu.edu/service/turbulence.asmx";
+	if (!soap_action)
+		soap_action = "http://turbulence.pha.jhu.edu/GetDensity";
+	soap->encodingStyle = NULL;
+	soap_tmp___turb2__GetDensity.turb1__GetDensity = turb1__GetDensity;
+	soap_begin(soap);
+	soap_serializeheader(soap);
+	soap_serialize___turb2__GetDensity(soap, &soap_tmp___turb2__GetDensity);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put___turb2__GetDensity(soap, &soap_tmp___turb2__GetDensity, "-turb2:GetDensity", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	}
+	if (soap_end_count(soap))
+		return soap->error;
+	if (soap_connect(soap, soap_endpoint, soap_action)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put___turb2__GetDensity(soap, &soap_tmp___turb2__GetDensity, "-turb2:GetDensity", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap_closesock(soap);
+	if (!turb1__GetDensityResponse)
+		return soap_closesock(soap);
+	soap_default__turb1__GetDensityResponse(soap, turb1__GetDensityResponse);
+	if (soap_begin_recv(soap)
+	 || soap_envelope_begin_in(soap)
+	 || soap_recv_header(soap)
+	 || soap_body_begin_in(soap))
+		return soap_closesock(soap);
+	soap_get__turb1__GetDensityResponse(soap, turb1__GetDensityResponse, "turb1:GetDensityResponse", "");
+	if (soap->error)
+		return soap_recv_fault(soap, 0);
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap_closesock(soap);
+	return soap_closesock(soap);
+}
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_call___turb2__GetDensityGradient(struct soap *soap, const char *soap_endpoint, const char *soap_action, struct _turb1__GetDensityGradient *turb1__GetDensityGradient, struct _turb1__GetDensityGradientResponse *turb1__GetDensityGradientResponse)
+{	struct __turb2__GetDensityGradient soap_tmp___turb2__GetDensityGradient;
+	if (!soap_endpoint)
+		soap_endpoint = "http://turbulence.pha.jhu.edu/service/turbulence.asmx";
+	if (!soap_action)
+		soap_action = "http://turbulence.pha.jhu.edu/GetDensityGradient";
+	soap->encodingStyle = NULL;
+	soap_tmp___turb2__GetDensityGradient.turb1__GetDensityGradient = turb1__GetDensityGradient;
+	soap_begin(soap);
+	soap_serializeheader(soap);
+	soap_serialize___turb2__GetDensityGradient(soap, &soap_tmp___turb2__GetDensityGradient);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put___turb2__GetDensityGradient(soap, &soap_tmp___turb2__GetDensityGradient, "-turb2:GetDensityGradient", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	}
+	if (soap_end_count(soap))
+		return soap->error;
+	if (soap_connect(soap, soap_endpoint, soap_action)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put___turb2__GetDensityGradient(soap, &soap_tmp___turb2__GetDensityGradient, "-turb2:GetDensityGradient", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap_closesock(soap);
+	if (!turb1__GetDensityGradientResponse)
+		return soap_closesock(soap);
+	soap_default__turb1__GetDensityGradientResponse(soap, turb1__GetDensityGradientResponse);
+	if (soap_begin_recv(soap)
+	 || soap_envelope_begin_in(soap)
+	 || soap_recv_header(soap)
+	 || soap_body_begin_in(soap))
+		return soap_closesock(soap);
+	soap_get__turb1__GetDensityGradientResponse(soap, turb1__GetDensityGradientResponse, "turb1:GetDensityGradientResponse", "");
+	if (soap->error)
+		return soap_recv_fault(soap, 0);
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap_closesock(soap);
+	return soap_closesock(soap);
+}
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_call___turb2__GetDensityHessian(struct soap *soap, const char *soap_endpoint, const char *soap_action, struct _turb1__GetDensityHessian *turb1__GetDensityHessian, struct _turb1__GetDensityHessianResponse *turb1__GetDensityHessianResponse)
+{	struct __turb2__GetDensityHessian soap_tmp___turb2__GetDensityHessian;
+	if (!soap_endpoint)
+		soap_endpoint = "http://turbulence.pha.jhu.edu/service/turbulence.asmx";
+	if (!soap_action)
+		soap_action = "http://turbulence.pha.jhu.edu/GetDensityHessian";
+	soap->encodingStyle = NULL;
+	soap_tmp___turb2__GetDensityHessian.turb1__GetDensityHessian = turb1__GetDensityHessian;
+	soap_begin(soap);
+	soap_serializeheader(soap);
+	soap_serialize___turb2__GetDensityHessian(soap, &soap_tmp___turb2__GetDensityHessian);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put___turb2__GetDensityHessian(soap, &soap_tmp___turb2__GetDensityHessian, "-turb2:GetDensityHessian", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	}
+	if (soap_end_count(soap))
+		return soap->error;
+	if (soap_connect(soap, soap_endpoint, soap_action)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put___turb2__GetDensityHessian(soap, &soap_tmp___turb2__GetDensityHessian, "-turb2:GetDensityHessian", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap_closesock(soap);
+	if (!turb1__GetDensityHessianResponse)
+		return soap_closesock(soap);
+	soap_default__turb1__GetDensityHessianResponse(soap, turb1__GetDensityHessianResponse);
+	if (soap_begin_recv(soap)
+	 || soap_envelope_begin_in(soap)
+	 || soap_recv_header(soap)
+	 || soap_body_begin_in(soap))
+		return soap_closesock(soap);
+	soap_get__turb1__GetDensityHessianResponse(soap, turb1__GetDensityHessianResponse, "turb1:GetDensityHessianResponse", "");
+	if (soap->error)
+		return soap_recv_fault(soap, 0);
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap_closesock(soap);
+	return soap_closesock(soap);
+}
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_call___turb2__GetRawDensity(struct soap *soap, const char *soap_endpoint, const char *soap_action, struct _turb1__GetRawDensity *turb1__GetRawDensity, struct _turb1__GetRawDensityResponse *turb1__GetRawDensityResponse)
+{	struct __turb2__GetRawDensity soap_tmp___turb2__GetRawDensity;
+	if (!soap_endpoint)
+		soap_endpoint = "http://turbulence.pha.jhu.edu/service/turbulence.asmx";
+	if (!soap_action)
+		soap_action = "http://turbulence.pha.jhu.edu/GetRawDensity";
+	soap->encodingStyle = NULL;
+	soap_tmp___turb2__GetRawDensity.turb1__GetRawDensity = turb1__GetRawDensity;
+	soap_begin(soap);
+	soap_serializeheader(soap);
+	soap_serialize___turb2__GetRawDensity(soap, &soap_tmp___turb2__GetRawDensity);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put___turb2__GetRawDensity(soap, &soap_tmp___turb2__GetRawDensity, "-turb2:GetRawDensity", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	}
+	if (soap_end_count(soap))
+		return soap->error;
+	if (soap_connect(soap, soap_endpoint, soap_action)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put___turb2__GetRawDensity(soap, &soap_tmp___turb2__GetRawDensity, "-turb2:GetRawDensity", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap_closesock(soap);
+	if (!turb1__GetRawDensityResponse)
+		return soap_closesock(soap);
+	soap_default__turb1__GetRawDensityResponse(soap, turb1__GetRawDensityResponse);
+	if (soap_begin_recv(soap)
+	 || soap_envelope_begin_in(soap)
+	 || soap_recv_header(soap)
+	 || soap_body_begin_in(soap))
+		return soap_closesock(soap);
+	soap_get__turb1__GetRawDensityResponse(soap, turb1__GetRawDensityResponse, "turb1:GetRawDensityResponse", "");
 	if (soap->error)
 		return soap_recv_fault(soap, 0);
 	if (soap_body_end_in(soap)
@@ -1397,6 +1601,57 @@ SOAP_FMAC5 int SOAP_FMAC6 soap_call___turb2__GetBoxFilterGradient(struct soap *s
 	return soap_closesock(soap);
 }
 
+SOAP_FMAC5 int SOAP_FMAC6 soap_call___turb2__GetThreshold(struct soap *soap, const char *soap_endpoint, const char *soap_action, struct _turb1__GetThreshold *turb1__GetThreshold, struct _turb1__GetThresholdResponse *turb1__GetThresholdResponse)
+{	struct __turb2__GetThreshold soap_tmp___turb2__GetThreshold;
+	if (!soap_endpoint)
+		soap_endpoint = "http://turbulence.pha.jhu.edu/service/turbulence.asmx";
+	if (!soap_action)
+		soap_action = "http://turbulence.pha.jhu.edu/GetThreshold";
+	soap->encodingStyle = NULL;
+	soap_tmp___turb2__GetThreshold.turb1__GetThreshold = turb1__GetThreshold;
+	soap_begin(soap);
+	soap_serializeheader(soap);
+	soap_serialize___turb2__GetThreshold(soap, &soap_tmp___turb2__GetThreshold);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put___turb2__GetThreshold(soap, &soap_tmp___turb2__GetThreshold, "-turb2:GetThreshold", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	}
+	if (soap_end_count(soap))
+		return soap->error;
+	if (soap_connect(soap, soap_endpoint, soap_action)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put___turb2__GetThreshold(soap, &soap_tmp___turb2__GetThreshold, "-turb2:GetThreshold", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap_closesock(soap);
+	if (!turb1__GetThresholdResponse)
+		return soap_closesock(soap);
+	soap_default__turb1__GetThresholdResponse(soap, turb1__GetThresholdResponse);
+	if (soap_begin_recv(soap)
+	 || soap_envelope_begin_in(soap)
+	 || soap_recv_header(soap)
+	 || soap_body_begin_in(soap))
+		return soap_closesock(soap);
+	soap_get__turb1__GetThresholdResponse(soap, turb1__GetThresholdResponse, "turb1:GetThresholdResponse", "");
+	if (soap->error)
+		return soap_recv_fault(soap, 0);
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap_closesock(soap);
+	return soap_closesock(soap);
+}
+
 SOAP_FMAC5 int SOAP_FMAC6 soap_call___turb2__GetLaplacianOfGradient(struct soap *soap, const char *soap_endpoint, const char *soap_action, struct _turb1__GetLaplacianOfGradient *turb1__GetLaplacianOfGradient, struct _turb1__GetLaplacianOfGradientResponse *turb1__GetLaplacianOfGradientResponse)
 {	struct __turb2__GetLaplacianOfGradient soap_tmp___turb2__GetLaplacianOfGradient;
 	if (!soap_endpoint)
@@ -1949,6 +2204,210 @@ SOAP_FMAC5 int SOAP_FMAC6 soap_call___turb3__GetRawVectorPotential(struct soap *
 	 || soap_body_begin_in(soap))
 		return soap_closesock(soap);
 	soap_get__turb1__GetRawVectorPotentialResponse(soap, turb1__GetRawVectorPotentialResponse, "turb1:GetRawVectorPotentialResponse", "");
+	if (soap->error)
+		return soap_recv_fault(soap, 0);
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap_closesock(soap);
+	return soap_closesock(soap);
+}
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_call___turb3__GetDensity(struct soap *soap, const char *soap_endpoint, const char *soap_action, struct _turb1__GetDensity *turb1__GetDensity, struct _turb1__GetDensityResponse *turb1__GetDensityResponse)
+{	struct __turb3__GetDensity soap_tmp___turb3__GetDensity;
+	if (!soap_endpoint)
+		soap_endpoint = "http://turbulence.pha.jhu.edu/service/turbulence.asmx";
+	if (!soap_action)
+		soap_action = "http://turbulence.pha.jhu.edu/GetDensity";
+	soap->encodingStyle = NULL;
+	soap_tmp___turb3__GetDensity.turb1__GetDensity = turb1__GetDensity;
+	soap_begin(soap);
+	soap_serializeheader(soap);
+	soap_serialize___turb3__GetDensity(soap, &soap_tmp___turb3__GetDensity);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put___turb3__GetDensity(soap, &soap_tmp___turb3__GetDensity, "-turb3:GetDensity", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	}
+	if (soap_end_count(soap))
+		return soap->error;
+	if (soap_connect(soap, soap_endpoint, soap_action)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put___turb3__GetDensity(soap, &soap_tmp___turb3__GetDensity, "-turb3:GetDensity", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap_closesock(soap);
+	if (!turb1__GetDensityResponse)
+		return soap_closesock(soap);
+	soap_default__turb1__GetDensityResponse(soap, turb1__GetDensityResponse);
+	if (soap_begin_recv(soap)
+	 || soap_envelope_begin_in(soap)
+	 || soap_recv_header(soap)
+	 || soap_body_begin_in(soap))
+		return soap_closesock(soap);
+	soap_get__turb1__GetDensityResponse(soap, turb1__GetDensityResponse, "turb1:GetDensityResponse", "");
+	if (soap->error)
+		return soap_recv_fault(soap, 0);
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap_closesock(soap);
+	return soap_closesock(soap);
+}
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_call___turb3__GetDensityGradient(struct soap *soap, const char *soap_endpoint, const char *soap_action, struct _turb1__GetDensityGradient *turb1__GetDensityGradient, struct _turb1__GetDensityGradientResponse *turb1__GetDensityGradientResponse)
+{	struct __turb3__GetDensityGradient soap_tmp___turb3__GetDensityGradient;
+	if (!soap_endpoint)
+		soap_endpoint = "http://turbulence.pha.jhu.edu/service/turbulence.asmx";
+	if (!soap_action)
+		soap_action = "http://turbulence.pha.jhu.edu/GetDensityGradient";
+	soap->encodingStyle = NULL;
+	soap_tmp___turb3__GetDensityGradient.turb1__GetDensityGradient = turb1__GetDensityGradient;
+	soap_begin(soap);
+	soap_serializeheader(soap);
+	soap_serialize___turb3__GetDensityGradient(soap, &soap_tmp___turb3__GetDensityGradient);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put___turb3__GetDensityGradient(soap, &soap_tmp___turb3__GetDensityGradient, "-turb3:GetDensityGradient", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	}
+	if (soap_end_count(soap))
+		return soap->error;
+	if (soap_connect(soap, soap_endpoint, soap_action)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put___turb3__GetDensityGradient(soap, &soap_tmp___turb3__GetDensityGradient, "-turb3:GetDensityGradient", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap_closesock(soap);
+	if (!turb1__GetDensityGradientResponse)
+		return soap_closesock(soap);
+	soap_default__turb1__GetDensityGradientResponse(soap, turb1__GetDensityGradientResponse);
+	if (soap_begin_recv(soap)
+	 || soap_envelope_begin_in(soap)
+	 || soap_recv_header(soap)
+	 || soap_body_begin_in(soap))
+		return soap_closesock(soap);
+	soap_get__turb1__GetDensityGradientResponse(soap, turb1__GetDensityGradientResponse, "turb1:GetDensityGradientResponse", "");
+	if (soap->error)
+		return soap_recv_fault(soap, 0);
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap_closesock(soap);
+	return soap_closesock(soap);
+}
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_call___turb3__GetDensityHessian(struct soap *soap, const char *soap_endpoint, const char *soap_action, struct _turb1__GetDensityHessian *turb1__GetDensityHessian, struct _turb1__GetDensityHessianResponse *turb1__GetDensityHessianResponse)
+{	struct __turb3__GetDensityHessian soap_tmp___turb3__GetDensityHessian;
+	if (!soap_endpoint)
+		soap_endpoint = "http://turbulence.pha.jhu.edu/service/turbulence.asmx";
+	if (!soap_action)
+		soap_action = "http://turbulence.pha.jhu.edu/GetDensityHessian";
+	soap->encodingStyle = NULL;
+	soap_tmp___turb3__GetDensityHessian.turb1__GetDensityHessian = turb1__GetDensityHessian;
+	soap_begin(soap);
+	soap_serializeheader(soap);
+	soap_serialize___turb3__GetDensityHessian(soap, &soap_tmp___turb3__GetDensityHessian);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put___turb3__GetDensityHessian(soap, &soap_tmp___turb3__GetDensityHessian, "-turb3:GetDensityHessian", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	}
+	if (soap_end_count(soap))
+		return soap->error;
+	if (soap_connect(soap, soap_endpoint, soap_action)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put___turb3__GetDensityHessian(soap, &soap_tmp___turb3__GetDensityHessian, "-turb3:GetDensityHessian", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap_closesock(soap);
+	if (!turb1__GetDensityHessianResponse)
+		return soap_closesock(soap);
+	soap_default__turb1__GetDensityHessianResponse(soap, turb1__GetDensityHessianResponse);
+	if (soap_begin_recv(soap)
+	 || soap_envelope_begin_in(soap)
+	 || soap_recv_header(soap)
+	 || soap_body_begin_in(soap))
+		return soap_closesock(soap);
+	soap_get__turb1__GetDensityHessianResponse(soap, turb1__GetDensityHessianResponse, "turb1:GetDensityHessianResponse", "");
+	if (soap->error)
+		return soap_recv_fault(soap, 0);
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap_closesock(soap);
+	return soap_closesock(soap);
+}
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_call___turb3__GetRawDensity(struct soap *soap, const char *soap_endpoint, const char *soap_action, struct _turb1__GetRawDensity *turb1__GetRawDensity, struct _turb1__GetRawDensityResponse *turb1__GetRawDensityResponse)
+{	struct __turb3__GetRawDensity soap_tmp___turb3__GetRawDensity;
+	if (!soap_endpoint)
+		soap_endpoint = "http://turbulence.pha.jhu.edu/service/turbulence.asmx";
+	if (!soap_action)
+		soap_action = "http://turbulence.pha.jhu.edu/GetRawDensity";
+	soap->encodingStyle = NULL;
+	soap_tmp___turb3__GetRawDensity.turb1__GetRawDensity = turb1__GetRawDensity;
+	soap_begin(soap);
+	soap_serializeheader(soap);
+	soap_serialize___turb3__GetRawDensity(soap, &soap_tmp___turb3__GetRawDensity);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put___turb3__GetRawDensity(soap, &soap_tmp___turb3__GetRawDensity, "-turb3:GetRawDensity", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	}
+	if (soap_end_count(soap))
+		return soap->error;
+	if (soap_connect(soap, soap_endpoint, soap_action)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put___turb3__GetRawDensity(soap, &soap_tmp___turb3__GetRawDensity, "-turb3:GetRawDensity", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap_closesock(soap);
+	if (!turb1__GetRawDensityResponse)
+		return soap_closesock(soap);
+	soap_default__turb1__GetRawDensityResponse(soap, turb1__GetRawDensityResponse);
+	if (soap_begin_recv(soap)
+	 || soap_envelope_begin_in(soap)
+	 || soap_recv_header(soap)
+	 || soap_body_begin_in(soap))
+		return soap_closesock(soap);
+	soap_get__turb1__GetRawDensityResponse(soap, turb1__GetRawDensityResponse, "turb1:GetRawDensityResponse", "");
 	if (soap->error)
 		return soap_recv_fault(soap, 0);
 	if (soap_body_end_in(soap)
@@ -2816,6 +3275,57 @@ SOAP_FMAC5 int SOAP_FMAC6 soap_call___turb3__GetBoxFilterGradient(struct soap *s
 	 || soap_body_begin_in(soap))
 		return soap_closesock(soap);
 	soap_get__turb1__GetBoxFilterGradientResponse(soap, turb1__GetBoxFilterGradientResponse, "turb1:GetBoxFilterGradientResponse", "");
+	if (soap->error)
+		return soap_recv_fault(soap, 0);
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap_closesock(soap);
+	return soap_closesock(soap);
+}
+
+SOAP_FMAC5 int SOAP_FMAC6 soap_call___turb3__GetThreshold(struct soap *soap, const char *soap_endpoint, const char *soap_action, struct _turb1__GetThreshold *turb1__GetThreshold, struct _turb1__GetThresholdResponse *turb1__GetThresholdResponse)
+{	struct __turb3__GetThreshold soap_tmp___turb3__GetThreshold;
+	if (!soap_endpoint)
+		soap_endpoint = "http://turbulence.pha.jhu.edu/service/turbulence.asmx";
+	if (!soap_action)
+		soap_action = "http://turbulence.pha.jhu.edu/GetThreshold";
+	soap->encodingStyle = NULL;
+	soap_tmp___turb3__GetThreshold.turb1__GetThreshold = turb1__GetThreshold;
+	soap_begin(soap);
+	soap_serializeheader(soap);
+	soap_serialize___turb3__GetThreshold(soap, &soap_tmp___turb3__GetThreshold);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put___turb3__GetThreshold(soap, &soap_tmp___turb3__GetThreshold, "-turb3:GetThreshold", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	}
+	if (soap_end_count(soap))
+		return soap->error;
+	if (soap_connect(soap, soap_endpoint, soap_action)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put___turb3__GetThreshold(soap, &soap_tmp___turb3__GetThreshold, "-turb3:GetThreshold", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap_closesock(soap);
+	if (!turb1__GetThresholdResponse)
+		return soap_closesock(soap);
+	soap_default__turb1__GetThresholdResponse(soap, turb1__GetThresholdResponse);
+	if (soap_begin_recv(soap)
+	 || soap_envelope_begin_in(soap)
+	 || soap_recv_header(soap)
+	 || soap_body_begin_in(soap))
+		return soap_closesock(soap);
+	soap_get__turb1__GetThresholdResponse(soap, turb1__GetThresholdResponse, "turb1:GetThresholdResponse", "");
 	if (soap->error)
 		return soap_recv_fault(soap, 0);
 	if (soap_body_end_in(soap)

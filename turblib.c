@@ -42,23 +42,22 @@ int __turblib_prefetching = 0;
 //Linked list of all added cutout files
 cutoutFile* __turblib_cutouts = NULL;
 
-set_info DataSets[8] = {
+set_info DataSets[6] = {
  { 0, 0, 0 },
  { 2.0f * 3.14159265358979f / 1024.0f, .002f,  1024 }, //isotropic1024old
  { 2.0f * 3.14159265358979f / 1024.0f, .0002f,  1024 }, //isotropicfine_old
  { 2.0f * 3.14159265358979f / 1024.0f, .0025f, 1024 },  //mhd1024
  { 2.0f * 3.14159265358979f / 1024.0f, .002f,  1024 }, //isotropic1024coarse
- { 2.0f * 3.14159265358979f / 1024.0f, .0002f, 1024 }, //isotropic1024fine
- { 0, 0, 0 },
- { 2.0f * 3.14159265358979f / 1024.0f, .0025f, 1024 } //custom_dataset
+ { 2.0f * 3.14159265358979f / 1024.0f, .0002f, 1024 } //isotropic1024fine
 };
 
-turb_fn TurbFields[4] = 
+turb_fn TurbFields[5] = 
 {
  { 'u', 3}, //velocity
  { 'p', 1}, //pressure
  { 'b', 3}, //magnetic
- { 'a', 3}  //vector potential
+ { 'a', 3}, //vector potential
+ { 'd', 1}  //density
 };
 #endif
 
@@ -126,6 +125,54 @@ enum turb1__SpatialInterpolation SpatialIntToEnum(enum SpatialInterpolation spat
       return turb1__SpatialInterpolation__None_USCOREFd6;
     case 80:
       return turb1__SpatialInterpolation__None_USCOREFd8;
+  case 104:
+    return turb1__SpatialInterpolation__M1Q4;
+  case 106:
+    return turb1__SpatialInterpolation__M1Q6;
+  case 108:
+    return turb1__SpatialInterpolation__M1Q8;
+  case 110:
+    return turb1__SpatialInterpolation__M1Q10;
+  case 112:
+    return turb1__SpatialInterpolation__M1Q12;
+  case 114:
+    return turb1__SpatialInterpolation__M1Q14;
+  case 204:
+    return turb1__SpatialInterpolation__M2Q4;
+  case 206:
+    return turb1__SpatialInterpolation__M2Q6;
+  case 208:
+    return turb1__SpatialInterpolation__M2Q8;
+  case 210:
+    return turb1__SpatialInterpolation__M2Q10;
+  case 212:
+    return turb1__SpatialInterpolation__M2Q12;
+  case 214:
+    return turb1__SpatialInterpolation__M2Q14;
+  case 304:
+    return turb1__SpatialInterpolation__M3Q4;
+  case 306:
+    return turb1__SpatialInterpolation__M3Q6;
+  case 308:
+    return turb1__SpatialInterpolation__M3Q8;
+  case 310:
+    return turb1__SpatialInterpolation__M3Q10;
+  case 312:
+    return turb1__SpatialInterpolation__M3Q12;
+  case 314:
+    return turb1__SpatialInterpolation__M3Q14;
+  case 404:
+    return turb1__SpatialInterpolation__M4Q4;
+  case 406:
+    return turb1__SpatialInterpolation__M4Q6;
+  case 408:
+    return turb1__SpatialInterpolation__M4Q8;
+  case 410:
+    return turb1__SpatialInterpolation__M4Q10;
+  case 412:
+    return turb1__SpatialInterpolation__M4Q12;
+  case 414:
+    return turb1__SpatialInterpolation__M4Q14;
     default:
       return -1;
   }
@@ -1443,6 +1490,203 @@ int getRawPressure (char *authToken,
   return rc;
 }
 
+int getdensity_ (char *authToken,
+      char *dataset, float *time,
+      int *spatial, int *temporal,
+      int *count, float datain[][3], float dataout[],
+      int len_a, int len_d)
+{
+  return getDensity (authToken,
+    dataset, *time,
+    *spatial, *temporal,
+    *count, datain, dataout);
+}
+
+int getDensitySoap (char *authToken,
+      char *dataset, float time,
+      enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+      int count, float datain[][3], float dataout[])
+{
+  int rc;
+
+  struct _turb1__GetDensity input;
+  struct _turb1__GetDensityResponse output;
+
+  input.authToken = authToken;
+  input.dataset = dataset;
+  input.time = time;
+  input.spatialInterpolation = SpatialIntToEnum(spatial);
+  input.temporalInterpolation = TemporalIntToEnum(temporal);
+
+  struct turb1__ArrayOfPoint3 pointArray;
+  pointArray.__sizePoint3 = count;
+  pointArray.Point3 = (void *)datain;
+  input.points = &pointArray;
+
+  rc = soap_call___turb2__GetDensity(&__jhuturbsoap, NULL, NULL, &input, &output);
+  if (rc == SOAP_OK) {
+    memcpy(dataout, output.GetDensityResult->Pressure,
+      output.GetDensityResult->__sizePressure * sizeof(float));
+    bzero(__turblib_err, TURB_ERROR_LENGTH);
+  } else {
+    soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
+    turblibHandleError();
+  }
+  
+  soap_end(&__jhuturbsoap);  // remove deserialized data and clean up
+  soap_done(&__jhuturbsoap); // detach the gSOAP environment
+
+  __turblib_errno = rc;
+
+  return rc;
+}
+
+int getdensitygradient_(char *authToken,
+      char *dataset, float *time,
+      int *spatial, int *temporal,
+      int *count, float datain[][3], float dataout[][3],
+      int len_a, int len_d)
+{
+  return getDensityGradient(authToken,
+    dataset, *time,
+    *spatial, *temporal,
+    *count, datain, dataout);
+}
+
+int getDensityGradientSoap(char *authToken,
+      char *dataset, float time,
+      enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+      int count, float datain[][3], float dataout[][3])
+{
+  int rc;
+
+  struct _turb1__GetDensityGradient input;
+  struct _turb1__GetDensityGradientResponse output;
+
+  input.authToken = authToken;
+  input.dataset = dataset;
+  input.time = time;
+  input.spatialInterpolation = SpatialIntToEnum(spatial);
+  input.temporalInterpolation = TemporalIntToEnum(temporal);
+
+  struct turb1__ArrayOfPoint3 pointArray;
+  pointArray.__sizePoint3 = count;
+  pointArray.Point3 = (void *)datain;
+  input.points = &pointArray;
+
+  rc = soap_call___turb2__GetDensityGradient (&__jhuturbsoap, NULL, NULL, &input, &output);
+  if (rc == SOAP_OK) {
+    memcpy(dataout, output.GetDensityGradientResult->Vector3,
+      output.GetDensityGradientResult->__sizeVector3 * sizeof(float) * 3);
+    bzero(__turblib_err, TURB_ERROR_LENGTH);
+  } else {
+    soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
+    turblibHandleError();
+  }
+  
+  soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
+  soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
+
+  __turblib_errno = rc;
+  return rc;
+}
+
+int getdensityhessian_(char *authToken,
+      char *dataset, float *time,
+      int *spatial, int *temporal,
+      int *count, float datain[][3], float dataout[][6],
+      int len_a, int len_d)
+{
+  return getDensityHessian(authToken,
+    dataset, *time,
+    *spatial, *temporal,
+    *count, datain, dataout);
+}
+
+int getDensityHessianSoap(char *authToken,
+      char *dataset, float time,
+      enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+      int count, float datain[][3], float dataout[][6])
+{
+  int rc;
+
+  struct _turb1__GetDensityHessian input;
+  struct _turb1__GetDensityHessianResponse output;
+
+  input.authToken = authToken;
+  input.dataset = dataset;
+  input.time = time;
+  input.spatialInterpolation = SpatialIntToEnum(spatial);
+  input.temporalInterpolation = TemporalIntToEnum(temporal);
+
+  struct turb1__ArrayOfPoint3 pointArray;
+  pointArray.__sizePoint3 = count;
+  pointArray.Point3 = (void *)datain;
+  input.points = &pointArray;
+
+  rc = soap_call___turb2__GetDensityHessian (&__jhuturbsoap, NULL, NULL, &input, &output);
+  if (rc == SOAP_OK) {
+    memcpy(dataout, output.GetDensityHessianResult->PressureHessian,
+      output.GetDensityHessianResult->__sizePressureHessian * sizeof(float) * 6);
+    bzero(__turblib_err, TURB_ERROR_LENGTH);
+  } else {
+    soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
+    turblibHandleError();
+  }
+  
+  soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
+  soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
+
+  __turblib_errno = rc;
+  return rc;
+}
+
+int getrawdensity_ (char *authToken, char *dataset, float *time,
+  int *X, int *Y, int *Z, int *Xwidth, int *Ywidth, int *Zwidth,
+  float dataout[])
+{
+  return getRawDensity(authToken, dataset, *time, *X, *Y, *Z,
+                        *Xwidth, *Ywidth, *Zwidth,(char*)dataout);
+}
+
+int getRawDensity (char *authToken,
+      char *dataset, float time,
+	  int X, int Y, int Z, int Xwidth, int Ywidth, int Zwidth, char dataout[])
+{
+  int rc;
+
+  struct _turb1__GetRawDensity input;
+  struct _turb1__GetRawDensityResponse output;
+
+  input.authToken = authToken;
+  input.dataset = dataset;
+  input.time = time;
+  input.X = X;
+  input.Y = Y;
+  input.Z = Z;
+  input.Xwidth = Xwidth;
+  input.Ywidth = Ywidth;
+  input.Zwidth = Zwidth;
+
+  rc = soap_call___turb2__GetRawDensity(&__jhuturbsoap, NULL, NULL, &input, &output);
+  if (rc == SOAP_OK) {
+    memcpy(dataout, output.GetRawDensityResult->__ptr,
+      output.GetRawDensityResult->__size );
+    bzero(__turblib_err, TURB_ERROR_LENGTH);
+  } else {
+    soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
+    turblibHandleError();
+  }
+  
+  soap_end(&__jhuturbsoap);  // remove deserialized data and clean up
+  soap_done(&__jhuturbsoap); // detach the gSOAP environment
+
+  __turblib_errno = rc;
+
+  return rc;
+}
+
+
 
 ////////////////////////////////
 
@@ -1826,6 +2070,64 @@ int getPressure (char *authToken,
     return getPressureSoap (authToken, dataset, time, spatial, temporal, count, datain, dataout);
 }
 
+int getDensity (char *authToken,
+      char *dataset, float time,
+      enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+      int count, float datain[][3], float dataout[])
+{
+  TurbDataset dataset_ = getDataSet(dataset);
+  
+  if (isDataAvailable(dataset_, turb_density, count, datain, time, spatial, temporal))
+    return getValueLocal(dataset_, turb_density, spatial, temporal, time, count, datain, &dataout[0]);
+
+  else
+    return getDensitySoap (authToken, dataset, time, spatial, temporal, count, datain, dataout);
+}
+
+int getDensityGradient(char *authToken,
+      char *dataset, float time,
+      enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+      int count, float datain[][3], float dataout[][3])
+{
+  TurbDataset dataset_ = getDataSet(dataset);
+  
+  if (isDataAvailable(dataset_, turb_density, count, datain, time, spatial, temporal)) 
+    return getDensityGradientLocal(dataset_, time, spatial, temporal, count, datain, dataout); 
+
+  else
+    return getDensityGradientSoap (authToken, dataset, time, spatial, temporal, count, datain, dataout);
+}
+
+int getDensityGradientLocal (TurbDataset dataset, float time, enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+  int count, float input[count][3], float output[count][3])
+{
+  if(!validateParams(spatial, dataset, 1)) return -1;
+  return getGradient(dataset, turb_density, time, spatial, temporal, count, input, &output[0][0]);
+}
+
+
+int getDensityHessian(char *authToken,
+      char *dataset, float time,
+      enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+      int count, float datain[][3], float dataout[][6])
+{
+  TurbDataset dataset_ = getDataSet(dataset);
+  
+  if (isDataAvailable(dataset_, turb_density, count, datain, time, spatial, temporal)) 
+    return getDensityHessianLocal(dataset_, time, spatial, temporal, count, datain, dataout); 
+
+  else
+    return getDensityHessianSoap (authToken, dataset, time, spatial, temporal, count, datain, dataout);
+}
+
+int getDensityHessianLocal (TurbDataset dataset, float time, enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+  int count, float input[count][3], float output[count][6])
+{
+  if(!validateParams(spatial, dataset, 1)) return -1;
+  return getHessian(dataset, turb_density, time, spatial, temporal, count, input, &output[0][0]);
+}
+
+
 /* HDF5 file utility functions */
 
 
@@ -1836,7 +2138,6 @@ int turblibaddlocalsource_ (char *fname)
 
 int turblibAddLocalSource(char *fname)
 {
-  fprintf(stderr, "opening %s\n", fname);
   hid_t file = H5Fopen(fname, H5F_ACC_RDONLY, H5P_DEFAULT);
   if (file < 0) return -1;
   
@@ -1872,6 +2173,7 @@ int turblibAddLocalSource(char *fname)
   src->contents[turb_pressure] = (contents & 0x02 ? 1 : 0);
   src->contents[turb_magnetic] = (contents & 0x04 ? 1 : 0);
   src->contents[turb_potential] = (contents & 0x08 ? 1 : 0);
+  src->contents[turb_density] = (contents & 0x16 ? 1 : 0);
   
   memset(src->data, 0, sizeof(float *) * 4096);
   
@@ -2135,7 +2437,7 @@ TurbDataset getDataSet(char *name)
   if (strcmp("isotropic1024fine", name) == 0) return isotropic1024fine;
   if (strcmp("mhd1024", name) == 0) return mhd1024;
   if (strcmp("channel", name) == 0) return channel;
-  if (strcmp("custom", name) == 0) return custom_dataset;
+  if (strcmp("mixing", name) == 0) return mixing;
   
   return -1;
 }
@@ -2313,34 +2615,14 @@ cutoutFile* findDataBlock(TurbDataset dataset, TurbField function, int x, int y,
 
 int isWithinFile(TurbDataset dataset, TurbField function, int x, int y, int z, int xw, int yw, int zw, int timestep, cutoutFile* file)
 {
-  //int result;
-  //result = (file->dataset == dataset);
-  ////fprintf(stderr,   "\nisWithinFile, %s\n", result ? "true" : "false");
-  //result = result && 
-  //     (function == turb_vp ? file->contents[turb_pressure] && file->contents[turb_velocity] : file->contents[function]);
-  ////fprintf(stderr,   "isWithinFile, %s\n", result ? "true" : "false");
-  //result = result && 
-  //     timestep >= file->start[0] && timestep           <= (file->start[0] + file->size[0]-1);
-  ////fprintf(stderr,   "isWithinFile, %s\n", result ? "true" : "false");
-  //result = result && 
-  //     x        >= file->start[1] && (x + xw) <= (file->start[1] + file->size[1]);
-  ////fprintf(stderr,   "isWithinFile, %s\n", result ? "true" : "false");
-  //result = result && 
-  //     y        >= file->start[2] && (y + yw) <= (file->start[2] + file->size[2]);
-  ////fprintf(stderr,   "isWithinFile, %s\n", result ? "true" : "false");
-  //result = result &&
-  //     z        >= file->start[3] && (z + zw) <= (file->start[3] + file->size[3]);
-  ////fprintf(stderr,   "isWithinFile, %s\n", result ? "true" : "false");
-  ////fprintf(stderr,   "isWithinFile, %d %d %d %d\n", z, zw, file->start[3], file->size[3]);
-  //if (result)
-  if ((file->dataset == dataset) && 
-      (function == turb_vp ? file->contents[turb_pressure] && file->contents[turb_velocity] : file->contents[function]) && 
+    if (file->dataset == dataset && 
+       (function == turb_vp ? file->contents[turb_pressure] && file->contents[turb_velocity] : file->contents[function]) && 
        timestep >= file->start[0] && timestep           <= (file->start[0] + file->size[0]-1) && 
        x        >= file->start[1] && (x + xw) <= (file->start[1] + file->size[1]) && 
        y        >= file->start[2] && (y + yw) <= (file->start[2] + file->size[2]) &&
        z        >= file->start[3] && (z + zw) <= (file->start[3] + file->size[3]))
-    return 1;
-  return 0;
+         return 1;
+    return 0;
 }
 
 /* zyx order */

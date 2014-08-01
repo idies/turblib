@@ -47,7 +47,7 @@ program TurbTest
   ! If you need one, please visit http://turbulence.pha.jhu.edu/
   ! (We just want to know a bit about our users!)
   !
-  character(*), parameter :: authkey = 'edu.jhu.pha.turbulence.testing-201302' // CHAR(0)
+  character(*), parameter :: authkey = 'edu.jhu.pha.turbulence.testing-201406' // CHAR(0)
 
   character(*), parameter :: field = 'velocity' // CHAR(0) ! field used for box filter
   real(RP), parameter :: filterwidth = 0.055223308_RP ! 9 * dx, where dx = 2*PI/1024
