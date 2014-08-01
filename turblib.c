@@ -51,6 +51,7 @@ set_info DataSets[8] = {
  { 2.0f * 3.14159265358979f / 1024.0f, .0002f, 1024 }, //isotropic1024fine
  { 0, 0, 0 },
  { 2.0f * 3.14159265358979f / 1024.0f, .0025f, 1024 } //custom_dataset
+ { 2.0f * 3.14159265358979f / 1024.0f, .04f, 1024 } //mixing_dataset
 };
 
 turb_fn TurbFields[5] = 
