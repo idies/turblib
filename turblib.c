@@ -42,7 +42,7 @@ int __turblib_prefetching = 0;
 //Linked list of all added cutout files
 cutoutFile* __turblib_cutouts = NULL;
 
-set_info DataSets[8] = {
+set_info DataSets[9] = {
  { 0, 0, 0 },
  { 2.0f * 3.14159265358979f / 1024.0f, .002f,  1024 }, //isotropic1024old
  { 2.0f * 3.14159265358979f / 1024.0f, .0002f,  1024 }, //isotropicfine_old
@@ -50,7 +50,7 @@ set_info DataSets[8] = {
  { 2.0f * 3.14159265358979f / 1024.0f, .002f,  1024 }, //isotropic1024coarse
  { 2.0f * 3.14159265358979f / 1024.0f, .0002f, 1024 }, //isotropic1024fine
  { 0, 0, 0 },
- { 2.0f * 3.14159265358979f / 1024.0f, .0025f, 1024 } //custom_dataset
+ { 2.0f * 3.14159265358979f / 1024.0f, .0025f, 1024 }, //custom_dataset
  { 2.0f * 3.14159265358979f / 1024.0f, .04f, 1024 } //mixing_dataset
 };
 
