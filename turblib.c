@@ -264,6 +264,51 @@ int getVelocitySoap (char *authToken,
   return rc;
 }
 
+int getThreshold (char *authToken,
+                  char *dataset, char *field, float time, float threshold,
+                  enum SpatialInterpolation spatial,
+                  int X, int Y, int Z, int Xwidth, int Ywidth, int Zwidth, 
+		  ThresholdInfo **dataout, int *result_size)
+{
+  int rc;
+
+  struct _turb1__GetThreshold input;
+  struct _turb1__GetThresholdResponse output;
+
+  input.authToken = authToken;
+  input.dataset = dataset;
+  input.field = field;
+  input.time = time;
+  input.threshold = threshold;
+  input.spatialInterpolation = SpatialIntToEnum(spatial);
+  input.X = X;
+  input.Y = Y;
+  input.Z = Z;
+  input.Xwidth = Xwidth;
+  input.Ywidth = Ywidth;
+  input.Zwidth = Zwidth;
+
+  rc = soap_call___turb2__GetThreshold(&__jhuturbsoap, NULL, NULL, &input, &output);
+  if (rc == SOAP_OK) {
+    *result_size = output.GetThresholdResult->__sizeThresholdInfo;
+    *dataout = (ThresholdInfo *) malloc(sizeof(ThresholdInfo) * (*result_size));
+    memcpy(*dataout, output.GetThresholdResult->ThresholdInfo,
+	   output.GetThresholdResult->__sizeThresholdInfo * sizeof(ThresholdInfo));
+    bzero(__turblib_err, TURB_ERROR_LENGTH);
+  } else {
+    soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
+    turblibHandleError();
+  }
+
+  soap_end(&__jhuturbsoap);  // remove deserialized data and clean up
+  soap_done(&__jhuturbsoap); //  detach the gSOAP environment
+
+  __turblib_errno = rc;
+
+  return rc;
+}
+
+
 int getboxfilter_ (char *authToken,
                    char *dataset, char *field, float *time, float *filterwidth,
                    int *count, float datain[][3], float dataout[][3],

@@ -93,6 +93,14 @@ enum TemporalInterpolation
   PCHIPInterpolation = 1
 };
 
+typedef struct
+{
+  int x;
+  int y;
+  int z;
+  float value;
+} ThresholdInfo;
+
 #ifdef CUTOUT_SUPPORT
 typedef enum
 {
@@ -216,6 +224,12 @@ int getvelocity_ (char *authToken,
                   int *spatial, int *temporal,
                   int *count, float datain[][3], float dataout[][3],
                   int len_a, int len_d);
+
+int getThreshold (char *authToken,
+		  char *dataset, char *field, float time, float threshold, 
+		  enum SpatialInterpolation spatial,
+		  int X, int Y, int Z, int Xwidth, int Ywidth, int Zwidth,
+		  ThresholdInfo **dataout, int *result_size);
     
 /* C */
 int getBoxFilter (char *authToken,
