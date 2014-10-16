@@ -38,7 +38,7 @@ program TurbTest
   !
   ! Choose which dataset to use in this query
   ! Currently, only valid datasets are:
-  !   'isotropic1024coarse', 'isotropic1024fine', 'mhd1024' and 'channel'
+  !   'isotropic1024coarse', 'isotropic1024fine', 'mhd1024', 'channel' and 'mixing'
   !
   character(*), parameter :: dataset = 'isotropic1024coarse' // CHAR(0)
 
@@ -69,7 +69,7 @@ program TurbTest
   integer,parameter :: x=0, y=0, z=0, xwidth=16, ywidth=16, zwidth=16
   !real(RP) :: rawvelocity(xwidth*ywidth*zwidth*3)
   real(RP) :: rawvelocity(3,xwidth*ywidth*zwidth)
-  real(RP) :: rawpressure(xwidth*ywidth*zwidth)
+  real(RP) :: rawpressure(xwidth*ywidth*zwidth)  
 
   ! Declare the return type of the turblib functions as integer.
   ! This is required for custom error handling (see the README).

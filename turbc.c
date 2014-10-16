@@ -59,7 +59,7 @@ int main(int argc, char *argv[]) {
   char *threshold_field = "vorticity";
   ThresholdInfo *threshold_array;      /* dynamic array for the results of Threshold queries */
   int threshold_array_size;            /* size of the threshold array */
-  float threshold = 0.0f;
+  float threshold = 30.0f;
 
   /* Initialize gSOAP */
   soapinit();
@@ -151,19 +151,6 @@ int main(int argc, char *argv[]) {
   for (p = 0; p < N; p++) {
     printf("%d: %13.6e, %13.6e, %13.6e\n", p, result3[p][0],  result3[p][1],  result3[p][2]);
   }
-
-  printf("\nRequesting threshold...\n");
-  //NOTE: The array storing the results is dynamically allocated inside the getThreshold function,
-  //because it's size is not known. It needs to be freed after it has been used to avoid leaking the memory.
-  //FD4NoInt
-  getThreshold (authtoken, dataset, threshold_field, time, threshold, FD4NoInt, 0, 0, 0, 4, 4, 4,
-	       &threshold_array, &threshold_array_size);
-  for (p = 0; p < threshold_array_size; p++) {
-    printf("(%d, %d, %d): %13.6e\n", threshold_array[p].x, threshold_array[p].y, threshold_array[p].z,
-	   threshold_array[p].value);
-    }
-  // Free the threshold array after using it.
-  free(threshold_array);
 
   printf("\nRequesting forcing at %d points...\n", N);
   getForce (authtoken, dataset, time, spatialInterp, temporalInterp, N, points, result3);
@@ -268,6 +255,18 @@ int main(int argc, char *argv[]) {
     printf("duydx=%13.6e, duydy=%13.6e, duydz=%13.6e, ", result9[p][3], result9[p][4], result9[p][5]);
     printf("duzdx=%13.6e, duzdy=%13.6e, duzdz=%13.6e\n", result9[p][6], result9[p][7], result9[p][8]);
   }
+
+  printf("\nRequesting threshold...\n");
+  //NOTE: The array storing the results is dynamically allocated inside the getThreshold function,
+  //because it's size is not known. It needs to be freed after it has been used to avoid leaking the memory.
+  getThreshold (authtoken, dataset, threshold_field, time, threshold, FD4NoInt, 0, 0, 0, 4, 4, 4,
+	       &threshold_array, &threshold_array_size);
+  for (p = 0; p < threshold_array_size; p++) {
+    printf("(%d, %d, %d): %13.6e\n", threshold_array[p].x, threshold_array[p].y, threshold_array[p].z,
+	   threshold_array[p].value);
+    }
+  // Free the threshold array after using it.
+  free(threshold_array);
   
   /* Free gSOAP resources */
   soapdestroy();
