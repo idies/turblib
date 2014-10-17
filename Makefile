@@ -38,7 +38,7 @@ MKDIR  = mkdir -p
 
 ifeq ($(CUTOUT_SUPPORT), 1)
 #If you built HDF5 from source yourself, fill in the path to your HDF5 installation
-   H5DIR  = /usr
+   H5DIR  = /usr/local/HDF5
    H5INC  = $(H5DIR)/include
    H5CC   = $(H5DIR)/bin/h5cc
    H5FC   = $(H5DIR)/bin/h5fc
