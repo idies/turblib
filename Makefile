@@ -38,7 +38,7 @@ MKDIR  = mkdir -p
 
 ifeq ($(CUTOUT_SUPPORT), 1)
 #If you built HDF5 from source yourself, fill in the path to your HDF5 installation
-   H5DIR  = /usr/local/hdf5
+   H5DIR  = /usr
    H5INC  = $(H5DIR)/include
    H5CC   = $(H5DIR)/bin/h5cc
    H5FC   = $(H5DIR)/bin/h5fc
@@ -113,7 +113,7 @@ static_lib: $(OBJ)
 install: static_lib
 	$(MKDIR) $(JHTDB_PREFIX)/include
 	$(MKDIR) $(JHTDB_PREFIX)/lib
-	$(CP) turblib.h $(JHTDB_PREFIX)/include/
+	$(CP) *.h $(JHTDB_PREFIX)/include/
 	$(CP) libJHTDB.a $(JHTDB_PREFIX)/lib/
 
 # Regenerate the gSOAP interfaces if required
