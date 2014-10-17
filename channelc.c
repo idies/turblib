@@ -58,7 +58,7 @@ int main(int argc, char *argv[]) {
   /* Enable exit on error.  See README for details. */
   turblibSetExitOnError(1);
 
-  for (p = 0; p < N; p++) { 
+  for (p = 0; p < N; p++) {
     points[p][0] = (float)rand()/RAND_MAX*8*3.141592F;
     points[p][1] = (float)rand()/RAND_MAX*2 - 1;
     points[p][2] = (float)rand()/RAND_MAX*3*3.141592F;
@@ -68,7 +68,7 @@ int main(int argc, char *argv[]) {
   for (p = 0; p < N; p++) {
     printf("%d: %13.6e, %13.6e, %13.6e\n", p, points[p][0],  points[p][1],  points[p][2]);
   }
-  
+
   printf("\nRequesting velocity at %d points...\n", N);
   getVelocity (authtoken, dataset, time, spatialInterp, temporalInterp, N, points, result3);
   for (p = 0; p < N; p++) {
@@ -130,13 +130,13 @@ int main(int argc, char *argv[]) {
   printf("Requesting raw velocity data...\n");
   getRawVelocity(authtoken, dataset, time, X, Y, Z, Xwidth, Ywidth, Zwidth, (char*)rawdata);
   for (p = 0; p < Xwidth*Ywidth*Zwidth; p++) {
-    //printf("%d: Vx=%f, Vy=%f, Vz=%f\n", p, rawdata[3*p],  rawdata[3*p+1], rawdata[3*p+2]);             
+    //printf("%d: Vx=%f, Vy=%f, Vz=%f\n", p, rawdata[3*p],  rawdata[3*p+1], rawdata[3*p+2]);
   }
 
   printf("Requesting raw pressure data...\n");
   getRawPressure (authtoken, dataset, time, X, Y, Z, Xwidth, Ywidth, Zwidth, (char*)rawpressure);
   for (p = 0; p < Xwidth*Ywidth*Zwidth; p++) {
-    //printf("%d: P=%f\n", p, rawpressure[p]);                                                           
+    //printf("%d: P=%f\n", p, rawpressure[p]);
   }
   
   printf("\nRequesting threshold...\n");
@@ -150,7 +150,7 @@ int main(int argc, char *argv[]) {
   }
   // Free the threshold array after using it.
   free(threshold_array);
-  
+
   /* Free gSOAP resources */
   soapdestroy();
 

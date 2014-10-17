@@ -15989,7 +15989,7 @@ SOAP_FMAC3 struct xsd__base64Binary * SOAP_FMAC4 soap_in_xsd__base64Binary(struc
 			return NULL;
 	}
 	else
-	{	
+	{
 #ifndef WITH_LEANER
 		if (*soap->href != '#')
 		{	if (soap_dime_forward(soap, &a->__ptr, &a->__size, &a->id, &a->type, &a->options))

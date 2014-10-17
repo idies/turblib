@@ -54,7 +54,7 @@ set_info DataSets[9] = {
  { 2.0f * 3.14159265358979f / 1024.0f, .04f, 1024 } //mixing_dataset
 };
 
-turb_fn TurbFields[5] = 
+turb_fn TurbFields[5] =
 {
  { 'u', 3}, //velocity
  { 'p', 1}, //pressure
@@ -255,10 +255,10 @@ int getVelocitySoap (char *authToken,
     soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
     turblibHandleError();
   }
-  
+
   soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
   soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
- 
+
   __turblib_errno = rc;
 
   return rc;
@@ -267,7 +267,7 @@ int getVelocitySoap (char *authToken,
 int getThreshold (char *authToken,
                   char *dataset, char *field, float time, float threshold,
                   enum SpatialInterpolation spatial,
-                  int X, int Y, int Z, int Xwidth, int Ywidth, int Zwidth, 
+                  int X, int Y, int Z, int Xwidth, int Ywidth, int Zwidth,
 		  ThresholdInfo **dataout, int *result_size)
 {
   int rc;
@@ -320,25 +320,25 @@ int getboxfilter_ (char *authToken,
 }
 
 int getBoxFilter (char *authToken,
-                  char *dataset, char *field, float time, float filterwidth, 
+                  char *dataset, char *field, float time, float filterwidth,
                   int count, float datain[][3], float dataout[][3])
 {
     int rc;
-      
+
     struct _turb1__GetBoxFilter input;
     struct _turb1__GetBoxFilterResponse output;
-    
+
     input.authToken = authToken;
     input.dataset = dataset;
     input.field = field;
     input.time = time;
     input.filterwidth = filterwidth;
-    
+
     struct turb1__ArrayOfPoint3 pointArray;
     pointArray.__sizePoint3 = count;
     pointArray.Point3 = (void *)datain;
     input.points = &pointArray;
-    
+
     rc = soap_call___turb2__GetBoxFilter(&__jhuturbsoap, NULL, NULL, &input, &output);
     if (rc == SOAP_OK) {
         memcpy(dataout, output.GetBoxFilterResult->Vector3,
@@ -348,12 +348,12 @@ int getBoxFilter (char *authToken,
       soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
       turblibHandleError();
     }
-        
+
     soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
     soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
 
     __turblib_errno = rc;
-    
+
     return rc;
 }
 
@@ -368,25 +368,25 @@ int getboxfiltersgs_ (char *authToken,
 }
 
 int getBoxFilterSGS (char *authToken,
-                  char *dataset, char *field, float time, float filterwidth, 
+                  char *dataset, char *field, float time, float filterwidth,
                   int count, float datain[][3], float dataout[][6])
 {
     int rc;
-    
+
     struct _turb1__GetBoxFilterSGS input;
     struct _turb1__GetBoxFilterSGSResponse output;
-    
+
     input.authToken = authToken;
     input.dataset = dataset;
     input.field = field;
     input.time = time;
     input.filterwidth = filterwidth;
-    
+
     struct turb1__ArrayOfPoint3 pointArray;
     pointArray.__sizePoint3 = count;
     pointArray.Point3 = (void *)datain;
     input.points = &pointArray;
-    
+
     rc = soap_call___turb2__GetBoxFilterSGS(&__jhuturbsoap, NULL, NULL, &input, &output);
     if (rc == SOAP_OK) {
         memcpy(dataout, output.GetBoxFilterSGSResult->SGSTensor,
@@ -396,24 +396,24 @@ int getBoxFilterSGS (char *authToken,
       soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
       turblibHandleError();
     }
-    
+
     soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
     soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
-    
+
     __turblib_errno = rc;
-    
+
     return rc;
 }
 
 int getboxfiltergradient_(char *authToken,
 			  char *dataset, char* field, float *time,
-			  float *filterwidth, float *spacing, 
+			  float *filterwidth, float *spacing,
 			  int *count, float datain[][3], float dataout[][9],
 			  int len_a, int len_d)
 {
   return getBoxFilterGradient(authToken,
 			      dataset, field, *time,
-			      *filterwidth, *spacing, 
+			      *filterwidth, *spacing,
 			      *count, datain, dataout);
 }
 
@@ -448,7 +448,7 @@ int getBoxFilterGradient(char *authToken,
     soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
     turblibHandleError();
   }
-  
+
   soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
   soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
 
@@ -498,7 +498,7 @@ int getVelocityAndPressureSoap (char *authToken,
     soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
     turblibHandleError();
   }
-  
+
   soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
   soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
 
@@ -548,7 +548,7 @@ int getPressureHessianSoap(char *authToken,
     soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
     turblibHandleError();
   }
-  
+
   soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
   soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
 
@@ -598,7 +598,7 @@ int getVelocityGradientSoap(char *authToken,
     soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
     turblibHandleError();
   }
-  
+
   soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
   soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
 
@@ -648,7 +648,7 @@ int getMagneticFieldGradientSoap(char *authToken,
     soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
     turblibHandleError();
   }
-  
+
   soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
   soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
 
@@ -698,7 +698,7 @@ int getVectorPotentialGradientSoap(char *authToken,
     soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
     turblibHandleError();
   }
-  
+
   soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
   soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
 
@@ -748,7 +748,7 @@ int getPressureGradientSoap(char *authToken,
     soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
     turblibHandleError();
   }
-  
+
   soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
   soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
 
@@ -798,7 +798,7 @@ int getVelocityHessianSoap(char *authToken,
     soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
     turblibHandleError();
   }
-  
+
   soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
   soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
 
@@ -848,7 +848,7 @@ int getVelocityLaplacianSoap (char *authToken,
     soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
     turblibHandleError();
   }
-  
+
   soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
   soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
 
@@ -898,7 +898,7 @@ int getMagneticFieldHessianSoap(char *authToken,
     soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
     turblibHandleError();
   }
-  
+
   soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
   soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
 
@@ -948,7 +948,7 @@ int getMagneticFieldLaplacianSoap (char *authToken,
     soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
     turblibHandleError();
   }
-  
+
   soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
   soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
 
@@ -998,7 +998,7 @@ int getVectorPotentialHessianSoap(char *authToken,
     soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
     turblibHandleError();
   }
-  
+
   soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
   soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
 
@@ -1048,7 +1048,7 @@ int getVectorPotentialLaplacianSoap (char *authToken,
     soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
     turblibHandleError();
   }
-  
+
   soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
   soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
 
@@ -1056,15 +1056,15 @@ int getVectorPotentialLaplacianSoap (char *authToken,
   return rc;
 }
 
-int nullop_ (char *authToken, int *count, 
+int nullop_ (char *authToken, int *count,
       float datain[][3], float dataout[][3],
       int len_a, int len_d)
 {
-  return nullOp (authToken, *count, 
+  return nullOp (authToken, *count,
     datain, dataout);
 }
 
-int nullOp (char *authToken, int count, 
+int nullOp (char *authToken, int count,
       float datain[][3], float dataout[][3])
 {
   int rc;
@@ -1088,7 +1088,7 @@ int nullOp (char *authToken, int count,
     soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
     turblibHandleError();
   }
-  
+
   soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
   soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
 
@@ -1126,7 +1126,7 @@ int getForce(char *authToken,
     soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
     turblibHandleError();
   }
-  
+
   soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
   soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
 
@@ -1147,7 +1147,7 @@ int getforce_(char *authToken,
 }
 
 int getPosition(char *authToken,
-  char *dataset, float startTime, float endTime, 
+  char *dataset, float startTime, float endTime,
   float dt,
   enum SpatialInterpolation spatial,
   int count, float datain[][3], float dataout[][3])
@@ -1178,7 +1178,7 @@ int getPosition(char *authToken,
     soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
     turblibHandleError();
   }
-  
+
   soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
   soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
 
@@ -1206,7 +1206,7 @@ int getrawvelocity_(char *authToken, char *dataset, float *time,
   int *X, int *Y, int *Z, int *Xwidth, int *Ywidth, int *Zwidth,
   float dataout[])
 {
-    return getRawVelocity(authToken, dataset, *time, *X, *Y, *Z, 
+    return getRawVelocity(authToken, dataset, *time, *X, *Y, *Z,
                           *Xwidth, *Ywidth, *Zwidth, (char*)dataout);
 }
 
@@ -1238,7 +1238,7 @@ int getRawVelocity (char *authToken,
     soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
     turblibHandleError();
   }
-  
+
   soap_end(&__jhuturbsoap);  // remove deserialized data and clean up
   soap_done(&__jhuturbsoap); //  detach the gSOAP environment
 
@@ -1259,8 +1259,8 @@ int getmagneticfield_ (char *authToken,
     *count, datain, dataout);
 }
 
-int getMagneticFieldSoap (char *authToken, 
-      char *dataset, float time, 
+int getMagneticFieldSoap (char *authToken,
+      char *dataset, float time,
       enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
       int count, float datain[][3], float dataout[][3])
 {
@@ -1289,7 +1289,7 @@ int getMagneticFieldSoap (char *authToken,
     soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
     turblibHandleError();
   }
-  
+
   soap_end(&__jhuturbsoap);  //remove deserialized data and clean up
   soap_done(&__jhuturbsoap); //detach the gSOAP environment
 
@@ -1335,7 +1335,7 @@ int getRawMagneticField (char *authToken,
     soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
     turblibHandleError();
   }
-  
+
   soap_end(&__jhuturbsoap);  // remove deserialized data and clean up
   soap_done(&__jhuturbsoap); // detach the gSOAP environment
 
@@ -1386,7 +1386,7 @@ int getVectorPotentialSoap (char *authToken,
     soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
     turblibHandleError();
   }
-  
+
   soap_end(&__jhuturbsoap);  // remove deserialized data and clean up
   soap_done(&__jhuturbsoap); //  detach the gSOAP environment
 
@@ -1432,7 +1432,7 @@ int getRawVectorPotential (char *authToken,
     soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
     turblibHandleError();
   }
-  
+
   soap_end(&__jhuturbsoap);  // remove deserialized data and clean up
   soap_done(&__jhuturbsoap); // detach the gSOAP environment
 
@@ -1484,7 +1484,7 @@ int getPressureSoap (char *authToken,
     soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
     turblibHandleError();
   }
-  
+
   soap_end(&__jhuturbsoap);  // remove deserialized data and clean up
   soap_done(&__jhuturbsoap); // detach the gSOAP environment
 
@@ -1529,7 +1529,7 @@ int getRawPressure (char *authToken,
     soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
     turblibHandleError();
   }
-  
+
   soap_end(&__jhuturbsoap);  // remove deserialized data and clean up
   soap_done(&__jhuturbsoap); // detach the gSOAP environment
 
@@ -1580,7 +1580,7 @@ int getDensitySoap (char *authToken,
     soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
     turblibHandleError();
   }
-  
+
   soap_end(&__jhuturbsoap);  // remove deserialized data and clean up
   soap_done(&__jhuturbsoap); // detach the gSOAP environment
 
@@ -1631,7 +1631,7 @@ int getDensityGradientSoap(char *authToken,
     soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
     turblibHandleError();
   }
-  
+
   soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
   soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
 
@@ -1681,7 +1681,7 @@ int getDensityHessianSoap(char *authToken,
     soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
     turblibHandleError();
   }
-  
+
   soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
   soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
 
@@ -1725,7 +1725,7 @@ int getRawDensity (char *authToken,
     soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
     turblibHandleError();
   }
-  
+
   soap_end(&__jhuturbsoap);  // remove deserialized data and clean up
   soap_done(&__jhuturbsoap); // detach the gSOAP environment
 
@@ -1747,9 +1747,9 @@ int getVelocity (char *authToken,
       int count, float datain[][3], float dataout[][3])
 {
   TurbDataset dataset_ = getDataSet(dataset);
-  
-  if (isDataAvailable(dataset_, turb_velocity, count, datain, time, spatial, temporal)) 
-    return getValueLocal(dataset_, turb_velocity, spatial, temporal, time, count, datain, &dataout[0][0]); 
+
+  if (isDataAvailable(dataset_, turb_velocity, count, datain, time, spatial, temporal))
+    return getValueLocal(dataset_, turb_velocity, spatial, temporal, time, count, datain, &dataout[0][0]);
 
   else
     return getVelocitySoap (authToken, dataset, time, spatial, temporal, count, datain, dataout);
@@ -1758,14 +1758,14 @@ int getVelocity (char *authToken,
 int getValueLocal(TurbDataset dataset, TurbField func, enum SpatialInterpolation spatial, enum TemporalInterpolation temporal, float time, int count, float position[][3], float *result)
 {
   if(!validateParams(spatial, dataset, 0)) return -1;
-  
+
   loadNeededData(dataset, func, count, position, time, spatial, temporal);
-  
+
   int comps = TurbFields[func].comps;
-  
+
   float dt = DataSets[dataset].dt;
   int timestep = (int)ceil(time/DataSets[dataset].dt - .5f);
-  
+
   if(temporal == PCHIPInt)
   {
     float temp[4][3];
@@ -1797,9 +1797,9 @@ int getVelocityAndPressure (char *authToken,
       int count, float datain[][3], float dataout[][4])
 {
   TurbDataset dataset_ = getDataSet(dataset);
-  
+
   if (isDataAvailable(dataset_, turb_vp, count, datain, time, spatial, temporal))
-    return getVelocityAndPressureLocal(dataset_, time, spatial, temporal, count, datain, dataout); 
+    return getVelocityAndPressureLocal(dataset_, time, spatial, temporal, count, datain, dataout);
 
   else
     return getVelocityAndPressureSoap(authToken, dataset, time, spatial, temporal, count, datain, dataout);
@@ -1812,7 +1812,7 @@ int getVelocityAndPressureLocal (TurbDataset dataset, float time,
   if(!validateParams(spatial, dataset, 0)) return -1;
   float dt = DataSets[dataset].dt;
   int timestep = (int)ceil(time/DataSets[dataset].dt - .5f);
-  
+
   if(temporal == PCHIPInt)
   {
     float temp[4][3];
@@ -1850,9 +1850,9 @@ int getPressureHessian(char *authToken,
       int count, float datain[][3], float dataout[][6])
 {
   TurbDataset dataset_ = getDataSet(dataset);
-  
-  if (isDataAvailable(dataset_, turb_pressure, count, datain, time, spatial, temporal)) 
-    return getPressureHessianLocal(dataset_, time, spatial, temporal, count, datain, dataout); 
+
+  if (isDataAvailable(dataset_, turb_pressure, count, datain, time, spatial, temporal))
+    return getPressureHessianLocal(dataset_, time, spatial, temporal, count, datain, dataout);
 
   else
     return getPressureHessianSoap (authToken, dataset, time, spatial, temporal, count, datain, dataout);
@@ -1871,9 +1871,9 @@ int getVelocityGradient(char *authToken,
       int count, float datain[][3], float dataout[][9])
 {
   TurbDataset dataset_ = getDataSet(dataset);
-  
-  if (isDataAvailable(dataset_,  turb_velocity, count, datain, time, spatial, temporal)) 
-    return getVelocityGradientLocal(dataset_, time, spatial, temporal, count, datain, dataout); 
+
+  if (isDataAvailable(dataset_,  turb_velocity, count, datain, time, spatial, temporal))
+    return getVelocityGradientLocal(dataset_, time, spatial, temporal, count, datain, dataout);
 
   else
     return getVelocityGradientSoap (authToken, dataset, time, spatial, temporal, count, datain, dataout);
@@ -1892,9 +1892,9 @@ int getMagneticFieldGradient(char *authToken,
       int count, float datain[][3], float dataout[][9])
 {
   TurbDataset dataset_ = getDataSet(dataset);
-  
-  if (isDataAvailable(dataset_, turb_magnetic, count, datain, time, spatial, temporal)) 
-    return getMagneticFieldGradientLocal(dataset_, time, spatial, temporal, count, datain, dataout); 
+
+  if (isDataAvailable(dataset_, turb_magnetic, count, datain, time, spatial, temporal))
+    return getMagneticFieldGradientLocal(dataset_, time, spatial, temporal, count, datain, dataout);
 
   else
     return getMagneticFieldGradientSoap (authToken, dataset, time, spatial, temporal, count, datain, dataout);
@@ -1913,9 +1913,9 @@ int getVectorPotentialGradient(char *authToken,
       int count, float datain[][3], float dataout[][9])
 {
   TurbDataset dataset_ = getDataSet(dataset);
-  
-  if (isDataAvailable(dataset_, turb_potential, count, datain, time, spatial, temporal)) 
-    return getVectorPotentialGradientLocal(dataset_, time, spatial, temporal, count, datain, dataout); 
+
+  if (isDataAvailable(dataset_, turb_potential, count, datain, time, spatial, temporal))
+    return getVectorPotentialGradientLocal(dataset_, time, spatial, temporal, count, datain, dataout);
 
   else
     return getVectorPotentialGradientSoap (authToken, dataset, time, spatial, temporal, count, datain, dataout);
@@ -1934,9 +1934,9 @@ int getPressureGradient(char *authToken,
       int count, float datain[][3], float dataout[][3])
 {
   TurbDataset dataset_ = getDataSet(dataset);
-  
-  if (isDataAvailable(dataset_, turb_pressure, count, datain, time, spatial, temporal)) 
-    return getPressureGradientLocal(dataset_, time, spatial, temporal, count, datain, dataout); 
+
+  if (isDataAvailable(dataset_, turb_pressure, count, datain, time, spatial, temporal))
+    return getPressureGradientLocal(dataset_, time, spatial, temporal, count, datain, dataout);
 
   else
     return getPressureGradientSoap (authToken, dataset, time, spatial, temporal, count, datain, dataout);
@@ -1955,9 +1955,9 @@ int getVelocityHessian(char *authToken,
       int count, float datain[][3], float dataout[][18])
 {
   TurbDataset dataset_ = getDataSet(dataset);
-  
-  if (isDataAvailable(dataset_, turb_velocity, count, datain, time, spatial, temporal)) 
-    return getVelocityHessianLocal(dataset_, time, spatial, temporal, count, datain, dataout); 
+
+  if (isDataAvailable(dataset_, turb_velocity, count, datain, time, spatial, temporal))
+    return getVelocityHessianLocal(dataset_, time, spatial, temporal, count, datain, dataout);
   else
     return getVelocityHessianSoap (authToken, dataset, time, spatial, temporal, count, datain, dataout);
 }
@@ -1975,9 +1975,9 @@ int getVelocityLaplacian (char *authToken,
       int count, float datain[][3], float dataout[][3])
 {
   TurbDataset dataset_ = getDataSet(dataset);
-  
-  if (isDataAvailable(dataset_, turb_velocity, count, datain, time, spatial, temporal)) 
-    return getVelocityLaplacianLocal (dataset_, time, spatial, temporal, count, datain, dataout); 
+
+  if (isDataAvailable(dataset_, turb_velocity, count, datain, time, spatial, temporal))
+    return getVelocityLaplacianLocal (dataset_, time, spatial, temporal, count, datain, dataout);
 
   else
     return getVelocityLaplacianSoap (authToken, dataset, time, spatial, temporal, count, datain, dataout);
@@ -1996,9 +1996,9 @@ int getMagneticFieldHessian(char *authToken,
       int count, float datain[][3], float dataout[][18])
 {
   TurbDataset dataset_ = getDataSet(dataset);
-  
-  if (isDataAvailable(dataset_, turb_magnetic, count, datain, time, spatial, temporal)) 
-    return getMagneticFieldHessianLocal(dataset_, time, spatial, temporal, count, datain, dataout); 
+
+  if (isDataAvailable(dataset_, turb_magnetic, count, datain, time, spatial, temporal))
+    return getMagneticFieldHessianLocal(dataset_, time, spatial, temporal, count, datain, dataout);
 
   else
     return getMagneticFieldHessianSoap (authToken, dataset, time, spatial, temporal, count, datain, dataout);
@@ -2017,9 +2017,9 @@ int getMagneticFieldLaplacian (char *authToken,
       int count, float datain[][3], float dataout[][3])
 {
   TurbDataset dataset_ = getDataSet(dataset);
-  
-  if (isDataAvailable(dataset_, turb_magnetic, count, datain, time, spatial, temporal)) 
-    return getMagneticFieldLaplacianLocal (dataset_, time, spatial, temporal, count, datain, dataout); 
+
+  if (isDataAvailable(dataset_, turb_magnetic, count, datain, time, spatial, temporal))
+    return getMagneticFieldLaplacianLocal (dataset_, time, spatial, temporal, count, datain, dataout);
 
   else
     return getMagneticFieldLaplacianSoap (authToken, dataset, time, spatial, temporal, count, datain, dataout);
@@ -2038,9 +2038,9 @@ int getVectorPotentialHessian(char *authToken,
       int count, float datain[][3], float dataout[][18])
 {
   TurbDataset dataset_ = getDataSet(dataset);
-  
-  if (isDataAvailable(dataset_, turb_potential, count, datain, time, spatial, temporal)) 
-    return getVectorPotentialHessianLocal(dataset_, time, spatial, temporal, count, datain, dataout); 
+
+  if (isDataAvailable(dataset_, turb_potential, count, datain, time, spatial, temporal))
+    return getVectorPotentialHessianLocal(dataset_, time, spatial, temporal, count, datain, dataout);
 
   else
     return getVectorPotentialHessianSoap (authToken, dataset, time, spatial, temporal, count, datain, dataout);
@@ -2060,9 +2060,9 @@ int getVectorPotentialLaplacian (char *authToken,
       int count, float datain[][3], float dataout[][3])
 {
   TurbDataset dataset_ = getDataSet(dataset);
-  
-  if (isDataAvailable(dataset_, turb_potential, count, datain, time, spatial, temporal)) 
-    return getVectorPotentialLaplacianLocal (dataset_, time, spatial, temporal, count, datain, dataout); 
+
+  if (isDataAvailable(dataset_, turb_potential, count, datain, time, spatial, temporal))
+    return getVectorPotentialLaplacianLocal (dataset_, time, spatial, temporal, count, datain, dataout);
 
   else
     return getVectorPotentialLaplacianSoap (authToken, dataset, time, spatial, temporal, count, datain, dataout);
@@ -2082,9 +2082,9 @@ int getMagneticField (char *authToken,
       int count, float datain[][3], float dataout[][3])
 {
   TurbDataset dataset_ = getDataSet(dataset);
-  
-  if (isDataAvailable(dataset_, turb_magnetic, count, datain, time, spatial, temporal)) 
-    return getValueLocal(dataset_, turb_magnetic, spatial, temporal, time, count, datain, &dataout[0][0]); 
+
+  if (isDataAvailable(dataset_, turb_magnetic, count, datain, time, spatial, temporal))
+    return getValueLocal(dataset_, turb_magnetic, spatial, temporal, time, count, datain, &dataout[0][0]);
 
   else
     return getMagneticFieldSoap (authToken, dataset, time, spatial, temporal, count, datain, dataout);
@@ -2096,9 +2096,9 @@ int getVectorPotential (char *authToken,
       int count, float datain[][3], float dataout[][3])
 {
   TurbDataset dataset_ = getDataSet(dataset);
-  
-  if (isDataAvailable(dataset_, turb_potential, count, datain, time, spatial, temporal)) 
-    return getValueLocal(dataset_, turb_potential, spatial, temporal, time, count, datain, &dataout[0][0]); 
+
+  if (isDataAvailable(dataset_, turb_potential, count, datain, time, spatial, temporal))
+    return getValueLocal(dataset_, turb_potential, spatial, temporal, time, count, datain, &dataout[0][0]);
 
   else
     return getVectorPotentialSoap (authToken, dataset, time, spatial, temporal, count, datain, dataout);
@@ -2110,7 +2110,7 @@ int getPressure (char *authToken,
       int count, float datain[][3], float dataout[])
 {
   TurbDataset dataset_ = getDataSet(dataset);
-  
+
   if (isDataAvailable(dataset_, turb_pressure, count, datain, time, spatial, temporal))
     return getValueLocal(dataset_, turb_pressure, spatial, temporal, time, count, datain, &dataout[0]);
 
@@ -2124,7 +2124,7 @@ int getDensity (char *authToken,
       int count, float datain[][3], float dataout[])
 {
   TurbDataset dataset_ = getDataSet(dataset);
-  
+
   if (isDataAvailable(dataset_, turb_density, count, datain, time, spatial, temporal))
     return getValueLocal(dataset_, turb_density, spatial, temporal, time, count, datain, &dataout[0]);
 
@@ -2138,9 +2138,9 @@ int getDensityGradient(char *authToken,
       int count, float datain[][3], float dataout[][3])
 {
   TurbDataset dataset_ = getDataSet(dataset);
-  
-  if (isDataAvailable(dataset_, turb_density, count, datain, time, spatial, temporal)) 
-    return getDensityGradientLocal(dataset_, time, spatial, temporal, count, datain, dataout); 
+
+  if (isDataAvailable(dataset_, turb_density, count, datain, time, spatial, temporal))
+    return getDensityGradientLocal(dataset_, time, spatial, temporal, count, datain, dataout);
 
   else
     return getDensityGradientSoap (authToken, dataset, time, spatial, temporal, count, datain, dataout);
@@ -2160,9 +2160,9 @@ int getDensityHessian(char *authToken,
       int count, float datain[][3], float dataout[][6])
 {
   TurbDataset dataset_ = getDataSet(dataset);
-  
-  if (isDataAvailable(dataset_, turb_density, count, datain, time, spatial, temporal)) 
-    return getDensityHessianLocal(dataset_, time, spatial, temporal, count, datain, dataout); 
+
+  if (isDataAvailable(dataset_, turb_density, count, datain, time, spatial, temporal))
+    return getDensityHessianLocal(dataset_, time, spatial, temporal, count, datain, dataout);
 
   else
     return getDensityHessianSoap (authToken, dataset, time, spatial, temporal, count, datain, dataout);
@@ -2189,30 +2189,30 @@ int turblibAddLocalSource(char *fname)
   fprintf(stderr, "opening %s\n", fname);
   hid_t file = H5Fopen(fname, H5F_ACC_RDONLY, H5P_DEFAULT);
   if (file < 0) return -1;
-  
+
   cutoutFile *src = malloc(sizeof(cutoutFile));
   src->next = NULL;
   src->file = file;
-  
+
   //Determine which set
   int dataset;
   hid_t set_name = H5Dopen1(file, "_dataset");
   H5Dread(set_name, H5T_NATIVE_INT, H5S_ALL, H5S_ALL, H5P_DEFAULT, &dataset);
-  
+
   src->dataset = dataset;
-  
+
   //Determine bounds
   int start[4];
   hid_t set_start = H5Dopen1(file, "_start");
   H5Dread(set_start, H5T_NATIVE_INT, H5S_ALL, H5S_ALL, H5P_DEFAULT, start);
-  src->start[0] = start[0]; src->start[1] = start[1]; src->start[2] = start[2]; src->start[3] = start[3]; 
-  
+  src->start[0] = start[0]; src->start[1] = start[1]; src->start[2] = start[2]; src->start[3] = start[3];
+
   //Determine size
   int size[4];
   hid_t set_size = H5Dopen1(file, "_size");
   H5Dread(set_size, H5T_NATIVE_INT, H5S_ALL, H5S_ALL, H5P_DEFAULT, size);
   src->size[0] = size[0]; src->size[1] = size[1]; src->size[2] = size[2]; src->size[3] = size[3];
-  
+
   //Determine contents
   int contents;
   hid_t set_contents = H5Dopen1(file, "_contents");
@@ -2223,9 +2223,9 @@ int turblibAddLocalSource(char *fname)
   src->contents[turb_magnetic] = (contents & 0x04 ? 1 : 0);
   src->contents[turb_potential] = (contents & 0x08 ? 1 : 0);
   src->contents[turb_density] = (contents & 0x16 ? 1 : 0);
-  
+
   memset(src->data, 0, sizeof(float *) * 4096);
-  
+
   /*
   int f;
   for (f = 0; f < 4; f++)
@@ -2234,7 +2234,7 @@ int turblibAddLocalSource(char *fname)
     for (t = src->start[0]; t < src->size[0]; t++)
     {
       if(src->contents[f] == 0) continue;
-      src->data[f][t] = malloc(sizeof(float) * TurbFields[f].comps * src->size[1] * src->size[2] * src->size[3]);    
+      src->data[f][t] = malloc(sizeof(float) * TurbFields[f].comps * src->size[1] * src->size[2] * src->size[3]);
       char setname[16];
       sprintf(setname, "%c%.5d", TurbFields[f].prefix, t);
       hid_t datachunk = H5Dopen1(file, setname);
@@ -2247,7 +2247,7 @@ int turblibAddLocalSource(char *fname)
   H5Dclose(set_start);
   H5Dclose(set_size);
   H5Dclose(set_contents);
-  
+
   if (__turblib_cutouts == NULL) {
       __turblib_cutouts = src;
     }
@@ -2268,11 +2268,11 @@ int turblibSetPrefetching(int prefetch)
   return (__turblib_prefetching = prefetch);
 }
 
-//Caches a portion of the specified file in memory              
+//Caches a portion of the specified file in memory
 int loadDataToMemory(cutoutFile *src, TurbField function, int timestep, int xl, int yl, int zl, int xh, int yh, int zh)
 {
   if(src->data[function][timestep] != NULL) return 0;
-  
+
   hsize_t buff_size[] = { zh - zl + 1, yh - yl + 1, xh - xl + 1, TurbFields[function].comps };
   hid_t mspace = H5Screate_simple(4, buff_size, NULL);
 
@@ -2282,21 +2282,21 @@ int loadDataToMemory(cutoutFile *src, TurbField function, int timestep, int xl, 
 
   char setname[16];
   sprintf(setname, "%c%.5d", TurbFields[function].prefix, timestep*10);
-  
+
   hsize_t start[4] = { zl - src->start[3], yl - src->start[2], xl - src->start[1], 0 },
           scount[4] = { zh - zl + 1, yh - yl + 1, xh - xl + 1, TurbFields[function].comps };
-    
+
   hid_t dataset = H5Dopen1(src->file, setname);
   hid_t filespace = H5Dget_space(dataset);
-  
+
   H5Sselect_hyperslab(filespace, H5S_SELECT_SET, start, NULL, scount, NULL);
   H5Dread(dataset, H5T_NATIVE_FLOAT, mspace, filespace, H5P_DEFAULT, buff);
-  
+
   H5Dclose(dataset);
   H5Sclose(filespace);
-  
+
   dataBlock *cache = malloc(sizeof(dataBlock));
-  
+
   cache->data = buff;
   cache->xl = xl;
   cache->yl = yl;
@@ -2306,13 +2306,13 @@ int loadDataToMemory(cutoutFile *src, TurbField function, int timestep, int xl, 
   cache->hz = scount[0];
 
   src->data[function][timestep] = cache;
-  
+
   return 0;
 }
 
 int freeLoadedMemory(void)
 {
-  cutoutFile * file; 
+  cutoutFile * file;
   if(!__turblib_prefetching) return 0;
   int j, k;
   for (file = __turblib_cutouts; file != NULL; file = file->next)
@@ -2321,7 +2321,7 @@ int freeLoadedMemory(void)
     {
       for(k = 0; k < 1024; k++)
       {
-        if(file->data[j][k] != NULL) 
+        if(file->data[j][k] != NULL)
         {
           free(file->data[j][k]->data);
           free(file->data[j][k]);
@@ -2336,48 +2336,48 @@ int freeLoadedMemory(void)
 int loadNeededData(TurbDataset set, TurbField function, int count, float position[][3], float time, enum SpatialInterpolation spatial, enum TemporalInterpolation temporal)
 {
   if(!__turblib_prefetching) return 0;
-  
+
   float dx = DataSets[set].dx, dt = DataSets[set].dt;
   //Determine availability of data locally
   int nOrderLag = spatial % 10;
   int nOrderFD = (int) (spatial / 10);
   int size =  (spatial == NoSInt ? 1 : nOrderLag) + nOrderFD;
   int timestep = (int)ceil(time/dt - .5f);
-     
+
   int timesteps = 1;
   if (temporal == PCHIPInt) { timestep -= 1; timesteps = 4; }
-  
+
   int t;
   for (t = 0; t < timesteps; t++)
   {
-  
+
     cutoutFile *file;
     for (file = __turblib_cutouts; file != NULL; file = file->next)
     {
       int fileUsed = 0;
-      int lowestx = file->start[1] + file->size[1] - 1, lowesty = file->start[2] + file->size[2] - 1, lowestz = file->start[3] + file->size[3] - 1, 
+      int lowestx = file->start[1] + file->size[1] - 1, lowesty = file->start[2] + file->size[2] - 1, lowestz = file->start[3] + file->size[3] - 1,
           highestx = file->start[1], highesty = file->start[2], highestz = file->start[3];
       int i;
       int x, y, z, endx, endy, endz;
       for (i = 0; i < count; i++)
       {
         if (spatial==NoSInt)
-        {   
-	  x = (int) (round(position[i][0]/dx)) - nOrderFD/2; 
-	  y = (int) (round(position[i][1]/dx)) - nOrderFD/2; 
+        {
+	  x = (int) (round(position[i][0]/dx)) - nOrderFD/2;
+	  y = (int) (round(position[i][1]/dx)) - nOrderFD/2;
 	  z = (int) (round(position[i][2]/dx)) - nOrderFD/2;
-        }   
+        }
         else
-        {   
-          x = (int) (floor(position[i][0]/dx)) - (nOrderLag + nOrderFD) / 2 + 1;  
-          y = (int) (floor(position[i][1]/dx)) - (nOrderLag + nOrderFD) / 2 + 1;  
-          z = (int) (floor(position[i][2]/dx)) - (nOrderLag + nOrderFD) / 2 + 1;  
+        {
+          x = (int) (floor(position[i][0]/dx)) - (nOrderLag + nOrderFD) / 2 + 1;
+          y = (int) (floor(position[i][1]/dx)) - (nOrderLag + nOrderFD) / 2 + 1;
+          z = (int) (floor(position[i][2]/dx)) - (nOrderLag + nOrderFD) / 2 + 1;
         }
 
 	endx = x + size - 1;
 	endy = y + size - 1;
 	endz = z + size - 1;
-	
+
 	x = (x % 1024 + 1024) % 1024;
 	y = (y % 1024 + 1024) % 1024;
 	z = (z % 1024 + 1024) % 1024;
@@ -2385,19 +2385,19 @@ int loadNeededData(TurbDataset set, TurbField function, int count, float positio
 	endx = (endx % 1024 + 1024) % 1024;
 	endy = (endy % 1024 + 1024) % 1024;
 	endz = (endz % 1024 + 1024) % 1024;
-    
+
         //if(!isWithinFile(set, function, x, y, z, size, size, size, timestep, file)) continue;
-	//fileUsed = 1;	      
+	//fileUsed = 1;
 	//if(x < lowestx) lowestx = x;
 	//if(y < lowesty) lowesty = y;
 	//if(z < lowestz) lowestz = z;
-	
+
 	//if(x > highestx) highestx = x;
 	//if(y > highesty) highesty = y;
 	//if(z > highestz) highestz = z;
 
-	if (file->dataset == set && 
-	    (function == turb_vp ? file->contents[turb_pressure] && file->contents[turb_velocity] : file->contents[function]) && 
+	if (file->dataset == set &&
+	    (function == turb_vp ? file->contents[turb_pressure] && file->contents[turb_velocity] : file->contents[function]) &&
 	    timestep >= file->start[0] && timestep           <= (file->start[0] + file->size[0]-1))
 	  {
 	    if ((file->start[1] <= x && x < (file->start[1] + file->size[1])) ||
@@ -2467,14 +2467,14 @@ int loadNeededData(TurbDataset set, TurbField function, int count, float positio
 	  }
       }
       if(!fileUsed) continue;
-      
+
       //highestx = highestx + size - 1;
       //highesty = highesty + size - 1;
       //highestz = highestz + size - 1;
 
       loadDataToMemory(file, function, timestep, lowestx, lowesty, lowestz, highestx, highesty, highestz);
     }
-  
+
   }
   return 1;
 }
@@ -2488,7 +2488,7 @@ TurbDataset getDataSet(char *name)
   if (strcmp("channel", name) == 0) return channel;
   if (strcmp("mixing", name) == 0) return mixing;
   if (strcmp("custom", name) == 0) return custom_dataset;
-  
+
   return -1;
 }
 
@@ -2508,41 +2508,41 @@ int isDataAvailable(TurbDataset set, TurbField function, int count, float positi
   int nOrderFD = (int) (spatial / 10);
   int size =  (spatial == NoSInt ? 1 : nOrderLag) + nOrderFD;
   int xc, yc, zc;
-  
+
   int i;
   for (i = 0; i < count; i++)
   {
-    int x = (int) (floor(position[i][0]/dx)), 
-      y = (int) (floor(position[i][1]/dx)), 
+    int x = (int) (floor(position[i][0]/dx)),
+      y = (int) (floor(position[i][1]/dx)),
       z = (int) (floor(position[i][2]/dx));
-  
+
     if (spatial==NoSInt)
-      { 
-        xc = (int) (round(position[i][0]/dx)) - nOrderFD/2; 
-        yc = (int) (round(position[i][1]/dx)) - nOrderFD/2; 
-        zc = (int) (round(position[i][2]/dx)) - nOrderFD/2; 
+      {
+        xc = (int) (round(position[i][0]/dx)) - nOrderFD/2;
+        yc = (int) (round(position[i][1]/dx)) - nOrderFD/2;
+        zc = (int) (round(position[i][2]/dx)) - nOrderFD/2;
       }
     else
-      { 
-        xc = x - (nOrderLag + nOrderFD) / 2 + 1; 
-        yc = y - (nOrderLag + nOrderFD) / 2 + 1; 
-        zc = z - (nOrderLag + nOrderFD) / 2 + 1; 
+      {
+        xc = x - (nOrderLag + nOrderFD) / 2 + 1;
+        yc = y - (nOrderLag + nOrderFD) / 2 + 1;
+        zc = z - (nOrderLag + nOrderFD) / 2 + 1;
       }
 
     int timestep = (int)ceil(time/dt - .5f);
-  
+
     if (temporal == PCHIPInt)
     {
       int t;
       for(t = 0; t < 4; t++)
       {
-        if(!isDataComplete(set, function, xc, yc, zc, size, size, size, timestep-1+t)) {  return 0; 
+        if(!isDataComplete(set, function, xc, yc, zc, size, size, size, timestep-1+t)) {  return 0;
         }
       }
     }
     else
     {
-      if(!isDataComplete(set, function,  xc, yc, zc, size, size, size, timestep)) {  return 0; 
+      if(!isDataComplete(set, function,  xc, yc, zc, size, size, size, timestep)) {  return 0;
       }
     }
   }
@@ -2550,7 +2550,7 @@ int isDataAvailable(TurbDataset set, TurbField function, int count, float positi
 }
 
 //Determines if the given data cube can be completely assembled from all cutout files
-//In the case where data may span more than 2 files we call on the function recursively 
+//In the case where data may span more than 2 files we call on the function recursively
 int isDataComplete(TurbDataset dataset, TurbField function, int x, int y, int z, int xw, int yw, int zw, int timestep)
 {
   // Wrap the coordinates into the grid space
@@ -2560,85 +2560,85 @@ int isDataComplete(TurbDataset dataset, TurbField function, int x, int y, int z,
 
   //Is the data available as a contiguous block?
   if(findDataBlock(dataset, function, x, y, z, xw, yw, zw, timestep) != NULL) return 1;
-  
+
   //Is the data available in pieces across different files? (Individual HDF5 files are restricted to units of 16x16x16)
   cutoutFile* corner = findDataBlock(dataset, function, x, y, z, 1, 1, 1, timestep);
   if (corner == NULL) return 0;
-    
+
   int sx = ((corner->start[1] + corner->size[1]) - x),
       sy = ((corner->start[2] + corner->size[2]) - y),
       sz = ((corner->start[3] + corner->size[3]) - z);
-  
+
   int dx = xw - sx,
       dy = yw - sy,
       dz = zw - sz;
-  
+
   if(findDataBlock(dataset, function, x, y, z, sx, sy, sz, timestep) == NULL) return 0;
 
   //NOTE: In the case of wrap-around corner->start + corner->size will be wrapped to 0 below
   //Ensure presence of other pieces
   if(dz > 0)
   {
-    //    if(findDataBlock(dataset, function, x, y, corner->start[3] + corner->size[3], 
+    //    if(findDataBlock(dataset, function, x, y, corner->start[3] + corner->size[3],
     //      (dx > 0 ? size - dx : size), (dy > 0 ? size - dy : size), dz, timestep) == NULL) return 0;
-    if(!isDataComplete(dataset, function, x, y, corner->start[3] + corner->size[3], 
+    if(!isDataComplete(dataset, function, x, y, corner->start[3] + corner->size[3],
       (dx > 0 ? xw - dx : xw), (dy > 0 ? yw - dy : yw), dz, timestep)) return 0;
-    
+
     if (dy > 0)
     {
       //      if(findDataBlock(dataset, function,
-      //        x, corner->start[2] + corner->size[2], corner->start[3] + corner->size[3], 
+      //        x, corner->start[2] + corner->size[2], corner->start[3] + corner->size[3],
       //        (dx > 0 ? size - dx : size), dy, dz, timestep) == NULL) return 0;
       if(!isDataComplete(dataset, function,
-        x, corner->start[2] + corner->size[2], corner->start[3] + corner->size[3], 
+        x, corner->start[2] + corner->size[2], corner->start[3] + corner->size[3],
         (dx > 0 ? xw - dx : xw), dy, dz, timestep)) return 0;
-      
+
       if (dx > 0)
       {
 	//        if(findDataBlock(dataset, function,
-	//          corner->start[1] + corner->size[1], corner->start[2] + corner->size[2], corner->start[3] + corner->size[3], 
+	//          corner->start[1] + corner->size[1], corner->start[2] + corner->size[2], corner->start[3] + corner->size[3],
 	//          dx, dy, dz, timestep) == NULL) return 0;
         if(!isDataComplete(dataset, function,
-          corner->start[1] + corner->size[1], corner->start[2] + corner->size[2], corner->start[3] + corner->size[3], 
+          corner->start[1] + corner->size[1], corner->start[2] + corner->size[2], corner->start[3] + corner->size[3],
           dx, dy, dz, timestep)) return 0;
       }
     }
     if (dx > 0)
     {
       //      if(findDataBlock(dataset, function,
-      //        corner->start[1] + corner->size[1], y, corner->start[3] + corner->size[3], 
+      //        corner->start[1] + corner->size[1], y, corner->start[3] + corner->size[3],
       //        dx, (dy > 0 ? size - dy : size), dz, timestep) == NULL) return 0;
       if(!isDataComplete(dataset, function,
-        corner->start[1] + corner->size[1], y, corner->start[3] + corner->size[3], 
+        corner->start[1] + corner->size[1], y, corner->start[3] + corner->size[3],
         dx, (dy > 0 ? yw - dy : yw), dz, timestep)) return 0;
     }
   }
   if (dy > 0)
   {
     //    if(findDataBlock(dataset, function,
-    //      x, corner->start[2] + corner->size[2], z, 
+    //      x, corner->start[2] + corner->size[2], z,
     //      (dx > 0 ? size - dx : size), dy, (dz > 0 ? size - dz : size), timestep) == NULL) return 0;
     if(!isDataComplete(dataset, function,
-      x, corner->start[2] + corner->size[2], z, 
+      x, corner->start[2] + corner->size[2], z,
       (dx > 0 ? xw - dx : xw), dy, (dz > 0 ? zw - dz : zw), timestep)) return 0;
-    
+
     if (dx > 0)
     {
       //      if(findDataBlock(dataset, function,
-      //        corner->start[1] + corner->size[1], corner->start[2] + corner->size[2], z, 
+      //        corner->start[1] + corner->size[1], corner->start[2] + corner->size[2], z,
       //        dx, dy, (dz > 0 ? size - dz : size), timestep) == NULL) return 0;
     if(!isDataComplete(dataset, function,
-      x, corner->start[2] + corner->size[2], z, 
+      x, corner->start[2] + corner->size[2], z,
       (dx > 0 ? xw - dx : xw), dy, (dz > 0 ? zw - dz : zw), timestep)) return 0;
     }
   }
   if (dx > 0)
   {
     //    if(findDataBlock(dataset, function,
-    //      corner->start[1] + corner->size[1], y, z, 
+    //      corner->start[1] + corner->size[1], y, z,
     //      dx, (dy > 0 ? size - dy : size), (dz > 0 ? size - dz : size), timestep) == NULL) return 0;
     if(!isDataComplete(dataset, function,
-      corner->start[1] + corner->size[1], y, z, 
+      corner->start[1] + corner->size[1], y, z,
       dx, (dy > 0 ? yw - dy : yw), (dz > 0 ? zw - dz : zw), timestep)) return 0;
   }
   return 1;
@@ -2653,7 +2653,7 @@ cutoutFile* findDataBlock(TurbDataset dataset, TurbField function, int x, int y,
   //xw = (xw % 1024 + 1024) % 1024;
   //yw = (yw % 1024 + 1024) % 1024;
   //zw = (zw % 1024 + 1024) % 1024;
-  
+
   cutoutFile *file;
   for (file = __turblib_cutouts; file != NULL; file = file->next)
   {
@@ -2668,16 +2668,16 @@ int isWithinFile(TurbDataset dataset, TurbField function, int x, int y, int z, i
   //int result;
   //result = (file->dataset == dataset);
   ////fprintf(stderr,   "\nisWithinFile, %s\n", result ? "true" : "false");
-  //result = result && 
+  //result = result &&
   //     (function == turb_vp ? file->contents[turb_pressure] && file->contents[turb_velocity] : file->contents[function]);
   ////fprintf(stderr,   "isWithinFile, %s\n", result ? "true" : "false");
-  //result = result && 
+  //result = result &&
   //     timestep >= file->start[0] && timestep           <= (file->start[0] + file->size[0]-1);
   ////fprintf(stderr,   "isWithinFile, %s\n", result ? "true" : "false");
-  //result = result && 
+  //result = result &&
   //     x        >= file->start[1] && (x + xw) <= (file->start[1] + file->size[1]);
   ////fprintf(stderr,   "isWithinFile, %s\n", result ? "true" : "false");
-  //result = result && 
+  //result = result &&
   //     y        >= file->start[2] && (y + yw) <= (file->start[2] + file->size[2]);
   ////fprintf(stderr,   "isWithinFile, %s\n", result ? "true" : "false");
   //result = result &&
@@ -2685,10 +2685,10 @@ int isWithinFile(TurbDataset dataset, TurbField function, int x, int y, int z, i
   ////fprintf(stderr,   "isWithinFile, %s\n", result ? "true" : "false");
   ////fprintf(stderr,   "isWithinFile, %d %d %d %d\n", z, zw, file->start[3], file->size[3]);
   //if (result)
-  if ((file->dataset == dataset) && 
-      (function == turb_vp ? file->contents[turb_pressure] && file->contents[turb_velocity] : file->contents[function]) && 
-       timestep >= file->start[0] && timestep           <= (file->start[0] + file->size[0]-1) && 
-       x        >= file->start[1] && (x + xw) <= (file->start[1] + file->size[1]) && 
+  if ((file->dataset == dataset) &&
+      (function == turb_vp ? file->contents[turb_pressure] && file->contents[turb_velocity] : file->contents[function]) &&
+       timestep >= file->start[0] && timestep           <= (file->start[0] + file->size[0]-1) &&
+       x        >= file->start[1] && (x + xw) <= (file->start[1] + file->size[1]) &&
        y        >= file->start[2] && (y + yw) <= (file->start[2] + file->size[2]) &&
        z        >= file->start[3] && (z + zw) <= (file->start[3] + file->size[3]))
     return 1;
@@ -2735,7 +2735,7 @@ dataKernel* getDataCube(TurbDataset dataset, TurbField function, int x, int y, i
 int getSinglePoint(TurbDataset dataset, TurbField function, int x, int y, int z, int timestep, float *out)
 {
   int comps = TurbFields[function].comps;
-  
+
   cutoutFile *loc = findDataBlock(dataset, function, x, y, z, 1, 1, 1, timestep);
   if(loc != NULL && loc->data[function][timestep] != NULL)
   {
@@ -2759,7 +2759,7 @@ void freeDataCube(dataKernel* cube)
 
 /* zyx order */
 //Loads a given block of data into memory, assembled possibly from multiple files
-//TODO: The function doesn't handle the situation where the data cube requested 
+//TODO: The function doesn't handle the situation where the data cube requested
 //      spans more than 2 files in each dimension
 int loadDataCube(TurbDataset dataset, TurbField function, int x, int y, int z, int timestep, int size, float *buff)
 {
@@ -2774,100 +2774,100 @@ int loadDataCube(TurbDataset dataset, TurbField function, int x, int y, int z, i
   z = (z % 1024 + 1024) % 1024;
 
   //Is the data available as a contiguous block?
-  cutoutFile* src = findDataBlock(dataset, function, x, y, z, size, size, size, timestep);  
+  cutoutFile* src = findDataBlock(dataset, function, x, y, z, size, size, size, timestep);
   if(src != NULL)
   {
     char setname[16];
     sprintf(setname, "%c%.5d", TurbFields[function].prefix, timestep*10);
     hid_t dataset = H5Dopen1(src->file, setname);
     hid_t filespace = H5Dget_space(dataset);
-    
+
     //Data selection of the file
     hsize_t start[4]  = { z - src->start[3], y - src->start[2], x - src->start[1], 0 },
             scount[4] = { size, size, size, comps };
-    
+
     H5Sselect_hyperslab(filespace, H5S_SELECT_SET, start, NULL, scount, NULL);
     H5Dread(dataset, H5T_NATIVE_FLOAT, mspace, filespace, H5P_DEFAULT, (float*)buff);
-    
+
     H5Dclose(dataset);
     H5Sclose(mspace);
     H5Sclose(filespace);
-    
+
     return 0;
   }
 
-  //Load the data piece by piece:  
+  //Load the data piece by piece:
   cutoutFile *corner = findDataBlock(dataset, function, x, y, z, 1, 1, 1, timestep);
-  
+
   int sx = ((corner->start[1] + corner->size[1]) - x),
       sy = ((corner->start[2] + corner->size[2]) - y),
       sz = ((corner->start[3] + corner->size[3]) - z);
-  
+
   int dx = size - sx,
       dy = size - sy,
       dz = size - sz;
 
   sx = sx > size ? size : sx;
-  sy = sy > size ? size : sy; 
+  sy = sy > size ? size : sy;
   sz = sz > size ? size : sz;
-  
+
   //First load corner
   loadSubBlock(dataset, function, timestep, mspace, buff, x, y, z, sx, sy, sz, 0, 0, 0);
 
   //Then load other pieces
   if(dz > 0)
   {
-    loadSubBlock(dataset, function, timestep, mspace, buff, 
-      x, y, corner->start[3] + corner->size[3], 
-      (dx > 0 ? size - dx : size), (dy > 0 ? size - dy : size), dz, 
+    loadSubBlock(dataset, function, timestep, mspace, buff,
+      x, y, corner->start[3] + corner->size[3],
+      (dx > 0 ? size - dx : size), (dy > 0 ? size - dy : size), dz,
       0, 0, sz);
-    
+
     if (dy > 0)
     {
-      loadSubBlock(dataset, function, timestep, mspace, buff, 
-        x, corner->start[2] + corner->size[2], corner->start[3] + corner->size[3], 
-        (dx > 0 ? size - dx : size), dy, dz, 
+      loadSubBlock(dataset, function, timestep, mspace, buff,
+        x, corner->start[2] + corner->size[2], corner->start[3] + corner->size[3],
+        (dx > 0 ? size - dx : size), dy, dz,
         0, sy, sz);
-      
+
       if (dx > 0)
       {
-        loadSubBlock(dataset, function, timestep, mspace, buff, 
-          corner->start[1] + corner->size[1], corner->start[2] + corner->size[2], corner->start[3] + corner->size[3], 
-          dx, dy, dz, 
+        loadSubBlock(dataset, function, timestep, mspace, buff,
+          corner->start[1] + corner->size[1], corner->start[2] + corner->size[2], corner->start[3] + corner->size[3],
+          dx, dy, dz,
           sx, sy, sz);
       }
     }
     if (dx > 0)
     {
-      loadSubBlock(dataset, function, timestep, mspace, buff, 
-        corner->start[1] + corner->size[1], y, corner->start[3] + corner->size[3], 
-        dx, (dy > 0 ? size - dy : size), dz, 
+      loadSubBlock(dataset, function, timestep, mspace, buff,
+        corner->start[1] + corner->size[1], y, corner->start[3] + corner->size[3],
+        dx, (dy > 0 ? size - dy : size), dz,
         sx, 0, sz);
     }
   }
   if (dy > 0)
   {
-    loadSubBlock(dataset, function, timestep, mspace, buff, 
-      x, corner->start[2] + corner->size[2], z, 
-      (dx > 0 ? size - dx : size), dy, (dz > 0 ? size - dz : size), 
+    loadSubBlock(dataset, function, timestep, mspace, buff,
+      x, corner->start[2] + corner->size[2], z,
+      (dx > 0 ? size - dx : size), dy, (dz > 0 ? size - dz : size),
       0, sy, 0);
-    
+
     if (dx > 0)
     {
-      loadSubBlock(dataset, function, timestep, mspace, buff, 
-        corner->start[1] + corner->size[1], corner->start[2] + corner->size[2], z, 
-        dx, dy, (dz > 0 ? size - dz : size), 
+      loadSubBlock(dataset, function, timestep, mspace, buff,
+        corner->start[1] + corner->size[1], corner->start[2] + corner->size[2], z,
+        dx, dy, (dz > 0 ? size - dz : size),
         sx, sy, 0);
     }
   }
   if (dx > 0)
   {
-    loadSubBlock(dataset, function, timestep, mspace, buff, 
-    corner->start[1] + corner->size[1], y, z, 
-    dx, (dy > 0 ? size - dy : size), (dz > 0 ? size - dz : size), 
+    loadSubBlock(dataset, function, timestep, mspace, buff,
+    corner->start[1] + corner->size[1], y, z,
+    dx, (dy > 0 ? size - dy : size), (dz > 0 ? size - dz : size),
     sx, 0, 0);
   }
-  
+
   H5Sclose(mspace);
   return 1;
 }
@@ -2879,26 +2879,26 @@ int loadSubBlock(TurbDataset dataset, TurbField function, int timestep, hid_t ms
   x = (x % 1024 + 1024) % 1024;
   y = (y % 1024 + 1024) % 1024;
   z = (z % 1024 + 1024) % 1024;
-  
+
   char setname[16];
   int comps = TurbFields[function].comps;
   sprintf(setname, "%c%.5d", TurbFields[function].prefix, timestep*10);
   cutoutFile *src = findDataBlock(dataset, function, x, y, z, wx, wy, wz, timestep);
   hid_t dataset_ = H5Dopen1(src->file, setname);
-  
+
   hid_t filespace = H5Dget_space(dataset_);
   //Data selection of the file
   hsize_t start[4]  = { z - src->start[3], y - src->start[2], x - src->start[1], 0 },
           scount[4] = { wz, wy, wx, comps };
-  
+
   //Data selection of memory
   hsize_t mstart[4] = { dest_z, dest_y, dest_x, 0 };
-  
+
   H5Sselect_hyperslab(mspace, H5S_SELECT_SET, mstart, NULL, scount, NULL);
   H5Sselect_hyperslab(filespace, H5S_SELECT_SET, start, NULL, scount, NULL);
-  
+
   H5Dread(dataset_, H5T_NATIVE_FLOAT, mspace, filespace, H5P_DEFAULT, buff);
-  
+
   H5Sclose(filespace);
   H5Dclose(dataset_);
   return 0;
@@ -2915,24 +2915,24 @@ int validateParams(enum SpatialInterpolation spatial, TurbDataset set, int useFD
       (nOrderLag != 0 && nOrderLag != 4 && nOrderLag != 6 && nOrderLag != 8) ||
       (set < 0)
     )  { fprintf(stderr, "Error: Invaled interpolation parameter specified\n"); return 0; }
-    
+
   return 1;
 }
 
 //Gets the value of a function at the point, with or without interpolation
 int getSingleValue(TurbDataset dataset, TurbField func, float position[3], int timestep, enum SpatialInterpolation spatial, float *output)
 {
-  if (func == turb_vp) 
+  if (func == turb_vp)
   {
     getSingleValue(dataset, turb_velocity, position, timestep, spatial, output);
     getSingleValue(dataset, turb_pressure, position, timestep, spatial, &output[3]);
     return 0;
   }
-  
+
   float dx = DataSets[dataset].dx;
   int nOrder = (int) spatial;
   int comps = TurbFields[func].comps;
-  
+
   //If no spatial int, just return the closest points and finish
   if (nOrder == 0)
   {
@@ -2944,7 +2944,7 @@ int getSingleValue(TurbDataset dataset, TurbField func, float position[3], int t
     int x = (int) (floor(position[0]/dx)) - (nOrder/2) + 1,
       y = (int) (floor(position[1]/dx)) - (nOrder/2) + 1,
       z = (int) (floor(position[2]/dx)) - (nOrder/2) + 1;
-      
+
     dataKernel* cube = getDataCube(dataset, func, x, y, z, timestep, nOrder);
     lagrangianInterp2(comps, cube, position, nOrder, dx, output);
     freeDataCube(cube);
@@ -2972,19 +2972,19 @@ int getGradient (TurbDataset dataset, TurbField function, float time, enum Spati
   {
     float temp[4][comps*3];
     int i, j;
-    
-    
+
+
     if (nOrderLag > 0)
     {
       float *lagkernel;
       lagkernel = malloc(sizeof(float) * comps * 3 * gradientSize * gradientSize * gradientSize);
-      
+
       for (i = 0; i < count; i++)
       {
         x = (int) (input[i][0]/dx) - (kernelsize/2) + 1;
         y = (int) (input[i][1]/dx) - (kernelsize/2) + 1;
         z = (int) (input[i][2]/dx) - (kernelsize/2) + 1;
-      
+
         for (j = 0; j < 4; j++)
         {
           fdkernel = getDataCube(dataset, function, x, y, z, timestep+j-1, kernelsize);
@@ -3004,7 +3004,7 @@ int getGradient (TurbDataset dataset, TurbField function, float time, enum Spati
         x = (int) (input[i][0]/dx + 0.5f) - nOrderFD/2;
         y = (int) (input[i][1]/dx + 0.5f) - nOrderFD/2;
         z = (int) (input[i][2]/dx + 0.5f) - nOrderFD/2;
-        
+
         for (j = 0; j < 4; j++)
         {
           fdkernel = getDataCube(dataset, function, x, y, z, timestep+j-1, kernelsize);
@@ -3023,13 +3023,13 @@ int getGradient (TurbDataset dataset, TurbField function, float time, enum Spati
     {
       float *lagkernel;
       lagkernel = malloc(sizeof(float) * comps * 3 * gradientSize * gradientSize * gradientSize);
-      
+
       for (i = 0; i < count; i++)
       {
         x = (int) (input[i][0]/dx) - (kernelsize/2) + 1;
         y = (int) (input[i][1]/dx) - (kernelsize/2) + 1;
         z = (int) (input[i][2]/dx) - (kernelsize/2) + 1;
-      
+
         fdkernel = getDataCube(dataset, function, x, y, z, timestep, kernelsize);
         computeGradient(fdkernel, comps, dx, gradientSize, nOrderFD, lagkernel);
         lagrangianInterp(comps * 3, lagkernel, input[i], nOrderLag, dx, output+i*comps*3);
@@ -3074,18 +3074,18 @@ int getLaplacian (TurbDataset dataset, TurbField function, float time, enum Spat
   {
     float temp[4][3];
     int i, j;
-    
+
     if (nOrderLag > 0)
     {
       float *lagkernel;
       lagkernel = malloc(sizeof(float) * comps * gradientSize * gradientSize * gradientSize);
-      
+
       for (i = 0; i < count; i++)
       {
         x = (int) (input[i][0]/dx) - (kernelsize/2) + 1;
         y = (int) (input[i][1]/dx) - (kernelsize/2) + 1;
         z = (int) (input[i][2]/dx) - (kernelsize/2) + 1;
-      
+
         for (j = 0; j < 4; j++)
         {
           fdkernel = getDataCube(dataset, function, x, y, z, timestep+j-1, kernelsize);
@@ -3103,7 +3103,7 @@ int getLaplacian (TurbDataset dataset, TurbField function, float time, enum Spat
         x = (int) (input[i][0]/dx + 0.5f) - nOrderFD/2;
         y = (int) (input[i][1]/dx + 0.5f) - nOrderFD/2;
         z = (int) (input[i][2]/dx + 0.5f) - nOrderFD/2;
-        
+
         for (j = 0; j < 4; j++)
         {
           fdkernel = getDataCube(dataset, function, x, y, z, timestep+j-1, kernelsize);
@@ -3119,7 +3119,7 @@ int getLaplacian (TurbDataset dataset, TurbField function, float time, enum Spat
   {
     int i;
     if (nOrderLag > 0)
-    {      
+    {
       float *lagkernel;
       lagkernel = malloc(sizeof(float) * comps * gradientSize * gradientSize * gradientSize);
       for (i = 0; i < count; i++)
@@ -3127,7 +3127,7 @@ int getLaplacian (TurbDataset dataset, TurbField function, float time, enum Spat
         x = (int) (input[i][0]/dx) - (kernelsize / 2) + 1;
         y = (int) (input[i][1]/dx) - (kernelsize / 2) + 1;
         z = (int) (input[i][2]/dx) - (kernelsize / 2) + 1;
-      
+
         fdkernel = getDataCube(dataset, function, x, y, z, timestep, kernelsize);
         computeLaplacian(fdkernel, comps, dx, gradientSize, nOrderFD, lagkernel);
         lagrangianInterp(comps, lagkernel, input[i], nOrderLag, dx, output[i]);
@@ -3165,24 +3165,24 @@ int getHessian (TurbDataset dataset, TurbField function, float time, enum Spatia
   float dx = DataSets[dataset].dx;
 
   dataKernel* fdkernel;
-  
+
   //Diff, Lagint, pchipInt
   if(temporal == PCHIPInt)
   {
     float temp[4][18];
     int i, j;
-    
+
     if (nOrderLag > 0)
     {
       float *lagkernel;
       lagkernel = malloc(sizeof(float) * comps * 6 * gradientSize * gradientSize * gradientSize);
-      
+
       for (i = 0; i < count; i++)
       {
         x = (int) (input[i][0]/dx) - (kernelsize/2) + 1;
         y = (int) (input[i][1]/dx) - (kernelsize/2) + 1;
         z = (int) (input[i][2]/dx) - (kernelsize/2) + 1;
-      
+
         for (j = 0; j < 4; j++)
 
         {
@@ -3201,7 +3201,7 @@ int getHessian (TurbDataset dataset, TurbField function, float time, enum Spatia
         x = (int) (input[i][0]/dx + 0.5f) - nOrderFD/2;
         y = (int) (input[i][1]/dx + 0.5f) - nOrderFD/2;
         z = (int) (input[i][2]/dx + 0.5f) - nOrderFD/2;
-        
+
         for (j = 0; j < 4; j++)
         {
           fdkernel = getDataCube(dataset, function, x, y, z, timestep+j-1, kernelsize);
@@ -3216,18 +3216,18 @@ int getHessian (TurbDataset dataset, TurbField function, float time, enum Spatia
   else
   {
     int i;
-    
+
     if (nOrderLag > 0)
     {
       float *lagkernel;
       lagkernel = malloc(sizeof(float) * comps * 6 * gradientSize * gradientSize * gradientSize);
-      
+
       for (i = 0; i < count; i++)
       {
         x = (int) (input[i][0]/dx) - (kernelsize / 2) + 1;
         y = (int) (input[i][1]/dx) - (kernelsize / 2) + 1;
         z = (int) (input[i][2]/dx) - (kernelsize / 2) + 1;
-      
+
         fdkernel = getDataCube(dataset, function, x, y, z, timestep, kernelsize);
         computeHessian(fdkernel, comps, dx, gradientSize, nOrderFD, lagkernel);
         lagrangianInterp(comps * 6, lagkernel, input[i], nOrderLag, dx, output+i*6*comps);
@@ -3259,22 +3259,22 @@ int lagrangianInterp(int comps, float *kernel, float position[3], int nOrder, fl
     node[0] = (int) (floor(position[0]/dx));
     node[1] = (int) (floor(position[1]/dx));
     node[2] = (int) (floor(position[2]/dx));
-    
+
       int x, y, z;
       float lagInt[3][8];
-      
+
       for (x = 0; x < 3; x++)
       {
         float z1 = position[x] / dx - (float) node[x] ;
         float z2 = z1 * z1;
         float z3 = z2 * z1;
         switch(nOrder) {
-          case 4: 
+          case 4:
           {
             lagInt[x][0] = (-2 * z1 + 3 * z2 - z3) / 6;
             lagInt[x][1] = (2 - z1 - 2 * z2 + z3) / 2;
             lagInt[x][2] = (2 * z1 + z2 - z3) / 2;
-            lagInt[x][3] = (-z1 + z3) / 6;        
+            lagInt[x][3] = (-z1 + z3) / 6;
             break;
           }
           case 6:
@@ -3286,8 +3286,8 @@ int lagrangianInterp(int comps, float *kernel, float position[3], int nOrder, fl
             lagInt[x][2] = (12 - 4 * z1 - 15 * z2 + 5 * z3 + 3 * z4 - z5) / 12;
             lagInt[x][3] = (12 * z1 + 8 * z2 - 7 * z3 - 2 * z4 + z5) / 12;
             lagInt[x][4] = (-6 * z1 - z2 + 7 * z3 + z4 - z5) / 24;
-            lagInt[x][5] = (4 * z1 - 5 * z3 + z5) / 120;      
-            break;    
+            lagInt[x][5] = (4 * z1 - 5 * z3 + z5) / 120;
+            break;
           }
           case 8:
           {
@@ -3302,12 +3302,12 @@ int lagrangianInterp(int comps, float *kernel, float position[3], int nOrder, fl
             lagInt[x][4] = -z1 * (z6 - 3 * z5 - 17 * z4 + 39 * z3 + 88 * z2 - 108 * z1 - 144) / 144;
             lagInt[x][5] = z1 * (z6 - 2 * z5 - 18 * z4 + 20 * z3 + 89 * z2 - 18 * z1 - 72) / 240;
             lagInt[x][6] = -z1 * (z6 - z5 - 17 * z4 + 5 * z3 + 64 * z2 - 4 * z1 - 48) / 720;
-            lagInt[x][7] = z1 * (z6 - 14 * z4 + 49 * z2 - 36) / 5040; 
+            lagInt[x][7] = z1 * (z6 - 14 * z4 + 49 * z2 - 36) / 5040;
             break;
           }
         }
       }
-      
+
       int comp;
       for (comp = 0; comp < comps; comp++)
         result[comp] = 0;
@@ -3343,12 +3343,12 @@ int lagrangianInterp2(int comps, dataKernel* kernel, float position[3], int nOrd
         float z2 = z1 * z1;
         float z3 = z2 * z1;
         switch(nOrder) {
-          case 4: 
+          case 4:
           {
             lagInt[x][0] = (-2 * z1 + 3 * z2 - z3) / 6;
             lagInt[x][1] = (2 - z1 - 2 * z2 + z3) / 2;
             lagInt[x][2] = (2 * z1 + z2 - z3) / 2;
-            lagInt[x][3] = (-z1 + z3) / 6;        
+            lagInt[x][3] = (-z1 + z3) / 6;
             break;
           }
           case 6:
@@ -3360,8 +3360,8 @@ int lagrangianInterp2(int comps, dataKernel* kernel, float position[3], int nOrd
             lagInt[x][2] = (12 - 4 * z1 - 15 * z2 + 5 * z3 + 3 * z4 - z5) / 12;
             lagInt[x][3] = (12 * z1 + 8 * z2 - 7 * z3 - 2 * z4 + z5) / 12;
             lagInt[x][4] = (-6 * z1 - z2 + 7 * z3 + z4 - z5) / 24;
-            lagInt[x][5] = (4 * z1 - 5 * z3 + z5) / 120;      
-            break;    
+            lagInt[x][5] = (4 * z1 - 5 * z3 + z5) / 120;
+            break;
           }
           case 8:
           {
@@ -3376,12 +3376,12 @@ int lagrangianInterp2(int comps, dataKernel* kernel, float position[3], int nOrd
             lagInt[x][4] = -z1 * (z6 - 3 * z5 - 17 * z4 + 39 * z3 + 88 * z2 - 108 * z1 - 144) / 144;
             lagInt[x][5] = z1 * (z6 - 2 * z5 - 18 * z4 + 20 * z3 + 89 * z2 - 18 * z1 - 72) / 240;
             lagInt[x][6] = -z1 * (z6 - z5 - 17 * z4 + 5 * z3 + 64 * z2 - 4 * z1 - 48) / 720;
-            lagInt[x][7] = z1 * (z6 - 14 * z4 + 49 * z2 - 36) / 5040; 
+            lagInt[x][7] = z1 * (z6 - 14 * z4 + 49 * z2 - 36) / 5040;
             break;
           }
         }
       }
-      
+
       int comp;
       for (comp = 0; comp < comps; comp++)
         result[comp] = 0;
@@ -3390,7 +3390,7 @@ int lagrangianInterp2(int comps, dataKernel* kernel, float position[3], int nOrd
       {
         for (y = 0; y < nOrder; y++)
         {
-	  index = (kernel->x)*comps + (y+kernel->y)*kernel->hx*comps + 
+	  index = (kernel->x)*comps + (y+kernel->y)*kernel->hx*comps +
           (z+kernel->z)*kernel->hx*kernel->hy*comps;
           for (x = 0; x < nOrder; x++)
           {
@@ -3406,8 +3406,8 @@ int lagrangianInterp2(int comps, dataKernel* kernel, float position[3], int nOrd
 
 int pchipInterp(int comps, float data[4][comps], float time, int timestep, float dt, float result[comps])
 {
-      float times[4] = { (timestep - 1) * dt, (timestep) * dt, (timestep + 1) * dt, (timestep + 2) * dt }; 
-      int j;     
+      float times[4] = { (timestep - 1) * dt, (timestep) * dt, (timestep + 1) * dt, (timestep + 2) * dt };
+      int j;
       for(j = 0; j < comps; j++)
       {
             float a, b, c, d;
@@ -3430,12 +3430,12 @@ int pchipInterp(int comps, float data[4][comps], float time, int timestep, float
 /* Differentiation Functions */
 
 int computeGradient(dataKernel* kernel, int comps, float dx, int size, int nOrder, float *output)
-{  
+{
       int x, y, z, w;
       //Differentiate each point
       int   hx = comps,   hy = comps*kernel->hx,   hz=comps*kernel->hx*kernel->hy;
       float* data = kernel->data;
-      
+
       for (z = 0; z < size; z++)
       {
         for (y = 0; y < size; y++)
@@ -3444,7 +3444,7 @@ int computeGradient(dataKernel* kernel, int comps, float dx, int size, int nOrde
           {
             //Each component
             for (w = 0; w < comps; w++)
-            { 
+            {
             	int x_ = nOrder/2+x+kernel->x, y_ = nOrder/2+y+kernel->y, z_ = nOrder/2+z+kernel->z;
             	int index = z*size*size*comps*3 + y*size*comps*3 + x*comps*3 + w*3;
             	int center = z_*hz+ y_*hy + x_*hx + w;
@@ -3453,60 +3453,60 @@ int computeGradient(dataKernel* kernel, int comps, float dx, int size, int nOrde
             	case 4: {
                   // dfw/dx
                   output[index] =
-                    2.0f / 3.0f / dx *  (data[center +   hx] - data[center -   hx]) - 
+                    2.0f / 3.0f / dx *  (data[center +   hx] - data[center -   hx]) -
                     1.0f / 12.0f / dx * (data[center + 2*hx] - data[center - 2*hx]);
-                    
+
                   // dfw/dy
                   output[index+1] =
-                    2.0f / 3.0f / dx *  (data[center +   hy] - data[center -   hy]) - 
+                    2.0f / 3.0f / dx *  (data[center +   hy] - data[center -   hy]) -
                     1.0f / 12.0f / dx * (data[center + 2*hy] - data[center - 2*hy]);
-                  
+
                   // dfw/dz
                   output[index+2] =
-                    2.0f / 3.0f / dx *  (data[center +   hz] - data[center -   hz]) - 
+                    2.0f / 3.0f / dx *  (data[center +   hz] - data[center -   hz]) -
                     1.0f / 12.0f / dx * (data[center + 2*hz] - data[center - 2*hz]);
                   break;
                 }
                 case 6: {
                   // dfw/dx
                   output[index] =
-                    3.0f / 4.0f / dx *  (data[center +   hx] - data[center -   hx]) - 
-                    3.0f / 20.0f / dx * (data[center + 2*hx] - data[center - 2*hx]) + 
+                    3.0f / 4.0f / dx *  (data[center +   hx] - data[center -   hx]) -
+                    3.0f / 20.0f / dx * (data[center + 2*hx] - data[center - 2*hx]) +
                     1.0f / 60.0f / dx * (data[center + 3*hx] - data[center - 3*hx]);
-                    
+
                   // dfw/dy
                   output[index+1] =
-                    3.0f / 4.0f / dx *  (data[center +   hy] - data[center -   hy]) - 
-                    3.0f / 20.0f / dx * (data[center + 2*hy] - data[center - 2*hy]) + 
+                    3.0f / 4.0f / dx *  (data[center +   hy] - data[center -   hy]) -
+                    3.0f / 20.0f / dx * (data[center + 2*hy] - data[center - 2*hy]) +
                     1.0f / 60.0f / dx * (data[center + 3*hy] - data[center - 3*hy]);
-                  
+
                   // dfw/dz
                   output[index+2] =
-                    3.0f / 4.0f / dx *  (data[center +   hz] - data[center -   hz]) - 
-                    3.0f / 20.0f / dx * (data[center + 2*hz] - data[center - 2*hz]) + 
+                    3.0f / 4.0f / dx *  (data[center +   hz] - data[center -   hz]) -
+                    3.0f / 20.0f / dx * (data[center + 2*hz] - data[center - 2*hz]) +
                     1.0f / 60.0f / dx * (data[center + 3*hz] - data[center - 3*hz]);
                   break;
                 }
                 case 8: {
                   // dfw/dx
                   output[index] =
-                    4.0f / 5.0f / dx *  (data[center +   hx] - data[center -   hx]) - 
-                    1.0f / 5.0f / dx *  (data[center + 2*hx] - data[center - 2*hx]) + 
-                    4.0f / 105.0f/ dx * (data[center + 3*hx] - data[center - 3*hx]) - 
+                    4.0f / 5.0f / dx *  (data[center +   hx] - data[center -   hx]) -
+                    1.0f / 5.0f / dx *  (data[center + 2*hx] - data[center - 2*hx]) +
+                    4.0f / 105.0f/ dx * (data[center + 3*hx] - data[center - 3*hx]) -
                     1.0f / 280.0f/ dx * (data[center + 4*hx] - data[center - 4*hx]);
-                    
+
                   // dfw/dy
                   output[index+1] =
-                    4.0f / 5.0f / dx *  (data[center +   hy] - data[center -   hy]) - 
-                    1.0f / 5.0f / dx *  (data[center + 2*hy] - data[center - 2*hy]) + 
-                    4.0f / 105.0f/ dx * (data[center + 3*hy] - data[center - 3*hy]) - 
+                    4.0f / 5.0f / dx *  (data[center +   hy] - data[center -   hy]) -
+                    1.0f / 5.0f / dx *  (data[center + 2*hy] - data[center - 2*hy]) +
+                    4.0f / 105.0f/ dx * (data[center + 3*hy] - data[center - 3*hy]) -
                     1.0f / 280.0f/ dx * (data[center + 4*hy] - data[center - 4*hy]);
-                  
+
                   // dfw/dz
                   output[index+2] =
-                    4.0f / 5.0f / dx *  (data[center +   hz] - data[center -   hz]) - 
-                    1.0f / 5.0f / dx *  (data[center + 2*hz] - data[center - 2*hz]) + 
-                    4.0f / 105.0f/ dx * (data[center + 3*hz] - data[center - 3*hz]) - 
+                    4.0f / 5.0f / dx *  (data[center +   hz] - data[center -   hz]) -
+                    1.0f / 5.0f / dx *  (data[center + 2*hz] - data[center - 2*hz]) +
+                    4.0f / 105.0f/ dx * (data[center + 3*hz] - data[center - 3*hz]) -
                     1.0f / 280.0f/ dx * (data[center + 4*hz] - data[center - 4*hz]);
                   break;
                 }
@@ -3514,7 +3514,7 @@ int computeGradient(dataKernel* kernel, int comps, float dx, int size, int nOrde
 
             }
           }
-        } 
+        }
       }
   return 0;
 }
@@ -3542,74 +3542,74 @@ int computeLaplacian(dataKernel* kernel, int comps, float dx, int size, int nOrd
                 {
                 case 4: {
                 // du2w/dxdx
-                output[index] = 
+                output[index] =
                   SecFiniteDiff4(dx,
                     data[center - 2*hx],
                     data[center -   hx],
                     data[center],
-                    data[center +   hx], 
+                    data[center +   hx],
                     data[center + 2*hx]) +
-                    
+
                   SecFiniteDiff4(dx,
                     data[center - 2*hy],
                     data[center -   hy],
                     data[center],
-                    data[center +   hy], 
+                    data[center +   hy],
                     data[center + 2*hy]) +
-                    
+
                   SecFiniteDiff4(dx,
                     data[center - 2*hz],
                     data[center -   hz],
                     data[center],
-                    data[center +   hz], 
+                    data[center +   hz],
                     data[center + 2*hz]);
 
-                
-                break;   
+
+                break;
                 } case 6: {
-                
+
                 // du2w/dxdx
-                output[index + 0] = 
+                output[index + 0] =
                   SecFiniteDiff6(dx,
                     data[center - 3*hx],
                     data[center - 2*hx],
                     data[center -   hx],
                     data[center],
-                    data[center +   hx], 
-                    data[center + 2*hx], 
+                    data[center +   hx],
+                    data[center + 2*hx],
                     data[center + 3*hx])+
-                    
+
                   SecFiniteDiff6(dx,
                     data[center - 3*hy],
                     data[center - 2*hy],
                     data[center -   hy],
                     data[center],
-                    data[center +   hy], 
-                    data[center + 2*hy], 
+                    data[center +   hy],
+                    data[center + 2*hy],
                     data[center + 3*hy])+
-                
+
                   SecFiniteDiff6(dx,
                     data[center - 3*hz],
                     data[center - 2*hz],
                     data[center -   hz],
                     data[center],
-                    data[center +   hz], 
-                    data[center + 2*hz], 
+                    data[center +   hz],
+                    data[center + 2*hz],
                     data[center + 3*hz]);
-                break;    
+                break;
                 } case 8: {
-                
+
                 // du2w/dxdx
-                output[index + 0] = 
+                output[index + 0] =
                   SecFiniteDiff8(dx,
                     data[center - 4*hx],
                     data[center - 3*hx],
                     data[center - 2*hx],
                     data[center -   hx],
                     data[center],
-                    data[center +   hx], 
-                    data[center + 2*hx], 
-                    data[center + 3*hx], 
+                    data[center +   hx],
+                    data[center + 2*hx],
+                    data[center + 3*hx],
                     data[center + 4*hx]) +
 
                   SecFiniteDiff8(dx,
@@ -3618,9 +3618,9 @@ int computeLaplacian(dataKernel* kernel, int comps, float dx, int size, int nOrd
                     data[center - 2*hy],
                     data[center -   hy],
                     data[center],
-                    data[center +   hy], 
-                    data[center + 2*hy], 
-                    data[center + 3*hy], 
+                    data[center +   hy],
+                    data[center + 2*hy],
+                    data[center + 3*hy],
                     data[center + 4*hy]) +
 
                   SecFiniteDiff8(dx,
@@ -3629,15 +3629,15 @@ int computeLaplacian(dataKernel* kernel, int comps, float dx, int size, int nOrd
                     data[center - 2*hz],
                     data[center -   hz],
                     data[center],
-                    data[center +   hz], 
-                    data[center + 2*hz], 
-                    data[center + 3*hz], 
+                    data[center +   hz],
+                    data[center + 2*hz],
+                    data[center + 3*hz],
                     data[center + 4*hz]);
-                break;     
+                break;
                 }
               }
             }
-            
+
           }
         }
       }
@@ -3645,7 +3645,7 @@ int computeLaplacian(dataKernel* kernel, int comps, float dx, int size, int nOrd
 }
 
 int computeHessian(dataKernel* kernel, int comps, float dx, int size, int nOrder, float *output)
-{  
+{
       int x, y, z, w;
       float* data = kernel->data;
       int hz = kernel->hy*kernel->hx*comps, hy = kernel->hx*comps, hx = comps;
@@ -3667,14 +3667,14 @@ int computeHessian(dataKernel* kernel, int comps, float dx, int size, int nOrder
                 {
                 case 4: {
                 // du2w/dxdx
-                output[index + 0] = 
+                output[index + 0] =
                   SecFiniteDiff4(dx,
                     data[center - 2*hx],
                     data[center -   hx],
                     data[center],
-                    data[center +   hx], 
+                    data[center +   hx],
                     data[center + 2*hx]);
-                    
+
                 // du2w/dxdy
                 output[index + 1] =
                   CrossFiniteDiff4(dx,
@@ -3686,7 +3686,7 @@ int computeHessian(dataKernel* kernel, int comps, float dx, int size, int nOrder
                     data[center +   hy -   hx],
                     data[center -   hy -   hx],
                     data[center -   hy +   hx]);
-                    
+
                 // du2w/dxdz
                 output[index + 2] =
                   CrossFiniteDiff4(dx,
@@ -3700,14 +3700,14 @@ int computeHessian(dataKernel* kernel, int comps, float dx, int size, int nOrder
                     data[center -   hz +   hx]);
 
                 // du2w/dydy
-                output[index +3] = 
+                output[index +3] =
                   SecFiniteDiff4(dx,
                     data[center - 2*hy],
                     data[center -   hy],
                     data[center],
-                    data[center +   hy], 
+                    data[center +   hy],
                     data[center + 2*hy]);
-                
+
                 // du2w/dydz
                 output[index +4] =
                   CrossFiniteDiff4(dx,
@@ -3719,30 +3719,30 @@ int computeHessian(dataKernel* kernel, int comps, float dx, int size, int nOrder
                     data[center +   hz -   hy],
                     data[center -   hz -   hy],
                     data[center -   hz +   hy]);
-                
+
                 // du2w/dzdz
-                output[index +5] = 
+                output[index +5] =
                   SecFiniteDiff4(dx,
                     data[center - 2*hz],
                     data[center -   hz],
                     data[center],
-                    data[center +   hz], 
+                    data[center +   hz],
                     data[center + 2*hz]);
-                
-                break;   
+
+                break;
                 } case 6: {
-                
+
                 // du2w/dxdx
-                output[index + 0] = 
+                output[index + 0] =
                   SecFiniteDiff6(dx,
                     data[center - 3*hx],
                     data[center - 2*hx],
                     data[center -   hx],
                     data[center],
-                    data[center +   hx], 
-                    data[center + 2*hx], 
+                    data[center +   hx],
+                    data[center + 2*hx],
                     data[center + 3*hx]);
-                    
+
                 // du2w/dxdy
                 output[index + 1] =
                   CrossFiniteDiff6(dx,
@@ -3758,7 +3758,7 @@ int computeHessian(dataKernel* kernel, int comps, float dx, int size, int nOrder
                     data[center +   hy -   hx],
                     data[center -   hy -   hx],
                     data[center -   hy +   hx]);
-                    
+
                 // du2w/dxdz
                 output[index + 2] =
                   CrossFiniteDiff6(dx,
@@ -3776,16 +3776,16 @@ int computeHessian(dataKernel* kernel, int comps, float dx, int size, int nOrder
                     data[center -   hz +   hx]);
 
                 // du2w/dydy
-                output[index +3] = 
+                output[index +3] =
                   SecFiniteDiff6(dx,
                     data[center - 3*hy],
                     data[center - 2*hy],
                     data[center -   hy],
                     data[center],
-                    data[center +   hy], 
-                    data[center + 2*hy], 
+                    data[center +   hy],
+                    data[center + 2*hy],
                     data[center + 3*hy]);
-                
+
                 // du2w/dydz
                 output[index +4] =
                   CrossFiniteDiff6(dx,
@@ -3801,33 +3801,33 @@ int computeHessian(dataKernel* kernel, int comps, float dx, int size, int nOrder
                     data[center +   hz -   hy],
                     data[center -   hz -   hy],
                     data[center -   hz +   hy]);
-                
+
                 // du2w/dzdz
-                output[index +5] = 
+                output[index +5] =
                   SecFiniteDiff6(dx,
                     data[center - 3*hz],
                     data[center - 2*hz],
                     data[center -   hz],
                     data[center],
-                    data[center +   hz], 
-                    data[center + 2*hz], 
+                    data[center +   hz],
+                    data[center + 2*hz],
                     data[center + 3*hz]);
-                break;    
+                break;
                 } case 8: {
-                
+
                 // du2w/dxdx
-                output[index + 0] = 
+                output[index + 0] =
                   SecFiniteDiff8(dx,
                     data[center - 4*hx],
                     data[center - 3*hx],
                     data[center - 2*hx],
                     data[center -   hx],
                     data[center],
-                    data[center +   hx], 
-                    data[center + 2*hx], 
-                    data[center + 3*hx], 
+                    data[center +   hx],
+                    data[center + 2*hx],
+                    data[center + 3*hx],
                     data[center + 4*hx]);
-                    
+
                 // du2w/dxdy
                 output[index + 1] =
                   CrossFiniteDiff8(dx,
@@ -3847,7 +3847,7 @@ int computeHessian(dataKernel* kernel, int comps, float dx, int size, int nOrder
                     data[center +   hy -   hx],
                     data[center -   hy -   hx],
                     data[center -   hy +   hx]);
-                    
+
                 // du2w/dxdz
                 output[index + 2] =
                   CrossFiniteDiff8(dx,
@@ -3869,18 +3869,18 @@ int computeHessian(dataKernel* kernel, int comps, float dx, int size, int nOrder
                     data[center -   hz +   hx]);
 
                 // du2w/dydy
-                output[index +3] = 
+                output[index +3] =
                   SecFiniteDiff8(dx,
                     data[center - 4*hy],
                     data[center - 3*hy],
                     data[center - 2*hy],
                     data[center -   hy],
                     data[center],
-                    data[center +   hy], 
-                    data[center + 2*hy], 
-                    data[center + 3*hy], 
+                    data[center +   hy],
+                    data[center + 2*hy],
+                    data[center + 3*hy],
                     data[center + 4*hy]);
-                
+
                 // du2w/dydz
                 output[index +4] =
                   CrossFiniteDiff8(dx,
@@ -3900,24 +3900,24 @@ int computeHessian(dataKernel* kernel, int comps, float dx, int size, int nOrder
                     data[center +   hz -   hy],
                     data[center -   hz -   hy],
                     data[center -   hz +   hy]);
-                
+
                 // du2w/dzdz
-                output[index +5] = 
+                output[index +5] =
                   SecFiniteDiff8(dx,
                     data[center - 4*hz],
                     data[center - 3*hz],
                     data[center - 2*hz],
                     data[center -   hz],
                     data[center],
-                    data[center +   hz], 
-                    data[center + 2*hz], 
-                    data[center + 3*hz], 
+                    data[center +   hz],
+                    data[center + 2*hz],
+                    data[center + 3*hz],
                     data[center + 4*hz]);
-                break; 
+                break;
                 }
               }
             }
-            
+
           }
         }
       }

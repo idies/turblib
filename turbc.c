@@ -67,7 +67,7 @@ int main(int argc, char *argv[]) {
   /* Enable exit on error.  See README for details. */
   turblibSetExitOnError(1);
 
-  /* If working with cutout files, CUTOUT_SUPPORT should be defined during compilation. 
+  /* If working with cutout files, CUTOUT_SUPPORT should be defined during compilation.
      Make sure to run make with the "CUTOUT_SUPPORT=1" option, e.g.:
      $ make turbc CUTOUT_SUPPORT=1
      Change the filename to the name of the downloaded cutout file or supply it at the command line.
@@ -81,14 +81,14 @@ int main(int argc, char *argv[]) {
   //turblibAddLocalSource("isotropic1024coarse.h5");
 #endif
 
-  /* The client library implements all of the server-side functionality "locally" (except 
-     for particle tracking and filtering). Therefore, if an hdf5 file with cutout data is 
+  /* The client library implements all of the server-side functionality "locally" (except
+     for particle tracking and filtering). Therefore, if an hdf5 file with cutout data is
      available and loaded as above all queries for data that are within the region defined
      in the file will be evaluated locally (without being sent to the server). An example
-     is provided below. 
+     is provided below.
 
-     Please note that the use of this feature of the client library requires an hdf5 
-     installation. The standard approach of simply executing queries through the server 
+     Please note that the use of this feature of the client library requires an hdf5
+     installation. The standard approach of simply executing queries through the server
      does not require hdf5 or downloading any cutout data.
 
      For users that make frequent calls for data in a particular region and would like to
@@ -100,7 +100,7 @@ int main(int argc, char *argv[]) {
 
      The steps below can be followed to download data cutouts in hdf5 format and use the
      client library locally:
-     1) Download an hdf5 file containing a cubic region of the velocity data at timestep 0 
+     1) Download an hdf5 file containing a cubic region of the velocity data at timestep 0
         with the following download link:
 	http://turbulence.pha.jhu.edu/download.aspx/[authorization Token]/isotropic1024coarse/u/0,1/0,16/0,16/0,16/
      2) Compile this sample code with the "CUTOUT_SUPPORT=1" option, e.g.:
@@ -109,7 +109,7 @@ int main(int argc, char *argv[]) {
   */
 
   //  turblibAddLocalSource("isotropic1024coarse.h5");
-  
+
   /* 4) Uncomment the code below to restrict target locations to within the data region downloaded:
   */
 
@@ -118,9 +118,9 @@ int main(int argc, char *argv[]) {
   //    points[p][1] = (float)rand()/RAND_MAX*2*3.141592F/64.0F;
   //    points[p][2] = (float)rand()/RAND_MAX*2*3.141592F/64.0F;
   //  }
-  
+
   /*
-    5) Uncomment the code below to call getVelocity, which will be evaluated locally as 
+    5) Uncomment the code below to call getVelocity, which will be evaluated locally as
        the time chosen is 0.0, which corresponds to timestep 0 and no spatial or temporal
        interpolation is requested:
    */
@@ -131,11 +131,11 @@ int main(int argc, char *argv[]) {
   //    printf("%d: %13.6e, %13.6e, %13.6e\n", p, result3[p][0],  result3[p][1],  result3[p][2]);
   //  }
 
-  /* In this sample code, the default time chosen is 0.364, so all of the function calls in the 
+  /* In this sample code, the default time chosen is 0.364, so all of the function calls in the
      remainder of the sample code will be evaluated at the server.
   */
 
-  for (p = 0; p < N; p++) { 
+  for (p = 0; p < N; p++) {
     points[p][0] = (float)rand()/RAND_MAX*2*3.141592F;
     points[p][1] = (float)rand()/RAND_MAX*2*3.141592F;
     points[p][2] = (float)rand()/RAND_MAX*2*3.141592F;
@@ -145,7 +145,7 @@ int main(int argc, char *argv[]) {
   for (p = 0; p < N; p++) {
     printf("%d: %13.6e, %13.6e, %13.6e\n", p, points[p][0],  points[p][1],  points[p][2]);
   }
-  
+
   printf("\nRequesting velocity at %d points...\n", N);
   getVelocity (authtoken, dataset, time, spatialInterp, temporalInterp, N, points, result3);
   for (p = 0; p < N; p++) {
@@ -213,23 +213,23 @@ int main(int argc, char *argv[]) {
   printf("Requesting raw velocity data...\n");
   getRawVelocity(authtoken, dataset, time, X, Y, Z, Xwidth, Ywidth, Zwidth, (char*)rawdata);
   for (p = 0; p < Xwidth*Ywidth*Zwidth; p++) {
-    //printf("%d: Vx=%f, Vy=%f, Vz=%f\n", p, rawdata[3*p],  rawdata[3*p+1], rawdata[3*p+2]);             
+    //printf("%d: Vx=%f, Vy=%f, Vz=%f\n", p, rawdata[3*p],  rawdata[3*p+1], rawdata[3*p+2]);
   }
 
   printf("Requesting raw pressure data...\n");
   getRawPressure (authtoken, dataset, time, X, Y, Z, Xwidth, Ywidth, Zwidth, (char*)rawpressure);
   for (p = 0; p < Xwidth*Ywidth*Zwidth; p++) {
-    //printf("%d: P=%f\n", p, rawpressure[p]);                                                           
+    //printf("%d: P=%f\n", p, rawpressure[p]);
   }
 
   printf("\nRequesting position at %d points, starting at time %f and ending at time %f...\n", N, startTime, endTime);
   getPosition (authtoken, dataset, startTime, endTime, lag_dt, spatialInterp, N, points, result3);
 
-  printf("\nCoordinates of 10 points at startTime:\n");  
+  printf("\nCoordinates of 10 points at startTime:\n");
   for (p = 0; p < N; p++) {
     printf("%d: %13.6e, %13.6e, %13.6e\n", p, points[p][0], points[p][1], points[p][2]);
   }
-  printf("\nCoordinates of 10 points at endTime:\n");  
+  printf("\nCoordinates of 10 points at endTime:\n");
   for (p = 0; p < N; p++) {
     printf("%d: %13.6e, %13.6e, %13.6e\n", p, result3[p][0],  result3[p][1],  result3[p][2]);
   }

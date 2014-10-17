@@ -16,7 +16,7 @@
 program TurbTest
 
   implicit none
-  
+
   integer, parameter :: RP=4 ! Number of bytes for reals (single precision)
 
   ! ---- Temporal Interpolation Options ----
@@ -51,12 +51,12 @@ program TurbTest
 
   character(*), parameter :: field = 'velocity' // CHAR(0) ! field used for box filter
   real(RP), parameter :: filterwidth = 0.055223308_RP ! 9 * dx, where dx = 2*PI/1024
-  real(RP), parameter :: spacing = 0.030680_RP ! 5 * dx    
+  real(RP), parameter :: spacing = 0.030680_RP ! 5 * dx
 
   real(RP), parameter :: time = 0.364_RP;
   real(RP), parameter :: startTime = 0.364_RP;
   real(RP), parameter :: endTime = 0.376_RP;
-  real(RP), parameter :: lag_dt = 0.0004_RP     ! fraction of database timestep to use for 
+  real(RP), parameter :: lag_dt = 0.0004_RP     ! fraction of database timestep to use for
                                                 ! getposition method (Lagrangian integration time step)
   real(RP) :: points(3, 10)    ! input
   real(RP) :: dataout1(10)     ! p
@@ -116,14 +116,14 @@ program TurbTest
   ! rc = turblibaddlocalsource(filename);
 
 
-  !   The client library implements all of the server-side functionality "locally" (except 
-  !   for particle tracking and filtering). Therefore, if an hdf5 file with cutout data is 
+  !   The client library implements all of the server-side functionality "locally" (except
+  !   for particle tracking and filtering). Therefore, if an hdf5 file with cutout data is
   !   available and loaded as above all queries for data that are within the region defined
   !   in the file will be evaluated locally (without being sent to the server). An example
-  !   is provided below. 
+  !   is provided below.
 
-  !   Please note that the use of this feature of the client library requires an hdf5 
-  !   installation. The standard approach of simply executing queries through the server 
+  !   Please note that the use of this feature of the client library requires an hdf5
+  !   installation. The standard approach of simply executing queries through the server
   !   does not require hdf5 or downloading any cutout data.
 
   !   For users that make frequent calls for data in a particular region and would like to
@@ -135,7 +135,7 @@ program TurbTest
 
   !   The steps below can be followed to download data cutouts in hdf5 format and use the
   !   client library locally:
-  !   1) Download an hdf5 file containing a cubic region of the velocity data at timestep 0 
+  !   1) Download an hdf5 file containing a cubic region of the velocity data at timestep 0
   !      with the following download link:
   !	http://turbulence.pha.jhu.edu/download.aspx/[authorization Token]/isotropic1024coarse/u/0,1/0,16/0,16/0,16/
   !   2) Compile this sample code with the "CUTOUT_SUPPORT=1" option, e.g.:
@@ -143,16 +143,16 @@ program TurbTest
   !   3) Uncomment the line below to Load the hdf5 cutout file:
 
   ! rc = turblibAddLocalSource(filename);
-  
+
   !   4) Uncomment the code below to restrict target locations to within the data region downloaded:
-  
+
   ! do i = 1, 10
   !   points(1, i) = 2 * 3.141592 / 1024.0 * i
   !   points(2, i) = 2 * 3.141592 / 1024.0 * i
   !   points(3, i) = 2 * 3.141592 / 1024.0 * i
   ! end do
-  
-  !  5) Uncomment the code below to call getVelocity, which will be evaluated locally as 
+
+  !  5) Uncomment the code below to call getVelocity, which will be evaluated locally as
   !     the time chosen is 0.0, which corresponds to timestep 0 and no spatial or temporal
   !     interpolation is requested:
 
@@ -163,13 +163,13 @@ program TurbTest
   !   write(*,format3) i, ': ', dataout3(1,i), ', ', dataout3(2,i), ', ', dataout3(3,i)
   ! end do
 
-  ! In this sample code, the default time chosen is 0.364, so all of the function calls in the 
+  ! In this sample code, the default time chosen is 0.364, so all of the function calls in the
   !   remainder of the sample code will be evaluated at the server.
 
   do i = 1, 10
     points(1, i) = 0.20 * i
     points(2, i) = 0.50 * i
-    points(3, i) = 0.15 * i 
+    points(3, i) = 0.15 * i
   end do
 
   write(*,*)
@@ -177,7 +177,7 @@ program TurbTest
   do i = 1, 10
     write(*,format3) i, ': ', points(1,i), ', ', points(2,i), ', ', points(3,i)
   end do
-  
+
 
   write(*,*)
   write(*,'(a)') 'Requesting velocity at 10 points...'
@@ -189,21 +189,21 @@ program TurbTest
   write(*,*)
   write(*,'(a)') 'Requesting forcing at 10 points...'
   rc = getforce(authkey, dataset,  time, Lag6, NoTInt, 10, points, dataout3)
-  do i = 1, 10 
+  do i = 1, 10
     write(*,format3) i, ': ', dataout3(1,i), ', ', dataout3(2,i), ', ', dataout3(3,i)
   end do
 
   write(*,*)
   write(*,'(a)') 'Requesting velocity and pressure at 10 points...'
   rc = getvelocityandpressure(authkey, dataset,  time, Lag6, NoTInt, 10, points, dataout4)
-  do i = 1, 10 
+  do i = 1, 10
     write(*,format4) i, ': ', dataout4(1,i), ', ', dataout4(2,i), ', ', dataout4(3,i), ', ', dataout4(4,i)
   end do
 
   write(*,*)
   write(*,'(a)') 'Requesting velocity gradient at 10 points...'
   rc = getvelocitygradient(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout9)
-  do i = 1, 10 
+  do i = 1, 10
     write(*,format9) i, ': duxdx=', dataout9(1,i), ', duxdy=', dataout9(2,i), &
        ', duxdz=', dataout9(3,i), ', duydx=', dataout9(4,i),  &
        ', duydy=', dataout9(5,i), ', duydz=', dataout9(6,i),  &
@@ -214,14 +214,14 @@ program TurbTest
   write(*,*)
   write(*,'(a)') 'Requesting velocity laplacian at 10 points...'
   rc = getvelocitylaplacian(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout3)
-  do i = 1, 10 
+  do i = 1, 10
     write(*,format3) i, ': grad2ux=', dataout3(1,i), ', grad2uy=', dataout3(2,i), ', grad2uz=', dataout3(3,i)
   end do
 
   write(*,*)
   write(*,'(a)') 'Requesting velocity hessian at 10 points...'
   rc = getvelocityhessian(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout18)
-  do i = 1, 10 
+  do i = 1, 10
     write(*,format18) i, ': d2uxdxdx=', dataout18(1,i), &
        ', d2uxdxdy=', dataout18(2,i), &
        ', d2uxdxdz=', dataout18(3,i), &
@@ -245,27 +245,27 @@ program TurbTest
   write(*,*)
   write(*,'(a)') 'Requesting pressure at 10 points...'
   rc = getpressure(authkey, dataset,  time, Lag6, NoTInt, 10, points, dataout1)
-  do i = 1, 10 
+  do i = 1, 10
     write(*,format1) i, ': ', dataout1(i)
   end do
 
   write(*,*)
   write(*,'(a)') 'Requesting pressure gradient at 10 points...'
   rc = getpressuregradient(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout3)
-  do i = 1, 10 
+  do i = 1, 10
     write(*,format3) i, ': dpdx=', dataout3(1,i), ', dpdy=', dataout3(2,i), ', dpdz=', dataout3(3,i)
   end do
 
   write(*,*)
   write(*,'(a)') 'Requesting pressure hessian at 10 points...'
   rc = getpressurehessian(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout6)
-  do i = 1, 10 
+  do i = 1, 10
     write(*,format6) i, ': d2pdxdx=', dataout6(1,i), ', d2pdxdy=', dataout6(2,i), &
        ', d2pdxdz=', dataout6(3,i), ', d2pdydy=', dataout6(4,i),  &
        ', d2pdydz=', dataout6(5,i), ', d2pdzdz', dataout6(6,i)
   end do
 
- 
+
   write(*,*)
   write(*,'(a)') 'Requesting raw velocity ...'
   rc = getrawvelocity(authkey, dataset,  time, x, y, z, xwidth, ywidth, zwidth, rawvelocity)
@@ -277,7 +277,7 @@ program TurbTest
   write(*,*)
   write(*,'(a)') 'Requesting raw pressure ...'
   rc = getrawpressure(authkey, dataset,  time, x, y, z, xwidth, ywidth, zwidth, rawpressure)
-  do i = 1, xwidth*ywidth*zwidth 
+  do i = 1, xwidth*ywidth*zwidth
     !write(*,rawformat1) i, ': ', rawpressure(i)
   end do
 
