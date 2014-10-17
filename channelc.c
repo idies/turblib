@@ -138,7 +138,7 @@ int main(int argc, char *argv[]) {
   for (p = 0; p < Xwidth*Ywidth*Zwidth; p++) {
     //printf("%d: P=%f\n", p, rawpressure[p]);
   }
-  
+
   printf("\nRequesting threshold...\n");
   //NOTE: The array storing the results is dynamically allocated inside the getThreshold function,
   //because it's size is not known. It needs to be freed after it has been used to avoid leaking the memory.

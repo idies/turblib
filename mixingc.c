@@ -289,7 +289,7 @@ int main(int argc, char *argv[]) {
   }
   // Free the threshold array after using it.
   free(threshold_array);
-  
+
   /* Free gSOAP resources */
   soapdestroy();
 

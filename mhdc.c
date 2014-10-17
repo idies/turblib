@@ -340,9 +340,9 @@ int main(int argc, char *argv[]) {
     printf("(%d, %d, %d): %13.6e\n", threshold_array[p].x, threshold_array[p].y, threshold_array[p].z,
            threshold_array[p].value);
   }
-  // Free the threshold array after using it.                                     
+  // Free the threshold array after using it.
   free(threshold_array);
-    
+
   /* Free gSOAP resources */
   soapdestroy();
 
