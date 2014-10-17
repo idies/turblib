@@ -17,7 +17,7 @@
 define HDF5_ERROR
 
 Error in make!
-An hdf5 installation is required for working with cutoutfiles and h5cc was not found! 
+An hdf5 installation is required for working with cutoutfiles and h5cc was not found!
 Please, edit the Makefile with the installation directory of hdf5
 endef
 
@@ -26,13 +26,13 @@ OSARCH := $(shell uname -sp)
 ifeq ($(OSARCH),Darwin i386)
 # Compile both 32- and 64-bit code under MacOS X for Intel
 # ARCH_FLAGS = -arch i386 -arch x86_64
-else	
+else
 	ARCH_FLAGS =
 endif
 
 RM     = rm -f
 CFLAGS = -Wall
-LDLIBS = 
+LDLIBS =
 
 ifeq ($(CUTOUT_SUPPORT), 1)
 #If you built HDF5 from source yourself, fill in the path to your HDF5 installation
@@ -142,7 +142,7 @@ spotless: clean
 .SUFFIXES: .o .c .x
 
 .c.o:
-	$(CC) $(CFLAGS) -c $< 
+	$(CC) $(CFLAGS) -c $<
 
 .PHONY: force
 compiler_flags: force
