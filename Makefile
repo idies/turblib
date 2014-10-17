@@ -33,6 +33,8 @@ endif
 RM     = rm -f
 CFLAGS = -Wall
 LDLIBS =
+CP     = cp
+MKDIR  = mkdir -p
 
 ifeq ($(CUTOUT_SUPPORT), 1)
 #If you built HDF5 from source yourself, fill in the path to your HDF5 installation
@@ -104,6 +106,15 @@ mixingf.o : mixingf.f90
 
 stdsoap2.o: stdsoap2.c
 	$(CC) $(CFLAGS) -c $<
+
+static_lib: $(OBJ)
+	ar rcs libJHTDB.a $(OBJ)
+
+install: static_lib
+	$(MKDIR) $(JHTDB_PREFIX)/include
+	$(MKDIR) $(JHTDB_PREFIX)/lib
+	$(CP) turblib.h $(JHTDB_PREFIX)/include/
+	$(CP) libJHTDB.a $(JHTDB_PREFIX)/lib/
 
 # Regenerate the gSOAP interfaces if required
 TurbulenceService.h : wsdl
