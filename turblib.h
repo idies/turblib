@@ -19,13 +19,13 @@
 
 #ifdef CUTOUT_SUPPORT
 #include "hdf5.h"
-#endif
+#endif//CUTOUT_SUPPORT
 
 #include "soapH.h"
 
 #ifdef  __cplusplus
 extern "C" {
-#endif
+#endif//__cplusplus
 
 #define TURBLIB_VERSION "0.2"
 #define TURB_ERROR_LENGTH 2048
@@ -166,7 +166,7 @@ typedef struct
   int hx, hy, hz, comps;
   int persist;
 } dataKernel;
-#endif
+#endif//CUTOUT_SUPPORT
 
 /* C */
 void soapinit ();
@@ -210,7 +210,7 @@ void turblibsetexitonerror_(int *);
 #define getDensityGradient getDensityGradientSoap
 #define getDensityHessian getDensityHessianSoap
 
-#endif
+#endif//not CUTOUT_SUPPORT
 
 /* C */
 int getVelocity (char *authToken,
@@ -781,10 +781,10 @@ int computeLaplacian(dataKernel* kernel, int comps, float dx, int size, int nOrd
 
 #define CrossFiniteDiff8(dx, x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13, x14, x15, x16) 14.0f / 35.0f / dx / dx * (x13 + x15 - x14 - x16) - 1.0f / 20.0f / dx / dx * (x9 + x11 - x10 - x12) + 2.0f / 315.0f / dx / dx * (x5 + x7 - x6 - x8) - 1.0f / 2240.0f / dx / dx * (x1 + x3 - x2 - x4)
 
-#endif
+#endif//CUTOUT_SUPPORT
 
 #ifdef  __cplusplus
 }
-#endif
+#endif//__cplusplus
 
-#endif
+#endif//TURBLIB_H_
