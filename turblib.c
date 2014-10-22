@@ -19,7 +19,7 @@
 
 #ifdef CUTOUT_SUPPORT
 #include "hdf5.h"
-#endif
+#endif//CUTOUT_SUPPORT
 
 #include "soapH.h"
 #include "TurbulenceServiceSoap.nsmap"
@@ -62,7 +62,7 @@ turb_fn TurbFields[5] =
  { 'a', 3}, //vector potential
  { 'd', 1}  //density
 };
-#endif
+#endif//CUTOUT_SUPPORT
 
 char * turblibGetErrorString() {
   return __turblib_err;
@@ -211,18 +211,6 @@ void soapdestroy_ () {
 
 void soapdestroy () {
   soap_destroy(&__jhuturbsoap);
-}
-
-int getvelocity_ (char *authToken,
-      char *dataset, float *time,
-      int *spatial, int *temporal,
-      int *count, float datain[][3], float dataout[][3],
-      int len_a, int len_d)
-{
-  return getVelocity (authToken,
-    dataset, *time,
-    *spatial, *temporal,
-    *count, datain, dataout);
 }
 
 int getVelocitySoap (char *authToken,
@@ -3938,4 +3926,17 @@ int computeHessian(dataKernel* kernel, int comps, float dx, int size, int nOrder
       }
   return 0;
 }
-#endif
+#endif//CUTOUT_SUPPORT
+
+int getvelocity_ (char *authToken,
+      char *dataset, float *time,
+      int *spatial, int *temporal,
+      int *count, float datain[][3], float dataout[][3],
+      int len_a, int len_d)
+{
+  return getVelocity (authToken,
+    dataset, *time,
+    *spatial, *temporal,
+    *count, datain, dataout);
+}
+

@@ -190,7 +190,7 @@ void turblibsetexitonerror_(int *);
 
 #ifndef CUTOUT_SUPPORT
 
-#define getVelocity getVelocitySoap
+//#define getVelocity getVelocitySoap
 #define getVelocityGradient getVelocityGradientSoap
 #define getVelocityLaplacian getVelocityLaplacianSoap
 #define getMagneticField getMagneticFieldSoap
@@ -213,10 +213,24 @@ void turblibsetexitonerror_(int *);
 #endif//not CUTOUT_SUPPORT
 
 /* C */
-int getVelocity (char *authToken,
+int getVelocitySoap (char *authToken,
   char *dataset, float time,
   enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
   int count, float datain[][3], float dataout[][3]);
+#ifndef CUTOUT_SUPPORT
+
+//#define getVelocity getVelocitySoap
+inline int getVelocity (char *authToken,
+		     char *dataset, float time,
+		     enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+		     int count, float datain[][3], float dataout[][3])
+{
+    return getVelocitySoap (authToken,
+		     dataset, time,
+		     spatial, temporal,
+		     count, datain, dataout);
+}
+#endif//CUTOUT_SUPPORT
 
 /* Fortran */
 int getvelocity_ (char *authToken,
