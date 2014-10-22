@@ -264,6 +264,21 @@ int getVelocitySoap (char *authToken,
   return rc;
 }
 
+int getthreshold_ (char *authToken,
+		    char *dataset, char *field, float *time, float *threshold,
+		    int *spatial,
+		    int *X, int *Y, int *Z, int *Xwidth, int *Ywidth, int *Zwidth,
+		    ThresholdInfo** dataout, int *result_size)
+{
+  return getThreshold(authToken, dataset, field, *time, *threshold, *spatial,
+		      *X, *Y, *Z, *Xwidth, *Ywidth, *Zwidth, dataout, result_size);
+}
+
+void deallocate_array_ (ThresholdInfo **threshold_array)
+{
+  free(*threshold_array);
+}
+
 int getThreshold (char *authToken,
                   char *dataset, char *field, float time, float threshold,
                   enum SpatialInterpolation spatial,

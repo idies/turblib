@@ -15,7 +15,13 @@
 
 program TurbTest
 
+  use, intrinsic :: iso_c_binding, only: c_ptr, c_int, c_float, c_f_pointer
   implicit none
+
+  type, bind(c) :: thresholdinfo
+    integer(c_int) :: x, y, z
+    real(c_float) :: value
+  end type thresholdinfo
 
   integer, parameter :: RP=4 ! Number of bytes for reals (single precision)
 
@@ -66,10 +72,17 @@ program TurbTest
   real(RP) :: dataout9(9, 10)  ! results from Velocity Gradient
   real(RP) :: dataout18(18, 10) ! results from Velocity Hessian
 
-  integer,parameter :: x=0, y=0, z=0, xwidth=16, ywidth=16, zwidth=16
+  integer,parameter :: x=0, y=0, z=0, xwidth=4, ywidth=4, zwidth=4
   !real(RP) :: rawvelocity(xwidth*ywidth*zwidth*3)
   real(RP) :: rawvelocity(3,xwidth*ywidth*zwidth)
   real(RP) :: rawpressure(xwidth*ywidth*zwidth)  
+
+  real(RP) :: threshold = 30.0_RP; ! threshold level
+  character(*), parameter :: threshold_field = 'vorticity' // CHAR(0) ! field used for threshold query
+  integer(c_int) :: result_size; ! the size of the array returned from the getThreshold function
+  type(c_ptr) :: cptr_to_array   ! C pointer to the dynamically allocated array from the getThreshold function
+  type(thresholdinfo), pointer :: points_above_threshold(:) => NULL() ! Fortran pointer used to extract the array
+                                                                      ! of points from the C pointer above
 
   ! Declare the return type of the turblib functions as integer.
   ! This is required for custom error handling (see the README).
@@ -79,6 +92,7 @@ program TurbTest
   integer :: getpressure, getpressuregradient, getpressurehessian
   integer :: getrawvelocity, getrawpressure
   integer :: getposition
+  integer :: getthreshold
   ! If working with hdf5 cutout files, uncomment the lines below
   ! to load the file and use the functions locally:
   ! character(*), parameter :: filename = 'isotropic1024coarse.h5' // CHAR(0)
@@ -99,6 +113,7 @@ program TurbTest
   character(*), parameter :: format6='(i3,6(a,e13.6))'
   character(*), parameter :: format9='(i3,9(a,e13.6))'
   character(*), parameter :: format18='(i3,18(a,e13.6))'
+  character(*), parameter :: formatT='(3(a,i4),1(a,e13.6))'
   !
   ! Intialize the gSOAP runtime.
   ! This is required before any WebService routines are called.
@@ -326,6 +341,20 @@ program TurbTest
        ', duzdx=', dataout9(7,i), ', duzdy=', dataout9(8,i),  &
        ', duzdz=', dataout9(9,i)
   end do
+
+  write(*,*)
+  write(*,'(a)') 'Requesting points above threshold ...'
+  rc = getthreshold(authkey, dataset, threshold_field, time, threshold, FD4NoInt, x, y, z, &
+       xwidth, ywidth, zwidth, cptr_to_array, result_size)
+  ! convert the C pointer to Fortran pointer
+  call c_f_pointer(cptr_to_array, points_above_threshold, [result_size])
+  do i = 1, result_size
+    write(*,formatT) '(', points_above_threshold(i)%x, ', ', points_above_threshold(i)%y, ', ', &
+         points_above_threshold(i)%z, ') value = ', points_above_threshold(i)%value 
+  end do
+  ! The dynamically allocated array for the getThreshold function needs to be deallocated.
+  ! Call this function to deallocate the array, otherwise a memory leak can occur.
+  call deallocate_array(cptr_to_array)
 
   !
   ! Destroy the gSOAP runtime.

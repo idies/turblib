@@ -225,11 +225,21 @@ int getvelocity_ (char *authToken,
                   int *count, float datain[][3], float dataout[][3],
                   int len_a, int len_d);
 
+/* C */
 int getThreshold (char *authToken,
 		  char *dataset, char *field, float time, float threshold,
 		  enum SpatialInterpolation spatial,
 		  int X, int Y, int Z, int Xwidth, int Ywidth, int Zwidth,
 		  ThresholdInfo **dataout, int *result_size);
+
+/* Fortran */
+int getthreshold_ (char *authToken,
+		  char *dataset, char *field, float *time, float *threshold, 
+		  int *spatial,
+		  int *X, int *Y, int *Z, int *Xwidth, int *Ywidth, int *Zwidth,
+		  ThresholdInfo **dataout, int *result_size);
+
+void deallocate_array_ (ThresholdInfo **threshold_array);
 
 /* C */
 int getBoxFilter (char *authToken,

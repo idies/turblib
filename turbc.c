@@ -260,7 +260,7 @@ int main(int argc, char *argv[]) {
   //NOTE: The array storing the results is dynamically allocated inside the getThreshold function,
   //because it's size is not known. It needs to be freed after it has been used to avoid leaking the memory.
   getThreshold (authtoken, dataset, threshold_field, time, threshold, FD4NoInt, 0, 0, 0, 4, 4, 4,
-	       &threshold_array, &threshold_array_size);
+		&threshold_array, &threshold_array_size);
   for (p = 0; p < threshold_array_size; p++) {
     printf("(%d, %d, %d): %13.6e\n", threshold_array[p].x, threshold_array[p].y, threshold_array[p].z,
 	   threshold_array[p].value);
