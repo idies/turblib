@@ -188,49 +188,11 @@ int turblibgeterrornumber_();
 void turblibprinterror_();
 void turblibsetexitonerror_(int *);
 
-#ifndef CUTOUT_SUPPORT
-
-//#define getVelocity getVelocitySoap
-#define getVelocityGradient getVelocityGradientSoap
-#define getVelocityLaplacian getVelocityLaplacianSoap
-#define getMagneticField getMagneticFieldSoap
-#define getVectorPotential getVectorPotentialSoap
-#define getVelocityHessian getVelocityHessianSoap
-#define getVelocityAndPressure getVelocityAndPressureSoap
-#define getMagneticFieldLaplacian getMagneticFieldLaplacianSoap
-#define getVectorPotentialLaplacian getVectorPotentialLaplacianSoap
-#define getPressureHessian getPressureHessianSoap
-#define getMagneticFieldHessian getMagneticFieldHessianSoap
-#define getVectorPotentialHessian getVectorPotentialHessianSoap
-#define getPressureGradient getPressureGradientSoap
-#define getMagneticFieldGradient getMagneticFieldGradientSoap
-#define getVectorPotentialGradient getVectorPotentialGradientSoap
-#define getPressure getPressureSoap
-#define getDensity getDensitySoap
-#define getDensityGradient getDensityGradientSoap
-#define getDensityHessian getDensityHessianSoap
-
-#endif//not CUTOUT_SUPPORT
-
 /* C */
 int getVelocitySoap (char *authToken,
   char *dataset, float time,
   enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
   int count, float datain[][3], float dataout[][3]);
-#ifndef CUTOUT_SUPPORT
-
-//#define getVelocity getVelocitySoap
-inline int getVelocity (char *authToken,
-		     char *dataset, float time,
-		     enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
-		     int count, float datain[][3], float dataout[][3])
-{
-    return getVelocitySoap (authToken,
-		     dataset, time,
-		     spatial, temporal,
-		     count, datain, dataout);
-}
-#endif//CUTOUT_SUPPORT
 
 /* Fortran */
 int getvelocity_ (char *authToken,
@@ -291,7 +253,7 @@ int getboxfiltergradient_(char *authToken,
 			  int len_a, int len_d);
 
 /* C */
-int getVelocityAndPressure (char *authToken,
+int getVelocityAndPressureSoap (char *authToken,
   char *dataset, float time,
   enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
   int count, float datain[][3], float dataout[][4]);
@@ -304,7 +266,7 @@ int getvelocityandpressure_ (char *authToken,
   int len_a, int len_d);
 
 /* C */
-int getPressureHessian(char *authToken,
+int getPressureHessianSoap(char *authToken,
       char *dataset, float time,
       enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
       int count, float datain[][3], float dataout[][6]);
@@ -317,7 +279,7 @@ int getpressurehessian_(char *authToken,
       int len_a, int len_d);
 
 /* C */
-int getVelocityGradient(char *authToken,
+int getVelocityGradientSoap(char *authToken,
       char *dataset, float time,
       enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
       int count, float datain[][3], float dataout[][9]);
@@ -330,10 +292,23 @@ int getvelocitygradient_(char *authToken,
       int len_a, int len_d);
 
 /* C */
-int getMagneticFieldGradient(char *authToken,
+int getMagneticFieldGradientSoap(char *authToken,
       char *dataset, float time,
       enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
       int count, float datain[][3], float dataout[][9]);
+
+#ifndef CUTOUT_SUPPORT
+inline int getMagneticFieldGradient (char *authToken,
+		     char *dataset, float time,
+		     enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+		     int count, float datain[][3], float dataout[][9])
+{
+    return getMagneticFieldGradientSoap (authToken,
+		     dataset, time,
+		     spatial, temporal,
+		     count, datain, dataout);
+}
+#endif//CUTOUT_SUPPORT
 
 /* Fortran */
 int getmagneticfieldgradient_(char *authToken,
@@ -343,10 +318,23 @@ int getmagneticfieldgradient_(char *authToken,
       int len_a, int len_d);
 
 /* C */
-int getVectorPotentialGradient(char *authToken,
+int getVectorPotentialGradientSoap(char *authToken,
       char *dataset, float time,
       enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
       int count, float datain[][3], float dataout[][9]);
+
+#ifndef CUTOUT_SUPPORT
+inline int getVectorPotentialGradient (char *authToken,
+		     char *dataset, float time,
+		     enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+		     int count, float datain[][3], float dataout[][9])
+{
+    return getVectorPotentialGradientSoap (authToken,
+		     dataset, time,
+		     spatial, temporal,
+		     count, datain, dataout);
+}
+#endif//CUTOUT_SUPPORT
 
 /* Fortran */
 int getvectorpotentialgradient_(char *authToken,
@@ -356,7 +344,7 @@ int getvectorpotentialgradient_(char *authToken,
       int len_a, int len_d);
 
 /* C */
-int getPressureGradient(char *authToken,
+int getPressureGradientSoap(char *authToken,
       char *dataset, float time,
       enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
       int count, float datain[][3], float dataout[][3]);
@@ -369,7 +357,7 @@ int getpressuregradient_(char *authToken,
       int len_a, int len_d);
 
 /* C */
-int getVelocityHessian(char *authToken,
+int getVelocityHessianSoap(char *authToken,
       char *dataset, float time,
       enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
       int count, float datain[][3], float dataout[][18]);
@@ -382,7 +370,7 @@ int getvelocityhessian_(char *authToken,
       int len_a, int len_d);
 
 /* C */
-int getVelocityLaplacian(char *authToken,
+int getVelocityLaplacianSoap(char *authToken,
       char *dataset, float time,
       enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
       int count, float datain[][3], float dataout[][3]);
@@ -395,10 +383,23 @@ int getvelocitylaplacian_(char *authToken,
       int len_a, int len_d);
 
 /* C */
-int getMagneticFieldHessian(char *authToken,
+int getMagneticFieldHessianSoap(char *authToken,
       char *dataset, float time,
       enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
       int count, float datain[][3], float dataout[][18]);
+
+#ifndef CUTOUT_SUPPORT
+inline int getMagneticFieldHessian (char *authToken,
+		     char *dataset, float time,
+		     enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+		     int count, float datain[][3], float dataout[][18])
+{
+    return getMagneticFieldHessianSoap (authToken,
+		     dataset, time,
+		     spatial, temporal,
+		     count, datain, dataout);
+}
+#endif//CUTOUT_SUPPORT
 
 /* Fortran */
 int getmagneticfieldhessian_(char *authToken,
@@ -408,10 +409,23 @@ int getmagneticfieldhessian_(char *authToken,
       int len_a, int len_d);
 
 /* C */
-int getMagneticFieldLaplacian(char *authToken,
+int getMagneticFieldLaplacianSoap(char *authToken,
       char *dataset, float time,
       enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
       int count, float datain[][3], float dataout[][3]);
+
+#ifndef CUTOUT_SUPPORT
+inline int getMagneticFieldLaplacian (char *authToken,
+		     char *dataset, float time,
+		     enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+		     int count, float datain[][3], float dataout[][3])
+{
+    return getMagneticFieldLaplacianSoap (authToken,
+		     dataset, time,
+		     spatial, temporal,
+		     count, datain, dataout);
+}
+#endif//CUTOUT_SUPPORT
 
 /* Fortran */
 int getmagneticfieldlaplacian_(char *authToken,
@@ -421,10 +435,23 @@ int getmagneticfieldlaplacian_(char *authToken,
       int len_a, int len_d);
 
 /* C */
-int getVectorPotentialHessian(char *authToken,
+int getVectorPotentialHessianSoap(char *authToken,
       char *dataset, float time,
       enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
       int count, float datain[][3], float dataout[][18]);
+
+#ifndef CUTOUT_SUPPORT
+inline int getVectorPotentialHessian (char *authToken,
+		     char *dataset, float time,
+		     enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+		     int count, float datain[][3], float dataout[][18])
+{
+    return getVectorPotentialHessianSoap (authToken,
+		     dataset, time,
+		     spatial, temporal,
+		     count, datain, dataout);
+}
+#endif//CUTOUT_SUPPORT
 
 /* Fortran */
 int getvectorpotentialhessian_(char *authToken,
@@ -434,10 +461,23 @@ int getvectorpotentialhessian_(char *authToken,
       int len_a, int len_d);
 
 /* C */
-int getVectorPotentialLaplacian(char *authToken,
+int getVectorPotentialLaplacianSoap(char *authToken,
       char *dataset, float time,
       enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
       int count, float datain[][3], float dataout[][3]);
+
+#ifndef CUTOUT_SUPPORT
+inline int getVectorPotentialLaplacian (char *authToken,
+		     char *dataset, float time,
+		     enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+		     int count, float datain[][3], float dataout[][3])
+{
+    return getVectorPotentialLaplacianSoap (authToken,
+		     dataset, time,
+		     spatial, temporal,
+		     count, datain, dataout);
+}
+#endif//CUTOUT_SUPPORT
 
 /* Fortran */
 int getvectorpotentiallaplacian_(char *authToken,
@@ -495,10 +535,23 @@ int getrawvelocity_ (char *authToken,
   float dataout[]);
 
 /* C */
-int getMagneticField (char *authToken,
+int getMagneticFieldSoap (char *authToken,
   char *dataset, float time,
   enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
   int count, float datain[][3], float dataout[][3]);
+
+#ifndef CUTOUT_SUPPORT
+inline int getMagneticField (char *authToken,
+		     char *dataset, float time,
+		     enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+		     int count, float datain[][3], float dataout[][3])
+{
+    return getMagneticFieldSoap (authToken,
+		     dataset, time,
+		     spatial, temporal,
+		     count, datain, dataout);
+}
+#endif//CUTOUT_SUPPORT
 
 /* Fortran */
 int getmagneticfield_ (char *authToken,
@@ -519,10 +572,23 @@ int getrawmagneticfield_ (char *authToken,
   float dataout[]);
 
 /* C */
-int getVectorPotential (char *authToken,
+int getVectorPotentialSoap (char *authToken,
   char *dataset, float time,
   enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
   int count, float datain[][3], float dataout[][3]);
+
+#ifndef CUTOUT_SUPPORT
+inline int getVectorPotential (char *authToken,
+		     char *dataset, float time,
+		     enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+		     int count, float datain[][3], float dataout[][3])
+{
+    return getVectorPotentialSoap (authToken,
+		     dataset, time,
+		     spatial, temporal,
+		     count, datain, dataout);
+}
+#endif//CUTOUT_SUPPORT
 
 /* Fortran */
 int getvectorpotential_ (char *authToken,
@@ -543,7 +609,7 @@ int getrawvectorpotential_ (char *authToken,
   float dataout[]);
 
 /* C */
-int getPressure (char *authToken,
+int getPressureSoap (char *authToken,
   char *dataset, float time,
   enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
   int count, float datain[][3], float dataout[]);
@@ -566,10 +632,23 @@ int getrawpressure_ (char *authToken,
   int *X, int *Y, int *Z, int *Xwidth, int *Ywidth, int *Zwidth, float dataout[]);
 
 /* C */
-int getDensity (char *authToken,
+int getDensitySoap (char *authToken,
   char *dataset, float time,
   enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
   int count, float datain[][3], float dataout[]);
+
+#ifndef CUTOUT_SUPPORT
+inline int getDensity (char *authToken,
+		     char *dataset, float time,
+		     enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+		     int count, float datain[][3], float dataout[])
+{
+    return getDensitySoap (authToken,
+		     dataset, time,
+		     spatial, temporal,
+		     count, datain, dataout);
+}
+#endif//CUTOUT_SUPPORT
 
 /* Fortran */
 int getdensity_ (char *authToken,
@@ -579,10 +658,23 @@ int getdensity_ (char *authToken,
   int len_a, int len_d);
 
 /* C */
-int getDensityGradient(char *authToken,
+int getDensityGradientSoap(char *authToken,
       char *dataset, float time,
       enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
       int count, float datain[][3], float dataout[][3]);
+
+#ifndef CUTOUT_SUPPORT
+inline int getDensityGradient (char *authToken,
+		     char *dataset, float time,
+		     enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+		     int count, float datain[][3], float dataout[][3])
+{
+    return getDensityGradientSoap (authToken,
+		     dataset, time,
+		     spatial, temporal,
+		     count, datain, dataout);
+}
+#endif//CUTOUT_SUPPORT
 
 /* Fortran */
 int getdensitygradient_(char *authToken,
@@ -592,10 +684,23 @@ int getdensitygradient_(char *authToken,
       int len_a, int len_d);
 
 /* C */
-int getDensityHessian(char *authToken,
+int getDensityHessianSoap(char *authToken,
       char *dataset, float time,
       enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
       int count, float datain[][3], float dataout[][6]);
+
+#ifndef CUTOUT_SUPPORT
+inline int getDensityHessian (char *authToken,
+		     char *dataset, float time,
+		     enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+		     int count, float datain[][3], float dataout[][6])
+{
+    return getDensityHessianSoap (authToken,
+		     dataset, time,
+		     spatial, temporal,
+		     count, datain, dataout);
+}
+#endif//CUTOUT_SUPPORT
 
 /* Fortran */
 int getdensityhessian_(char *authToken,
@@ -801,4 +906,45 @@ int computeLaplacian(dataKernel* kernel, int comps, float dx, int size, int nOrd
 }
 #endif//__cplusplus
 
+inline int getVelocity (char *authToken,
+             char *dataset, float time,
+             enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+             int count, float datain[][3], float dataout[][3]);
+
+inline int getVelocityAndPressure (char *authToken,
+		     char *dataset, float time,
+		     enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+		     int count, float datain[][3], float dataout[][4]);
+
+inline int getVelocityGradient (char *authToken,
+		     char *dataset, float time,
+		     enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+		     int count, float datain[][3], float dataout[][9]);
+
+inline int getVelocityHessian (char *authToken,
+		     char *dataset, float time,
+		     enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+		     int count, float datain[][3], float dataout[][18]);
+
+inline int getVelocityLaplacian (char *authToken,
+		     char *dataset, float time,
+		     enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+		     int count, float datain[][3], float dataout[][3]);
+
+inline int getPressure (char *authToken,
+		     char *dataset, float time,
+		     enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+		     int count, float datain[][3], float dataout[]);
+
+inline int getPressureGradient (char *authToken,
+		     char *dataset, float time,
+		     enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+		     int count, float datain[][3], float dataout[][3]);
+
+inline int getPressureHessian (char *authToken,
+		     char *dataset, float time,
+		     enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+		     int count, float datain[][3], float dataout[][6]);
+
 #endif//TURBLIB_H_
+

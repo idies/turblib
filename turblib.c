@@ -213,6 +213,133 @@ void soapdestroy () {
   soap_destroy(&__jhuturbsoap);
 }
 
+inline int getVelocity (char *authToken,
+             char *dataset, float time,
+             enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+             int count, float datain[][3], float dataout[][3])
+{
+#ifdef CUTOUT_SUPPORT
+  TurbDataset dataset_ = getDataSet(dataset);
+
+  if (isDataAvailable(dataset_, turb_velocity, count, datain, time, spatial, temporal))
+    return getValueLocal(dataset_, turb_velocity, spatial, temporal, time, count, datain, &dataout[0][0]);
+
+  else
+#endif//CUTOUT_SUPPORT
+    return getVelocitySoap (authToken, dataset, time, spatial, temporal, count, datain, dataout);
+}
+
+inline int getVelocityAndPressure (char *authToken,
+      char *dataset, float time,
+      enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+      int count, float datain[][3], float dataout[][4])
+{
+#ifdef CUTOUT_SUPPORT
+  TurbDataset dataset_ = getDataSet(dataset);
+
+  if (isDataAvailable(dataset_, turb_vp, count, datain, time, spatial, temporal))
+    return getVelocityAndPressureLocal(dataset_, time, spatial, temporal, count, datain, dataout);
+
+  else
+#endif//CUTOUT_SUPPORT
+    return getVelocityAndPressureSoap(authToken, dataset, time, spatial, temporal, count, datain, dataout);
+}
+
+inline int getPressure (char *authToken,
+      char *dataset, float time,
+      enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+      int count, float datain[][3], float dataout[])
+{
+#ifdef CUTOUT_SUPPORT
+  TurbDataset dataset_ = getDataSet(dataset);
+
+  if (isDataAvailable(dataset_, turb_pressure, count, datain, time, spatial, temporal))
+    return getValueLocal(dataset_, turb_pressure, spatial, temporal, time, count, datain, &dataout[0]);
+
+  else
+#endif//CUTOUT_SUPPORT
+    return getPressureSoap (authToken, dataset, time, spatial, temporal, count, datain, dataout);
+}
+
+inline int getPressureHessian(char *authToken,
+      char *dataset, float time,
+      enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+      int count, float datain[][3], float dataout[][6])
+{
+#ifdef CUTOUT_SUPPORT
+  TurbDataset dataset_ = getDataSet(dataset);
+
+  if (isDataAvailable(dataset_, turb_pressure, count, datain, time, spatial, temporal))
+    return getPressureHessianLocal(dataset_, time, spatial, temporal, count, datain, dataout);
+
+  else
+#endif//CUTOUT_SUPPORT
+    return getPressureHessianSoap (authToken, dataset, time, spatial, temporal, count, datain, dataout);
+}
+
+inline int getVelocityGradient(char *authToken,
+      char *dataset, float time,
+      enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+      int count, float datain[][3], float dataout[][9])
+{
+#ifdef CUTOUT_SUPPORT
+  TurbDataset dataset_ = getDataSet(dataset);
+
+  if (isDataAvailable(dataset_,  turb_velocity, count, datain, time, spatial, temporal))
+    return getVelocityGradientLocal(dataset_, time, spatial, temporal, count, datain, dataout);
+
+  else
+#endif//CUTOUT_SUPPORT
+    return getVelocityGradientSoap (authToken, dataset, time, spatial, temporal, count, datain, dataout);
+}
+
+inline int getVelocityHessian(char *authToken,
+      char *dataset, float time,
+      enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+      int count, float datain[][3], float dataout[][18])
+{
+#ifdef CUTOUT_SUPPORT
+  TurbDataset dataset_ = getDataSet(dataset);
+
+  if (isDataAvailable(dataset_, turb_velocity, count, datain, time, spatial, temporal))
+    return getVelocityHessianLocal(dataset_, time, spatial, temporal, count, datain, dataout);
+  else
+#endif//CUTOUT_SUPPORT
+    return getVelocityHessianSoap (authToken, dataset, time, spatial, temporal, count, datain, dataout);
+}
+
+inline int getVelocityLaplacian (char *authToken,
+      char *dataset, float time,
+      enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+      int count, float datain[][3], float dataout[][3])
+{
+#ifdef CUTOUT_SUPPORT
+  TurbDataset dataset_ = getDataSet(dataset);
+
+  if (isDataAvailable(dataset_, turb_velocity, count, datain, time, spatial, temporal))
+    return getVelocityLaplacianLocal (dataset_, time, spatial, temporal, count, datain, dataout);
+
+  else
+#endif//CUTOUT_SUPPORT
+    return getVelocityLaplacianSoap (authToken, dataset, time, spatial, temporal, count, datain, dataout);
+}
+
+inline int getPressureGradient(char *authToken,
+      char *dataset, float time,
+      enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+      int count, float datain[][3], float dataout[][3])
+{
+#ifdef CUTOUT_SUPPORT
+  TurbDataset dataset_ = getDataSet(dataset);
+
+  if (isDataAvailable(dataset_, turb_pressure, count, datain, time, spatial, temporal))
+    return getPressureGradientLocal(dataset_, time, spatial, temporal, count, datain, dataout);
+
+  else
+#endif//CUTOUT_SUPPORT
+    return getPressureGradientSoap (authToken, dataset, time, spatial, temporal, count, datain, dataout);
+}
+
 int getVelocitySoap (char *authToken,
   char *dataset, float time,
   enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
@@ -459,18 +586,6 @@ int getBoxFilterGradient(char *authToken,
   return rc;
 }
 
-int getvelocityandpressure_ (char *authToken,
-      char *dataset, float *time,
-      int *spatial, int *temporal,
-      int *count, float datain[][3], float dataout[][4],
-      int len_a, int len_d)
-{
-  return getVelocityAndPressure (authToken,
-    dataset, *time,
-    *spatial, *temporal,
-    *count, datain, dataout);
-}
-
 int getVelocityAndPressureSoap (char *authToken,
       char *dataset, float time,
       enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
@@ -507,18 +622,6 @@ int getVelocityAndPressureSoap (char *authToken,
 
   __turblib_errno = rc;
   return rc;
-}
-
-int getpressurehessian_(char *authToken,
-      char *dataset, float *time,
-      int *spatial, int *temporal,
-      int *count, float datain[][3], float dataout[][6],
-      int len_a, int len_d)
-{
-  return getPressureHessian(authToken,
-    dataset, *time,
-    *spatial, *temporal,
-    *count, datain, dataout);
 }
 
 int getPressureHessianSoap(char *authToken,
@@ -559,18 +662,6 @@ int getPressureHessianSoap(char *authToken,
   return rc;
 }
 
-int getvelocitygradient_(char *authToken,
-      char *dataset, float *time,
-      int *spatial, int *temporal,
-      int *count, float datain[][3], float dataout[][9],
-      int len_a, int len_d)
-{
-  return getVelocityGradient(authToken,
-    dataset, *time,
-    *spatial, *temporal,
-    *count, datain, dataout);
-}
-
 int getVelocityGradientSoap(char *authToken,
       char *dataset, float time,
       enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
@@ -607,18 +698,6 @@ int getVelocityGradientSoap(char *authToken,
 
   __turblib_errno = rc;
   return rc;
-}
-
-int getmagneticfieldgradient_(char *authToken,
-      char *dataset, float *time,
-      int *spatial, int *temporal,
-      int *count, float datain[][3], float dataout[][9],
-      int len_a, int len_d)
-{
-  return getMagneticFieldGradient(authToken,
-    dataset, *time,
-    *spatial, *temporal,
-    *count, datain, dataout);
 }
 
 int getMagneticFieldGradientSoap(char *authToken,
@@ -659,18 +738,6 @@ int getMagneticFieldGradientSoap(char *authToken,
   return rc;
 }
 
-int getvectorpotentialgradient_(char *authToken,
-      char *dataset, float *time,
-      int *spatial, int *temporal,
-      int *count, float datain[][3], float dataout[][9],
-      int len_a, int len_d)
-{
-  return getVectorPotentialGradient(authToken,
-    dataset, *time,
-    *spatial, *temporal,
-    *count, datain, dataout);
-}
-
 int getVectorPotentialGradientSoap(char *authToken,
       char *dataset, float time,
       enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
@@ -707,18 +774,6 @@ int getVectorPotentialGradientSoap(char *authToken,
 
   __turblib_errno = rc;
   return rc;
-}
-
-int getpressuregradient_(char *authToken,
-      char *dataset, float *time,
-      int *spatial, int *temporal,
-      int *count, float datain[][3], float dataout[][3],
-      int len_a, int len_d)
-{
-  return getPressureGradient(authToken,
-    dataset, *time,
-    *spatial, *temporal,
-    *count, datain, dataout);
 }
 
 int getPressureGradientSoap(char *authToken,
@@ -759,18 +814,6 @@ int getPressureGradientSoap(char *authToken,
   return rc;
 }
 
-int getvelocityhessian_(char *authToken,
-      char *dataset, float *time,
-      int *spatial, int *temporal,
-      int *count, float datain[][3], float dataout[][18],
-      int len_a, int len_d)
-{
-  return getVelocityHessian(authToken,
-    dataset, *time,
-    *spatial, *temporal,
-    *count, datain, dataout);
-}
-
 int getVelocityHessianSoap(char *authToken,
       char *dataset, float time,
       enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
@@ -807,18 +850,6 @@ int getVelocityHessianSoap(char *authToken,
 
   __turblib_errno = rc;
   return rc;
-}
-
-int getvelocitylaplacian_ (char *authToken,
-      char *dataset, float *time,
-      int *spatial, int *temporal,
-      int *count, float datain[][3], float dataout[][3],
-      int len_a, int len_d)
-{
-  return getVelocityLaplacian (authToken,
-    dataset, *time,
-    *spatial, *temporal,
-    *count, datain, dataout);
 }
 
 int getVelocityLaplacianSoap (char *authToken,
@@ -859,18 +890,6 @@ int getVelocityLaplacianSoap (char *authToken,
   return rc;
 }
 
-int getmagneticfieldhessian_(char *authToken,
-      char *dataset, float *time,
-      int *spatial, int *temporal,
-      int *count, float datain[][3], float dataout[][18],
-      int len_a, int len_d)
-{
-  return getMagneticFieldHessian(authToken,
-    dataset, *time,
-    *spatial, *temporal,
-    *count, datain, dataout);
-}
-
 int getMagneticFieldHessianSoap(char *authToken,
       char *dataset, float time,
       enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
@@ -907,18 +926,6 @@ int getMagneticFieldHessianSoap(char *authToken,
 
   __turblib_errno = rc;
   return rc;
-}
-
-int getmagneticfieldlaplacian_ (char *authToken,
-      char *dataset, float *time,
-      int *spatial, int *temporal,
-      int *count, float datain[][3], float dataout[][3],
-      int len_a, int len_d)
-{
-  return getMagneticFieldLaplacian (authToken,
-    dataset, *time,
-    *spatial, *temporal,
-    *count, datain, dataout);
 }
 
 int getMagneticFieldLaplacianSoap (char *authToken,
@@ -959,18 +966,6 @@ int getMagneticFieldLaplacianSoap (char *authToken,
   return rc;
 }
 
-int getvectorpotentialhessian_(char *authToken,
-      char *dataset, float *time,
-      int *spatial, int *temporal,
-      int *count, float datain[][3], float dataout[][18],
-      int len_a, int len_d)
-{
-  return getVectorPotentialHessian(authToken,
-    dataset, *time,
-    *spatial, *temporal,
-    *count, datain, dataout);
-}
-
 int getVectorPotentialHessianSoap(char *authToken,
       char *dataset, float time,
       enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
@@ -1007,18 +1002,6 @@ int getVectorPotentialHessianSoap(char *authToken,
 
   __turblib_errno = rc;
   return rc;
-}
-
-int getvectorpotentiallaplacian_ (char *authToken,
-      char *dataset, float *time,
-      int *spatial, int *temporal,
-      int *count, float datain[][3], float dataout[][3],
-      int len_a, int len_d)
-{
-  return getVectorPotentialLaplacian (authToken,
-    dataset, *time,
-    *spatial, *temporal,
-    *count, datain, dataout);
 }
 
 int getVectorPotentialLaplacianSoap (char *authToken,
@@ -1250,18 +1233,6 @@ int getRawVelocity (char *authToken,
   return rc;
 }
 
-int getmagneticfield_ (char *authToken,
-      char *dataset, float *time,
-      int *spatial, int *temporal,
-      int *count, float datain[][3], float dataout[][3],
-      int len_a, int len_d)
-{
-  return getMagneticField (authToken,
-    dataset, *time,
-    *spatial, *temporal,
-    *count, datain, dataout);
-}
-
 int getMagneticFieldSoap (char *authToken,
       char *dataset, float time,
       enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
@@ -1345,18 +1316,6 @@ int getRawMagneticField (char *authToken,
   __turblib_errno = rc;
 
   return rc;
-}
-
-int getvectorpotential_ (char *authToken,
-      char *dataset, float *time,
-      int *spatial, int *temporal,
-      int *count, float datain[][3], float dataout[][3],
-      int len_a, int len_d)
-{
-  return getVectorPotential (authToken,
-    dataset, *time,
-    *spatial, *temporal,
-    *count, datain, dataout);
 }
 
 int getVectorPotentialSoap (char *authToken,
@@ -1445,18 +1404,6 @@ int getRawVectorPotential (char *authToken,
 }
 
 
-int getpressure_ (char *authToken,
-      char *dataset, float *time,
-      int *spatial, int *temporal,
-      int *count, float datain[][3], float dataout[],
-      int len_a, int len_d)
-{
-  return getPressure (authToken,
-    dataset, *time,
-    *spatial, *temporal,
-    *count, datain, dataout);
-}
-
 int getPressureSoap (char *authToken,
       char *dataset, float time,
       enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
@@ -1541,18 +1488,6 @@ int getRawPressure (char *authToken,
   return rc;
 }
 
-int getdensity_ (char *authToken,
-      char *dataset, float *time,
-      int *spatial, int *temporal,
-      int *count, float datain[][3], float dataout[],
-      int len_a, int len_d)
-{
-  return getDensity (authToken,
-    dataset, *time,
-    *spatial, *temporal,
-    *count, datain, dataout);
-}
-
 int getDensitySoap (char *authToken,
       char *dataset, float time,
       enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
@@ -1592,18 +1527,6 @@ int getDensitySoap (char *authToken,
   return rc;
 }
 
-int getdensitygradient_(char *authToken,
-      char *dataset, float *time,
-      int *spatial, int *temporal,
-      int *count, float datain[][3], float dataout[][3],
-      int len_a, int len_d)
-{
-  return getDensityGradient(authToken,
-    dataset, *time,
-    *spatial, *temporal,
-    *count, datain, dataout);
-}
-
 int getDensityGradientSoap(char *authToken,
       char *dataset, float time,
       enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
@@ -1640,18 +1563,6 @@ int getDensityGradientSoap(char *authToken,
 
   __turblib_errno = rc;
   return rc;
-}
-
-int getdensityhessian_(char *authToken,
-      char *dataset, float *time,
-      int *spatial, int *temporal,
-      int *count, float datain[][3], float dataout[][6],
-      int len_a, int len_d)
-{
-  return getDensityHessian(authToken,
-    dataset, *time,
-    *spatial, *temporal,
-    *count, datain, dataout);
 }
 
 int getDensityHessianSoap(char *authToken,
@@ -1744,19 +1655,7 @@ int getRawDensity (char *authToken,
 /* Local Functions */
 
 #ifdef CUTOUT_SUPPORT
-int getVelocity (char *authToken,
-      char *dataset, float time,
-      enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
-      int count, float datain[][3], float dataout[][3])
-{
-  TurbDataset dataset_ = getDataSet(dataset);
 
-  if (isDataAvailable(dataset_, turb_velocity, count, datain, time, spatial, temporal))
-    return getValueLocal(dataset_, turb_velocity, spatial, temporal, time, count, datain, &dataout[0][0]);
-
-  else
-    return getVelocitySoap (authToken, dataset, time, spatial, temporal, count, datain, dataout);
-}
 
 int getValueLocal(TurbDataset dataset, TurbField func, enum SpatialInterpolation spatial, enum TemporalInterpolation temporal, float time, int count, float position[][3], float *result)
 {
@@ -1792,20 +1691,6 @@ int getValueLocal(TurbDataset dataset, TurbField func, enum SpatialInterpolation
   }
   freeLoadedMemory();
   return 0;
-}
-
-int getVelocityAndPressure (char *authToken,
-      char *dataset, float time,
-      enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
-      int count, float datain[][3], float dataout[][4])
-{
-  TurbDataset dataset_ = getDataSet(dataset);
-
-  if (isDataAvailable(dataset_, turb_vp, count, datain, time, spatial, temporal))
-    return getVelocityAndPressureLocal(dataset_, time, spatial, temporal, count, datain, dataout);
-
-  else
-    return getVelocityAndPressureSoap(authToken, dataset, time, spatial, temporal, count, datain, dataout);
 }
 
 int getVelocityAndPressureLocal (TurbDataset dataset, float time,
@@ -1847,39 +1732,11 @@ int getVelocityAndPressureLocal (TurbDataset dataset, float time,
 
 
 
-int getPressureHessian(char *authToken,
-      char *dataset, float time,
-      enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
-      int count, float datain[][3], float dataout[][6])
-{
-  TurbDataset dataset_ = getDataSet(dataset);
-
-  if (isDataAvailable(dataset_, turb_pressure, count, datain, time, spatial, temporal))
-    return getPressureHessianLocal(dataset_, time, spatial, temporal, count, datain, dataout);
-
-  else
-    return getPressureHessianSoap (authToken, dataset, time, spatial, temporal, count, datain, dataout);
-}
-
 int getPressureHessianLocal (TurbDataset dataset, float time, enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
   int count, float input[count][3], float output[count][6])
 {
   if(!validateParams(spatial, dataset, 1)) return -1;
   return getHessian(dataset, turb_pressure, time, spatial, temporal, count, input, &output[0][0]);
-}
-
-int getVelocityGradient(char *authToken,
-      char *dataset, float time,
-      enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
-      int count, float datain[][3], float dataout[][9])
-{
-  TurbDataset dataset_ = getDataSet(dataset);
-
-  if (isDataAvailable(dataset_,  turb_velocity, count, datain, time, spatial, temporal))
-    return getVelocityGradientLocal(dataset_, time, spatial, temporal, count, datain, dataout);
-
-  else
-    return getVelocityGradientSoap (authToken, dataset, time, spatial, temporal, count, datain, dataout);
 }
 
 int getVelocityGradientLocal (TurbDataset dataset, float time, enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
@@ -1931,20 +1788,6 @@ int getVectorPotentialGradientLocal (TurbDataset dataset, float time, enum Spati
   return getGradient(dataset, turb_potential, time, spatial, temporal, count, input, &output[0][0]);
 }
 
-int getPressureGradient(char *authToken,
-      char *dataset, float time,
-      enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
-      int count, float datain[][3], float dataout[][3])
-{
-  TurbDataset dataset_ = getDataSet(dataset);
-
-  if (isDataAvailable(dataset_, turb_pressure, count, datain, time, spatial, temporal))
-    return getPressureGradientLocal(dataset_, time, spatial, temporal, count, datain, dataout);
-
-  else
-    return getPressureGradientSoap (authToken, dataset, time, spatial, temporal, count, datain, dataout);
-}
-
 int getPressureGradientLocal (TurbDataset dataset, float time, enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
   int count, float input[count][3], float output[count][3])
 {
@@ -1952,38 +1795,11 @@ int getPressureGradientLocal (TurbDataset dataset, float time, enum SpatialInter
   return getGradient(dataset, turb_pressure, time, spatial, temporal, count, input, &output[0][0]);
 }
 
-int getVelocityHessian(char *authToken,
-      char *dataset, float time,
-      enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
-      int count, float datain[][3], float dataout[][18])
-{
-  TurbDataset dataset_ = getDataSet(dataset);
-
-  if (isDataAvailable(dataset_, turb_velocity, count, datain, time, spatial, temporal))
-    return getVelocityHessianLocal(dataset_, time, spatial, temporal, count, datain, dataout);
-  else
-    return getVelocityHessianSoap (authToken, dataset, time, spatial, temporal, count, datain, dataout);
-}
-
 int getVelocityHessianLocal (TurbDataset dataset, float time, enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
   int count, float input[count][3], float output[count][18])
 {
   if(!validateParams(spatial, dataset, 1)) return -1;
   return getHessian(dataset, turb_velocity, time, spatial, temporal, count, input, &output[0][0]);
-}
-
-int getVelocityLaplacian (char *authToken,
-      char *dataset, float time,
-      enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
-      int count, float datain[][3], float dataout[][3])
-{
-  TurbDataset dataset_ = getDataSet(dataset);
-
-  if (isDataAvailable(dataset_, turb_velocity, count, datain, time, spatial, temporal))
-    return getVelocityLaplacianLocal (dataset_, time, spatial, temporal, count, datain, dataout);
-
-  else
-    return getVelocityLaplacianSoap (authToken, dataset, time, spatial, temporal, count, datain, dataout);
 }
 
 int getVelocityLaplacianLocal (TurbDataset dataset, float time, enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
@@ -2105,20 +1921,6 @@ int getVectorPotential (char *authToken,
 
   else
     return getVectorPotentialSoap (authToken, dataset, time, spatial, temporal, count, datain, dataout);
-}
-
-int getPressure (char *authToken,
-      char *dataset, float time,
-      enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
-      int count, float datain[][3], float dataout[])
-{
-  TurbDataset dataset_ = getDataSet(dataset);
-
-  if (isDataAvailable(dataset_, turb_pressure, count, datain, time, spatial, temporal))
-    return getValueLocal(dataset_, turb_pressure, spatial, temporal, time, count, datain, &dataout[0]);
-
-  else
-    return getPressureSoap (authToken, dataset, time, spatial, temporal, count, datain, dataout);
 }
 
 int getDensity (char *authToken,
@@ -3935,6 +3737,222 @@ int getvelocity_ (char *authToken,
       int len_a, int len_d)
 {
   return getVelocity (authToken,
+    dataset, *time,
+    *spatial, *temporal,
+    *count, datain, dataout);
+}
+
+int getvelocitygradient_(char *authToken,
+      char *dataset, float *time,
+      int *spatial, int *temporal,
+      int *count, float datain[][3], float dataout[][9],
+      int len_a, int len_d)
+{
+  return getVelocityGradient(authToken,
+    dataset, *time,
+    *spatial, *temporal,
+    *count, datain, dataout);
+}
+
+int getvelocityhessian_(char *authToken,
+      char *dataset, float *time,
+      int *spatial, int *temporal,
+      int *count, float datain[][3], float dataout[][18],
+      int len_a, int len_d)
+{
+  return getVelocityHessian(authToken,
+    dataset, *time,
+    *spatial, *temporal,
+    *count, datain, dataout);
+}
+
+int getvelocitylaplacian_ (char *authToken,
+      char *dataset, float *time,
+      int *spatial, int *temporal,
+      int *count, float datain[][3], float dataout[][3],
+      int len_a, int len_d)
+{
+  return getVelocityLaplacian (authToken,
+    dataset, *time,
+    *spatial, *temporal,
+    *count, datain, dataout);
+}
+
+int getmagneticfield_ (char *authToken,
+      char *dataset, float *time,
+      int *spatial, int *temporal,
+      int *count, float datain[][3], float dataout[][3],
+      int len_a, int len_d)
+{
+  return getMagneticField (authToken,
+    dataset, *time,
+    *spatial, *temporal,
+    *count, datain, dataout);
+}
+
+int getvectorpotential_ (char *authToken,
+      char *dataset, float *time,
+      int *spatial, int *temporal,
+      int *count, float datain[][3], float dataout[][3],
+      int len_a, int len_d)
+{
+  return getVectorPotential (authToken,
+    dataset, *time,
+    *spatial, *temporal,
+    *count, datain, dataout);
+}
+
+int getvelocityandpressure_ (char *authToken,
+      char *dataset, float *time,
+      int *spatial, int *temporal,
+      int *count, float datain[][3], float dataout[][4],
+      int len_a, int len_d)
+{
+  return getVelocityAndPressure (authToken,
+    dataset, *time,
+    *spatial, *temporal,
+    *count, datain, dataout);
+}
+
+int getpressurehessian_(char *authToken,
+      char *dataset, float *time,
+      int *spatial, int *temporal,
+      int *count, float datain[][3], float dataout[][6],
+      int len_a, int len_d)
+{
+  return getPressureHessian(authToken,
+    dataset, *time,
+    *spatial, *temporal,
+    *count, datain, dataout);
+}
+
+int getmagneticfieldlaplacian_ (char *authToken,
+      char *dataset, float *time,
+      int *spatial, int *temporal,
+      int *count, float datain[][3], float dataout[][3],
+      int len_a, int len_d)
+{
+  return getMagneticFieldLaplacian (authToken,
+    dataset, *time,
+    *spatial, *temporal,
+    *count, datain, dataout);
+}
+
+int getvectorpotentiallaplacian_ (char *authToken,
+      char *dataset, float *time,
+      int *spatial, int *temporal,
+      int *count, float datain[][3], float dataout[][3],
+      int len_a, int len_d)
+{
+  return getVectorPotentialLaplacian (authToken,
+    dataset, *time,
+    *spatial, *temporal,
+    *count, datain, dataout);
+}
+
+int getdensityhessian_(char *authToken,
+      char *dataset, float *time,
+      int *spatial, int *temporal,
+      int *count, float datain[][3], float dataout[][6],
+      int len_a, int len_d)
+{
+  return getDensityHessian(authToken,
+    dataset, *time,
+    *spatial, *temporal,
+    *count, datain, dataout);
+}
+
+int getdensitygradient_(char *authToken,
+      char *dataset, float *time,
+      int *spatial, int *temporal,
+      int *count, float datain[][3], float dataout[][3],
+      int len_a, int len_d)
+{
+  return getDensityGradient(authToken,
+    dataset, *time,
+    *spatial, *temporal,
+    *count, datain, dataout);
+}
+
+int getdensity_ (char *authToken,
+      char *dataset, float *time,
+      int *spatial, int *temporal,
+      int *count, float datain[][3], float dataout[],
+      int len_a, int len_d)
+{
+  return getDensity (authToken,
+    dataset, *time,
+    *spatial, *temporal,
+    *count, datain, dataout);
+}
+
+int getpressure_ (char *authToken,
+      char *dataset, float *time,
+      int *spatial, int *temporal,
+      int *count, float datain[][3], float dataout[],
+      int len_a, int len_d)
+{
+  return getPressure (authToken,
+    dataset, *time,
+    *spatial, *temporal,
+    *count, datain, dataout);
+}
+
+int getvectorpotentialhessian_(char *authToken,
+      char *dataset, float *time,
+      int *spatial, int *temporal,
+      int *count, float datain[][3], float dataout[][18],
+      int len_a, int len_d)
+{
+  return getVectorPotentialHessian(authToken,
+    dataset, *time,
+    *spatial, *temporal,
+    *count, datain, dataout);
+}
+
+int getpressuregradient_(char *authToken,
+      char *dataset, float *time,
+      int *spatial, int *temporal,
+      int *count, float datain[][3], float dataout[][3],
+      int len_a, int len_d)
+{
+  return getPressureGradient(authToken,
+    dataset, *time,
+    *spatial, *temporal,
+    *count, datain, dataout);
+}
+
+int getmagneticfieldgradient_(char *authToken,
+      char *dataset, float *time,
+      int *spatial, int *temporal,
+      int *count, float datain[][3], float dataout[][9],
+      int len_a, int len_d)
+{
+  return getMagneticFieldGradient(authToken,
+    dataset, *time,
+    *spatial, *temporal,
+    *count, datain, dataout);
+}
+
+int getvectorpotentialgradient_(char *authToken,
+      char *dataset, float *time,
+      int *spatial, int *temporal,
+      int *count, float datain[][3], float dataout[][9],
+      int len_a, int len_d)
+{
+  return getVectorPotentialGradient(authToken,
+    dataset, *time,
+    *spatial, *temporal,
+    *count, datain, dataout);
+}
+
+int getmagneticfieldhessian_(char *authToken,
+      char *dataset, float *time,
+      int *spatial, int *temporal,
+      int *count, float datain[][3], float dataout[][18],
+      int len_a, int len_d)
+{
+  return getMagneticFieldHessian(authToken,
     dataset, *time,
     *spatial, *temporal,
     *count, datain, dataout);
