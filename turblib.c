@@ -2740,7 +2740,7 @@ int validateParams(enum SpatialInterpolation spatial, TurbDataset set, int useFD
       (!useFD && nOrderFD != 0) ||
       (nOrderLag != 0 && nOrderLag != 4 && nOrderLag != 6 && nOrderLag != 8) ||
       (set < 0)
-    )  { fprintf(stderr, "Error: Invaled interpolation parameter specified\n"); return 0; }
+    )  { fprintf(stderr, "Error: Invalid interpolation parameter specified\n"); return 0; }
 
   return 1;
 }
