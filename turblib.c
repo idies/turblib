@@ -2322,9 +2322,9 @@ int isDataAvailable(TurbDataset set, TurbField function, int count, float positi
 {
   if (set == channel)
     {
-      printf("The client library does not currently provide local implementaions"
-		 "of the server-side functions for the channel flow dataset."
-	     " Redirecting to the server...\n");
+      printf("The client library does not currently provide local implementations "
+		 "of the server-side functions for the channel flow dataset. "
+	     "Redirecting to the server...\n");
       return 0;
     }
 
