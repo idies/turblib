@@ -169,23 +169,23 @@ typedef struct
 #endif//CUTOUT_SUPPORT
 
 /* C */
-void soapinit ();
-void soapdestroy ();
+void soapinit (void);
+void soapdestroy (void);
 
 /* Fortran */
-void soapinit_ ();
-void soapdestroy_ ();
+void soapinit_ (void);
+void soapdestroy_ (void);
 
 /* C */
-char *turblibGetErrorString ();
-int turblibGetErrorNumber ();
-void turblibPrintError ();
+char *turblibGetErrorString (void);
+int turblibGetErrorNumber (void);
+void turblibPrintError (void);
 void turblibSetExitOnError (int);
 
 /* Fortran */
 void turblibgeterrorstring_ (char *dest, int len);
-int turblibgeterrornumber_();
-void turblibprinterror_();
+int turblibgeterrornumber_(void);
+void turblibprinterror_(void);
 void turblibsetexitonerror_(int *);
 
 /* C */
