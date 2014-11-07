@@ -126,23 +126,23 @@ wsdl:
 
 testwsdl:
 	wsdl2h -o TurbulenceService.h -n turb -c "http://test.turbulence.pha.jhu.edu/service/turbulence.asmx?WSDL" -s
-	soapcpp2 -CLcx -2 TurbulenceService.h
+	soapcpp2 -CLcx -2 -I.:$(SOAP_INCLUDE_DIR) TurbulenceService.h
 
 mhdtestwsdl:
 	wsdl2h -o TurbulenceService.h -n turb -c "http://mhdtest.turbulence.pha.jhu.edu/service/turbulence.asmx?WSDL" -s
-	soapcpp2 -CLcx -2 TurbulenceService.h
+	soapcpp2 -CLcx -2 -I.:$(SOAP_INCLUDE_DIR) TurbulenceService.h
 
 devwsdl:
 	wsdl2h -o TurbulenceService.h -n turb -c "http://dev.turbulence.pha.jhu.edu/service/turbulence.asmx?WSDL" -s
-	soapcpp2 -CLcx -2 TurbulenceService.h
+	soapcpp2 -CLcx -2 -I.:$(SOAP_INCLUDE_DIR) TurbulenceService.h
 
 mhddevwsdl:
 	wsdl2h -o TurbulenceService.h -n turb -c "http://mhddev.turbulence.pha.jhu.edu/service/turbulence.asmx?WSDL" -s
-	soapcpp2 -CLcx -2 TurbulenceService.h
+	soapcpp2 -CLcx -2 -I.:$(SOAP_INCLUDE_DIR) TurbulenceService.h
 
 prodtestwsdl:
 	wsdl2h -o TurbulenceService.h -n turb -c "http://prodtest.turbulence.pha.jhu.edu/service/turbulence.asmx?WSDL" -s
-	soapcpp2 -CLcx -2 TurbulenceService.h
+	soapcpp2 -CLcx -2 -I.:$(SOAP_INCLUDE_DIR) TurbulenceService.h
 
 clean:
 	$(RM) *.o *.exe turbf turbc mhdc mhdf channelc channelf mixingc mixingf compiler_flags
