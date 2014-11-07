@@ -122,7 +122,7 @@ TurbulenceService.h : wsdl
 # Update the WSDL and gSOAP interfaces
 wsdl:
 	wsdl2h -o TurbulenceService.h -n turb -c "http://turbulence.pha.jhu.edu/service/turbulence.asmx?WSDL" -s
-	soapcpp2 -CLcx -2 TurbulenceService.h
+	soapcpp2 -CLcx -2 -I.:$(SOAP_INCLUDE_DIR) TurbulenceService.h
 
 testwsdl:
 	wsdl2h -o TurbulenceService.h -n turb -c "http://test.turbulence.pha.jhu.edu/service/turbulence.asmx?WSDL" -s
