@@ -50,7 +50,7 @@ int main(int argc, char *argv[]) {
   char *threshold_field = "vorticity";
   ThresholdInfo *threshold_array;      /* dynamic array for the results of Threshold queries */
   int threshold_array_size;            /* size of the threshold array */
-  float threshold = 0.5f;
+  float threshold = 70.0f;
 
   /* Initialize gSOAP */
   soapinit();
