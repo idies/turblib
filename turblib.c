@@ -213,7 +213,7 @@ void soapdestroy () {
   soap_destroy(&__jhuturbsoap);
 }
 
-inline int getVelocity (char *authToken,
+int getVelocity (char *authToken,
              char *dataset, float time,
              enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
              int count, float datain[][3], float dataout[][3])
@@ -229,7 +229,7 @@ inline int getVelocity (char *authToken,
     return getVelocitySoap (authToken, dataset, time, spatial, temporal, count, datain, dataout);
 }
 
-inline int getVelocityAndPressure (char *authToken,
+int getVelocityAndPressure (char *authToken,
       char *dataset, float time,
       enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
       int count, float datain[][3], float dataout[][4])
@@ -245,7 +245,7 @@ inline int getVelocityAndPressure (char *authToken,
     return getVelocityAndPressureSoap(authToken, dataset, time, spatial, temporal, count, datain, dataout);
 }
 
-inline int getPressure (char *authToken,
+int getPressure (char *authToken,
       char *dataset, float time,
       enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
       int count, float datain[][3], float dataout[])
@@ -261,7 +261,7 @@ inline int getPressure (char *authToken,
     return getPressureSoap (authToken, dataset, time, spatial, temporal, count, datain, dataout);
 }
 
-inline int getPressureHessian(char *authToken,
+int getPressureHessian(char *authToken,
       char *dataset, float time,
       enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
       int count, float datain[][3], float dataout[][6])
@@ -277,7 +277,7 @@ inline int getPressureHessian(char *authToken,
     return getPressureHessianSoap (authToken, dataset, time, spatial, temporal, count, datain, dataout);
 }
 
-inline int getVelocityGradient(char *authToken,
+int getVelocityGradient(char *authToken,
       char *dataset, float time,
       enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
       int count, float datain[][3], float dataout[][9])
@@ -293,7 +293,7 @@ inline int getVelocityGradient(char *authToken,
     return getVelocityGradientSoap (authToken, dataset, time, spatial, temporal, count, datain, dataout);
 }
 
-inline int getVelocityHessian(char *authToken,
+int getVelocityHessian(char *authToken,
       char *dataset, float time,
       enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
       int count, float datain[][3], float dataout[][18])
@@ -308,7 +308,7 @@ inline int getVelocityHessian(char *authToken,
     return getVelocityHessianSoap (authToken, dataset, time, spatial, temporal, count, datain, dataout);
 }
 
-inline int getVelocityLaplacian (char *authToken,
+int getVelocityLaplacian (char *authToken,
       char *dataset, float time,
       enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
       int count, float datain[][3], float dataout[][3])
@@ -324,7 +324,7 @@ inline int getVelocityLaplacian (char *authToken,
     return getVelocityLaplacianSoap (authToken, dataset, time, spatial, temporal, count, datain, dataout);
 }
 
-inline int getPressureGradient(char *authToken,
+int getPressureGradient(char *authToken,
       char *dataset, float time,
       enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
       int count, float datain[][3], float dataout[][3])
@@ -340,7 +340,7 @@ inline int getPressureGradient(char *authToken,
     return getPressureGradientSoap (authToken, dataset, time, spatial, temporal, count, datain, dataout);
 }
 
-inline int getMagneticFieldGradient(char *authToken,
+int getMagneticFieldGradient(char *authToken,
       char *dataset, float time,
       enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
       int count, float datain[][3], float dataout[][9])
@@ -356,7 +356,7 @@ inline int getMagneticFieldGradient(char *authToken,
     return getMagneticFieldGradientSoap (authToken, dataset, time, spatial, temporal, count, datain, dataout);
 }
 
-inline int getVectorPotentialGradient(char *authToken,
+int getVectorPotentialGradient(char *authToken,
       char *dataset, float time,
       enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
       int count, float datain[][3], float dataout[][9])
@@ -372,7 +372,7 @@ inline int getVectorPotentialGradient(char *authToken,
     return getVectorPotentialGradientSoap (authToken, dataset, time, spatial, temporal, count, datain, dataout);
 }
 
-inline int getMagneticFieldHessian(char *authToken,
+int getMagneticFieldHessian(char *authToken,
       char *dataset, float time,
       enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
       int count, float datain[][3], float dataout[][18])
@@ -388,7 +388,7 @@ inline int getMagneticFieldHessian(char *authToken,
     return getMagneticFieldHessianSoap (authToken, dataset, time, spatial, temporal, count, datain, dataout);
 }
 
-inline int getMagneticFieldLaplacian (char *authToken,
+int getMagneticFieldLaplacian (char *authToken,
       char *dataset, float time,
       enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
       int count, float datain[][3], float dataout[][3])
@@ -404,7 +404,7 @@ inline int getMagneticFieldLaplacian (char *authToken,
     return getMagneticFieldLaplacianSoap (authToken, dataset, time, spatial, temporal, count, datain, dataout);
 }
 
-inline int getMagneticField (char *authToken,
+int getMagneticField (char *authToken,
       char *dataset, float time,
       enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
       int count, float datain[][3], float dataout[][3])
@@ -420,7 +420,7 @@ inline int getMagneticField (char *authToken,
     return getMagneticFieldSoap (authToken, dataset, time, spatial, temporal, count, datain, dataout);
 }
 
-inline int getVectorPotentialHessian(char *authToken,
+int getVectorPotentialHessian(char *authToken,
       char *dataset, float time,
       enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
       int count, float datain[][3], float dataout[][18])
@@ -436,7 +436,7 @@ inline int getVectorPotentialHessian(char *authToken,
     return getVectorPotentialHessianSoap (authToken, dataset, time, spatial, temporal, count, datain, dataout);
 }
 
-inline int getVectorPotentialLaplacian (char *authToken,
+int getVectorPotentialLaplacian (char *authToken,
       char *dataset, float time,
       enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
       int count, float datain[][3], float dataout[][3])
@@ -452,7 +452,7 @@ inline int getVectorPotentialLaplacian (char *authToken,
     return getVectorPotentialLaplacianSoap (authToken, dataset, time, spatial, temporal, count, datain, dataout);
 }
 
-inline int getVectorPotential (char *authToken,
+int getVectorPotential (char *authToken,
       char *dataset, float time,
       enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
       int count, float datain[][3], float dataout[][3])
@@ -468,7 +468,7 @@ inline int getVectorPotential (char *authToken,
     return getVectorPotentialSoap (authToken, dataset, time, spatial, temporal, count, datain, dataout);
 }
 
-inline int getDensity (char *authToken,
+int getDensity (char *authToken,
       char *dataset, float time,
       enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
       int count, float datain[][3], float dataout[])
@@ -484,7 +484,7 @@ inline int getDensity (char *authToken,
     return getDensitySoap (authToken, dataset, time, spatial, temporal, count, datain, dataout);
 }
 
-inline int getDensityGradient(char *authToken,
+int getDensityGradient(char *authToken,
       char *dataset, float time,
       enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
       int count, float datain[][3], float dataout[][3])
@@ -697,6 +697,198 @@ int getBoxFilterSGS (char *authToken,
     if (rc == SOAP_OK) {
         memcpy(dataout, output.GetBoxFilterSGSResult->SGSTensor,
 	       output.GetBoxFilterSGSResult->__sizeSGSTensor * sizeof(float) * 6);
+        bzero(__turblib_err, TURB_ERROR_LENGTH);
+    } else {
+      soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
+      turblibHandleError();
+    }
+
+    soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
+    soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
+
+    __turblib_errno = rc;
+
+    return rc;
+}
+
+int getboxfiltersgsscalar_ (char *authToken,
+                   char *dataset, char *field, float *time, float *filterwidth,
+                   int *count, float datain[][3], float dataout[],
+                   int len_a, int len_d)
+{
+    return getBoxFilterSGSscalar (authToken,
+                         dataset, field, *time, *filterwidth,
+                         *count, datain, dataout);
+}
+
+int getBoxFilterSGSscalar (char *authToken,
+                  char *dataset, char *field, float time, float filterwidth,
+                  int count, float datain[][3], float dataout[])
+{
+    int rc;
+
+    struct _turb1__GetBoxFilterSGSscalar input;
+    struct _turb1__GetBoxFilterSGSscalarResponse output;
+
+    input.authToken = authToken;
+    input.dataset = dataset;
+    input.field = field;
+    input.time = time;
+    input.filterwidth = filterwidth;
+
+    struct turb1__ArrayOfPoint3 pointArray;
+    pointArray.__sizePoint3 = count;
+    pointArray.Point3 = (void *)datain;
+    input.points = &pointArray;
+
+    rc = soap_call___turb2__GetBoxFilterSGSscalar(&__jhuturbsoap, NULL, NULL, &input, &output);
+    if (rc == SOAP_OK) {
+        memcpy(dataout, output.GetBoxFilterSGSscalarResult->float_,
+	       output.GetBoxFilterSGSscalarResult->__sizefloat_ * sizeof(float));
+        bzero(__turblib_err, TURB_ERROR_LENGTH);
+    } else {
+      soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
+      turblibHandleError();
+    }
+
+    soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
+    soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
+
+    __turblib_errno = rc;
+
+    return rc;
+}
+
+int getboxfiltersgsvector_ (char *authToken,
+                   char *dataset, char *field, float *time, float *filterwidth,
+                   int *count, float datain[][3], float dataout[][3],
+                   int len_a, int len_d)
+{
+    return getBoxFilterSGSvector (authToken,
+                         dataset, field, *time, *filterwidth,
+                         *count, datain, dataout);
+}
+
+int getBoxFilterSGSvector (char *authToken,
+                  char *dataset, char *field, float time, float filterwidth,
+                  int count, float datain[][3], float dataout[][3])
+{
+    int rc;
+
+    struct _turb1__GetBoxFilterSGSvector input;
+    struct _turb1__GetBoxFilterSGSvectorResponse output;
+
+    input.authToken = authToken;
+    input.dataset = dataset;
+    input.field = field;
+    input.time = time;
+    input.filterwidth = filterwidth;
+
+    struct turb1__ArrayOfPoint3 pointArray;
+    pointArray.__sizePoint3 = count;
+    pointArray.Point3 = (void *)datain;
+    input.points = &pointArray;
+
+    rc = soap_call___turb2__GetBoxFilterSGSvector(&__jhuturbsoap, NULL, NULL, &input, &output);
+    if (rc == SOAP_OK) {
+        memcpy(dataout, output.GetBoxFilterSGSvectorResult->Vector3,
+	       output.GetBoxFilterSGSvectorResult->__sizeVector3 * sizeof(float) * 3);
+        bzero(__turblib_err, TURB_ERROR_LENGTH);
+    } else {
+      soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
+      turblibHandleError();
+    }
+
+    soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
+    soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
+
+    __turblib_errno = rc;
+
+    return rc;
+}
+
+int getboxfiltersgssymtensor_ (char *authToken,
+                   char *dataset, char *field, float *time, float *filterwidth,
+                   int *count, float datain[][3], float dataout[][6],
+                   int len_a, int len_d)
+{
+    return getBoxFilterSGSsymtensor (authToken,
+                         dataset, field, *time, *filterwidth,
+                         *count, datain, dataout);
+}
+
+int getBoxFilterSGSsymtensor (char *authToken,
+                  char *dataset, char *field, float time, float filterwidth,
+                  int count, float datain[][3], float dataout[][6])
+{
+    int rc;
+
+    struct _turb1__GetBoxFilterSGSsymtensor input;
+    struct _turb1__GetBoxFilterSGSsymtensorResponse output;
+
+    input.authToken = authToken;
+    input.dataset = dataset;
+    input.field = field;
+    input.time = time;
+    input.filterwidth = filterwidth;
+
+    struct turb1__ArrayOfPoint3 pointArray;
+    pointArray.__sizePoint3 = count;
+    pointArray.Point3 = (void *)datain;
+    input.points = &pointArray;
+
+    rc = soap_call___turb2__GetBoxFilterSGSsymtensor(&__jhuturbsoap, NULL, NULL, &input, &output);
+    if (rc == SOAP_OK) {
+        memcpy(dataout, output.GetBoxFilterSGSsymtensorResult->SGSTensor,
+	       output.GetBoxFilterSGSsymtensorResult->__sizeSGSTensor * sizeof(float) * 6);
+        bzero(__turblib_err, TURB_ERROR_LENGTH);
+    } else {
+      soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
+      turblibHandleError();
+    }
+
+    soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
+    soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
+
+    __turblib_errno = rc;
+
+    return rc;
+}
+
+int getboxfiltersgstensor_ (char *authToken,
+                   char *dataset, char *field, float *time, float *filterwidth,
+                   int *count, float datain[][3], float dataout[][9],
+                   int len_a, int len_d)
+{
+    return getBoxFilterSGStensor (authToken,
+                         dataset, field, *time, *filterwidth,
+                         *count, datain, dataout);
+}
+
+int getBoxFilterSGStensor (char *authToken,
+                  char *dataset, char *field, float time, float filterwidth,
+                  int count, float datain[][3], float dataout[][9])
+{
+    int rc;
+
+    struct _turb1__GetBoxFilterSGStensor input;
+    struct _turb1__GetBoxFilterSGStensorResponse output;
+
+    input.authToken = authToken;
+    input.dataset = dataset;
+    input.field = field;
+    input.time = time;
+    input.filterwidth = filterwidth;
+
+    struct turb1__ArrayOfPoint3 pointArray;
+    pointArray.__sizePoint3 = count;
+    pointArray.Point3 = (void *)datain;
+    input.points = &pointArray;
+
+    rc = soap_call___turb2__GetBoxFilterSGStensor(&__jhuturbsoap, NULL, NULL, &input, &output);
+    if (rc == SOAP_OK) {
+        memcpy(dataout, output.GetBoxFilterSGStensorResult->VelocityGradient,
+	       output.GetBoxFilterSGStensorResult->__sizeVelocityGradient * sizeof(float) * 9);
         bzero(__turblib_err, TURB_ERROR_LENGTH);
     } else {
       soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);

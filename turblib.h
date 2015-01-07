@@ -240,6 +240,50 @@ int getboxfiltersgs_ (char *authToken,
                    int len_a, int len_d);
 
 /* C */
+int getBoxFilterSGSscalar (char *authToken,
+                  char *dataset, char *field, float time, float filterwidth,
+                  int count, float datain[][3], float dataout[]);
+
+/* Fortran */
+int getboxfiltersgsscalar_ (char *authToken,
+                   char *dataset, char *field, float *time, float *filterwidth,
+                   int *count, float datain[][3], float dataout[],
+                   int len_a, int len_d);
+
+/* C */
+int getBoxFilterSGSvector (char *authToken,
+                  char *dataset, char *field, float time, float filterwidth,
+                  int count, float datain[][3], float dataout[][3]);
+
+/* Fortran */
+int getboxfiltersgsvector_ (char *authToken,
+                   char *dataset, char *field, float *time, float *filterwidth,
+                   int *count, float datain[][3], float dataout[][3],
+                   int len_a, int len_d);
+
+/* C */
+int getBoxFilterSGSsymtensor (char *authToken,
+                  char *dataset, char *field, float time, float filterwidth,
+                  int count, float datain[][3], float dataout[][6]);
+
+/* Fortran */
+int getboxfiltersgssymtensor_ (char *authToken,
+                   char *dataset, char *field, float *time, float *filterwidth,
+                   int *count, float datain[][3], float dataout[][6],
+                   int len_a, int len_d);
+
+/* C */
+int getBoxFilterSGStensor (char *authToken,
+                  char *dataset, char *field, float time, float filterwidth,
+                  int count, float datain[][3], float dataout[][9]);
+
+/* Fortran */
+int getboxfiltersgstensor_ (char *authToken,
+                   char *dataset, char *field, float *time, float *filterwidth,
+                   int *count, float datain[][3], float dataout[][9],
+                   int len_a, int len_d);
+
+/* C */
 int getBoxFilterGradient(char *authToken,
 			 char *dataset, char *field, float time,
 			 float filterwidth, float spacing,
@@ -700,97 +744,97 @@ int computeLaplacian(dataKernel* kernel, int comps, float dx, int size, int nOrd
 }
 #endif//__cplusplus
 
-inline int getVelocity (char *authToken,
+int getVelocity (char *authToken,
              char *dataset, float time,
              enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
              int count, float datain[][3], float dataout[][3]);
 
-inline int getVelocityAndPressure (char *authToken,
+int getVelocityAndPressure (char *authToken,
 		     char *dataset, float time,
 		     enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
 		     int count, float datain[][3], float dataout[][4]);
 
-inline int getVelocityGradient (char *authToken,
+int getVelocityGradient (char *authToken,
 		     char *dataset, float time,
 		     enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
 		     int count, float datain[][3], float dataout[][9]);
 
-inline int getVelocityHessian (char *authToken,
+int getVelocityHessian (char *authToken,
 		     char *dataset, float time,
 		     enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
 		     int count, float datain[][3], float dataout[][18]);
 
-inline int getVelocityLaplacian (char *authToken,
+int getVelocityLaplacian (char *authToken,
 		     char *dataset, float time,
 		     enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
 		     int count, float datain[][3], float dataout[][3]);
 
-inline int getPressure (char *authToken,
+int getPressure (char *authToken,
 		     char *dataset, float time,
 		     enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
 		     int count, float datain[][3], float dataout[]);
 
-inline int getPressureGradient (char *authToken,
+int getPressureGradient (char *authToken,
 		     char *dataset, float time,
 		     enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
 		     int count, float datain[][3], float dataout[][3]);
 
-inline int getPressureHessian (char *authToken,
+int getPressureHessian (char *authToken,
 		     char *dataset, float time,
 		     enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
 		     int count, float datain[][3], float dataout[][6]);
 
-inline int getMagneticField (char *authToken,
+int getMagneticField (char *authToken,
 		     char *dataset, float time,
 		     enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
 		     int count, float datain[][3], float dataout[][3]);
 
-inline int getMagneticFieldGradient (char *authToken,
+int getMagneticFieldGradient (char *authToken,
 		     char *dataset, float time,
 		     enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
 		     int count, float datain[][3], float dataout[][9]);
 
-inline int getMagneticFieldHessian (char *authToken,
+int getMagneticFieldHessian (char *authToken,
 		     char *dataset, float time,
 		     enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
 		     int count, float datain[][3], float dataout[][18]);
 
-inline int getMagneticFieldLaplacian (char *authToken,
+int getMagneticFieldLaplacian (char *authToken,
 		     char *dataset, float time,
 		     enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
 		     int count, float datain[][3], float dataout[][3]);
 
-inline int getVectorPotential (char *authToken,
+int getVectorPotential (char *authToken,
 		     char *dataset, float time,
 		     enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
 		     int count, float datain[][3], float dataout[][3]);
 
-inline int getVectorPotentialGradient (char *authToken,
+int getVectorPotentialGradient (char *authToken,
 		     char *dataset, float time,
 		     enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
 		     int count, float datain[][3], float dataout[][9]);
 
-inline int getVectorPotentialHessian (char *authToken,
+int getVectorPotentialHessian (char *authToken,
 		     char *dataset, float time,
 		     enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
 		     int count, float datain[][3], float dataout[][18]);
 
-inline int getVectorPotentialLaplacian (char *authToken,
+int getVectorPotentialLaplacian (char *authToken,
 		     char *dataset, float time,
 		     enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
 		     int count, float datain[][3], float dataout[][3]);
 
-inline int getDensity (char *authToken,
+int getDensity (char *authToken,
 		     char *dataset, float time,
 		     enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
 		     int count, float datain[][3], float dataout[]);
 
-inline int getDensityGradient (char *authToken,
+int getDensityGradient (char *authToken,
 		     char *dataset, float time,
 		     enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
 		     int count, float datain[][3], float dataout[][3]);
 
-inline int getDensityHessian (char *authToken,
+int getDensityHessian (char *authToken,
 		     char *dataset, float time,
 		     enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
 		     int count, float datain[][3], float dataout[][6]);

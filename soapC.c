@@ -19,7 +19,7 @@ compiling, linking, and/or using OpenSSL is allowed.
 extern "C" {
 #endif
 
-SOAP_SOURCE_STAMP("@(#) soapC.c ver 2.8.8 2014-08-01 18:48:23 GMT")
+SOAP_SOURCE_STAMP("@(#) soapC.c ver 2.8.8 2015-01-07 17:06:37 GMT")
 
 
 #ifndef WITH_NOGLOBAL
@@ -206,6 +206,8 @@ SOAP_FMAC3 void * SOAP_FMAC4 soap_getelement(struct soap *soap, int *type)
 		return soap_in_turb1__ThresholdInfo(soap, NULL, NULL, "turb1:ThresholdInfo");
 	case SOAP_TYPE_turb1__ArrayOfThresholdInfo:
 		return soap_in_turb1__ArrayOfThresholdInfo(soap, NULL, NULL, "turb1:ArrayOfThresholdInfo");
+	case SOAP_TYPE_turb1__ArrayOfFloat:
+		return soap_in_turb1__ArrayOfFloat(soap, NULL, NULL, "turb1:ArrayOfFloat");
 	case SOAP_TYPE_turb1__SGSTensor:
 		return soap_in_turb1__SGSTensor(soap, NULL, NULL, "turb1:SGSTensor");
 	case SOAP_TYPE_turb1__ArrayOfSGSTensor:
@@ -252,6 +254,22 @@ SOAP_FMAC3 void * SOAP_FMAC4 soap_getelement(struct soap *soap, int *type)
 		return soap_in_PointerTo_turb1__GetBoxFilterGradientResponse(soap, NULL, NULL, "turb1:GetBoxFilterGradientResponse");
 	case SOAP_TYPE_PointerTo_turb1__GetBoxFilterGradient:
 		return soap_in_PointerTo_turb1__GetBoxFilterGradient(soap, NULL, NULL, "turb1:GetBoxFilterGradient");
+	case SOAP_TYPE_PointerTo_turb1__GetBoxFilterSGSscalarResponse:
+		return soap_in_PointerTo_turb1__GetBoxFilterSGSscalarResponse(soap, NULL, NULL, "turb1:GetBoxFilterSGSscalarResponse");
+	case SOAP_TYPE_PointerTo_turb1__GetBoxFilterSGSscalar:
+		return soap_in_PointerTo_turb1__GetBoxFilterSGSscalar(soap, NULL, NULL, "turb1:GetBoxFilterSGSscalar");
+	case SOAP_TYPE_PointerTo_turb1__GetBoxFilterSGSvectorResponse:
+		return soap_in_PointerTo_turb1__GetBoxFilterSGSvectorResponse(soap, NULL, NULL, "turb1:GetBoxFilterSGSvectorResponse");
+	case SOAP_TYPE_PointerTo_turb1__GetBoxFilterSGSvector:
+		return soap_in_PointerTo_turb1__GetBoxFilterSGSvector(soap, NULL, NULL, "turb1:GetBoxFilterSGSvector");
+	case SOAP_TYPE_PointerTo_turb1__GetBoxFilterSGStensorResponse:
+		return soap_in_PointerTo_turb1__GetBoxFilterSGStensorResponse(soap, NULL, NULL, "turb1:GetBoxFilterSGStensorResponse");
+	case SOAP_TYPE_PointerTo_turb1__GetBoxFilterSGStensor:
+		return soap_in_PointerTo_turb1__GetBoxFilterSGStensor(soap, NULL, NULL, "turb1:GetBoxFilterSGStensor");
+	case SOAP_TYPE_PointerTo_turb1__GetBoxFilterSGSsymtensorResponse:
+		return soap_in_PointerTo_turb1__GetBoxFilterSGSsymtensorResponse(soap, NULL, NULL, "turb1:GetBoxFilterSGSsymtensorResponse");
+	case SOAP_TYPE_PointerTo_turb1__GetBoxFilterSGSsymtensor:
+		return soap_in_PointerTo_turb1__GetBoxFilterSGSsymtensor(soap, NULL, NULL, "turb1:GetBoxFilterSGSsymtensor");
 	case SOAP_TYPE_PointerTo_turb1__GetBoxFilterSGSResponse:
 		return soap_in_PointerTo_turb1__GetBoxFilterSGSResponse(soap, NULL, NULL, "turb1:GetBoxFilterSGSResponse");
 	case SOAP_TYPE_PointerTo_turb1__GetBoxFilterSGS:
@@ -374,6 +392,8 @@ SOAP_FMAC3 void * SOAP_FMAC4 soap_getelement(struct soap *soap, int *type)
 		return soap_in_PointerTo_turb1__NullOp(soap, NULL, NULL, "turb1:NullOp");
 	case SOAP_TYPE_PointerToturb1__ArrayOfThresholdInfo:
 		return soap_in_PointerToturb1__ArrayOfThresholdInfo(soap, NULL, NULL, "turb1:ArrayOfThresholdInfo");
+	case SOAP_TYPE_PointerToturb1__ArrayOfFloat:
+		return soap_in_PointerToturb1__ArrayOfFloat(soap, NULL, NULL, "turb1:ArrayOfFloat");
 	case SOAP_TYPE_PointerToturb1__ArrayOfSGSTensor:
 		return soap_in_PointerToturb1__ArrayOfSGSTensor(soap, NULL, NULL, "turb1:ArrayOfSGSTensor");
 	case SOAP_TYPE_PointerToturb1__ArrayOfVelocityHessian:
@@ -394,6 +414,8 @@ SOAP_FMAC3 void * SOAP_FMAC4 soap_getelement(struct soap *soap, int *type)
 		return soap_in_PointerToturb1__ArrayOfPoint3(soap, NULL, NULL, "turb1:ArrayOfPoint3");
 	case SOAP_TYPE_PointerToturb1__ThresholdInfo:
 		return soap_in_PointerToturb1__ThresholdInfo(soap, NULL, NULL, "turb1:ThresholdInfo");
+	case SOAP_TYPE_PointerTofloat:
+		return soap_in_PointerTofloat(soap, NULL, NULL, "xsd:float");
 	case SOAP_TYPE_PointerToturb1__SGSTensor:
 		return soap_in_PointerToturb1__SGSTensor(soap, NULL, NULL, "turb1:SGSTensor");
 	case SOAP_TYPE_PointerToturb1__VelocityHessian:
@@ -461,6 +483,10 @@ SOAP_FMAC3 void * SOAP_FMAC4 soap_getelement(struct soap *soap, int *type)
 		if (!soap_match_tag(soap, t, "turb1:ArrayOfThresholdInfo"))
 		{	*type = SOAP_TYPE_turb1__ArrayOfThresholdInfo;
 			return soap_in_turb1__ArrayOfThresholdInfo(soap, NULL, NULL, NULL);
+		}
+		if (!soap_match_tag(soap, t, "turb1:ArrayOfFloat"))
+		{	*type = SOAP_TYPE_turb1__ArrayOfFloat;
+			return soap_in_turb1__ArrayOfFloat(soap, NULL, NULL, NULL);
 		}
 		if (!soap_match_tag(soap, t, "turb1:SGSTensor"))
 		{	*type = SOAP_TYPE_turb1__SGSTensor;
@@ -566,6 +592,38 @@ SOAP_FMAC3 void * SOAP_FMAC4 soap_getelement(struct soap *soap, int *type)
 		if (!soap_match_tag(soap, t, "turb1:GetBoxFilterGradient"))
 		{	*type = SOAP_TYPE__turb1__GetBoxFilterGradient;
 			return soap_in__turb1__GetBoxFilterGradient(soap, NULL, NULL, NULL);
+		}
+		if (!soap_match_tag(soap, t, "turb1:GetBoxFilterSGSscalarResponse"))
+		{	*type = SOAP_TYPE__turb1__GetBoxFilterSGSscalarResponse;
+			return soap_in__turb1__GetBoxFilterSGSscalarResponse(soap, NULL, NULL, NULL);
+		}
+		if (!soap_match_tag(soap, t, "turb1:GetBoxFilterSGSscalar"))
+		{	*type = SOAP_TYPE__turb1__GetBoxFilterSGSscalar;
+			return soap_in__turb1__GetBoxFilterSGSscalar(soap, NULL, NULL, NULL);
+		}
+		if (!soap_match_tag(soap, t, "turb1:GetBoxFilterSGSvectorResponse"))
+		{	*type = SOAP_TYPE__turb1__GetBoxFilterSGSvectorResponse;
+			return soap_in__turb1__GetBoxFilterSGSvectorResponse(soap, NULL, NULL, NULL);
+		}
+		if (!soap_match_tag(soap, t, "turb1:GetBoxFilterSGSvector"))
+		{	*type = SOAP_TYPE__turb1__GetBoxFilterSGSvector;
+			return soap_in__turb1__GetBoxFilterSGSvector(soap, NULL, NULL, NULL);
+		}
+		if (!soap_match_tag(soap, t, "turb1:GetBoxFilterSGStensorResponse"))
+		{	*type = SOAP_TYPE__turb1__GetBoxFilterSGStensorResponse;
+			return soap_in__turb1__GetBoxFilterSGStensorResponse(soap, NULL, NULL, NULL);
+		}
+		if (!soap_match_tag(soap, t, "turb1:GetBoxFilterSGStensor"))
+		{	*type = SOAP_TYPE__turb1__GetBoxFilterSGStensor;
+			return soap_in__turb1__GetBoxFilterSGStensor(soap, NULL, NULL, NULL);
+		}
+		if (!soap_match_tag(soap, t, "turb1:GetBoxFilterSGSsymtensorResponse"))
+		{	*type = SOAP_TYPE__turb1__GetBoxFilterSGSsymtensorResponse;
+			return soap_in__turb1__GetBoxFilterSGSsymtensorResponse(soap, NULL, NULL, NULL);
+		}
+		if (!soap_match_tag(soap, t, "turb1:GetBoxFilterSGSsymtensor"))
+		{	*type = SOAP_TYPE__turb1__GetBoxFilterSGSsymtensor;
+			return soap_in__turb1__GetBoxFilterSGSsymtensor(soap, NULL, NULL, NULL);
 		}
 		if (!soap_match_tag(soap, t, "turb1:GetBoxFilterSGSResponse"))
 		{	*type = SOAP_TYPE__turb1__GetBoxFilterSGSResponse;
@@ -890,6 +948,22 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_putelement(struct soap *soap, const void *ptr, co
 		return soap_out__turb1__GetBoxFilterGradientResponse(soap, "turb1:GetBoxFilterGradientResponse", id, (const struct _turb1__GetBoxFilterGradientResponse *)ptr, NULL);
 	case SOAP_TYPE__turb1__GetBoxFilterGradient:
 		return soap_out__turb1__GetBoxFilterGradient(soap, "turb1:GetBoxFilterGradient", id, (const struct _turb1__GetBoxFilterGradient *)ptr, NULL);
+	case SOAP_TYPE__turb1__GetBoxFilterSGSscalarResponse:
+		return soap_out__turb1__GetBoxFilterSGSscalarResponse(soap, "turb1:GetBoxFilterSGSscalarResponse", id, (const struct _turb1__GetBoxFilterSGSscalarResponse *)ptr, NULL);
+	case SOAP_TYPE__turb1__GetBoxFilterSGSscalar:
+		return soap_out__turb1__GetBoxFilterSGSscalar(soap, "turb1:GetBoxFilterSGSscalar", id, (const struct _turb1__GetBoxFilterSGSscalar *)ptr, NULL);
+	case SOAP_TYPE__turb1__GetBoxFilterSGSvectorResponse:
+		return soap_out__turb1__GetBoxFilterSGSvectorResponse(soap, "turb1:GetBoxFilterSGSvectorResponse", id, (const struct _turb1__GetBoxFilterSGSvectorResponse *)ptr, NULL);
+	case SOAP_TYPE__turb1__GetBoxFilterSGSvector:
+		return soap_out__turb1__GetBoxFilterSGSvector(soap, "turb1:GetBoxFilterSGSvector", id, (const struct _turb1__GetBoxFilterSGSvector *)ptr, NULL);
+	case SOAP_TYPE__turb1__GetBoxFilterSGStensorResponse:
+		return soap_out__turb1__GetBoxFilterSGStensorResponse(soap, "turb1:GetBoxFilterSGStensorResponse", id, (const struct _turb1__GetBoxFilterSGStensorResponse *)ptr, NULL);
+	case SOAP_TYPE__turb1__GetBoxFilterSGStensor:
+		return soap_out__turb1__GetBoxFilterSGStensor(soap, "turb1:GetBoxFilterSGStensor", id, (const struct _turb1__GetBoxFilterSGStensor *)ptr, NULL);
+	case SOAP_TYPE__turb1__GetBoxFilterSGSsymtensorResponse:
+		return soap_out__turb1__GetBoxFilterSGSsymtensorResponse(soap, "turb1:GetBoxFilterSGSsymtensorResponse", id, (const struct _turb1__GetBoxFilterSGSsymtensorResponse *)ptr, NULL);
+	case SOAP_TYPE__turb1__GetBoxFilterSGSsymtensor:
+		return soap_out__turb1__GetBoxFilterSGSsymtensor(soap, "turb1:GetBoxFilterSGSsymtensor", id, (const struct _turb1__GetBoxFilterSGSsymtensor *)ptr, NULL);
 	case SOAP_TYPE__turb1__GetBoxFilterSGSResponse:
 		return soap_out__turb1__GetBoxFilterSGSResponse(soap, "turb1:GetBoxFilterSGSResponse", id, (const struct _turb1__GetBoxFilterSGSResponse *)ptr, NULL);
 	case SOAP_TYPE__turb1__GetBoxFilterSGS:
@@ -1014,6 +1088,8 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_putelement(struct soap *soap, const void *ptr, co
 		return soap_out_turb1__ThresholdInfo(soap, tag, id, (const struct turb1__ThresholdInfo *)ptr, "turb1:ThresholdInfo");
 	case SOAP_TYPE_turb1__ArrayOfThresholdInfo:
 		return soap_out_turb1__ArrayOfThresholdInfo(soap, tag, id, (const struct turb1__ArrayOfThresholdInfo *)ptr, "turb1:ArrayOfThresholdInfo");
+	case SOAP_TYPE_turb1__ArrayOfFloat:
+		return soap_out_turb1__ArrayOfFloat(soap, tag, id, (const struct turb1__ArrayOfFloat *)ptr, "turb1:ArrayOfFloat");
 	case SOAP_TYPE_turb1__SGSTensor:
 		return soap_out_turb1__SGSTensor(soap, tag, id, (const struct turb1__SGSTensor *)ptr, "turb1:SGSTensor");
 	case SOAP_TYPE_turb1__ArrayOfSGSTensor:
@@ -1060,6 +1136,22 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_putelement(struct soap *soap, const void *ptr, co
 		return soap_out_PointerTo_turb1__GetBoxFilterGradientResponse(soap, tag, id, (struct _turb1__GetBoxFilterGradientResponse *const*)ptr, "turb1:GetBoxFilterGradientResponse");
 	case SOAP_TYPE_PointerTo_turb1__GetBoxFilterGradient:
 		return soap_out_PointerTo_turb1__GetBoxFilterGradient(soap, tag, id, (struct _turb1__GetBoxFilterGradient *const*)ptr, "turb1:GetBoxFilterGradient");
+	case SOAP_TYPE_PointerTo_turb1__GetBoxFilterSGSscalarResponse:
+		return soap_out_PointerTo_turb1__GetBoxFilterSGSscalarResponse(soap, tag, id, (struct _turb1__GetBoxFilterSGSscalarResponse *const*)ptr, "turb1:GetBoxFilterSGSscalarResponse");
+	case SOAP_TYPE_PointerTo_turb1__GetBoxFilterSGSscalar:
+		return soap_out_PointerTo_turb1__GetBoxFilterSGSscalar(soap, tag, id, (struct _turb1__GetBoxFilterSGSscalar *const*)ptr, "turb1:GetBoxFilterSGSscalar");
+	case SOAP_TYPE_PointerTo_turb1__GetBoxFilterSGSvectorResponse:
+		return soap_out_PointerTo_turb1__GetBoxFilterSGSvectorResponse(soap, tag, id, (struct _turb1__GetBoxFilterSGSvectorResponse *const*)ptr, "turb1:GetBoxFilterSGSvectorResponse");
+	case SOAP_TYPE_PointerTo_turb1__GetBoxFilterSGSvector:
+		return soap_out_PointerTo_turb1__GetBoxFilterSGSvector(soap, tag, id, (struct _turb1__GetBoxFilterSGSvector *const*)ptr, "turb1:GetBoxFilterSGSvector");
+	case SOAP_TYPE_PointerTo_turb1__GetBoxFilterSGStensorResponse:
+		return soap_out_PointerTo_turb1__GetBoxFilterSGStensorResponse(soap, tag, id, (struct _turb1__GetBoxFilterSGStensorResponse *const*)ptr, "turb1:GetBoxFilterSGStensorResponse");
+	case SOAP_TYPE_PointerTo_turb1__GetBoxFilterSGStensor:
+		return soap_out_PointerTo_turb1__GetBoxFilterSGStensor(soap, tag, id, (struct _turb1__GetBoxFilterSGStensor *const*)ptr, "turb1:GetBoxFilterSGStensor");
+	case SOAP_TYPE_PointerTo_turb1__GetBoxFilterSGSsymtensorResponse:
+		return soap_out_PointerTo_turb1__GetBoxFilterSGSsymtensorResponse(soap, tag, id, (struct _turb1__GetBoxFilterSGSsymtensorResponse *const*)ptr, "turb1:GetBoxFilterSGSsymtensorResponse");
+	case SOAP_TYPE_PointerTo_turb1__GetBoxFilterSGSsymtensor:
+		return soap_out_PointerTo_turb1__GetBoxFilterSGSsymtensor(soap, tag, id, (struct _turb1__GetBoxFilterSGSsymtensor *const*)ptr, "turb1:GetBoxFilterSGSsymtensor");
 	case SOAP_TYPE_PointerTo_turb1__GetBoxFilterSGSResponse:
 		return soap_out_PointerTo_turb1__GetBoxFilterSGSResponse(soap, tag, id, (struct _turb1__GetBoxFilterSGSResponse *const*)ptr, "turb1:GetBoxFilterSGSResponse");
 	case SOAP_TYPE_PointerTo_turb1__GetBoxFilterSGS:
@@ -1182,6 +1274,8 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_putelement(struct soap *soap, const void *ptr, co
 		return soap_out_PointerTo_turb1__NullOp(soap, tag, id, (struct _turb1__NullOp *const*)ptr, "turb1:NullOp");
 	case SOAP_TYPE_PointerToturb1__ArrayOfThresholdInfo:
 		return soap_out_PointerToturb1__ArrayOfThresholdInfo(soap, tag, id, (struct turb1__ArrayOfThresholdInfo *const*)ptr, "turb1:ArrayOfThresholdInfo");
+	case SOAP_TYPE_PointerToturb1__ArrayOfFloat:
+		return soap_out_PointerToturb1__ArrayOfFloat(soap, tag, id, (struct turb1__ArrayOfFloat *const*)ptr, "turb1:ArrayOfFloat");
 	case SOAP_TYPE_PointerToturb1__ArrayOfSGSTensor:
 		return soap_out_PointerToturb1__ArrayOfSGSTensor(soap, tag, id, (struct turb1__ArrayOfSGSTensor *const*)ptr, "turb1:ArrayOfSGSTensor");
 	case SOAP_TYPE_PointerToturb1__ArrayOfVelocityHessian:
@@ -1202,6 +1296,8 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_putelement(struct soap *soap, const void *ptr, co
 		return soap_out_PointerToturb1__ArrayOfPoint3(soap, tag, id, (struct turb1__ArrayOfPoint3 *const*)ptr, "turb1:ArrayOfPoint3");
 	case SOAP_TYPE_PointerToturb1__ThresholdInfo:
 		return soap_out_PointerToturb1__ThresholdInfo(soap, tag, id, (struct turb1__ThresholdInfo *const*)ptr, "turb1:ThresholdInfo");
+	case SOAP_TYPE_PointerTofloat:
+		return soap_out_PointerTofloat(soap, tag, id, (float *const*)ptr, "xsd:float");
 	case SOAP_TYPE_PointerToturb1__SGSTensor:
 		return soap_out_PointerToturb1__SGSTensor(soap, tag, id, (struct turb1__SGSTensor *const*)ptr, "turb1:SGSTensor");
 	case SOAP_TYPE_PointerToturb1__VelocityHessian:
@@ -1243,6 +1339,18 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_markelement(struct soap *soap, const void *ptr, 
 		break;
 	case SOAP_TYPE___turb3__GetBoxFilterGradient:
 		soap_serialize___turb3__GetBoxFilterGradient(soap, (const struct __turb3__GetBoxFilterGradient *)ptr);
+		break;
+	case SOAP_TYPE___turb3__GetBoxFilterSGSscalar:
+		soap_serialize___turb3__GetBoxFilterSGSscalar(soap, (const struct __turb3__GetBoxFilterSGSscalar *)ptr);
+		break;
+	case SOAP_TYPE___turb3__GetBoxFilterSGSvector:
+		soap_serialize___turb3__GetBoxFilterSGSvector(soap, (const struct __turb3__GetBoxFilterSGSvector *)ptr);
+		break;
+	case SOAP_TYPE___turb3__GetBoxFilterSGStensor:
+		soap_serialize___turb3__GetBoxFilterSGStensor(soap, (const struct __turb3__GetBoxFilterSGStensor *)ptr);
+		break;
+	case SOAP_TYPE___turb3__GetBoxFilterSGSsymtensor:
+		soap_serialize___turb3__GetBoxFilterSGSsymtensor(soap, (const struct __turb3__GetBoxFilterSGSsymtensor *)ptr);
 		break;
 	case SOAP_TYPE___turb3__GetBoxFilterSGS:
 		soap_serialize___turb3__GetBoxFilterSGS(soap, (const struct __turb3__GetBoxFilterSGS *)ptr);
@@ -1342,6 +1450,18 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_markelement(struct soap *soap, const void *ptr, 
 		break;
 	case SOAP_TYPE___turb2__GetBoxFilterGradient:
 		soap_serialize___turb2__GetBoxFilterGradient(soap, (const struct __turb2__GetBoxFilterGradient *)ptr);
+		break;
+	case SOAP_TYPE___turb2__GetBoxFilterSGSscalar:
+		soap_serialize___turb2__GetBoxFilterSGSscalar(soap, (const struct __turb2__GetBoxFilterSGSscalar *)ptr);
+		break;
+	case SOAP_TYPE___turb2__GetBoxFilterSGSvector:
+		soap_serialize___turb2__GetBoxFilterSGSvector(soap, (const struct __turb2__GetBoxFilterSGSvector *)ptr);
+		break;
+	case SOAP_TYPE___turb2__GetBoxFilterSGStensor:
+		soap_serialize___turb2__GetBoxFilterSGStensor(soap, (const struct __turb2__GetBoxFilterSGStensor *)ptr);
+		break;
+	case SOAP_TYPE___turb2__GetBoxFilterSGSsymtensor:
+		soap_serialize___turb2__GetBoxFilterSGSsymtensor(soap, (const struct __turb2__GetBoxFilterSGSsymtensor *)ptr);
 		break;
 	case SOAP_TYPE___turb2__GetBoxFilterSGS:
 		soap_serialize___turb2__GetBoxFilterSGS(soap, (const struct __turb2__GetBoxFilterSGS *)ptr);
@@ -1450,6 +1570,30 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_markelement(struct soap *soap, const void *ptr, 
 		break;
 	case SOAP_TYPE__turb1__GetBoxFilterGradient:
 		soap_serialize__turb1__GetBoxFilterGradient(soap, (const struct _turb1__GetBoxFilterGradient *)ptr);
+		break;
+	case SOAP_TYPE__turb1__GetBoxFilterSGSscalarResponse:
+		soap_serialize__turb1__GetBoxFilterSGSscalarResponse(soap, (const struct _turb1__GetBoxFilterSGSscalarResponse *)ptr);
+		break;
+	case SOAP_TYPE__turb1__GetBoxFilterSGSscalar:
+		soap_serialize__turb1__GetBoxFilterSGSscalar(soap, (const struct _turb1__GetBoxFilterSGSscalar *)ptr);
+		break;
+	case SOAP_TYPE__turb1__GetBoxFilterSGSvectorResponse:
+		soap_serialize__turb1__GetBoxFilterSGSvectorResponse(soap, (const struct _turb1__GetBoxFilterSGSvectorResponse *)ptr);
+		break;
+	case SOAP_TYPE__turb1__GetBoxFilterSGSvector:
+		soap_serialize__turb1__GetBoxFilterSGSvector(soap, (const struct _turb1__GetBoxFilterSGSvector *)ptr);
+		break;
+	case SOAP_TYPE__turb1__GetBoxFilterSGStensorResponse:
+		soap_serialize__turb1__GetBoxFilterSGStensorResponse(soap, (const struct _turb1__GetBoxFilterSGStensorResponse *)ptr);
+		break;
+	case SOAP_TYPE__turb1__GetBoxFilterSGStensor:
+		soap_serialize__turb1__GetBoxFilterSGStensor(soap, (const struct _turb1__GetBoxFilterSGStensor *)ptr);
+		break;
+	case SOAP_TYPE__turb1__GetBoxFilterSGSsymtensorResponse:
+		soap_serialize__turb1__GetBoxFilterSGSsymtensorResponse(soap, (const struct _turb1__GetBoxFilterSGSsymtensorResponse *)ptr);
+		break;
+	case SOAP_TYPE__turb1__GetBoxFilterSGSsymtensor:
+		soap_serialize__turb1__GetBoxFilterSGSsymtensor(soap, (const struct _turb1__GetBoxFilterSGSsymtensor *)ptr);
 		break;
 	case SOAP_TYPE__turb1__GetBoxFilterSGSResponse:
 		soap_serialize__turb1__GetBoxFilterSGSResponse(soap, (const struct _turb1__GetBoxFilterSGSResponse *)ptr);
@@ -1637,6 +1781,9 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_markelement(struct soap *soap, const void *ptr, 
 	case SOAP_TYPE_turb1__ArrayOfThresholdInfo:
 		soap_serialize_turb1__ArrayOfThresholdInfo(soap, (const struct turb1__ArrayOfThresholdInfo *)ptr);
 		break;
+	case SOAP_TYPE_turb1__ArrayOfFloat:
+		soap_serialize_turb1__ArrayOfFloat(soap, (const struct turb1__ArrayOfFloat *)ptr);
+		break;
 	case SOAP_TYPE_turb1__SGSTensor:
 		soap_serialize_turb1__SGSTensor(soap, (const struct turb1__SGSTensor *)ptr);
 		break;
@@ -1705,6 +1852,30 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_markelement(struct soap *soap, const void *ptr, 
 		break;
 	case SOAP_TYPE_PointerTo_turb1__GetBoxFilterGradient:
 		soap_serialize_PointerTo_turb1__GetBoxFilterGradient(soap, (struct _turb1__GetBoxFilterGradient *const*)ptr);
+		break;
+	case SOAP_TYPE_PointerTo_turb1__GetBoxFilterSGSscalarResponse:
+		soap_serialize_PointerTo_turb1__GetBoxFilterSGSscalarResponse(soap, (struct _turb1__GetBoxFilterSGSscalarResponse *const*)ptr);
+		break;
+	case SOAP_TYPE_PointerTo_turb1__GetBoxFilterSGSscalar:
+		soap_serialize_PointerTo_turb1__GetBoxFilterSGSscalar(soap, (struct _turb1__GetBoxFilterSGSscalar *const*)ptr);
+		break;
+	case SOAP_TYPE_PointerTo_turb1__GetBoxFilterSGSvectorResponse:
+		soap_serialize_PointerTo_turb1__GetBoxFilterSGSvectorResponse(soap, (struct _turb1__GetBoxFilterSGSvectorResponse *const*)ptr);
+		break;
+	case SOAP_TYPE_PointerTo_turb1__GetBoxFilterSGSvector:
+		soap_serialize_PointerTo_turb1__GetBoxFilterSGSvector(soap, (struct _turb1__GetBoxFilterSGSvector *const*)ptr);
+		break;
+	case SOAP_TYPE_PointerTo_turb1__GetBoxFilterSGStensorResponse:
+		soap_serialize_PointerTo_turb1__GetBoxFilterSGStensorResponse(soap, (struct _turb1__GetBoxFilterSGStensorResponse *const*)ptr);
+		break;
+	case SOAP_TYPE_PointerTo_turb1__GetBoxFilterSGStensor:
+		soap_serialize_PointerTo_turb1__GetBoxFilterSGStensor(soap, (struct _turb1__GetBoxFilterSGStensor *const*)ptr);
+		break;
+	case SOAP_TYPE_PointerTo_turb1__GetBoxFilterSGSsymtensorResponse:
+		soap_serialize_PointerTo_turb1__GetBoxFilterSGSsymtensorResponse(soap, (struct _turb1__GetBoxFilterSGSsymtensorResponse *const*)ptr);
+		break;
+	case SOAP_TYPE_PointerTo_turb1__GetBoxFilterSGSsymtensor:
+		soap_serialize_PointerTo_turb1__GetBoxFilterSGSsymtensor(soap, (struct _turb1__GetBoxFilterSGSsymtensor *const*)ptr);
 		break;
 	case SOAP_TYPE_PointerTo_turb1__GetBoxFilterSGSResponse:
 		soap_serialize_PointerTo_turb1__GetBoxFilterSGSResponse(soap, (struct _turb1__GetBoxFilterSGSResponse *const*)ptr);
@@ -1889,6 +2060,9 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_markelement(struct soap *soap, const void *ptr, 
 	case SOAP_TYPE_PointerToturb1__ArrayOfThresholdInfo:
 		soap_serialize_PointerToturb1__ArrayOfThresholdInfo(soap, (struct turb1__ArrayOfThresholdInfo *const*)ptr);
 		break;
+	case SOAP_TYPE_PointerToturb1__ArrayOfFloat:
+		soap_serialize_PointerToturb1__ArrayOfFloat(soap, (struct turb1__ArrayOfFloat *const*)ptr);
+		break;
 	case SOAP_TYPE_PointerToturb1__ArrayOfSGSTensor:
 		soap_serialize_PointerToturb1__ArrayOfSGSTensor(soap, (struct turb1__ArrayOfSGSTensor *const*)ptr);
 		break;
@@ -1918,6 +2092,9 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_markelement(struct soap *soap, const void *ptr, 
 		break;
 	case SOAP_TYPE_PointerToturb1__ThresholdInfo:
 		soap_serialize_PointerToturb1__ThresholdInfo(soap, (struct turb1__ThresholdInfo *const*)ptr);
+		break;
+	case SOAP_TYPE_PointerTofloat:
+		soap_serialize_PointerTofloat(soap, (float *const*)ptr);
 		break;
 	case SOAP_TYPE_PointerToturb1__SGSTensor:
 		soap_serialize_PointerToturb1__SGSTensor(soap, (struct turb1__SGSTensor *const*)ptr);
@@ -3003,6 +3180,262 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb3__GetBoxFilterGradient(struct soap *so
 SOAP_FMAC3 struct __turb3__GetBoxFilterGradient * SOAP_FMAC4 soap_get___turb3__GetBoxFilterGradient(struct soap *soap, struct __turb3__GetBoxFilterGradient *p, const char *tag, const char *type)
 {
 	if ((p = soap_in___turb3__GetBoxFilterGradient(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb3__GetBoxFilterSGSscalar(struct soap *soap, struct __turb3__GetBoxFilterSGSscalar *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	a->turb1__GetBoxFilterSGSscalar = NULL;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb3__GetBoxFilterSGSscalar(struct soap *soap, const struct __turb3__GetBoxFilterSGSscalar *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_serialize_PointerTo_turb1__GetBoxFilterSGSscalar(soap, &a->turb1__GetBoxFilterSGSscalar);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out___turb3__GetBoxFilterSGSscalar(struct soap *soap, const char *tag, int id, const struct __turb3__GetBoxFilterSGSscalar *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)type;
+	if (soap_out_PointerTo_turb1__GetBoxFilterSGSscalar(soap, "turb1:GetBoxFilterSGSscalar", -1, &a->turb1__GetBoxFilterSGSscalar, ""))
+		return soap->error;
+	return SOAP_OK;
+}
+
+SOAP_FMAC3 struct __turb3__GetBoxFilterSGSscalar * SOAP_FMAC4 soap_in___turb3__GetBoxFilterSGSscalar(struct soap *soap, const char *tag, struct __turb3__GetBoxFilterSGSscalar *a, const char *type)
+{
+	size_t soap_flag_turb1__GetBoxFilterSGSscalar = 1;
+	short soap_flag;
+	a = (struct __turb3__GetBoxFilterSGSscalar *)soap_id_enter(soap, "", a, SOAP_TYPE___turb3__GetBoxFilterSGSscalar, sizeof(struct __turb3__GetBoxFilterSGSscalar), 0, NULL, NULL, NULL);
+	if (!a)
+		return NULL;
+	soap_default___turb3__GetBoxFilterSGSscalar(soap, a);
+		for (soap_flag = 0;; soap_flag = 1)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_turb1__GetBoxFilterSGSscalar && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_PointerTo_turb1__GetBoxFilterSGSscalar(soap, "turb1:GetBoxFilterSGSscalar", &a->turb1__GetBoxFilterSGSscalar, ""))
+				{	soap_flag_turb1__GetBoxFilterSGSscalar--;
+					continue;
+				}
+			if (soap->error == SOAP_TAG_MISMATCH)
+				if (soap_flag)
+				{	soap->error = SOAP_OK;
+					break;
+				}
+			if (soap_flag && soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb3__GetBoxFilterSGSscalar(struct soap *soap, const struct __turb3__GetBoxFilterSGSscalar *a, const char *tag, const char *type)
+{
+	register int id = 0;
+	if (soap_out___turb3__GetBoxFilterSGSscalar(soap, tag?tag:"-turb3:GetBoxFilterSGSscalar", id, a, type))
+		return soap->error;
+	return SOAP_OK;
+}
+
+SOAP_FMAC3 struct __turb3__GetBoxFilterSGSscalar * SOAP_FMAC4 soap_get___turb3__GetBoxFilterSGSscalar(struct soap *soap, struct __turb3__GetBoxFilterSGSscalar *p, const char *tag, const char *type)
+{
+	if ((p = soap_in___turb3__GetBoxFilterSGSscalar(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb3__GetBoxFilterSGSvector(struct soap *soap, struct __turb3__GetBoxFilterSGSvector *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	a->turb1__GetBoxFilterSGSvector = NULL;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb3__GetBoxFilterSGSvector(struct soap *soap, const struct __turb3__GetBoxFilterSGSvector *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_serialize_PointerTo_turb1__GetBoxFilterSGSvector(soap, &a->turb1__GetBoxFilterSGSvector);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out___turb3__GetBoxFilterSGSvector(struct soap *soap, const char *tag, int id, const struct __turb3__GetBoxFilterSGSvector *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)type;
+	if (soap_out_PointerTo_turb1__GetBoxFilterSGSvector(soap, "turb1:GetBoxFilterSGSvector", -1, &a->turb1__GetBoxFilterSGSvector, ""))
+		return soap->error;
+	return SOAP_OK;
+}
+
+SOAP_FMAC3 struct __turb3__GetBoxFilterSGSvector * SOAP_FMAC4 soap_in___turb3__GetBoxFilterSGSvector(struct soap *soap, const char *tag, struct __turb3__GetBoxFilterSGSvector *a, const char *type)
+{
+	size_t soap_flag_turb1__GetBoxFilterSGSvector = 1;
+	short soap_flag;
+	a = (struct __turb3__GetBoxFilterSGSvector *)soap_id_enter(soap, "", a, SOAP_TYPE___turb3__GetBoxFilterSGSvector, sizeof(struct __turb3__GetBoxFilterSGSvector), 0, NULL, NULL, NULL);
+	if (!a)
+		return NULL;
+	soap_default___turb3__GetBoxFilterSGSvector(soap, a);
+		for (soap_flag = 0;; soap_flag = 1)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_turb1__GetBoxFilterSGSvector && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_PointerTo_turb1__GetBoxFilterSGSvector(soap, "turb1:GetBoxFilterSGSvector", &a->turb1__GetBoxFilterSGSvector, ""))
+				{	soap_flag_turb1__GetBoxFilterSGSvector--;
+					continue;
+				}
+			if (soap->error == SOAP_TAG_MISMATCH)
+				if (soap_flag)
+				{	soap->error = SOAP_OK;
+					break;
+				}
+			if (soap_flag && soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb3__GetBoxFilterSGSvector(struct soap *soap, const struct __turb3__GetBoxFilterSGSvector *a, const char *tag, const char *type)
+{
+	register int id = 0;
+	if (soap_out___turb3__GetBoxFilterSGSvector(soap, tag?tag:"-turb3:GetBoxFilterSGSvector", id, a, type))
+		return soap->error;
+	return SOAP_OK;
+}
+
+SOAP_FMAC3 struct __turb3__GetBoxFilterSGSvector * SOAP_FMAC4 soap_get___turb3__GetBoxFilterSGSvector(struct soap *soap, struct __turb3__GetBoxFilterSGSvector *p, const char *tag, const char *type)
+{
+	if ((p = soap_in___turb3__GetBoxFilterSGSvector(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb3__GetBoxFilterSGStensor(struct soap *soap, struct __turb3__GetBoxFilterSGStensor *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	a->turb1__GetBoxFilterSGStensor = NULL;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb3__GetBoxFilterSGStensor(struct soap *soap, const struct __turb3__GetBoxFilterSGStensor *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_serialize_PointerTo_turb1__GetBoxFilterSGStensor(soap, &a->turb1__GetBoxFilterSGStensor);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out___turb3__GetBoxFilterSGStensor(struct soap *soap, const char *tag, int id, const struct __turb3__GetBoxFilterSGStensor *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)type;
+	if (soap_out_PointerTo_turb1__GetBoxFilterSGStensor(soap, "turb1:GetBoxFilterSGStensor", -1, &a->turb1__GetBoxFilterSGStensor, ""))
+		return soap->error;
+	return SOAP_OK;
+}
+
+SOAP_FMAC3 struct __turb3__GetBoxFilterSGStensor * SOAP_FMAC4 soap_in___turb3__GetBoxFilterSGStensor(struct soap *soap, const char *tag, struct __turb3__GetBoxFilterSGStensor *a, const char *type)
+{
+	size_t soap_flag_turb1__GetBoxFilterSGStensor = 1;
+	short soap_flag;
+	a = (struct __turb3__GetBoxFilterSGStensor *)soap_id_enter(soap, "", a, SOAP_TYPE___turb3__GetBoxFilterSGStensor, sizeof(struct __turb3__GetBoxFilterSGStensor), 0, NULL, NULL, NULL);
+	if (!a)
+		return NULL;
+	soap_default___turb3__GetBoxFilterSGStensor(soap, a);
+		for (soap_flag = 0;; soap_flag = 1)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_turb1__GetBoxFilterSGStensor && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_PointerTo_turb1__GetBoxFilterSGStensor(soap, "turb1:GetBoxFilterSGStensor", &a->turb1__GetBoxFilterSGStensor, ""))
+				{	soap_flag_turb1__GetBoxFilterSGStensor--;
+					continue;
+				}
+			if (soap->error == SOAP_TAG_MISMATCH)
+				if (soap_flag)
+				{	soap->error = SOAP_OK;
+					break;
+				}
+			if (soap_flag && soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb3__GetBoxFilterSGStensor(struct soap *soap, const struct __turb3__GetBoxFilterSGStensor *a, const char *tag, const char *type)
+{
+	register int id = 0;
+	if (soap_out___turb3__GetBoxFilterSGStensor(soap, tag?tag:"-turb3:GetBoxFilterSGStensor", id, a, type))
+		return soap->error;
+	return SOAP_OK;
+}
+
+SOAP_FMAC3 struct __turb3__GetBoxFilterSGStensor * SOAP_FMAC4 soap_get___turb3__GetBoxFilterSGStensor(struct soap *soap, struct __turb3__GetBoxFilterSGStensor *p, const char *tag, const char *type)
+{
+	if ((p = soap_in___turb3__GetBoxFilterSGStensor(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb3__GetBoxFilterSGSsymtensor(struct soap *soap, struct __turb3__GetBoxFilterSGSsymtensor *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	a->turb1__GetBoxFilterSGSsymtensor = NULL;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb3__GetBoxFilterSGSsymtensor(struct soap *soap, const struct __turb3__GetBoxFilterSGSsymtensor *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_serialize_PointerTo_turb1__GetBoxFilterSGSsymtensor(soap, &a->turb1__GetBoxFilterSGSsymtensor);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out___turb3__GetBoxFilterSGSsymtensor(struct soap *soap, const char *tag, int id, const struct __turb3__GetBoxFilterSGSsymtensor *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)type;
+	if (soap_out_PointerTo_turb1__GetBoxFilterSGSsymtensor(soap, "turb1:GetBoxFilterSGSsymtensor", -1, &a->turb1__GetBoxFilterSGSsymtensor, ""))
+		return soap->error;
+	return SOAP_OK;
+}
+
+SOAP_FMAC3 struct __turb3__GetBoxFilterSGSsymtensor * SOAP_FMAC4 soap_in___turb3__GetBoxFilterSGSsymtensor(struct soap *soap, const char *tag, struct __turb3__GetBoxFilterSGSsymtensor *a, const char *type)
+{
+	size_t soap_flag_turb1__GetBoxFilterSGSsymtensor = 1;
+	short soap_flag;
+	a = (struct __turb3__GetBoxFilterSGSsymtensor *)soap_id_enter(soap, "", a, SOAP_TYPE___turb3__GetBoxFilterSGSsymtensor, sizeof(struct __turb3__GetBoxFilterSGSsymtensor), 0, NULL, NULL, NULL);
+	if (!a)
+		return NULL;
+	soap_default___turb3__GetBoxFilterSGSsymtensor(soap, a);
+		for (soap_flag = 0;; soap_flag = 1)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_turb1__GetBoxFilterSGSsymtensor && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_PointerTo_turb1__GetBoxFilterSGSsymtensor(soap, "turb1:GetBoxFilterSGSsymtensor", &a->turb1__GetBoxFilterSGSsymtensor, ""))
+				{	soap_flag_turb1__GetBoxFilterSGSsymtensor--;
+					continue;
+				}
+			if (soap->error == SOAP_TAG_MISMATCH)
+				if (soap_flag)
+				{	soap->error = SOAP_OK;
+					break;
+				}
+			if (soap_flag && soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb3__GetBoxFilterSGSsymtensor(struct soap *soap, const struct __turb3__GetBoxFilterSGSsymtensor *a, const char *tag, const char *type)
+{
+	register int id = 0;
+	if (soap_out___turb3__GetBoxFilterSGSsymtensor(soap, tag?tag:"-turb3:GetBoxFilterSGSsymtensor", id, a, type))
+		return soap->error;
+	return SOAP_OK;
+}
+
+SOAP_FMAC3 struct __turb3__GetBoxFilterSGSsymtensor * SOAP_FMAC4 soap_get___turb3__GetBoxFilterSGSsymtensor(struct soap *soap, struct __turb3__GetBoxFilterSGSsymtensor *p, const char *tag, const char *type)
+{
+	if ((p = soap_in___turb3__GetBoxFilterSGSsymtensor(soap, tag, p, type)))
 		if (soap_getindependent(soap))
 			return NULL;
 	return p;
@@ -5120,6 +5553,262 @@ SOAP_FMAC3 struct __turb2__GetBoxFilterGradient * SOAP_FMAC4 soap_get___turb2__G
 	return p;
 }
 
+SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb2__GetBoxFilterSGSscalar(struct soap *soap, struct __turb2__GetBoxFilterSGSscalar *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	a->turb1__GetBoxFilterSGSscalar = NULL;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb2__GetBoxFilterSGSscalar(struct soap *soap, const struct __turb2__GetBoxFilterSGSscalar *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_serialize_PointerTo_turb1__GetBoxFilterSGSscalar(soap, &a->turb1__GetBoxFilterSGSscalar);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out___turb2__GetBoxFilterSGSscalar(struct soap *soap, const char *tag, int id, const struct __turb2__GetBoxFilterSGSscalar *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)type;
+	if (soap_out_PointerTo_turb1__GetBoxFilterSGSscalar(soap, "turb1:GetBoxFilterSGSscalar", -1, &a->turb1__GetBoxFilterSGSscalar, ""))
+		return soap->error;
+	return SOAP_OK;
+}
+
+SOAP_FMAC3 struct __turb2__GetBoxFilterSGSscalar * SOAP_FMAC4 soap_in___turb2__GetBoxFilterSGSscalar(struct soap *soap, const char *tag, struct __turb2__GetBoxFilterSGSscalar *a, const char *type)
+{
+	size_t soap_flag_turb1__GetBoxFilterSGSscalar = 1;
+	short soap_flag;
+	a = (struct __turb2__GetBoxFilterSGSscalar *)soap_id_enter(soap, "", a, SOAP_TYPE___turb2__GetBoxFilterSGSscalar, sizeof(struct __turb2__GetBoxFilterSGSscalar), 0, NULL, NULL, NULL);
+	if (!a)
+		return NULL;
+	soap_default___turb2__GetBoxFilterSGSscalar(soap, a);
+		for (soap_flag = 0;; soap_flag = 1)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_turb1__GetBoxFilterSGSscalar && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_PointerTo_turb1__GetBoxFilterSGSscalar(soap, "turb1:GetBoxFilterSGSscalar", &a->turb1__GetBoxFilterSGSscalar, ""))
+				{	soap_flag_turb1__GetBoxFilterSGSscalar--;
+					continue;
+				}
+			if (soap->error == SOAP_TAG_MISMATCH)
+				if (soap_flag)
+				{	soap->error = SOAP_OK;
+					break;
+				}
+			if (soap_flag && soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb2__GetBoxFilterSGSscalar(struct soap *soap, const struct __turb2__GetBoxFilterSGSscalar *a, const char *tag, const char *type)
+{
+	register int id = 0;
+	if (soap_out___turb2__GetBoxFilterSGSscalar(soap, tag?tag:"-turb2:GetBoxFilterSGSscalar", id, a, type))
+		return soap->error;
+	return SOAP_OK;
+}
+
+SOAP_FMAC3 struct __turb2__GetBoxFilterSGSscalar * SOAP_FMAC4 soap_get___turb2__GetBoxFilterSGSscalar(struct soap *soap, struct __turb2__GetBoxFilterSGSscalar *p, const char *tag, const char *type)
+{
+	if ((p = soap_in___turb2__GetBoxFilterSGSscalar(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb2__GetBoxFilterSGSvector(struct soap *soap, struct __turb2__GetBoxFilterSGSvector *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	a->turb1__GetBoxFilterSGSvector = NULL;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb2__GetBoxFilterSGSvector(struct soap *soap, const struct __turb2__GetBoxFilterSGSvector *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_serialize_PointerTo_turb1__GetBoxFilterSGSvector(soap, &a->turb1__GetBoxFilterSGSvector);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out___turb2__GetBoxFilterSGSvector(struct soap *soap, const char *tag, int id, const struct __turb2__GetBoxFilterSGSvector *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)type;
+	if (soap_out_PointerTo_turb1__GetBoxFilterSGSvector(soap, "turb1:GetBoxFilterSGSvector", -1, &a->turb1__GetBoxFilterSGSvector, ""))
+		return soap->error;
+	return SOAP_OK;
+}
+
+SOAP_FMAC3 struct __turb2__GetBoxFilterSGSvector * SOAP_FMAC4 soap_in___turb2__GetBoxFilterSGSvector(struct soap *soap, const char *tag, struct __turb2__GetBoxFilterSGSvector *a, const char *type)
+{
+	size_t soap_flag_turb1__GetBoxFilterSGSvector = 1;
+	short soap_flag;
+	a = (struct __turb2__GetBoxFilterSGSvector *)soap_id_enter(soap, "", a, SOAP_TYPE___turb2__GetBoxFilterSGSvector, sizeof(struct __turb2__GetBoxFilterSGSvector), 0, NULL, NULL, NULL);
+	if (!a)
+		return NULL;
+	soap_default___turb2__GetBoxFilterSGSvector(soap, a);
+		for (soap_flag = 0;; soap_flag = 1)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_turb1__GetBoxFilterSGSvector && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_PointerTo_turb1__GetBoxFilterSGSvector(soap, "turb1:GetBoxFilterSGSvector", &a->turb1__GetBoxFilterSGSvector, ""))
+				{	soap_flag_turb1__GetBoxFilterSGSvector--;
+					continue;
+				}
+			if (soap->error == SOAP_TAG_MISMATCH)
+				if (soap_flag)
+				{	soap->error = SOAP_OK;
+					break;
+				}
+			if (soap_flag && soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb2__GetBoxFilterSGSvector(struct soap *soap, const struct __turb2__GetBoxFilterSGSvector *a, const char *tag, const char *type)
+{
+	register int id = 0;
+	if (soap_out___turb2__GetBoxFilterSGSvector(soap, tag?tag:"-turb2:GetBoxFilterSGSvector", id, a, type))
+		return soap->error;
+	return SOAP_OK;
+}
+
+SOAP_FMAC3 struct __turb2__GetBoxFilterSGSvector * SOAP_FMAC4 soap_get___turb2__GetBoxFilterSGSvector(struct soap *soap, struct __turb2__GetBoxFilterSGSvector *p, const char *tag, const char *type)
+{
+	if ((p = soap_in___turb2__GetBoxFilterSGSvector(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb2__GetBoxFilterSGStensor(struct soap *soap, struct __turb2__GetBoxFilterSGStensor *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	a->turb1__GetBoxFilterSGStensor = NULL;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb2__GetBoxFilterSGStensor(struct soap *soap, const struct __turb2__GetBoxFilterSGStensor *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_serialize_PointerTo_turb1__GetBoxFilterSGStensor(soap, &a->turb1__GetBoxFilterSGStensor);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out___turb2__GetBoxFilterSGStensor(struct soap *soap, const char *tag, int id, const struct __turb2__GetBoxFilterSGStensor *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)type;
+	if (soap_out_PointerTo_turb1__GetBoxFilterSGStensor(soap, "turb1:GetBoxFilterSGStensor", -1, &a->turb1__GetBoxFilterSGStensor, ""))
+		return soap->error;
+	return SOAP_OK;
+}
+
+SOAP_FMAC3 struct __turb2__GetBoxFilterSGStensor * SOAP_FMAC4 soap_in___turb2__GetBoxFilterSGStensor(struct soap *soap, const char *tag, struct __turb2__GetBoxFilterSGStensor *a, const char *type)
+{
+	size_t soap_flag_turb1__GetBoxFilterSGStensor = 1;
+	short soap_flag;
+	a = (struct __turb2__GetBoxFilterSGStensor *)soap_id_enter(soap, "", a, SOAP_TYPE___turb2__GetBoxFilterSGStensor, sizeof(struct __turb2__GetBoxFilterSGStensor), 0, NULL, NULL, NULL);
+	if (!a)
+		return NULL;
+	soap_default___turb2__GetBoxFilterSGStensor(soap, a);
+		for (soap_flag = 0;; soap_flag = 1)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_turb1__GetBoxFilterSGStensor && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_PointerTo_turb1__GetBoxFilterSGStensor(soap, "turb1:GetBoxFilterSGStensor", &a->turb1__GetBoxFilterSGStensor, ""))
+				{	soap_flag_turb1__GetBoxFilterSGStensor--;
+					continue;
+				}
+			if (soap->error == SOAP_TAG_MISMATCH)
+				if (soap_flag)
+				{	soap->error = SOAP_OK;
+					break;
+				}
+			if (soap_flag && soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb2__GetBoxFilterSGStensor(struct soap *soap, const struct __turb2__GetBoxFilterSGStensor *a, const char *tag, const char *type)
+{
+	register int id = 0;
+	if (soap_out___turb2__GetBoxFilterSGStensor(soap, tag?tag:"-turb2:GetBoxFilterSGStensor", id, a, type))
+		return soap->error;
+	return SOAP_OK;
+}
+
+SOAP_FMAC3 struct __turb2__GetBoxFilterSGStensor * SOAP_FMAC4 soap_get___turb2__GetBoxFilterSGStensor(struct soap *soap, struct __turb2__GetBoxFilterSGStensor *p, const char *tag, const char *type)
+{
+	if ((p = soap_in___turb2__GetBoxFilterSGStensor(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb2__GetBoxFilterSGSsymtensor(struct soap *soap, struct __turb2__GetBoxFilterSGSsymtensor *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	a->turb1__GetBoxFilterSGSsymtensor = NULL;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___turb2__GetBoxFilterSGSsymtensor(struct soap *soap, const struct __turb2__GetBoxFilterSGSsymtensor *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_serialize_PointerTo_turb1__GetBoxFilterSGSsymtensor(soap, &a->turb1__GetBoxFilterSGSsymtensor);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out___turb2__GetBoxFilterSGSsymtensor(struct soap *soap, const char *tag, int id, const struct __turb2__GetBoxFilterSGSsymtensor *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)type;
+	if (soap_out_PointerTo_turb1__GetBoxFilterSGSsymtensor(soap, "turb1:GetBoxFilterSGSsymtensor", -1, &a->turb1__GetBoxFilterSGSsymtensor, ""))
+		return soap->error;
+	return SOAP_OK;
+}
+
+SOAP_FMAC3 struct __turb2__GetBoxFilterSGSsymtensor * SOAP_FMAC4 soap_in___turb2__GetBoxFilterSGSsymtensor(struct soap *soap, const char *tag, struct __turb2__GetBoxFilterSGSsymtensor *a, const char *type)
+{
+	size_t soap_flag_turb1__GetBoxFilterSGSsymtensor = 1;
+	short soap_flag;
+	a = (struct __turb2__GetBoxFilterSGSsymtensor *)soap_id_enter(soap, "", a, SOAP_TYPE___turb2__GetBoxFilterSGSsymtensor, sizeof(struct __turb2__GetBoxFilterSGSsymtensor), 0, NULL, NULL, NULL);
+	if (!a)
+		return NULL;
+	soap_default___turb2__GetBoxFilterSGSsymtensor(soap, a);
+		for (soap_flag = 0;; soap_flag = 1)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_turb1__GetBoxFilterSGSsymtensor && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_PointerTo_turb1__GetBoxFilterSGSsymtensor(soap, "turb1:GetBoxFilterSGSsymtensor", &a->turb1__GetBoxFilterSGSsymtensor, ""))
+				{	soap_flag_turb1__GetBoxFilterSGSsymtensor--;
+					continue;
+				}
+			if (soap->error == SOAP_TAG_MISMATCH)
+				if (soap_flag)
+				{	soap->error = SOAP_OK;
+					break;
+				}
+			if (soap_flag && soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put___turb2__GetBoxFilterSGSsymtensor(struct soap *soap, const struct __turb2__GetBoxFilterSGSsymtensor *a, const char *tag, const char *type)
+{
+	register int id = 0;
+	if (soap_out___turb2__GetBoxFilterSGSsymtensor(soap, tag?tag:"-turb2:GetBoxFilterSGSsymtensor", id, a, type))
+		return soap->error;
+	return SOAP_OK;
+}
+
+SOAP_FMAC3 struct __turb2__GetBoxFilterSGSsymtensor * SOAP_FMAC4 soap_get___turb2__GetBoxFilterSGSsymtensor(struct soap *soap, struct __turb2__GetBoxFilterSGSsymtensor *p, const char *tag, const char *type)
+{
+	if ((p = soap_in___turb2__GetBoxFilterSGSsymtensor(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
 SOAP_FMAC3 void SOAP_FMAC4 soap_default___turb2__GetBoxFilterSGS(struct soap *soap, struct __turb2__GetBoxFilterSGS *a)
 {
 	(void)soap; (void)a; /* appease -Wall -Werror */
@@ -7135,6 +7824,7 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetLaplacianOfGradient(struct 
 	soap_serialize_string(soap, &a->authToken);
 	soap_serialize_string(soap, &a->dataset);
 	soap_serialize_string(soap, &a->field);
+	soap_embedded(soap, &a->time, SOAP_TYPE_float);
 	soap_serialize_PointerToturb1__ArrayOfPoint3(soap, &a->points);
 }
 
@@ -7352,6 +8042,8 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetThreshold(struct soap *soap
 	soap_serialize_string(soap, &a->authToken);
 	soap_serialize_string(soap, &a->dataset);
 	soap_serialize_string(soap, &a->field);
+	soap_embedded(soap, &a->time, SOAP_TYPE_float);
+	soap_embedded(soap, &a->threshold, SOAP_TYPE_float);
 }
 
 SOAP_FMAC3 int SOAP_FMAC4 soap_out__turb1__GetThreshold(struct soap *soap, const char *tag, int id, const struct _turb1__GetThreshold *a, const char *type)
@@ -7603,6 +8295,9 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetBoxFilterGradient(struct so
 	soap_serialize_string(soap, &a->authToken);
 	soap_serialize_string(soap, &a->dataset);
 	soap_serialize_string(soap, &a->field);
+	soap_embedded(soap, &a->time, SOAP_TYPE_float);
+	soap_embedded(soap, &a->filterwidth, SOAP_TYPE_float);
+	soap_embedded(soap, &a->spacing, SOAP_TYPE_float);
 	soap_serialize_PointerToturb1__ArrayOfPoint3(soap, &a->points);
 }
 
@@ -7720,6 +8415,826 @@ SOAP_FMAC3 struct _turb1__GetBoxFilterGradient * SOAP_FMAC4 soap_get__turb1__Get
 	return p;
 }
 
+SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetBoxFilterSGSscalarResponse(struct soap *soap, struct _turb1__GetBoxFilterSGSscalarResponse *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	a->GetBoxFilterSGSscalarResult = NULL;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetBoxFilterSGSscalarResponse(struct soap *soap, const struct _turb1__GetBoxFilterSGSscalarResponse *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_serialize_PointerToturb1__ArrayOfFloat(soap, &a->GetBoxFilterSGSscalarResult);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out__turb1__GetBoxFilterSGSscalarResponse(struct soap *soap, const char *tag, int id, const struct _turb1__GetBoxFilterSGSscalarResponse *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)type;
+	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE__turb1__GetBoxFilterSGSscalarResponse), type))
+		return soap->error;
+	if (a->GetBoxFilterSGSscalarResult)
+		soap_element_result(soap, "turb1:GetBoxFilterSGSscalarResult");
+	if (soap_out_PointerToturb1__ArrayOfFloat(soap, "turb1:GetBoxFilterSGSscalarResult", -1, &a->GetBoxFilterSGSscalarResult, ""))
+		return soap->error;
+	return soap_element_end_out(soap, tag);
+}
+
+SOAP_FMAC3 struct _turb1__GetBoxFilterSGSscalarResponse * SOAP_FMAC4 soap_in__turb1__GetBoxFilterSGSscalarResponse(struct soap *soap, const char *tag, struct _turb1__GetBoxFilterSGSscalarResponse *a, const char *type)
+{
+	size_t soap_flag_GetBoxFilterSGSscalarResult = 1;
+	if (soap_element_begin_in(soap, tag, 0, type))
+		return NULL;
+	a = (struct _turb1__GetBoxFilterSGSscalarResponse *)soap_id_enter(soap, soap->id, a, SOAP_TYPE__turb1__GetBoxFilterSGSscalarResponse, sizeof(struct _turb1__GetBoxFilterSGSscalarResponse), 0, NULL, NULL, NULL);
+	if (!a)
+		return NULL;
+	soap_default__turb1__GetBoxFilterSGSscalarResponse(soap, a);
+	if (soap->body && !*soap->href)
+	{
+		for (;;)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_GetBoxFilterSGSscalarResult && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_PointerToturb1__ArrayOfFloat(soap, "turb1:GetBoxFilterSGSscalarResult", &a->GetBoxFilterSGSscalarResult, "turb1:ArrayOfFloat"))
+				{	soap_flag_GetBoxFilterSGSscalarResult--;
+					continue;
+				}
+			soap_check_result(soap, "turb1:GetBoxFilterSGSscalarResult");
+			if (soap->error == SOAP_TAG_MISMATCH)
+				soap->error = soap_ignore_element(soap);
+			if (soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+		if (soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	else
+	{	a = (struct _turb1__GetBoxFilterSGSscalarResponse *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE__turb1__GetBoxFilterSGSscalarResponse, 0, sizeof(struct _turb1__GetBoxFilterSGSscalarResponse), 0, NULL);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetBoxFilterSGSscalarResponse(struct soap *soap, const struct _turb1__GetBoxFilterSGSscalarResponse *a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE__turb1__GetBoxFilterSGSscalarResponse);
+	if (soap_out__turb1__GetBoxFilterSGSscalarResponse(soap, tag?tag:"turb1:GetBoxFilterSGSscalarResponse", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct _turb1__GetBoxFilterSGSscalarResponse * SOAP_FMAC4 soap_get__turb1__GetBoxFilterSGSscalarResponse(struct soap *soap, struct _turb1__GetBoxFilterSGSscalarResponse *p, const char *tag, const char *type)
+{
+	if ((p = soap_in__turb1__GetBoxFilterSGSscalarResponse(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetBoxFilterSGSscalar(struct soap *soap, struct _turb1__GetBoxFilterSGSscalar *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_default_string(soap, &a->authToken);
+	soap_default_string(soap, &a->dataset);
+	soap_default_string(soap, &a->field);
+	soap_default_float(soap, &a->time);
+	soap_default_float(soap, &a->filterwidth);
+	a->points = NULL;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetBoxFilterSGSscalar(struct soap *soap, const struct _turb1__GetBoxFilterSGSscalar *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_serialize_string(soap, &a->authToken);
+	soap_serialize_string(soap, &a->dataset);
+	soap_serialize_string(soap, &a->field);
+	soap_embedded(soap, &a->time, SOAP_TYPE_float);
+	soap_embedded(soap, &a->filterwidth, SOAP_TYPE_float);
+	soap_serialize_PointerToturb1__ArrayOfPoint3(soap, &a->points);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out__turb1__GetBoxFilterSGSscalar(struct soap *soap, const char *tag, int id, const struct _turb1__GetBoxFilterSGSscalar *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)type;
+	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE__turb1__GetBoxFilterSGSscalar), type))
+		return soap->error;
+	if (soap_out_string(soap, "turb1:authToken", -1, &a->authToken, ""))
+		return soap->error;
+	if (soap_out_string(soap, "turb1:dataset", -1, &a->dataset, ""))
+		return soap->error;
+	if (soap_out_string(soap, "turb1:field", -1, &a->field, ""))
+		return soap->error;
+	if (soap_out_float(soap, "turb1:time", -1, &a->time, ""))
+		return soap->error;
+	if (soap_out_float(soap, "turb1:filterwidth", -1, &a->filterwidth, ""))
+		return soap->error;
+	if (soap_out_PointerToturb1__ArrayOfPoint3(soap, "turb1:points", -1, &a->points, ""))
+		return soap->error;
+	return soap_element_end_out(soap, tag);
+}
+
+SOAP_FMAC3 struct _turb1__GetBoxFilterSGSscalar * SOAP_FMAC4 soap_in__turb1__GetBoxFilterSGSscalar(struct soap *soap, const char *tag, struct _turb1__GetBoxFilterSGSscalar *a, const char *type)
+{
+	size_t soap_flag_authToken = 1;
+	size_t soap_flag_dataset = 1;
+	size_t soap_flag_field = 1;
+	size_t soap_flag_time = 1;
+	size_t soap_flag_filterwidth = 1;
+	size_t soap_flag_points = 1;
+	if (soap_element_begin_in(soap, tag, 0, type))
+		return NULL;
+	a = (struct _turb1__GetBoxFilterSGSscalar *)soap_id_enter(soap, soap->id, a, SOAP_TYPE__turb1__GetBoxFilterSGSscalar, sizeof(struct _turb1__GetBoxFilterSGSscalar), 0, NULL, NULL, NULL);
+	if (!a)
+		return NULL;
+	soap_default__turb1__GetBoxFilterSGSscalar(soap, a);
+	if (soap->body && !*soap->href)
+	{
+		for (;;)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_authToken && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_string(soap, "turb1:authToken", &a->authToken, "xsd:string"))
+				{	soap_flag_authToken--;
+					continue;
+				}
+			if (soap_flag_dataset && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_string(soap, "turb1:dataset", &a->dataset, "xsd:string"))
+				{	soap_flag_dataset--;
+					continue;
+				}
+			if (soap_flag_field && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_string(soap, "turb1:field", &a->field, "xsd:string"))
+				{	soap_flag_field--;
+					continue;
+				}
+			if (soap_flag_time && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_float(soap, "turb1:time", &a->time, "xsd:float"))
+				{	soap_flag_time--;
+					continue;
+				}
+			if (soap_flag_filterwidth && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_float(soap, "turb1:filterwidth", &a->filterwidth, "xsd:float"))
+				{	soap_flag_filterwidth--;
+					continue;
+				}
+			if (soap_flag_points && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_PointerToturb1__ArrayOfPoint3(soap, "turb1:points", &a->points, "turb1:ArrayOfPoint3"))
+				{	soap_flag_points--;
+					continue;
+				}
+			if (soap->error == SOAP_TAG_MISMATCH)
+				soap->error = soap_ignore_element(soap);
+			if (soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+		if (soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	else
+	{	a = (struct _turb1__GetBoxFilterSGSscalar *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE__turb1__GetBoxFilterSGSscalar, 0, sizeof(struct _turb1__GetBoxFilterSGSscalar), 0, NULL);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_time > 0 || soap_flag_filterwidth > 0))
+	{	soap->error = SOAP_OCCURS;
+		return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetBoxFilterSGSscalar(struct soap *soap, const struct _turb1__GetBoxFilterSGSscalar *a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE__turb1__GetBoxFilterSGSscalar);
+	if (soap_out__turb1__GetBoxFilterSGSscalar(soap, tag?tag:"turb1:GetBoxFilterSGSscalar", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct _turb1__GetBoxFilterSGSscalar * SOAP_FMAC4 soap_get__turb1__GetBoxFilterSGSscalar(struct soap *soap, struct _turb1__GetBoxFilterSGSscalar *p, const char *tag, const char *type)
+{
+	if ((p = soap_in__turb1__GetBoxFilterSGSscalar(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetBoxFilterSGSvectorResponse(struct soap *soap, struct _turb1__GetBoxFilterSGSvectorResponse *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	a->GetBoxFilterSGSvectorResult = NULL;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetBoxFilterSGSvectorResponse(struct soap *soap, const struct _turb1__GetBoxFilterSGSvectorResponse *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_serialize_PointerToturb1__ArrayOfVector3(soap, &a->GetBoxFilterSGSvectorResult);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out__turb1__GetBoxFilterSGSvectorResponse(struct soap *soap, const char *tag, int id, const struct _turb1__GetBoxFilterSGSvectorResponse *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)type;
+	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE__turb1__GetBoxFilterSGSvectorResponse), type))
+		return soap->error;
+	if (a->GetBoxFilterSGSvectorResult)
+		soap_element_result(soap, "turb1:GetBoxFilterSGSvectorResult");
+	if (soap_out_PointerToturb1__ArrayOfVector3(soap, "turb1:GetBoxFilterSGSvectorResult", -1, &a->GetBoxFilterSGSvectorResult, ""))
+		return soap->error;
+	return soap_element_end_out(soap, tag);
+}
+
+SOAP_FMAC3 struct _turb1__GetBoxFilterSGSvectorResponse * SOAP_FMAC4 soap_in__turb1__GetBoxFilterSGSvectorResponse(struct soap *soap, const char *tag, struct _turb1__GetBoxFilterSGSvectorResponse *a, const char *type)
+{
+	size_t soap_flag_GetBoxFilterSGSvectorResult = 1;
+	if (soap_element_begin_in(soap, tag, 0, type))
+		return NULL;
+	a = (struct _turb1__GetBoxFilterSGSvectorResponse *)soap_id_enter(soap, soap->id, a, SOAP_TYPE__turb1__GetBoxFilterSGSvectorResponse, sizeof(struct _turb1__GetBoxFilterSGSvectorResponse), 0, NULL, NULL, NULL);
+	if (!a)
+		return NULL;
+	soap_default__turb1__GetBoxFilterSGSvectorResponse(soap, a);
+	if (soap->body && !*soap->href)
+	{
+		for (;;)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_GetBoxFilterSGSvectorResult && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_PointerToturb1__ArrayOfVector3(soap, "turb1:GetBoxFilterSGSvectorResult", &a->GetBoxFilterSGSvectorResult, "turb1:ArrayOfVector3"))
+				{	soap_flag_GetBoxFilterSGSvectorResult--;
+					continue;
+				}
+			soap_check_result(soap, "turb1:GetBoxFilterSGSvectorResult");
+			if (soap->error == SOAP_TAG_MISMATCH)
+				soap->error = soap_ignore_element(soap);
+			if (soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+		if (soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	else
+	{	a = (struct _turb1__GetBoxFilterSGSvectorResponse *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE__turb1__GetBoxFilterSGSvectorResponse, 0, sizeof(struct _turb1__GetBoxFilterSGSvectorResponse), 0, NULL);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetBoxFilterSGSvectorResponse(struct soap *soap, const struct _turb1__GetBoxFilterSGSvectorResponse *a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE__turb1__GetBoxFilterSGSvectorResponse);
+	if (soap_out__turb1__GetBoxFilterSGSvectorResponse(soap, tag?tag:"turb1:GetBoxFilterSGSvectorResponse", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct _turb1__GetBoxFilterSGSvectorResponse * SOAP_FMAC4 soap_get__turb1__GetBoxFilterSGSvectorResponse(struct soap *soap, struct _turb1__GetBoxFilterSGSvectorResponse *p, const char *tag, const char *type)
+{
+	if ((p = soap_in__turb1__GetBoxFilterSGSvectorResponse(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetBoxFilterSGSvector(struct soap *soap, struct _turb1__GetBoxFilterSGSvector *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_default_string(soap, &a->authToken);
+	soap_default_string(soap, &a->dataset);
+	soap_default_string(soap, &a->field);
+	soap_default_float(soap, &a->time);
+	soap_default_float(soap, &a->filterwidth);
+	a->points = NULL;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetBoxFilterSGSvector(struct soap *soap, const struct _turb1__GetBoxFilterSGSvector *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_serialize_string(soap, &a->authToken);
+	soap_serialize_string(soap, &a->dataset);
+	soap_serialize_string(soap, &a->field);
+	soap_embedded(soap, &a->time, SOAP_TYPE_float);
+	soap_embedded(soap, &a->filterwidth, SOAP_TYPE_float);
+	soap_serialize_PointerToturb1__ArrayOfPoint3(soap, &a->points);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out__turb1__GetBoxFilterSGSvector(struct soap *soap, const char *tag, int id, const struct _turb1__GetBoxFilterSGSvector *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)type;
+	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE__turb1__GetBoxFilterSGSvector), type))
+		return soap->error;
+	if (soap_out_string(soap, "turb1:authToken", -1, &a->authToken, ""))
+		return soap->error;
+	if (soap_out_string(soap, "turb1:dataset", -1, &a->dataset, ""))
+		return soap->error;
+	if (soap_out_string(soap, "turb1:field", -1, &a->field, ""))
+		return soap->error;
+	if (soap_out_float(soap, "turb1:time", -1, &a->time, ""))
+		return soap->error;
+	if (soap_out_float(soap, "turb1:filterwidth", -1, &a->filterwidth, ""))
+		return soap->error;
+	if (soap_out_PointerToturb1__ArrayOfPoint3(soap, "turb1:points", -1, &a->points, ""))
+		return soap->error;
+	return soap_element_end_out(soap, tag);
+}
+
+SOAP_FMAC3 struct _turb1__GetBoxFilterSGSvector * SOAP_FMAC4 soap_in__turb1__GetBoxFilterSGSvector(struct soap *soap, const char *tag, struct _turb1__GetBoxFilterSGSvector *a, const char *type)
+{
+	size_t soap_flag_authToken = 1;
+	size_t soap_flag_dataset = 1;
+	size_t soap_flag_field = 1;
+	size_t soap_flag_time = 1;
+	size_t soap_flag_filterwidth = 1;
+	size_t soap_flag_points = 1;
+	if (soap_element_begin_in(soap, tag, 0, type))
+		return NULL;
+	a = (struct _turb1__GetBoxFilterSGSvector *)soap_id_enter(soap, soap->id, a, SOAP_TYPE__turb1__GetBoxFilterSGSvector, sizeof(struct _turb1__GetBoxFilterSGSvector), 0, NULL, NULL, NULL);
+	if (!a)
+		return NULL;
+	soap_default__turb1__GetBoxFilterSGSvector(soap, a);
+	if (soap->body && !*soap->href)
+	{
+		for (;;)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_authToken && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_string(soap, "turb1:authToken", &a->authToken, "xsd:string"))
+				{	soap_flag_authToken--;
+					continue;
+				}
+			if (soap_flag_dataset && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_string(soap, "turb1:dataset", &a->dataset, "xsd:string"))
+				{	soap_flag_dataset--;
+					continue;
+				}
+			if (soap_flag_field && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_string(soap, "turb1:field", &a->field, "xsd:string"))
+				{	soap_flag_field--;
+					continue;
+				}
+			if (soap_flag_time && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_float(soap, "turb1:time", &a->time, "xsd:float"))
+				{	soap_flag_time--;
+					continue;
+				}
+			if (soap_flag_filterwidth && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_float(soap, "turb1:filterwidth", &a->filterwidth, "xsd:float"))
+				{	soap_flag_filterwidth--;
+					continue;
+				}
+			if (soap_flag_points && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_PointerToturb1__ArrayOfPoint3(soap, "turb1:points", &a->points, "turb1:ArrayOfPoint3"))
+				{	soap_flag_points--;
+					continue;
+				}
+			if (soap->error == SOAP_TAG_MISMATCH)
+				soap->error = soap_ignore_element(soap);
+			if (soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+		if (soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	else
+	{	a = (struct _turb1__GetBoxFilterSGSvector *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE__turb1__GetBoxFilterSGSvector, 0, sizeof(struct _turb1__GetBoxFilterSGSvector), 0, NULL);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_time > 0 || soap_flag_filterwidth > 0))
+	{	soap->error = SOAP_OCCURS;
+		return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetBoxFilterSGSvector(struct soap *soap, const struct _turb1__GetBoxFilterSGSvector *a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE__turb1__GetBoxFilterSGSvector);
+	if (soap_out__turb1__GetBoxFilterSGSvector(soap, tag?tag:"turb1:GetBoxFilterSGSvector", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct _turb1__GetBoxFilterSGSvector * SOAP_FMAC4 soap_get__turb1__GetBoxFilterSGSvector(struct soap *soap, struct _turb1__GetBoxFilterSGSvector *p, const char *tag, const char *type)
+{
+	if ((p = soap_in__turb1__GetBoxFilterSGSvector(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetBoxFilterSGStensorResponse(struct soap *soap, struct _turb1__GetBoxFilterSGStensorResponse *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	a->GetBoxFilterSGStensorResult = NULL;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetBoxFilterSGStensorResponse(struct soap *soap, const struct _turb1__GetBoxFilterSGStensorResponse *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_serialize_PointerToturb1__ArrayOfVelocityGradient(soap, &a->GetBoxFilterSGStensorResult);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out__turb1__GetBoxFilterSGStensorResponse(struct soap *soap, const char *tag, int id, const struct _turb1__GetBoxFilterSGStensorResponse *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)type;
+	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE__turb1__GetBoxFilterSGStensorResponse), type))
+		return soap->error;
+	if (a->GetBoxFilterSGStensorResult)
+		soap_element_result(soap, "turb1:GetBoxFilterSGStensorResult");
+	if (soap_out_PointerToturb1__ArrayOfVelocityGradient(soap, "turb1:GetBoxFilterSGStensorResult", -1, &a->GetBoxFilterSGStensorResult, ""))
+		return soap->error;
+	return soap_element_end_out(soap, tag);
+}
+
+SOAP_FMAC3 struct _turb1__GetBoxFilterSGStensorResponse * SOAP_FMAC4 soap_in__turb1__GetBoxFilterSGStensorResponse(struct soap *soap, const char *tag, struct _turb1__GetBoxFilterSGStensorResponse *a, const char *type)
+{
+	size_t soap_flag_GetBoxFilterSGStensorResult = 1;
+	if (soap_element_begin_in(soap, tag, 0, type))
+		return NULL;
+	a = (struct _turb1__GetBoxFilterSGStensorResponse *)soap_id_enter(soap, soap->id, a, SOAP_TYPE__turb1__GetBoxFilterSGStensorResponse, sizeof(struct _turb1__GetBoxFilterSGStensorResponse), 0, NULL, NULL, NULL);
+	if (!a)
+		return NULL;
+	soap_default__turb1__GetBoxFilterSGStensorResponse(soap, a);
+	if (soap->body && !*soap->href)
+	{
+		for (;;)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_GetBoxFilterSGStensorResult && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_PointerToturb1__ArrayOfVelocityGradient(soap, "turb1:GetBoxFilterSGStensorResult", &a->GetBoxFilterSGStensorResult, "turb1:ArrayOfVelocityGradient"))
+				{	soap_flag_GetBoxFilterSGStensorResult--;
+					continue;
+				}
+			soap_check_result(soap, "turb1:GetBoxFilterSGStensorResult");
+			if (soap->error == SOAP_TAG_MISMATCH)
+				soap->error = soap_ignore_element(soap);
+			if (soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+		if (soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	else
+	{	a = (struct _turb1__GetBoxFilterSGStensorResponse *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE__turb1__GetBoxFilterSGStensorResponse, 0, sizeof(struct _turb1__GetBoxFilterSGStensorResponse), 0, NULL);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetBoxFilterSGStensorResponse(struct soap *soap, const struct _turb1__GetBoxFilterSGStensorResponse *a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE__turb1__GetBoxFilterSGStensorResponse);
+	if (soap_out__turb1__GetBoxFilterSGStensorResponse(soap, tag?tag:"turb1:GetBoxFilterSGStensorResponse", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct _turb1__GetBoxFilterSGStensorResponse * SOAP_FMAC4 soap_get__turb1__GetBoxFilterSGStensorResponse(struct soap *soap, struct _turb1__GetBoxFilterSGStensorResponse *p, const char *tag, const char *type)
+{
+	if ((p = soap_in__turb1__GetBoxFilterSGStensorResponse(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetBoxFilterSGStensor(struct soap *soap, struct _turb1__GetBoxFilterSGStensor *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_default_string(soap, &a->authToken);
+	soap_default_string(soap, &a->dataset);
+	soap_default_string(soap, &a->field);
+	soap_default_float(soap, &a->time);
+	soap_default_float(soap, &a->filterwidth);
+	a->points = NULL;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetBoxFilterSGStensor(struct soap *soap, const struct _turb1__GetBoxFilterSGStensor *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_serialize_string(soap, &a->authToken);
+	soap_serialize_string(soap, &a->dataset);
+	soap_serialize_string(soap, &a->field);
+	soap_embedded(soap, &a->time, SOAP_TYPE_float);
+	soap_embedded(soap, &a->filterwidth, SOAP_TYPE_float);
+	soap_serialize_PointerToturb1__ArrayOfPoint3(soap, &a->points);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out__turb1__GetBoxFilterSGStensor(struct soap *soap, const char *tag, int id, const struct _turb1__GetBoxFilterSGStensor *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)type;
+	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE__turb1__GetBoxFilterSGStensor), type))
+		return soap->error;
+	if (soap_out_string(soap, "turb1:authToken", -1, &a->authToken, ""))
+		return soap->error;
+	if (soap_out_string(soap, "turb1:dataset", -1, &a->dataset, ""))
+		return soap->error;
+	if (soap_out_string(soap, "turb1:field", -1, &a->field, ""))
+		return soap->error;
+	if (soap_out_float(soap, "turb1:time", -1, &a->time, ""))
+		return soap->error;
+	if (soap_out_float(soap, "turb1:filterwidth", -1, &a->filterwidth, ""))
+		return soap->error;
+	if (soap_out_PointerToturb1__ArrayOfPoint3(soap, "turb1:points", -1, &a->points, ""))
+		return soap->error;
+	return soap_element_end_out(soap, tag);
+}
+
+SOAP_FMAC3 struct _turb1__GetBoxFilterSGStensor * SOAP_FMAC4 soap_in__turb1__GetBoxFilterSGStensor(struct soap *soap, const char *tag, struct _turb1__GetBoxFilterSGStensor *a, const char *type)
+{
+	size_t soap_flag_authToken = 1;
+	size_t soap_flag_dataset = 1;
+	size_t soap_flag_field = 1;
+	size_t soap_flag_time = 1;
+	size_t soap_flag_filterwidth = 1;
+	size_t soap_flag_points = 1;
+	if (soap_element_begin_in(soap, tag, 0, type))
+		return NULL;
+	a = (struct _turb1__GetBoxFilterSGStensor *)soap_id_enter(soap, soap->id, a, SOAP_TYPE__turb1__GetBoxFilterSGStensor, sizeof(struct _turb1__GetBoxFilterSGStensor), 0, NULL, NULL, NULL);
+	if (!a)
+		return NULL;
+	soap_default__turb1__GetBoxFilterSGStensor(soap, a);
+	if (soap->body && !*soap->href)
+	{
+		for (;;)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_authToken && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_string(soap, "turb1:authToken", &a->authToken, "xsd:string"))
+				{	soap_flag_authToken--;
+					continue;
+				}
+			if (soap_flag_dataset && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_string(soap, "turb1:dataset", &a->dataset, "xsd:string"))
+				{	soap_flag_dataset--;
+					continue;
+				}
+			if (soap_flag_field && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_string(soap, "turb1:field", &a->field, "xsd:string"))
+				{	soap_flag_field--;
+					continue;
+				}
+			if (soap_flag_time && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_float(soap, "turb1:time", &a->time, "xsd:float"))
+				{	soap_flag_time--;
+					continue;
+				}
+			if (soap_flag_filterwidth && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_float(soap, "turb1:filterwidth", &a->filterwidth, "xsd:float"))
+				{	soap_flag_filterwidth--;
+					continue;
+				}
+			if (soap_flag_points && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_PointerToturb1__ArrayOfPoint3(soap, "turb1:points", &a->points, "turb1:ArrayOfPoint3"))
+				{	soap_flag_points--;
+					continue;
+				}
+			if (soap->error == SOAP_TAG_MISMATCH)
+				soap->error = soap_ignore_element(soap);
+			if (soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+		if (soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	else
+	{	a = (struct _turb1__GetBoxFilterSGStensor *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE__turb1__GetBoxFilterSGStensor, 0, sizeof(struct _turb1__GetBoxFilterSGStensor), 0, NULL);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_time > 0 || soap_flag_filterwidth > 0))
+	{	soap->error = SOAP_OCCURS;
+		return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetBoxFilterSGStensor(struct soap *soap, const struct _turb1__GetBoxFilterSGStensor *a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE__turb1__GetBoxFilterSGStensor);
+	if (soap_out__turb1__GetBoxFilterSGStensor(soap, tag?tag:"turb1:GetBoxFilterSGStensor", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct _turb1__GetBoxFilterSGStensor * SOAP_FMAC4 soap_get__turb1__GetBoxFilterSGStensor(struct soap *soap, struct _turb1__GetBoxFilterSGStensor *p, const char *tag, const char *type)
+{
+	if ((p = soap_in__turb1__GetBoxFilterSGStensor(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetBoxFilterSGSsymtensorResponse(struct soap *soap, struct _turb1__GetBoxFilterSGSsymtensorResponse *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	a->GetBoxFilterSGSsymtensorResult = NULL;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetBoxFilterSGSsymtensorResponse(struct soap *soap, const struct _turb1__GetBoxFilterSGSsymtensorResponse *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_serialize_PointerToturb1__ArrayOfSGSTensor(soap, &a->GetBoxFilterSGSsymtensorResult);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out__turb1__GetBoxFilterSGSsymtensorResponse(struct soap *soap, const char *tag, int id, const struct _turb1__GetBoxFilterSGSsymtensorResponse *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)type;
+	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE__turb1__GetBoxFilterSGSsymtensorResponse), type))
+		return soap->error;
+	if (a->GetBoxFilterSGSsymtensorResult)
+		soap_element_result(soap, "turb1:GetBoxFilterSGSsymtensorResult");
+	if (soap_out_PointerToturb1__ArrayOfSGSTensor(soap, "turb1:GetBoxFilterSGSsymtensorResult", -1, &a->GetBoxFilterSGSsymtensorResult, ""))
+		return soap->error;
+	return soap_element_end_out(soap, tag);
+}
+
+SOAP_FMAC3 struct _turb1__GetBoxFilterSGSsymtensorResponse * SOAP_FMAC4 soap_in__turb1__GetBoxFilterSGSsymtensorResponse(struct soap *soap, const char *tag, struct _turb1__GetBoxFilterSGSsymtensorResponse *a, const char *type)
+{
+	size_t soap_flag_GetBoxFilterSGSsymtensorResult = 1;
+	if (soap_element_begin_in(soap, tag, 0, type))
+		return NULL;
+	a = (struct _turb1__GetBoxFilterSGSsymtensorResponse *)soap_id_enter(soap, soap->id, a, SOAP_TYPE__turb1__GetBoxFilterSGSsymtensorResponse, sizeof(struct _turb1__GetBoxFilterSGSsymtensorResponse), 0, NULL, NULL, NULL);
+	if (!a)
+		return NULL;
+	soap_default__turb1__GetBoxFilterSGSsymtensorResponse(soap, a);
+	if (soap->body && !*soap->href)
+	{
+		for (;;)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_GetBoxFilterSGSsymtensorResult && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_PointerToturb1__ArrayOfSGSTensor(soap, "turb1:GetBoxFilterSGSsymtensorResult", &a->GetBoxFilterSGSsymtensorResult, "turb1:ArrayOfSGSTensor"))
+				{	soap_flag_GetBoxFilterSGSsymtensorResult--;
+					continue;
+				}
+			soap_check_result(soap, "turb1:GetBoxFilterSGSsymtensorResult");
+			if (soap->error == SOAP_TAG_MISMATCH)
+				soap->error = soap_ignore_element(soap);
+			if (soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+		if (soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	else
+	{	a = (struct _turb1__GetBoxFilterSGSsymtensorResponse *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE__turb1__GetBoxFilterSGSsymtensorResponse, 0, sizeof(struct _turb1__GetBoxFilterSGSsymtensorResponse), 0, NULL);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetBoxFilterSGSsymtensorResponse(struct soap *soap, const struct _turb1__GetBoxFilterSGSsymtensorResponse *a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE__turb1__GetBoxFilterSGSsymtensorResponse);
+	if (soap_out__turb1__GetBoxFilterSGSsymtensorResponse(soap, tag?tag:"turb1:GetBoxFilterSGSsymtensorResponse", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct _turb1__GetBoxFilterSGSsymtensorResponse * SOAP_FMAC4 soap_get__turb1__GetBoxFilterSGSsymtensorResponse(struct soap *soap, struct _turb1__GetBoxFilterSGSsymtensorResponse *p, const char *tag, const char *type)
+{
+	if ((p = soap_in__turb1__GetBoxFilterSGSsymtensorResponse(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetBoxFilterSGSsymtensor(struct soap *soap, struct _turb1__GetBoxFilterSGSsymtensor *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_default_string(soap, &a->authToken);
+	soap_default_string(soap, &a->dataset);
+	soap_default_string(soap, &a->field);
+	soap_default_float(soap, &a->time);
+	soap_default_float(soap, &a->filterwidth);
+	a->points = NULL;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetBoxFilterSGSsymtensor(struct soap *soap, const struct _turb1__GetBoxFilterSGSsymtensor *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_serialize_string(soap, &a->authToken);
+	soap_serialize_string(soap, &a->dataset);
+	soap_serialize_string(soap, &a->field);
+	soap_embedded(soap, &a->time, SOAP_TYPE_float);
+	soap_embedded(soap, &a->filterwidth, SOAP_TYPE_float);
+	soap_serialize_PointerToturb1__ArrayOfPoint3(soap, &a->points);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out__turb1__GetBoxFilterSGSsymtensor(struct soap *soap, const char *tag, int id, const struct _turb1__GetBoxFilterSGSsymtensor *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)type;
+	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE__turb1__GetBoxFilterSGSsymtensor), type))
+		return soap->error;
+	if (soap_out_string(soap, "turb1:authToken", -1, &a->authToken, ""))
+		return soap->error;
+	if (soap_out_string(soap, "turb1:dataset", -1, &a->dataset, ""))
+		return soap->error;
+	if (soap_out_string(soap, "turb1:field", -1, &a->field, ""))
+		return soap->error;
+	if (soap_out_float(soap, "turb1:time", -1, &a->time, ""))
+		return soap->error;
+	if (soap_out_float(soap, "turb1:filterwidth", -1, &a->filterwidth, ""))
+		return soap->error;
+	if (soap_out_PointerToturb1__ArrayOfPoint3(soap, "turb1:points", -1, &a->points, ""))
+		return soap->error;
+	return soap_element_end_out(soap, tag);
+}
+
+SOAP_FMAC3 struct _turb1__GetBoxFilterSGSsymtensor * SOAP_FMAC4 soap_in__turb1__GetBoxFilterSGSsymtensor(struct soap *soap, const char *tag, struct _turb1__GetBoxFilterSGSsymtensor *a, const char *type)
+{
+	size_t soap_flag_authToken = 1;
+	size_t soap_flag_dataset = 1;
+	size_t soap_flag_field = 1;
+	size_t soap_flag_time = 1;
+	size_t soap_flag_filterwidth = 1;
+	size_t soap_flag_points = 1;
+	if (soap_element_begin_in(soap, tag, 0, type))
+		return NULL;
+	a = (struct _turb1__GetBoxFilterSGSsymtensor *)soap_id_enter(soap, soap->id, a, SOAP_TYPE__turb1__GetBoxFilterSGSsymtensor, sizeof(struct _turb1__GetBoxFilterSGSsymtensor), 0, NULL, NULL, NULL);
+	if (!a)
+		return NULL;
+	soap_default__turb1__GetBoxFilterSGSsymtensor(soap, a);
+	if (soap->body && !*soap->href)
+	{
+		for (;;)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_authToken && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_string(soap, "turb1:authToken", &a->authToken, "xsd:string"))
+				{	soap_flag_authToken--;
+					continue;
+				}
+			if (soap_flag_dataset && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_string(soap, "turb1:dataset", &a->dataset, "xsd:string"))
+				{	soap_flag_dataset--;
+					continue;
+				}
+			if (soap_flag_field && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_string(soap, "turb1:field", &a->field, "xsd:string"))
+				{	soap_flag_field--;
+					continue;
+				}
+			if (soap_flag_time && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_float(soap, "turb1:time", &a->time, "xsd:float"))
+				{	soap_flag_time--;
+					continue;
+				}
+			if (soap_flag_filterwidth && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_float(soap, "turb1:filterwidth", &a->filterwidth, "xsd:float"))
+				{	soap_flag_filterwidth--;
+					continue;
+				}
+			if (soap_flag_points && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_PointerToturb1__ArrayOfPoint3(soap, "turb1:points", &a->points, "turb1:ArrayOfPoint3"))
+				{	soap_flag_points--;
+					continue;
+				}
+			if (soap->error == SOAP_TAG_MISMATCH)
+				soap->error = soap_ignore_element(soap);
+			if (soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+		if (soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	else
+	{	a = (struct _turb1__GetBoxFilterSGSsymtensor *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE__turb1__GetBoxFilterSGSsymtensor, 0, sizeof(struct _turb1__GetBoxFilterSGSsymtensor), 0, NULL);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_time > 0 || soap_flag_filterwidth > 0))
+	{	soap->error = SOAP_OCCURS;
+		return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put__turb1__GetBoxFilterSGSsymtensor(struct soap *soap, const struct _turb1__GetBoxFilterSGSsymtensor *a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE__turb1__GetBoxFilterSGSsymtensor);
+	if (soap_out__turb1__GetBoxFilterSGSsymtensor(soap, tag?tag:"turb1:GetBoxFilterSGSsymtensor", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct _turb1__GetBoxFilterSGSsymtensor * SOAP_FMAC4 soap_get__turb1__GetBoxFilterSGSsymtensor(struct soap *soap, struct _turb1__GetBoxFilterSGSsymtensor *p, const char *tag, const char *type)
+{
+	if ((p = soap_in__turb1__GetBoxFilterSGSsymtensor(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
 SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetBoxFilterSGSResponse(struct soap *soap, struct _turb1__GetBoxFilterSGSResponse *a)
 {
 	(void)soap; (void)a; /* appease -Wall -Werror */
@@ -7814,6 +9329,8 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetBoxFilterSGS(struct soap *s
 	soap_serialize_string(soap, &a->authToken);
 	soap_serialize_string(soap, &a->dataset);
 	soap_serialize_string(soap, &a->field);
+	soap_embedded(soap, &a->time, SOAP_TYPE_float);
+	soap_embedded(soap, &a->filterwidth, SOAP_TYPE_float);
 	soap_serialize_PointerToturb1__ArrayOfPoint3(soap, &a->points);
 }
 
@@ -8017,6 +9534,8 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetBoxFilter(struct soap *soap
 	soap_serialize_string(soap, &a->authToken);
 	soap_serialize_string(soap, &a->dataset);
 	soap_serialize_string(soap, &a->field);
+	soap_embedded(soap, &a->time, SOAP_TYPE_float);
+	soap_embedded(soap, &a->filterwidth, SOAP_TYPE_float);
 	soap_serialize_PointerToturb1__ArrayOfPoint3(soap, &a->points);
 }
 
@@ -8220,6 +9739,9 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetPosition(struct soap *soap,
 	(void)soap; (void)a; /* appease -Wall -Werror */
 	soap_serialize_string(soap, &a->authToken);
 	soap_serialize_string(soap, &a->dataset);
+	soap_embedded(soap, &a->StartTime, SOAP_TYPE_float);
+	soap_embedded(soap, &a->EndTime, SOAP_TYPE_float);
+	soap_embedded(soap, &a->dt, SOAP_TYPE_float);
 	soap_serialize_PointerToturb1__ArrayOfPoint3(soap, &a->points);
 }
 
@@ -8430,6 +9952,7 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetVectorPotentialLaplacian(st
 	(void)soap; (void)a; /* appease -Wall -Werror */
 	soap_serialize_string(soap, &a->authToken);
 	soap_serialize_string(soap, &a->dataset);
+	soap_embedded(soap, &a->time, SOAP_TYPE_float);
 	soap_serialize_PointerToturb1__ArrayOfPoint3(soap, &a->points);
 }
 
@@ -8632,6 +10155,7 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetMagneticFieldLaplacian(stru
 	(void)soap; (void)a; /* appease -Wall -Werror */
 	soap_serialize_string(soap, &a->authToken);
 	soap_serialize_string(soap, &a->dataset);
+	soap_embedded(soap, &a->time, SOAP_TYPE_float);
 	soap_serialize_PointerToturb1__ArrayOfPoint3(soap, &a->points);
 }
 
@@ -8834,6 +10358,7 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetVelocityLaplacian(struct so
 	(void)soap; (void)a; /* appease -Wall -Werror */
 	soap_serialize_string(soap, &a->authToken);
 	soap_serialize_string(soap, &a->dataset);
+	soap_embedded(soap, &a->time, SOAP_TYPE_float);
 	soap_serialize_PointerToturb1__ArrayOfPoint3(soap, &a->points);
 }
 
@@ -9036,6 +10561,7 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetVectorPotentialHessian(stru
 	(void)soap; (void)a; /* appease -Wall -Werror */
 	soap_serialize_string(soap, &a->authToken);
 	soap_serialize_string(soap, &a->dataset);
+	soap_embedded(soap, &a->time, SOAP_TYPE_float);
 	soap_serialize_PointerToturb1__ArrayOfPoint3(soap, &a->points);
 }
 
@@ -9238,6 +10764,7 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetMagneticHessian(struct soap
 	(void)soap; (void)a; /* appease -Wall -Werror */
 	soap_serialize_string(soap, &a->authToken);
 	soap_serialize_string(soap, &a->dataset);
+	soap_embedded(soap, &a->time, SOAP_TYPE_float);
 	soap_serialize_PointerToturb1__ArrayOfPoint3(soap, &a->points);
 }
 
@@ -9440,6 +10967,7 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetVelocityHessian(struct soap
 	(void)soap; (void)a; /* appease -Wall -Werror */
 	soap_serialize_string(soap, &a->authToken);
 	soap_serialize_string(soap, &a->dataset);
+	soap_embedded(soap, &a->time, SOAP_TYPE_float);
 	soap_serialize_PointerToturb1__ArrayOfPoint3(soap, &a->points);
 }
 
@@ -9642,6 +11170,7 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetPressureHessian(struct soap
 	(void)soap; (void)a; /* appease -Wall -Werror */
 	soap_serialize_string(soap, &a->authToken);
 	soap_serialize_string(soap, &a->dataset);
+	soap_embedded(soap, &a->time, SOAP_TYPE_float);
 	soap_serialize_PointerToturb1__ArrayOfPoint3(soap, &a->points);
 }
 
@@ -9844,6 +11373,7 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetPressureGradient(struct soa
 	(void)soap; (void)a; /* appease -Wall -Werror */
 	soap_serialize_string(soap, &a->authToken);
 	soap_serialize_string(soap, &a->dataset);
+	soap_embedded(soap, &a->time, SOAP_TYPE_float);
 	soap_serialize_PointerToturb1__ArrayOfPoint3(soap, &a->points);
 }
 
@@ -10046,6 +11576,7 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetVectorPotentialGradient(str
 	(void)soap; (void)a; /* appease -Wall -Werror */
 	soap_serialize_string(soap, &a->authToken);
 	soap_serialize_string(soap, &a->dataset);
+	soap_embedded(soap, &a->time, SOAP_TYPE_float);
 	soap_serialize_PointerToturb1__ArrayOfPoint3(soap, &a->points);
 }
 
@@ -10248,6 +11779,7 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetMagneticFieldGradient(struc
 	(void)soap; (void)a; /* appease -Wall -Werror */
 	soap_serialize_string(soap, &a->authToken);
 	soap_serialize_string(soap, &a->dataset);
+	soap_embedded(soap, &a->time, SOAP_TYPE_float);
 	soap_serialize_PointerToturb1__ArrayOfPoint3(soap, &a->points);
 }
 
@@ -10450,6 +11982,7 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetVelocityGradient(struct soa
 	(void)soap; (void)a; /* appease -Wall -Werror */
 	soap_serialize_string(soap, &a->authToken);
 	soap_serialize_string(soap, &a->dataset);
+	soap_embedded(soap, &a->time, SOAP_TYPE_float);
 	soap_serialize_PointerToturb1__ArrayOfPoint3(soap, &a->points);
 }
 
@@ -10652,6 +12185,7 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetVelocityAndPressure(struct 
 	(void)soap; (void)a; /* appease -Wall -Werror */
 	soap_serialize_string(soap, &a->authToken);
 	soap_serialize_string(soap, &a->dataset);
+	soap_embedded(soap, &a->time, SOAP_TYPE_float);
 	soap_serialize_PointerToturb1__ArrayOfPoint3(soap, &a->points);
 }
 
@@ -10854,6 +12388,7 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetForce(struct soap *soap, co
 	(void)soap; (void)a; /* appease -Wall -Werror */
 	soap_serialize_string(soap, &a->authToken);
 	soap_serialize_string(soap, &a->dataset);
+	soap_embedded(soap, &a->time, SOAP_TYPE_float);
 	soap_serialize_PointerToturb1__ArrayOfPoint3(soap, &a->points);
 }
 
@@ -11059,6 +12594,7 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetRawDensity(struct soap *soa
 	(void)soap; (void)a; /* appease -Wall -Werror */
 	soap_serialize_string(soap, &a->authToken);
 	soap_serialize_string(soap, &a->dataset);
+	soap_embedded(soap, &a->time, SOAP_TYPE_float);
 }
 
 SOAP_FMAC3 int SOAP_FMAC4 soap_out__turb1__GetRawDensity(struct soap *soap, const char *tag, int id, const struct _turb1__GetRawDensity *a, const char *type)
@@ -11284,6 +12820,7 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetDensityHessian(struct soap 
 	(void)soap; (void)a; /* appease -Wall -Werror */
 	soap_serialize_string(soap, &a->authToken);
 	soap_serialize_string(soap, &a->dataset);
+	soap_embedded(soap, &a->time, SOAP_TYPE_float);
 	soap_serialize_PointerToturb1__ArrayOfPoint3(soap, &a->points);
 }
 
@@ -11486,6 +13023,7 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetDensityGradient(struct soap
 	(void)soap; (void)a; /* appease -Wall -Werror */
 	soap_serialize_string(soap, &a->authToken);
 	soap_serialize_string(soap, &a->dataset);
+	soap_embedded(soap, &a->time, SOAP_TYPE_float);
 	soap_serialize_PointerToturb1__ArrayOfPoint3(soap, &a->points);
 }
 
@@ -11688,6 +13226,7 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetDensity(struct soap *soap, 
 	(void)soap; (void)a; /* appease -Wall -Werror */
 	soap_serialize_string(soap, &a->authToken);
 	soap_serialize_string(soap, &a->dataset);
+	soap_embedded(soap, &a->time, SOAP_TYPE_float);
 	soap_serialize_PointerToturb1__ArrayOfPoint3(soap, &a->points);
 }
 
@@ -11893,6 +13432,7 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetRawVectorPotential(struct s
 	(void)soap; (void)a; /* appease -Wall -Werror */
 	soap_serialize_string(soap, &a->authToken);
 	soap_serialize_string(soap, &a->dataset);
+	soap_embedded(soap, &a->time, SOAP_TYPE_float);
 }
 
 SOAP_FMAC3 int SOAP_FMAC4 soap_out__turb1__GetRawVectorPotential(struct soap *soap, const char *tag, int id, const struct _turb1__GetRawVectorPotential *a, const char *type)
@@ -12118,6 +13658,7 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetVectorPotential(struct soap
 	(void)soap; (void)a; /* appease -Wall -Werror */
 	soap_serialize_string(soap, &a->authToken);
 	soap_serialize_string(soap, &a->dataset);
+	soap_embedded(soap, &a->time, SOAP_TYPE_float);
 	soap_serialize_PointerToturb1__ArrayOfPoint3(soap, &a->points);
 }
 
@@ -12323,6 +13864,7 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetRawMagneticField(struct soa
 	(void)soap; (void)a; /* appease -Wall -Werror */
 	soap_serialize_string(soap, &a->authToken);
 	soap_serialize_string(soap, &a->dataset);
+	soap_embedded(soap, &a->time, SOAP_TYPE_float);
 }
 
 SOAP_FMAC3 int SOAP_FMAC4 soap_out__turb1__GetRawMagneticField(struct soap *soap, const char *tag, int id, const struct _turb1__GetRawMagneticField *a, const char *type)
@@ -12548,6 +14090,7 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetMagneticField(struct soap *
 	(void)soap; (void)a; /* appease -Wall -Werror */
 	soap_serialize_string(soap, &a->authToken);
 	soap_serialize_string(soap, &a->dataset);
+	soap_embedded(soap, &a->time, SOAP_TYPE_float);
 	soap_serialize_PointerToturb1__ArrayOfPoint3(soap, &a->points);
 }
 
@@ -12753,6 +14296,7 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetRawPressure(struct soap *so
 	(void)soap; (void)a; /* appease -Wall -Werror */
 	soap_serialize_string(soap, &a->authToken);
 	soap_serialize_string(soap, &a->dataset);
+	soap_embedded(soap, &a->time, SOAP_TYPE_float);
 }
 
 SOAP_FMAC3 int SOAP_FMAC4 soap_out__turb1__GetRawPressure(struct soap *soap, const char *tag, int id, const struct _turb1__GetRawPressure *a, const char *type)
@@ -12978,6 +14522,7 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetPressure(struct soap *soap,
 	(void)soap; (void)a; /* appease -Wall -Werror */
 	soap_serialize_string(soap, &a->authToken);
 	soap_serialize_string(soap, &a->dataset);
+	soap_embedded(soap, &a->time, SOAP_TYPE_float);
 	soap_serialize_PointerToturb1__ArrayOfPoint3(soap, &a->points);
 }
 
@@ -13183,6 +14728,7 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetRawVelocity(struct soap *so
 	(void)soap; (void)a; /* appease -Wall -Werror */
 	soap_serialize_string(soap, &a->authToken);
 	soap_serialize_string(soap, &a->dataset);
+	soap_embedded(soap, &a->time, SOAP_TYPE_float);
 }
 
 SOAP_FMAC3 int SOAP_FMAC4 soap_out__turb1__GetRawVelocity(struct soap *soap, const char *tag, int id, const struct _turb1__GetRawVelocity *a, const char *type)
@@ -13408,6 +14954,7 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetVelocityBatch(struct soap *
 	(void)soap; (void)a; /* appease -Wall -Werror */
 	soap_serialize_string(soap, &a->authToken);
 	soap_serialize_string(soap, &a->dataset);
+	soap_embedded(soap, &a->time, SOAP_TYPE_float);
 	soap_serialize_PointerToturb1__ArrayOfPoint3(soap, &a->points);
 }
 
@@ -13610,6 +15157,7 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetVelocity(struct soap *soap,
 	(void)soap; (void)a; /* appease -Wall -Werror */
 	soap_serialize_string(soap, &a->authToken);
 	soap_serialize_string(soap, &a->dataset);
+	soap_embedded(soap, &a->time, SOAP_TYPE_float);
 	soap_serialize_PointerToturb1__ArrayOfPoint3(soap, &a->points);
 }
 
@@ -13892,6 +15440,7 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_default_turb1__ThresholdInfo(struct soap *soap, 
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_turb1__ThresholdInfo(struct soap *soap, const struct turb1__ThresholdInfo *a)
 {
 	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_embedded(soap, &a->value, SOAP_TYPE_float);
 }
 
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_turb1__ThresholdInfo(struct soap *soap, const char *tag, int id, const struct turb1__ThresholdInfo *a, const char *type)
@@ -14090,6 +15639,111 @@ SOAP_FMAC3 struct turb1__ArrayOfThresholdInfo * SOAP_FMAC4 soap_get_turb1__Array
 	return p;
 }
 
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_turb1__ArrayOfFloat(struct soap *soap, struct turb1__ArrayOfFloat *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	a->__sizefloat_ = 0;
+	a->float_ = NULL;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_turb1__ArrayOfFloat(struct soap *soap, const struct turb1__ArrayOfFloat *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	if (a->float_)
+	{	int i;
+		for (i = 0; i < a->__sizefloat_; i++)
+		{
+			soap_embedded(soap, a->float_ + i, SOAP_TYPE_float);
+		}
+	}
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_turb1__ArrayOfFloat(struct soap *soap, const char *tag, int id, const struct turb1__ArrayOfFloat *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)type;
+	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_turb1__ArrayOfFloat), type))
+		return soap->error;
+	if (a->float_)
+	{	int i;
+		for (i = 0; i < a->__sizefloat_; i++)
+			if (soap_out_float(soap, "turb1:float", -1, a->float_ + i, ""))
+				return soap->error;
+	}
+	return soap_element_end_out(soap, tag);
+}
+
+SOAP_FMAC3 struct turb1__ArrayOfFloat * SOAP_FMAC4 soap_in_turb1__ArrayOfFloat(struct soap *soap, const char *tag, struct turb1__ArrayOfFloat *a, const char *type)
+{
+	struct soap_blist *soap_blist_float_ = NULL;
+	if (soap_element_begin_in(soap, tag, 0, type))
+		return NULL;
+	a = (struct turb1__ArrayOfFloat *)soap_id_enter(soap, soap->id, a, SOAP_TYPE_turb1__ArrayOfFloat, sizeof(struct turb1__ArrayOfFloat), 0, NULL, NULL, NULL);
+	if (!a)
+		return NULL;
+	soap_default_turb1__ArrayOfFloat(soap, a);
+	if (soap->body && !*soap->href)
+	{
+		for (;;)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap->error == SOAP_TAG_MISMATCH && !soap_element_begin_in(soap, "turb1:float", 1, NULL))
+			{	if (a->float_ == NULL)
+				{	if (soap_blist_float_ == NULL)
+						soap_blist_float_ = soap_new_block(soap);
+					a->float_ = (float *)soap_push_block(soap, soap_blist_float_, sizeof(float));
+					if (a->float_ == NULL)
+						return NULL;
+					soap_default_float(soap, a->float_);
+				}
+				soap_revert(soap);
+				if (soap_in_float(soap, "turb1:float", a->float_, "xsd:float"))
+				{	a->__sizefloat_++;
+					a->float_ = NULL;
+					continue;
+				}
+			}
+			if (soap->error == SOAP_TAG_MISMATCH)
+				soap->error = soap_ignore_element(soap);
+			if (soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+		if (a->float_)
+			soap_pop_block(soap, soap_blist_float_);
+		if (a->__sizefloat_)
+			a->float_ = (float *)soap_save_block(soap, soap_blist_float_, NULL, 1);
+		else
+		{	a->float_ = NULL;
+			if (soap_blist_float_)
+				soap_end_block(soap, soap_blist_float_);
+		}
+		if (soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	else
+	{	a = (struct turb1__ArrayOfFloat *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE_turb1__ArrayOfFloat, 0, sizeof(struct turb1__ArrayOfFloat), 0, NULL);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_turb1__ArrayOfFloat(struct soap *soap, const struct turb1__ArrayOfFloat *a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE_turb1__ArrayOfFloat);
+	if (soap_out_turb1__ArrayOfFloat(soap, tag?tag:"turb1:ArrayOfFloat", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct turb1__ArrayOfFloat * SOAP_FMAC4 soap_get_turb1__ArrayOfFloat(struct soap *soap, struct turb1__ArrayOfFloat *p, const char *tag, const char *type)
+{
+	if ((p = soap_in_turb1__ArrayOfFloat(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
 SOAP_FMAC3 void SOAP_FMAC4 soap_default_turb1__SGSTensor(struct soap *soap, struct turb1__SGSTensor *a)
 {
 	(void)soap; (void)a; /* appease -Wall -Werror */
@@ -14104,6 +15758,12 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_default_turb1__SGSTensor(struct soap *soap, stru
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_turb1__SGSTensor(struct soap *soap, const struct turb1__SGSTensor *a)
 {
 	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_embedded(soap, &a->xx, SOAP_TYPE_float);
+	soap_embedded(soap, &a->yy, SOAP_TYPE_float);
+	soap_embedded(soap, &a->zz, SOAP_TYPE_float);
+	soap_embedded(soap, &a->xy, SOAP_TYPE_float);
+	soap_embedded(soap, &a->xz, SOAP_TYPE_float);
+	soap_embedded(soap, &a->yz, SOAP_TYPE_float);
 }
 
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_turb1__SGSTensor(struct soap *soap, const char *tag, int id, const struct turb1__SGSTensor *a, const char *type)
@@ -14344,6 +16004,24 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_default_turb1__VelocityHessian(struct soap *soap
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_turb1__VelocityHessian(struct soap *soap, const struct turb1__VelocityHessian *a)
 {
 	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_embedded(soap, &a->d2uxdxdx, SOAP_TYPE_float);
+	soap_embedded(soap, &a->d2uxdxdy, SOAP_TYPE_float);
+	soap_embedded(soap, &a->d2uxdxdz, SOAP_TYPE_float);
+	soap_embedded(soap, &a->d2uxdydy, SOAP_TYPE_float);
+	soap_embedded(soap, &a->d2uxdydz, SOAP_TYPE_float);
+	soap_embedded(soap, &a->d2uxdzdz, SOAP_TYPE_float);
+	soap_embedded(soap, &a->d2uydxdx, SOAP_TYPE_float);
+	soap_embedded(soap, &a->d2uydxdy, SOAP_TYPE_float);
+	soap_embedded(soap, &a->d2uydxdz, SOAP_TYPE_float);
+	soap_embedded(soap, &a->d2uydydy, SOAP_TYPE_float);
+	soap_embedded(soap, &a->d2uydydz, SOAP_TYPE_float);
+	soap_embedded(soap, &a->d2uydzdz, SOAP_TYPE_float);
+	soap_embedded(soap, &a->d2uzdxdx, SOAP_TYPE_float);
+	soap_embedded(soap, &a->d2uzdxdy, SOAP_TYPE_float);
+	soap_embedded(soap, &a->d2uzdxdz, SOAP_TYPE_float);
+	soap_embedded(soap, &a->d2uzdydy, SOAP_TYPE_float);
+	soap_embedded(soap, &a->d2uzdydz, SOAP_TYPE_float);
+	soap_embedded(soap, &a->d2uzdzdz, SOAP_TYPE_float);
 }
 
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_turb1__VelocityHessian(struct soap *soap, const char *tag, int id, const struct turb1__VelocityHessian *a, const char *type)
@@ -14671,6 +16349,15 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_default_turb1__VelocityGradient(struct soap *soa
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_turb1__VelocityGradient(struct soap *soap, const struct turb1__VelocityGradient *a)
 {
 	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_embedded(soap, &a->duxdx, SOAP_TYPE_float);
+	soap_embedded(soap, &a->duxdy, SOAP_TYPE_float);
+	soap_embedded(soap, &a->duxdz, SOAP_TYPE_float);
+	soap_embedded(soap, &a->duydx, SOAP_TYPE_float);
+	soap_embedded(soap, &a->duydy, SOAP_TYPE_float);
+	soap_embedded(soap, &a->duydz, SOAP_TYPE_float);
+	soap_embedded(soap, &a->duzdx, SOAP_TYPE_float);
+	soap_embedded(soap, &a->duzdy, SOAP_TYPE_float);
+	soap_embedded(soap, &a->duzdz, SOAP_TYPE_float);
 }
 
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_turb1__VelocityGradient(struct soap *soap, const char *tag, int id, const struct turb1__VelocityGradient *a, const char *type)
@@ -14921,6 +16608,10 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_default_turb1__Vector3P(struct soap *soap, struc
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_turb1__Vector3P(struct soap *soap, const struct turb1__Vector3P *a)
 {
 	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_embedded(soap, &a->x, SOAP_TYPE_float);
+	soap_embedded(soap, &a->y, SOAP_TYPE_float);
+	soap_embedded(soap, &a->z, SOAP_TYPE_float);
+	soap_embedded(soap, &a->p, SOAP_TYPE_float);
 }
 
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_turb1__Vector3P(struct soap *soap, const char *tag, int id, const struct turb1__Vector3P *a, const char *type)
@@ -15133,6 +16824,12 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_default_turb1__PressureHessian(struct soap *soap
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_turb1__PressureHessian(struct soap *soap, const struct turb1__PressureHessian *a)
 {
 	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_embedded(soap, &a->d2pdxdx, SOAP_TYPE_float);
+	soap_embedded(soap, &a->d2pdxdy, SOAP_TYPE_float);
+	soap_embedded(soap, &a->d2pdxdz, SOAP_TYPE_float);
+	soap_embedded(soap, &a->d2pdydy, SOAP_TYPE_float);
+	soap_embedded(soap, &a->d2pdydz, SOAP_TYPE_float);
+	soap_embedded(soap, &a->d2pdzdz, SOAP_TYPE_float);
 }
 
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_turb1__PressureHessian(struct soap *soap, const char *tag, int id, const struct turb1__PressureHessian *a, const char *type)
@@ -15356,6 +17053,7 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_default_turb1__Pressure(struct soap *soap, struc
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_turb1__Pressure(struct soap *soap, const struct turb1__Pressure *a)
 {
 	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_embedded(soap, &a->p, SOAP_TYPE_float);
 }
 
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_turb1__Pressure(struct soap *soap, const char *tag, int id, const struct turb1__Pressure *a, const char *type)
@@ -15541,6 +17239,9 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_default_turb1__Vector3(struct soap *soap, struct
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_turb1__Vector3(struct soap *soap, const struct turb1__Vector3 *a)
 {
 	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_embedded(soap, &a->x, SOAP_TYPE_float);
+	soap_embedded(soap, &a->y, SOAP_TYPE_float);
+	soap_embedded(soap, &a->z, SOAP_TYPE_float);
 }
 
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_turb1__Vector3(struct soap *soap, const char *tag, int id, const struct turb1__Vector3 *a, const char *type)
@@ -15742,6 +17443,9 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_default_turb1__Point3(struct soap *soap, struct 
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_turb1__Point3(struct soap *soap, const struct turb1__Point3 *a)
 {
 	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_embedded(soap, &a->x, SOAP_TYPE_float);
+	soap_embedded(soap, &a->y, SOAP_TYPE_float);
+	soap_embedded(soap, &a->z, SOAP_TYPE_float);
 }
 
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_turb1__Point3(struct soap *soap, const char *tag, int id, const struct turb1__Point3 *a, const char *type)
@@ -15989,7 +17693,7 @@ SOAP_FMAC3 struct xsd__base64Binary * SOAP_FMAC4 soap_in_xsd__base64Binary(struc
 			return NULL;
 	}
 	else
-	{
+	{	
 #ifndef WITH_LEANER
 		if (*soap->href != '#')
 		{	if (soap_dime_forward(soap, &a->__ptr, &a->__size, &a->id, &a->type, &a->options))
@@ -16486,6 +18190,414 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetBoxFilterGradient(struct 
 SOAP_FMAC3 struct _turb1__GetBoxFilterGradient ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetBoxFilterGradient(struct soap *soap, struct _turb1__GetBoxFilterGradient **p, const char *tag, const char *type)
 {
 	if ((p = soap_in_PointerTo_turb1__GetBoxFilterGradient(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetBoxFilterSGSscalarResponse(struct soap *soap, struct _turb1__GetBoxFilterSGSscalarResponse *const*a)
+{
+	if (!soap_reference(soap, *a, SOAP_TYPE__turb1__GetBoxFilterSGSscalarResponse))
+		soap_serialize__turb1__GetBoxFilterSGSscalarResponse(soap, *a);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetBoxFilterSGSscalarResponse(struct soap *soap, const char *tag, int id, struct _turb1__GetBoxFilterSGSscalarResponse *const*a, const char *type)
+{
+	id = soap_element_id(soap, tag, id, *a, NULL, 0, type, SOAP_TYPE__turb1__GetBoxFilterSGSscalarResponse);
+	if (id < 0)
+		return soap->error;
+	return soap_out__turb1__GetBoxFilterSGSscalarResponse(soap, tag, id, *a, type);
+}
+
+SOAP_FMAC3 struct _turb1__GetBoxFilterSGSscalarResponse ** SOAP_FMAC4 soap_in_PointerTo_turb1__GetBoxFilterSGSscalarResponse(struct soap *soap, const char *tag, struct _turb1__GetBoxFilterSGSscalarResponse **a, const char *type)
+{
+	if (soap_element_begin_in(soap, tag, 1, NULL))
+		return NULL;
+	if (!a)
+		if (!(a = (struct _turb1__GetBoxFilterSGSscalarResponse **)soap_malloc(soap, sizeof(struct _turb1__GetBoxFilterSGSscalarResponse *))))
+			return NULL;
+	*a = NULL;
+	if (!soap->null && *soap->href != '#')
+	{	soap_revert(soap);
+		if (!(*a = soap_in__turb1__GetBoxFilterSGSscalarResponse(soap, tag, *a, type)))
+			return NULL;
+	}
+	else
+	{	a = (struct _turb1__GetBoxFilterSGSscalarResponse **)soap_id_lookup(soap, soap->href, (void**)a, SOAP_TYPE__turb1__GetBoxFilterSGSscalarResponse, sizeof(struct _turb1__GetBoxFilterSGSscalarResponse), 0);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetBoxFilterSGSscalarResponse(struct soap *soap, struct _turb1__GetBoxFilterSGSscalarResponse *const*a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE_PointerTo_turb1__GetBoxFilterSGSscalarResponse);
+	if (soap_out_PointerTo_turb1__GetBoxFilterSGSscalarResponse(soap, tag?tag:"turb1:GetBoxFilterSGSscalarResponse", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct _turb1__GetBoxFilterSGSscalarResponse ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetBoxFilterSGSscalarResponse(struct soap *soap, struct _turb1__GetBoxFilterSGSscalarResponse **p, const char *tag, const char *type)
+{
+	if ((p = soap_in_PointerTo_turb1__GetBoxFilterSGSscalarResponse(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetBoxFilterSGSscalar(struct soap *soap, struct _turb1__GetBoxFilterSGSscalar *const*a)
+{
+	if (!soap_reference(soap, *a, SOAP_TYPE__turb1__GetBoxFilterSGSscalar))
+		soap_serialize__turb1__GetBoxFilterSGSscalar(soap, *a);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetBoxFilterSGSscalar(struct soap *soap, const char *tag, int id, struct _turb1__GetBoxFilterSGSscalar *const*a, const char *type)
+{
+	id = soap_element_id(soap, tag, id, *a, NULL, 0, type, SOAP_TYPE__turb1__GetBoxFilterSGSscalar);
+	if (id < 0)
+		return soap->error;
+	return soap_out__turb1__GetBoxFilterSGSscalar(soap, tag, id, *a, type);
+}
+
+SOAP_FMAC3 struct _turb1__GetBoxFilterSGSscalar ** SOAP_FMAC4 soap_in_PointerTo_turb1__GetBoxFilterSGSscalar(struct soap *soap, const char *tag, struct _turb1__GetBoxFilterSGSscalar **a, const char *type)
+{
+	if (soap_element_begin_in(soap, tag, 1, NULL))
+		return NULL;
+	if (!a)
+		if (!(a = (struct _turb1__GetBoxFilterSGSscalar **)soap_malloc(soap, sizeof(struct _turb1__GetBoxFilterSGSscalar *))))
+			return NULL;
+	*a = NULL;
+	if (!soap->null && *soap->href != '#')
+	{	soap_revert(soap);
+		if (!(*a = soap_in__turb1__GetBoxFilterSGSscalar(soap, tag, *a, type)))
+			return NULL;
+	}
+	else
+	{	a = (struct _turb1__GetBoxFilterSGSscalar **)soap_id_lookup(soap, soap->href, (void**)a, SOAP_TYPE__turb1__GetBoxFilterSGSscalar, sizeof(struct _turb1__GetBoxFilterSGSscalar), 0);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetBoxFilterSGSscalar(struct soap *soap, struct _turb1__GetBoxFilterSGSscalar *const*a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE_PointerTo_turb1__GetBoxFilterSGSscalar);
+	if (soap_out_PointerTo_turb1__GetBoxFilterSGSscalar(soap, tag?tag:"turb1:GetBoxFilterSGSscalar", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct _turb1__GetBoxFilterSGSscalar ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetBoxFilterSGSscalar(struct soap *soap, struct _turb1__GetBoxFilterSGSscalar **p, const char *tag, const char *type)
+{
+	if ((p = soap_in_PointerTo_turb1__GetBoxFilterSGSscalar(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetBoxFilterSGSvectorResponse(struct soap *soap, struct _turb1__GetBoxFilterSGSvectorResponse *const*a)
+{
+	if (!soap_reference(soap, *a, SOAP_TYPE__turb1__GetBoxFilterSGSvectorResponse))
+		soap_serialize__turb1__GetBoxFilterSGSvectorResponse(soap, *a);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetBoxFilterSGSvectorResponse(struct soap *soap, const char *tag, int id, struct _turb1__GetBoxFilterSGSvectorResponse *const*a, const char *type)
+{
+	id = soap_element_id(soap, tag, id, *a, NULL, 0, type, SOAP_TYPE__turb1__GetBoxFilterSGSvectorResponse);
+	if (id < 0)
+		return soap->error;
+	return soap_out__turb1__GetBoxFilterSGSvectorResponse(soap, tag, id, *a, type);
+}
+
+SOAP_FMAC3 struct _turb1__GetBoxFilterSGSvectorResponse ** SOAP_FMAC4 soap_in_PointerTo_turb1__GetBoxFilterSGSvectorResponse(struct soap *soap, const char *tag, struct _turb1__GetBoxFilterSGSvectorResponse **a, const char *type)
+{
+	if (soap_element_begin_in(soap, tag, 1, NULL))
+		return NULL;
+	if (!a)
+		if (!(a = (struct _turb1__GetBoxFilterSGSvectorResponse **)soap_malloc(soap, sizeof(struct _turb1__GetBoxFilterSGSvectorResponse *))))
+			return NULL;
+	*a = NULL;
+	if (!soap->null && *soap->href != '#')
+	{	soap_revert(soap);
+		if (!(*a = soap_in__turb1__GetBoxFilterSGSvectorResponse(soap, tag, *a, type)))
+			return NULL;
+	}
+	else
+	{	a = (struct _turb1__GetBoxFilterSGSvectorResponse **)soap_id_lookup(soap, soap->href, (void**)a, SOAP_TYPE__turb1__GetBoxFilterSGSvectorResponse, sizeof(struct _turb1__GetBoxFilterSGSvectorResponse), 0);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetBoxFilterSGSvectorResponse(struct soap *soap, struct _turb1__GetBoxFilterSGSvectorResponse *const*a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE_PointerTo_turb1__GetBoxFilterSGSvectorResponse);
+	if (soap_out_PointerTo_turb1__GetBoxFilterSGSvectorResponse(soap, tag?tag:"turb1:GetBoxFilterSGSvectorResponse", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct _turb1__GetBoxFilterSGSvectorResponse ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetBoxFilterSGSvectorResponse(struct soap *soap, struct _turb1__GetBoxFilterSGSvectorResponse **p, const char *tag, const char *type)
+{
+	if ((p = soap_in_PointerTo_turb1__GetBoxFilterSGSvectorResponse(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetBoxFilterSGSvector(struct soap *soap, struct _turb1__GetBoxFilterSGSvector *const*a)
+{
+	if (!soap_reference(soap, *a, SOAP_TYPE__turb1__GetBoxFilterSGSvector))
+		soap_serialize__turb1__GetBoxFilterSGSvector(soap, *a);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetBoxFilterSGSvector(struct soap *soap, const char *tag, int id, struct _turb1__GetBoxFilterSGSvector *const*a, const char *type)
+{
+	id = soap_element_id(soap, tag, id, *a, NULL, 0, type, SOAP_TYPE__turb1__GetBoxFilterSGSvector);
+	if (id < 0)
+		return soap->error;
+	return soap_out__turb1__GetBoxFilterSGSvector(soap, tag, id, *a, type);
+}
+
+SOAP_FMAC3 struct _turb1__GetBoxFilterSGSvector ** SOAP_FMAC4 soap_in_PointerTo_turb1__GetBoxFilterSGSvector(struct soap *soap, const char *tag, struct _turb1__GetBoxFilterSGSvector **a, const char *type)
+{
+	if (soap_element_begin_in(soap, tag, 1, NULL))
+		return NULL;
+	if (!a)
+		if (!(a = (struct _turb1__GetBoxFilterSGSvector **)soap_malloc(soap, sizeof(struct _turb1__GetBoxFilterSGSvector *))))
+			return NULL;
+	*a = NULL;
+	if (!soap->null && *soap->href != '#')
+	{	soap_revert(soap);
+		if (!(*a = soap_in__turb1__GetBoxFilterSGSvector(soap, tag, *a, type)))
+			return NULL;
+	}
+	else
+	{	a = (struct _turb1__GetBoxFilterSGSvector **)soap_id_lookup(soap, soap->href, (void**)a, SOAP_TYPE__turb1__GetBoxFilterSGSvector, sizeof(struct _turb1__GetBoxFilterSGSvector), 0);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetBoxFilterSGSvector(struct soap *soap, struct _turb1__GetBoxFilterSGSvector *const*a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE_PointerTo_turb1__GetBoxFilterSGSvector);
+	if (soap_out_PointerTo_turb1__GetBoxFilterSGSvector(soap, tag?tag:"turb1:GetBoxFilterSGSvector", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct _turb1__GetBoxFilterSGSvector ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetBoxFilterSGSvector(struct soap *soap, struct _turb1__GetBoxFilterSGSvector **p, const char *tag, const char *type)
+{
+	if ((p = soap_in_PointerTo_turb1__GetBoxFilterSGSvector(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetBoxFilterSGStensorResponse(struct soap *soap, struct _turb1__GetBoxFilterSGStensorResponse *const*a)
+{
+	if (!soap_reference(soap, *a, SOAP_TYPE__turb1__GetBoxFilterSGStensorResponse))
+		soap_serialize__turb1__GetBoxFilterSGStensorResponse(soap, *a);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetBoxFilterSGStensorResponse(struct soap *soap, const char *tag, int id, struct _turb1__GetBoxFilterSGStensorResponse *const*a, const char *type)
+{
+	id = soap_element_id(soap, tag, id, *a, NULL, 0, type, SOAP_TYPE__turb1__GetBoxFilterSGStensorResponse);
+	if (id < 0)
+		return soap->error;
+	return soap_out__turb1__GetBoxFilterSGStensorResponse(soap, tag, id, *a, type);
+}
+
+SOAP_FMAC3 struct _turb1__GetBoxFilterSGStensorResponse ** SOAP_FMAC4 soap_in_PointerTo_turb1__GetBoxFilterSGStensorResponse(struct soap *soap, const char *tag, struct _turb1__GetBoxFilterSGStensorResponse **a, const char *type)
+{
+	if (soap_element_begin_in(soap, tag, 1, NULL))
+		return NULL;
+	if (!a)
+		if (!(a = (struct _turb1__GetBoxFilterSGStensorResponse **)soap_malloc(soap, sizeof(struct _turb1__GetBoxFilterSGStensorResponse *))))
+			return NULL;
+	*a = NULL;
+	if (!soap->null && *soap->href != '#')
+	{	soap_revert(soap);
+		if (!(*a = soap_in__turb1__GetBoxFilterSGStensorResponse(soap, tag, *a, type)))
+			return NULL;
+	}
+	else
+	{	a = (struct _turb1__GetBoxFilterSGStensorResponse **)soap_id_lookup(soap, soap->href, (void**)a, SOAP_TYPE__turb1__GetBoxFilterSGStensorResponse, sizeof(struct _turb1__GetBoxFilterSGStensorResponse), 0);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetBoxFilterSGStensorResponse(struct soap *soap, struct _turb1__GetBoxFilterSGStensorResponse *const*a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE_PointerTo_turb1__GetBoxFilterSGStensorResponse);
+	if (soap_out_PointerTo_turb1__GetBoxFilterSGStensorResponse(soap, tag?tag:"turb1:GetBoxFilterSGStensorResponse", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct _turb1__GetBoxFilterSGStensorResponse ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetBoxFilterSGStensorResponse(struct soap *soap, struct _turb1__GetBoxFilterSGStensorResponse **p, const char *tag, const char *type)
+{
+	if ((p = soap_in_PointerTo_turb1__GetBoxFilterSGStensorResponse(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetBoxFilterSGStensor(struct soap *soap, struct _turb1__GetBoxFilterSGStensor *const*a)
+{
+	if (!soap_reference(soap, *a, SOAP_TYPE__turb1__GetBoxFilterSGStensor))
+		soap_serialize__turb1__GetBoxFilterSGStensor(soap, *a);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetBoxFilterSGStensor(struct soap *soap, const char *tag, int id, struct _turb1__GetBoxFilterSGStensor *const*a, const char *type)
+{
+	id = soap_element_id(soap, tag, id, *a, NULL, 0, type, SOAP_TYPE__turb1__GetBoxFilterSGStensor);
+	if (id < 0)
+		return soap->error;
+	return soap_out__turb1__GetBoxFilterSGStensor(soap, tag, id, *a, type);
+}
+
+SOAP_FMAC3 struct _turb1__GetBoxFilterSGStensor ** SOAP_FMAC4 soap_in_PointerTo_turb1__GetBoxFilterSGStensor(struct soap *soap, const char *tag, struct _turb1__GetBoxFilterSGStensor **a, const char *type)
+{
+	if (soap_element_begin_in(soap, tag, 1, NULL))
+		return NULL;
+	if (!a)
+		if (!(a = (struct _turb1__GetBoxFilterSGStensor **)soap_malloc(soap, sizeof(struct _turb1__GetBoxFilterSGStensor *))))
+			return NULL;
+	*a = NULL;
+	if (!soap->null && *soap->href != '#')
+	{	soap_revert(soap);
+		if (!(*a = soap_in__turb1__GetBoxFilterSGStensor(soap, tag, *a, type)))
+			return NULL;
+	}
+	else
+	{	a = (struct _turb1__GetBoxFilterSGStensor **)soap_id_lookup(soap, soap->href, (void**)a, SOAP_TYPE__turb1__GetBoxFilterSGStensor, sizeof(struct _turb1__GetBoxFilterSGStensor), 0);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetBoxFilterSGStensor(struct soap *soap, struct _turb1__GetBoxFilterSGStensor *const*a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE_PointerTo_turb1__GetBoxFilterSGStensor);
+	if (soap_out_PointerTo_turb1__GetBoxFilterSGStensor(soap, tag?tag:"turb1:GetBoxFilterSGStensor", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct _turb1__GetBoxFilterSGStensor ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetBoxFilterSGStensor(struct soap *soap, struct _turb1__GetBoxFilterSGStensor **p, const char *tag, const char *type)
+{
+	if ((p = soap_in_PointerTo_turb1__GetBoxFilterSGStensor(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetBoxFilterSGSsymtensorResponse(struct soap *soap, struct _turb1__GetBoxFilterSGSsymtensorResponse *const*a)
+{
+	if (!soap_reference(soap, *a, SOAP_TYPE__turb1__GetBoxFilterSGSsymtensorResponse))
+		soap_serialize__turb1__GetBoxFilterSGSsymtensorResponse(soap, *a);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetBoxFilterSGSsymtensorResponse(struct soap *soap, const char *tag, int id, struct _turb1__GetBoxFilterSGSsymtensorResponse *const*a, const char *type)
+{
+	id = soap_element_id(soap, tag, id, *a, NULL, 0, type, SOAP_TYPE__turb1__GetBoxFilterSGSsymtensorResponse);
+	if (id < 0)
+		return soap->error;
+	return soap_out__turb1__GetBoxFilterSGSsymtensorResponse(soap, tag, id, *a, type);
+}
+
+SOAP_FMAC3 struct _turb1__GetBoxFilterSGSsymtensorResponse ** SOAP_FMAC4 soap_in_PointerTo_turb1__GetBoxFilterSGSsymtensorResponse(struct soap *soap, const char *tag, struct _turb1__GetBoxFilterSGSsymtensorResponse **a, const char *type)
+{
+	if (soap_element_begin_in(soap, tag, 1, NULL))
+		return NULL;
+	if (!a)
+		if (!(a = (struct _turb1__GetBoxFilterSGSsymtensorResponse **)soap_malloc(soap, sizeof(struct _turb1__GetBoxFilterSGSsymtensorResponse *))))
+			return NULL;
+	*a = NULL;
+	if (!soap->null && *soap->href != '#')
+	{	soap_revert(soap);
+		if (!(*a = soap_in__turb1__GetBoxFilterSGSsymtensorResponse(soap, tag, *a, type)))
+			return NULL;
+	}
+	else
+	{	a = (struct _turb1__GetBoxFilterSGSsymtensorResponse **)soap_id_lookup(soap, soap->href, (void**)a, SOAP_TYPE__turb1__GetBoxFilterSGSsymtensorResponse, sizeof(struct _turb1__GetBoxFilterSGSsymtensorResponse), 0);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetBoxFilterSGSsymtensorResponse(struct soap *soap, struct _turb1__GetBoxFilterSGSsymtensorResponse *const*a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE_PointerTo_turb1__GetBoxFilterSGSsymtensorResponse);
+	if (soap_out_PointerTo_turb1__GetBoxFilterSGSsymtensorResponse(soap, tag?tag:"turb1:GetBoxFilterSGSsymtensorResponse", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct _turb1__GetBoxFilterSGSsymtensorResponse ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetBoxFilterSGSsymtensorResponse(struct soap *soap, struct _turb1__GetBoxFilterSGSsymtensorResponse **p, const char *tag, const char *type)
+{
+	if ((p = soap_in_PointerTo_turb1__GetBoxFilterSGSsymtensorResponse(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_turb1__GetBoxFilterSGSsymtensor(struct soap *soap, struct _turb1__GetBoxFilterSGSsymtensor *const*a)
+{
+	if (!soap_reference(soap, *a, SOAP_TYPE__turb1__GetBoxFilterSGSsymtensor))
+		soap_serialize__turb1__GetBoxFilterSGSsymtensor(soap, *a);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_turb1__GetBoxFilterSGSsymtensor(struct soap *soap, const char *tag, int id, struct _turb1__GetBoxFilterSGSsymtensor *const*a, const char *type)
+{
+	id = soap_element_id(soap, tag, id, *a, NULL, 0, type, SOAP_TYPE__turb1__GetBoxFilterSGSsymtensor);
+	if (id < 0)
+		return soap->error;
+	return soap_out__turb1__GetBoxFilterSGSsymtensor(soap, tag, id, *a, type);
+}
+
+SOAP_FMAC3 struct _turb1__GetBoxFilterSGSsymtensor ** SOAP_FMAC4 soap_in_PointerTo_turb1__GetBoxFilterSGSsymtensor(struct soap *soap, const char *tag, struct _turb1__GetBoxFilterSGSsymtensor **a, const char *type)
+{
+	if (soap_element_begin_in(soap, tag, 1, NULL))
+		return NULL;
+	if (!a)
+		if (!(a = (struct _turb1__GetBoxFilterSGSsymtensor **)soap_malloc(soap, sizeof(struct _turb1__GetBoxFilterSGSsymtensor *))))
+			return NULL;
+	*a = NULL;
+	if (!soap->null && *soap->href != '#')
+	{	soap_revert(soap);
+		if (!(*a = soap_in__turb1__GetBoxFilterSGSsymtensor(soap, tag, *a, type)))
+			return NULL;
+	}
+	else
+	{	a = (struct _turb1__GetBoxFilterSGSsymtensor **)soap_id_lookup(soap, soap->href, (void**)a, SOAP_TYPE__turb1__GetBoxFilterSGSsymtensor, sizeof(struct _turb1__GetBoxFilterSGSsymtensor), 0);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_turb1__GetBoxFilterSGSsymtensor(struct soap *soap, struct _turb1__GetBoxFilterSGSsymtensor *const*a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE_PointerTo_turb1__GetBoxFilterSGSsymtensor);
+	if (soap_out_PointerTo_turb1__GetBoxFilterSGSsymtensor(soap, tag?tag:"turb1:GetBoxFilterSGSsymtensor", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct _turb1__GetBoxFilterSGSsymtensor ** SOAP_FMAC4 soap_get_PointerTo_turb1__GetBoxFilterSGSsymtensor(struct soap *soap, struct _turb1__GetBoxFilterSGSsymtensor **p, const char *tag, const char *type)
+{
+	if ((p = soap_in_PointerTo_turb1__GetBoxFilterSGSsymtensor(soap, tag, p, type)))
 		if (soap_getindependent(soap))
 			return NULL;
 	return p;
@@ -19602,6 +21714,57 @@ SOAP_FMAC3 struct turb1__ArrayOfThresholdInfo ** SOAP_FMAC4 soap_get_PointerTotu
 	return p;
 }
 
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerToturb1__ArrayOfFloat(struct soap *soap, struct turb1__ArrayOfFloat *const*a)
+{
+	if (!soap_reference(soap, *a, SOAP_TYPE_turb1__ArrayOfFloat))
+		soap_serialize_turb1__ArrayOfFloat(soap, *a);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerToturb1__ArrayOfFloat(struct soap *soap, const char *tag, int id, struct turb1__ArrayOfFloat *const*a, const char *type)
+{
+	id = soap_element_id(soap, tag, id, *a, NULL, 0, type, SOAP_TYPE_turb1__ArrayOfFloat);
+	if (id < 0)
+		return soap->error;
+	return soap_out_turb1__ArrayOfFloat(soap, tag, id, *a, type);
+}
+
+SOAP_FMAC3 struct turb1__ArrayOfFloat ** SOAP_FMAC4 soap_in_PointerToturb1__ArrayOfFloat(struct soap *soap, const char *tag, struct turb1__ArrayOfFloat **a, const char *type)
+{
+	if (soap_element_begin_in(soap, tag, 1, NULL))
+		return NULL;
+	if (!a)
+		if (!(a = (struct turb1__ArrayOfFloat **)soap_malloc(soap, sizeof(struct turb1__ArrayOfFloat *))))
+			return NULL;
+	*a = NULL;
+	if (!soap->null && *soap->href != '#')
+	{	soap_revert(soap);
+		if (!(*a = soap_in_turb1__ArrayOfFloat(soap, tag, *a, type)))
+			return NULL;
+	}
+	else
+	{	a = (struct turb1__ArrayOfFloat **)soap_id_lookup(soap, soap->href, (void**)a, SOAP_TYPE_turb1__ArrayOfFloat, sizeof(struct turb1__ArrayOfFloat), 0);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerToturb1__ArrayOfFloat(struct soap *soap, struct turb1__ArrayOfFloat *const*a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE_PointerToturb1__ArrayOfFloat);
+	if (soap_out_PointerToturb1__ArrayOfFloat(soap, tag?tag:"turb1:ArrayOfFloat", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct turb1__ArrayOfFloat ** SOAP_FMAC4 soap_get_PointerToturb1__ArrayOfFloat(struct soap *soap, struct turb1__ArrayOfFloat **p, const char *tag, const char *type)
+{
+	if ((p = soap_in_PointerToturb1__ArrayOfFloat(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerToturb1__ArrayOfSGSTensor(struct soap *soap, struct turb1__ArrayOfSGSTensor *const*a)
 {
 	if (!soap_reference(soap, *a, SOAP_TYPE_turb1__ArrayOfSGSTensor))
@@ -20107,6 +22270,56 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerToturb1__ThresholdInfo(struct soap *so
 SOAP_FMAC3 struct turb1__ThresholdInfo ** SOAP_FMAC4 soap_get_PointerToturb1__ThresholdInfo(struct soap *soap, struct turb1__ThresholdInfo **p, const char *tag, const char *type)
 {
 	if ((p = soap_in_PointerToturb1__ThresholdInfo(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTofloat(struct soap *soap, float *const*a)
+{
+	soap_reference(soap, *a, SOAP_TYPE_float);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTofloat(struct soap *soap, const char *tag, int id, float *const*a, const char *type)
+{
+	id = soap_element_id(soap, tag, id, *a, NULL, 0, type, SOAP_TYPE_float);
+	if (id < 0)
+		return soap->error;
+	return soap_out_float(soap, tag, id, *a, type);
+}
+
+SOAP_FMAC3 float ** SOAP_FMAC4 soap_in_PointerTofloat(struct soap *soap, const char *tag, float **a, const char *type)
+{
+	if (soap_element_begin_in(soap, tag, 1, NULL))
+		return NULL;
+	if (!a)
+		if (!(a = (float **)soap_malloc(soap, sizeof(float *))))
+			return NULL;
+	*a = NULL;
+	if (!soap->null && *soap->href != '#')
+	{	soap_revert(soap);
+		if (!(*a = soap_in_float(soap, tag, *a, type)))
+			return NULL;
+	}
+	else
+	{	a = (float **)soap_id_lookup(soap, soap->href, (void**)a, SOAP_TYPE_float, sizeof(float), 0);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTofloat(struct soap *soap, float *const*a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE_PointerTofloat);
+	if (soap_out_PointerTofloat(soap, tag?tag:"float", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 float ** SOAP_FMAC4 soap_get_PointerTofloat(struct soap *soap, float **p, const char *tag, const char *type)
+{
+	if ((p = soap_in_PointerTofloat(soap, tag, p, type)))
 		if (soap_getindependent(soap))
 			return NULL;
 	return p;

@@ -33,7 +33,7 @@ int main(int argc, char *argv[]) {
   float time = 0.364F;
 
   float points[N][3];    /* input of x,y,z */
-  float result[N];       /* results from GetPressure */
+  float result1[N];       /* results from GetPressure */
   float result3[N][3];   /* results of x,y,z */
   float result4[N][4];   /* results of x,y,z velocity and pressure */
   float result6[N][6];   /* results from Pressure Hessian and SGS queries */
@@ -51,7 +51,12 @@ int main(int argc, char *argv[]) {
   int pressure_components = 1;
   float * rawpressure = (float*) malloc(Xwidth*Ywidth*Zwidth*sizeof(float)*pressure_components);
 
-  char * field = "velocity";
+  char * field = "velocity"; /* field used for the calls to getBoxFilter, getBoxFilterSGSsymtensor
+				and getBoxFilterGradient */
+  char * scalar_fields = "pp"; /* two scalar fields ("p" and "p") used for the call to getBoxFilterSGSscalar */
+  char * vector_scalar_fields = "up"; /* a vector and a scalar field ("u" and "p") used for the call to
+					 getBoxFilterSGSvector */
+  char * vector_fields = "ub"; /* two vector fields ("u" and "b") used for the call to getBoxFilterSGStensor */
   float dx = 2.0f * 3.14159265f / 1024.0f;
   float filterwidth = 7.0f * dx;
   float spacing = 4.0f*dx;
@@ -190,9 +195,9 @@ int main(int argc, char *argv[]) {
   }
 
   printf("\nRequesting pressure at %d points...\n", N);
-  getPressure (authtoken, dataset, time, spatialInterp, temporalInterp, N, points, result);
+  getPressure (authtoken, dataset, time, spatialInterp, temporalInterp, N, points, result1);
   for (p = 0; p < N; p++) {
-    printf("%d: %13.6e\n", p, result[p]);
+    printf("%d: %13.6e\n", p, result1[p]);
   }
 
   printf("\nRequesting pressure gradient at %d points...\n", N);
@@ -315,12 +320,35 @@ int main(int argc, char *argv[]) {
     printf("%d: %13.6e, %13.6e, %13.6e\n", p, result3[p][0],  result3[p][1],  result3[p][2]);
   }
 
-  printf("\nRequesting sub-grid stress tensor at %d points...\n", N);
-  getBoxFilterSGS (authtoken, dataset, field, time, filterwidth, N, points, result6);
+  printf("\nRequesting sub-grid stress symmetric tensor at %d points...\n", N);
+  getBoxFilterSGSsymtensor (authtoken, dataset, field, time, filterwidth, N, points, result6);
   for (p = 0; p < N; p++) {
-    printf("%d: %13.6e, %13.6e, %13.6e, %13.6e, %13.6e, %13.6e\n", p,
+    printf("%d: xx=%13.6e, yy=%13.6e, zz=%13.6e, xy=%13.6e, xz=%13.6e, yz=%13.6e\n", p,
 	   result6[p][0],  result6[p][1],  result6[p][2],
 	   result6[p][3],  result6[p][4],  result6[p][5]);
+  }
+
+  printf("\nRequesting sub-grid stress of two scalar fields at %d points...\n", N);
+  getBoxFilterSGSscalar (authtoken, dataset, scalar_fields, time, filterwidth, N, points, result1);
+  for (p = 0; p < N; p++) {
+    printf("%d: %13.6e\n", p, result1[p]);
+  }
+
+  printf("\nRequesting sub-grid stress of a vector-scalar combination at %d points...\n", N);
+  getBoxFilterSGSvector (authtoken, dataset, vector_scalar_fields, time, filterwidth, N, points, result3);
+  for (p = 0; p < N; p++) {
+    printf("%d: %13.6e, %13.6e, %13.6e\n", p,
+           result3[p][0],  result3[p][1],  result3[p][2]);
+  }
+
+  printf("\nRequesting sub-grid stress of two vector fields at %d points...\n", N);
+  getBoxFilterSGStensor (authtoken, dataset, vector_fields, time, filterwidth, N, points, result9);
+  for (p = 0; p < N; p++) {
+    printf("%d: xx=%13.6e, xy=%13.6e, xz=%13.6e, "
+	   "yx=%13.6e, yy=%13.6e, yz=%13.6e, zx=%13.6e, zy=%13.6e, zz=%13.6e\n", p,
+           result9[p][0],  result9[p][1],  result9[p][2],
+           result9[p][3],  result9[p][4],  result9[p][5],
+           result9[p][6],  result9[p][7],  result9[p][8]);
   }
 
   printf("\nRequesting box filter of velocity gradient at %d points...\n", N);

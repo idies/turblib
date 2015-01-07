@@ -53,7 +53,11 @@ int main(int argc, char *argv[]) {
   int density_components = 1;
   float * rawdensity = (float*) malloc(Xwidth*Ywidth*Zwidth*sizeof(float)*density_components);
 
-  char * field = "velocity";
+  char * field = "velocity";/* field used for the calls to getBoxFilter, getBoxFilterSGSsymtensor
+			       and getBoxFilterGradient */
+  char * scalar_fields = "pd"; /* two scalar fields ("p" and "d") used for the call to getBoxFilterSGSscalar */
+  char * vector_scalar_fields = "up"; /* a vector and a scalar field ("u" and "p") used for the call to
+                                         getBoxFilterSGSvector */
   float dx = 2.0f * 3.14159265f / 1024.0f;
   float filterwidth = 7.0f * dx;
   float spacing = 4.0f*dx;
@@ -262,12 +266,25 @@ int main(int argc, char *argv[]) {
     printf("%d: %13.6e, %13.6e, %13.6e\n", p, result3[p][0],  result3[p][1],  result3[p][2]);
   }
 
-  printf("\nRequesting sub-grid stress tensor at %d points...\n", N);
-  getBoxFilterSGS (authtoken, dataset, field, time, filterwidth, N, points, result6);
+  printf("\nRequesting sub-grid stress symmentric tensor at %d points...\n", N);
+  getBoxFilterSGSsymtensor (authtoken, dataset, field, time, filterwidth, N, points, result6);
   for (p = 0; p < N; p++) {
-    printf("%d: %13.6e, %13.6e, %13.6e, %13.6e, %13.6e, %13.6e\n", p,
+    printf("%d: xx=%13.6e, yy=%13.6e, zz=%13.6e, xy=%13.6e, xz=%13.6e, yz=%13.6e\n", p,
            result6[p][0],  result6[p][1],  result6[p][2],
            result6[p][3],  result6[p][4],  result6[p][5]);
+  }
+
+  printf("\nRequesting sub-grid stress of two scalar fields at %d points...\n", N);
+  getBoxFilterSGSscalar (authtoken, dataset, scalar_fields, time, filterwidth, N, points, result1);
+  for (p = 0; p < N; p++) {
+    printf("%d: %13.6e\n", p, result1[p]);
+  }
+
+  printf("\nRequesting sub-grid stress of a vector-scalar combination at %d points...\n", N);
+  getBoxFilterSGSvector (authtoken, dataset, vector_scalar_fields, time, filterwidth, N, points, result3);
+  for (p = 0; p < N; p++) {
+    printf("%d: %13.6e, %13.6e, %13.6e\n", p,
+           result3[p][0],  result3[p][1],  result3[p][2]);
   }
 
   printf("\nRequesting box filter of velocity gradient at %d points...\n", N);

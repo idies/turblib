@@ -56,6 +56,12 @@ program TurbTest
   character(*), parameter :: authkey = 'edu.jhu.pha.turbulence.testing-201406' // CHAR(0)
 
   character(*), parameter :: field = 'velocity' // CHAR(0) ! field used for box filter
+  character(*), parameter :: scalar_fields = 'pp' // CHAR(0) ! two scalar fields ("p" and "p") used
+                                                             ! for getBoxFilterSGSscalar
+  character(*), parameter :: vector_scalar_fields = 'up' // CHAR(0) ! a vector and a scalar field ("u" and "p")
+                                                                    ! used for getBoxFilterSGSvector
+  character(*), parameter :: vector_fields = 'ub' // CHAR(0) ! two vector fields ("u" and "b")
+                                                                    ! used for getBoxFilterSGStensor
   real(RP), parameter :: filterwidth = 0.055223308_RP ! 9 * dx, where dx = 2*PI/1024
   real(RP), parameter :: spacing = 0.030680_RP ! 5 * dx
 
@@ -87,7 +93,8 @@ program TurbTest
   ! Declare the return type of the turblib functions as integer.
   ! This is required for custom error handling (see the README).
   integer :: getvelocity, getforce, getvelocityandpressure, getvelocitygradient
-  integer :: getboxfilter, getboxfiltersgs, getboxfiltergradient
+  integer :: getboxfilter, getboxfiltergradient
+  integer :: getboxfiltersgssymtensor, getboxfiltersgsscalar, getboxfiltersgsvector, getboxfiltersgstensor
   integer :: getvelocitylaplacian, getvelocityhessian
   integer :: getmagneticfield, getmagneticfieldgradient
   integer :: getmagneticfieldlaplacian, getmagneticfieldhessian
@@ -439,12 +446,37 @@ program TurbTest
   end do
 
   write(*,*)
-  write(*,'(a)') 'Requesting sub-grid stress tensor at 10 points...'
-  rc = getboxfiltersgs(authkey, dataset, field, time, filterwidth, 10, points, dataout6)
+  write(*,'(a)') 'Requesting sub-grid stress symmetric tensor at 10 points...'
+  rc = getboxfiltersgssymtensor(authkey, dataset, field, time, filterwidth, 10, points, dataout6)
   do i = 1, 10
     write(*,format6) i, ': xx=', dataout6(1,i), ', yy=', dataout6(2,i), &
        ', zz=', dataout6(3,i), ', xy=', dataout6(4,i),  &
        ', xz=', dataout6(5,i), ', yz', dataout6(6,i)
+  end do
+
+  write(*,*)
+  write(*,'(a)') 'Requesting sub-grid stress of two scalar fields at 10 points...'
+  rc = getboxfiltersgsscalar(authkey, dataset, scalar_fields, time, filterwidth, 10, points, dataout1)
+  do i = 1, 10
+    write(*,format1) i, ': ', dataout1(i)
+  end do
+
+  write(*,*)
+  write(*,'(a)') 'Requesting sub-grid stress of a vector and a scalar field at 10 points...'
+  rc = getboxfiltersgsvector(authkey, dataset, vector_scalar_fields, time, filterwidth, 10, points, dataout3)
+  do i = 1, 10
+    write(*,format3) i, ': ', dataout3(1,i), ', ', dataout3(2,i), ', ', dataout3(3,i)
+  end do
+
+  write(*,*)
+  write(*,'(a)') 'Requesting sub-grid stress of two vector fields  at 10 points...'
+  rc = getboxfiltersgstensor(authkey, dataset, vector_fields, time, filterwidth, 10, points, dataout9)
+  do i = 1, 10
+    write(*,format9) i, ': xx=', dataout9(1,i), ', xy=', dataout9(2,i), &
+       ', xz=', dataout9(3,i), ', yx=', dataout9(4,i),  &
+       ', yy=', dataout9(5,i), ', yz=', dataout9(6,i),  &
+       ', zx=', dataout9(7,i), ', zy=', dataout9(8,i),  &
+       ', zz=', dataout9(9,i)
   end do
 
   write(*,*)
