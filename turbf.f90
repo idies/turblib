@@ -40,6 +40,13 @@ program TurbTest
   integer, parameter :: FD6NoInt = 60 ! 6th order finite differential scheme for grid values, no spatial interpolation
   integer, parameter :: FD8NoInt = 80 ! 8th order finite differential scheme for grid values, no spatial interpolation
   integer, parameter :: FD4Lag4 = 44  ! 4th order finite differential scheme for grid values, 4th order Lagrangian interpolation in space
+  
+  ! ---- Spline interpolation and differentiation Flags for getVelocity,
+  !      getPressure, getVelocityGradient, getPressureGradient,
+  !      getVelocityHessian, getPressureHessian
+  integer, parameter :: M1Q4 = 104   ! Splines with smoothness 1 (3rd order) over 4 data points. Not applicable for Hessian.
+  integer, parameter :: M2Q8 = 208   ! Splines with smoothness 2 (5th order) over 8 data points.
+  integer, parameter :: M2Q14 = 214  ! Splines with smoothness 2 (5th order) over 14 data points.
 
   !
   ! Choose which dataset to use in this query
