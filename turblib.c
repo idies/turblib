@@ -42,25 +42,31 @@ int __turblib_prefetching = 0;
 //Linked list of all added cutout files
 cutoutFile* __turblib_cutouts = NULL;
 
-set_info DataSets[9] = {
- { 0, 0, 0 },
- { 2.0f * 3.14159265358979f / 1024.0f, .002f,  1024 }, //isotropic1024old
- { 2.0f * 3.14159265358979f / 1024.0f, .0002f,  1024 }, //isotropicfine_old
- { 2.0f * 3.14159265358979f / 1024.0f, .0025f, 1024 },  //mhd1024
- { 2.0f * 3.14159265358979f / 1024.0f, .002f,  1024 }, //isotropic1024coarse
- { 2.0f * 3.14159265358979f / 1024.0f, .0002f, 1024 }, //isotropic1024fine
- { 0, 0, 0 },
- { 2.0f * 3.14159265358979f / 1024.0f, .0025f, 1024 }, //custom_dataset
- { 2.0f * 3.14159265358979f / 1024.0f, .04f, 1024 } //mixing_dataset
+set_info DataSets[14] = {
+ { 0, 0, 0 },//=0
+ { 0, 0, 0 },//=1
+ { 0, 0, 0 },//=2
+ { 2.0f * 3.14159265358979f / 1024.0f, .0025f, 1024 },  //mhd1024=3
+ { 2.0f * 3.14159265358979f / 1024.0f, .002f,  1024 }, //isotropic1024coarse=4
+ { 2.0f * 3.14159265358979f / 1024.0f, .0002f, 1024 }, //isotropic1024fine=5
+ { 0, 0, 0 },//channel=6
+ { 2.0f * 3.14159265358979f / 1024.0f, .04f, 1024 }, //mixing_dataset=7
+ { 0, 0, 0 },//rmhd=8
+ { 0, 0, 0 },//=9
+ { 2.0f * 3.14159265358979f / 4096.0f, .0002f, 4096 }, //isotropic4096=10
+ { 2.0f * 3.14159265358979f / 4096.0f, 1.0f, 4096 }, //strat4096=11
+ { 0, 0, 0 },//transition_bl=12
+ { 0, 0, 0 }//channel5200=13
 };
 
-turb_fn TurbFields[5] =
+turb_fn TurbFields[6] =
 {
  { 'u', 3}, //velocity
  { 'p', 1}, //pressure
  { 'b', 3}, //magnetic
  { 'a', 3}, //vector potential
- { 'd', 1}  //density
+ { 'd', 1},  //density
+ { 't', 1}  //temperature
 };
 #endif//CUTOUT_SUPPORT
 
@@ -2499,13 +2505,17 @@ int loadNeededData(TurbDataset set, TurbField function, int count, float positio
 
 TurbDataset getDataSet(char *name)
 {
+  if (strcmp("channel", name) == 0) return channel;
+  if (strcmp("channel5200", name) == 0) return channel5200;
   if (strcmp("isotropic1024coarse", name) == 0) return isotropic1024coarse;
   if (strcmp("isotropic1024", name) == 0) return isotropic1024coarse;
   if (strcmp("isotropic1024fine", name) == 0) return isotropic1024fine;
+  if (strcmp("isotropic4096", name) == 0) return isotropic4096;
   if (strcmp("mhd1024", name) == 0) return mhd1024;
-  if (strcmp("channel", name) == 0) return channel;
   if (strcmp("mixing", name) == 0) return mixing;
-  if (strcmp("custom", name) == 0) return custom_dataset;
+  if (strcmp("rotstrat4096", name) == 0) return rotstrat4096;
+  if (strcmp("transition_bl", name) == 0) return transition_bl;
+  //if (strcmp("custom", name) == 0) return custom_dataset;
 
   return -1;
 }

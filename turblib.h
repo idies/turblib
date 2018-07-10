@@ -104,14 +104,24 @@ typedef struct
 #ifdef CUTOUT_SUPPORT
 typedef enum
 {
-  isotropic1024old = 1,
-  isotropic1024fine_old = 2,
+//isotropic1024old = 1,
+//isotropic1024fine_old = 2,
+//mhd1024 = 3,
+//isotropic1024coarse = 4,
+//isotropic1024fine = 5,
+//channel = 6,
+//custom_dataset = 7,
+//mixing = 8
   mhd1024 = 3,
   isotropic1024coarse = 4,
   isotropic1024fine = 5,
   channel = 6,
-  custom_dataset = 7,
-  mixing = 8
+  mixing = 7,
+  rmhd = 8,
+  isotropic4096 = 10,
+  rotstrat4096 = 11,
+  transition_bl = 12,
+  channel5200 = 13
 } TurbDataset;
 
 typedef enum
@@ -121,7 +131,8 @@ typedef enum
   turb_magnetic = 2,
   turb_potential = 3,
   turb_vp = 4,
-  turb_density = 5
+  turb_density = 5,
+  turb_temperature = 6,
 } TurbField;
 
 typedef struct
