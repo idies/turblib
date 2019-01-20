@@ -60,6 +60,17 @@ OBJ =	soapC.o \
 
 all: turbc turbf mhdc mhdf channelc channelf mixingc mixingf
 
+getCutoutc : $(OBJ) getCutoutc.o
+	$(CC) -o $@ $(OBJ) getCutoutc.o $(LDLIBS)
+
+getCutoutc.o : compiler_flags
+
+getCutoutf : $(OBJ) getCutoutf.o
+	 $(FC) -o $@ $(OBJ) getCutoutf.o $(LDLIBS)
+
+getCutoutf.o : getCutoutf.f90
+	 $(FC) -c getCutoutf.f90
+
 mhdc : $(OBJ) mhdc.o
 	 $(CC) -o $@ $(OBJ) mhdc.o $(LDLIBS)
 
@@ -145,7 +156,7 @@ prodtestwsdl:
 	soapcpp2 -CLcx -2 -I.:$(SOAP_INCLUDE_DIR) TurbulenceService.h
 
 clean:
-	$(RM) *.o *.exe turbf turbc mhdc mhdf channelc channelf mixingc mixingf compiler_flags
+	$(RM) *.o *.exe turbf turbc mhdc mhdf channelc channelf mixingc mixingf compiler_flags getCutoutc getCutoutf
 
 spotless: clean
 	$(RM) soapClient.c TurbulenceServiceSoap.nsmap soapH.h TurbulenceServiceSoap12.nsmap soapStub.h soapC.c TurbulenceService.h
