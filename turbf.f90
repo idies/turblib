@@ -51,7 +51,7 @@ program TurbTest
   !
   ! Choose which dataset to use in this query
   ! Currently, only valid datasets are:
-  !   'isotropic1024coarse', 'isotropic1024fine', 'mhd1024', 'channel' and 'mixing'
+  !   'isotropic1024coarse', 'isotropic1024fine', 'mhd1024', 'channel', 'mixing' and 'isotropic4096'
   !
   character(*), parameter :: dataset = 'isotropic1024coarse' // CHAR(0)
 
@@ -68,6 +68,9 @@ program TurbTest
   character(*), parameter :: vector_scalar_fields = 'up' // CHAR(0) ! a vector and a scalar field ("u" and "p")
                                                                     ! used for getBoxFilterSGSvector
   real(RP), parameter :: filterwidth = 0.055223308_RP ! 9 * dx, where dx = 2*PI/1024
+
+  ! dx = 2*PI/4096 if using the isotropic4096 dataset.
+  
   real(RP), parameter :: spacing = 0.030680_RP ! 5 * dx
 
   real(RP), parameter :: time = 0.364_RP;
@@ -109,6 +112,8 @@ program TurbTest
   ! to load the file and use the functions locally:
   ! character(*), parameter :: filename = 'isotropic1024coarse.h5' // CHAR(0)
   ! integer :: turblibaddlocalsource
+
+  ! If selecting a dataset without time evolution (e.g. isotropic4096), certain getFunctions such as getPosition do not work.
 
   ! return code
   integer :: rc

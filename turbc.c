@@ -27,6 +27,9 @@ int main(int argc, char *argv[]) {
 
   char * authtoken = "edu.jhu.pha.turbulence.testing-201406";
   char * dataset = "isotropic1024coarse";
+  /*char * dataset = "isotropic4096";
+  To select the isotropic4096 dataset.
+  */
   enum SpatialInterpolation spatialInterp = Lag6;
   enum TemporalInterpolation temporalInterp = NoTInt;
 
@@ -57,6 +60,10 @@ int main(int argc, char *argv[]) {
   char * vector_scalar_fields = "up"; /* a vector and a scalar field ("u" and "p") used for the call to 
 					 getBoxFilterSGSvector */
   float dx = 2.0f * 3.14159265f / 1024.0f;
+  /*
+  float dx = 2.0f * 3.14159265f / 4096.0f;
+  If using the isotropic4096 dataset.
+  */
   float filterwidth = 7.0f * dx;
   float spacing = 4.0f*dx;
 
@@ -76,6 +83,10 @@ int main(int argc, char *argv[]) {
      $ make turbc CUTOUT_SUPPORT=1
      Change the filename to the name of the downloaded cutout file or supply it at the command line.
      Detailed instructions and an example is provided below.
+  */
+
+  /*
+  If selecting a dataset without time evolution (e.g. isotropic4096), certain getFunctions such as getPosition do not work.
   */
 #ifdef CUTOUT_SUPPORT
   if (argc > 1)
