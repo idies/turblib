@@ -83,7 +83,7 @@
     real(RP) :: dataout9(9, 10)  ! results from Velocity Gradient
     real(RP) :: dataout18(18, 10) ! results from Velocity Hessian
 
-    integer,parameter :: x=0, y=0, z=0, xwidth=4, ywidth=4, zwidth=4
+    integer,parameter :: time_step=0, x=0, y=0, z=0, xwidth=4, ywidth=4, zwidth=4
     !real(RP) :: rawvelocity(xwidth*ywidth*zwidth*3)
     real(RP) :: rawvelocity(3,xwidth*ywidth*zwidth)
     real(RP) :: rawpressure(xwidth*ywidth*zwidth)
@@ -210,21 +210,21 @@
 
     write(*,*)
     write(*,'(a)') 'Requesting velocity at 10 points...'
-    rc = getvelocity(authkey, dataset,  time, Lag6, NoTInt, 10, points, dataout3)
+    rc = getvelocity(authkey, dataset, time, Lag6, NoTInt, 10, points, dataout3)
     do i = 1, 10
         write(*,format3) i, ': ', dataout3(1,i), ', ', dataout3(2,i), ', ', dataout3(3,i)
     end do
 
     write(*,*)
     write(*,'(a)') 'Requesting velocity and pressure at 10 points...'
-    rc = getvelocityandpressure(authkey, dataset,  time, Lag6, NoTInt, 10, points, dataout4)
+    rc = getvelocityandpressure(authkey, dataset, time, Lag6, NoTInt, 10, points, dataout4)
     do i = 1, 10
         write(*,format4) i, ': ', dataout4(1,i), ', ', dataout4(2,i), ', ', dataout4(3,i), ', ', dataout4(4,i)
     end do
 
     write(*,*)
     write(*,'(a)') 'Requesting velocity gradient at 10 points...'
-    rc = getvelocitygradient(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout9)
+    rc = getvelocitygradient(authkey, dataset, time, FD4Lag4, NoTInt, 10, points, dataout9)
     do i = 1, 10
         write(*,format9) i, ': duxdx=', dataout9(1,i), ', duxdy=', dataout9(2,i), &
             ', duxdz=', dataout9(3,i), ', duydx=', dataout9(4,i),  &
@@ -235,14 +235,14 @@
 
     write(*,*)
     write(*,'(a)') 'Requesting velocity laplacian at 10 points...'
-    rc = getvelocitylaplacian(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout3)
+    rc = getvelocitylaplacian(authkey, dataset, time, FD4Lag4, NoTInt, 10, points, dataout3)
     do i = 1, 10
         write(*,format3) i, ': grad2ux=', dataout3(1,i), ', grad2uy=', dataout3(2,i), ', grad2uz=', dataout3(3,i)
     end do
 
     write(*,*)
     write(*,'(a)') 'Requesting velocity hessian at 10 points...'
-    rc = getvelocityhessian(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout18)
+    rc = getvelocityhessian(authkey, dataset, time, FD4Lag4, NoTInt, 10, points, dataout18)
     do i = 1, 10
         write(*,format18) i, ': d2uxdxdx=', dataout18(1,i), &
             ', d2uxdxdy=', dataout18(2,i), &
@@ -266,21 +266,21 @@
 
     write(*,*)
     write(*,'(a)') 'Requesting pressure at 10 points...'
-    rc = getpressure(authkey, dataset,  time, Lag6, NoTInt, 10, points, dataout1)
+    rc = getpressure(authkey, dataset, time, Lag6, NoTInt, 10, points, dataout1)
     do i = 1, 10
         write(*,format1) i, ': ', dataout1(i)
     end do
 
     write(*,*)
     write(*,'(a)') 'Requesting pressure gradient at 10 points...'
-    rc = getpressuregradient(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout3)
+    rc = getpressuregradient(authkey, dataset, time, FD4Lag4, NoTInt, 10, points, dataout3)
     do i = 1, 10
         write(*,format3) i, ': dpdx=', dataout3(1,i), ', dpdy=', dataout3(2,i), ', dpdz=', dataout3(3,i)
     end do
 
     write(*,*)
     write(*,'(a)') 'Requesting pressure hessian at 10 points...'
-    rc = getpressurehessian(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout6)
+    rc = getpressurehessian(authkey, dataset, time, FD4Lag4, NoTInt, 10, points, dataout6)
     do i = 1, 10
         write(*,format6) i, ': d2pdxdx=', dataout6(1,i), ', d2pdxdy=', dataout6(2,i), &
             ', d2pdxdz=', dataout6(3,i), ', d2pdydy=', dataout6(4,i),  &
@@ -289,21 +289,21 @@
 
     write(*,*)
     write(*,'(a)') 'Requesting density at 10 points...'
-    rc = getdensity(authkey, dataset,  time, Lag6, NoTInt, 10, points, dataout1)
+    rc = getdensity(authkey, dataset, time, Lag6, NoTInt, 10, points, dataout1)
     do i = 1, 10
         write(*,format1) i, ': ', dataout1(i)
     end do
 
     write(*,*)
     write(*,'(a)') 'Requesting density gradient at 10 points...'
-    rc = getdensitygradient(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout3)
+    rc = getdensitygradient(authkey, dataset, time, FD4Lag4, NoTInt, 10, points, dataout3)
     do i = 1, 10
         write(*,format3) i, ': dpdx=', dataout3(1,i), ', dpdy=', dataout3(2,i), ', dpdz=', dataout3(3,i)
     end do
 
     write(*,*)
     write(*,'(a)') 'Requesting density hessian at 10 points...'
-    rc = getdensityhessian(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout6)
+    rc = getdensityhessian(authkey, dataset, time, FD4Lag4, NoTInt, 10, points, dataout6)
     do i = 1, 10
         write(*,format6) i, ': d2pdxdx=', dataout6(1,i), ', d2pdxdy=', dataout6(2,i), &
             ', d2pdxdz=', dataout6(3,i), ', d2pdydy=', dataout6(4,i),  &
@@ -313,7 +313,7 @@
 
     write(*,*)
     write(*,'(a)') 'Requesting raw velocity ...'
-    rc = getrawvelocity(authkey, dataset,  time, x, y, z, xwidth, ywidth, zwidth, rawvelocity)
+    rc = getrawvelocity(authkey, dataset, time_step, x, y, z, xwidth, ywidth, zwidth, rawvelocity)
     do i = 1, xwidth*ywidth*zwidth
         !write(*,rawformat3) i, ': Vx=', rawvelocity(3*(i-1)+1), ', Vy=', rawvelocity(3*(i-1)+2), ', Vz=', rawvelocity(3*(i-1)+3)
         !write(*,rawformat3) i, ': Vx=', rawvelocity(1,i), ', Vy=', rawvelocity(2,i), ', Vz=', rawvelocity(3,i)
@@ -321,14 +321,14 @@
 
     write(*,*)
     write(*,'(a)') 'Requesting raw pressure ...'
-    rc = getrawpressure(authkey, dataset,  time, x, y, z, xwidth, ywidth, zwidth, rawpressure)
+    rc = getrawpressure(authkey, dataset, time_step, x, y, z, xwidth, ywidth, zwidth, rawpressure)
     do i = 1, xwidth*ywidth*zwidth
         !write(*,rawformat1) i, ': ', rawpressure(i)
     end do
 
     write(*,*)
     write(*,'(a)') 'Requesting raw density ...'
-    rc = getrawdensity(authkey, dataset,  time, x, y, z, xwidth, ywidth, zwidth, rawdensity)
+    rc = getrawdensity(authkey, dataset, time_step, x, y, z, xwidth, ywidth, zwidth, rawdensity)
     do i = 1, xwidth*ywidth*zwidth
         !write(*,rawformat1) i, ': ', rawdensity(i)
     end do

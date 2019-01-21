@@ -48,7 +48,7 @@ int main(int argc, char *argv[]) {
 	float endTime = 0.376F;
 	float lag_dt = 0.0004F;
 
-	int X = 0, Y = 0, Z = 0, Xwidth = 16, Ywidth = 16, Zwidth = 16;
+	int time_step = 0, X = 0, Y = 0, Z = 0, Xwidth = 16, Ywidth = 16, Zwidth = 16;
 	int components = 3;
 	float * rawdata = (float*)malloc(Xwidth*Ywidth*Zwidth * sizeof(float)*components);
 	int pressure_components = 1;
@@ -226,13 +226,13 @@ int main(int argc, char *argv[]) {
 	}
 
 	printf("Requesting raw velocity data...\n");
-	getRawVelocity(authtoken, dataset, time, X, Y, Z, Xwidth, Ywidth, Zwidth, (char*)rawdata);
+	getRawVelocity(authtoken, dataset, time_step, X, Y, Z, Xwidth, Ywidth, Zwidth, (char*)rawdata);
 	for (p = 0; p < Xwidth*Ywidth*Zwidth; p++) {
 		//printf("%d: Vx=%f, Vy=%f, Vz=%f\n", p, rawdata[3*p],  rawdata[3*p+1], rawdata[3*p+2]);
 	}
 
 	printf("Requesting raw pressure data...\n");
-	getRawPressure(authtoken, dataset, time, X, Y, Z, Xwidth, Ywidth, Zwidth, (char*)rawpressure);
+	getRawPressure(authtoken, dataset, time_step, X, Y, Z, Xwidth, Ywidth, Zwidth, (char*)rawpressure);
 	for (p = 0; p < Xwidth*Ywidth*Zwidth; p++) {
 		//printf("%d: P=%f\n", p, rawpressure[p]);
 	}

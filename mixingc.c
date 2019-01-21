@@ -45,7 +45,7 @@ int main(int argc, char *argv[]) {
 	float endTime = 5.08F;
 	float lag_dt = 0.02F;
 
-	int X = 0, Y = 0, Z = 0, Xwidth = 16, Ywidth = 16, Zwidth = 16;
+	int time_step = 10, X = 0, Y = 0, Z = 0, Xwidth = 16, Ywidth = 16, Zwidth = 16;
 	int components = 3;
 	float * rawdata = (float*)malloc(Xwidth*Ywidth*Zwidth * sizeof(float)*components);
 	int pressure_components = 1;
@@ -231,19 +231,19 @@ int main(int argc, char *argv[]) {
 	}
 
 	printf("Requesting raw velocity data...\n");
-	getRawVelocity(authtoken, dataset, time, X, Y, Z, Xwidth, Ywidth, Zwidth, (char*)rawdata);
+	getRawVelocity(authtoken, dataset, time_step, X, Y, Z, Xwidth, Ywidth, Zwidth, (char*)rawdata);
 	for (p = 0; p < Xwidth*Ywidth*Zwidth; p++) {
 		//printf("%d: Vx=%f, Vy=%f, Vz=%f\n", p, rawdata[3*p],  rawdata[3*p+1], rawdata[3*p+2]);
 	}
 
 	printf("Requesting raw pressure data...\n");
-	getRawPressure(authtoken, dataset, time, X, Y, Z, Xwidth, Ywidth, Zwidth, (char*)rawpressure);
+	getRawPressure(authtoken, dataset, time_step, X, Y, Z, Xwidth, Ywidth, Zwidth, (char*)rawpressure);
 	for (p = 0; p < Xwidth*Ywidth*Zwidth; p++) {
 		//printf("%d: P=%f\n", p, rawpressure[p]);
 	}
 
 	printf("Requesting raw density data...\n");
-	getRawDensity(authtoken, dataset, time, X, Y, Z, Xwidth, Ywidth, Zwidth, (char*)rawdensity);
+	getRawDensity(authtoken, dataset, time_step, X, Y, Z, Xwidth, Ywidth, Zwidth, (char*)rawdensity);
 	for (p = 0; p < Xwidth*Ywidth*Zwidth; p++) {
 		//printf("%d: P=%f\n", p, rawdensity[p]);
 	}

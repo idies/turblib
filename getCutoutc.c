@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
 
 	float *result;
 
-	int t0 = 0, x0 = 0, y0 = x0, z0 = x0, nx = 2, ny = nx, nz = nx;
+	int time_step = 0, x0 = 0, y0 = x0, z0 = x0, nx = 2, ny = nx, nz = nx;
 	int x_step = 1, y_step = 1, z_step = 1, filter_width = 1;
 	int size, i;
 
@@ -55,7 +55,7 @@ int main(int argc, char *argv[])
 		size = nx * ny*nz * 3;
 	}
 	result = (float *)malloc(sizeof(float)*size);
-	getAnyCutoutWeb(authtoken, "channel", field, t0, x0, y0, z0, nx, ny, nz, x_step, y_step, z_step, filter_width, result);
+	getCutout(authtoken, "channel", field, time_step, x0, y0+10, z0, nx, ny, nz, x_step, y_step, z_step, filter_width, result);
 	for (i = 0; i < size; i++) {
 		printf("%d: u=%f\n", i, result[i]);
 	}
@@ -72,7 +72,7 @@ int main(int argc, char *argv[])
 		size = nx * ny*nz * 3;
 	}
 	result = (float *)malloc(sizeof(float)*size);
-	getAnyCutoutWeb(authtoken, "transition_bl", field, t0, x0, y0, z0, nx, ny, nz, x_step, y_step, z_step, filter_width, result);
+	getCutout(authtoken, "transition_bl", field, time_step, x0, y0, z0, nx, ny, nz, x_step, y_step, z_step, filter_width, result);
 	for (i = 0; i < size; i++) {
 		printf("%d: p=%f\n", i, result[i]);
 	}
@@ -81,7 +81,7 @@ int main(int argc, char *argv[])
 	field = "u";
 	size = 2 * 2 * 2 * 3;
 	result = (float *)malloc(sizeof(float)*size);
-	getAnyCutoutWeb(authtoken, "isotropic1024coarse", field, t0, x0, y0, z0, nx * 4, ny * 4, nz * 4, x_step * 4, y_step * 4, z_step * 4, filter_width * 4, result);
+	getCutout(authtoken, "isotropic1024coarse", field, time_step, x0, y0, z0, nx * 4, ny * 4, nz * 4, x_step * 4, y_step * 4, z_step * 4, filter_width * 4, result);
 	for (i = 0; i < size; i++) {
 		printf("%d: u=%f\n", i, result[i]);
 	}

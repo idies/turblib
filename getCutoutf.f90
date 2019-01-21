@@ -22,14 +22,14 @@
     character(*), parameter :: authtoken = 'edu.jhu.pha.turbulence.testing-201406' // CHAR(0)
     character(1) :: field
 
-    integer, parameter :: t0=0, x0=0, y0=x0, z0=x0, nx=2, ny=nx, nz=nx
+    integer, parameter :: time_step=0, x0=0, y0=x0, z0=x0, nx=2, ny=nx, nz=nx
     integer, parameter :: x_step=1, y_step=1, z_step=1, filter_width=1
     integer :: size, i
     real(RP), allocatable :: result(:)
 
     ! Declare the return type of the turblib functions as integer.
     ! This is required for custom error handling (see the README).
-    integer :: getanycutoutweb
+    integer :: getcutout
 
     ! return code
     integer :: rc
@@ -59,7 +59,7 @@
     allocate(result(size))
     print *, field=='u', size
 
-    rc = getanycutoutweb (authtoken, "isotropic1024coarse", field, t0, x0, y0, z0, &
+    rc = getcutout (authtoken, "isotropic1024coarse", field, time_step, x0, y0, z0, &
         nx, ny, nz, x_step, y_step, z_step, filter_width, result)
     do i = 1, size
         write(*,rawformat1) i, ': ', result(i)
@@ -76,7 +76,7 @@
     allocate(result(size))
     print *, field=='p', size
 
-    rc = getanycutoutweb (authtoken, "transition_bl", field, t0, x0, y0, z0, &
+    rc = getcutout (authtoken, "transition_bl", field, time_step, x0, y0, z0, &
         nx, ny, nz, x_step, y_step, z_step, filter_width, result)
     do i = 1, size
         write(*,rawformat1) i, ': ', result(i)

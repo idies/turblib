@@ -1609,16 +1609,16 @@ int getposition_(char *authToken,
 }
 
 
-int getrawvelocity_(char *authToken, char *dataset, float *time,
+int getrawvelocity_(char *authToken, char *dataset, int *time_step,
 	int *X, int *Y, int *Z, int *Xwidth, int *Ywidth, int *Zwidth,
 	float dataout[])
 {
-	return getRawVelocity(authToken, dataset, *time, *X, *Y, *Z,
+	return getRawVelocity(authToken, dataset, *time_step, *X, *Y, *Z,
 		*Xwidth, *Ywidth, *Zwidth, (char*)dataout);
 }
 
 int getRawVelocity(char *authToken,
-	char *dataset, float time,
+	char *dataset, int time_step,
 	int X, int Y, int Z, int Xwidth, int Ywidth, int Zwidth, char dataout[])
 {
 	int rc;
@@ -1628,7 +1628,7 @@ int getRawVelocity(char *authToken,
 
 	input.authToken = authToken;
 	input.dataset = dataset;
-	input.time = time;
+	input.T = time_step;
 	input.X = X;
 	input.Y = Y;
 	input.Z = Z;
@@ -1698,16 +1698,16 @@ int getMagneticFieldSoap(char *authToken,
 }
 
 int getrawmagneticfield_(char *authToken,
-	char *dataset, float *time,
+	char *dataset, int *time_step,
 	int *X, int *Y, int *Z, int *Xwidth, int *Ywidth, int *Zwidth,
 	float dataout[])
 {
-	return getRawMagneticField(authToken, dataset, *time, *X, *Y, *Z,
+	return getRawMagneticField(authToken, dataset, *time_step, *X, *Y, *Z,
 		*Xwidth, *Ywidth, *Zwidth, (char*)dataout);
 }
 
 int getRawMagneticField(char *authToken,
-	char *dataset, float time,
+	char *dataset, int time_step,
 	int X, int Y, int Z, int Xwidth, int Ywidth, int Zwidth, char dataout[])
 {
 	int rc;
@@ -1717,7 +1717,7 @@ int getRawMagneticField(char *authToken,
 
 	input.authToken = authToken;
 	input.dataset = dataset;
-	input.time = time;
+	input.T = time_step;
 	input.X = X;
 	input.Y = Y;
 	input.Z = Z;
@@ -1787,16 +1787,16 @@ int getVectorPotentialSoap(char *authToken,
 }
 
 int getrawvectorpotential_(char *authToken,
-	char *dataset, float *time,
+	char *dataset, int *time_step,
 	int *X, int *Y, int *Z, int *Xwidth, int *Ywidth, int *Zwidth,
 	float dataout[])
 {
-	return getRawVectorPotential(authToken, dataset, *time, *X, *Y, *Z,
+	return getRawVectorPotential(authToken, dataset, *time_step, *X, *Y, *Z,
 		*Xwidth, *Ywidth, *Zwidth, (char*)dataout);
 }
 
 int getRawVectorPotential(char *authToken,
-	char *dataset, float time,
+	char *dataset, int time_step,
 	int X, int Y, int Z, int Xwidth, int Ywidth, int Zwidth, char dataout[])
 {
 	int rc;
@@ -1806,7 +1806,7 @@ int getRawVectorPotential(char *authToken,
 
 	input.authToken = authToken;
 	input.dataset = dataset;
-	input.time = time;
+	input.T = time_step;
 	input.X = X;
 	input.Y = Y;
 	input.Z = Z;
@@ -1876,16 +1876,16 @@ int getPressureSoap(char *authToken,
 	return rc;
 }
 
-int getrawpressure_(char *authToken, char *dataset, float *time,
+int getrawpressure_(char *authToken, char *dataset, int *time_step,
 	int *X, int *Y, int *Z, int *Xwidth, int *Ywidth, int *Zwidth,
 	float dataout[])
 {
-	return getRawPressure(authToken, dataset, *time, *X, *Y, *Z,
+	return getRawPressure(authToken, dataset, *time_step, *X, *Y, *Z,
 		*Xwidth, *Ywidth, *Zwidth, (char*)dataout);
 }
 
 int getRawPressure(char *authToken,
-	char *dataset, float time,
+	char *dataset, int time_step,
 	int X, int Y, int Z, int Xwidth, int Ywidth, int Zwidth, char dataout[])
 {
 	int rc;
@@ -1895,7 +1895,7 @@ int getRawPressure(char *authToken,
 
 	input.authToken = authToken;
 	input.dataset = dataset;
-	input.time = time;
+	input.T = time_step;
 	input.X = X;
 	input.Y = Y;
 	input.Z = Z;
@@ -2044,16 +2044,16 @@ int getDensityHessianSoap(char *authToken,
 	return rc;
 }
 
-int getrawdensity_(char *authToken, char *dataset, float *time,
+int getrawdensity_(char *authToken, char *dataset, int *time_step,
 	int *X, int *Y, int *Z, int *Xwidth, int *Ywidth, int *Zwidth,
 	float dataout[])
 {
-	return getRawDensity(authToken, dataset, *time, *X, *Y, *Z,
+	return getRawDensity(authToken, dataset, *time_step, *X, *Y, *Z,
 		*Xwidth, *Ywidth, *Zwidth, (char*)dataout);
 }
 
 int getRawDensity(char *authToken,
-	char *dataset, float time,
+	char *dataset, int time_step,
 	int X, int Y, int Z, int Xwidth, int Ywidth, int Zwidth, char dataout[])
 {
 	int rc;
@@ -2063,7 +2063,7 @@ int getRawDensity(char *authToken,
 
 	input.authToken = authToken;
 	input.dataset = dataset;
-	input.time = time;
+	input.T = time_step;
 	input.X = X;
 	input.Y = Y;
 	input.Z = Z;
@@ -2101,7 +2101,7 @@ int getRawDensity(char *authToken,
  return getAnyCutoutWebSoap (authToken, dataset, field, T, x0, y0, z0, nx, ny, nz, x_step, y_step, z_step, filter_width, dataout);
  }*/
 int getCutout(char *authToken,
-	char *dataset, char *field, int T, int x0, int y0, int z0,
+	char *dataset, char *field, int time_step, int x0, int y0, int z0,
 	int nx, int ny, int nz,
 	int x_step, int y_step, int z_step, int filter_width,
 	float dataout[])
@@ -2114,7 +2114,7 @@ int getCutout(char *authToken,
 	input.authToken = authToken;
 	input.dataset = dataset;
 	input.field = field;
-	input.T = T;
+	input.T = time_step;
 	input.X = x0;
 	input.Y = y0;
 	input.Z = z0;
@@ -2129,8 +2129,10 @@ int getCutout(char *authToken,
 
 	rc = soap_call___turb1__GetAnyCutoutWeb(&__jhuturbsoap, NULL, NULL, &input, &output);
 	if (rc == SOAP_OK) {
-		memcpy(dataout, output.GetAnyCutoutWebResult->float_,
-			output.GetAnyCutoutWebResult->__sizefloat_ * sizeof(float));
+		memcpy(dataout, output.GetAnyCutoutWebResult->__ptr,
+			output.GetAnyCutoutWebResult->__size);
+		//memcpy(dataout, output.GetAnyCutoutWebResult->float_,
+		//	output.GetAnyCutoutWebResult->__sizefloat_ * sizeof(float));
 		bzero(__turblib_err, TURB_ERROR_LENGTH);
 	}
 	else {

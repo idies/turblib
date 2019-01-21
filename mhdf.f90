@@ -85,7 +85,7 @@
     real(RP) :: dataout9(9, 10)  ! results from Gradient function
     real(RP) :: dataout18(18, 10) ! results from Hessian function
 
-    integer,parameter :: x=0, y=0, z=0, xwidth=4, ywidth=4, zwidth=4
+    integer,parameter :: time_step=10, x=0, y=0, z=0, xwidth=4, ywidth=4, zwidth=4
     !real(RP) :: rawdata(xwidth*ywidth*zwidth*3)
     real(RP) :: rawdata(3,xwidth*ywidth*zwidth)
     real(RP) :: rawpressure(xwidth*ywidth*zwidth)
@@ -215,28 +215,28 @@
 
     write(*,*)
     write(*,'(a)') 'Requesting velocity at 10 points...'
-    rc = getvelocity(authkey, dataset,  time, Lag6, NoTInt, 10, points, dataout3)
+    rc = getvelocity(authkey, dataset, time, Lag6, NoTInt, 10, points, dataout3)
     do i = 1, 10
         write(*,format3) i, ': ', dataout3(1,i), ', ', dataout3(2,i), ', ', dataout3(3,i)
     end do
 
     write(*,*)
     write(*,'(a)') 'Requesting forcing at 10 points...'
-    rc = getforce(authkey, dataset,  time, Lag6, NoTInt, 10, points, dataout3)
+    rc = getforce(authkey, dataset, time, Lag6, NoTInt, 10, points, dataout3)
     do i = 1, 10
         write(*,format3) i, ': ', dataout3(1,i), ', ', dataout3(2,i), ', ', dataout3(3,i)
     end do
 
     write(*,*)
     write(*,'(a)') 'Requesting velocity and pressure at 10 points...'
-    rc = getvelocityandpressure(authkey, dataset,  time, Lag6, NoTInt, 10, points, dataout4)
+    rc = getvelocityandpressure(authkey, dataset, time, Lag6, NoTInt, 10, points, dataout4)
     do i = 1, 10
         write(*,format4) i, ': ', dataout4(1,i), ', ', dataout4(2,i), ', ', dataout4(3,i), ', ', dataout4(4,i)
     end do
 
     write(*,*)
     write(*,'(a)') 'Requesting velocity gradient at 10 points...'
-    rc = getvelocitygradient(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout9)
+    rc = getvelocitygradient(authkey, dataset, time, FD4Lag4, NoTInt, 10, points, dataout9)
     do i = 1, 10
         write(*,format9) i, ': duxdx=', dataout9(1,i), ', duxdy=', dataout9(2,i), &
             ', duxdz=', dataout9(3,i), ', duydx=', dataout9(4,i),  &
@@ -247,14 +247,14 @@
 
     write(*,*)
     write(*,'(a)') 'Requesting velocity laplacian at 10 points...'
-    rc = getvelocitylaplacian(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout3)
+    rc = getvelocitylaplacian(authkey, dataset, time, FD4Lag4, NoTInt, 10, points, dataout3)
     do i = 1, 10
         write(*,format3) i, ': grad2ux=', dataout3(1,i), ', grad2uy=', dataout3(2,i), ', grad2uz=', dataout3(3,i)
     end do
 
     write(*,*)
     write(*,'(a)') 'Requesting velocity hessian at 10 points...'
-    rc = getvelocityhessian(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout18)
+    rc = getvelocityhessian(authkey, dataset, time, FD4Lag4, NoTInt, 10, points, dataout18)
     do i = 1, 10
         write(*,format18) i, ': d2uxdxdx=', dataout18(1,i), &
             ', d2uxdxdy=', dataout18(2,i), &
@@ -278,14 +278,14 @@
 
     write(*,*)
     write(*,'(a)') 'Requesting magnetic field at 10 points...'
-    rc = getmagneticfield(authkey, dataset,  time, Lag6, NoTInt, 10, points, dataout3)
+    rc = getmagneticfield(authkey, dataset, time, Lag6, NoTInt, 10, points, dataout3)
     do i = 1, 10
         write(*,format3) i, ': ', dataout3(1,i), ', ', dataout3(2,i), ', ', dataout3(3,i)
     end do
 
     write(*,*)
     write(*,'(a)') 'Requesting magnetic field gradient at 10 points...'
-    rc = getmagneticfieldgradient(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout9)
+    rc = getmagneticfieldgradient(authkey, dataset, time, FD4Lag4, NoTInt, 10, points, dataout9)
     do i = 1, 10
         write(*,format9) i, ': duxdx=', dataout9(1,i), ', duxdy=', dataout9(2,i), &
             ', duxdz=', dataout9(3,i), ', duydx=', dataout9(4,i),  &
@@ -296,14 +296,14 @@
 
     write(*,*)
     write(*,'(a)') 'Requesting magnetic field laplacian at 10 points...'
-    rc = getmagneticfieldlaplacian(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout3)
+    rc = getmagneticfieldlaplacian(authkey, dataset, time, FD4Lag4, NoTInt, 10, points, dataout3)
     do i = 1, 10
         write(*,format3) i, ': grad2ux=', dataout3(1,i), ', grad2uy=', dataout3(2,i), ', grad2uz=', dataout3(3,i)
     end do
 
     write(*,*)
     write(*,'(a)') 'Requesting magnetic field hessian at 10 points...'
-    rc = getmagneticfieldhessian(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout18)
+    rc = getmagneticfieldhessian(authkey, dataset, time, FD4Lag4, NoTInt, 10, points, dataout18)
     do i = 1, 10
         write(*,format18) i, ': d2uxdxdx=', dataout18(1,i), &
             ', d2uxdxdy=', dataout18(2,i), &
@@ -327,14 +327,14 @@
 
     write(*,*)
     write(*,'(a)') 'Requesting vector potential at 10 points...'
-    rc = getvectorpotential(authkey, dataset,  time, Lag6, NoTInt, 10, points, dataout3)
+    rc = getvectorpotential(authkey, dataset, time, Lag6, NoTInt, 10, points, dataout3)
     do i = 1, 10
         write(*,format3) i, ': ', dataout3(1,i), ', ', dataout3(2,i), ', ', dataout3(3,i)
     end do
 
     write(*,*)
     write(*,'(a)') 'Requesting vector potential gradient at 10 points...'
-    rc = getvectorpotentialgradient(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout9)
+    rc = getvectorpotentialgradient(authkey, dataset, time, FD4Lag4, NoTInt, 10, points, dataout9)
     do i = 1, 10
         write(*,format9) i, ': duxdx=', dataout9(1,i), ', duxdy=', dataout9(2,i), &
             ', duxdz=', dataout9(3,i), ', duydx=', dataout9(4,i),  &
@@ -345,14 +345,14 @@
 
     write(*,*)
     write(*,'(a)') 'Requesting vector potential laplacian at 10 points...'
-    rc = getvectorpotentiallaplacian(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout3)
+    rc = getvectorpotentiallaplacian(authkey, dataset, time, FD4Lag4, NoTInt, 10, points, dataout3)
     do i = 1, 10
         write(*,format3) i, ': grad2ux=', dataout3(1,i), ', grad2uy=', dataout3(2,i), ', grad2uz=', dataout3(3,i)
     end do
 
     write(*,*)
     write(*,'(a)') 'Requesting vector potential hessian at 10 points...'
-    rc = getvectorpotentialhessian(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout18)
+    rc = getvectorpotentialhessian(authkey, dataset, time, FD4Lag4, NoTInt, 10, points, dataout18)
     do i = 1, 10
         write(*,format18) i, ': d2uxdxdx=', dataout18(1,i), &
             ', d2uxdxdy=', dataout18(2,i), &
@@ -376,21 +376,21 @@
 
     write(*,*)
     write(*,'(a)') 'Requesting pressure at 10 points...'
-    rc = getpressure(authkey, dataset,  time, Lag6, NoTInt, 10, points, dataout1)
+    rc = getpressure(authkey, dataset, time, Lag6, NoTInt, 10, points, dataout1)
     do i = 1, 10
         write(*,format1) i, ': ', dataout1(i)
     end do
 
     write(*,*)
     write(*,'(a)') 'Requesting pressure gradient at 10 points...'
-    rc = getpressuregradient(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout3)
+    rc = getpressuregradient(authkey, dataset, time, FD4Lag4, NoTInt, 10, points, dataout3)
     do i = 1, 10
         write(*,format3) i, ': dpdx=', dataout3(1,i), ', dpdy=', dataout3(2,i), ', dpdz=', dataout3(3,i)
     end do
 
     write(*,*)
     write(*,'(a)') 'Requesting pressure hessian at 10 points...'
-    rc = getpressurehessian(authkey, dataset,  time, FD4Lag4, NoTInt, 10, points, dataout6)
+    rc = getpressurehessian(authkey, dataset, time, FD4Lag4, NoTInt, 10, points, dataout6)
     do i = 1, 10
         write(*,format6) i, ': d2pdxdx=', dataout6(1,i), ', d2pdxdy=', dataout6(2,i), &
             ', d2pdxdz=', dataout6(3,i), ', d2pdydy=', dataout6(4,i),  &
@@ -399,7 +399,7 @@
 
     write(*,*)
     write(*,'(a)') 'Requesting raw velocity ...'
-    rc = getrawvelocity(authkey, dataset,  time, x, y, z, xwidth, ywidth, zwidth, rawdata)
+    rc = getrawvelocity(authkey, dataset, time_step, x, y, z, xwidth, ywidth, zwidth, rawdata)
     do i = 1, xwidth*ywidth*zwidth
         !write(*,rawformat3) i, ': Vx=', rawdata(3*(i-1)+1), ', Vy=', rawdata(3*(i-1)+2), ', Vz=', rawdata(3*(i-1)+3)
         !write(*,rawformat3) i, ': Vx=', rawdata(1,i), ', Vy=', rawdata(2,i), ', Vz=', rawdata(3,i)
@@ -407,14 +407,14 @@
 
     write(*,*)
     write(*,'(a)') 'Requesting raw pressure ...'
-    rc = getrawpressure(authkey, dataset,  time, x, y, z, xwidth, ywidth, zwidth, rawpressure)
+    rc = getrawpressure(authkey, dataset, time_step, x, y, z, xwidth, ywidth, zwidth, rawpressure)
     do i = 1, xwidth*ywidth*zwidth
         !write(*,rawformat1) i, ': ', rawpressure(i)
     end do
 
     write(*,*)
     write(*,'(a)') 'Requesting raw magnetic field ...'
-    rc = getrawmagneticfield(authkey, dataset,  time, x, y, z, xwidth, ywidth, zwidth, rawdata)
+    rc = getrawmagneticfield(authkey, dataset, time_step, x, y, z, xwidth, ywidth, zwidth, rawdata)
     do i = 1, xwidth*ywidth*zwidth
         !write(*,rawformat3) i, ': bx=', rawdata(3*(i-1)+1), ', by=', rawdata(3*(i-1)+2), ', bz=', rawdata(3*(i-1)+3)
         !write(*,rawformat3) i, ': bx=', rawdata(1,i), ', by=', rawdata(2,i), ', bz=', rawdata(3,i)
@@ -422,7 +422,7 @@
 
     write(*,*)
     write(*,'(a)') 'Requesting raw vector potential ...'
-    rc = getrawvectorpotential(authkey, dataset,  time, x, y, z, xwidth, ywidth, zwidth, rawdata)
+    rc = getrawvectorpotential(authkey, dataset, time_step, x, y, z, xwidth, ywidth, zwidth, rawdata)
     do i = 1, xwidth*ywidth*zwidth
         !write(*,rawformat3) i, ': ax=', rawdata(3*(i-1)+1), ', ay=', rawdata(3*(i-1)+2), ', az=', rawdata(3*(i-1)+3)
         !write(*,rawformat3) i, ': ax=', rawdata(1,i), ', ay=', rawdata(2,i), ', az=', rawdata(3,i)

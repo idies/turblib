@@ -502,12 +502,12 @@ extern "C" {
 
 	/* C */
 	int getRawVelocity(char *authToken,
-		char *dataset, float time,
+		char *dataset, int time_step,
 		int X, int Y, int Z, int Xwidth, int Ywidth, int Zwidth, char dataout[]);
 
 	/* Fortran */
 	int getrawvelocity_(char *authToken,
-		char *dataset, float *time,
+		char *dataset, int *time_step,
 		int *X, int *Y, int *Z, int *Xwidth, int *Ywidth, int *Zwidth,
 		float dataout[]);
 
@@ -526,12 +526,12 @@ extern "C" {
 
 	/* C */
 	int getRawMagneticField(char *authToken,
-		char *dataset, float time,
+		char *dataset, int time_step,
 		int X, int Y, int Z, int Xwidth, int Ywidth, int Zwidth, char dataout[]);
 
 	/* Fortran */
 	int getrawmagneticfield_(char *authToken,
-		char *dataset, float *time,
+		char *dataset, int *time_step,
 		int *X, int *Y, int *Z, int *Xwidth, int *Ywidth, int *Zwidth,
 		float dataout[]);
 
@@ -550,12 +550,12 @@ extern "C" {
 
 	/* C */
 	int getRawVectorPotential(char *authToken,
-		char *dataset, float time,
+		char *dataset, int time_step,
 		int X, int Y, int Z, int Xwidth, int Ywidth, int Zwidth, char dataout[]);
 
 	/* Fortran */
 	int getrawvectorpotential_(char *authToken,
-		char *dataset, float *time,
+		char *dataset, int *time_step,
 		int *X, int *Y, int *Z, int *Xwidth, int *Ywidth, int *Zwidth,
 		float dataout[]);
 
@@ -574,12 +574,12 @@ extern "C" {
 
 	/* C */
 	int getRawPressure(char *authToken,
-		char *dataset, float time,
+		char *dataset, int time_step,
 		int X, int Y, int Z, int Xwidth, int Ywidth, int Zwidth, char dataout[]);
 
 	/* Fortran */
 	int getrawpressure_(char *authToken,
-		char *dataset, float *time,
+		char *dataset, int *time_step,
 		int *X, int *Y, int *Z, int *Xwidth, int *Ywidth, int *Zwidth, float dataout[]);
 
 	/* C */
@@ -623,17 +623,17 @@ extern "C" {
 
 	/* C */
 	int getRawDensity(char *authToken,
-		char *dataset, float time,
+		char *dataset, int time_step,
 		int X, int Y, int Z, int Xwidth, int Ywidth, int Zwidth, char dataout[]);
 
 	/* Fortran */
 	int getrawdensity_(char *authToken,
-		char *dataset, float *time,
+		char *dataset, int *time_step,
 		int *X, int *Y, int *Z, int *Xwidth, int *Ywidth, int *Zwidth, float dataout[]);
 
 	/* C */
 	int getCutout(char *authToken,
-		char *dataset, char *field, int T,
+		char *dataset, char *field, int time_step,
 		int x0, int y0, int z0,
 		int nx, int ny, int nz,
 		int x_step, int y_step, int z_step, int filter_width,
@@ -641,7 +641,7 @@ extern "C" {
 
 	/* Fortran */
 	int getcutout_(char *authToken,
-		char *dataset, char *field, int *T,
+		char *dataset, char *field, int *time_step,
 		int *x0, int *y0, int *z0,
 		int *nx, int *ny, int *nz,
 		int *x_step, int *y_step, int *z_step, int *filter_width,
