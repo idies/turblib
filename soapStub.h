@@ -1195,7 +1195,7 @@ struct _turb1__GetRawVelocity
 {
 	char *authToken;	/* optional element of type xsd:string */
 	char *dataset;	/* optional element of type xsd:string */
-	float time;	/* required element of type xsd:float */
+	int T;	/* required element of type xsd:int */
 	int X;	/* required element of type xsd:int */
 	int Y;	/* required element of type xsd:int */
 	int Z;	/* required element of type xsd:int */
@@ -1222,7 +1222,7 @@ struct _turb1__GetRawMagneticField
 {
 	char *authToken;	/* optional element of type xsd:string */
 	char *dataset;	/* optional element of type xsd:string */
-	float time;	/* required element of type xsd:float */
+	int T;	/* required element of type xsd:int */
 	int X;	/* required element of type xsd:int */
 	int Y;	/* required element of type xsd:int */
 	int Z;	/* required element of type xsd:int */
@@ -1249,7 +1249,7 @@ struct _turb1__GetRawVectorPotential
 {
 	char *authToken;	/* optional element of type xsd:string */
 	char *dataset;	/* optional element of type xsd:string */
-	float time;	/* required element of type xsd:float */
+	int T;	/* required element of type xsd:int */
 	int X;	/* required element of type xsd:int */
 	int Y;	/* required element of type xsd:int */
 	int Z;	/* required element of type xsd:int */
@@ -1276,7 +1276,7 @@ struct _turb1__GetRawPressure
 {
 	char *authToken;	/* optional element of type xsd:string */
 	char *dataset;	/* optional element of type xsd:string */
-	float time;	/* required element of type xsd:float */
+	int T;	/* required element of type xsd:int */
 	int X;	/* required element of type xsd:int */
 	int Y;	/* required element of type xsd:int */
 	int Z;	/* required element of type xsd:int */
@@ -1303,7 +1303,7 @@ struct _turb1__GetRawDensity
 {
 	char *authToken;	/* optional element of type xsd:string */
 	char *dataset;	/* optional element of type xsd:string */
-	float time;	/* required element of type xsd:float */
+	int T;	/* required element of type xsd:int */
 	int X;	/* required element of type xsd:int */
 	int Y;	/* required element of type xsd:int */
 	int Z;	/* required element of type xsd:int */
@@ -1330,7 +1330,7 @@ struct _turb1__GetRawTemperature
 {
 	char *authToken;	/* optional element of type xsd:string */
 	char *dataset;	/* optional element of type xsd:string */
-	float time;	/* required element of type xsd:float */
+	int T;	/* required element of type xsd:int */
 	int X;	/* required element of type xsd:int */
 	int Y;	/* required element of type xsd:int */
 	int Z;	/* required element of type xsd:int */
@@ -1378,7 +1378,7 @@ struct _turb1__GetAnyCutoutWeb
 /* turb1:GetAnyCutoutWebResponse */
 struct _turb1__GetAnyCutoutWebResponse
 {
-	struct turb1__ArrayOfFloat *GetAnyCutoutWebResult;	/* SOAP 1.2 RPC return element (when namespace qualified) */	/* optional element of type turb1:ArrayOfFloat */
+	struct xsd__base64Binary *GetAnyCutoutWebResult;	/* SOAP 1.2 RPC return element (when namespace qualified) */	/* optional element of type xsd:base64Binary */
 };
 #endif
 

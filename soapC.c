@@ -19,7 +19,7 @@ compiling, linking, and/or using OpenSSL is allowed.
 extern "C" {
 #endif
 
-SOAP_SOURCE_STAMP("@(#) soapC.c ver 2.8.16 2019-01-21 23:29:54 GMT")
+SOAP_SOURCE_STAMP("@(#) soapC.c ver 2.8.16 2019-02-11 16:44:53 GMT")
 
 
 #ifndef WITH_NOGLOBAL
@@ -9087,7 +9087,7 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetAnyCutoutWebResponse(struct
 {
 #ifndef WITH_NOIDREF
 	(void)soap; (void)a; /* appease -Wall -Werror */
-	soap_serialize_PointerToturb1__ArrayOfFloat(soap, &a->GetAnyCutoutWebResult);
+	soap_serialize_PointerToxsd__base64Binary(soap, &a->GetAnyCutoutWebResult);
 #endif
 }
 
@@ -9098,7 +9098,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_out__turb1__GetAnyCutoutWebResponse(struct soap *
 		return soap->error;
 	if (a->GetAnyCutoutWebResult)
 		soap_element_result(soap, "turb1:GetAnyCutoutWebResult");
-	if (soap_out_PointerToturb1__ArrayOfFloat(soap, "turb1:GetAnyCutoutWebResult", -1, &a->GetAnyCutoutWebResult, ""))
+	if (soap_out_PointerToxsd__base64Binary(soap, "turb1:GetAnyCutoutWebResult", -1, &a->GetAnyCutoutWebResult, ""))
 		return soap->error;
 	return soap_element_end_out(soap, tag);
 }
@@ -9117,7 +9117,7 @@ SOAP_FMAC3 struct _turb1__GetAnyCutoutWebResponse * SOAP_FMAC4 soap_in__turb1__G
 		for (;;)
 		{	soap->error = SOAP_TAG_MISMATCH;
 			if (soap_flag_GetAnyCutoutWebResult && soap->error == SOAP_TAG_MISMATCH)
-				if (soap_in_PointerToturb1__ArrayOfFloat(soap, "turb1:GetAnyCutoutWebResult", &a->GetAnyCutoutWebResult, "turb1:ArrayOfFloat"))
+				if (soap_in_PointerToxsd__base64Binary(soap, "turb1:GetAnyCutoutWebResult", &a->GetAnyCutoutWebResult, "xsd:base64Binary"))
 				{	soap_flag_GetAnyCutoutWebResult--;
 					continue;
 				}
@@ -9449,7 +9449,7 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetRawTemperature(struct soap *s
 	(void)soap; (void)a; /* appease -Wall -Werror */
 	soap_default_string(soap, &a->authToken);
 	soap_default_string(soap, &a->dataset);
-	soap_default_float(soap, &a->time);
+	soap_default_int(soap, &a->T);
 	soap_default_int(soap, &a->X);
 	soap_default_int(soap, &a->Y);
 	soap_default_int(soap, &a->Z);
@@ -9465,7 +9465,6 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetRawTemperature(struct soap 
 	(void)soap; (void)a; /* appease -Wall -Werror */
 	soap_serialize_string(soap, &a->authToken);
 	soap_serialize_string(soap, &a->dataset);
-	soap_embedded(soap, &a->time, SOAP_TYPE_float);
 	soap_serialize_string(soap, &a->addr);
 #endif
 }
@@ -9479,7 +9478,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_out__turb1__GetRawTemperature(struct soap *soap, 
 		return soap->error;
 	if (soap_out_string(soap, "turb1:dataset", -1, &a->dataset, ""))
 		return soap->error;
-	if (soap_out_float(soap, "turb1:time", -1, &a->time, ""))
+	if (soap_out_int(soap, "turb1:T", -1, &a->T, ""))
 		return soap->error;
 	if (soap_out_int(soap, "turb1:X", -1, &a->X, ""))
 		return soap->error;
@@ -9502,7 +9501,7 @@ SOAP_FMAC3 struct _turb1__GetRawTemperature * SOAP_FMAC4 soap_in__turb1__GetRawT
 {
 	size_t soap_flag_authToken = 1;
 	size_t soap_flag_dataset = 1;
-	size_t soap_flag_time = 1;
+	size_t soap_flag_T = 1;
 	size_t soap_flag_X = 1;
 	size_t soap_flag_Y = 1;
 	size_t soap_flag_Z = 1;
@@ -9530,9 +9529,9 @@ SOAP_FMAC3 struct _turb1__GetRawTemperature * SOAP_FMAC4 soap_in__turb1__GetRawT
 				{	soap_flag_dataset--;
 					continue;
 				}
-			if (soap_flag_time && soap->error == SOAP_TAG_MISMATCH)
-				if (soap_in_float(soap, "turb1:time", &a->time, "xsd:float"))
-				{	soap_flag_time--;
+			if (soap_flag_T && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_int(soap, "turb1:T", &a->T, "xsd:int"))
+				{	soap_flag_T--;
 					continue;
 				}
 			if (soap_flag_X && soap->error == SOAP_TAG_MISMATCH)
@@ -9585,7 +9584,7 @@ SOAP_FMAC3 struct _turb1__GetRawTemperature * SOAP_FMAC4 soap_in__turb1__GetRawT
 		if (soap->body && soap_element_end_in(soap, tag))
 			return NULL;
 	}
-	if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_time > 0 || soap_flag_X > 0 || soap_flag_Y > 0 || soap_flag_Z > 0 || soap_flag_Xwidth > 0 || soap_flag_Ywidth > 0 || soap_flag_Zwidth > 0))
+	if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_T > 0 || soap_flag_X > 0 || soap_flag_Y > 0 || soap_flag_Z > 0 || soap_flag_Xwidth > 0 || soap_flag_Ywidth > 0 || soap_flag_Zwidth > 0))
 	{	soap->error = SOAP_OCCURS;
 		return NULL;
 	}
@@ -9692,7 +9691,7 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetRawDensity(struct soap *soap,
 	(void)soap; (void)a; /* appease -Wall -Werror */
 	soap_default_string(soap, &a->authToken);
 	soap_default_string(soap, &a->dataset);
-	soap_default_float(soap, &a->time);
+	soap_default_int(soap, &a->T);
 	soap_default_int(soap, &a->X);
 	soap_default_int(soap, &a->Y);
 	soap_default_int(soap, &a->Z);
@@ -9708,7 +9707,6 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetRawDensity(struct soap *soa
 	(void)soap; (void)a; /* appease -Wall -Werror */
 	soap_serialize_string(soap, &a->authToken);
 	soap_serialize_string(soap, &a->dataset);
-	soap_embedded(soap, &a->time, SOAP_TYPE_float);
 	soap_serialize_string(soap, &a->addr);
 #endif
 }
@@ -9722,7 +9720,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_out__turb1__GetRawDensity(struct soap *soap, cons
 		return soap->error;
 	if (soap_out_string(soap, "turb1:dataset", -1, &a->dataset, ""))
 		return soap->error;
-	if (soap_out_float(soap, "turb1:time", -1, &a->time, ""))
+	if (soap_out_int(soap, "turb1:T", -1, &a->T, ""))
 		return soap->error;
 	if (soap_out_int(soap, "turb1:X", -1, &a->X, ""))
 		return soap->error;
@@ -9745,7 +9743,7 @@ SOAP_FMAC3 struct _turb1__GetRawDensity * SOAP_FMAC4 soap_in__turb1__GetRawDensi
 {
 	size_t soap_flag_authToken = 1;
 	size_t soap_flag_dataset = 1;
-	size_t soap_flag_time = 1;
+	size_t soap_flag_T = 1;
 	size_t soap_flag_X = 1;
 	size_t soap_flag_Y = 1;
 	size_t soap_flag_Z = 1;
@@ -9773,9 +9771,9 @@ SOAP_FMAC3 struct _turb1__GetRawDensity * SOAP_FMAC4 soap_in__turb1__GetRawDensi
 				{	soap_flag_dataset--;
 					continue;
 				}
-			if (soap_flag_time && soap->error == SOAP_TAG_MISMATCH)
-				if (soap_in_float(soap, "turb1:time", &a->time, "xsd:float"))
-				{	soap_flag_time--;
+			if (soap_flag_T && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_int(soap, "turb1:T", &a->T, "xsd:int"))
+				{	soap_flag_T--;
 					continue;
 				}
 			if (soap_flag_X && soap->error == SOAP_TAG_MISMATCH)
@@ -9828,7 +9826,7 @@ SOAP_FMAC3 struct _turb1__GetRawDensity * SOAP_FMAC4 soap_in__turb1__GetRawDensi
 		if (soap->body && soap_element_end_in(soap, tag))
 			return NULL;
 	}
-	if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_time > 0 || soap_flag_X > 0 || soap_flag_Y > 0 || soap_flag_Z > 0 || soap_flag_Xwidth > 0 || soap_flag_Ywidth > 0 || soap_flag_Zwidth > 0))
+	if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_T > 0 || soap_flag_X > 0 || soap_flag_Y > 0 || soap_flag_Z > 0 || soap_flag_Xwidth > 0 || soap_flag_Ywidth > 0 || soap_flag_Zwidth > 0))
 	{	soap->error = SOAP_OCCURS;
 		return NULL;
 	}
@@ -9935,7 +9933,7 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetRawPressure(struct soap *soap
 	(void)soap; (void)a; /* appease -Wall -Werror */
 	soap_default_string(soap, &a->authToken);
 	soap_default_string(soap, &a->dataset);
-	soap_default_float(soap, &a->time);
+	soap_default_int(soap, &a->T);
 	soap_default_int(soap, &a->X);
 	soap_default_int(soap, &a->Y);
 	soap_default_int(soap, &a->Z);
@@ -9951,7 +9949,6 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetRawPressure(struct soap *so
 	(void)soap; (void)a; /* appease -Wall -Werror */
 	soap_serialize_string(soap, &a->authToken);
 	soap_serialize_string(soap, &a->dataset);
-	soap_embedded(soap, &a->time, SOAP_TYPE_float);
 	soap_serialize_string(soap, &a->addr);
 #endif
 }
@@ -9965,7 +9962,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_out__turb1__GetRawPressure(struct soap *soap, con
 		return soap->error;
 	if (soap_out_string(soap, "turb1:dataset", -1, &a->dataset, ""))
 		return soap->error;
-	if (soap_out_float(soap, "turb1:time", -1, &a->time, ""))
+	if (soap_out_int(soap, "turb1:T", -1, &a->T, ""))
 		return soap->error;
 	if (soap_out_int(soap, "turb1:X", -1, &a->X, ""))
 		return soap->error;
@@ -9988,7 +9985,7 @@ SOAP_FMAC3 struct _turb1__GetRawPressure * SOAP_FMAC4 soap_in__turb1__GetRawPres
 {
 	size_t soap_flag_authToken = 1;
 	size_t soap_flag_dataset = 1;
-	size_t soap_flag_time = 1;
+	size_t soap_flag_T = 1;
 	size_t soap_flag_X = 1;
 	size_t soap_flag_Y = 1;
 	size_t soap_flag_Z = 1;
@@ -10016,9 +10013,9 @@ SOAP_FMAC3 struct _turb1__GetRawPressure * SOAP_FMAC4 soap_in__turb1__GetRawPres
 				{	soap_flag_dataset--;
 					continue;
 				}
-			if (soap_flag_time && soap->error == SOAP_TAG_MISMATCH)
-				if (soap_in_float(soap, "turb1:time", &a->time, "xsd:float"))
-				{	soap_flag_time--;
+			if (soap_flag_T && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_int(soap, "turb1:T", &a->T, "xsd:int"))
+				{	soap_flag_T--;
 					continue;
 				}
 			if (soap_flag_X && soap->error == SOAP_TAG_MISMATCH)
@@ -10071,7 +10068,7 @@ SOAP_FMAC3 struct _turb1__GetRawPressure * SOAP_FMAC4 soap_in__turb1__GetRawPres
 		if (soap->body && soap_element_end_in(soap, tag))
 			return NULL;
 	}
-	if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_time > 0 || soap_flag_X > 0 || soap_flag_Y > 0 || soap_flag_Z > 0 || soap_flag_Xwidth > 0 || soap_flag_Ywidth > 0 || soap_flag_Zwidth > 0))
+	if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_T > 0 || soap_flag_X > 0 || soap_flag_Y > 0 || soap_flag_Z > 0 || soap_flag_Xwidth > 0 || soap_flag_Ywidth > 0 || soap_flag_Zwidth > 0))
 	{	soap->error = SOAP_OCCURS;
 		return NULL;
 	}
@@ -10178,7 +10175,7 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetRawVectorPotential(struct soa
 	(void)soap; (void)a; /* appease -Wall -Werror */
 	soap_default_string(soap, &a->authToken);
 	soap_default_string(soap, &a->dataset);
-	soap_default_float(soap, &a->time);
+	soap_default_int(soap, &a->T);
 	soap_default_int(soap, &a->X);
 	soap_default_int(soap, &a->Y);
 	soap_default_int(soap, &a->Z);
@@ -10194,7 +10191,6 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetRawVectorPotential(struct s
 	(void)soap; (void)a; /* appease -Wall -Werror */
 	soap_serialize_string(soap, &a->authToken);
 	soap_serialize_string(soap, &a->dataset);
-	soap_embedded(soap, &a->time, SOAP_TYPE_float);
 	soap_serialize_string(soap, &a->addr);
 #endif
 }
@@ -10208,7 +10204,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_out__turb1__GetRawVectorPotential(struct soap *so
 		return soap->error;
 	if (soap_out_string(soap, "turb1:dataset", -1, &a->dataset, ""))
 		return soap->error;
-	if (soap_out_float(soap, "turb1:time", -1, &a->time, ""))
+	if (soap_out_int(soap, "turb1:T", -1, &a->T, ""))
 		return soap->error;
 	if (soap_out_int(soap, "turb1:X", -1, &a->X, ""))
 		return soap->error;
@@ -10231,7 +10227,7 @@ SOAP_FMAC3 struct _turb1__GetRawVectorPotential * SOAP_FMAC4 soap_in__turb1__Get
 {
 	size_t soap_flag_authToken = 1;
 	size_t soap_flag_dataset = 1;
-	size_t soap_flag_time = 1;
+	size_t soap_flag_T = 1;
 	size_t soap_flag_X = 1;
 	size_t soap_flag_Y = 1;
 	size_t soap_flag_Z = 1;
@@ -10259,9 +10255,9 @@ SOAP_FMAC3 struct _turb1__GetRawVectorPotential * SOAP_FMAC4 soap_in__turb1__Get
 				{	soap_flag_dataset--;
 					continue;
 				}
-			if (soap_flag_time && soap->error == SOAP_TAG_MISMATCH)
-				if (soap_in_float(soap, "turb1:time", &a->time, "xsd:float"))
-				{	soap_flag_time--;
+			if (soap_flag_T && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_int(soap, "turb1:T", &a->T, "xsd:int"))
+				{	soap_flag_T--;
 					continue;
 				}
 			if (soap_flag_X && soap->error == SOAP_TAG_MISMATCH)
@@ -10314,7 +10310,7 @@ SOAP_FMAC3 struct _turb1__GetRawVectorPotential * SOAP_FMAC4 soap_in__turb1__Get
 		if (soap->body && soap_element_end_in(soap, tag))
 			return NULL;
 	}
-	if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_time > 0 || soap_flag_X > 0 || soap_flag_Y > 0 || soap_flag_Z > 0 || soap_flag_Xwidth > 0 || soap_flag_Ywidth > 0 || soap_flag_Zwidth > 0))
+	if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_T > 0 || soap_flag_X > 0 || soap_flag_Y > 0 || soap_flag_Z > 0 || soap_flag_Xwidth > 0 || soap_flag_Ywidth > 0 || soap_flag_Zwidth > 0))
 	{	soap->error = SOAP_OCCURS;
 		return NULL;
 	}
@@ -10421,7 +10417,7 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetRawMagneticField(struct soap 
 	(void)soap; (void)a; /* appease -Wall -Werror */
 	soap_default_string(soap, &a->authToken);
 	soap_default_string(soap, &a->dataset);
-	soap_default_float(soap, &a->time);
+	soap_default_int(soap, &a->T);
 	soap_default_int(soap, &a->X);
 	soap_default_int(soap, &a->Y);
 	soap_default_int(soap, &a->Z);
@@ -10437,7 +10433,6 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetRawMagneticField(struct soa
 	(void)soap; (void)a; /* appease -Wall -Werror */
 	soap_serialize_string(soap, &a->authToken);
 	soap_serialize_string(soap, &a->dataset);
-	soap_embedded(soap, &a->time, SOAP_TYPE_float);
 	soap_serialize_string(soap, &a->addr);
 #endif
 }
@@ -10451,7 +10446,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_out__turb1__GetRawMagneticField(struct soap *soap
 		return soap->error;
 	if (soap_out_string(soap, "turb1:dataset", -1, &a->dataset, ""))
 		return soap->error;
-	if (soap_out_float(soap, "turb1:time", -1, &a->time, ""))
+	if (soap_out_int(soap, "turb1:T", -1, &a->T, ""))
 		return soap->error;
 	if (soap_out_int(soap, "turb1:X", -1, &a->X, ""))
 		return soap->error;
@@ -10474,7 +10469,7 @@ SOAP_FMAC3 struct _turb1__GetRawMagneticField * SOAP_FMAC4 soap_in__turb1__GetRa
 {
 	size_t soap_flag_authToken = 1;
 	size_t soap_flag_dataset = 1;
-	size_t soap_flag_time = 1;
+	size_t soap_flag_T = 1;
 	size_t soap_flag_X = 1;
 	size_t soap_flag_Y = 1;
 	size_t soap_flag_Z = 1;
@@ -10502,9 +10497,9 @@ SOAP_FMAC3 struct _turb1__GetRawMagneticField * SOAP_FMAC4 soap_in__turb1__GetRa
 				{	soap_flag_dataset--;
 					continue;
 				}
-			if (soap_flag_time && soap->error == SOAP_TAG_MISMATCH)
-				if (soap_in_float(soap, "turb1:time", &a->time, "xsd:float"))
-				{	soap_flag_time--;
+			if (soap_flag_T && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_int(soap, "turb1:T", &a->T, "xsd:int"))
+				{	soap_flag_T--;
 					continue;
 				}
 			if (soap_flag_X && soap->error == SOAP_TAG_MISMATCH)
@@ -10557,7 +10552,7 @@ SOAP_FMAC3 struct _turb1__GetRawMagneticField * SOAP_FMAC4 soap_in__turb1__GetRa
 		if (soap->body && soap_element_end_in(soap, tag))
 			return NULL;
 	}
-	if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_time > 0 || soap_flag_X > 0 || soap_flag_Y > 0 || soap_flag_Z > 0 || soap_flag_Xwidth > 0 || soap_flag_Ywidth > 0 || soap_flag_Zwidth > 0))
+	if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_T > 0 || soap_flag_X > 0 || soap_flag_Y > 0 || soap_flag_Z > 0 || soap_flag_Xwidth > 0 || soap_flag_Ywidth > 0 || soap_flag_Zwidth > 0))
 	{	soap->error = SOAP_OCCURS;
 		return NULL;
 	}
@@ -10664,7 +10659,7 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetRawVelocity(struct soap *soap
 	(void)soap; (void)a; /* appease -Wall -Werror */
 	soap_default_string(soap, &a->authToken);
 	soap_default_string(soap, &a->dataset);
-	soap_default_float(soap, &a->time);
+	soap_default_int(soap, &a->T);
 	soap_default_int(soap, &a->X);
 	soap_default_int(soap, &a->Y);
 	soap_default_int(soap, &a->Z);
@@ -10680,7 +10675,6 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__turb1__GetRawVelocity(struct soap *so
 	(void)soap; (void)a; /* appease -Wall -Werror */
 	soap_serialize_string(soap, &a->authToken);
 	soap_serialize_string(soap, &a->dataset);
-	soap_embedded(soap, &a->time, SOAP_TYPE_float);
 	soap_serialize_string(soap, &a->addr);
 #endif
 }
@@ -10694,7 +10688,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_out__turb1__GetRawVelocity(struct soap *soap, con
 		return soap->error;
 	if (soap_out_string(soap, "turb1:dataset", -1, &a->dataset, ""))
 		return soap->error;
-	if (soap_out_float(soap, "turb1:time", -1, &a->time, ""))
+	if (soap_out_int(soap, "turb1:T", -1, &a->T, ""))
 		return soap->error;
 	if (soap_out_int(soap, "turb1:X", -1, &a->X, ""))
 		return soap->error;
@@ -10717,7 +10711,7 @@ SOAP_FMAC3 struct _turb1__GetRawVelocity * SOAP_FMAC4 soap_in__turb1__GetRawVelo
 {
 	size_t soap_flag_authToken = 1;
 	size_t soap_flag_dataset = 1;
-	size_t soap_flag_time = 1;
+	size_t soap_flag_T = 1;
 	size_t soap_flag_X = 1;
 	size_t soap_flag_Y = 1;
 	size_t soap_flag_Z = 1;
@@ -10745,9 +10739,9 @@ SOAP_FMAC3 struct _turb1__GetRawVelocity * SOAP_FMAC4 soap_in__turb1__GetRawVelo
 				{	soap_flag_dataset--;
 					continue;
 				}
-			if (soap_flag_time && soap->error == SOAP_TAG_MISMATCH)
-				if (soap_in_float(soap, "turb1:time", &a->time, "xsd:float"))
-				{	soap_flag_time--;
+			if (soap_flag_T && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_int(soap, "turb1:T", &a->T, "xsd:int"))
+				{	soap_flag_T--;
 					continue;
 				}
 			if (soap_flag_X && soap->error == SOAP_TAG_MISMATCH)
@@ -10800,7 +10794,7 @@ SOAP_FMAC3 struct _turb1__GetRawVelocity * SOAP_FMAC4 soap_in__turb1__GetRawVelo
 		if (soap->body && soap_element_end_in(soap, tag))
 			return NULL;
 	}
-	if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_time > 0 || soap_flag_X > 0 || soap_flag_Y > 0 || soap_flag_Z > 0 || soap_flag_Xwidth > 0 || soap_flag_Ywidth > 0 || soap_flag_Zwidth > 0))
+	if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_T > 0 || soap_flag_X > 0 || soap_flag_Y > 0 || soap_flag_Z > 0 || soap_flag_Xwidth > 0 || soap_flag_Ywidth > 0 || soap_flag_Zwidth > 0))
 	{	soap->error = SOAP_OCCURS;
 		return NULL;
 	}
