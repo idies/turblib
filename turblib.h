@@ -17,10 +17,6 @@
 #ifndef TURBLIB_H_
 #define TURBLIB_H_
 
-#ifdef CUTOUT_SUPPORT
-#include "hdf5.h"
-#endif//CUTOUT_SUPPORT
-
 #include "soapH.h"
 
 #ifdef  __cplusplus
@@ -101,7 +97,6 @@ extern "C" {
 		float value;
 	} ThresholdInfo;
 
-#ifdef CUTOUT_SUPPORT
 	typedef enum
 	{
 		//isotropic1024old = 1,
@@ -159,16 +154,16 @@ extern "C" {
 		dataBlock* next;
 	};
 
-	typedef struct cutoutFile cutoutFile;
-	struct cutoutFile
-	{
-		hid_t file;
-		int start[4], size[4];
-		int contents[5];
-		dataBlock *data[4][1024];
-		TurbDataset dataset;
-		cutoutFile *next;
-	};
+//    typedef struct cutoutFile cutoutFile;
+//    struct cutoutFile
+//    {
+//        hid_t file;
+//        int start[4], size[4];
+//        int contents[5];
+//        dataBlock *data[4][1024];
+//        TurbDataset dataset;
+//        cutoutFile *next;
+//    };
 
 	typedef struct
 	{
@@ -177,7 +172,6 @@ extern "C" {
 		int hx, hy, hz, comps;
 		int persist;
 	} dataKernel;
-#endif//CUTOUT_SUPPORT
 
 	/* C */
 	void soapinit(void);
@@ -650,8 +644,6 @@ extern "C" {
 
 	/* Local vs Soap functions */
 
-#ifdef CUTOUT_SUPPORT
-
 	int getVelocityGradientLocal(TurbDataset dataset, float time,
 		enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
 		int count, float input[][3], float output[][9]);
@@ -710,41 +702,6 @@ extern "C" {
 
 	/* Cutout functions */
 
-	/* Fortran */
-	int turblibaddlocalsource_(char *filename);
-	int turblibAddLocalSource(char *filename);
-	dataKernel* getDataCube(TurbDataset dataset, TurbField function, int x, int y, int z, int timestep, int size);
-	int validateParams(enum SpatialInterpolation spatial, TurbDataset set, int useFD);
-	TurbDataset getDataSet(char *setname);
-	int isDataAvailable(TurbDataset set, TurbField function, int count, float position[][3], float time,
-		enum SpatialInterpolation spatial, enum TemporalInterpolation temporal);
-	cutoutFile* findDataBlock(TurbDataset dataset, TurbField function, int x, int y, int z, int xw, int yw, int zw, int timestep);
-	int isWithinFile(TurbDataset dataset, TurbField function, int x, int y, int z, int xw, int yw, int zw, int timestep, cutoutFile* file);
-	int isDataComplete(TurbDataset dataset, TurbField function, int x, int y, int z, int xw, int yw, int zw, int timestep);
-	int turblibSetPrefetching(int);
-	int loadNeededData(TurbDataset set, TurbField function, int count, float position[][3], float time,
-		enum SpatialInterpolation spatial, enum TemporalInterpolation temporal);
-	int freeLoadedMemory(void);
-	void freeDataCube(dataKernel* cube);
-	int loadDataCube(TurbDataset dataset, TurbField function, int x, int y, int z, int timestep, int size, float *buff);
-	int loadSubBlock(TurbDataset dataset, TurbField function, int timestep, hid_t mspace, float *buff,
-		int x, int y, int z, int wx, int wy, int wz, int dest_x, int dest_y, int dest_z);
-	int loadDataToMemory(cutoutFile *src, TurbField function, int timestep, int xl, int yl, int zl, int xh, int yh, int zh);
-	int getValueLocal(TurbDataset dataset, TurbField func,
-		enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
-		float time, int count, float position[][3], float *result);
-	int getSingleValue(TurbDataset dataset, TurbField func, float position[3], int timestep,
-		enum SpatialInterpolation spatial, float *output);
-	int getGradient(TurbDataset dataset, TurbField function, float time,
-		enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
-		int count, float input[count][3], float *output);
-	int getLaplacian(TurbDataset dataset, TurbField function, float time,
-		enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
-		int count, float input[count][3], float output[count][3]);
-	int getHessian(TurbDataset dataset, TurbField function, float time,
-		enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
-		int count, float input[count][3], float *output);
-
 	int lagrangianInterp(int comps, float *kernel, float position[3], int nOrder, float dx, float result[comps]);
 	int lagrangianInterp2(int comps, dataKernel *kernel, float position[3], int nOrder, float dx, float result[comps]);
 	int pchipInterp(int comps, float data[4][comps], float time, int timestep, float dt, float result[comps]);
@@ -764,8 +721,6 @@ extern "C" {
 #define CrossFiniteDiff6(dx, x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12)  3.0f / 8.0f / dx / dx * (x9 + x11 - x10 - x12) - 3.0f / 80.0f / dx / dx * (x5 + x7 - x6 - x8) + 1.0f / 360.0f / dx / dx * (x1 + x3 - x2 - x4)
 
 #define CrossFiniteDiff8(dx, x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13, x14, x15, x16) 14.0f / 35.0f / dx / dx * (x13 + x15 - x14 - x16) - 1.0f / 20.0f / dx / dx * (x9 + x11 - x10 - x12) + 2.0f / 315.0f / dx / dx * (x5 + x7 - x6 - x8) - 1.0f / 2240.0f / dx / dx * (x1 + x3 - x2 - x4)
-
-#endif//CUTOUT_SUPPORT
 
 #ifdef  __cplusplus
 }

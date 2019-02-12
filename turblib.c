@@ -17,10 +17,6 @@
 #include <stdio.h>
 #include <math.h>
 
-#ifdef CUTOUT_SUPPORT
-#include "hdf5.h"
-#endif//CUTOUT_SUPPORT
-
 #include "soapH.h"
 #include "TurbulenceServiceSoap.nsmap"
 #include "turblib.h"
@@ -37,10 +33,7 @@ int __turblib_errno = 0;
 int __turblib_exit_on_error = 1;
 int __turblib_prefetching = 0;
 
-#ifdef CUTOUT_SUPPORT
-
 //Linked list of all added cutout files
-cutoutFile* __turblib_cutouts = NULL;
 
 set_info DataSets[14] = {
 	{ 0, 0, 0 },//=0
@@ -68,7 +61,6 @@ turb_fn TurbFields[6] =
 	{ 'd', 1},  //density
 	{ 't', 1}  //temperature
 };
-#endif//CUTOUT_SUPPORT
 
 char * turblibGetErrorString() {
 	return __turblib_err;
@@ -224,14 +216,6 @@ int getVelocity(char *authToken,
 	enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
 	int count, float datain[][3], float dataout[][3])
 {
-#ifdef CUTOUT_SUPPORT
-	TurbDataset dataset_ = getDataSet(dataset);
-
-	if (isDataAvailable(dataset_, turb_velocity, count, datain, time, spatial, temporal))
-		return getValueLocal(dataset_, turb_velocity, spatial, temporal, time, count, datain, &dataout[0][0]);
-
-	else
-#endif//CUTOUT_SUPPORT
 		return getVelocitySoap(authToken, dataset, time, spatial, temporal, count, datain, dataout);
 }
 
@@ -240,14 +224,6 @@ int getVelocityAndPressure(char *authToken,
 	enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
 	int count, float datain[][3], float dataout[][4])
 {
-#ifdef CUTOUT_SUPPORT
-	TurbDataset dataset_ = getDataSet(dataset);
-
-	if (isDataAvailable(dataset_, turb_vp, count, datain, time, spatial, temporal))
-		return getVelocityAndPressureLocal(dataset_, time, spatial, temporal, count, datain, dataout);
-
-	else
-#endif//CUTOUT_SUPPORT
 		return getVelocityAndPressureSoap(authToken, dataset, time, spatial, temporal, count, datain, dataout);
 }
 
@@ -256,14 +232,6 @@ int getPressure(char *authToken,
 	enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
 	int count, float datain[][3], float dataout[])
 {
-#ifdef CUTOUT_SUPPORT
-	TurbDataset dataset_ = getDataSet(dataset);
-
-	if (isDataAvailable(dataset_, turb_pressure, count, datain, time, spatial, temporal))
-		return getValueLocal(dataset_, turb_pressure, spatial, temporal, time, count, datain, &dataout[0]);
-
-	else
-#endif//CUTOUT_SUPPORT
 		return getPressureSoap(authToken, dataset, time, spatial, temporal, count, datain, dataout);
 }
 
@@ -272,14 +240,6 @@ int getPressureHessian(char *authToken,
 	enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
 	int count, float datain[][3], float dataout[][6])
 {
-#ifdef CUTOUT_SUPPORT
-	TurbDataset dataset_ = getDataSet(dataset);
-
-	if (isDataAvailable(dataset_, turb_pressure, count, datain, time, spatial, temporal))
-		return getPressureHessianLocal(dataset_, time, spatial, temporal, count, datain, dataout);
-
-	else
-#endif//CUTOUT_SUPPORT
 		return getPressureHessianSoap(authToken, dataset, time, spatial, temporal, count, datain, dataout);
 }
 
@@ -288,14 +248,6 @@ int getVelocityGradient(char *authToken,
 	enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
 	int count, float datain[][3], float dataout[][9])
 {
-#ifdef CUTOUT_SUPPORT
-	TurbDataset dataset_ = getDataSet(dataset);
-
-	if (isDataAvailable(dataset_, turb_velocity, count, datain, time, spatial, temporal))
-		return getVelocityGradientLocal(dataset_, time, spatial, temporal, count, datain, dataout);
-
-	else
-#endif//CUTOUT_SUPPORT
 		return getVelocityGradientSoap(authToken, dataset, time, spatial, temporal, count, datain, dataout);
 }
 
@@ -304,13 +256,6 @@ int getVelocityHessian(char *authToken,
 	enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
 	int count, float datain[][3], float dataout[][18])
 {
-#ifdef CUTOUT_SUPPORT
-	TurbDataset dataset_ = getDataSet(dataset);
-
-	if (isDataAvailable(dataset_, turb_velocity, count, datain, time, spatial, temporal))
-		return getVelocityHessianLocal(dataset_, time, spatial, temporal, count, datain, dataout);
-	else
-#endif//CUTOUT_SUPPORT
 		return getVelocityHessianSoap(authToken, dataset, time, spatial, temporal, count, datain, dataout);
 }
 
@@ -319,14 +264,6 @@ int getVelocityLaplacian(char *authToken,
 	enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
 	int count, float datain[][3], float dataout[][3])
 {
-#ifdef CUTOUT_SUPPORT
-	TurbDataset dataset_ = getDataSet(dataset);
-
-	if (isDataAvailable(dataset_, turb_velocity, count, datain, time, spatial, temporal))
-		return getVelocityLaplacianLocal(dataset_, time, spatial, temporal, count, datain, dataout);
-
-	else
-#endif//CUTOUT_SUPPORT
 		return getVelocityLaplacianSoap(authToken, dataset, time, spatial, temporal, count, datain, dataout);
 }
 
@@ -335,14 +272,6 @@ int getPressureGradient(char *authToken,
 	enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
 	int count, float datain[][3], float dataout[][3])
 {
-#ifdef CUTOUT_SUPPORT
-	TurbDataset dataset_ = getDataSet(dataset);
-
-	if (isDataAvailable(dataset_, turb_pressure, count, datain, time, spatial, temporal))
-		return getPressureGradientLocal(dataset_, time, spatial, temporal, count, datain, dataout);
-
-	else
-#endif//CUTOUT_SUPPORT
 		return getPressureGradientSoap(authToken, dataset, time, spatial, temporal, count, datain, dataout);
 }
 
@@ -351,14 +280,6 @@ int getMagneticFieldGradient(char *authToken,
 	enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
 	int count, float datain[][3], float dataout[][9])
 {
-#ifdef CUTOUT_SUPPORT
-	TurbDataset dataset_ = getDataSet(dataset);
-
-	if (isDataAvailable(dataset_, turb_magnetic, count, datain, time, spatial, temporal))
-		return getMagneticFieldGradientLocal(dataset_, time, spatial, temporal, count, datain, dataout);
-
-	else
-#endif//CUTOUT_SUPPORT
 		return getMagneticFieldGradientSoap(authToken, dataset, time, spatial, temporal, count, datain, dataout);
 }
 
@@ -367,14 +288,6 @@ int getVectorPotentialGradient(char *authToken,
 	enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
 	int count, float datain[][3], float dataout[][9])
 {
-#ifdef CUTOUT_SUPPORT
-	TurbDataset dataset_ = getDataSet(dataset);
-
-	if (isDataAvailable(dataset_, turb_potential, count, datain, time, spatial, temporal))
-		return getVectorPotentialGradientLocal(dataset_, time, spatial, temporal, count, datain, dataout);
-
-	else
-#endif//CUTOUT_SUPPORT
 		return getVectorPotentialGradientSoap(authToken, dataset, time, spatial, temporal, count, datain, dataout);
 }
 
@@ -383,14 +296,6 @@ int getMagneticFieldHessian(char *authToken,
 	enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
 	int count, float datain[][3], float dataout[][18])
 {
-#ifdef CUTOUT_SUPPORT
-	TurbDataset dataset_ = getDataSet(dataset);
-
-	if (isDataAvailable(dataset_, turb_magnetic, count, datain, time, spatial, temporal))
-		return getMagneticFieldHessianLocal(dataset_, time, spatial, temporal, count, datain, dataout);
-
-	else
-#endif//CUTOUT_SUPPORT
 		return getMagneticFieldHessianSoap(authToken, dataset, time, spatial, temporal, count, datain, dataout);
 }
 
@@ -399,14 +304,6 @@ int getMagneticFieldLaplacian(char *authToken,
 	enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
 	int count, float datain[][3], float dataout[][3])
 {
-#ifdef CUTOUT_SUPPORT
-	TurbDataset dataset_ = getDataSet(dataset);
-
-	if (isDataAvailable(dataset_, turb_magnetic, count, datain, time, spatial, temporal))
-		return getMagneticFieldLaplacianLocal(dataset_, time, spatial, temporal, count, datain, dataout);
-
-	else
-#endif//CUTOUT_SUPPORT
 		return getMagneticFieldLaplacianSoap(authToken, dataset, time, spatial, temporal, count, datain, dataout);
 }
 
@@ -415,14 +312,6 @@ int getMagneticField(char *authToken,
 	enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
 	int count, float datain[][3], float dataout[][3])
 {
-#ifdef CUTOUT_SUPPORT
-	TurbDataset dataset_ = getDataSet(dataset);
-
-	if (isDataAvailable(dataset_, turb_magnetic, count, datain, time, spatial, temporal))
-		return getValueLocal(dataset_, turb_magnetic, spatial, temporal, time, count, datain, &dataout[0][0]);
-
-	else
-#endif//CUTOUT_SUPPORT
 		return getMagneticFieldSoap(authToken, dataset, time, spatial, temporal, count, datain, dataout);
 }
 
@@ -431,14 +320,6 @@ int getVectorPotentialHessian(char *authToken,
 	enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
 	int count, float datain[][3], float dataout[][18])
 {
-#ifdef CUTOUT_SUPPORT
-	TurbDataset dataset_ = getDataSet(dataset);
-
-	if (isDataAvailable(dataset_, turb_potential, count, datain, time, spatial, temporal))
-		return getVectorPotentialHessianLocal(dataset_, time, spatial, temporal, count, datain, dataout);
-
-	else
-#endif//CUTOUT_SUPPORT
 		return getVectorPotentialHessianSoap(authToken, dataset, time, spatial, temporal, count, datain, dataout);
 }
 
@@ -447,14 +328,6 @@ int getVectorPotentialLaplacian(char *authToken,
 	enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
 	int count, float datain[][3], float dataout[][3])
 {
-#ifdef CUTOUT_SUPPORT
-	TurbDataset dataset_ = getDataSet(dataset);
-
-	if (isDataAvailable(dataset_, turb_potential, count, datain, time, spatial, temporal))
-		return getVectorPotentialLaplacianLocal(dataset_, time, spatial, temporal, count, datain, dataout);
-
-	else
-#endif//CUTOUT_SUPPORT
 		return getVectorPotentialLaplacianSoap(authToken, dataset, time, spatial, temporal, count, datain, dataout);
 }
 
@@ -463,14 +336,6 @@ int getVectorPotential(char *authToken,
 	enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
 	int count, float datain[][3], float dataout[][3])
 {
-#ifdef CUTOUT_SUPPORT
-	TurbDataset dataset_ = getDataSet(dataset);
-
-	if (isDataAvailable(dataset_, turb_potential, count, datain, time, spatial, temporal))
-		return getValueLocal(dataset_, turb_potential, spatial, temporal, time, count, datain, &dataout[0][0]);
-
-	else
-#endif//CUTOUT_SUPPORT
 		return getVectorPotentialSoap(authToken, dataset, time, spatial, temporal, count, datain, dataout);
 }
 
@@ -479,14 +344,6 @@ int getDensity(char *authToken,
 	enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
 	int count, float datain[][3], float dataout[])
 {
-#ifdef CUTOUT_SUPPORT
-	TurbDataset dataset_ = getDataSet(dataset);
-
-	if (isDataAvailable(dataset_, turb_density, count, datain, time, spatial, temporal))
-		return getValueLocal(dataset_, turb_density, spatial, temporal, time, count, datain, &dataout[0]);
-
-	else
-#endif//CUTOUT_SUPPORT
 		return getDensitySoap(authToken, dataset, time, spatial, temporal, count, datain, dataout);
 }
 
@@ -495,14 +352,6 @@ int getDensityGradient(char *authToken,
 	enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
 	int count, float datain[][3], float dataout[][3])
 {
-#ifdef CUTOUT_SUPPORT
-	TurbDataset dataset_ = getDataSet(dataset);
-
-	if (isDataAvailable(dataset_, turb_density, count, datain, time, spatial, temporal))
-		return getDensityGradientLocal(dataset_, time, spatial, temporal, count, datain, dataout);
-
-	else
-#endif//CUTOUT_SUPPORT
 		return getDensityGradientSoap(authToken, dataset, time, spatial, temporal, count, datain, dataout);
 }
 
@@ -511,14 +360,6 @@ int getDensityHessian(char *authToken,
 	enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
 	int count, float datain[][3], float dataout[][6])
 {
-#ifdef CUTOUT_SUPPORT
-	TurbDataset dataset_ = getDataSet(dataset);
-
-	if (isDataAvailable(dataset_, turb_density, count, datain, time, spatial, temporal))
-		return getDensityHessianLocal(dataset_, time, spatial, temporal, count, datain, dataout);
-
-	else
-#endif//CUTOUT_SUPPORT
 		return getDensityHessianSoap(authToken, dataset, time, spatial, temporal, count, datain, dataout);
 }
 
@@ -2150,1263 +1991,6 @@ int getCutout(char *authToken,
 
 ////////////////////////////////
 
-/* Local Functions */
-
-#ifdef CUTOUT_SUPPORT
-
-
-int getValueLocal(TurbDataset dataset, TurbField func, enum SpatialInterpolation spatial, enum TemporalInterpolation temporal, float time, int count, float position[][3], float *result)
-{
-	if (!validateParams(spatial, dataset, 0)) return -1;
-
-	loadNeededData(dataset, func, count, position, time, spatial, temporal);
-
-	int comps = TurbFields[func].comps;
-
-	float dt = DataSets[dataset].dt;
-	int timestep = (int)ceil(time / DataSets[dataset].dt - .5f);
-
-	if (temporal == PCHIPInt)
-	{
-		float temp[4][3];
-		int i, j;
-		for (i = 0; i < count; i++)
-		{
-			for (j = 0; j < 4; j++)
-			{
-				getSingleValue(dataset, func, position[i], timestep + (j - 1), spatial, temp[j]);
-			}
-			pchipInterp(3, temp, time, timestep, dt, result + i * comps);
-		}
-	}
-	else
-	{
-		int i;
-		for (i = 0; i < count; i++)
-		{
-			getSingleValue(dataset, func, position[i], timestep, spatial, result + i * comps);
-		}
-	}
-	freeLoadedMemory();
-	return 0;
-}
-
-int getVelocityAndPressureLocal(TurbDataset dataset, float time,
-	enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
-	int count, float datain[][3], float dataout[][4])
-{
-	if (!validateParams(spatial, dataset, 0)) return -1;
-	float dt = DataSets[dataset].dt;
-	int timestep = (int)ceil(time / DataSets[dataset].dt - .5f);
-
-	if (temporal == PCHIPInt)
-	{
-		float temp[4][3];
-		int i, j;
-		for (i = 0; i < count; i++)
-		{
-			for (j = 0; j < 4; j++)
-			{
-				getSingleValue(dataset, turb_vp, datain[i], timestep + (j - 1), spatial, temp[j]);
-			}
-			pchipInterp(4, temp, time, timestep, dt, dataout[i]);
-		}
-	}
-	else
-	{
-		float temp[4];
-		int i;
-		for (i = 0; i < count; i++)
-		{
-			getSingleValue(dataset, turb_vp, datain[i], timestep, spatial, temp);
-			dataout[i][0] = temp[0];
-			dataout[i][1] = temp[1];
-			dataout[i][2] = temp[2];
-			dataout[i][3] = temp[3];
-		}
-	}
-	return 0;
-}
-
-
-
-int getPressureHessianLocal(TurbDataset dataset, float time, enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
-	int count, float input[count][3], float output[count][6])
-{
-	if (!validateParams(spatial, dataset, 1)) return -1;
-	return getHessian(dataset, turb_pressure, time, spatial, temporal, count, input, &output[0][0]);
-}
-
-int getVelocityGradientLocal(TurbDataset dataset, float time, enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
-	int count, float input[count][3], float output[count][9])
-{
-	if (!validateParams(spatial, dataset, 1)) return -1;
-	return getGradient(dataset, turb_velocity, time, spatial, temporal, count, input, &output[0][0]);
-}
-
-int getMagneticFieldGradientLocal(TurbDataset dataset, float time, enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
-	int count, float input[count][3], float output[count][9])
-{
-	if (!validateParams(spatial, dataset, 1)) return -1;
-	return getGradient(dataset, turb_magnetic, time, spatial, temporal, count, input, &output[0][0]);
-}
-
-int getVectorPotentialGradientLocal(TurbDataset dataset, float time, enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
-	int count, float input[count][3], float output[count][9])
-{
-	if (!validateParams(spatial, dataset, 1)) return -1;
-	return getGradient(dataset, turb_potential, time, spatial, temporal, count, input, &output[0][0]);
-}
-
-int getPressureGradientLocal(TurbDataset dataset, float time, enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
-	int count, float input[count][3], float output[count][3])
-{
-	if (!validateParams(spatial, dataset, 1)) return -1;
-	return getGradient(dataset, turb_pressure, time, spatial, temporal, count, input, &output[0][0]);
-}
-
-int getVelocityHessianLocal(TurbDataset dataset, float time, enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
-	int count, float input[count][3], float output[count][18])
-{
-	if (!validateParams(spatial, dataset, 1)) return -1;
-	return getHessian(dataset, turb_velocity, time, spatial, temporal, count, input, &output[0][0]);
-}
-
-int getVelocityLaplacianLocal(TurbDataset dataset, float time, enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
-	int count, float input[][3], float output[][3])
-{
-	if (!validateParams(spatial, dataset, 1)) return -1;
-	return getLaplacian(dataset, turb_velocity, time, spatial, temporal, count, input, output);
-}
-
-int getMagneticFieldHessianLocal(TurbDataset dataset, float time, enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
-	int count, float input[count][3], float output[count][18])
-{
-	if (!validateParams(spatial, dataset, 1)) return -1;
-	return getHessian(dataset, turb_magnetic, time, spatial, temporal, count, input, &output[0][0]);
-}
-
-int getMagneticFieldLaplacianLocal(TurbDataset dataset, float time, enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
-	int count, float input[][3], float output[][3])
-{
-	if (!validateParams(spatial, dataset, 1)) return -1;
-	return getLaplacian(dataset, turb_magnetic, time, spatial, temporal, count, input, output);
-}
-
-int getVectorPotentialHessianLocal(TurbDataset dataset, float time, enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
-	int count, float input[count][3], float output[count][18])
-{
-	if (!validateParams(spatial, dataset, 1)) return -1;
-	return getHessian(dataset, turb_potential, time, spatial, temporal, count, input, &output[0][0]);
-}
-
-int getVectorPotentialLaplacianLocal(TurbDataset dataset, float time, enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
-	int count, float datain[][3], float dataout[][3])
-{
-	if (!validateParams(spatial, dataset, 1)) return -1;
-	return getLaplacian(dataset, turb_potential, time, spatial, temporal, count, datain, dataout);
-}
-
-
-int getDensityGradientLocal(TurbDataset dataset, float time, enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
-	int count, float input[count][3], float output[count][3])
-{
-	if (!validateParams(spatial, dataset, 1)) return -1;
-	return getGradient(dataset, turb_density, time, spatial, temporal, count, input, &output[0][0]);
-}
-
-
-int getDensityHessianLocal(TurbDataset dataset, float time, enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
-	int count, float input[count][3], float output[count][6])
-{
-	if (!validateParams(spatial, dataset, 1)) return -1;
-	return getHessian(dataset, turb_density, time, spatial, temporal, count, input, &output[0][0]);
-}
-
-
-/* HDF5 file utility functions */
-
-
-int turblibaddlocalsource_(char *fname)
-{
-	return turblibAddLocalSource(fname);
-}
-
-int turblibAddLocalSource(char *fname)
-{
-	fprintf(stderr, "opening %s\n", fname);
-	hid_t file = H5Fopen(fname, H5F_ACC_RDONLY, H5P_DEFAULT);
-	if (file < 0) return -1;
-
-	cutoutFile *src = malloc(sizeof(cutoutFile));
-	src->next = NULL;
-	src->file = file;
-
-	//Determine which set
-	int dataset;
-	hid_t set_name = H5Dopen1(file, "_dataset");
-	H5Dread(set_name, H5T_NATIVE_INT, H5S_ALL, H5S_ALL, H5P_DEFAULT, &dataset);
-
-	src->dataset = dataset;
-
-	//Determine bounds
-	int start[4];
-	hid_t set_start = H5Dopen1(file, "_start");
-	H5Dread(set_start, H5T_NATIVE_INT, H5S_ALL, H5S_ALL, H5P_DEFAULT, start);
-	src->start[0] = start[0]; src->start[1] = start[1]; src->start[2] = start[2]; src->start[3] = start[3];
-
-	//Determine size
-	int size[4];
-	hid_t set_size = H5Dopen1(file, "_size");
-	H5Dread(set_size, H5T_NATIVE_INT, H5S_ALL, H5S_ALL, H5P_DEFAULT, size);
-	src->size[0] = size[0]; src->size[1] = size[1]; src->size[2] = size[2]; src->size[3] = size[3];
-
-	//Determine contents
-	int contents;
-	hid_t set_contents = H5Dopen1(file, "_contents");
-	H5Dread(set_contents, H5T_NATIVE_INT, H5S_ALL, H5S_ALL, H5P_DEFAULT, &contents);
-
-	src->contents[turb_velocity] = (contents & 0x01 ? 1 : 0);
-	src->contents[turb_pressure] = (contents & 0x02 ? 1 : 0);
-	src->contents[turb_magnetic] = (contents & 0x04 ? 1 : 0);
-	src->contents[turb_potential] = (contents & 0x08 ? 1 : 0);
-	src->contents[turb_density] = (contents & 0x16 ? 1 : 0);
-
-	memset(src->data, 0, sizeof(float *) * 4096);
-
-	/*
-	 int f;
-	 for (f = 0; f < 4; f++)
-	 {
-	 int t;
-	 for (t = src->start[0]; t < src->size[0]; t++)
-	 {
-	 if(src->contents[f] == 0) continue;
-	 src->data[f][t] = malloc(sizeof(float) * TurbFields[f].comps * src->size[1] * src->size[2] * src->size[3]);
-	 char setname[16];
-	 sprintf(setname, "%c%.5d", TurbFields[f].prefix, t);
-	 hid_t datachunk = H5Dopen1(file, setname);
-	 H5Dread(datachunk, H5T_NATIVE_FLOAT, H5S_ALL, H5S_ALL, H5P_DEFAULT, src->data[f][t]);
-	 H5Dclose(datachunk);
-	 }
-	 }
-	 */
-	H5Dclose(set_name);
-	H5Dclose(set_start);
-	H5Dclose(set_size);
-	H5Dclose(set_contents);
-
-	if (__turblib_cutouts == NULL) {
-		__turblib_cutouts = src;
-	}
-	else {
-		cutoutFile* last = __turblib_cutouts;
-		while (last->next != NULL)
-			last = last->next;
-
-		last->next = src;
-	}
-
-	return 0;
-}
-
-//Turn prefetching on or off
-int turblibSetPrefetching(int prefetch)
-{
-	return (__turblib_prefetching = prefetch);
-}
-
-//Caches a portion of the specified file in memory
-int loadDataToMemory(cutoutFile *src, TurbField function, int timestep, int xl, int yl, int zl, int xh, int yh, int zh)
-{
-	if (src->data[function][timestep] != NULL) return 0;
-
-	hsize_t buff_size[] = { zh - zl + 1, yh - yl + 1, xh - xl + 1, TurbFields[function].comps };
-	hid_t mspace = H5Screate_simple(4, buff_size, NULL);
-
-	float* buff = malloc(sizeof(float) * TurbFields[function].comps * buff_size[0] * buff_size[1] * buff_size[2]);
-	if (!buff) return -1;
-
-
-	char setname[16];
-	sprintf(setname, "%c%.5d", TurbFields[function].prefix, timestep * 10);
-
-	hsize_t start[4] = { zl - src->start[3], yl - src->start[2], xl - src->start[1], 0 },
-		scount[4] = { zh - zl + 1, yh - yl + 1, xh - xl + 1, TurbFields[function].comps };
-
-	hid_t dataset = H5Dopen1(src->file, setname);
-	hid_t filespace = H5Dget_space(dataset);
-
-	H5Sselect_hyperslab(filespace, H5S_SELECT_SET, start, NULL, scount, NULL);
-	H5Dread(dataset, H5T_NATIVE_FLOAT, mspace, filespace, H5P_DEFAULT, buff);
-
-	H5Dclose(dataset);
-	H5Sclose(filespace);
-
-	dataBlock *cache = malloc(sizeof(dataBlock));
-
-	cache->data = buff;
-	cache->xl = xl;
-	cache->yl = yl;
-	cache->zl = zl;
-	cache->hx = scount[2];
-	cache->hy = scount[1];
-	cache->hz = scount[0];
-
-	src->data[function][timestep] = cache;
-
-	return 0;
-}
-
-int freeLoadedMemory(void)
-{
-	cutoutFile * file;
-	if (!__turblib_prefetching) return 0;
-	int j, k;
-	for (file = __turblib_cutouts; file != NULL; file = file->next)
-	{
-		for (j = 0; j < 4; j++)
-		{
-			for (k = 0; k < 1024; k++)
-			{
-				if (file->data[j][k] != NULL)
-				{
-					free(file->data[j][k]->data);
-					free(file->data[j][k]);
-					file->data[j][k] = NULL;
-				}
-			}
-		}
-	}
-	return 0;
-}
-
-int loadNeededData(TurbDataset set, TurbField function, int count, float position[][3], float time, enum SpatialInterpolation spatial, enum TemporalInterpolation temporal)
-{
-	if (!__turblib_prefetching) return 0;
-
-	float dx = DataSets[set].dx, dt = DataSets[set].dt;
-	//Determine availability of data locally
-	int nOrderLag = spatial % 10;
-	int nOrderFD = (int)(spatial / 10);
-	int size = (spatial == NoSInt ? 1 : nOrderLag) + nOrderFD;
-	int timestep = (int)ceil(time / dt - .5f);
-
-	int timesteps = 1;
-	if (temporal == PCHIPInt) { timestep -= 1; timesteps = 4; }
-
-	int t;
-	for (t = 0; t < timesteps; t++)
-	{
-
-		cutoutFile *file;
-		for (file = __turblib_cutouts; file != NULL; file = file->next)
-		{
-			int fileUsed = 0;
-			int lowestx = file->start[1] + file->size[1] - 1, lowesty = file->start[2] + file->size[2] - 1, lowestz = file->start[3] + file->size[3] - 1,
-				highestx = file->start[1], highesty = file->start[2], highestz = file->start[3];
-			int i;
-			int x, y, z, endx, endy, endz;
-			for (i = 0; i < count; i++)
-			{
-				if (spatial == NoSInt)
-				{
-					x = (int)(round(position[i][0] / dx)) - nOrderFD / 2;
-					y = (int)(round(position[i][1] / dx)) - nOrderFD / 2;
-					z = (int)(round(position[i][2] / dx)) - nOrderFD / 2;
-				}
-				else
-				{
-					x = (int)(floor(position[i][0] / dx)) - (nOrderLag + nOrderFD) / 2 + 1;
-					y = (int)(floor(position[i][1] / dx)) - (nOrderLag + nOrderFD) / 2 + 1;
-					z = (int)(floor(position[i][2] / dx)) - (nOrderLag + nOrderFD) / 2 + 1;
-				}
-
-				endx = x + size - 1;
-				endy = y + size - 1;
-				endz = z + size - 1;
-
-				x = (x % 1024 + 1024) % 1024;
-				y = (y % 1024 + 1024) % 1024;
-				z = (z % 1024 + 1024) % 1024;
-
-				endx = (endx % 1024 + 1024) % 1024;
-				endy = (endy % 1024 + 1024) % 1024;
-				endz = (endz % 1024 + 1024) % 1024;
-
-				//if(!isWithinFile(set, function, x, y, z, size, size, size, timestep, file)) continue;
-				//fileUsed = 1;
-				//if(x < lowestx) lowestx = x;
-				//if(y < lowesty) lowesty = y;
-				//if(z < lowestz) lowestz = z;
-
-				//if(x > highestx) highestx = x;
-				//if(y > highesty) highesty = y;
-				//if(z > highestz) highestz = z;
-
-				if (file->dataset == set &&
-					(function == turb_vp ? file->contents[turb_pressure] && file->contents[turb_velocity] : file->contents[function]) &&
-					timestep >= file->start[0] && timestep <= (file->start[0] + file->size[0] - 1))
-				{
-					if ((file->start[1] <= x && x < (file->start[1] + file->size[1])) ||
-						(file->start[1] <= endx && endx < (file->start[1] + file->size[1])) ||
-						(x < file->start[1] && (file->start[1] + file->size[1]) <= endx) ||
-						(x < file->start[1] && endx < x) ||
-						((file->start[1] + file->size[1]) <= endx && endx < x))
-						if ((file->start[2] <= y && y < (file->start[2] + file->size[2])) ||
-							(file->start[2] <= endy && endy < (file->start[2] + file->size[2])) ||
-							(y < file->start[2] && (file->start[2] + file->size[2]) <= endy) ||
-							(y < file->start[2] && endy < y) ||
-							((file->start[2] + file->size[2]) <= endy && endy < y))
-							if ((file->start[3] <= z && z < (file->start[3] + file->size[3])) ||
-								(file->start[3] <= endz && endz < (file->start[3] + file->size[3])) ||
-								(z < file->start[3] && (file->start[3] + file->size[3]) <= endz) ||
-								(z < file->start[3] && endz < z) ||
-								((file->start[3] + file->size[3]) <= endz && endz < z))
-							{
-								if (lowestx > x)
-									if (x >= file->start[1])
-										lowestx = x;
-									else
-										lowestx = file->start[1];
-								else if (x >= file->start[1] + file->size[1] && x > endx)
-									lowestx = file->start[1];
-
-								if (lowesty > y)
-									if (y >= file->start[2])
-										lowesty = y;
-									else
-										lowesty = file->start[2];
-								else if (y >= file->start[2] + file->size[2] && y > endy)
-									lowesty = file->start[2];
-
-								if (lowestz > z)
-									if (z >= file->start[3])
-										lowestz = z;
-									else
-										lowestz = file->start[3];
-								else if (z >= file->start[3] + file->size[3] && z > endz)
-									lowestz = file->start[3];
-
-								if (highestx < endx)
-									if (endx < file->start[1] + file->size[1])
-										highestx = endx;
-									else
-										highestx = file->start[1] + file->size[1] - 1;
-								else if (endx < file->start[1] && x > endx)
-									highestx = file->start[1] + file->size[1] - 1;
-
-								if (highesty < endy)
-									if (endy < file->start[2] + file->size[2])
-										highesty = endy;
-									else
-										highesty = file->start[2] + file->size[2] - 1;
-								else if (endy < file->start[2] && y > endy)
-									highesty = file->start[2] + file->size[2] - 1;
-
-								if (highestz < endz)
-									if (endz < file->start[3] + file->size[3])
-										highestz = endz;
-									else
-										highestz = file->start[3] + file->size[3] - 1;
-								else if (endz < file->start[3] && z > endz)
-									highestz = file->start[3] + file->size[3] - 1;
-							}
-				}
-			}
-			if (!fileUsed) continue;
-
-			//highestx = highestx + size - 1;
-			//highesty = highesty + size - 1;
-			//highestz = highestz + size - 1;
-
-			loadDataToMemory(file, function, timestep, lowestx, lowesty, lowestz, highestx, highesty, highestz);
-		}
-
-	}
-	return 1;
-}
-
-TurbDataset getDataSet(char *name)
-{
-	if (strcmp("channel", name) == 0) return channel;
-	if (strcmp("channel5200", name) == 0) return channel5200;
-	if (strcmp("isotropic1024coarse", name) == 0) return isotropic1024coarse;
-	if (strcmp("isotropic1024", name) == 0) return isotropic1024coarse;
-	if (strcmp("isotropic1024fine", name) == 0) return isotropic1024fine;
-	if (strcmp("isotropic4096", name) == 0) return isotropic4096;
-	if (strcmp("mhd1024", name) == 0) return mhd1024;
-	if (strcmp("mixing", name) == 0) return mixing;
-	if (strcmp("rotstrat4096", name) == 0) return rotstrat4096;
-	if (strcmp("transition_bl", name) == 0) return transition_bl;
-	//if (strcmp("custom", name) == 0) return custom_dataset;
-
-	return -1;
-}
-
-int isDataAvailable(TurbDataset set, TurbField function, int count, float position[][3], float time, enum SpatialInterpolation spatial, enum TemporalInterpolation temporal)
-{
-	if (set == channel)
-	{
-		printf("The client library does not currently provide local implementations "
-			"of the server-side functions for the channel flow dataset. "
-			"Redirecting to the server...\n");
-		return 0;
-	}
-
-	float dx = DataSets[set].dx, dt = DataSets[set].dt;
-	//Determine availability of data locally
-	int nOrderLag = spatial % 10;
-	int nOrderFD = (int)(spatial / 10);
-	int size = (spatial == NoSInt ? 1 : nOrderLag) + nOrderFD;
-	int xc, yc, zc;
-
-	int i;
-	for (i = 0; i < count; i++)
-	{
-		int x = (int)(floor(position[i][0] / dx)),
-			y = (int)(floor(position[i][1] / dx)),
-			z = (int)(floor(position[i][2] / dx));
-
-		if (spatial == NoSInt)
-		{
-			xc = (int)(round(position[i][0] / dx)) - nOrderFD / 2;
-			yc = (int)(round(position[i][1] / dx)) - nOrderFD / 2;
-			zc = (int)(round(position[i][2] / dx)) - nOrderFD / 2;
-		}
-		else
-		{
-			xc = x - (nOrderLag + nOrderFD) / 2 + 1;
-			yc = y - (nOrderLag + nOrderFD) / 2 + 1;
-			zc = z - (nOrderLag + nOrderFD) / 2 + 1;
-		}
-
-		int timestep = (int)ceil(time / dt - .5f);
-
-		if (temporal == PCHIPInt)
-		{
-			int t;
-			for (t = 0; t < 4; t++)
-			{
-				if (!isDataComplete(set, function, xc, yc, zc, size, size, size, timestep - 1 + t)) {
-					return 0;
-				}
-			}
-		}
-		else
-		{
-			if (!isDataComplete(set, function, xc, yc, zc, size, size, size, timestep)) {
-				return 0;
-			}
-		}
-	}
-	return 1;
-}
-
-//Determines if the given data cube can be completely assembled from all cutout files
-//In the case where data may span more than 2 files we call on the function recursively
-int isDataComplete(TurbDataset dataset, TurbField function, int x, int y, int z, int xw, int yw, int zw, int timestep)
-{
-	// Wrap the coordinates into the grid space
-	x = (x % 1024 + 1024) % 1024;
-	y = (y % 1024 + 1024) % 1024;
-	z = (z % 1024 + 1024) % 1024;
-
-	//Is the data available as a contiguous block?
-	if (findDataBlock(dataset, function, x, y, z, xw, yw, zw, timestep) != NULL) return 1;
-
-	//Is the data available in pieces across different files? (Individual HDF5 files are restricted to units of 16x16x16)
-	cutoutFile* corner = findDataBlock(dataset, function, x, y, z, 1, 1, 1, timestep);
-	if (corner == NULL) return 0;
-
-	int sx = ((corner->start[1] + corner->size[1]) - x),
-		sy = ((corner->start[2] + corner->size[2]) - y),
-		sz = ((corner->start[3] + corner->size[3]) - z);
-
-	int dx = xw - sx,
-		dy = yw - sy,
-		dz = zw - sz;
-
-	if (findDataBlock(dataset, function, x, y, z, sx, sy, sz, timestep) == NULL) return 0;
-
-	//NOTE: In the case of wrap-around corner->start + corner->size will be wrapped to 0 below
-	//Ensure presence of other pieces
-	if (dz > 0)
-	{
-		//    if(findDataBlock(dataset, function, x, y, corner->start[3] + corner->size[3],
-		//      (dx > 0 ? size - dx : size), (dy > 0 ? size - dy : size), dz, timestep) == NULL) return 0;
-		if (!isDataComplete(dataset, function, x, y, corner->start[3] + corner->size[3],
-			(dx > 0 ? xw - dx : xw), (dy > 0 ? yw - dy : yw), dz, timestep)) return 0;
-
-		if (dy > 0)
-		{
-			//      if(findDataBlock(dataset, function,
-			//        x, corner->start[2] + corner->size[2], corner->start[3] + corner->size[3],
-			//        (dx > 0 ? size - dx : size), dy, dz, timestep) == NULL) return 0;
-			if (!isDataComplete(dataset, function,
-				x, corner->start[2] + corner->size[2], corner->start[3] + corner->size[3],
-				(dx > 0 ? xw - dx : xw), dy, dz, timestep)) return 0;
-
-			if (dx > 0)
-			{
-				//        if(findDataBlock(dataset, function,
-				//          corner->start[1] + corner->size[1], corner->start[2] + corner->size[2], corner->start[3] + corner->size[3],
-				//          dx, dy, dz, timestep) == NULL) return 0;
-				if (!isDataComplete(dataset, function,
-					corner->start[1] + corner->size[1], corner->start[2] + corner->size[2], corner->start[3] + corner->size[3],
-					dx, dy, dz, timestep)) return 0;
-			}
-		}
-		if (dx > 0)
-		{
-			//      if(findDataBlock(dataset, function,
-			//        corner->start[1] + corner->size[1], y, corner->start[3] + corner->size[3],
-			//        dx, (dy > 0 ? size - dy : size), dz, timestep) == NULL) return 0;
-			if (!isDataComplete(dataset, function,
-				corner->start[1] + corner->size[1], y, corner->start[3] + corner->size[3],
-				dx, (dy > 0 ? yw - dy : yw), dz, timestep)) return 0;
-		}
-	}
-	if (dy > 0)
-	{
-		//    if(findDataBlock(dataset, function,
-		//      x, corner->start[2] + corner->size[2], z,
-		//      (dx > 0 ? size - dx : size), dy, (dz > 0 ? size - dz : size), timestep) == NULL) return 0;
-		if (!isDataComplete(dataset, function,
-			x, corner->start[2] + corner->size[2], z,
-			(dx > 0 ? xw - dx : xw), dy, (dz > 0 ? zw - dz : zw), timestep)) return 0;
-
-		if (dx > 0)
-		{
-			//      if(findDataBlock(dataset, function,
-			//        corner->start[1] + corner->size[1], corner->start[2] + corner->size[2], z,
-			//        dx, dy, (dz > 0 ? size - dz : size), timestep) == NULL) return 0;
-			if (!isDataComplete(dataset, function,
-				x, corner->start[2] + corner->size[2], z,
-				(dx > 0 ? xw - dx : xw), dy, (dz > 0 ? zw - dz : zw), timestep)) return 0;
-		}
-	}
-	if (dx > 0)
-	{
-		//    if(findDataBlock(dataset, function,
-		//      corner->start[1] + corner->size[1], y, z,
-		//      dx, (dy > 0 ? size - dy : size), (dz > 0 ? size - dz : size), timestep) == NULL) return 0;
-		if (!isDataComplete(dataset, function,
-			corner->start[1] + corner->size[1], y, z,
-			dx, (dy > 0 ? yw - dy : yw), (dz > 0 ? zw - dz : zw), timestep)) return 0;
-	}
-	return 1;
-}
-//XYZ
-cutoutFile* findDataBlock(TurbDataset dataset, TurbField function, int x, int y, int z, int xw, int yw, int zw, int timestep)
-{
-	x = (x % 1024 + 1024) % 1024;
-	y = (y % 1024 + 1024) % 1024;
-	z = (z % 1024 + 1024) % 1024;
-
-	//xw = (xw % 1024 + 1024) % 1024;
-	//yw = (yw % 1024 + 1024) % 1024;
-	//zw = (zw % 1024 + 1024) % 1024;
-
-	cutoutFile *file;
-	for (file = __turblib_cutouts; file != NULL; file = file->next)
-	{
-		if (isWithinFile(dataset, function, x, y, z, xw, yw, zw, timestep, file))
-			return file;
-	}
-	return NULL;
-}
-
-int isWithinFile(TurbDataset dataset, TurbField function, int x, int y, int z, int xw, int yw, int zw, int timestep, cutoutFile* file)
-{
-	//int result;
-	//result = (file->dataset == dataset);
-	////fprintf(stderr,   "\nisWithinFile, %s\n", result ? "true" : "false");
-	//result = result &&
-	//     (function == turb_vp ? file->contents[turb_pressure] && file->contents[turb_velocity] : file->contents[function]);
-	////fprintf(stderr,   "isWithinFile, %s\n", result ? "true" : "false");
-	//result = result &&
-	//     timestep >= file->start[0] && timestep           <= (file->start[0] + file->size[0]-1);
-	////fprintf(stderr,   "isWithinFile, %s\n", result ? "true" : "false");
-	//result = result &&
-	//     x        >= file->start[1] && (x + xw) <= (file->start[1] + file->size[1]);
-	////fprintf(stderr,   "isWithinFile, %s\n", result ? "true" : "false");
-	//result = result &&
-	//     y        >= file->start[2] && (y + yw) <= (file->start[2] + file->size[2]);
-	////fprintf(stderr,   "isWithinFile, %s\n", result ? "true" : "false");
-	//result = result &&
-	//     z        >= file->start[3] && (z + zw) <= (file->start[3] + file->size[3]);
-	////fprintf(stderr,   "isWithinFile, %s\n", result ? "true" : "false");
-	////fprintf(stderr,   "isWithinFile, %d %d %d %d\n", z, zw, file->start[3], file->size[3]);
-	//if (result)
-	if ((file->dataset == dataset) &&
-		(function == turb_vp ? file->contents[turb_pressure] && file->contents[turb_velocity] : file->contents[function]) &&
-		timestep >= file->start[0] && timestep <= (file->start[0] + file->size[0] - 1) &&
-		x >= file->start[1] && (x + xw) <= (file->start[1] + file->size[1]) &&
-		y >= file->start[2] && (y + yw) <= (file->start[2] + file->size[2]) &&
-		z >= file->start[3] && (z + zw) <= (file->start[3] + file->size[3]))
-		return 1;
-	return 0;
-}
-
-/* zyx order */
-dataKernel* getDataCube(TurbDataset dataset, TurbField function, int x, int y, int z, int timestep, int size)
-{
-	dataKernel* cube = malloc(sizeof(dataKernel));
-	cutoutFile *loc = findDataBlock(dataset, function, x, y, z, size, size, size, timestep);
-	if (loc != 0 && loc->data[function][timestep] != NULL)
-	{
-		dataBlock *cache = loc->data[function][timestep];
-		cube->data = cache->data;
-		cube->x = x - cache->xl;
-		cube->y = y - cache->yl;
-		cube->z = z - cache->zl;
-		cube->hx = cache->hx;
-		cube->hy = cache->hy;
-		cube->hz = cache->hz;
-		cube->comps = TurbFields[function].comps;
-		cube->persist = 1;
-	}
-	else
-	{
-		//    printf("Cache miss!\n");
-		float* buff = malloc(sizeof(float) * TurbFields[function].comps * size * size * size);
-		loadDataCube(dataset, function, x, y, z, timestep, size, buff);
-		cube->data = buff;
-		cube->x = 0;
-		cube->y = 0;
-		cube->z = 0;
-		cube->hx = size;
-		cube->hy = size;
-		cube->hz = size;
-		cube->comps = TurbFields[function].comps;
-		cube->persist = 0;
-	}
-	return cube;
-}
-
-
-int getSinglePoint(TurbDataset dataset, TurbField function, int x, int y, int z, int timestep, float *out)
-{
-	int comps = TurbFields[function].comps;
-
-	cutoutFile *loc = findDataBlock(dataset, function, x, y, z, 1, 1, 1, timestep);
-	if (loc != NULL && loc->data[function][timestep] != NULL)
-	{
-		dataBlock *cache = loc->data[function][timestep];
-		int c = 0, index = x * comps + y * comps*cache->hx + z * comps*cache->hx*cache->hy;
-		for (c = 0; c < comps; c++)
-			out[c] = cache->data[c + index];
-	}
-	else
-	{
-		loadDataCube(dataset, function, x, y, z, timestep, 1, out);
-	}
-	return 0;
-}
-
-void freeDataCube(dataKernel* cube)
-{
-	if (cube->persist == 0) free(cube->data);
-	//  free cube;
-}
-
-/* zyx order */
-//Loads a given block of data into memory, assembled possibly from multiple files
-//TODO: The function doesn't handle the situation where the data cube requested
-//      spans more than 2 files in each dimension
-int loadDataCube(TurbDataset dataset, TurbField function, int x, int y, int z, int timestep, int size, float *buff)
-{
-	int comps = TurbFields[function].comps;
-
-	hsize_t dim_mem[] = { size, size, size, comps };
-	hid_t mspace = H5Screate_simple(4, dim_mem, NULL);
-
-	//Wrap the coordinates into the grid space:
-	x = (x % 1024 + 1024) % 1024;
-	y = (y % 1024 + 1024) % 1024;
-	z = (z % 1024 + 1024) % 1024;
-
-	//Is the data available as a contiguous block?
-	cutoutFile* src = findDataBlock(dataset, function, x, y, z, size, size, size, timestep);
-	if (src != NULL)
-	{
-		char setname[16];
-		sprintf(setname, "%c%.5d", TurbFields[function].prefix, timestep * 10);
-		hid_t dataset = H5Dopen1(src->file, setname);
-		hid_t filespace = H5Dget_space(dataset);
-
-		//Data selection of the file
-		hsize_t start[4] = { z - src->start[3], y - src->start[2], x - src->start[1], 0 },
-			scount[4] = { size, size, size, comps };
-
-		H5Sselect_hyperslab(filespace, H5S_SELECT_SET, start, NULL, scount, NULL);
-		H5Dread(dataset, H5T_NATIVE_FLOAT, mspace, filespace, H5P_DEFAULT, (float*)buff);
-
-		H5Dclose(dataset);
-		H5Sclose(mspace);
-		H5Sclose(filespace);
-
-		return 0;
-	}
-
-	//Load the data piece by piece:
-	cutoutFile *corner = findDataBlock(dataset, function, x, y, z, 1, 1, 1, timestep);
-
-	int sx = ((corner->start[1] + corner->size[1]) - x),
-		sy = ((corner->start[2] + corner->size[2]) - y),
-		sz = ((corner->start[3] + corner->size[3]) - z);
-
-	int dx = size - sx,
-		dy = size - sy,
-		dz = size - sz;
-
-	sx = sx > size ? size : sx;
-	sy = sy > size ? size : sy;
-	sz = sz > size ? size : sz;
-
-	//First load corner
-	loadSubBlock(dataset, function, timestep, mspace, buff, x, y, z, sx, sy, sz, 0, 0, 0);
-
-	//Then load other pieces
-	if (dz > 0)
-	{
-		loadSubBlock(dataset, function, timestep, mspace, buff,
-			x, y, corner->start[3] + corner->size[3],
-			(dx > 0 ? size - dx : size), (dy > 0 ? size - dy : size), dz,
-			0, 0, sz);
-
-		if (dy > 0)
-		{
-			loadSubBlock(dataset, function, timestep, mspace, buff,
-				x, corner->start[2] + corner->size[2], corner->start[3] + corner->size[3],
-				(dx > 0 ? size - dx : size), dy, dz,
-				0, sy, sz);
-
-			if (dx > 0)
-			{
-				loadSubBlock(dataset, function, timestep, mspace, buff,
-					corner->start[1] + corner->size[1], corner->start[2] + corner->size[2], corner->start[3] + corner->size[3],
-					dx, dy, dz,
-					sx, sy, sz);
-			}
-		}
-		if (dx > 0)
-		{
-			loadSubBlock(dataset, function, timestep, mspace, buff,
-				corner->start[1] + corner->size[1], y, corner->start[3] + corner->size[3],
-				dx, (dy > 0 ? size - dy : size), dz,
-				sx, 0, sz);
-		}
-	}
-	if (dy > 0)
-	{
-		loadSubBlock(dataset, function, timestep, mspace, buff,
-			x, corner->start[2] + corner->size[2], z,
-			(dx > 0 ? size - dx : size), dy, (dz > 0 ? size - dz : size),
-			0, sy, 0);
-
-		if (dx > 0)
-		{
-			loadSubBlock(dataset, function, timestep, mspace, buff,
-				corner->start[1] + corner->size[1], corner->start[2] + corner->size[2], z,
-				dx, dy, (dz > 0 ? size - dz : size),
-				sx, sy, 0);
-		}
-	}
-	if (dx > 0)
-	{
-		loadSubBlock(dataset, function, timestep, mspace, buff,
-			corner->start[1] + corner->size[1], y, z,
-			dx, (dy > 0 ? size - dy : size), (dz > 0 ? size - dz : size),
-			sx, 0, 0);
-	}
-
-	H5Sclose(mspace);
-	return 1;
-}
-
-/* xyz order */
-int loadSubBlock(TurbDataset dataset, TurbField function, int timestep, hid_t mspace, float *buff,
-	int x, int y, int z, int wx, int wy, int wz, int dest_x, int dest_y, int dest_z)
-{
-	x = (x % 1024 + 1024) % 1024;
-	y = (y % 1024 + 1024) % 1024;
-	z = (z % 1024 + 1024) % 1024;
-
-	char setname[16];
-	int comps = TurbFields[function].comps;
-	sprintf(setname, "%c%.5d", TurbFields[function].prefix, timestep * 10);
-	cutoutFile *src = findDataBlock(dataset, function, x, y, z, wx, wy, wz, timestep);
-	hid_t dataset_ = H5Dopen1(src->file, setname);
-
-	hid_t filespace = H5Dget_space(dataset_);
-	//Data selection of the file
-	hsize_t start[4] = { z - src->start[3], y - src->start[2], x - src->start[1], 0 },
-		scount[4] = { wz, wy, wx, comps };
-
-	//Data selection of memory
-	hsize_t mstart[4] = { dest_z, dest_y, dest_x, 0 };
-
-	H5Sselect_hyperslab(mspace, H5S_SELECT_SET, mstart, NULL, scount, NULL);
-	H5Sselect_hyperslab(filespace, H5S_SELECT_SET, start, NULL, scount, NULL);
-
-	H5Dread(dataset_, H5T_NATIVE_FLOAT, mspace, filespace, H5P_DEFAULT, buff);
-
-	H5Sclose(filespace);
-	H5Dclose(dataset_);
-	return 0;
-}
-
-/* Local computation functions */
-
-int validateParams(enum SpatialInterpolation spatial, TurbDataset set, int useFD)
-{
-	int nOrderFD = (int)spatial / 10;
-	int nOrderLag = (int)spatial % 10;
-	if ((useFD && nOrderFD != 4 && nOrderFD != 6 && nOrderFD != 8) ||
-		(!useFD && nOrderFD != 0) ||
-		(nOrderLag != 0 && nOrderLag != 4 && nOrderLag != 6 && nOrderLag != 8) ||
-		(set < 0)
-		) {
-		fprintf(stderr, "Error: Invalid interpolation parameter specified\n"); return 0;
-	}
-
-	return 1;
-}
-
-//Gets the value of a function at the point, with or without interpolation
-int getSingleValue(TurbDataset dataset, TurbField func, float position[3], int timestep, enum SpatialInterpolation spatial, float *output)
-{
-	if (func == turb_vp)
-	{
-		getSingleValue(dataset, turb_velocity, position, timestep, spatial, output);
-		getSingleValue(dataset, turb_pressure, position, timestep, spatial, &output[3]);
-		return 0;
-	}
-
-	float dx = DataSets[dataset].dx;
-	int nOrder = (int)spatial;
-	int comps = TurbFields[func].comps;
-
-	//If no spatial int, just return the closest points and finish
-	if (nOrder == 0)
-	{
-		int x = (int)(round(position[0] / dx)), y = (int)(round(position[1] / dx)), z = (int)(round(position[2] / dx));
-		getSinglePoint(dataset, func, x, y, z, timestep, output);
-	}
-	else
-	{
-		int x = (int)(floor(position[0] / dx)) - (nOrder / 2) + 1,
-			y = (int)(floor(position[1] / dx)) - (nOrder / 2) + 1,
-			z = (int)(floor(position[2] / dx)) - (nOrder / 2) + 1;
-
-		dataKernel* cube = getDataCube(dataset, func, x, y, z, timestep, nOrder);
-		lagrangianInterp2(comps, cube, position, nOrder, dx, output);
-		freeDataCube(cube);
-	}
-	return 0;
-}
-
-int getGradient(TurbDataset dataset, TurbField function, float time, enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
-	int count, float input[count][3], float *output)
-{
-	loadNeededData(dataset, function, count, input, time, spatial, temporal);
-	float dt = DataSets[dataset].dt;
-	int timestep = (int)ceil(time / DataSets[dataset].dt - .5f);
-	int comps = TurbFields[function].comps;
-	int nOrderLag = spatial % 10, nOrderFD = spatial / 10;
-	int gradientSize = (nOrderLag == 0 ? 1 : nOrderLag);
-	int kernelsize = gradientSize + nOrderFD;
-	int x, y, z;
-	float dx = DataSets[dataset].dx;
-
-	dataKernel* fdkernel;
-
-	//Diff, Lagint, pchipInt
-	if (temporal == PCHIPInt)
-	{
-		float temp[4][comps * 3];
-		int i, j;
-
-
-		if (nOrderLag > 0)
-		{
-			float *lagkernel;
-			lagkernel = malloc(sizeof(float) * comps * 3 * gradientSize * gradientSize * gradientSize);
-
-			for (i = 0; i < count; i++)
-			{
-				x = (int)(input[i][0] / dx) - (kernelsize / 2) + 1;
-				y = (int)(input[i][1] / dx) - (kernelsize / 2) + 1;
-				z = (int)(input[i][2] / dx) - (kernelsize / 2) + 1;
-
-				for (j = 0; j < 4; j++)
-				{
-					fdkernel = getDataCube(dataset, function, x, y, z, timestep + j - 1, kernelsize);
-					computeGradient(fdkernel, comps, dx, gradientSize, nOrderFD, lagkernel);
-
-					lagrangianInterp(comps * 3, lagkernel, input[i], nOrderLag, dx, temp[j]);
-					freeDataCube(fdkernel);
-				}
-				pchipInterp(comps * 3, temp, time, timestep, dt, output + i * comps * 3);
-			}
-			free(lagkernel);
-		}
-		else
-		{
-			for (i = 0; i < count; i++)
-			{
-				x = (int)(input[i][0] / dx + 0.5f) - nOrderFD / 2;
-				y = (int)(input[i][1] / dx + 0.5f) - nOrderFD / 2;
-				z = (int)(input[i][2] / dx + 0.5f) - nOrderFD / 2;
-
-				for (j = 0; j < 4; j++)
-				{
-					fdkernel = getDataCube(dataset, function, x, y, z, timestep + j - 1, kernelsize);
-					computeGradient(fdkernel, comps, dx, gradientSize, nOrderFD, temp[j]);
-					freeDataCube(fdkernel);
-				}
-				pchipInterp(comps * 3, temp, time, timestep, dt, output + i * comps * 3);
-			}
-		}
-	}
-	//No temporal int
-	else
-	{
-		int i;
-		if (nOrderLag > 0)
-		{
-			float *lagkernel;
-			lagkernel = malloc(sizeof(float) * comps * 3 * gradientSize * gradientSize * gradientSize);
-
-			for (i = 0; i < count; i++)
-			{
-				x = (int)(input[i][0] / dx) - (kernelsize / 2) + 1;
-				y = (int)(input[i][1] / dx) - (kernelsize / 2) + 1;
-				z = (int)(input[i][2] / dx) - (kernelsize / 2) + 1;
-
-				fdkernel = getDataCube(dataset, function, x, y, z, timestep, kernelsize);
-				computeGradient(fdkernel, comps, dx, gradientSize, nOrderFD, lagkernel);
-				lagrangianInterp(comps * 3, lagkernel, input[i], nOrderLag, dx, output + i * comps * 3);
-				freeDataCube(fdkernel);
-			}
-			free(lagkernel);
-		}
-		else
-		{
-			for (i = 0; i < count; i++)
-			{
-				x = (int)(input[i][0] / dx + 0.5f) - nOrderFD / 2;
-				y = (int)(input[i][1] / dx + 0.5f) - nOrderFD / 2;
-				z = (int)(input[i][2] / dx + 0.5f) - nOrderFD / 2;
-				fdkernel = getDataCube(dataset, function, x, y, z, timestep, kernelsize);
-				computeGradient(fdkernel, comps, dx, gradientSize, nOrderFD, output + i * comps * 3);
-				freeDataCube(fdkernel);
-			}
-		}
-	}
-	freeLoadedMemory();
-	return 0;
-}
-
-int getLaplacian(TurbDataset dataset, TurbField function, float time, enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
-	int count, float input[][3], float output[][3])
-{
-	loadNeededData(dataset, function, count, input, time, spatial, temporal);
-	float dt = DataSets[dataset].dt;
-	int timestep = (int)ceil(time / DataSets[dataset].dt - .5f);
-	int comps = TurbFields[function].comps;
-	int nOrderLag = spatial % 10, nOrderFD = spatial / 10;
-	int gradientSize = (nOrderLag == 0 ? 1 : nOrderLag);
-	int kernelsize = gradientSize + nOrderFD;
-	int x, y, z;
-	float dx = DataSets[dataset].dx;
-
-	dataKernel* fdkernel;
-
-	//Diff, Lagint, pchipInt
-	if (temporal == PCHIPInt)
-	{
-		float temp[4][3];
-		int i, j;
-
-		if (nOrderLag > 0)
-		{
-			float *lagkernel;
-			lagkernel = malloc(sizeof(float) * comps * gradientSize * gradientSize * gradientSize);
-
-			for (i = 0; i < count; i++)
-			{
-				x = (int)(input[i][0] / dx) - (kernelsize / 2) + 1;
-				y = (int)(input[i][1] / dx) - (kernelsize / 2) + 1;
-				z = (int)(input[i][2] / dx) - (kernelsize / 2) + 1;
-
-				for (j = 0; j < 4; j++)
-				{
-					fdkernel = getDataCube(dataset, function, x, y, z, timestep + j - 1, kernelsize);
-					computeLaplacian(fdkernel, comps, dx, gradientSize, nOrderFD, lagkernel);
-					lagrangianInterp(comps, lagkernel, input[i], nOrderLag, dx, temp[j]);
-					freeDataCube(fdkernel);
-				}
-				pchipInterp(comps, temp, time, timestep, dt, output[i]);
-			}
-		}
-		else
-		{
-			for (i = 0; i < count; i++)
-			{
-				x = (int)(input[i][0] / dx + 0.5f) - nOrderFD / 2;
-				y = (int)(input[i][1] / dx + 0.5f) - nOrderFD / 2;
-				z = (int)(input[i][2] / dx + 0.5f) - nOrderFD / 2;
-
-				for (j = 0; j < 4; j++)
-				{
-					fdkernel = getDataCube(dataset, function, x, y, z, timestep + j - 1, kernelsize);
-					computeLaplacian(fdkernel, comps, dx, gradientSize, nOrderFD, temp[j]);
-					freeDataCube(fdkernel);
-				}
-				pchipInterp(comps, temp, time, timestep, dt, output[i]);
-			}
-		}
-	}
-	//No temporal int
-	else
-	{
-		int i;
-		if (nOrderLag > 0)
-		{
-			float *lagkernel;
-			lagkernel = malloc(sizeof(float) * comps * gradientSize * gradientSize * gradientSize);
-			for (i = 0; i < count; i++)
-			{
-				x = (int)(input[i][0] / dx) - (kernelsize / 2) + 1;
-				y = (int)(input[i][1] / dx) - (kernelsize / 2) + 1;
-				z = (int)(input[i][2] / dx) - (kernelsize / 2) + 1;
-
-				fdkernel = getDataCube(dataset, function, x, y, z, timestep, kernelsize);
-				computeLaplacian(fdkernel, comps, dx, gradientSize, nOrderFD, lagkernel);
-				lagrangianInterp(comps, lagkernel, input[i], nOrderLag, dx, output[i]);
-				freeDataCube(fdkernel);
-			}
-		}
-		else
-		{
-			for (i = 0; i < count; i++)
-			{
-				x = (int)(input[i][0] / dx + 0.5f) - nOrderFD / 2;
-				y = (int)(input[i][1] / dx + 0.5f) - nOrderFD / 2;
-				z = (int)(input[i][2] / dx + 0.5f) - nOrderFD / 2;
-				fdkernel = getDataCube(dataset, function, x, y, z, timestep, kernelsize);
-				computeLaplacian(fdkernel, comps, dx, gradientSize, nOrderFD, output[i]);
-				freeDataCube(fdkernel);
-			}
-		}
-	}
-	freeLoadedMemory();
-	return 0;
-}
-
-int getHessian(TurbDataset dataset, TurbField function, float time, enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
-	int count, float input[count][3], float* output)
-{
-	loadNeededData(dataset, function, count, input, time, spatial, temporal);
-	float dt = DataSets[dataset].dt;
-	int timestep = (int)ceil(time / DataSets[dataset].dt - .5f);
-	int nOrderLag = spatial % 10, nOrderFD = spatial / 10;
-	int gradientSize = (nOrderLag == 0 ? 1 : nOrderLag);
-	int comps = TurbFields[function].comps;
-	int kernelsize = gradientSize + nOrderFD;
-	int x, y, z;
-	float dx = DataSets[dataset].dx;
-
-	dataKernel* fdkernel;
-
-	//Diff, Lagint, pchipInt
-	if (temporal == PCHIPInt)
-	{
-		float temp[4][18];
-		int i, j;
-
-		if (nOrderLag > 0)
-		{
-			float *lagkernel;
-			lagkernel = malloc(sizeof(float) * comps * 6 * gradientSize * gradientSize * gradientSize);
-
-			for (i = 0; i < count; i++)
-			{
-				x = (int)(input[i][0] / dx) - (kernelsize / 2) + 1;
-				y = (int)(input[i][1] / dx) - (kernelsize / 2) + 1;
-				z = (int)(input[i][2] / dx) - (kernelsize / 2) + 1;
-
-				for (j = 0; j < 4; j++)
-
-				{
-					fdkernel = getDataCube(dataset, function, x, y, z, timestep + j - 1, kernelsize);
-					computeHessian(fdkernel, comps, dx, gradientSize, nOrderFD, lagkernel);
-					lagrangianInterp(comps * 6, lagkernel, input[i], nOrderLag, dx, temp[j]);
-					freeDataCube(fdkernel);
-				}
-				pchipInterp(comps * 6, temp, time, timestep, dt, output + i * 6 * comps);
-			}
-		}
-		else
-		{
-			for (i = 0; i < count; i++)
-			{
-				x = (int)(input[i][0] / dx + 0.5f) - nOrderFD / 2;
-				y = (int)(input[i][1] / dx + 0.5f) - nOrderFD / 2;
-				z = (int)(input[i][2] / dx + 0.5f) - nOrderFD / 2;
-
-				for (j = 0; j < 4; j++)
-				{
-					fdkernel = getDataCube(dataset, function, x, y, z, timestep + j - 1, kernelsize);
-					computeHessian(fdkernel, comps, dx, gradientSize, nOrderFD, temp[j]);
-					freeDataCube(fdkernel);
-				}
-				pchipInterp(comps * 6, temp, time, timestep, dt, output + i * 6 * comps);
-			}
-		}
-	}
-	//No temporal int
-	else
-	{
-		int i;
-
-		if (nOrderLag > 0)
-		{
-			float *lagkernel;
-			lagkernel = malloc(sizeof(float) * comps * 6 * gradientSize * gradientSize * gradientSize);
-
-			for (i = 0; i < count; i++)
-			{
-				x = (int)(input[i][0] / dx) - (kernelsize / 2) + 1;
-				y = (int)(input[i][1] / dx) - (kernelsize / 2) + 1;
-				z = (int)(input[i][2] / dx) - (kernelsize / 2) + 1;
-
-				fdkernel = getDataCube(dataset, function, x, y, z, timestep, kernelsize);
-				computeHessian(fdkernel, comps, dx, gradientSize, nOrderFD, lagkernel);
-				lagrangianInterp(comps * 6, lagkernel, input[i], nOrderLag, dx, output + i * 6 * comps);
-				freeDataCube(fdkernel);
-			}
-		}
-		else
-		{
-			for (i = 0; i < count; i++)
-			{
-				x = (int)(input[i][0] / dx + 0.5f) - nOrderFD / 2;
-				y = (int)(input[i][1] / dx + 0.5f) - nOrderFD / 2;
-				z = (int)(input[i][2] / dx + 0.5f) - nOrderFD / 2;
-				fdkernel = getDataCube(dataset, function, x, y, z, timestep, kernelsize);
-				computeHessian(fdkernel, comps, dx, gradientSize, nOrderFD, output + i * 6 * comps);
-				freeDataCube(fdkernel);
-			}
-		}
-	}
-	freeLoadedMemory();
-	return 0;
-}
-
 /* Interpolation Functions */
 
 int lagrangianInterp(int comps, float *kernel, float position[3], int nOrder, float dx, float result[comps])
@@ -4079,7 +2663,6 @@ int computeHessian(dataKernel* kernel, int comps, float dx, int size, int nOrder
 	}
 	return 0;
 }
-#endif//CUTOUT_SUPPORT
 
 int getvelocity_(char *authToken,
 	char *dataset, float *time,

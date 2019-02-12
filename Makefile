@@ -14,13 +14,6 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
-define HDF5_ERROR
-
-Error in make!
-An hdf5 installation is required for working with cutoutfiles and h5cc was not found!
-Please, edit the Makefile with the installation directory of hdf5
-endef
-
 OSARCH := $(shell uname -sp)
 
 ifeq ($(OSARCH),Darwin i386)
@@ -36,29 +29,15 @@ LDLIBS =
 CP     = cp
 MKDIR  = mkdir -p
 
-ifeq ($(CUTOUT_SUPPORT), 1)
-#If you built HDF5 from source yourself, fill in the path to your HDF5 installation
-   H5DIR  = /usr/local/HDF5
-   H5INC  = $(H5DIR)/include
-   H5CC   = $(H5DIR)/bin/h5cc
-   H5FC   = $(H5DIR)/bin/h5fc
-   CC     = $(H5CC) -g $(ARCH_FLAGS)
-   FC     = $(H5FC) $(ARCH_FLAGS)
-   CFLAGS += -D CUTOUT_SUPPORT -I$(H5INC)
-   ifeq ($(wildcard $(H5CC)),)
-      $(error $(HDF5_ERROR))
-   endif
-else
-   CC     = gcc -g $(ARCH_FLAGS)
-   FC     = gfortran $(ARCH_FLAGS)
-endif
+CC     = gcc -g $(ARCH_FLAGS)
+FC     = gfortran $(ARCH_FLAGS)
 
 OBJ =	soapC.o \
 	soapClient.o \
 	stdsoap2.o \
         turblib.o
 
-all: turbc turbf mhdc mhdf channelc channelf mixingc mixingf
+all: turbc turbf mhdc mhdf channelc channelf mixingc mixingf getCutoutc getCutoutf
 
 getCutoutc : $(OBJ) getCutoutc.o
 	$(CC) -o $@ $(OBJ) getCutoutc.o $(LDLIBS)
