@@ -407,11 +407,11 @@ int getVelocitySoap(char *authToken,
 int getthreshold_(char *authToken,
 	char *dataset, char *field, float *time, float *threshold,
 	int *spatial,
-	int *X, int *Y, int *Z, int *Xwidth, int *Ywidth, int *Zwidth,
+	int *x_start, int *y_start, int *z_start, int *x_end, int *y_end, int *z_end,
 	ThresholdInfo** dataout, int *result_size)
 {
 	return getThreshold(authToken, dataset, field, *time, *threshold, *spatial,
-		*X, *Y, *Z, *Xwidth, *Ywidth, *Zwidth, dataout, result_size);
+		*x_start, *y_start, *z_start, *x_end, *y_end, *z_end, dataout, result_size);
 }
 
 void deallocate_array_(ThresholdInfo **threshold_array)
@@ -422,7 +422,7 @@ void deallocate_array_(ThresholdInfo **threshold_array)
 int getThreshold(char *authToken,
 	char *dataset, char *field, float time, float threshold,
 	enum SpatialInterpolation spatial,
-	int X, int Y, int Z, int Xwidth, int Ywidth, int Zwidth,
+	int x_start, int y_start, int z_start, int x_end, int y_end, int z_end,
 	ThresholdInfo **dataout, int *result_size)
 {
 	int rc;
@@ -436,12 +436,12 @@ int getThreshold(char *authToken,
 	input.time = time;
 	input.threshold = threshold;
 	input.spatialInterpolation = SpatialIntToEnum(spatial);
-	input.X = X;
-	input.Y = Y;
-	input.Z = Z;
-	input.Xwidth = Xwidth;
-	input.Ywidth = Ywidth;
-	input.Zwidth = Zwidth;
+	input.x_USCOREstart = x_start;
+	input.y_USCOREstart = y_start;
+	input.z_USCOREstart = z_start;
+	input.x_USCOREend = x_end;
+	input.x_USCOREend = y_end;
+	input.x_USCOREend = z_end;
 	input.addr = NULL;
 
 	rc = soap_call___turb1__GetThreshold(&__jhuturbsoap, NULL, NULL, &input, &output);
@@ -1462,6 +1462,8 @@ int getRawVelocity(char *authToken,
 	char *dataset, int time_step,
 	int X, int Y, int Z, int Xwidth, int Ywidth, int Zwidth, char dataout[])
 {
+	fprintf(stderr, "%s\n", "******getRawVelocity has been deprecated. Please use getCutout instead******");
+	return -999;
 	int rc;
 
 	struct _turb1__GetRawVelocity input;
@@ -1551,6 +1553,8 @@ int getRawMagneticField(char *authToken,
 	char *dataset, int time_step,
 	int X, int Y, int Z, int Xwidth, int Ywidth, int Zwidth, char dataout[])
 {
+	fprintf(stderr, "%s\n", "******getRawMagneticField has been deprecated. Please use getCutout instead******");
+	return -999;
 	int rc;
 
 	struct _turb1__GetRawMagneticField input;
@@ -1640,6 +1644,8 @@ int getRawVectorPotential(char *authToken,
 	char *dataset, int time_step,
 	int X, int Y, int Z, int Xwidth, int Ywidth, int Zwidth, char dataout[])
 {
+	fprintf(stderr, "%s\n", "******getRawVectorPotential has been deprecated. Please use getCutout instead******");
+	return -999;
 	int rc;
 
 	struct _turb1__GetRawVectorPotential input;
@@ -1729,6 +1735,8 @@ int getRawPressure(char *authToken,
 	char *dataset, int time_step,
 	int X, int Y, int Z, int Xwidth, int Ywidth, int Zwidth, char dataout[])
 {
+	fprintf(stderr, "%s\n", "******getRawPressure has been deprecated. Please use getCutout instead******");
+	return -999;
 	int rc;
 
 	struct _turb1__GetRawPressure input;
@@ -1897,6 +1905,8 @@ int getRawDensity(char *authToken,
 	char *dataset, int time_step,
 	int X, int Y, int Z, int Xwidth, int Ywidth, int Zwidth, char dataout[])
 {
+	fprintf(stderr, "%s\n", "******getRawDensity has been deprecated. Please use getCutout instead******");
+	return -999;
 	int rc;
 
 	struct _turb1__GetRawDensity input;
@@ -1942,8 +1952,8 @@ int getRawDensity(char *authToken,
  return getAnyCutoutWebSoap (authToken, dataset, field, T, x0, y0, z0, nx, ny, nz, x_step, y_step, z_step, filter_width, dataout);
  }*/
 int getCutout(char *authToken,
-	char *dataset, char *field, int time_step, int x0, int y0, int z0,
-	int nx, int ny, int nz,
+	char *dataset, char *field, int time_step, int x_start, int y_start, int z_start,
+	int x_end, int y_end, int z_end,
 	int x_step, int y_step, int z_step, int filter_width,
 	float dataout[])
 {
@@ -1956,12 +1966,12 @@ int getCutout(char *authToken,
 	input.dataset = dataset;
 	input.field = field;
 	input.T = time_step;
-	input.X = x0;
-	input.Y = y0;
-	input.Z = z0;
-	input.Xwidth = nx;
-	input.Ywidth = ny;
-	input.Zwidth = nz;
+	input.x_USCOREstart = x_start;
+	input.y_USCOREstart = y_start;
+	input.z_USCOREstart = z_start;
+	input.x_USCOREend = x_end;
+	input.y_USCOREend = y_end;
+	input.z_USCOREend = z_end;
 	input.x_USCOREstep = x_step;
 	input.y_USCOREstep = y_step;
 	input.z_USCOREstep = z_step;
@@ -2894,10 +2904,10 @@ int getmagneticfieldhessian_(char *authToken,
 
 int getcutout_(char *authToken,
 	char *dataset, char *field, int *T,
-	int *x0, int *y0, int *z0,
-	int *nx, int *ny, int *nz,
+	int *x_start, int *y_start, int *z_start,
+	int *x_end, int *y_end, int *z_end,
 	int *x_step, int *y_step, int *z_step, int *filter_width,
 	float dataout[])
 {
-	return getCutout(authToken, dataset, field, *T, *x0, *y0, *z0, *nx, *ny, *nz, *x_step, *y_step, *z_step, *filter_width, dataout);
+	return getCutout(authToken, dataset, field, *T, *x_start, *y_start, *z_start, *x_end, *y_end, *z_end, *x_step, *y_step, *z_step, *filter_width, dataout);
 }

@@ -86,6 +86,7 @@
     real(RP) :: dataout18(18, 10) ! results from Hessian function
 
     integer,parameter :: time_step=10, x=0, y=0, z=0, xwidth=4, ywidth=4, zwidth=4
+    integer,parameter :: x_start=1, y_start=1, z_start=1, x_end=4, y_end=4, z_end=4
     !real(RP) :: rawdata(xwidth*ywidth*zwidth*3)
     real(RP) :: rawdata(3,xwidth*ywidth*zwidth)
     real(RP) :: rawpressure(xwidth*ywidth*zwidth)
@@ -499,8 +500,8 @@
 
     write(*,*)
     write(*,'(a)') 'Requesting points above threshold ...'
-    rc = getthreshold(authkey, dataset, threshold_field, time, threshold, FD4NoInt, x, y, z, &
-        xwidth, ywidth, zwidth, cptr_to_array, result_size)
+    rc = getthreshold(authkey, dataset, threshold_field, time, threshold, FD4NoInt, x_start, y_start, z_start, &
+        x_end, y_end, z_end, cptr_to_array, result_size)
     ! convert the C pointer to Fortran pointer
     call c_f_pointer(cptr_to_array, points_above_threshold, [result_size])
     do i = 1, result_size

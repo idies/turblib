@@ -25,7 +25,7 @@ endif
 
 RM     = rm -f
 CFLAGS = -Wall
-LDLIBS =
+LDLIBS = -lm
 CP     = cp
 MKDIR  = mkdir -p
 
@@ -139,6 +139,29 @@ clean:
 
 spotless: clean
 	$(RM) soapClient.c TurbulenceServiceSoap.nsmap soapH.h TurbulenceServiceSoap12.nsmap soapStub.h soapC.c TurbulenceService.h
+
+testall:
+	./channelc &> test_output.txt
+	@echo "PASSED: channelc"
+	./channelf &> test_output.txt
+	@echo "PASSED: channelf"
+	./getCutoutc &> test_output.txt
+	@echo "PASSED: getCutoutc"
+	./getCutoutf &> test_output.txt
+	@echo "PASSED: getCutoutf"
+	./mhdc &> test_output.txt
+	@echo "PASSED: mhdc"
+	./mhdf &> test_output.txt
+	@echo "PASSED: mhdf"
+	./mixingc &> test_output.txt
+	@echo "PASSED: mixingc"
+	./mixingf &> test_output.txt
+	@echo "PASSED: mixingf"
+	./turbc &> test_output.txt
+	@echo "PASSED: turbc"
+	./turbf &> test_output.txt
+	@echo "PASSED: turbf"
+	rm test_output.txt
 
 .SUFFIXES: .o .c .x
 

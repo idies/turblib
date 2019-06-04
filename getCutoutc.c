@@ -27,12 +27,12 @@ int main(int argc, char *argv[])
 {
 
 	char * authtoken = "edu.jhu.pha.turbulence.testing-201406";
-	char * dataset = "isotropic1024coarse";
+	char * dataset;
 	char * field;
 
 	float *result;
 
-	int time_step = 0, x0 = 0, y0 = x0, z0 = x0, nx = 2, ny = nx, nz = nx;
+	int time_step = 0, x_start, y_start, z_start, x_end, y_end, z_end;
 	int x_step = 1, y_step = 1, z_step = 1, filter_width = 1;
 	int size, i;
 
@@ -44,44 +44,54 @@ int main(int argc, char *argv[])
 
 	printf("\n.........getAnyCutoutWeb.........\n");
 
+
 	printf("\n.........channel u.........\n");
+	dataset = "channel";
+	x_start = 1; y_start = 10; z_start = 1; x_end = 2; y_end = 11; z_end = 2;
 	field = "u";
 	if (field[0] == 'p')
 	{
-		size = nx * ny*nz;
+		size = (x_end-x_start+1) * (y_end-y_start+1) * (z_end-z_start+1);
 	}
 	else if (field[0] == 'u')
 	{
-		size = nx * ny*nz * 3;
+		size = (x_end-x_start+1) * (y_end-y_start+1) * (z_end-z_start+1) * 3;
 	}
 	result = (float *)malloc(sizeof(float)*size);
-	getCutout(authtoken, "channel", field, time_step, x0, y0+10, z0, nx, ny, nz, x_step, y_step, z_step, filter_width, result);
+	getCutout(authtoken, dataset, field, time_step, x_start, y_start, z_start, x_end, y_end, z_end, x_step, y_step, z_step, filter_width, result);
 	for (i = 0; i < size; i++) {
 		printf("%d: u=%f\n", i, result[i]);
 	}
 	free(result);
 
+
 	printf("\n.........transition_bl p.........\n");
+	dataset = "transition_bl";
+	x_start = 1; y_start = 1; z_start = 1; x_end = 2; y_end = 2; z_end = 2;
 	field = "p";
 	if (field[0] == 'p')
 	{
-		size = nx * ny*nz;
+		size = (x_end-x_start+1) * (y_end-y_start+1) * (z_end-z_start+1);
 	}
 	else if (field[0] == 'u')
 	{
-		size = nx * ny*nz * 3;
+		size = (x_end-x_start+1) * (y_end-y_start+1) * (z_end-z_start+1) * 3;
 	}
 	result = (float *)malloc(sizeof(float)*size);
-	getCutout(authtoken, "transition_bl", field, time_step, x0, y0, z0, nx, ny, nz, x_step, y_step, z_step, filter_width, result);
+	getCutout(authtoken, dataset, field, time_step, x_start, y_start, z_start, x_end, y_end, z_end, x_step, y_step, z_step, filter_width, result);
 	for (i = 0; i < size; i++) {
 		printf("%d: p=%f\n", i, result[i]);
 	}
 
+
 	printf("\n.........isotropic1024coarse u filter.........\n");
+	dataset = "isotropic1024coarse";
+	x_start = 1; y_start = 1; z_start = 1; x_end = 6; y_end = 6; z_end = 6;
+	x_step = 4; y_step = 4; z_step = 4; filter_width = 4;
 	field = "u";
 	size = 2 * 2 * 2 * 3;
 	result = (float *)malloc(sizeof(float)*size);
-	getCutout(authtoken, "isotropic1024coarse", field, time_step, x0, y0, z0, nx * 4, ny * 4, nz * 4, x_step * 4, y_step * 4, z_step * 4, filter_width * 4, result);
+	getCutout(authtoken, dataset, field, time_step, x_start, y_start, z_start, x_end, y_end, z_end, x_step, y_step, z_step, filter_width, result);
 	for (i = 0; i < size; i++) {
 		printf("%d: u=%f\n", i, result[i]);
 	}

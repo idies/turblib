@@ -19,7 +19,7 @@ compiling, linking, and/or using OpenSSL is allowed.
 extern "C" {
 #endif
 
-SOAP_SOURCE_STAMP("@(#) soapC.c ver 2.8.16 2019-02-11 16:44:53 GMT")
+SOAP_SOURCE_STAMP("@(#) soapC.c ver 2.8.16 2019-03-04 20:09:39 GMT")
 
 
 #ifndef WITH_NOGLOBAL
@@ -9163,12 +9163,12 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetAnyCutoutWeb(struct soap *soa
 	soap_default_string(soap, &a->dataset);
 	soap_default_string(soap, &a->field);
 	soap_default_int(soap, &a->T);
-	soap_default_int(soap, &a->X);
-	soap_default_int(soap, &a->Y);
-	soap_default_int(soap, &a->Z);
-	soap_default_int(soap, &a->Xwidth);
-	soap_default_int(soap, &a->Ywidth);
-	soap_default_int(soap, &a->Zwidth);
+	soap_default_int(soap, &a->x_USCOREstart);
+	soap_default_int(soap, &a->y_USCOREstart);
+	soap_default_int(soap, &a->z_USCOREstart);
+	soap_default_int(soap, &a->x_USCOREend);
+	soap_default_int(soap, &a->y_USCOREend);
+	soap_default_int(soap, &a->z_USCOREend);
 	soap_default_int(soap, &a->x_USCOREstep);
 	soap_default_int(soap, &a->y_USCOREstep);
 	soap_default_int(soap, &a->z_USCOREstep);
@@ -9200,17 +9200,17 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_out__turb1__GetAnyCutoutWeb(struct soap *soap, co
 		return soap->error;
 	if (soap_out_int(soap, "turb1:T", -1, &a->T, ""))
 		return soap->error;
-	if (soap_out_int(soap, "turb1:X", -1, &a->X, ""))
+	if (soap_out_int(soap, "turb1:x_start", -1, &a->x_USCOREstart, ""))
 		return soap->error;
-	if (soap_out_int(soap, "turb1:Y", -1, &a->Y, ""))
+	if (soap_out_int(soap, "turb1:y_start", -1, &a->y_USCOREstart, ""))
 		return soap->error;
-	if (soap_out_int(soap, "turb1:Z", -1, &a->Z, ""))
+	if (soap_out_int(soap, "turb1:z_start", -1, &a->z_USCOREstart, ""))
 		return soap->error;
-	if (soap_out_int(soap, "turb1:Xwidth", -1, &a->Xwidth, ""))
+	if (soap_out_int(soap, "turb1:x_end", -1, &a->x_USCOREend, ""))
 		return soap->error;
-	if (soap_out_int(soap, "turb1:Ywidth", -1, &a->Ywidth, ""))
+	if (soap_out_int(soap, "turb1:y_end", -1, &a->y_USCOREend, ""))
 		return soap->error;
-	if (soap_out_int(soap, "turb1:Zwidth", -1, &a->Zwidth, ""))
+	if (soap_out_int(soap, "turb1:z_end", -1, &a->z_USCOREend, ""))
 		return soap->error;
 	if (soap_out_int(soap, "turb1:x_step", -1, &a->x_USCOREstep, ""))
 		return soap->error;
@@ -9231,12 +9231,12 @@ SOAP_FMAC3 struct _turb1__GetAnyCutoutWeb * SOAP_FMAC4 soap_in__turb1__GetAnyCut
 	size_t soap_flag_dataset = 1;
 	size_t soap_flag_field = 1;
 	size_t soap_flag_T = 1;
-	size_t soap_flag_X = 1;
-	size_t soap_flag_Y = 1;
-	size_t soap_flag_Z = 1;
-	size_t soap_flag_Xwidth = 1;
-	size_t soap_flag_Ywidth = 1;
-	size_t soap_flag_Zwidth = 1;
+	size_t soap_flag_x_USCOREstart = 1;
+	size_t soap_flag_y_USCOREstart = 1;
+	size_t soap_flag_z_USCOREstart = 1;
+	size_t soap_flag_x_USCOREend = 1;
+	size_t soap_flag_y_USCOREend = 1;
+	size_t soap_flag_z_USCOREend = 1;
 	size_t soap_flag_x_USCOREstep = 1;
 	size_t soap_flag_y_USCOREstep = 1;
 	size_t soap_flag_z_USCOREstep = 1;
@@ -9272,34 +9272,34 @@ SOAP_FMAC3 struct _turb1__GetAnyCutoutWeb * SOAP_FMAC4 soap_in__turb1__GetAnyCut
 				{	soap_flag_T--;
 					continue;
 				}
-			if (soap_flag_X && soap->error == SOAP_TAG_MISMATCH)
-				if (soap_in_int(soap, "turb1:X", &a->X, "xsd:int"))
-				{	soap_flag_X--;
+			if (soap_flag_x_USCOREstart && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_int(soap, "turb1:x_start", &a->x_USCOREstart, "xsd:int"))
+				{	soap_flag_x_USCOREstart--;
 					continue;
 				}
-			if (soap_flag_Y && soap->error == SOAP_TAG_MISMATCH)
-				if (soap_in_int(soap, "turb1:Y", &a->Y, "xsd:int"))
-				{	soap_flag_Y--;
+			if (soap_flag_y_USCOREstart && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_int(soap, "turb1:y_start", &a->y_USCOREstart, "xsd:int"))
+				{	soap_flag_y_USCOREstart--;
 					continue;
 				}
-			if (soap_flag_Z && soap->error == SOAP_TAG_MISMATCH)
-				if (soap_in_int(soap, "turb1:Z", &a->Z, "xsd:int"))
-				{	soap_flag_Z--;
+			if (soap_flag_z_USCOREstart && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_int(soap, "turb1:z_start", &a->z_USCOREstart, "xsd:int"))
+				{	soap_flag_z_USCOREstart--;
 					continue;
 				}
-			if (soap_flag_Xwidth && soap->error == SOAP_TAG_MISMATCH)
-				if (soap_in_int(soap, "turb1:Xwidth", &a->Xwidth, "xsd:int"))
-				{	soap_flag_Xwidth--;
+			if (soap_flag_x_USCOREend && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_int(soap, "turb1:x_end", &a->x_USCOREend, "xsd:int"))
+				{	soap_flag_x_USCOREend--;
 					continue;
 				}
-			if (soap_flag_Ywidth && soap->error == SOAP_TAG_MISMATCH)
-				if (soap_in_int(soap, "turb1:Ywidth", &a->Ywidth, "xsd:int"))
-				{	soap_flag_Ywidth--;
+			if (soap_flag_y_USCOREend && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_int(soap, "turb1:y_end", &a->y_USCOREend, "xsd:int"))
+				{	soap_flag_y_USCOREend--;
 					continue;
 				}
-			if (soap_flag_Zwidth && soap->error == SOAP_TAG_MISMATCH)
-				if (soap_in_int(soap, "turb1:Zwidth", &a->Zwidth, "xsd:int"))
-				{	soap_flag_Zwidth--;
+			if (soap_flag_z_USCOREend && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_int(soap, "turb1:z_end", &a->z_USCOREend, "xsd:int"))
+				{	soap_flag_z_USCOREend--;
 					continue;
 				}
 			if (soap_flag_x_USCOREstep && soap->error == SOAP_TAG_MISMATCH)
@@ -9342,7 +9342,7 @@ SOAP_FMAC3 struct _turb1__GetAnyCutoutWeb * SOAP_FMAC4 soap_in__turb1__GetAnyCut
 		if (soap->body && soap_element_end_in(soap, tag))
 			return NULL;
 	}
-	if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_T > 0 || soap_flag_X > 0 || soap_flag_Y > 0 || soap_flag_Z > 0 || soap_flag_Xwidth > 0 || soap_flag_Ywidth > 0 || soap_flag_Zwidth > 0 || soap_flag_x_USCOREstep > 0 || soap_flag_y_USCOREstep > 0 || soap_flag_z_USCOREstep > 0 || soap_flag_filter_USCOREwidth > 0))
+	if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_T > 0 || soap_flag_x_USCOREstart > 0 || soap_flag_y_USCOREstart > 0 || soap_flag_z_USCOREstart > 0 || soap_flag_x_USCOREend > 0 || soap_flag_y_USCOREend > 0 || soap_flag_z_USCOREend > 0 || soap_flag_x_USCOREstep > 0 || soap_flag_y_USCOREstep > 0 || soap_flag_z_USCOREstep > 0 || soap_flag_filter_USCOREwidth > 0))
 	{	soap->error = SOAP_OCCURS;
 		return NULL;
 	}
@@ -13326,12 +13326,12 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_default__turb1__GetThreshold(struct soap *soap, 
 	soap_default_float(soap, &a->time);
 	soap_default_float(soap, &a->threshold);
 	soap_default_turb1__SpatialInterpolation(soap, &a->spatialInterpolation);
-	soap_default_int(soap, &a->X);
-	soap_default_int(soap, &a->Y);
-	soap_default_int(soap, &a->Z);
-	soap_default_int(soap, &a->Xwidth);
-	soap_default_int(soap, &a->Ywidth);
-	soap_default_int(soap, &a->Zwidth);
+	soap_default_int(soap, &a->x_USCOREstart);
+	soap_default_int(soap, &a->y_USCOREstart);
+	soap_default_int(soap, &a->z_USCOREstart);
+	soap_default_int(soap, &a->x_USCOREend);
+	soap_default_int(soap, &a->y_USCOREend);
+	soap_default_int(soap, &a->z_USCOREend);
 	soap_default_string(soap, &a->addr);
 }
 
@@ -13365,17 +13365,17 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_out__turb1__GetThreshold(struct soap *soap, const
 		return soap->error;
 	if (soap_out_turb1__SpatialInterpolation(soap, "turb1:spatialInterpolation", -1, &a->spatialInterpolation, ""))
 		return soap->error;
-	if (soap_out_int(soap, "turb1:X", -1, &a->X, ""))
+	if (soap_out_int(soap, "turb1:x_start", -1, &a->x_USCOREstart, ""))
 		return soap->error;
-	if (soap_out_int(soap, "turb1:Y", -1, &a->Y, ""))
+	if (soap_out_int(soap, "turb1:y_start", -1, &a->y_USCOREstart, ""))
 		return soap->error;
-	if (soap_out_int(soap, "turb1:Z", -1, &a->Z, ""))
+	if (soap_out_int(soap, "turb1:z_start", -1, &a->z_USCOREstart, ""))
 		return soap->error;
-	if (soap_out_int(soap, "turb1:Xwidth", -1, &a->Xwidth, ""))
+	if (soap_out_int(soap, "turb1:x_end", -1, &a->x_USCOREend, ""))
 		return soap->error;
-	if (soap_out_int(soap, "turb1:Ywidth", -1, &a->Ywidth, ""))
+	if (soap_out_int(soap, "turb1:y_end", -1, &a->y_USCOREend, ""))
 		return soap->error;
-	if (soap_out_int(soap, "turb1:Zwidth", -1, &a->Zwidth, ""))
+	if (soap_out_int(soap, "turb1:z_end", -1, &a->z_USCOREend, ""))
 		return soap->error;
 	if (soap_out_string(soap, "turb1:addr", -1, &a->addr, ""))
 		return soap->error;
@@ -13390,12 +13390,12 @@ SOAP_FMAC3 struct _turb1__GetThreshold * SOAP_FMAC4 soap_in__turb1__GetThreshold
 	size_t soap_flag_time = 1;
 	size_t soap_flag_threshold = 1;
 	size_t soap_flag_spatialInterpolation = 1;
-	size_t soap_flag_X = 1;
-	size_t soap_flag_Y = 1;
-	size_t soap_flag_Z = 1;
-	size_t soap_flag_Xwidth = 1;
-	size_t soap_flag_Ywidth = 1;
-	size_t soap_flag_Zwidth = 1;
+	size_t soap_flag_x_USCOREstart = 1;
+	size_t soap_flag_y_USCOREstart = 1;
+	size_t soap_flag_z_USCOREstart = 1;
+	size_t soap_flag_x_USCOREend = 1;
+	size_t soap_flag_y_USCOREend = 1;
+	size_t soap_flag_z_USCOREend = 1;
 	size_t soap_flag_addr = 1;
 	if (soap_element_begin_in(soap, tag, 0, type))
 		return NULL;
@@ -13437,34 +13437,34 @@ SOAP_FMAC3 struct _turb1__GetThreshold * SOAP_FMAC4 soap_in__turb1__GetThreshold
 				{	soap_flag_spatialInterpolation--;
 					continue;
 				}
-			if (soap_flag_X && soap->error == SOAP_TAG_MISMATCH)
-				if (soap_in_int(soap, "turb1:X", &a->X, "xsd:int"))
-				{	soap_flag_X--;
+			if (soap_flag_x_USCOREstart && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_int(soap, "turb1:x_start", &a->x_USCOREstart, "xsd:int"))
+				{	soap_flag_x_USCOREstart--;
 					continue;
 				}
-			if (soap_flag_Y && soap->error == SOAP_TAG_MISMATCH)
-				if (soap_in_int(soap, "turb1:Y", &a->Y, "xsd:int"))
-				{	soap_flag_Y--;
+			if (soap_flag_y_USCOREstart && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_int(soap, "turb1:y_start", &a->y_USCOREstart, "xsd:int"))
+				{	soap_flag_y_USCOREstart--;
 					continue;
 				}
-			if (soap_flag_Z && soap->error == SOAP_TAG_MISMATCH)
-				if (soap_in_int(soap, "turb1:Z", &a->Z, "xsd:int"))
-				{	soap_flag_Z--;
+			if (soap_flag_z_USCOREstart && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_int(soap, "turb1:z_start", &a->z_USCOREstart, "xsd:int"))
+				{	soap_flag_z_USCOREstart--;
 					continue;
 				}
-			if (soap_flag_Xwidth && soap->error == SOAP_TAG_MISMATCH)
-				if (soap_in_int(soap, "turb1:Xwidth", &a->Xwidth, "xsd:int"))
-				{	soap_flag_Xwidth--;
+			if (soap_flag_x_USCOREend && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_int(soap, "turb1:x_end", &a->x_USCOREend, "xsd:int"))
+				{	soap_flag_x_USCOREend--;
 					continue;
 				}
-			if (soap_flag_Ywidth && soap->error == SOAP_TAG_MISMATCH)
-				if (soap_in_int(soap, "turb1:Ywidth", &a->Ywidth, "xsd:int"))
-				{	soap_flag_Ywidth--;
+			if (soap_flag_y_USCOREend && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_int(soap, "turb1:y_end", &a->y_USCOREend, "xsd:int"))
+				{	soap_flag_y_USCOREend--;
 					continue;
 				}
-			if (soap_flag_Zwidth && soap->error == SOAP_TAG_MISMATCH)
-				if (soap_in_int(soap, "turb1:Zwidth", &a->Zwidth, "xsd:int"))
-				{	soap_flag_Zwidth--;
+			if (soap_flag_z_USCOREend && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_int(soap, "turb1:z_end", &a->z_USCOREend, "xsd:int"))
+				{	soap_flag_z_USCOREend--;
 					continue;
 				}
 			if (soap_flag_addr && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
@@ -13487,7 +13487,7 @@ SOAP_FMAC3 struct _turb1__GetThreshold * SOAP_FMAC4 soap_in__turb1__GetThreshold
 		if (soap->body && soap_element_end_in(soap, tag))
 			return NULL;
 	}
-	if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_time > 0 || soap_flag_threshold > 0 || soap_flag_spatialInterpolation > 0 || soap_flag_X > 0 || soap_flag_Y > 0 || soap_flag_Z > 0 || soap_flag_Xwidth > 0 || soap_flag_Ywidth > 0 || soap_flag_Zwidth > 0))
+	if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_time > 0 || soap_flag_threshold > 0 || soap_flag_spatialInterpolation > 0 || soap_flag_x_USCOREstart > 0 || soap_flag_y_USCOREstart > 0 || soap_flag_z_USCOREstart > 0 || soap_flag_x_USCOREend > 0 || soap_flag_y_USCOREend > 0 || soap_flag_z_USCOREend > 0))
 	{	soap->error = SOAP_OCCURS;
 		return NULL;
 	}

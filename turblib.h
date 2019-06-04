@@ -210,14 +210,14 @@ extern "C" {
 	int getThreshold(char *authToken,
 		char *dataset, char *field, float time, float threshold,
 		enum SpatialInterpolation spatial,
-		int X, int Y, int Z, int Xwidth, int Ywidth, int Zwidth,
+		int x_start, int y_start, int z_start, int x_end, int y_end, int z_end,
 		ThresholdInfo **dataout, int *result_size);
 
 	/* Fortran */
 	int getthreshold_(char *authToken,
 		char *dataset, char *field, float *time, float *threshold,
 		int *spatial,
-		int *X, int *Y, int *Z, int *Xwidth, int *Ywidth, int *Zwidth,
+		int *x_start, int *y_start, int *z_start, int *x_end, int *y_end, int *z_end,
 		ThresholdInfo **dataout, int *result_size);
 
 	void deallocate_array_(ThresholdInfo **threshold_array);
@@ -628,16 +628,16 @@ extern "C" {
 	/* C */
 	int getCutout(char *authToken,
 		char *dataset, char *field, int time_step,
-		int x0, int y0, int z0,
-		int nx, int ny, int nz,
+		int x_start, int y_start, int z_start,
+		int x_end, int y_end, int z_end,
 		int x_step, int y_step, int z_step, int filter_width,
 		float dataout[]);
 
 	/* Fortran */
 	int getcutout_(char *authToken,
 		char *dataset, char *field, int *time_step,
-		int *x0, int *y0, int *z0,
-		int *nx, int *ny, int *nz,
+		int *x_start, int *y_start, int *z_start,
+		int *x_end, int *y_end, int *z_end,
 		int *x_step, int *y_step, int *z_step, int *filter_width,
 		float dataout[]);
 
