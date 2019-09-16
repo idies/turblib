@@ -27,7 +27,7 @@
  */
 struct soap __jhuturbsoap;
 
-char * __version_info = "20190909";
+char * __version_info = "20190916";
 
 /* Error reporting - C */
 char __turblib_err[TURB_ERROR_LENGTH];
