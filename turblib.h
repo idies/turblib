@@ -174,10 +174,12 @@ extern "C" {
 	} dataKernel;
 
 	/* C */
+	char *getVersion();
 	void soapinit(void);
 	void soapdestroy(void);
 
 	/* Fortran */
+	char *getVersion_();
 	void soapinit_(void);
 	void soapdestroy_(void);
 
@@ -210,14 +212,14 @@ extern "C" {
 	int getThreshold(char *authToken,
 		char *dataset, char *field, float time, float threshold,
 		enum SpatialInterpolation spatial,
-		int X, int Y, int Z, int Xwidth, int Ywidth, int Zwidth,
+		int x_start, int y_start, int z_start, int x_end, int y_end, int z_end,
 		ThresholdInfo **dataout, int *result_size);
 
 	/* Fortran */
 	int getthreshold_(char *authToken,
 		char *dataset, char *field, float *time, float *threshold,
 		int *spatial,
-		int *X, int *Y, int *Z, int *Xwidth, int *Ywidth, int *Zwidth,
+		int *x_start, int *y_start, int *z_start, int *x_end, int *y_end, int *z_end,
 		ThresholdInfo **dataout, int *result_size);
 
 	void deallocate_array_(ThresholdInfo **threshold_array);
@@ -616,6 +618,25 @@ extern "C" {
 		int len_a, int len_d);
 
 	/* C */
+	int getInvariantSoap(char *authToken,
+		char *dataset, float time,
+		enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+		int count, float datain[][3], float dataout[][2]);
+
+	/* C */
+	int getInvariant(char *authToken,
+		char *dataset, float time,
+		enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+		int count, float datain[][3], float dataout[][2]);
+
+	/* Fortran */
+	int getinvariant_(char *authToken,
+		char *dataset, float *time,
+		int *spatial, int *temporal,
+		int *count, float datain[][3], float dataout[][2],
+		int len_a, int len_d);
+
+	/* C */
 	int getRawDensity(char *authToken,
 		char *dataset, int time_step,
 		int X, int Y, int Z, int Xwidth, int Ywidth, int Zwidth, char dataout[]);
@@ -628,16 +649,16 @@ extern "C" {
 	/* C */
 	int getCutout(char *authToken,
 		char *dataset, char *field, int time_step,
-		int x0, int y0, int z0,
-		int nx, int ny, int nz,
+		int x_start, int y_start, int z_start,
+		int x_end, int y_end, int z_end,
 		int x_step, int y_step, int z_step, int filter_width,
 		float dataout[]);
 
 	/* Fortran */
 	int getcutout_(char *authToken,
 		char *dataset, char *field, int *time_step,
-		int *x0, int *y0, int *z0,
-		int *nx, int *ny, int *nz,
+		int *x_start, int *y_start, int *z_start,
+		int *x_end, int *y_end, int *z_end,
 		int *x_step, int *y_step, int *z_step, int *filter_width,
 		float dataout[]);
 
@@ -702,9 +723,9 @@ extern "C" {
 
 	/* Cutout functions */
 
-	int lagrangianInterp(int comps, float *kernel, float position[3], int nOrder, float dx, float result[comps]);
-	int lagrangianInterp2(int comps, dataKernel *kernel, float position[3], int nOrder, float dx, float result[comps]);
-	int pchipInterp(int comps, float data[4][comps], float time, int timestep, float dt, float result[comps]);
+	int lagrangianInterp(int comps, float *kernel, float position[3], int nOrder, float dx, float *result);
+	int lagrangianInterp2(int comps, dataKernel *kernel, float position[3], int nOrder, float dx, float *result);
+	int pchipInterp(int comps, float *data[4], float time, int timestep, float dt, float *result);
 
 	int computeGradient(dataKernel* kernel, int comps, float dx, int size, int nOrder, float *output);
 	int computeHessian(dataKernel* kernel, int comps, float dx, int size, int nOrder, float *output);

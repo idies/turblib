@@ -903,12 +903,12 @@ struct _turb1__GetThreshold
 	float time;	/* required element of type xsd:float */
 	float threshold;	/* required element of type xsd:float */
 	enum turb1__SpatialInterpolation spatialInterpolation;	/* required element of type turb1:SpatialInterpolation */
-	int X;	/* required element of type xsd:int */
-	int Y;	/* required element of type xsd:int */
-	int Z;	/* required element of type xsd:int */
-	int Xwidth;	/* required element of type xsd:int */
-	int Ywidth;	/* required element of type xsd:int */
-	int Zwidth;	/* required element of type xsd:int */
+	int x_USCOREstart;	/* required element of type xsd:int */
+	int y_USCOREstart;	/* required element of type xsd:int */
+	int z_USCOREstart;	/* required element of type xsd:int */
+	int x_USCOREend;	/* required element of type xsd:int */
+	int y_USCOREend;	/* required element of type xsd:int */
+	int z_USCOREend;	/* required element of type xsd:int */
 	char *addr;	/* optional element of type xsd:string */
 };
 #endif
@@ -1359,12 +1359,12 @@ struct _turb1__GetAnyCutoutWeb
 	char *dataset;	/* optional element of type xsd:string */
 	char *field;	/* optional element of type xsd:string */
 	int T;	/* required element of type xsd:int */
-	int X;	/* required element of type xsd:int */
-	int Y;	/* required element of type xsd:int */
-	int Z;	/* required element of type xsd:int */
-	int Xwidth;	/* required element of type xsd:int */
-	int Ywidth;	/* required element of type xsd:int */
-	int Zwidth;	/* required element of type xsd:int */
+	int x_USCOREstart;	/* required element of type xsd:int */
+	int y_USCOREstart;	/* required element of type xsd:int */
+	int z_USCOREstart;	/* required element of type xsd:int */
+	int x_USCOREend;	/* required element of type xsd:int */
+	int y_USCOREend;	/* required element of type xsd:int */
+	int z_USCOREend;	/* required element of type xsd:int */
 	int x_USCOREstep;	/* required element of type xsd:int */
 	int y_USCOREstep;	/* required element of type xsd:int */
 	int z_USCOREstep;	/* required element of type xsd:int */

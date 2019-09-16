@@ -22,7 +22,7 @@
     character(*), parameter :: authtoken = 'edu.jhu.pha.turbulence.testing-201406' // CHAR(0)
     character(1) :: field
 
-    integer, parameter :: time_step=0, x0=0, y0=x0, z0=x0, nx=2, ny=nx, nz=nx
+    integer, parameter :: time_step=1, x_start=1, y_start=10, z_start=1, x_end=2, y_end=11, z_end=2
     integer, parameter :: x_step=1, y_step=1, z_step=1, filter_width=1
     integer :: size, i
     real(RP), allocatable :: result(:)
@@ -52,15 +52,15 @@
     print *, "......isotropic1024coarse u......";
     field='u'
     if (field=='u') then
-        size = nx*ny*nz*3;
+        size = (x_end-x_start+1) * (y_end-y_start+1) * (z_end-z_start+1)*3;
     else if (field=='p') then
-        size = nx*ny*nz;
+        size = (x_end-x_start+1) * (y_end-y_start+1) * (z_end-z_start+1);
     end if
     allocate(result(size))
     print *, field=='u', size
 
-    rc = getcutout (authtoken, "isotropic1024coarse", field, time_step, x0, y0, z0, &
-        nx, ny, nz, x_step, y_step, z_step, filter_width, result)
+    rc = getcutout (authtoken, "isotropic1024coarse", field, time_step, x_start, y_start, z_start, &
+        x_end, y_end, z_end, x_step, y_step, z_step, filter_width, result)
     do i = 1, size
         write(*,rawformat1) i, ': ', result(i)
     end do
@@ -69,15 +69,15 @@
     print *, ".........transition_bl p.........";
     field='p'
     if (field=='u') then
-        size = nx*ny*nz*3;
+        size = (x_end-x_start+1) * (y_end-y_start+1) * (z_end-z_start+1)*3;
     else if (field=='p') then
-        size = nx*ny*nz;
+        size = (x_end-x_start+1) * (y_end-y_start+1) * (z_end-z_start+1);
     end if
     allocate(result(size))
     print *, field=='p', size
 
-    rc = getcutout (authtoken, "transition_bl", field, time_step, x0, y0, z0, &
-        nx, ny, nz, x_step, y_step, z_step, filter_width, result)
+    rc = getcutout (authtoken, "transition_bl", field, time_step, x_start, y_start, z_start, &
+        x_end, y_end, z_end, x_step, y_step, z_step, filter_width, result)
     do i = 1, size
         write(*,rawformat1) i, ': ', result(i)
     end do

@@ -27,6 +27,8 @@
  */
 struct soap __jhuturbsoap;
 
+char * __version_info = "20190916";
+
 /* Error reporting - C */
 char __turblib_err[TURB_ERROR_LENGTH];
 int __turblib_errno = 0;
@@ -191,6 +193,15 @@ enum turb1__TemporalInterpolation TemporalIntToEnum(enum TemporalInterpolation t
 		return turb1__TemporalInterpolation__PCHIP;
 	}
 	return -1;
+}
+
+/* Get turblib version */
+char * getVersion_() {
+	getVersion();
+}
+
+char * getVersion() {
+	return __version_info;
 }
 
 /* Intialize the gSOAP runtime environment */
@@ -363,6 +374,14 @@ int getDensityHessian(char *authToken,
 		return getDensityHessianSoap(authToken, dataset, time, spatial, temporal, count, datain, dataout);
 }
 
+int getInvariant(char *authToken,
+	char *dataset, float time,
+	enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+	int count, float datain[][3], float dataout[][2])
+{
+		return getInvariantSoap(authToken, dataset, time, spatial, temporal, count, datain, dataout);
+}
+
 int getVelocitySoap(char *authToken,
 	char *dataset, float time,
 	enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
@@ -407,11 +426,11 @@ int getVelocitySoap(char *authToken,
 int getthreshold_(char *authToken,
 	char *dataset, char *field, float *time, float *threshold,
 	int *spatial,
-	int *X, int *Y, int *Z, int *Xwidth, int *Ywidth, int *Zwidth,
+	int *x_start, int *y_start, int *z_start, int *x_end, int *y_end, int *z_end,
 	ThresholdInfo** dataout, int *result_size)
 {
 	return getThreshold(authToken, dataset, field, *time, *threshold, *spatial,
-		*X, *Y, *Z, *Xwidth, *Ywidth, *Zwidth, dataout, result_size);
+		*x_start, *y_start, *z_start, *x_end, *y_end, *z_end, dataout, result_size);
 }
 
 void deallocate_array_(ThresholdInfo **threshold_array)
@@ -422,7 +441,7 @@ void deallocate_array_(ThresholdInfo **threshold_array)
 int getThreshold(char *authToken,
 	char *dataset, char *field, float time, float threshold,
 	enum SpatialInterpolation spatial,
-	int X, int Y, int Z, int Xwidth, int Ywidth, int Zwidth,
+	int x_start, int y_start, int z_start, int x_end, int y_end, int z_end,
 	ThresholdInfo **dataout, int *result_size)
 {
 	int rc;
@@ -436,12 +455,12 @@ int getThreshold(char *authToken,
 	input.time = time;
 	input.threshold = threshold;
 	input.spatialInterpolation = SpatialIntToEnum(spatial);
-	input.X = X;
-	input.Y = Y;
-	input.Z = Z;
-	input.Xwidth = Xwidth;
-	input.Ywidth = Ywidth;
-	input.Zwidth = Zwidth;
+	input.x_USCOREstart = x_start;
+	input.y_USCOREstart = y_start;
+	input.z_USCOREstart = z_start;
+	input.x_USCOREend = x_end;
+	input.y_USCOREend = y_end;
+	input.z_USCOREend = z_end;
 	input.addr = NULL;
 
 	rc = soap_call___turb1__GetThreshold(&__jhuturbsoap, NULL, NULL, &input, &output);
@@ -1462,6 +1481,8 @@ int getRawVelocity(char *authToken,
 	char *dataset, int time_step,
 	int X, int Y, int Z, int Xwidth, int Ywidth, int Zwidth, char dataout[])
 {
+	fprintf(stderr, "%s\n", "******getRawVelocity has been deprecated. Please use getCutout instead******");
+	return -999;
 	int rc;
 
 	struct _turb1__GetRawVelocity input;
@@ -1551,6 +1572,8 @@ int getRawMagneticField(char *authToken,
 	char *dataset, int time_step,
 	int X, int Y, int Z, int Xwidth, int Ywidth, int Zwidth, char dataout[])
 {
+	fprintf(stderr, "%s\n", "******getRawMagneticField has been deprecated. Please use getCutout instead******");
+	return -999;
 	int rc;
 
 	struct _turb1__GetRawMagneticField input;
@@ -1640,6 +1663,8 @@ int getRawVectorPotential(char *authToken,
 	char *dataset, int time_step,
 	int X, int Y, int Z, int Xwidth, int Ywidth, int Zwidth, char dataout[])
 {
+	fprintf(stderr, "%s\n", "******getRawVectorPotential has been deprecated. Please use getCutout instead******");
+	return -999;
 	int rc;
 
 	struct _turb1__GetRawVectorPotential input;
@@ -1729,6 +1754,8 @@ int getRawPressure(char *authToken,
 	char *dataset, int time_step,
 	int X, int Y, int Z, int Xwidth, int Ywidth, int Zwidth, char dataout[])
 {
+	fprintf(stderr, "%s\n", "******getRawPressure has been deprecated. Please use getCutout instead******");
+	return -999;
 	int rc;
 
 	struct _turb1__GetRawPressure input;
@@ -1885,6 +1912,56 @@ int getDensityHessianSoap(char *authToken,
 	return rc;
 }
 
+int getInvariantSoap(char *authToken,
+	char *dataset, float time,
+	enum SpatialInterpolation spatial, enum TemporalInterpolation temporal,
+	int count, float datain[][3], float dataout[][2])
+{
+	int rc, i;
+	float* full_InvariantOutput;
+	full_InvariantOutput = malloc(sizeof(float)*count*3);
+	//dataout = (float*) malloc(sizeof(float)*count);
+	
+	struct _turb1__GetInvariant input;
+	struct _turb1__GetInvariantResponse output;
+
+	input.authToken = authToken;
+	input.dataset = dataset;
+	input.time = time;
+	input.spatialInterpolation = SpatialIntToEnum(spatial);
+	input.temporalInterpolation = TemporalIntToEnum(temporal);
+
+	struct turb1__ArrayOfPoint3 pointArray;
+	pointArray.__sizePoint3 = count;
+	pointArray.Point3 = (void *)datain;
+	input.points = &pointArray;
+	input.addr = NULL;
+
+	rc = soap_call___turb1__GetInvariant(&__jhuturbsoap, NULL, NULL, &input, &output);
+	if (rc == SOAP_OK) {
+		memcpy(full_InvariantOutput, output.GetInvariantResult->Vector3,
+			output.GetInvariantResult->__sizeVector3 * sizeof(float) * 3);
+		bzero(__turblib_err, TURB_ERROR_LENGTH);
+	}
+	else {
+		soap_sprint_fault(&__jhuturbsoap, __turblib_err, TURB_ERROR_LENGTH);
+		turblibHandleError();
+	}
+
+	soap_end(&__jhuturbsoap);  /* remove deserialized data and clean up */
+	soap_done(&__jhuturbsoap); /*  detach the gSOAP environment  */
+
+	__turblib_errno = rc;
+
+	for (i=0; i<count; i++ )
+	{
+		dataout[i][0] = *(full_InvariantOutput+i*3+0);
+		dataout[i][1] = *(full_InvariantOutput+i*3+1);
+	}
+
+	return rc;
+}
+
 int getrawdensity_(char *authToken, char *dataset, int *time_step,
 	int *X, int *Y, int *Z, int *Xwidth, int *Ywidth, int *Zwidth,
 	float dataout[])
@@ -1897,6 +1974,8 @@ int getRawDensity(char *authToken,
 	char *dataset, int time_step,
 	int X, int Y, int Z, int Xwidth, int Ywidth, int Zwidth, char dataout[])
 {
+	fprintf(stderr, "%s\n", "******getRawDensity has been deprecated. Please use getCutout instead******");
+	return -999;
 	int rc;
 
 	struct _turb1__GetRawDensity input;
@@ -1942,8 +2021,8 @@ int getRawDensity(char *authToken,
  return getAnyCutoutWebSoap (authToken, dataset, field, T, x0, y0, z0, nx, ny, nz, x_step, y_step, z_step, filter_width, dataout);
  }*/
 int getCutout(char *authToken,
-	char *dataset, char *field, int time_step, int x0, int y0, int z0,
-	int nx, int ny, int nz,
+	char *dataset, char *field, int time_step, int x_start, int y_start, int z_start,
+	int x_end, int y_end, int z_end,
 	int x_step, int y_step, int z_step, int filter_width,
 	float dataout[])
 {
@@ -1956,12 +2035,12 @@ int getCutout(char *authToken,
 	input.dataset = dataset;
 	input.field = field;
 	input.T = time_step;
-	input.X = x0;
-	input.Y = y0;
-	input.Z = z0;
-	input.Xwidth = nx;
-	input.Ywidth = ny;
-	input.Zwidth = nz;
+	input.x_USCOREstart = x_start;
+	input.y_USCOREstart = y_start;
+	input.z_USCOREstart = z_start;
+	input.x_USCOREend = x_end;
+	input.y_USCOREend = y_end;
+	input.z_USCOREend = z_end;
 	input.x_USCOREstep = x_step;
 	input.y_USCOREstep = y_step;
 	input.z_USCOREstep = z_step;
@@ -1993,7 +2072,7 @@ int getCutout(char *authToken,
 
 /* Interpolation Functions */
 
-int lagrangianInterp(int comps, float *kernel, float position[3], int nOrder, float dx, float result[comps])
+int lagrangianInterp(int comps, float *kernel, float position[3], int nOrder, float dx, float *result)
 {
 	int node[3];
 	node[0] = (int)(floor(position[0] / dx));
@@ -2068,7 +2147,7 @@ int lagrangianInterp(int comps, float *kernel, float position[3], int nOrder, fl
 	return 0;
 }
 
-int lagrangianInterp2(int comps, dataKernel* kernel, float position[3], int nOrder, float dx, float result[comps])
+int lagrangianInterp2(int comps, dataKernel* kernel, float position[3], int nOrder, float dx, float *result)
 {
 	int node[3];
 	node[0] = (int)(floor(position[0] / dx));
@@ -2144,7 +2223,7 @@ int lagrangianInterp2(int comps, dataKernel* kernel, float position[3], int nOrd
 	return 0;
 }
 
-int pchipInterp(int comps, float data[4][comps], float time, int timestep, float dt, float result[comps])
+int pchipInterp(int comps, float *data[4], float time, int timestep, float dt, float *result)
 {
 	float times[4] = { (timestep - 1) * dt, (timestep)* dt, (timestep + 1) * dt, (timestep + 2) * dt };
 	int j;
@@ -2892,12 +2971,24 @@ int getmagneticfieldhessian_(char *authToken,
 		*count, datain, dataout);
 }
 
+int getinvariant_(char *authToken,
+	char *dataset, float *time,
+	int *spatial, int *temporal,
+	int *count, float datain[][3], float dataout[][2],
+	int len_a, int len_d)
+{
+	return getInvariant(authToken,
+		dataset, *time,
+		*spatial, *temporal,
+		*count, datain, dataout);
+}
+
 int getcutout_(char *authToken,
 	char *dataset, char *field, int *T,
-	int *x0, int *y0, int *z0,
-	int *nx, int *ny, int *nz,
+	int *x_start, int *y_start, int *z_start,
+	int *x_end, int *y_end, int *z_end,
 	int *x_step, int *y_step, int *z_step, int *filter_width,
 	float dataout[])
 {
-	return getCutout(authToken, dataset, field, *T, *x0, *y0, *z0, *nx, *ny, *nz, *x_step, *y_step, *z_step, *filter_width, dataout);
+	return getCutout(authToken, dataset, field, *T, *x_start, *y_start, *z_start, *x_end, *y_end, *z_end, *x_step, *y_step, *z_step, *filter_width, dataout);
 }
