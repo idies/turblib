@@ -135,7 +135,7 @@ prodtestwsdl:
 	soapcpp2 -CLcx -2 -I.:$(SOAP_INCLUDE_DIR) TurbulenceService.h
 
 clean:
-	$(RM) *.o *.exe turbf turbc mhdc mhdf channelc channelf mixingc mixingf compiler_flags getCutoutc getCutoutf
+	$(RM) *.o *.exe DEMO_turbf DEMO_turbc DEMO_mhdc DEMO_mhdf DEMO_channelc DEMO_channelf DEMO_mixingc DEMO_mixingf compiler_flags DEMO_getCutoutc DEMO_getCutoutf
 
 spotless: clean
 	$(RM) soapClient.c TurbulenceServiceSoap.nsmap soapH.h TurbulenceServiceSoap12.nsmap soapStub.h soapC.c TurbulenceService.h

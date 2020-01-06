@@ -5,3 +5,13 @@
 /.vs
 *.o
 /.vscode
+DEMO_turbf
+DEMO_turbc
+DEMO_mhdc
+DEMO_mhdf
+DEMO_channelc
+DEMO_channelf
+DEMO_mixingc
+DEMO_mixingf
+DEMO_getCutoutc
+DEMO_getCutoutf
